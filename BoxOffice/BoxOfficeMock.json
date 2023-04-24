@@ -1,11 +1,3 @@
-/* 
-  Mock.json
-  BoxOffice
-
-  Created by 김용재 on 2023/04/24.
-  
-*/
-
 {
   "boxOfficeResult": {
     "boxofficeType": "일별 박스오피스",

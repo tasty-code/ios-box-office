@@ -19,18 +19,14 @@ final class BoxOfficeDeserializerTest: XCTestCase {
         sut = nil
     }
     
-    func test_deserializer가_잘_작동하는가() {
+    func test_JSON_데이터를_BoxOffice_타입으로_Parsing_할_수_있는지() {
         guard let path = Bundle.main.path(forResource: "BoxOfficeMock", ofType: "json") else { return }
-        
         guard let jsonString = try? String(contentsOfFile: path) else { return }
-        
         guard let data = jsonString.data(using: .utf8) else { return }
         
-        guard let boxOffice = try? sut.deserialize(type: BoxOffice.self, data: data) else {
-            return print("이게뭐조")
-        }
-        print(boxOffice)
+        guard let boxOffice = try? sut.deserialize(type: BoxOffice.self, data: data) else { return }
         
+        XCTAssertNotNil(boxOffice)
     }
 
 }
