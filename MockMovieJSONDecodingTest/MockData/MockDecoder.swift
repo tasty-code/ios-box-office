@@ -19,7 +19,8 @@ class MockDecoder {
     func loadJSON<T>(_ filename: String) throws -> T where T : Decodable {
         let data: Data
         
-        guard let filePath = Bundle.main.url(forResource: filename, withExtension: nil) else {
+        let bundle = Bundle(for: type(of: self))
+        guard let filePath = bundle.url(forResource: filename, withExtension: nil) else {
             print("\(filename) not found.")
             throw JSONErrors.notFoundJSONFile
         }
