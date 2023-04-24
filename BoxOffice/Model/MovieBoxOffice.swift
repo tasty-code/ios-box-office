@@ -7,14 +7,12 @@
 
 import UIKit
 
-struct MovieBoxOffice {
+struct MovieBoxOffice: Codable {
     let showRange: String
-    let List: [Movie]
-}
+    let list: [Movie]
 
-struct Movie {
-    let movieName: String
-    let rank: UInt
-    let openDate: Date
-    let rankVariance: Int
+    enum CodingKeys: String, CodingKey {
+        case showRange
+        case list = "dailyBoxOfficeList"
+    }
 }

@@ -13,6 +13,7 @@
 		63DF20F62970E1A0005DF7D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F42970E1A0005DF7D1 /* Main.storyboard */; };
 		63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
+		76BCBAEE29F665AE006B989F /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BCBAED29F665AE006B989F /* Movie.swift */; };
 		F66085B229F6612A00A39D5A /* MovieBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66085B129F6612A00A39D5A /* MovieBoxOffice.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		63DF20FA2970E1A1005DF7D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63DF20FC2970E1A1005DF7D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76BCBAEC29F6564C006B989F /* MovieAPI.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = MovieAPI.xcconfig; sourceTree = "<group>"; };
+		76BCBAED29F665AE006B989F /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		F66085B129F6612A00A39D5A /* MovieBoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBoxOffice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				F66085B129F6612A00A39D5A /* MovieBoxOffice.swift */,
+				76BCBAED29F665AE006B989F /* Movie.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
+				76BCBAEE29F665AE006B989F /* Movie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
