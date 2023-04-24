@@ -21,6 +21,7 @@
 		D932149029F6671B00E4C2D8 /* DailyBoxOfficeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932148F29F6671B00E4C2D8 /* DailyBoxOfficeList.swift */; };
 		D932149429F66E0A00E4C2D8 /* Movie.json in Resources */ = {isa = PBXBuildFile; fileRef = D932149329F66E0A00E4C2D8 /* Movie.json */; };
 		D932149829F69DC100E4C2D8 /* BoxOfficeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932149729F69DC100E4C2D8 /* BoxOfficeResult.swift */; };
+		D932149929F69EDA00E4C2D8 /* BoxOfficeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932149729F69DC100E4C2D8 /* BoxOfficeResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B10173C29F673FB00AE55F3 /* MockDecoder.swift in Sources */,
+				D932149929F69EDA00E4C2D8 /* BoxOfficeResult.swift in Sources */,
 				5B10173329F66C2F00AE55F3 /* MockMovieJSONDecodingTest.swift in Sources */,
 				5B10173D29F675F000AE55F3 /* BoxOffice.swift in Sources */,
 				5B10173E29F675F400AE55F3 /* DailyBoxOfficeList.swift in Sources */,

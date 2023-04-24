@@ -16,7 +16,7 @@ enum JSONErrors: Error {
 
 class MockDecoder {
     
-    func loadJSON<T>(_ filename: String) throws -> T where T : Decodable {
+    private func loadJSON<T>(_ filename: String) throws -> T where T : Decodable {
         let data: Data
         
         let bundle = Bundle(for: type(of: self))
