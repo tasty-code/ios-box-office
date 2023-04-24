@@ -16,6 +16,7 @@
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
 		D932148E29F6670200E4C2D8 /* BoxOfficeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932148D29F6670200E4C2D8 /* BoxOfficeResult.swift */; };
 		D932149029F6671B00E4C2D8 /* DailyBoxOfficeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932148F29F6671B00E4C2D8 /* DailyBoxOfficeList.swift */; };
+		D932149429F66E0A00E4C2D8 /* Movie.json in Resources */ = {isa = PBXBuildFile; fileRef = D932149329F66E0A00E4C2D8 /* Movie.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		63DF20FC2970E1A1005DF7D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D932148D29F6670200E4C2D8 /* BoxOfficeResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeResult.swift; sourceTree = "<group>"; };
 		D932148F29F6671B00E4C2D8 /* DailyBoxOfficeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeList.swift; sourceTree = "<group>"; };
+		D932149329F66E0A00E4C2D8 /* Movie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Movie.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 		5B10173129F66C2F00AE55F3 /* MockMovieJSONDecodingTest */ = {
 			isa = PBXGroup;
 			children = (
+				D932149229F66DE000E4C2D8 /* MockData */,
 				5B10173229F66C2F00AE55F3 /* MockMovieJSONDecodingTest.swift */,
 			);
 			path = MockMovieJSONDecodingTest;
@@ -133,6 +136,14 @@
 				D932148D29F6670200E4C2D8 /* BoxOfficeResult.swift */,
 			);
 			path = MovieDTO;
+			sourceTree = "<group>";
+		};
+		D932149229F66DE000E4C2D8 /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+				D932149329F66E0A00E4C2D8 /* Movie.json */,
+			);
+			path = MockData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,6 +227,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D932149429F66E0A00E4C2D8 /* Movie.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
