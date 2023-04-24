@@ -14,14 +14,11 @@
 		63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
 		8739F26329F655D40000BA9E /* BoxOfficeMock.json in Resources */ = {isa = PBXBuildFile; fileRef = 8739F26229F655D40000BA9E /* BoxOfficeMock.json */; };
+		8739F26429F65CAB0000BA9E /* BoxOfficeDeserializerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF2FD129F658A4001B5BCF /* BoxOfficeDeserializerTest.swift */; };
+		8739F26729F661680000BA9E /* JSONDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF2FC729F65782001B5BCF /* JSONDeserializer.swift */; };
 		F1C7C1A129F6394E0060B95A /* BoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C7C1A029F6394E0060B95A /* BoxOffice.swift */; };
 		F1FF2FC829F65782001B5BCF /* JSONDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF2FC729F65782001B5BCF /* JSONDeserializer.swift */; };
-		F1FF2FCA29F657ED001B5BCF /* Deserializerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF2FC929F657ED001B5BCF /* Deserializerable.swift */; };
-		F1FF2FD229F658A4001B5BCF /* BoxOfficeDeserializerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF2FD129F658A4001B5BCF /* BoxOfficeDeserializerTest.swift */; };
-		F1FF2FD829F658C0001B5BCF /* BoxOfficeDeserializerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF2FD129F658A4001B5BCF /* BoxOfficeDeserializerTest.swift */; };
 		F1FF2FD929F658C4001B5BCF /* BoxOfficeMock.json in Resources */ = {isa = PBXBuildFile; fileRef = 8739F26229F655D40000BA9E /* BoxOfficeMock.json */; };
-		F1FF2FDA29F658C7001B5BCF /* Deserializerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF2FC929F657ED001B5BCF /* Deserializerable.swift */; };
-		F1FF2FDB29F658C9001B5BCF /* JSONDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF2FC729F65782001B5BCF /* JSONDeserializer.swift */; };
 		F1FF2FDC29F658D0001B5BCF /* BoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C7C1A029F6394E0060B95A /* BoxOffice.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,7 +44,6 @@
 		8739F26229F655D40000BA9E /* BoxOfficeMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BoxOfficeMock.json; sourceTree = "<group>"; };
 		F1C7C1A029F6394E0060B95A /* BoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOffice.swift; sourceTree = "<group>"; };
 		F1FF2FC729F65782001B5BCF /* JSONDeserializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDeserializer.swift; sourceTree = "<group>"; };
-		F1FF2FC929F657ED001B5BCF /* Deserializerable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deserializerable.swift; sourceTree = "<group>"; };
 		F1FF2FCF29F658A4001B5BCF /* BoxOfficeDeserializerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeDeserializerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1FF2FD129F658A4001B5BCF /* BoxOfficeDeserializerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeDeserializerTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,7 +92,6 @@
 				63DF20F22970E1A0005DF7D1 /* ViewController.swift */,
 				F1C7C1A029F6394E0060B95A /* BoxOffice.swift */,
 				F1FF2FC729F65782001B5BCF /* JSONDeserializer.swift */,
-				F1FF2FC929F657ED001B5BCF /* Deserializerable.swift */,
 				8739F26229F655D40000BA9E /* BoxOfficeMock.json */,
 				63DF20F42970E1A0005DF7D1 /* Main.storyboard */,
 				63DF20F72970E1A1005DF7D1 /* Assets.xcassets */,
@@ -218,11 +213,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1C7C1A129F6394E0060B95A /* BoxOffice.swift in Sources */,
-				F1FF2FD829F658C0001B5BCF /* BoxOfficeDeserializerTest.swift in Sources */,
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
-				F1FF2FCA29F657ED001B5BCF /* Deserializerable.swift in Sources */,
 				F1FF2FC829F65782001B5BCF /* JSONDeserializer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,9 +224,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1FF2FDA29F658C7001B5BCF /* Deserializerable.swift in Sources */,
-				F1FF2FDB29F658C9001B5BCF /* JSONDeserializer.swift in Sources */,
-				F1FF2FD229F658A4001B5BCF /* BoxOfficeDeserializerTest.swift in Sources */,
+				8739F26429F65CAB0000BA9E /* BoxOfficeDeserializerTest.swift in Sources */,
+				8739F26729F661680000BA9E /* JSONDeserializer.swift in Sources */,
 				F1FF2FDC29F658D0001B5BCF /* BoxOffice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

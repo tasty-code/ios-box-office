@@ -7,7 +7,7 @@
 
 import Foundation
 
-class JSONDesirializer: Deserializerable {
+class JSONDesirializer {
 
     // MARK: - Properties
 
@@ -15,8 +15,8 @@ class JSONDesirializer: Deserializerable {
 
     // MARK: - Public
 
-    func deserialize<T: Decodable>(_ type: T.Type, data: Data) throws -> T {
-        try decoder.decode(T.self, from: data)
+    func deserialize(type: Decodable.Type, data: Data) throws -> Decodable {
+        try decoder.decode(type.self, from: data)
     }
 
 }
