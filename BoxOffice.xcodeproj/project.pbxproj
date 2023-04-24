@@ -132,8 +132,8 @@
 		D932149129F6673000E4C2D8 /* MovieDTO */ = {
 			isa = PBXGroup;
 			children = (
-				D932148F29F6671B00E4C2D8 /* DailyBoxOfficeList.swift */,
 				D932148D29F6670200E4C2D8 /* BoxOfficeResult.swift */,
+				D932148F29F6671B00E4C2D8 /* DailyBoxOfficeList.swift */,
 			);
 			path = MovieDTO;
 			sourceTree = "<group>";
