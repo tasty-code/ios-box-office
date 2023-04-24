@@ -56,11 +56,10 @@ final class MockMovieJSONDecodingTest: XCTestCase {
         let jsonString = try? String(contentsOfFile: filePath)
 
         // when
-        let data = jsonString?.data(using: .utf8)!
+        let data = jsonString?.data(using: .utf8)
 
         // then
         XCTAssertNotNil(data)
-        XCTAssertTrue(data is Data)
     }
 
     func test_data가_디코딩_되었는지() {
@@ -75,6 +74,5 @@ final class MockMovieJSONDecodingTest: XCTestCase {
 
         // then
         XCTAssertNotNil(boxOffice)
-        XCTAssertTrue(boxOffice is BoxOffice)
     }
 }
