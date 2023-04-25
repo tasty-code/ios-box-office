@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - Welcome
+// MARK: - MovieDetail
 struct MovieDetail: Decodable {
     let movieInformationResult: MovieInformationResult
 
@@ -16,7 +16,7 @@ struct MovieDetail: Decodable {
     }
 }
 
-// MARK: - MovieInfoResult
+// MARK: - MovieInformationResult
 struct MovieInformationResult: Decodable {
     let movieInformation: MovieInformation
 
@@ -25,7 +25,7 @@ struct MovieInformationResult: Decodable {
     }
 }
 
-// MARK: - MovieInfo
+// MARK: - MovieInformation
 struct MovieInformation: Decodable {
 
     let movieCode: String
