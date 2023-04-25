@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DailyBoxOffice: Codable {
+struct DailyBoxOffice: Decodable {
     let recordNumber: String
     let rank: String
     let rankIntensity: String
@@ -49,7 +49,7 @@ struct DailyBoxOffice: Codable {
     }
 }
 
-enum RankStatus: String, Codable {
+enum RankStatus: String, Decodable {
     case new = "NEW"
     case old = "OLD"
 }

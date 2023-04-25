@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BoxOfficeResult: Codable {
+struct BoxOfficeResult: Decodable {
     let boxofficeType: String
     let showRange: String
     let dailyBoxOfficeList: [DailyBoxOffice]
