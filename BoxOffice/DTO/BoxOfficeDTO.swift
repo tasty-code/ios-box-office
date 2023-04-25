@@ -28,7 +28,7 @@ private func formatter(date: String) -> String {
     }
 
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyymmdd"
+    dateFormatter.dateFormat = "yyyyMMdd"
 
     guard let convertDate = dateFormatter.date(from: date) else {
         return ""
