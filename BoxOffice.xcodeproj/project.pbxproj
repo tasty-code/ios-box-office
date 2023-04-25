@@ -115,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				E7C115CF29F7915600497283 /* MovieDTO */,
-				E7C1159829F61B5900497283 /* DailyBoxOffice.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,6 +139,7 @@
 		E7C115CF29F7915600497283 /* MovieDTO */ = {
 			isa = PBXGroup;
 			children = (
+				E7C1159829F61B5900497283 /* DailyBoxOffice.swift */,
 			);
 			path = MovieDTO;
 			sourceTree = "<group>";
