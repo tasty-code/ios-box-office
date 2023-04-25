@@ -25,6 +25,18 @@ extension BoxOfficeAPIEndpoints {
         }
 
     }
+
+    var urlRequest: URLRequest? {
+        var urlCompoenets = URLComponents(string: endPoint.baseURL)
+
+        urlCompoenets?.path = endPoint.path
+        urlCompoenets?.queryItems = endPoint.queryItems
+
+        guard let url = urlCompoenets?.url else { return nil }
+        var urlRequest = URLRequest(url: url)
+
+        return urlRequest
+    }
     
     enum QueryConstant {
         static let apiKeyQueryName = "key"
