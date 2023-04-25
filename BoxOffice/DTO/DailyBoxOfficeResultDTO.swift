@@ -5,10 +5,16 @@
 //  Created by Bora Yang on 2023/04/25.
 //
 
-import Foundation
+import UIKit
 
-struct DailyBoxOfficeResultDTO: Codable, Equatable {
+struct DailyBoxOfficeResultDTO: Decodable {
     let boxOfficeType: String
     let showRange: String
     let dailyBoxOfficeList: [DailyBoxOfficeDTO]
+
+    enum CodingKeys: String, CodingKey {
+        case boxOfficeType = "boxofficeType"
+        case showRange
+        case dailyBoxOfficeList
+    }
 }

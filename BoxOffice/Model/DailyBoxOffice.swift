@@ -5,7 +5,7 @@
 //  Created by 박재우 on 2023/04/25.
 //
 
-import Foundation
+import UIKit
 
 struct DailyBoxOffice {
     let date: String

@@ -5,9 +5,9 @@
 //  Created by Bora Yang on 2023/04/25.
 //
 
-import Foundation
+import UIKit
 
-struct DailyBoxOfficeDTO: Codable, Equatable {
+struct DailyBoxOfficeDTO: Decodable {
     let index: String
     let rank: String
     let rankVariance: String

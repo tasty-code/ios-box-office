@@ -5,9 +5,9 @@
 //  Created by Bora Yang on 2023/04/25.
 //
 
-import Foundation
+import UIKit
 
-struct BoxOfficeDTO: Codable, Equatable {
+struct BoxOfficeDTO: Decodable {
     let boxOfficeResult: DailyBoxOfficeResultDTO
 }
 
