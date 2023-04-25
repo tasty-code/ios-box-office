@@ -9,24 +9,21 @@ import XCTest
 
 final class BoxOfficeTests: XCTestCase {
 
-    func test_json파일을_Data타입으로_제대로_하는지_확인() throws {
-        if let path = Bundle.main.path(forResource: name, ofType: "json"),
-           let jsonData = try String(contentsOfFile: path).data(using: .utf8) {
-            return jsonData
-        }
-        return nil
-    }
-
     func test_데이터_변환을_제대로_하는지_확인() throws {
-        do {
-            guard let data = readLocalFile(forName: "BoxOfficeData") else {
-                print("실패")
-                return
-            }
-            let decodedData = try JSONDecoder().decode(MovieBoxOffice.self, from: data)
-            print(decodedData)
-        } catch {
-            print(error)
+
+        let bundle = Bundle(for: type(of: self))
+
+        guard let filePath = bundle.path(forResource: "BoxOfficeData", ofType: "json") else {
+            XCTFail("파일 경로 추적 실패")
+            return
         }
+
+        guard let data = try String(contentsOfFile: filePath).data(using: .utf8) else {
+            XCTFail("DATA 타입으로 변환 실패")
+            return
+        }
+
+        let decodeData = try JSONDecoder().decode(BoxOfficeDTO.self, from: data)
+//        let result = decodeData.boxOfficeResult.dailyBoxOfficeList.last
     }
 }

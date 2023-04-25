@@ -22,6 +22,9 @@
 		F66085CE29F78C3C00A39D5A /* DailyBoxOfficeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D585DB29F775C800EAB343 /* DailyBoxOfficeDTO.swift */; };
 		F66085D129F78F2600A39D5A /* DailyBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66085D029F78F2600A39D5A /* DailyBoxOffice.swift */; };
 		F66085D329F78F8700A39D5A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66085D229F78F8700A39D5A /* Movie.swift */; };
+		F66085D429F79F0900A39D5A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66085D229F78F8700A39D5A /* Movie.swift */; };
+		F66085D529F79F0B00A39D5A /* DailyBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66085D029F78F2600A39D5A /* DailyBoxOffice.swift */; };
+		F66085D629F7A00800A39D5A /* BoxOfficeData.json in Resources */ = {isa = PBXBuildFile; fileRef = F66085C129F66B0C00A39D5A /* BoxOfficeData.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,6 +229,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F66085D629F7A00800A39D5A /* BoxOfficeData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +259,8 @@
 				F66085CE29F78C3C00A39D5A /* DailyBoxOfficeDTO.swift in Sources */,
 				F66085BB29F66A6C00A39D5A /* BoxOfficeTests.swift in Sources */,
 				F66085CC29F78C3700A39D5A /* BoxOfficeDTO.swift in Sources */,
+				F66085D429F79F0900A39D5A /* Movie.swift in Sources */,
+				F66085D529F79F0B00A39D5A /* DailyBoxOffice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,7 +473,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ooj.BoxOfficeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -485,7 +491,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ooj.BoxOfficeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
