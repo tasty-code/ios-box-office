@@ -19,7 +19,7 @@ struct DailyBoxOfficeDTO: Decodable {
     let salesShare: String
     let salesVariance: String
     let salesChange: String
-    let slaesAccumulate: String
+    let salesAccumulate: String
     let audienceCount: String
     let audienceVariance: String
     let audienceChange: String
@@ -39,7 +39,7 @@ struct DailyBoxOfficeDTO: Decodable {
         case salesShare
         case salesVariance = "salesInten"
         case salesChange
-        case slaesAccumulate = "salesAcc"
+        case salesAccumulate = "salesAcc"
         case audienceCount = "audiCnt"
         case audienceVariance = "audiInten"
         case audienceChange = "audiChange"
