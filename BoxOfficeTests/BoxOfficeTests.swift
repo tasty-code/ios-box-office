@@ -24,6 +24,10 @@ final class BoxOfficeTests: XCTestCase {
         }
 
         let decodeData = try JSONDecoder().decode(BoxOfficeDTO.self, from: data)
-//        let result = decodeData.boxOfficeResult.dailyBoxOfficeList.last
+        let dailyBoxOffice = decodeData.convert()
+        let result = dailyBoxOffice.movies.last
+        let expected = Movie(name: "아머드 사우루스: 기계공룡제국의 침략", rank: 10, releaseDate: "2023년 04월 20일", audienceCount: 2802, rankOldAndNew: .old, rankVariance: 2)
+
+        XCTAssertEqual(result, expected)
     }
 }

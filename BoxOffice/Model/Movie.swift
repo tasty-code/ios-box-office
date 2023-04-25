@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Movie {
+struct Movie: Equatable {
     enum Rank {
         case old
         case new
