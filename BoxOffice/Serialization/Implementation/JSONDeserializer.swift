@@ -14,7 +14,7 @@ struct JSONDeserializer: JSONDeserializable {
         self.decoder = decoder
     }
 
-    func deserialize<T: Decodable>(_ data: Data) throws -> T? {
+    func deserialize<T: Decodable>(_ data: Data) throws -> T {
         try decoder.decode(T.self, from: data)
     }
 }

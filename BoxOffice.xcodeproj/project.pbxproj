@@ -18,7 +18,18 @@
 		80985DDD29F7742C008BF073 /* RankOldAndNewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80985DDC29F7742C008BF073 /* RankOldAndNewDTO.swift */; };
 		F036101C29F776D40036BBF0 /* JSONDeserializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F036101B29F776D40036BBF0 /* JSONDeserializable.swift */; };
 		F036101E29F7892C0036BBF0 /* JSONDesrializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F036101D29F7892C0036BBF0 /* JSONDesrializer.swift */; };
+		F0560C5A29F7A15D0062FB01 /* JSONDeserializerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0560C5929F7A15D0062FB01 /* JSONDeserializerTest.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F0560C5B29F7A15D0062FB01 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63DF20E32970E1A0005DF7D1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 63DF20EA2970E1A0005DF7D1;
+			remoteInfo = BoxOffice;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		63DF20EB2970E1A0005DF7D1 /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -34,10 +45,19 @@
 		80985DDC29F7742C008BF073 /* RankOldAndNewDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankOldAndNewDTO.swift; sourceTree = "<group>"; };
 		F036101B29F776D40036BBF0 /* JSONDeserializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDeserializable.swift; sourceTree = "<group>"; };
 		F036101D29F7892C0036BBF0 /* JSONDesrializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDesrializer.swift; sourceTree = "<group>"; };
+		F0560C5729F7A15D0062FB01 /* BoxOfficeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0560C5929F7A15D0062FB01 /* JSONDeserializerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDeserializerTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		63DF20E82970E1A0005DF7D1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F0560C5429F7A15D0062FB01 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -51,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				63DF20ED2970E1A0005DF7D1 /* BoxOffice */,
+				F0560C5829F7A15D0062FB01 /* BoxOfficeTests */,
 				63DF20EC2970E1A0005DF7D1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				63DF20EB2970E1A0005DF7D1 /* BoxOffice.app */,
+				F0560C5729F7A15D0062FB01 /* BoxOfficeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,6 +152,14 @@
 			path = Interface;
 			sourceTree = "<group>";
 		};
+		F0560C5829F7A15D0062FB01 /* BoxOfficeTests */ = {
+			isa = PBXGroup;
+			children = (
+				F0560C5929F7A15D0062FB01 /* JSONDeserializerTest.swift */,
+			);
+			path = BoxOfficeTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -150,6 +180,24 @@
 			productReference = 63DF20EB2970E1A0005DF7D1 /* BoxOffice.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F0560C5629F7A15D0062FB01 /* BoxOfficeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F0560C5F29F7A15D0062FB01 /* Build configuration list for PBXNativeTarget "BoxOfficeTests" */;
+			buildPhases = (
+				F0560C5329F7A15D0062FB01 /* Sources */,
+				F0560C5429F7A15D0062FB01 /* Frameworks */,
+				F0560C5529F7A15D0062FB01 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F0560C5C29F7A15D0062FB01 /* PBXTargetDependency */,
+			);
+			name = BoxOfficeTests;
+			productName = BoxOfficeTests;
+			productReference = F0560C5729F7A15D0062FB01 /* BoxOfficeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -157,11 +205,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					63DF20EA2970E1A0005DF7D1 = {
 						CreatedOnToolsVersion = 14.2;
+					};
+					F0560C5629F7A15D0062FB01 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 63DF20EA2970E1A0005DF7D1;
 					};
 				};
 			};
@@ -179,6 +231,7 @@
 			projectRoot = "";
 			targets = (
 				63DF20EA2970E1A0005DF7D1 /* BoxOffice */,
+				F0560C5629F7A15D0062FB01 /* BoxOfficeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -191,6 +244,13 @@
 				63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */,
 				63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */,
 				63DF20F62970E1A0005DF7D1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F0560C5529F7A15D0062FB01 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,7 +272,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F0560C5329F7A15D0062FB01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0560C5A29F7A15D0062FB01 /* JSONDeserializerTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F0560C5C29F7A15D0062FB01 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 63DF20EA2970E1A0005DF7D1 /* BoxOffice */;
+			targetProxy = F0560C5B29F7A15D0062FB01 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		63DF20F42970E1A0005DF7D1 /* Main.storyboard */ = {
@@ -404,6 +480,44 @@
 			};
 			name = Release;
 		};
+		F0560C5D29F7A15D0062FB01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TMZ97PNGHJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blu.BoxOfficeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BoxOffice.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BoxOffice";
+			};
+			name = Debug;
+		};
+		F0560C5E29F7A15D0062FB01 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TMZ97PNGHJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blu.BoxOfficeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BoxOffice.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BoxOffice";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -421,6 +535,15 @@
 			buildConfigurations = (
 				63DF21002970E1A1005DF7D1 /* Debug */,
 				63DF21012970E1A1005DF7D1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F0560C5F29F7A15D0062FB01 /* Build configuration list for PBXNativeTarget "BoxOfficeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F0560C5D29F7A15D0062FB01 /* Debug */,
+				F0560C5E29F7A15D0062FB01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
