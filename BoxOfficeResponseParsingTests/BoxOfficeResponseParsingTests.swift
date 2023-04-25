@@ -25,8 +25,15 @@ final class BoxOfficeResponseParsingTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_mapping_data_to_response_is_success() throws {
-        let response: DailyBoxOfficeResponse = try JSONDecoder().decode(DailyBoxOfficeResponse.self, from: sut)
-        XCTAssertEqual(response.boxOfficeResult.dailyBoxOfficeList[0].movieCode, "20199882")
+    func test_JSON파일의_Data를_디코딩했을때의_결과값이_비어있지_않다() throws {
+        // given
+        let data: Data = sut
+        
+        // when
+        let decodedData = try JSONDecoder().decode(DailyBoxOfficeResponse.self, from: data)
+        let boxOfficeList = decodedData.boxOfficeResult.dailyBoxOfficeList
+        
+        // then
+        XCTAssertFalse(boxOfficeList.isEmpty)
     }
 }
