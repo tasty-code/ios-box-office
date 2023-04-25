@@ -8,6 +8,7 @@
 import Foundation
 
 enum RankOldAndNewDTO: String, Decodable {
+    
     case new = "NEW"
     case old = "OLD"
 }

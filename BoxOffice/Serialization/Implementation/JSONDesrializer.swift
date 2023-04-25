@@ -8,13 +8,16 @@
 import Foundation
 
 struct JSONDeserializer: JSONDeserializable {
+    
     private let decoder: JSONDecoder
 
     init(decoder: JSONDecoder = JSONDecoder()) {
+        
         self.decoder = decoder
     }
 
-    func deserialize<T: Decodable>(_ data: Data) throws -> T? {
+    func deserialize<T: Decodable>(_ data: Data) throws -> T {
+        
         try decoder.decode(T.self, from: data)
     }
 }

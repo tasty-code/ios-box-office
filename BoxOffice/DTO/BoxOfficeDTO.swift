@@ -8,5 +8,6 @@
 import Foundation
 
 struct BoxOfficeDTO: Decodable {
+    
     let boxOfficeResult: BoxOfficeResultDTO
 }

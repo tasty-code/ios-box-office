@@ -8,5 +8,6 @@
 import Foundation
 
 protocol JSONDeserializable {
-    func deserialize<T: Decodable>(_ data: Data) throws -> T?
+    
+    func deserialize<T: Decodable>(_ data: Data) throws -> T
 }

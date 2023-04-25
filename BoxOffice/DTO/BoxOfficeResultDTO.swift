@@ -8,6 +8,7 @@
 import Foundation
 
 struct BoxOfficeResultDTO: Decodable {
+    
     let boxofficeType, showRange: String
     let dailyBoxOfficeList: [DailyBoxOfficeListDTO]
 }

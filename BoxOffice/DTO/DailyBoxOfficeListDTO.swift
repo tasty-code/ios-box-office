@@ -8,6 +8,7 @@
 import Foundation
 
 struct DailyBoxOfficeListDTO: Decodable {
+    
     let rnum, rank, rankInten: String
     let rankOldAndNew: RankOldAndNewDTO
     let movieCD, movieNm, openDt, salesAmt: String
@@ -16,6 +17,7 @@ struct DailyBoxOfficeListDTO: Decodable {
     let scrnCnt, showCnt: String
 
     enum CodingKeys: String, CodingKey {
+        
         case rnum, rank, rankInten, rankOldAndNew
         case movieCD = "movieCd"
         case movieNm, openDt, salesAmt, salesShare, salesInten, salesChange, salesAcc, audiCnt, audiInten, audiChange, audiAcc, scrnCnt, showCnt
