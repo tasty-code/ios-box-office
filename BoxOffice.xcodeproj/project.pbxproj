@@ -16,6 +16,7 @@
 		E7C1159929F61B5900497283 /* DailyBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C1159829F61B5900497283 /* DailyBoxOffice.swift */; };
 		E7C115C129F7606F00497283 /* BoxOfficeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C115C029F7606F00497283 /* BoxOfficeTests.swift */; };
 		E7C115C829F7667100497283 /* DailyBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C1159829F61B5900497283 /* DailyBoxOffice.swift */; };
+		E7C115CA29F775AF00497283 /* DailyBoxOfficeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C115C929F775AF00497283 /* DailyBoxOfficeData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		E7C1159829F61B5900497283 /* DailyBoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOffice.swift; sourceTree = "<group>"; };
 		E7C115BE29F7606F00497283 /* BoxOfficeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7C115C029F7606F00497283 /* BoxOfficeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeTests.swift; sourceTree = "<group>"; };
+		E7C115C929F775AF00497283 /* DailyBoxOfficeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +99,17 @@
 			isa = PBXGroup;
 			children = (
 				E7C115C029F7606F00497283 /* BoxOfficeTests.swift */,
+				E7C115CB29F7770300497283 /* TestData */,
 			);
 			path = BoxOfficeTests;
+			sourceTree = "<group>";
+		};
+		E7C115CB29F7770300497283 /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				E7C115C929F775AF00497283 /* DailyBoxOfficeData.swift */,
+			);
+			path = TestData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7C115C129F7606F00497283 /* BoxOfficeTests.swift in Sources */,
+				E7C115CA29F775AF00497283 /* DailyBoxOfficeData.swift in Sources */,
 				E7C115C829F7667100497283 /* DailyBoxOffice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
