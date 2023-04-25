@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DailyBoxOfficeResultDTO {
+struct DailyBoxOfficeResultDTO: Codable, Equatable {
     let boxOfficeType: String
     let showRange: String
     let dailyBoxOfficeList: [DailyBoxOfficeDTO]
