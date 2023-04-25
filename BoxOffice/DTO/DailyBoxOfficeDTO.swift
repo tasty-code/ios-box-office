@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DailyBoxOfficeDTO: Codable {
+struct DailyBoxOfficeDTO: Codable, Equatable {
     let index: String
     let rank: String
     let rankVariance: String
@@ -47,4 +47,30 @@ struct DailyBoxOfficeDTO: Codable {
         case screenCount = "scrnCnt"
         case showCount = "showCnt"
     }
+}
+
+extension DailyBoxOfficeDTO {
+    func convert() -> Movie {
+        let rank = UInt(self.rank) ?? 0
+        let audienceCount = UInt(self.audienceCount) ?? 0
+        let rankVariance = Int(self.rankVariance) ?? 0
+        let releaseDate = formatter(date: self.releaseDate)
+        let rankOldAndNew = (self.rankOldAndNew == "NEW") ? Movie.Rank.new : Movie.Rank.old
+
+        return .init(name: movieName, rank: rank, releaseDate: releaseDate, audienceCount: audienceCount, rankOldAndNew: rankOldAndNew, rankVariance: rankVariance)
+    }
+}
+
+private func formatter(date: String) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-mm-dd"
+
+    guard let convertDate = dateFormatter.date(from: date) else {
+        return ""
+    }
+
+    let newDateFormatter = DateFormatter()
+    newDateFormatter.dateFormat = "yyyy년 MM월 dd일"
+
+    return newDateFormatter.string(from: convertDate)
 }
