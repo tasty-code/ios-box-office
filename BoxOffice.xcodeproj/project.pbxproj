@@ -14,7 +14,6 @@
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
 		8EEE4BB629F6724A0074302D /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8EEE4BB529F6724A0074302D /* .swiftlint.yml */; };
 		8EEE4BB829F6737E0074302D /* DailyBoxOfficeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEE4BB729F6737E0074302D /* DailyBoxOfficeResponse.swift */; };
-		8EEE4BC029F769DC0074302D /* DailyBoxOfficeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEE4BB729F6737E0074302D /* DailyBoxOfficeResponse.swift */; };
 		B42A7EEF29F6746200A3C535 /* BoxOfficeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42A7EEE29F6746200A3C535 /* BoxOfficeResult.swift */; };
 		B42A7EF129F6747000A3C535 /* DailyBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42A7EF029F6747000A3C535 /* DailyBoxOffice.swift */; };
 		B42D47F229F760E6009A3B04 /* BoxOfficeResponseParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42D47F129F760E6009A3B04 /* BoxOfficeResponseParsingTests.swift */; };
@@ -258,7 +257,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EEE4BC029F769DC0074302D /* DailyBoxOfficeResponse.swift in Sources */,
 				B42D47F229F760E6009A3B04 /* BoxOfficeResponseParsingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
