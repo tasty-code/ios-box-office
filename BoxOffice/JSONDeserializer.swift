@@ -7,7 +7,7 @@
 
 import Foundation
 
-class JSONDeserializer {
+final class JSONDeserializer {
 
     // MARK: - Properties
 
