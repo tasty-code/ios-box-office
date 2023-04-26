@@ -9,11 +9,13 @@ import Foundation
 
 // MARK: - BoxOfficeResult
 struct BoxOfficeResult: Decodable {
-    let boxofficeType, dateRange: String
+    let boxofficeType: String
+    let dateRange: String
     let dailyBoxOfficeList: [DailyBoxOfficeList]
 
     enum CodingKeys: String, CodingKey {
-        case boxofficeType, dailyBoxOfficeList
+        case boxofficeType
+        case dailyBoxOfficeList
         case dateRange = "showRange"
     }
 }
