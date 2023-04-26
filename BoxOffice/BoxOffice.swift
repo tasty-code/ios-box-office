@@ -1,5 +1,5 @@
 //
-//  boxOfficeResult.swift
+//  BoxOffice.swift
 //  BoxOffice
 //
 //  Created by DONGWOOK SEO on 2023/04/24.
