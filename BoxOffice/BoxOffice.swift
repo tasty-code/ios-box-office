@@ -1,19 +1,17 @@
 //
-//  boxOfficeResult.swift
+//  BoxOffice.swift
 //  BoxOffice
 //
 //  Created by DONGWOOK SEO on 2023/04/24.
 //
 import Foundation
 
-// MARK: - BoxOffice
 struct BoxOffice: Decodable {
 
     let boxOfficeResult: BoxOfficeResult
 
 }
 
-// MARK: - BoxOfficeResult
 struct BoxOfficeResult: Decodable {
 
     let boxOfficeType: String
@@ -30,7 +28,6 @@ struct BoxOfficeResult: Decodable {
 
 }
 
-// MARK: - DailyBoxOfficeList
 struct DailyBoxOfficeList: Decodable {
 
     let orderNumber: String
