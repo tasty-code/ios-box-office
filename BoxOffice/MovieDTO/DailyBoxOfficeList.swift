@@ -9,15 +9,30 @@ import Foundation
 
 // MARK: - DailyBoxOfficeList
 struct DailyBoxOfficeList: Decodable {
-    let rankNum, rank, rankVariation: String
+    let rankNum: String
+    let rank: String
+    let rankVariation: String
     let rankOldAndNew: RankOldAndNew
-    let movieCode, movieName, openDate, salesAmount: String
-    let salesShare, salesVariation, salesChange, salesAccumulate: String
-    let audienceCount, audienceVariation, audienceChange, audienceAccumulate: String
-    let screenCount, showCount: String
+    let movieCode: String
+    let movieName: String
+    let openDate: String
+    let salesAmount: String
+    let salesShare: String
+    let salesVariation: String
+    let salesChange: String
+    let salesAccumulate: String
+    let audienceCount: String
+    let audienceVariation: String
+    let audienceChange: String
+    let audienceAccumulate: String
+    let screenCount: String
+    let showCount: String
 
     enum CodingKeys: String, CodingKey {
-        case rank, rankOldAndNew, salesShare, salesChange
+        case rank
+        case rankOldAndNew
+        case salesShare
+        case salesChange
         case rankVariation = "rankInten"
         case rankNum = "rnum"
         case movieCode = "movieCd"
