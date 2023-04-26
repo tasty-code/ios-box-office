@@ -8,6 +8,6 @@
 import Foundation
 
 enum Show {
-    static let boxOffice: String = "boxoffice"
-    static let searchDailyList: String = "searchDailyBoxOfficeList"
+    static let boxOffice: String = "/boxoffice"
+    static let searchDailyList: String = "/searchDailyBoxOfficeList"
 }
