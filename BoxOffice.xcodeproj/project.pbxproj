@@ -12,6 +12,7 @@
 		5B10173E29F675F400AE55F3 /* DailyBoxOfficeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932148F29F6671B00E4C2D8 /* DailyBoxOfficeList.swift */; };
 		5B10174529F90D2600AE55F3 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B10174429F90D2600AE55F3 /* EndPoint.swift */; };
 		5BA4711229F91DB600B8427C /* Basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA4711129F91DB600B8427C /* Basic.swift */; };
+		5BA4711429FA465D00B8427C /* APIMagicLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA4711329FA465D00B8427C /* APIMagicLiteral.swift */; };
 		63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */; };
 		63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */; };
 		63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF20F22970E1A0005DF7D1 /* ViewController.swift */; };
@@ -43,6 +44,7 @@
 		5B10173229F66C2F00AE55F3 /* MockMovieJSONDecodingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMovieJSONDecodingTest.swift; sourceTree = "<group>"; };
 		5B10174429F90D2600AE55F3 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		5BA4711129F91DB600B8427C /* Basic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basic.swift; sourceTree = "<group>"; };
+		5BA4711329FA465D00B8427C /* APIMagicLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIMagicLiteral.swift; sourceTree = "<group>"; };
 		63DF20EB2970E1A0005DF7D1 /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				5BA4711129F91DB600B8427C /* Basic.swift */,
 				D96C74F829F914E90002A097 /* Show.swift */,
 				D96C74FA29F914ED0002A097 /* Movie.swift */,
+				5BA4711329FA465D00B8427C /* APIMagicLiteral.swift */,
 			);
 			path = Query;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				D932149029F6671B00E4C2D8 /* DailyBoxOfficeList.swift in Sources */,
 				5B10174529F90D2600AE55F3 /* EndPoint.swift in Sources */,
 				D96C74F929F914E90002A097 /* Show.swift in Sources */,
+				5BA4711429FA465D00B8427C /* APIMagicLiteral.swift in Sources */,
 				5BA4711229F91DB600B8427C /* Basic.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
 				D9E6F76C29FA3CB5007B542A /* URLComponentsError.swift in Sources */,
