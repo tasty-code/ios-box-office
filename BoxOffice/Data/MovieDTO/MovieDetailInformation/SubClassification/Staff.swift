@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Staff {
+struct Staff: Decodable {
     let peopleName: String
     let peopleNameInEnglish: String
     let staffRoleName: String

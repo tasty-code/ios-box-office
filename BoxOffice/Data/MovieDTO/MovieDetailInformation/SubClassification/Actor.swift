@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Actor {
+struct Actor: Decodable {
     let peopleName: String
     let peopleNameInEnglish: String
     let cast: String

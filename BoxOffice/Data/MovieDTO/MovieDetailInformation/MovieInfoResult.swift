@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieInfoResult {
+struct MovieInfoResult: Decodable {
     let movieInfo: MovieInfo
     let source: String
 }

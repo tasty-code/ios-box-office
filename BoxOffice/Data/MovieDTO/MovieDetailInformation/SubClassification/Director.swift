@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Director {
+struct Director: Decodable {
     let peopleName: String
     let peopleNameInEnglish: String
     

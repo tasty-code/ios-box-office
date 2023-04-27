@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ShowType {
+struct ShowType: Decodable {
     let showTypeGroupName: String
     let showTypeName: String
     

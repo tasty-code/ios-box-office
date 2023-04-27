@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Nation {
+struct Nation: Decodable {
     let nationName: String
     
     enum Codingkeys: String, CodingKey {

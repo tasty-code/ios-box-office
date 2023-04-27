@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Audit {
+struct Audit: Decodable {
     let auditNo: String
     let watchGradeName: String
     
