@@ -30,8 +30,8 @@ final class NetworkRouter<EndPoint: EndPointType>: NetworkRouterProtocol {
     
     // MARK: - Public Methods
     
-    func request(_ route: EndPoint, completion: @escaping NetworkRouterCompletion) {
-        let request = buildRequest(from: route)
+    func request(_ endPoint: EndPoint, completion: @escaping NetworkRouterCompletion) {
+        let request = buildRequest(from: endPoint)
         
         task = session.dataTask(with: request, completionHandler: { data, response, error in
             
