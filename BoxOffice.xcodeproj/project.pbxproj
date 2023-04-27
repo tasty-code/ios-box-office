@@ -118,6 +118,7 @@
 		8E854EF329FA3BAD00F2F6F7 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				B41A9C7729FA4C6600F34B16 /* Manager */,
 				8E854EF429FA3BB800F2F6F7 /* EndPointType.swift */,
 				8E854EF629FA3BF200F2F6F7 /* HTTPMethod.swift */,
 				8E854EF829FA3C0800F2F6F7 /* HTTPTask.swift */,
@@ -125,6 +126,13 @@
 				8E854EFC29FA459200F2F6F7 /* NetworkError.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		B41A9C7729FA4C6600F34B16 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		B42A7EED29F6744200A3C535 /* Model */ = {
