@@ -20,7 +20,7 @@ struct DailyBoxOfficeDTO: Decodable {
     let salesVariance: String
     let salesChange: String
     let salesAccumulate: String
-    let audienceCount: String
+    let audiencePerDay: String
     let audienceVariance: String
     let audienceChange: String
     let audienceAccumlate: String
@@ -40,7 +40,7 @@ struct DailyBoxOfficeDTO: Decodable {
         case salesVariance = "salesInten"
         case salesChange
         case salesAccumulate = "salesAcc"
-        case audienceCount = "audiCnt"
+        case audiencePerDay = "audiCnt"
         case audienceVariance = "audiInten"
         case audienceChange = "audiChange"
         case audienceAccumlate = "audiAcc"
@@ -52,12 +52,14 @@ struct DailyBoxOfficeDTO: Decodable {
 extension DailyBoxOfficeDTO {
     func convert() -> Movie {
         let rank = UInt(self.rank) ?? 0
-        let audienceCount = UInt(self.audienceCount) ?? 0
         let rankVariance = Int(self.rankVariance) ?? 0
-        let releaseDate = formatter(date: self.releaseDate)
-        let rankOldAndNew = (self.rankOldAndNew == "NEW") ? Movie.Rank.new : Movie.Rank.old
+        let rankOldAndNew = self.rankOldAndNew == "NEW"
+        let audiencePerDay = UInt(self.audiencePerDay) ?? 0
+        let audienceAccumlate = UInt(self.audienceAccumlate) ?? 0
 
-        return .init(name: movieName, rank: rank, releaseDate: releaseDate, audienceCount: audienceCount, rankOldAndNew: rankOldAndNew, rankVariance: rankVariance)
+        return .init(name: self.movieName,
+                     rank: Rank(rank: rank, isEntry: rankOldAndNew, variance: rankVariance),
+                     audience: Audience(today: audiencePerDay, accumulate: audienceAccumlate))
     }
 }
 
