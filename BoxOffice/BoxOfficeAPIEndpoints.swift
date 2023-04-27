@@ -38,14 +38,14 @@ extension BoxOfficeAPIEndpoints {
         return urlRequest
     }
     
-    enum QueryConstant {
+    private enum QueryConstant {
         static let apiKeyQueryName = "key"
         static let apiKeyQueryValue = "6c4b02fc76306e47a3ada0534d4cc519"
         static let movieCodeQueryName = "movieCd"
         static let targetDateQueryName = "targetDt"
     }
     
-    func makeQueryItems() -> [URLQueryItem] {
+    private func makeQueryItems() -> [URLQueryItem] {
         let apiKeyQueryItem = URLQueryItem(name: QueryConstant.apiKeyQueryName, value: QueryConstant.apiKeyQueryValue)
         
         switch self {

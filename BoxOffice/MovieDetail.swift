@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - MovieDetail
 struct MovieDetail: Decodable {
     let movieInformationResult: MovieInformationResult
 
@@ -16,7 +15,6 @@ struct MovieDetail: Decodable {
     }
 }
 
-// MARK: - MovieInformationResult
 struct MovieInformationResult: Decodable {
     let movieInformation: MovieInformation
 
@@ -25,7 +23,6 @@ struct MovieInformationResult: Decodable {
     }
 }
 
-// MARK: - MovieInformation
 struct MovieInformation: Decodable {
 
     let movieCode: String
@@ -64,7 +61,6 @@ struct MovieInformation: Decodable {
 
 }
 
-// MARK: - Actor
 struct Actor: Decodable {
 
     let peopleName: String
@@ -81,7 +77,6 @@ struct Actor: Decodable {
 
 }
 
-// MARK: - Audit
 struct Audit: Decodable {
     let auditNuber: String
     let movieRating: String
@@ -92,7 +87,6 @@ struct Audit: Decodable {
     }
 }
 
-// MARK: - Company
 struct Company: Decodable {
     let companyCode: String
     let companyName: String
@@ -107,7 +101,6 @@ struct Company: Decodable {
     }
 }
 
-// MARK: - Director
 struct Director: Decodable {
 
     let peopleName: String
@@ -120,7 +113,6 @@ struct Director: Decodable {
 
 }
 
-// MARK: - Genre
 struct Genre: Decodable {
 
     let genreName: String
@@ -131,7 +123,6 @@ struct Genre: Decodable {
 
 }
 
-// MARK: - Nation
 struct Nation: Decodable {
     let nationName: String
 
@@ -141,7 +132,6 @@ struct Nation: Decodable {
 
 }
 
-// MARK: - ShowType
 struct ShowType: Decodable {
     let showTypeGroupName: String
     let showTypeName: String

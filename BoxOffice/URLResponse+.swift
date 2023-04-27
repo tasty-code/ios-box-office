@@ -9,7 +9,7 @@ import Foundation
 
 extension URLResponse {
 
-    var successCodeRange: ClosedRange<Int> {
+    private var successCodeRange: ClosedRange<Int> {
         return 200...299
     }
 
