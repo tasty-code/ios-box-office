@@ -7,8 +7,9 @@
 
 import Foundation
 
-typealias HTTPHeaders = [String: String]
+typealias QueryParameters = [String: String]
 
 enum HTTPTask {
     case request
+    case requestWithQueryParameters(queryParameters: QueryParameters)
 }
