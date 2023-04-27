@@ -31,7 +31,10 @@ final class NetworkRouter<EndPoint: EndPointType>: NetworkRouterProtocol {
     // MARK: - Public Methods
     
     func request(_ endPoint: EndPoint, completion: @escaping NetworkRouterCompletion) {
-        let request = buildRequest(from: endPoint)
+        guard let request = buildRequest(from: endPoint) else {
+            completion(.failure(.invalidURL))
+            return
+        }
         
         task = session.dataTask(with: request, completionHandler: { data, response, error in
             
@@ -61,11 +64,26 @@ final class NetworkRouter<EndPoint: EndPointType>: NetworkRouterProtocol {
     
     // MARK: - Private Methods
     
-    private func buildRequest(from route: EndPoint) -> URLRequest {
-        var request = URLRequest(url: route.baseURL.appendingPathComponent(route.path),
-                                 timeoutInterval: 10.0)
+    private func buildRequest(from endPoint: EndPoint) -> URLRequest? {
         
-        request.httpMethod = route.httpMethod.rawValue
-        return request
+        var urlComponents = URLComponents(string: endPoint.baseURL)
+        urlComponents?.path = endPoint.path
+
+        switch endPoint.task {
+        case .request:
+            break
+        case .requestWithQueryParameters(let queryParameters):
+            let queryItems = queryParameters.map { key, value in
+                URLQueryItem(name: key, value: value)
+            }
+            urlComponents?.queryItems = queryItems
+        }
+        
+        guard let url = urlComponents?.url else { return nil }
+
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = endPoint.httpMethod.rawValue
+        
+        return urlRequest
     }
 }

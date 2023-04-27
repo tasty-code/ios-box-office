@@ -11,5 +11,5 @@ typealias QueryParameters = [String: String]
 
 enum HTTPTask {
     case request
-    case requestWithQueryParameters(queryParameters: QueryParameters)
+    case requestWithQueryParameters(_ queryParameters: QueryParameters)
 }

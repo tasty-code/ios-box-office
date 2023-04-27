@@ -13,11 +13,8 @@ enum MovieApi {
 
 extension MovieApi: EndPointType {
     
-    var baseURL: URL {
-        guard let url = URL(string: "http://kobis.or.kr/kobisopenapi/webservice/rest/") else {
-            fatalError("baseURL ERROR")
-        }
-        return url
+    var baseURL: String {
+        return "http://kobis.or.kr/kobisopenapi/webservice/rest/"
     }
     
     var path: String {
@@ -37,8 +34,8 @@ extension MovieApi: EndPointType {
     var task: HTTPTask {
         switch self {
         case .dailyBoxOffice(let date):
-            return .requestWithQueryParameters(queryParameters: ["key": APIKeys.kobisSecret,
-                                                                 "targetDt": date])
+            return .requestWithQueryParameters(["key": APIKeys.kobisSecret,
+                                                "targetDt": date])
         }
     }
 }
