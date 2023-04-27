@@ -20,10 +20,12 @@ final class BoxOfficeTests: XCTestCase {
     
     func test_dailyBoxOfficeData는_DailyBoxOffice로_디코딩_가능하다() {
         // given
-        let jsonData = dailyBoxOfficeData
+        guard let path = Bundle.main.path(forResource: "DailyBoxOfficeData", ofType: "json"),
+              let json = try? String(contentsOfFile: path),
+              let data = json.data(using: .utf8) else { fatalError("Data 생성 실패") }
         
         // when
-        let parsedData = try? JSONDecoder().decode(DailyBoxOffice.self, from: jsonData)
+        let parsedData = try? JSONDecoder().decode(DailyBoxOffice.self, from: data)
         
         // then
         XCTAssertNotNil(parsedData)
