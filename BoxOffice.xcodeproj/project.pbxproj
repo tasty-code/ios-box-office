@@ -144,6 +144,16 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		5BA4711529FA637B00B8427C /* BoxOffice */ = {
+			isa = PBXGroup;
+			children = (
+				D932148D29F6670200E4C2D8 /* BoxOffice.swift */,
+				D932149729F69DC100E4C2D8 /* BoxOfficeResult.swift */,
+				D932148F29F6671B00E4C2D8 /* DailyBoxOfficeList.swift */,
+			);
+			path = BoxOffice;
+			sourceTree = "<group>";
+		};
 		63DF20E22970E1A0005DF7D1 = {
 			isa = PBXGroup;
 			children = (
@@ -176,9 +186,7 @@
 		D932149129F6673000E4C2D8 /* MovieDTO */ = {
 			isa = PBXGroup;
 			children = (
-				D932148D29F6670200E4C2D8 /* BoxOffice.swift */,
-				D932149729F69DC100E4C2D8 /* BoxOfficeResult.swift */,
-				D932148F29F6671B00E4C2D8 /* DailyBoxOfficeList.swift */,
+				5BA4711529FA637B00B8427C /* BoxOffice */,
 			);
 			path = MovieDTO;
 			sourceTree = "<group>";
