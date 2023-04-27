@@ -40,6 +40,7 @@
 		D96C74FB29F914ED0002A097 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96C74FA29F914ED0002A097 /* Movie.swift */; };
 		D9E6F76C29FA3CB5007B542A /* URLComponentsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E6F76B29FA3CB5007B542A /* URLComponentsError.swift */; };
 		D9E6F76E29FA6AD1007B542A /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E6F76D29FA6AD1007B542A /* MovieDTO.swift */; };
+		D9E6F77129FAA046007B542A /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E6F77029FAA046007B542A /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		D96C74FA29F914ED0002A097 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		D9E6F76B29FA3CB5007B542A /* URLComponentsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentsError.swift; sourceTree = "<group>"; };
 		D9E6F76D29FA6AD1007B542A /* MovieDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDTO.swift; sourceTree = "<group>"; };
+		D9E6F77029FAA046007B542A /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				D9E6F76B29FA3CB5007B542A /* URLComponentsError.swift */,
+				D9E6F77029FAA046007B542A /* NetworkError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
 				D9E6F76C29FA3CB5007B542A /* URLComponentsError.swift in Sources */,
 				5BA4711F29FA64EF00B8427C /* Actor.swift in Sources */,
+				D9E6F77129FAA046007B542A /* NetworkError.swift in Sources */,
 				5BA4712129FA65CB00B8427C /* Audit.swift in Sources */,
 				5BA4712829FA677800B8427C /* Genre.swift in Sources */,
 			);
