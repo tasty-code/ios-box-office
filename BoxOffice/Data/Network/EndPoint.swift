@@ -15,22 +15,32 @@ struct EndPoint {
     
     private(set) var convertedData: String
     
-    func configureURL(_ firstPath: String, and lastPath: String) throws -> URL {
+    func urlRequest(from movieURL: URL) throws -> URLRequest {
         
-        guard var components = URLComponents(string: "\(Basic.baseURL)\(firstPath)\(lastPath)\(Basic.format)") else {
-            throw URLComponentsError.invalidComponent
-        }
+        var urlRequest = URLRequest(url: movieURL)
         
+        urlRequest.httpMethod = HTTPMethodType.get.rawValue
+        return urlRequest
+    }
+    
+    func url(with path: URLComponents) throws -> URL {
+        
+        var makedPath = path
         let key = URLQueryItem(name: APIMagicLiteral.Key, value: APIMagicLiteral.KeyValue)
         let targetDate = URLQueryItem(name: APIMagicLiteral.targetQuery, value: convertedData)
-        components.queryItems = [key, targetDate]
+        makedPath.queryItems = [key, targetDate]
         
-        guard let url = components.url else {
+        guard let url = makedPath.url else {
             throw URLComponentsError.invalidComponent
         }
         
         return url
     }
     
-    
+    func makePath(with firstPath: String, and lastPath: String) throws -> URLComponents {
+        guard let components = URLComponents(string: "\(Basic.baseURL)\(firstPath)\(lastPath)\(Basic.format)") else {
+            throw URLComponentsError.invalidComponent
+        }
+        return components
+    }
 }
