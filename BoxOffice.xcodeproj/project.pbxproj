@@ -25,6 +25,7 @@
 		D932149929F69EDA00E4C2D8 /* BoxOfficeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932149729F69DC100E4C2D8 /* BoxOfficeResult.swift */; };
 		D96C74F929F914E90002A097 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96C74F829F914E90002A097 /* Show.swift */; };
 		D96C74FB29F914ED0002A097 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96C74FA29F914ED0002A097 /* Movie.swift */; };
+		D9E6F76C29FA3CB5007B542A /* URLComponentsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E6F76B29FA3CB5007B542A /* URLComponentsError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		D932149729F69DC100E4C2D8 /* BoxOfficeResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeResult.swift; sourceTree = "<group>"; };
 		D96C74F829F914E90002A097 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		D96C74FA29F914ED0002A097 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		D9E6F76B29FA3CB5007B542A /* URLComponentsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentsError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		5B10174329F90CDB00AE55F3 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				D9E6F76A29FA3C97007B542A /* Error */,
 				D96C74F729F914DC0002A097 /* Query */,
 				5B10174429F90D2600AE55F3 /* EndPoint.swift */,
 			);
@@ -194,6 +197,14 @@
 				D96C74FA29F914ED0002A097 /* Movie.swift */,
 			);
 			path = Query;
+			sourceTree = "<group>";
+		};
+		D9E6F76A29FA3C97007B542A /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				D9E6F76B29FA3CB5007B542A /* URLComponentsError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +330,7 @@
 				D96C74F929F914E90002A097 /* Show.swift in Sources */,
 				5BA4711229F91DB600B8427C /* Basic.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
+				D9E6F76C29FA3CB5007B542A /* URLComponentsError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
