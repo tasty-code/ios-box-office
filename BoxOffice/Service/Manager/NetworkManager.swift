@@ -7,18 +7,18 @@
 
 import Foundation
 
-final class NetworkManager {
+final class NetworkManager<NetworkRouter: NetworkRouterProtocol> {
     
     typealias FetchMovieCompletion = (Result<DailyBoxOfficeResponse, NetworkError>) -> Void
     
     // MARK: - Properties
     
-    private let router: any NetworkRouterProtocol
+    private let router: NetworkRouter
     private let decoder = JSONDecoder()
     
     // MARK: - Initialization
 
-    init(router: any NetworkRouterProtocol) {
+    init(router: NetworkRouter) {
         self.router = router
     }
     
