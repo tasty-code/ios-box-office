@@ -66,7 +66,7 @@ final class NetworkRouter: NetworkRouterProtocol {
     private func buildRequest(from endPoint: EndPointType) -> URLRequest? {
         
         var urlComponents = URLComponents(string: endPoint.baseURL)
-        urlComponents?.path = endPoint.path
+        urlComponents?.path += endPoint.path
 
         switch endPoint.task {
         case .request:
