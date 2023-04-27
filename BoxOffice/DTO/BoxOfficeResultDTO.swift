@@ -9,6 +9,12 @@ import Foundation
 
 struct BoxOfficeResultDTO: Decodable {
     
-    let boxofficeType, showRange: String
-    let dailyBoxOfficeList: [DailyBoxOfficeListDTO]
+    let type, inqueryRange: String
+    let dailyBoxOffices: [DailyBoxOfficesDTO]
+
+    enum CodingKeys: String, CodingKey {
+        case type = "boxofficeType"
+        case inqueryRange = "showRange"
+        case dailyBoxOffices = "dailyBoxOfficeList"
+    }
 }

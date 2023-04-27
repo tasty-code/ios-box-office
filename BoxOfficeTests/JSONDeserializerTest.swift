@@ -40,8 +40,8 @@ final class JSONDeserializerTest: XCTestCase {
         
         // then
         XCTAssertNoThrow(result)
-        XCTAssertEqual(result?.boxOfficeResult.boxofficeType, "일별 박스오피스")
-        XCTAssertEqual(result?.boxOfficeResult.showRange, "20220105~20220105")
+        XCTAssertEqual(result?.result.type, "일별 박스오피스")
+        XCTAssertEqual(result?.result.inqueryRange, "20220105~20220105")
     }
 
     

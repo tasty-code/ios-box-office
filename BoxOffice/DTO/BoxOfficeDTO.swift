@@ -9,5 +9,9 @@ import Foundation
 
 struct BoxOfficeDTO: Decodable {
     
-    let boxOfficeResult: BoxOfficeResultDTO
+    let result: BoxOfficeResultDTO
+
+    enum CodingKeys: String, CodingKey {
+        case result = "boxOfficeResult"
+    }
 }
