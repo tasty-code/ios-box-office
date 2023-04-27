@@ -8,15 +8,7 @@
 import UIKit
 
 struct Movie: Equatable {
-    enum Rank {
-        case old
-        case new
-    }
-
     let name: String
-    let rank: UInt
-    let releaseDate: String
-    let audienceCount: UInt
-    let rankOldAndNew: Rank
-    let rankVariance: Int
+    let rank: Rank
+    let audience: Audience
 }
