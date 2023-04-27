@@ -13,6 +13,7 @@
 		63DF20F62970E1A0005DF7D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F42970E1A0005DF7D1 /* Main.storyboard */; };
 		63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
+		872B0F4A29FA511200EF91D0 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF2FE329F78F02001B5BCF /* MovieDetail.swift */; };
 		8739F26329F655D40000BA9E /* BoxOfficeMock.json in Resources */ = {isa = PBXBuildFile; fileRef = 8739F26229F655D40000BA9E /* BoxOfficeMock.json */; };
 		8739F26429F65CAB0000BA9E /* BoxOfficeDeserializerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF2FD129F658A4001B5BCF /* BoxOfficeDeserializerTest.swift */; };
 		8739F26729F661680000BA9E /* JSONDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF2FC729F65782001B5BCF /* JSONDeserializer.swift */; };
@@ -101,18 +102,12 @@
 		63DF20ED2970E1A0005DF7D1 /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
+				872B0F4D29FA528100EF91D0 /* Util */,
+				872B0F4829FA50EF00EF91D0 /* Model */,
+				872B0F4529FA50BC00EF91D0 /* Networking */,
 				63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */,
 				63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */,
 				63DF20F22970E1A0005DF7D1 /* ViewController.swift */,
-				F1C7C1A029F6394E0060B95A /* BoxOffice.swift */,
-				87C5438B29F7A5890056F1BD /* EndPoint.swift */,
-				F1FF2FE529F7A73C001B5BCF /* BoxOfficeAPIEndpoints.swift */,
-				87F1013229FA3DEE002CD11A /* BoxOfficeAPIManager.swift */,
-				F1FF2FE929FA395A001B5BCF /* NetworkDispatcher.swift */,
-				87F1013029FA386C002CD11A /* NetworkError.swift */,
-				F1FF2FE329F78F02001B5BCF /* MovieDetail.swift */,
-				F1FF2FC729F65782001B5BCF /* JSONDeserializer.swift */,
-				F1FF2FEB29FA3CA5001B5BCF /* URLResponse+.swift */,
 				8739F26229F655D40000BA9E /* BoxOfficeMock.json */,
 				63DF20F42970E1A0005DF7D1 /* Main.storyboard */,
 				63DF20F72970E1A1005DF7D1 /* Assets.xcassets */,
@@ -120,6 +115,76 @@
 				63DF20FC2970E1A1005DF7D1 /* Info.plist */,
 			);
 			path = BoxOffice;
+			sourceTree = "<group>";
+		};
+		872B0F4529FA50BC00EF91D0 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				87F1013029FA386C002CD11A /* NetworkError.swift */,
+				F1FF2FE929FA395A001B5BCF /* NetworkDispatcher.swift */,
+				872B0F4B29FA512C00EF91D0 /* Decoding */,
+				872B0F4729FA50D200EF91D0 /* Manager */,
+				872B0F4629FA50C900EF91D0 /* EndPoint */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		872B0F4629FA50C900EF91D0 /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+				87C5438B29F7A5890056F1BD /* EndPoint.swift */,
+				F1FF2FE529F7A73C001B5BCF /* BoxOfficeAPIEndpoints.swift */,
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
+		872B0F4729FA50D200EF91D0 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				87F1013229FA3DEE002CD11A /* BoxOfficeAPIManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		872B0F4829FA50EF00EF91D0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				872B0F4929FA50F800EF91D0 /* DTO */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		872B0F4929FA50F800EF91D0 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				F1C7C1A029F6394E0060B95A /* BoxOffice.swift */,
+				F1FF2FE329F78F02001B5BCF /* MovieDetail.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		872B0F4B29FA512C00EF91D0 /* Decoding */ = {
+			isa = PBXGroup;
+			children = (
+				F1FF2FC729F65782001B5BCF /* JSONDeserializer.swift */,
+			);
+			path = Decoding;
+			sourceTree = "<group>";
+		};
+		872B0F4C29FA518500EF91D0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F1FF2FEB29FA3CA5001B5BCF /* URLResponse+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		872B0F4D29FA528100EF91D0 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				872B0F4C29FA518500EF91D0 /* Extensions */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		F1FF2FD029F658A4001B5BCF /* BoxOfficeDeserializerTest */ = {
@@ -255,6 +320,7 @@
 				8739F26429F65CAB0000BA9E /* BoxOfficeDeserializerTest.swift in Sources */,
 				8739F26729F661680000BA9E /* JSONDeserializer.swift in Sources */,
 				F1FF2FDC29F658D0001B5BCF /* BoxOffice.swift in Sources */,
+				872B0F4A29FA511200EF91D0 /* MovieDetail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
