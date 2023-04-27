@@ -16,12 +16,12 @@ enum BoxOfficeAPIEndpoints {
 
 extension BoxOfficeAPIEndpoints {
 
-    var endPoint: EndPoint {
+    private var endPoint: EndPoint {
         switch self {
         case .boxOffice:
-            return EndPoint(baseURL: "http://www.kobis.or.kr", path: "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json", queryItems: makeQueryItems())
+            return EndPoint(baseURL: "https://www.kobis.or.kr", path: "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json", queryItems: makeQueryItems())
         case .movieDetail:
-            return EndPoint(baseURL: "http://www.kobis.or.kr", path: "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json", queryItems: makeQueryItems())
+            return EndPoint(baseURL: "https://www.kobis.or.kr", path: "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json", queryItems: makeQueryItems())
         }
 
     }

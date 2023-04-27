@@ -9,8 +9,8 @@ import Foundation
 
 struct BoxOfficeAPIManager {
     
-    let deserializer = JSONDeserializer()
-    let networkDispatcher = NetworkDispatcher()
+    private let deserializer = JSONDeserializer()
+    private let networkDispatcher = NetworkDispatcher()
     
     func fetchData(to type: Decodable.Type, endPoint: BoxOfficeAPIEndpoints, completionHandler: @escaping (Decodable) -> Void) {
         
