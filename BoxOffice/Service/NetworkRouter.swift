@@ -10,12 +10,11 @@ import Foundation
 typealias NetworkRouterCompletion = (Result<Data, NetworkError>) -> Void
 
 protocol NetworkRouterProtocol: AnyObject {
-    associatedtype EndPoint: EndPointType
-    func request(_ route: EndPoint, completion: @escaping NetworkRouterCompletion)
+    func request(_ endPoint: EndPointType, completion: @escaping NetworkRouterCompletion)
     func cancel()
 }
 
-final class NetworkRouter<EndPoint: EndPointType>: NetworkRouterProtocol {
+final class NetworkRouter: NetworkRouterProtocol {
     
     // MARK: - Properties
     
@@ -30,7 +29,7 @@ final class NetworkRouter<EndPoint: EndPointType>: NetworkRouterProtocol {
     
     // MARK: - Public Methods
     
-    func request(_ endPoint: EndPoint, completion: @escaping NetworkRouterCompletion) {
+    func request(_ endPoint: EndPointType, completion: @escaping NetworkRouterCompletion) {
         guard let request = buildRequest(from: endPoint) else {
             completion(.failure(.invalidURL))
             return
@@ -64,7 +63,7 @@ final class NetworkRouter<EndPoint: EndPointType>: NetworkRouterProtocol {
     
     // MARK: - Private Methods
     
-    private func buildRequest(from endPoint: EndPoint) -> URLRequest? {
+    private func buildRequest(from endPoint: EndPointType) -> URLRequest? {
         
         var urlComponents = URLComponents(string: endPoint.baseURL)
         urlComponents?.path = endPoint.path

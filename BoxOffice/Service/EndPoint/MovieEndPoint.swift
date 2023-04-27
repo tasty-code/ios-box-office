@@ -7,20 +7,20 @@
 
 import Foundation
 
-enum MovieApi {
+enum MovieEndPoint {
     case dailyBoxOffice(date: String)
 }
 
-extension MovieApi: EndPointType {
+extension MovieEndPoint: EndPointType {
     
     var baseURL: String {
-        return "http://kobis.or.kr/kobisopenapi/webservice/rest/"
+        return "http://kobis.or.kr/kobisopenapi/webservice/rest"
     }
     
     var path: String {
         switch self {
         case .dailyBoxOffice:
-            return "boxoffice/searchDailyBoxOfficeList"
+            return "/boxoffice/searchDailyBoxOfficeList"
         }
     }
     
