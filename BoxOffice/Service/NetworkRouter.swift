@@ -43,7 +43,7 @@ final class NetworkRouter: NetworkRouterProtocol {
             }
             
             if let httpResponse = response as? HTTPURLResponse, !(200..<300).contains(httpResponse.statusCode) {
-                completion(.failure(.serverError(statusCode: httpResponse.statusCode)))
+                completion(.failure(.responseError(statusCode: httpResponse.statusCode)))
                 return
             }
             
