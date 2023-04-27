@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias NetworkRouterCompletion = (Result<Data, Error>) -> Void
+typealias NetworkRouterCompletion = (Result<Data, NetworkError>) -> Void
 
 protocol NetworkRouterProtocol: AnyObject {
     associatedtype EndPoint: EndPointType
@@ -34,16 +34,19 @@ final class NetworkRouter<EndPoint: EndPointType>: NetworkRouterProtocol {
         let request = buildRequest(from: route)
         
         task = session.dataTask(with: request, completionHandler: { data, response, error in
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200..<300).contains(httpResponse.statusCode) else {
-                // TODO: Network 에러 정의, statusCode Error 던지기
-                completion(.failure(error!))
+            
+            if let error = error {
+                completion(.failure(.transportError(error)))
                 return
             }
             
-            guard let data else {
-                // TODO: Network 에러 정의, Data Error 던지기
-                completion(.failure(error!))
+            if let httpResponse = response as? HTTPURLResponse, !(200..<300).contains(httpResponse.statusCode) {
+                completion(.failure(.serverError(statusCode: httpResponse.statusCode)))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(.invalidData))
                 return
             }
             
