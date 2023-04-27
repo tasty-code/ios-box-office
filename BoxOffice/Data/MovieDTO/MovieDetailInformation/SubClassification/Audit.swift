@@ -8,7 +8,7 @@
 import Foundation
 
 struct Audit: Decodable {
-    let auditNo: String
+    let auditNumber: String
     let watchGradeName: String
     
     enum CodingKeys: String, CodingKey {
