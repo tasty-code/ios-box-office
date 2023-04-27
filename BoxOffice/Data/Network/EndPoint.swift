@@ -13,16 +13,24 @@ enum HTTPMethodType: String {
 
 struct EndPoint {
     
-    static func configureURL() {
+    private(set) var convertedData: String
+    
+    func configureURL(_ firstPath: String, and lastPath: String) throws -> URL {
         
-        guard var components = URLComponents(string: "\(Basic.baseURL)\(Show.boxOffice)\(Show.searchDailyList)\(Basic.format)") else {
-            return
+        guard var components = URLComponents(string: "\(Basic.baseURL)\(firstPath)\(lastPath)\(Basic.format)") else {
+            throw URLComponentsError.invalidComponent
         }
         
-        let key = URLQueryItem(name: "key", value: "f5eef3421c602c6cb7ea224104795888")
-        let targetDate = URLQueryItem(name: "targetDt", value: "20120101")
+        let key = URLQueryItem(name: APIMagicLiteral.Key, value: APIMagicLiteral.KeyValue)
+        let targetDate = URLQueryItem(name: APIMagicLiteral.targetQuery, value: convertedData)
         components.queryItems = [key, targetDate]
         
-        guard let url = components.url else { return }
+        guard let url = components.url else {
+            throw URLComponentsError.invalidComponent
+        }
+        
+        return url
     }
+    
+    
 }
