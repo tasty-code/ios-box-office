@@ -5,7 +5,7 @@
 //  Created by 신동오 on 2023/04/26.
 //
 
-struct Movie: Codable {
+struct Movie: Decodable {
     
     let rank, rankInten, rankOldAndNew, code, name, openDate, salesAmount, salesShare, salesInten, salesChange, salesAcc, audienceCount, audienceInten, audienceChange, audienceAcc, screenCount, showCount: String
     
