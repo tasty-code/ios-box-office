@@ -20,7 +20,7 @@ final class JSONDeserializerTest: XCTestCase {
 
         try super.setUpWithError()
         decoder = JSONDeserializer()
-        fileURL = findFile(name: fileName, withExtension: fileExtension)
+        fileURL = try findFile(name: fileName, withExtension: fileExtension)
     }
 
     override func tearDownWithError() throws {
@@ -32,26 +32,23 @@ final class JSONDeserializerTest: XCTestCase {
     func test_DTO타입으로_Parsing되는지() throws {
 
         // given
-        var result: BoxOfficeDTO
+        var result: BoxOfficeDTO?
 
         // when
-        do {
-            let data = try Data(contentsOf: fileURL)
-            result = try decoder.deserialize(data)
-        } catch {
-            throw error
-        }
+        let data = try Data(contentsOf: fileURL)
+        result = try decoder.deserialize(data)
         
         // then
-        XCTAssertNotNil(result)
-        XCTAssertEqual(result.boxOfficeResult.boxofficeType, "일별 박스오피스")
-        XCTAssertEqual(result.boxOfficeResult.showRange, "20220105~20220105")
+        XCTAssertNoThrow(result)
+        XCTAssertEqual(result?.boxOfficeResult.boxofficeType, "일별 박스오피스")
+        XCTAssertEqual(result?.boxOfficeResult.showRange, "20220105~20220105")
     }
 
-    func findFile(name: String, withExtension fileExtension: String) -> URL? {
+    
+    func findFile(name: String, withExtension fileExtension: String) throws -> URL {
 
         let fileURL = Bundle(for: JSONDeserializerTest.self).url(forResource: name, withExtension: fileExtension)
 
-        return fileURL
+        return try XCTUnwrap(fileURL)
     }
 }
