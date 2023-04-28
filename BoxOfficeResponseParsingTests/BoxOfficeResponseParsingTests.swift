@@ -12,7 +12,7 @@ final class BoxOfficeResponseParsingTests: XCTestCase {
     var sut: Data!
     
     override func setUpWithError() throws {
-        let fileLocation = Bundle.main.url(forResource: "box_office_sample", withExtension: "json")!
+        let fileLocation = Bundle.main.url(forResource: "movie_detail_sample", withExtension: "json")!
         XCTAssertNoThrow(
             sut = try Data(contentsOf: fileLocation)
         )
@@ -27,10 +27,10 @@ final class BoxOfficeResponseParsingTests: XCTestCase {
         let data: Data = sut
         
         // when
-        let decodedData = try JSONDecoder().decode(DailyBoxOfficeResponse.self, from: data)
-        let boxOfficeList = decodedData.boxOfficeResult.dailyBoxOfficeList
+        let response = try JSONDecoder().decode(MovieDetailResponse.self, from: data)
+        let decodedData = response.movieInfoResult.movieInfo.name
         
         // then
-        XCTAssertFalse(boxOfficeList.isEmpty)
+        XCTAssertFalse(decodedData.isEmpty)
     }
 }

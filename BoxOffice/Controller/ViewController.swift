@@ -28,13 +28,14 @@ class ViewController: UIViewController {
 //            }
 //        }
         
-        networkManager.fetchMovieDetail(endPoint: .movieDetail(movieCode: "20225061")) { result in
-            switch result {
-            case .success(let movieDetailResponse):
-                print(movieDetailResponse)
-            case .failure(let error):
-                print(error)
-            }
-        }
+//        networkManager.fetchMovieDetail(endPoint: .movieDetail(movieCode: "20225061")) { result in
+//            switch result {
+//            case .success(let movieDetailResponse):
+//                print(movieDetailResponse)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+        
     }
 }
