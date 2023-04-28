@@ -30,9 +30,10 @@ enum URLPath {
     }
 
     func configureURL(_ value: String) throws -> URL {
-        let baseURL = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/"
+        let baseURL = "https://www.kobis.or.kr"
+        let basePath = "/kobisopenapi/webservice/rest/"
 
-        guard var component = URLComponents(string: "\(baseURL)\(path)") else {
+        guard var component = URLComponents(string: baseURL) else {
             throw URLComponentsError.invalidComponent
         }
 
@@ -40,6 +41,7 @@ enum URLPath {
         let apiKeyItem = URLQueryItem(name: "key", value: apiKey)
         let requestItem = URLQueryItem(name: queryItemName, value: value)
 
+        component.path = "\(basePath)\(path)"
         component.queryItems = [apiKeyItem, requestItem]
 
         guard let url = component.url else {
