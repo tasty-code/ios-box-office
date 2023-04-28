@@ -29,6 +29,8 @@
 		F66085D429F79F0900A39D5A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66085D229F78F8700A39D5A /* Movie.swift */; };
 		F66085D529F79F0B00A39D5A /* DailyBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66085D029F78F2600A39D5A /* DailyBoxOffice.swift */; };
 		F66085D629F7A00800A39D5A /* BoxOfficeData.json in Resources */ = {isa = PBXBuildFile; fileRef = F66085C129F66B0C00A39D5A /* BoxOfficeData.json */; };
+		F6D6485D29FB5F390083247F /* URLPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D6485C29FB5F390083247F /* URLPath.swift */; };
+		F6D6485F29FB65590083247F /* URLComponentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D6485E29FB65590083247F /* URLComponentError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		F66085C129F66B0C00A39D5A /* BoxOfficeData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BoxOfficeData.json; sourceTree = "<group>"; };
 		F66085D029F78F2600A39D5A /* DailyBoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOffice.swift; sourceTree = "<group>"; };
 		F66085D229F78F8700A39D5A /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		F6D6485C29FB5F390083247F /* URLPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLPath.swift; sourceTree = "<group>"; };
+		F6D6485E29FB65590083247F /* URLComponentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 				63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */,
 				63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */,
 				63DF20F22970E1A0005DF7D1 /* ViewController.swift */,
+				F6D6485C29FB5F390083247F /* URLPath.swift */,
+				F6D6485E29FB65590083247F /* URLComponentError.swift */,
 				63DF20F42970E1A0005DF7D1 /* Main.storyboard */,
 				76BCBAEC29F6564C006B989F /* MovieAPI.xcconfig */,
 				63DF20F72970E1A1005DF7D1 /* Assets.xcassets */,
@@ -254,6 +260,8 @@
 				76D585DE29F78AB700EAB343 /* DailyBoxOfficeResultDTO.swift in Sources */,
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
+				F6D6485F29FB65590083247F /* URLComponentError.swift in Sources */,
+				F6D6485D29FB5F390083247F /* URLPath.swift in Sources */,
 				762E2B6C29FA411C00551153 /* Rank.swift in Sources */,
 				762E2B6E29FA41FC00551153 /* Audience.swift in Sources */,
 				F66085D329F78F8700A39D5A /* Movie.swift in Sources */,

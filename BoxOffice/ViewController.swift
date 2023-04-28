@@ -12,7 +12,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let apiKey = Bundle.main.object(forInfoDictionaryKey: "MOVIE_API_KEY") as? String
-        print(apiKey)
+        do {
+            print(try URLPath.dailyBoxOffice.configureURL("2012344"))
+            print(try URLPath.movieInformation.configureURL("123df"))
+        } catch {
+            print(error)
+        }
     }
 }
