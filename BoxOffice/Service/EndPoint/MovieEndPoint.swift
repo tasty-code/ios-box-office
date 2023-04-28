@@ -9,6 +9,7 @@ import Foundation
 
 enum MovieEndPoint {
     case dailyBoxOffice(date: String)
+    case movieDetail(movieCode: String)
 }
 
 extension MovieEndPoint: EndPointType {
@@ -21,12 +22,14 @@ extension MovieEndPoint: EndPointType {
         switch self {
         case .dailyBoxOffice:
             return "/boxoffice/searchDailyBoxOfficeList"
+        case .movieDetail:
+            return "/movie/searchMovieInfo"
         }
     }
     
     var httpMethod: HTTPMethod {
         switch self {
-        case .dailyBoxOffice:
+        case .dailyBoxOffice, .movieDetail:
             return .get
         }
     }
@@ -36,6 +39,9 @@ extension MovieEndPoint: EndPointType {
         case .dailyBoxOffice(let date):
             return .requestWithQueryParameters(["key": APIKeys.kobisSecret,
                                                 "targetDt": date])
+        case .movieDetail(let movieCode):
+            return .requestWithQueryParameters(["key": APIKeys.kobisSecret,
+                                                "movieCd": movieCode])
         }
     }
 }
