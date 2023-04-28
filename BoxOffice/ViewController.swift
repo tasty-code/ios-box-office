@@ -12,11 +12,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        do {
-            print(try URLPath.dailyBoxOffice.configureURL("2012344"))
-            print(try URLPath.movieInformation.configureURL("123df"))
-        } catch {
-            print(error)
+        Networking().loadData(request: "20230423") { data, error in
+            guard error == nil else {
+                print(error)
+                return
+            }
+
+            print(data)
         }
     }
 }
