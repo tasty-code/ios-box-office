@@ -31,14 +31,26 @@ class Networking {
                     return
                 }
 
-                guard let decodedData = try JSONDecoder().decode(BoxOfficeDTO.self, from: safeData) else {
+                guard let decodedData = self.loadJSON(data: safeData) else {
                     completion(nil, NetworkError.decodingError)
                     return
                 }
+
                 completion(decodedData.convert(), nil)
             }.resume()
         } catch {
             completion(nil, URLComponentsError.invalidComponent)
+        }
+    }
+
+    private func loadJSON(data: Data) -> BoxOfficeDTO? {
+        let decoder = JSONDecoder()
+
+        do {
+            let decodedData = try decoder.decode(BoxOfficeDTO.self, from: data)
+            return decodedData
+        } catch {
+            return nil
         }
     }
 }

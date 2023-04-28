@@ -14,7 +14,7 @@ enum URLPath {
     private var path: String {
         switch self {
         case .dailyBoxOffice:
-            return "boxOffice/searchDailyBoxOfficeLst.json"
+            return "boxoffice/searchDailyBoxOfficeList.json"
         case .movieInformation:
             return "movie/searchMovieInfo.json"
         }
@@ -30,7 +30,7 @@ enum URLPath {
     }
 
     func configureURL(_ value: String) throws -> URL {
-        let baseURL = "https://www.kobis.or.kr"
+        let baseURL = "https://kobis.or.kr"
         let basePath = "/kobisopenapi/webservice/rest/"
 
         guard var component = URLComponents(string: baseURL) else {
