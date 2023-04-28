@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum URLComponentsError {
+enum URLComponentsError: Error {
     case invalidComponent
 }
 
