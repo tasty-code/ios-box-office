@@ -27,7 +27,7 @@ struct MovieInfo: Decodable {
     let staffs: [Staff]
     
     enum CodingKeys: String, CodingKey {
-        case movieCode = "movieCD"
+        case movieCode = "movieCd"
         case movieName = "movieNm"
         case movieNameInEnglish = "movieNmEn"
         case movieNameOriginal = "movieNmOg"

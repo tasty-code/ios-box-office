@@ -12,19 +12,19 @@ enum HTTPMethodType: String {
 }
 
 struct EndPoint {
-    
+
     private(set) var convertedData: String
-    
+
     func urlRequest(from movieURL: URL) throws -> URLRequest {
-        
+
         var urlRequest = URLRequest(url: movieURL)
-        
         urlRequest.httpMethod = HTTPMethodType.get.rawValue
+
         return urlRequest
     }
-    
+
     func url(with path: URLComponents) throws -> URL {
-        
+
         var makedPath = path
         let key = URLQueryItem(name: APIMagicLiteral.Key, value: APIMagicLiteral.KeyValue)
         let targetDate = URLQueryItem(name: APIMagicLiteral.targetQuery, value: convertedData)
@@ -38,9 +38,11 @@ struct EndPoint {
     }
     
     func makePath(with firstPath: String, and lastPath: String) throws -> URLComponents {
+
         guard let components = URLComponents(string: "\(Basic.baseURL)\(firstPath)\(lastPath)\(Basic.format)") else {
             throw URLComponentsError.invalidComponent
         }
+
         return components
     }
 }

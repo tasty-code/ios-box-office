@@ -14,7 +14,7 @@ struct Company: Decodable {
     let companyPartName: String
     
     enum CodingKeys: String, CodingKey {
-        case companyCode = "companyCD"
+        case companyCode = "companyCd"
         case companyName = "companyNm"
         case companyNameInEnglish = "companyNmEn"
         case companyPartName = "companyPartNm"

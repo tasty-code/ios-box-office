@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - BoxOfficeResult
 struct BoxOfficeResult: Decodable {
     let boxofficeType: String
     let dateRange: String

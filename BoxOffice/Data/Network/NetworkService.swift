@@ -18,6 +18,7 @@ class NetworkService {
     }
 
     func request<T: Decodable>(from url: URL) async throws -> T {
+
         var result: Data?
         var HTTPResponse: HTTPURLResponse?
 
@@ -43,6 +44,7 @@ class NetworkService {
     }
     
     func verify(with HTTPResponse: HTTPURLResponse) throws {
+
         switch HTTPResponse.statusCode {
         case (300...399):
             throw HTTPErrorType.redirectionMessages(HTTPResponse.statusCode, HTTPResponse.debugDescription)
@@ -56,6 +58,7 @@ class NetworkService {
     }
     
     func decode<T: Decodable>(with apiData: Data) throws -> T {
+
         var decode: T
         let decoder = JSONDecoder()
         
