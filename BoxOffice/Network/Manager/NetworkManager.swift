@@ -26,31 +26,24 @@ final class NetworkManager {
     // MARK: - Public Methods
     
     func fetchDailyBoxOffice(endPoint: MovieEndPoint, completion: @escaping DailyBoxOfficeCompletion) {
-        router.request(endPoint) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let data):
-                do {
-                    let decodedData = try self.decoder.decode(DailyBoxOfficeResponse.self, from: data)
-                    completion(.success(decodedData))
-                } catch {
-                    completion(.failure(.parseError))
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        fetchData(endPoint, completion: completion)
     }
     
     func fetchMovieDetail(endPoint: MovieEndPoint, completion: @escaping MovieDetailCompletion) {
+        fetchData(endPoint, completion: completion)
+    }
+    
+    // MARK: - Private Methods
+
+    private func fetchData<T: Decodable>(_ endPoint: MovieEndPoint,
+                                         completion: @escaping (Result<T, NetworkError>) -> Void) {
         router.request(endPoint) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let data):
                 do {
-                    let decodedData = try self.decoder.decode(MovieDetailResponse.self, from: data)
+                    let decodedData = try self.decoder.decode(T.self, from: data)
                     completion(.success(decodedData))
                 } catch {
                     completion(.failure(.parseError))

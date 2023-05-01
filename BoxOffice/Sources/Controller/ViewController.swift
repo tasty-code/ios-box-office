@@ -11,8 +11,18 @@ class ViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let networkRouter = NetworkRouter()
-    private lazy var networkManager = NetworkManager(router: networkRouter)
+    private let networkManager: NetworkManager
+    
+    // MARK: - Initialization
+    
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - View Life Cycle
     

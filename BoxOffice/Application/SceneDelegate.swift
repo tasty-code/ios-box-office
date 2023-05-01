@@ -19,7 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         window.makeKeyAndVisible()
         
-        let viewController = ViewController()
+        let networkRouter = NetworkRouter()
+        let networkManager = NetworkManager(router: networkRouter)
+        let viewController = ViewController(networkManager: networkManager)
         window.rootViewController = viewController
     }
 }
