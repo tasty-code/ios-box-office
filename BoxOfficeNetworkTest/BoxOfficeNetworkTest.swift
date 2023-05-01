@@ -20,7 +20,6 @@ final class BoxOfficeNetworkTest: XCTestCase {
     }
 
     func test_BoxOfficeAPI_호출이_정상적으로_되는지() {
-
         let expectation = XCTestExpectation()
 
         sut.fetchData(to: BoxOffice.self,
@@ -30,11 +29,10 @@ final class BoxOfficeNetworkTest: XCTestCase {
             expectation.fulfill()
         }
 
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: 10.0)
     }
 
     func test_MoiveDetailAPI_호출이_정상적으로_되는지() {
-
         let expectation = XCTestExpectation(description: "")
 
         sut.fetchData(to: MovieDetail.self,
@@ -44,7 +42,7 @@ final class BoxOfficeNetworkTest: XCTestCase {
             expectation.fulfill()
         }
 
-        wait(for: [expectation], timeout: 5.0)
+        wait(for: [expectation], timeout: 10.0)
     }
 
 }
