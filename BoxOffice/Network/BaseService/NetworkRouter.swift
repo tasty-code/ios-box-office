@@ -19,13 +19,11 @@ final class NetworkRouter: NetworkRouterProtocol {
     // MARK: - Properties
     
     private var task: URLSessionTask?
-    private let session: URLSession
-//    private let session: URLSessionProtocol
+    private let session: URLSessionProtocol
     
     // MARK: - Initialization
     
-    init(session: URLSession = .shared) {
-//    init(session: URLSessionProtocol = URLSession.shared) {
+    init(session: URLSessionProtocol = URLSession.shared) {
         self.session = session
     }
     
