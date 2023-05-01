@@ -10,9 +10,9 @@ import Foundation
 class NetworkService {
 
     private let session: URLSession
-    private let endPoint: EndPoint
+    private let endPoint: APIEndPoint
     
-    init(session: URLSession = URLSession(configuration: .default), endPoint: EndPoint) {
+    init(session: URLSession = URLSession(configuration: .default), endPoint: APIEndPoint) {
         self.session = session
         self.endPoint = endPoint
     }

@@ -1,5 +1,5 @@
 //
-//  EndPoint.swift
+//  APIEndPoint.swift
 //  BoxOffice
 //
 //  Created by Jason on 2023/04/26.
@@ -7,11 +7,7 @@
 
 import Foundation
 
-enum HTTPMethodType: String {
-    case get = "GET"
-}
-
-struct EndPoint {
+struct APIEndPoint {
 
     private(set) var convertedData: String
 
