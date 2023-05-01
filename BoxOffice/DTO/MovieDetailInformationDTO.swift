@@ -8,7 +8,6 @@
 import UIKit
 
 struct MovieDetailInformationDTO: Decodable, Convertable {
-    typealias MetaType = MovieDetailInformationDTO
     let movieInfoResult: MovieInfoResultDTO
 }
 

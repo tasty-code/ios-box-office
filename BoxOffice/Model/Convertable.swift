@@ -8,7 +8,6 @@
 import UIKit
 
 protocol Convertable: Decodable {
-    associatedtype MetaType: Convertable
     func convert() -> MovieDatable
 }
 

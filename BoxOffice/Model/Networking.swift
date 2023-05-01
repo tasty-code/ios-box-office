@@ -7,9 +7,6 @@
 
 import UIKit
 
-//let url = try URLPath.dailyBoxOffice.configureURL(request)
-//var urlRequest = URLRequest(url: url)
-
 class Networking {
     func loadData<T: Convertable>(_ method: T.Type, request: URLRequest, completion: @escaping (MovieDatable?, Error?) -> Void) {
 
