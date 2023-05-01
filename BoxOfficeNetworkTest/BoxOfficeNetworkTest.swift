@@ -33,7 +33,7 @@ final class BoxOfficeNetworkTest: XCTestCase {
     }
 
     func test_MoiveDetailAPI_호출이_정상적으로_되는지() {
-        let expectation = XCTestExpectation(description: "")
+        let expectation = XCTestExpectation()
 
         sut.fetchData(to: MovieDetail.self,
                       endPoint: BoxOfficeAPIEndpoints.movieDetail(movieCode: "20227890")
