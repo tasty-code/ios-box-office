@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B0697CB29FFE6B500AE8F90 /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0697CA29FFE6B500AE8F90 /* Responsable.swift */; };
 		5B10173329F66C2F00AE55F3 /* MockMovieJSONDecodingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B10173229F66C2F00AE55F3 /* MockMovieJSONDecodingTest.swift */; };
 		5B10173D29F675F000AE55F3 /* BoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932148D29F6670200E4C2D8 /* BoxOffice.swift */; };
 		5B10173E29F675F400AE55F3 /* DailyBoxOfficeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932148F29F6671B00E4C2D8 /* DailyBoxOfficeList.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5B0697CA29FFE6B500AE8F90 /* Responsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
 		5B10173029F66C2F00AE55F3 /* MockMovieJSONDecodingTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MockMovieJSONDecodingTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B10173229F66C2F00AE55F3 /* MockMovieJSONDecodingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMovieJSONDecodingTest.swift; sourceTree = "<group>"; };
 		5B10174429F90D2600AE55F3 /* APIEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndPoint.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 		5B0697C929FFE67000AE8F90 /* Endpoint */ = {
 			isa = PBXGroup;
 			children = (
+				5B0697CA29FFE6B500AE8F90 /* Responsable.swift */,
 				D9DB45F629FFE483001C63B1 /* EndPoint.swift */,
 			);
 			path = Endpoint;
@@ -431,6 +434,7 @@
 				D932149029F6671B00E4C2D8 /* DailyBoxOfficeList.swift in Sources */,
 				5BA4712A29FA67B600B8427C /* Nation.swift in Sources */,
 				5B10174529F90D2600AE55F3 /* APIEndPoint.swift in Sources */,
+				5B0697CB29FFE6B500AE8F90 /* Responsable.swift in Sources */,
 				D96C74F929F914E90002A097 /* Show.swift in Sources */,
 				5BA4711429FA465D00B8427C /* APIMagicLiteral.swift in Sources */,
 				5BA4712C29FA67E900B8427C /* ShowType.swift in Sources */,
