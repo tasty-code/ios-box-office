@@ -7,18 +7,25 @@
 
 import Foundation
 
-class EndPoint {
-    var baseURL: String
-    var path: String
-    var method: HTTPMethodType
-    var queryParameters: String
+protocol RequestAndResponsable: Requestable, Responsable { }
 
-    init(baseURL: String = "", path: String = "", method: HTTPMethodType = .get, queryParameters: String = "") {
+class EndPoint<R>: RequestAndResponsable {
+    typealias Responese = R
+
+    var baseURL: String
+    var firstPath: String
+    var secondPath: String
+    var method: HTTPMethodType
+    var queryParameters: Encodable?
+
+    init(baseURL: String, firstPath: String, secondPath: String, method: HTTPMethodType = .get, queryParameters: Encodable? = nil) {
         self.baseURL = baseURL
-        self.path = path
+        self.firstPath = firstPath
+        self.secondPath = secondPath
         self.method = method
         self.queryParameters = queryParameters
     }
+
 }
 
 enum HTTPMethodType: String {
