@@ -12,13 +12,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        Networking().loadData(request: "20230423") { data, error in
-            guard error == nil else {
-                print(error)
-                return
-            }
+        do {
+            let url = try URLPath.movieInformation.configureURL("20231089")
+            var urlRequest = URLRequest(url: url)
 
-            print(data)
+            Networking().loadData(MovieDetailInformationDTO.self, request: urlRequest) { data, error in
+                guard error == nil else {
+                    print(error)
+                    return
+                }
+
+                print(data)
+            }
+        } catch {
+            print(error)
         }
     }
 }

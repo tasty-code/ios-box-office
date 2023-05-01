@@ -7,9 +7,9 @@
 
 import UIKit
 
-struct ShowTypeDTO {
-    let showTypeGroupName: String
-    let showTypeName: String
+struct ShowTypeDTO: Decodable {
+    let showTypeGroupName: String?
+    let showTypeName: String?
 
     enum CodingKeys: String, CodingKey {
         case showTypeGroupName = "showTypeGroupNm"

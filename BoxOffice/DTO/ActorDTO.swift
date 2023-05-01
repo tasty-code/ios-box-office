@@ -7,11 +7,11 @@
 
 import UIKit
 
-struct ActorDTO {
-    let peopleName: String
-    let peopleEnglishName: String
-    let castingName: String
-    let castingEnglishName: String
+struct ActorDTO: Decodable {
+    let peopleName: String?
+    let peopleEnglishName: String?
+    let castingName: String?
+    let castingEnglishName: String?
 
     enum CodingKeys: String, CodingKey {
         case peopleName = "peopleNm"

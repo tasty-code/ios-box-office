@@ -7,11 +7,11 @@
 
 import UIKit
 
-struct CompanyDTO {
-    let companyCD: String
-    let companyNm: String
-    let companyNmEn: String
-    let companyPartNm: String
+struct CompanyDTO: Decodable {
+    let companyCode: String?
+    let companyName: String?
+    let companyEnglishName: String?
+    let companyPartName: String?
 
     enum CodingKeys: String, CodingKey {
         case companyCode = "companyCD"

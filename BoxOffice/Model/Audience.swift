@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Audience: Equatable {
+struct Audience: Equatable, MovieDatable {
     let today: UInt
     let accumulate: UInt
 }

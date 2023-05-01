@@ -7,10 +7,10 @@
 
 import UIKit
 
-struct StaffDTO {
-    let peopleName: String
-    let peopleEnglishName: String
-    let staffRoleName: String
+struct StaffDTO: Decodable{
+    let peopleName: String?
+    let peopleEnglishName: String?
+    let staffRoleName: String?
 
     enum CodingKeys: String, CodingKey {
         case peopleName = "peopleNm"
