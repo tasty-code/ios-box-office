@@ -112,6 +112,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B0697C729FFE65200AE8F90 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				5B0697C829FFE66800AE8F90 /* Network */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		5B0697C829FFE66800AE8F90 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				5B0697C929FFE67000AE8F90 /* Endpoint */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		5B0697C929FFE67000AE8F90 /* Endpoint */ = {
+			isa = PBXGroup;
+			children = (
+				D9DB45F629FFE483001C63B1 /* EndPoint.swift */,
+			);
+			path = Endpoint;
+			sourceTree = "<group>";
+		};
 		5B10172929F655AF00AE55F3 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,7 +193,6 @@
 		5B10174329F90CDB00AE55F3 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				D9DB45F529FFE428001C63B1 /* EndPoint */,
 				D9E6F76A29FA3C97007B542A /* Error */,
 				D96C74F729F914DC0002A097 /* Query */,
 				5B10174429F90D2600AE55F3 /* APIEndPoint.swift */,
@@ -237,6 +260,7 @@
 			children = (
 				5B10174129F90CC500AE55F3 /* Presentation */,
 				5B10174229F90CD300AE55F3 /* Data */,
+				5B0697C729FFE65200AE8F90 /* Infrastructure */,
 				5B10172A29F655B700AE55F3 /* AppEnvironment */,
 				5B10172B29F655DD00AE55F3 /* Configuration */,
 			);
@@ -270,14 +294,6 @@
 				5BA4711329FA465D00B8427C /* APIMagicLiteral.swift */,
 			);
 			path = Query;
-			sourceTree = "<group>";
-		};
-		D9DB45F529FFE428001C63B1 /* EndPoint */ = {
-			isa = PBXGroup;
-			children = (
-				D9DB45F629FFE483001C63B1 /* EndPoint.swift */,
-			);
-			path = EndPoint;
 			sourceTree = "<group>";
 		};
 		D9E6F76A29FA3C97007B542A /* Error */ = {
