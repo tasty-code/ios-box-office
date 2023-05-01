@@ -7,9 +7,9 @@
 
 import UIKit
 
-struct MovieInfoResultDTO {
-    let movieInformation: MovieInformationDTO
-    let source: String
+struct MovieInfoResultDTO: Decodable {
+    let movieInformation: MovieInformationDTO?
+    let source: String?
 
     enum CodingKeys: String, CodingKey {
         case movieInformation = "movieInfo"

@@ -7,9 +7,9 @@
 
 import UIKit
 
-struct AuditDTO {
-    let auditNo: String
-    let watchGradeNm: String
+struct AuditDTO: Decodable {
+    let auditNumber: String?
+    let watchGradeName: String?
 
     enum CodingKeys: String, CodingKey {
         case auditNumber = "auditNo"

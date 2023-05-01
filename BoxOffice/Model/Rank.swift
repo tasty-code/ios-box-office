@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Rank: Equatable {
+struct Rank: Equatable, MovieDatable {
     let rank: UInt
     let isEntry: Bool
     let variance: Int

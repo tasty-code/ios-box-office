@@ -7,8 +7,8 @@
 
 import UIKit
 
-struct GenreDTO {
-    let genreName: String
+struct GenreDTO: Decodable {
+    let genreName: String?
 
     enum CodingKeys: String, CodingKey {
         case genreName = "genreNm"

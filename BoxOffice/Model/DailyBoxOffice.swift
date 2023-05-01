@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct DailyBoxOffice {
+struct DailyBoxOffice: MovieDatable {
     let date: String
     let movies: [Movie]
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Movie: Equatable {
+struct Movie: Equatable, MovieDatable {
     let name: String
     let rank: Rank
     let audience: Audience

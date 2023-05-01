@@ -5,14 +5,14 @@
 //  Created by Bora Yang on 2023/05/01.
 //
 
-import Foundation
+import UIKit
 
 typealias Director = String
 typealias Nation = String
 typealias Genre = String
 typealias Actor = String
 
-struct MovieInformation {
+struct MovieInformation: MovieDatable {
     let directors: [Director]
     let productYear: String
     let openDate: String

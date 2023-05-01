@@ -7,18 +7,19 @@
 
 import UIKit
 
-struct BoxOfficeDTO: Decodable {
+struct BoxOfficeDTO: Decodable, Convertable {
+    typealias MetaType = BoxOfficeDTO
     let boxOfficeResult: DailyBoxOfficeResultDTO
 }
 
 extension BoxOfficeDTO {
-    func convert() -> DailyBoxOffice {
+    func convert() -> MovieDatable {
         let date = formatter(date: boxOfficeResult.showRange)
         let movies = boxOfficeResult.dailyBoxOfficeList.map { movie in
             return movie.convert()
         }
 
-        return .init(date: date, movies: movies)
+        return DailyBoxOffice(date: date, movies: movies)
     }
 }
 

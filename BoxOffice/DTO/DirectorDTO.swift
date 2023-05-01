@@ -7,9 +7,9 @@
 
 import UIKit
 
-struct DirectorDTO {
-    let peopleName: String
-    let peopleEnglishName: String
+struct DirectorDTO: Decodable {
+    let peopleName: String?
+    let peopleEnglishName: String?
 
     enum CodingKeys: String, CodingKey {
         case peopleName = "peopleNm"

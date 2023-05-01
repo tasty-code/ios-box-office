@@ -7,27 +7,27 @@
 
 import UIKit
 
-struct MovieInformationDTO {
-    let movieCode: String
-    let movieName: String
-    let movieEnglishName: String
-    let movieOriginalName: String
-    let showTime: String
-    let productYear: String
-    let openDate: String
-    let productStatus: String
-    let movieType: String
-    let nations: [NationDTO]
-    let genres: [GenreDTO]
-    let directors: [DirectorDTO]
+struct MovieInformationDTO: Decodable {
+    let movieCode: String?
+    let movieName: String?
+    let movieEnglishName: String?
+    let movieOriginalName: String?
+    let showTime: String?
+    let productYear: String?
+    let openDate: String?
+    let productStatus: String?
+    let movieType: String?
+    let nations: [NationDTO]?
+    let genres: [GenreDTO]?
+    let directors: [DirectorDTO]?
     let actors: [ActorDTO]?
-    let showTypes: [ShowTypeDTO]
-    let companys: [CompanyDTO]
-    let audits: [AuditDTO]
+    let showTypes: [ShowTypeDTO]?
+    let companys: [CompanyDTO]?
+    let audits: [AuditDTO]?
     let staffs: [StaffDTO]?
 
     enum CodingKeys: String, CodingKey {
-        case movieCode = "movieCD"
+        case movieCode = "movieCd"
         case movieName = "movieNm"
         case movieEnglishName = "movieNmEn"
         case movieOriginalName = "movieNmOg"

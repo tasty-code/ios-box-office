@@ -7,8 +7,8 @@
 
 import UIKit
 
-struct NationDTO {
-    let nationName: String
+struct NationDTO: Decodable {
+    let nationName: String?
 
     enum CodingKeys: String, CodingKey {
         case nationName = "nationNm"
