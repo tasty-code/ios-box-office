@@ -13,11 +13,14 @@ final class MockURLSession: URLSessionProtocol {
     
     let sessionDataTask = MockURLSessionDataTask()
     let isFailRequest: Bool
+    let successData: Data!
     
     // MARK: - Initialization
     
-    init(isFailRequest: Bool = false) {
+    init(isFailRequest: Bool = false,
+         successData: Data = MockData.boxOffice) {
         self.isFailRequest = isFailRequest
+        self.successData = successData
     }
     
     // MARK: - Public Methods
@@ -38,7 +41,7 @@ final class MockURLSession: URLSessionProtocol {
             if self.isFailRequest {
                 completionHandler(nil, failureResponse, nil)
             } else {
-                completionHandler(MockData.boxOffice, successResponse, nil)
+                completionHandler(self.successData, successResponse, nil)
             }
         }
         
