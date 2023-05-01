@@ -12,14 +12,14 @@ struct BoxOfficeAPIManager {
     private let deserializer = JSONDeserializer()
     private let networkDispatcher = NetworkDispatcher()
     
-    func fetchData(to type: Decodable.Type, endPoint: BoxOfficeAPIEndpoints, completionHandler: @escaping (Decodable) -> Void) {
-        
+    func fetchData(to type: Decodable.Type,
+                   endPoint: BoxOfficeAPIEndpoints,
+                   completionHandler: @escaping (Decodable) -> Void
+    ) {
         let urlRequest = endPoint.urlRequest
-        
+
         networkDispatcher.performRequest(urlRequest) { networkResult in
-            
             switch networkResult {
-                
             case .success(let data):
                 do {
                     let decodedData = try deserializer.deserialize(type: type, data: data)
@@ -33,4 +33,5 @@ struct BoxOfficeAPIManager {
             }
         }
     }
+    
 }

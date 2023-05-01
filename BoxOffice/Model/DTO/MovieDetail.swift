@@ -8,20 +8,25 @@
 import Foundation
 
 struct MovieDetail: Decodable {
+
     let movieInformationResult: MovieInformationResult
 
     enum CodingKeys: String, CodingKey {
         case movieInformationResult = "movieInfoResult"
     }
+
 }
 
 struct MovieInformationResult: Decodable {
+
     let movieInformation: MovieInformation
 
     enum CodingKeys: String, CodingKey {
         case movieInformation = "movieInfo"
     }
+
 }
+
 
 struct MovieInformation: Decodable {
 
@@ -78,6 +83,7 @@ struct Actor: Decodable {
 }
 
 struct Audit: Decodable {
+
     let auditNuber: String
     let movieRating: String
 
@@ -85,9 +91,11 @@ struct Audit: Decodable {
         case auditNuber = "auditNo"
         case movieRating = "watchGradeNm"
     }
+
 }
 
 struct Company: Decodable {
+
     let companyCode: String
     let companyName: String
     let companyEnglishName: String
@@ -99,6 +107,7 @@ struct Company: Decodable {
         case companyEnglishName = "companyNmEn"
         case companyPartOfMoive = "companyPartNm"
     }
+    
 }
 
 struct Director: Decodable {
@@ -124,6 +133,7 @@ struct Genre: Decodable {
 }
 
 struct Nation: Decodable {
+
     let nationName: String
 
     enum CodingKeys: String, CodingKey {
@@ -133,6 +143,7 @@ struct Nation: Decodable {
 }
 
 struct ShowType: Decodable {
+    
     let showTypeGroupName: String
     let showTypeName: String
 

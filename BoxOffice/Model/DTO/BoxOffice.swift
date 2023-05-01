@@ -19,11 +19,9 @@ struct BoxOfficeResult: Decodable {
     let dailyBoxOfficeList: [DailyBoxOfficeList]
 
     enum CodingKeys: String, CodingKey {
-
         case boxOfficeType = "boxofficeType"
         case rangeOfDate = "showRange"
         case dailyBoxOfficeList
-        
     }
 
 }
@@ -40,7 +38,6 @@ struct DailyBoxOfficeList: Decodable {
     let audienceAccumulation: String
 
     enum CodingKeys: String, CodingKey {
-
         case orderNumber = "rnum"
         case rank
         case dailyRankChanges = "rankInten"
@@ -49,7 +46,6 @@ struct DailyBoxOfficeList: Decodable {
         case movieName = "movieNm"
         case openDate = "openDt"
         case audienceAccumulation = "audiAcc"
-
     }
 
 }

@@ -19,11 +19,14 @@ extension BoxOfficeAPIEndpoints {
     private var endPoint: EndPoint {
         switch self {
         case .boxOffice:
-            return EndPoint(baseURL: "https://www.kobis.or.kr", path: "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json", queryItems: makeQueryItems())
+            return EndPoint(baseURL: "https://www.kobis.or.kr",
+                            path: "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json",
+                            queryItems: makeQueryItems())
         case .movieDetail:
-            return EndPoint(baseURL: "https://www.kobis.or.kr", path: "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json", queryItems: makeQueryItems())
+            return EndPoint(baseURL: "https://www.kobis.or.kr",
+                            path: "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json",
+                            queryItems: makeQueryItems())
         }
-
     }
 
     var urlRequest: URLRequest? {
@@ -46,14 +49,17 @@ extension BoxOfficeAPIEndpoints {
     }
     
     private func makeQueryItems() -> [URLQueryItem] {
-        let apiKeyQueryItem = URLQueryItem(name: QueryConstant.apiKeyQueryName, value: QueryConstant.apiKeyQueryValue)
+        let apiKeyQueryItem = URLQueryItem(name: QueryConstant.apiKeyQueryName,
+                                           value: QueryConstant.apiKeyQueryValue)
         
         switch self {
         case .boxOffice(targetDate: let date):
-            let dateQueryItem = URLQueryItem(name: QueryConstant.targetDateQueryName, value: "\(date)")
+            let dateQueryItem = URLQueryItem(name: QueryConstant.targetDateQueryName,
+                                             value: "\(date)")
             return [apiKeyQueryItem, dateQueryItem]
         case .movieDetail(movieCode: let code):
-            let movieCodeQueryItem = URLQueryItem(name: QueryConstant.movieCodeQueryName, value: "\(code)")
+            let movieCodeQueryItem = URLQueryItem(name: QueryConstant.movieCodeQueryName,
+                                                  value: "\(code)")
             return [apiKeyQueryItem, movieCodeQueryItem]
         }
     }

@@ -11,14 +11,16 @@ typealias NetworkResult = Result<Data, NetworkError>
 
 struct NetworkDispatcher {
 
-    func performRequest(_ urlRequest: URLRequest?, completionHandler: @escaping (NetworkResult) -> Void) {
-
+    func performRequest(_ urlRequest: URLRequest?,
+                        completionHandler: @escaping (NetworkResult) -> Void
+    ) {
         let session = URLSession.shared
 
-        guard let urlRequest = urlRequest else { return completionHandler(.failure(.invalidURL)) }
+        guard let urlRequest = urlRequest else {
+            return completionHandler(.failure(.invalidURL))
+        }
 
         let task = session.dataTask(with: urlRequest) { data, urlRequest, error in
-
             guard error == nil else {
                 return completionHandler(.failure(.failedRequest))
             }
@@ -33,7 +35,6 @@ struct NetworkDispatcher {
         }
 
         task.resume()
-
     }
 
 }

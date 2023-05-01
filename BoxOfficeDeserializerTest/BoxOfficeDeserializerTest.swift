@@ -9,10 +9,10 @@ import XCTest
 
 final class BoxOfficeDeserializerTest: XCTestCase {
     
-    var sut: JSONDesirializer!
+    var sut: JSONDeserializer!
     
     override func setUpWithError() throws {
-        sut = JSONDesirializer()
+        sut = JSONDeserializer()
     }
 
     override func tearDownWithError() throws {

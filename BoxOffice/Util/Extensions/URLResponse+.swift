@@ -15,10 +15,8 @@ extension URLResponse {
 
     var checkResponse: Bool {
         guard let responseCode = self as? HTTPURLResponse else { return false }
-        guard successCodeRange.contains(responseCode.statusCode) else {
-            return false
-        }
-
+        guard successCodeRange.contains(responseCode.statusCode) else { return false }
         return true
     }
+
 }

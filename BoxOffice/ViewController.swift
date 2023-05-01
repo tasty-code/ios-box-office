@@ -18,13 +18,17 @@ final class ViewController: UIViewController {
     }
 
     private func fetchDailyBoxOffice() {
-        boxOfficeManager.fetchData(to: BoxOffice.self, endPoint: BoxOfficeAPIEndpoints.boxOffice(targetDate: "20230426")) { decodedData in
+        boxOfficeManager.fetchData(to: BoxOffice.self,
+                                   endPoint: BoxOfficeAPIEndpoints.boxOffice(targetDate: "20230426")
+        ) { decodedData in
             print(decodedData)
         }
     }
 
    private func fetchMovieDetail() {
-        boxOfficeManager.fetchData(to: MovieDetail.self, endPoint: BoxOfficeAPIEndpoints.movieDetail(movieCode: "20227890")) { decodedData in
+        boxOfficeManager.fetchData(to: MovieDetail.self,
+                                   endPoint: BoxOfficeAPIEndpoints.movieDetail(movieCode: "20227890")
+        ) { decodedData in
             print(decodedData)
         }
     }
