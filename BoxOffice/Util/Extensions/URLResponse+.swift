@@ -13,7 +13,7 @@ extension URLResponse {
         return 200...299
     }
 
-    var checkResponse: Bool {
+    var isValidResponse: Bool {
         guard let responseCode = self as? HTTPURLResponse else { return false }
         guard successCodeRange.contains(responseCode.statusCode) else { return false }
         return true

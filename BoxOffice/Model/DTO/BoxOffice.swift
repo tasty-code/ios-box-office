@@ -8,18 +8,18 @@ import Foundation
 
 struct BoxOffice: Decodable {
 
-    let boxOfficeResult: BoxOfficeResult
+    let result: BoxOfficeResult
 
 }
 
 struct BoxOfficeResult: Decodable {
 
-    let boxOfficeType: String
+    let type: String
     let rangeOfDate: String
     let dailyBoxOfficeList: [DailyBoxOfficeList]
 
     enum CodingKeys: String, CodingKey {
-        case boxOfficeType = "boxofficeType"
+        case type = "boxofficeType"
         case rangeOfDate = "showRange"
         case dailyBoxOfficeList
     }

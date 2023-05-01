@@ -53,11 +53,11 @@ extension BoxOfficeAPIEndpoints {
                                            value: QueryConstant.apiKeyQueryValue)
         
         switch self {
-        case .boxOffice(targetDate: let date):
+        case .boxOffice(let date):
             let dateQueryItem = URLQueryItem(name: QueryConstant.targetDateQueryName,
                                              value: "\(date)")
             return [apiKeyQueryItem, dateQueryItem]
-        case .movieDetail(movieCode: let code):
+        case .movieDetail(let code):
             let movieCodeQueryItem = URLQueryItem(name: QueryConstant.movieCodeQueryName,
                                                   value: "\(code)")
             return [apiKeyQueryItem, movieCodeQueryItem]

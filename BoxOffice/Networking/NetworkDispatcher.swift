@@ -7,9 +7,10 @@
 
 import Foundation
 
-typealias NetworkResult = Result<Data, NetworkError>
 
 struct NetworkDispatcher {
+
+    typealias NetworkResult = Result<Data, NetworkError>
 
     func performRequest(_ urlRequest: URLRequest?,
                         completionHandler: @escaping (NetworkResult) -> Void
@@ -24,7 +25,7 @@ struct NetworkDispatcher {
             guard error == nil else {
                 return completionHandler(.failure(.failedRequest))
             }
-            guard let response = urlRequest, response.checkResponse else {
+            guard let response = urlRequest, response.isValidResponse else {
                 return completionHandler(.failure(.outOfResponseCode))
             }
             guard let data = data else {

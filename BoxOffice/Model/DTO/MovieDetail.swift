@@ -30,10 +30,10 @@ struct MovieInformationResult: Decodable {
 
 struct MovieInformation: Decodable {
 
-    let movieCode: String
-    let movieName: String
-    let movieEnglishName: String
-    let movieOriginalName: String
+    let code: String
+    let name: String
+    let englishName: String
+    let originalName: String
 
     let runningTime: String
     let yearOfProduction: String
@@ -48,10 +48,10 @@ struct MovieInformation: Decodable {
     let audits: [Audit]
 
     enum CodingKeys: String, CodingKey {
-        case movieCode = "movieCd"
-        case movieName = "movieNm"
-        case movieEnglishName = "movieNmEn"
-        case movieOriginalName = "movieNmOg"
+        case code = "movieCd"
+        case name = "movieNm"
+        case englishName = "movieNmEn"
+        case originalName = "movieNmOg"
         case runningTime = "showTm"
         case yearOfProduction = "prdtYear"
         case openDate = "openDt"
@@ -68,14 +68,14 @@ struct MovieInformation: Decodable {
 
 struct Actor: Decodable {
 
-    let peopleName: String
-    let peopleEnglishName: String
+    let name: String
+    let englishName: String
     let cast: String
     let castEnglish: String
 
     enum CodingKeys: String, CodingKey {
-        case peopleName = "peopleNm"
-        case peopleEnglishName = "peopleNmEn"
+        case name = "peopleNm"
+        case englishName = "peopleNmEn"
         case cast
         case castEnglish = "castEn"
     }
@@ -84,11 +84,11 @@ struct Actor: Decodable {
 
 struct Audit: Decodable {
 
-    let auditNuber: String
+    let number: String
     let movieRating: String
 
     enum CodingKeys: String, CodingKey {
-        case auditNuber = "auditNo"
+        case number = "auditNo"
         case movieRating = "watchGradeNm"
     }
 
@@ -96,60 +96,60 @@ struct Audit: Decodable {
 
 struct Company: Decodable {
 
-    let companyCode: String
-    let companyName: String
-    let companyEnglishName: String
-    let companyPartOfMoive: String
+    let code: String
+    let name: String
+    let englishName: String
+    let partOfMoive: String
 
     enum CodingKeys: String, CodingKey {
-        case companyCode = "companyCd"
-        case companyName = "companyNm"
-        case companyEnglishName = "companyNmEn"
-        case companyPartOfMoive = "companyPartNm"
+        case code = "companyCd"
+        case name = "companyNm"
+        case englishName = "companyNmEn"
+        case partOfMoive = "companyPartNm"
     }
     
 }
 
 struct Director: Decodable {
 
-    let peopleName: String
-    let peopleEnglishName: String
+    let name: String
+    let englishName: String
 
     enum CodingKeys: String, CodingKey {
-        case peopleName = "peopleNm"
-        case peopleEnglishName = "peopleNmEn"
+        case name = "peopleNm"
+        case englishName = "peopleNmEn"
     }
 
 }
 
 struct Genre: Decodable {
 
-    let genreName: String
+    let name: String
 
     enum CodingKeys: String, CodingKey {
-        case genreName = "genreNm"
+        case name = "genreNm"
     }
 
 }
 
 struct Nation: Decodable {
 
-    let nationName: String
+    let name: String
 
     enum CodingKeys: String, CodingKey {
-        case nationName = "nationNm"
+        case name = "nationNm"
     }
 
 }
 
 struct ShowType: Decodable {
     
-    let showTypeGroupName: String
-    let showTypeName: String
+    let groupName: String
+    let name: String
 
     enum CodingKeys: String, CodingKey {
-        case showTypeGroupName = "showTypeGroupNm"
-        case showTypeName = "showTypeNm"
+        case groupName = "showTypeGroupNm"
+        case name = "showTypeNm"
     }
 
 }
