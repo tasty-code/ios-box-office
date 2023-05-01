@@ -11,4 +11,5 @@ struct Movie: Equatable {
     let name: String
     let rank: Rank
     let audience: Audience
+    let code: Int
 }

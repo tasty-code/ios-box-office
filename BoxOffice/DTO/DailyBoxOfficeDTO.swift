@@ -56,10 +56,12 @@ extension DailyBoxOfficeDTO {
         let rankOldAndNew = self.rankOldAndNew == "NEW"
         let audiencePerDay = UInt(self.audiencePerDay) ?? 0
         let audienceAccumlate = UInt(self.audienceAccumlate) ?? 0
+        let code = Int(self.movieCode) ?? 0
 
         return .init(name: self.movieName,
                      rank: Rank(rank: rank, isEntry: rankOldAndNew, variance: rankVariance),
-                     audience: Audience(today: audiencePerDay, accumulate: audienceAccumlate))
+                     audience: Audience(today: audiencePerDay, accumulate: audienceAccumlate),
+                     code: code)
     }
 }
 
