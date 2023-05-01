@@ -10,6 +10,10 @@ struct BoxOffice: Decodable {
 
     let result: BoxOfficeResult
 
+    enum CodingKeys: String, CodingKey {
+        case result = "boxOfficeResult"
+    }
+
 }
 
 struct BoxOfficeResult: Decodable {
