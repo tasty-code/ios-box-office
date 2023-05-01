@@ -9,8 +9,6 @@ import UIKit
 
 final class BoxOfficeViewController: UIViewController {
 
-//    private let boxOfficeManager = BoxOfficeAPIManager()
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
