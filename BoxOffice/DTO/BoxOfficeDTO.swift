@@ -8,7 +8,6 @@
 import UIKit
 
 struct BoxOfficeDTO: Decodable, Convertable {
-    typealias MetaType = BoxOfficeDTO
     let boxOfficeResult: DailyBoxOfficeResultDTO
 }
 
