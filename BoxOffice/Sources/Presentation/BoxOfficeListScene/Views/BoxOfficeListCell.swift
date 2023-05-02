@@ -13,11 +13,16 @@ final class BoxOfficeListCell: UICollectionViewCell {
     
     enum Metric {
         static let movieRankStackViewSpacing = 8.f
+        static let movieRankStackViewLeadingInset = 20.f
+        static let movieInfoStackViewSpacing = 8.f
+        static let movieInfoStackViewLeadingInset = 20.f
     }
     
     enum Constants {
         static let movieRankLabelSkeletonText: String = "-"
-        static let movieRankStatusLabelSkeletonText: String = "-0"
+        static let movieRankStatusLabelSkeletonText: String = "--"
+        static let movieTitleLabelSkeletonText: String = "----"
+        static let audienceCountLabelSkeletonText: String = "오늘 --- / 총 ---"
     }
     
     // MARK: - Properties
@@ -26,7 +31,7 @@ final class BoxOfficeListCell: UICollectionViewCell {
     
     private let movieRankLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .preferredFont(forTextStyle: .largeTitle)
         label.text = Constants.movieRankLabelSkeletonText
         return label
     }()
@@ -45,6 +50,30 @@ final class BoxOfficeListCell: UICollectionViewCell {
         ])
         stackView.axis = .vertical
         stackView.spacing = Metric.movieRankStackViewSpacing
+        return stackView
+    }()
+    
+    private let movieTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title1)
+        label.text = Constants.movieTitleLabelSkeletonText
+        return label
+    }()
+    
+    private let audienceCountLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .callout)
+        label.text = Constants.audienceCountLabelSkeletonText
+        return label
+    }()
+    
+    private lazy var movieInfoStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            movieTitleLabel,
+            audienceCountLabel
+        ])
+        stackView.axis = .vertical
+        stackView.spacing = Metric.movieInfoStackViewSpacing
         return stackView
     }()
     
@@ -78,12 +107,24 @@ extension BoxOfficeListCell {
     }
     
     private func setLayout() {
+        NSLayoutConstraint.activate([
+            heightAnchor.constraint(equalToConstant: 100)
+        ])
+        
         addSubview(movieRankStackView)
         movieRankStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            movieRankStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            movieRankStackView.topAnchor.constraint(equalTo: topAnchor),
-            movieRankStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            movieRankStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                        constant: Metric.movieRankStackViewLeadingInset),
+            movieRankStackView.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+        
+        addSubview(movieInfoStackView)
+        movieInfoStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            movieInfoStackView.leadingAnchor.constraint(equalTo: movieRankStackView.trailingAnchor,
+                                                        constant: Metric.movieInfoStackViewLeadingInset),
+            movieInfoStackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }
