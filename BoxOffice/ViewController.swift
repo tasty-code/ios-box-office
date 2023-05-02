@@ -13,10 +13,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         do {
-            let url = try URLPath.movieInformation.configureURL("20231089")
+            let api = URLPath.dailyBoxOffice(date: "20230501")
+            let url = try api.configureURL()
             var urlRequest = URLRequest(url: url)
 
-            Networking().loadData(MovieDetailInformationDTO.self, request: urlRequest) { data, error in
+            Networking().loadData(api.convertType, request: urlRequest) { data, error in
                 guard error == nil else {
                     print(error)
                     return

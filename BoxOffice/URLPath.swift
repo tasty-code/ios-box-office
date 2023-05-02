@@ -8,9 +8,20 @@
 import UIKit
 
 enum URLPath {
-    case dailyBoxOffice
-    case movieInformation
+    case dailyBoxOffice(date: String)
+    case movieInformation(code: String)
 
+    var convertType: Convertable.Type {
+        switch self {
+        case .dailyBoxOffice:
+            return BoxOfficeDTO.self
+        case .movieInformation:
+            return MovieDetailInformationDTO.self
+        }
+    }
+}
+
+extension URLPath {
     private var path: String {
         switch self {
         case .dailyBoxOffice:
@@ -18,6 +29,20 @@ enum URLPath {
         case .movieInformation:
             return "movie/searchMovieInfo.json"
         }
+    }
+
+    private var queryItem: URLQueryItem {
+        switch self {
+        case .dailyBoxOffice(let date):
+            return URLQueryItem(name: queryItemName, value: date)
+        case .movieInformation(let code):
+            return URLQueryItem(name: queryItemName, value: code)
+        }
+    }
+
+    private var apiKey: URLQueryItem {
+        let api = Bundle.main.object(forInfoDictionaryKey: "MOVIE_API_KEY") as? String
+        return URLQueryItem(name: "key", value: api)
     }
 
     private var queryItemName: String {
@@ -29,7 +54,7 @@ enum URLPath {
         }
     }
 
-    func configureURL(_ value: String) throws -> URL {
+    func configureURL() throws -> URL {
         let baseURL = "https://kobis.or.kr"
         let basePath = "/kobisopenapi/webservice/rest/"
 
@@ -37,12 +62,8 @@ enum URLPath {
             throw URLComponentsError.invalidComponent
         }
 
-        let apiKey = Bundle.main.object(forInfoDictionaryKey: "MOVIE_API_KEY") as? String
-        let apiKeyItem = URLQueryItem(name: "key", value: apiKey)
-        let requestItem = URLQueryItem(name: queryItemName, value: value)
-
         component.path = "\(basePath)\(path)"
-        component.queryItems = [apiKeyItem, requestItem]
+        component.queryItems = [apiKey, queryItem]
 
         guard let url = component.url else {
             throw URLComponentsError.invalidComponent
