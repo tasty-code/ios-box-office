@@ -11,10 +11,19 @@ final class MockURLSession: URLSessionProtocol {
     
     // MARK: - Properties
     
-    let sessionDataTask = MockURLSessionDataTask()
+    let urlSession: URLSession = {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [MockURLProtocol.self]
+        let urlSession = URLSession(configuration: configuration)
+        return urlSession
+    }()
+    
     let isFailRequest: Bool
     let successData: Data!
     
+    let successStatusCode = 200
+    let failureStatusCode = 410
+
     // MARK: - Initialization
     
     init(isFailRequest: Bool = false,
@@ -29,22 +38,23 @@ final class MockURLSession: URLSessionProtocol {
                   completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
         
         let successResponse = HTTPURLResponse(url: request.url!,
-                                              statusCode: 200,
+                                              statusCode: successStatusCode,
                                               httpVersion: "2",
                                               headerFields: nil)
         let failureResponse = HTTPURLResponse(url: request.url!,
-                                              statusCode: 410,
+                                              statusCode: failureStatusCode,
                                               httpVersion: "2",
                                               headerFields: nil)
         
-        sessionDataTask.resumeDidCall = {
-            if self.isFailRequest {
-                completionHandler(nil, failureResponse, nil)
-            } else {
-                completionHandler(self.successData, successResponse, nil)
-            }
+        let response = isFailRequest ? failureResponse : successResponse
+        let data = isFailRequest ? nil : successData
+        
+        MockURLProtocol.requestHandler = { _ in
+            return (data, response, nil)
         }
         
-        return sessionDataTask
+        return urlSession.dataTask(with: request) { data, response, error in
+            completionHandler(data, response, error)
+        }
     }
 }

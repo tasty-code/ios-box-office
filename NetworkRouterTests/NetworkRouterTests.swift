@@ -11,16 +11,12 @@ import XCTest
 final class NetworkRouterTests: XCTestCase {
     
     var sut: NetworkRouter!
-
-    override func setUpWithError() throws {
-        
-    }
-
+    
     func test_네트워킹에_실패했을때_router의_completion이_Error를_던진다() {
-        let expectation = XCTestExpectation(description: "Networking")
+        let expectation = XCTestExpectation()
         
-        let session = MockURLSession(isFailRequest: true)
-        sut = NetworkRouter(session: session)
+        let urlSession = MockURLSession(isFailRequest: true)
+        sut = NetworkRouter(session: urlSession)
         
         let endpoint = MovieEndPoint.dailyBoxOffice(date: "231101")
         
@@ -29,8 +25,12 @@ final class NetworkRouterTests: XCTestCase {
             case .success:
                 XCTFail("Mock URLSession이 실패하는 세션이기에 Success이면 안됨")
             case .failure(let error):
-                XCTAssertEqual(error.localizedDescription,
-                               NetworkError.responseError(statusCode: 410).localizedDescription)
+                guard case .responseError(statusCode: let statusCode) = error else {
+                    XCTFail("Mock URLSession의 실패 응답코드와 일치해야 함")
+                    return
+                }
+                
+                XCTAssertEqual(statusCode, urlSession.failureStatusCode)
             }
             expectation.fulfill()
         }
