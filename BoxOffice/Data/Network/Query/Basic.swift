@@ -8,6 +8,6 @@
 import Foundation
 
 enum Basic {
-    static let baseURL: String = "http://www.kobis.or.kr/kobisopenapi/webservice/rest"
+    static let baseURL: String = "https://www.kobis.or.kr/kobisopenapi/webservice/rest"
     static let format: String = ".json"
 }
