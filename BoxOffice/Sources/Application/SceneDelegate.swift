@@ -19,9 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         window.makeKeyAndVisible()
         
-        let networkRouter = NetworkRouter()
-        let networkManager = NetworkManager(router: networkRouter)
-        let viewController = BoxOfficeListController(networkManager: networkManager)
+        let viewController = BoxOfficeListController()
         window.rootViewController = viewController
     }
 }
