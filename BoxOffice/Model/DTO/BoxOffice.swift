@@ -8,22 +8,24 @@ import Foundation
 
 struct BoxOffice: Decodable {
 
-    let boxOfficeResult: BoxOfficeResult
+    let result: BoxOfficeResult
+
+    enum CodingKeys: String, CodingKey {
+        case result = "boxOfficeResult"
+    }
 
 }
 
 struct BoxOfficeResult: Decodable {
 
-    let boxOfficeType: String
+    let type: String
     let rangeOfDate: String
     let dailyBoxOfficeList: [DailyBoxOfficeList]
 
     enum CodingKeys: String, CodingKey {
-
-        case boxOfficeType = "boxofficeType"
+        case type = "boxofficeType"
         case rangeOfDate = "showRange"
         case dailyBoxOfficeList
-        
     }
 
 }
@@ -40,7 +42,6 @@ struct DailyBoxOfficeList: Decodable {
     let audienceAccumulation: String
 
     enum CodingKeys: String, CodingKey {
-
         case orderNumber = "rnum"
         case rank
         case dailyRankChanges = "rankInten"
@@ -49,7 +50,6 @@ struct DailyBoxOfficeList: Decodable {
         case movieName = "movieNm"
         case openDate = "openDt"
         case audienceAccumulation = "audiAcc"
-
     }
 
 }
