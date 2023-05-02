@@ -16,6 +16,8 @@
 		63DF20F62970E1A0005DF7D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F42970E1A0005DF7D1 /* Main.storyboard */; };
 		63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
+		E708A9832A00D81900E6CDAD /* NetworkConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E708A9822A00D81900E6CDAD /* NetworkConfigurable.swift */; };
+		E708A9862A00D85E00E6CDAD /* NetworkConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = E708A9852A00D85E00E6CDAD /* NetworkConfigure.swift */; };
 		E715375029F8B92200112BE6 /* BoxOfficeResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E715374F29F8B92200112BE6 /* BoxOfficeResultDTO.swift */; };
 		E715375229F8B93100112BE6 /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E715375129F8B93100112BE6 /* MovieDTO.swift */; };
 		E7C1159929F61B5900497283 /* DailyBoxOfficeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C1159829F61B5900497283 /* DailyBoxOfficeDTO.swift */; };
@@ -43,6 +45,8 @@
 		63DF20F72970E1A1005DF7D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63DF20FA2970E1A1005DF7D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63DF20FC2970E1A1005DF7D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E708A9822A00D81900E6CDAD /* NetworkConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfigurable.swift; sourceTree = "<group>"; };
+		E708A9852A00D85E00E6CDAD /* NetworkConfigure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfigure.swift; sourceTree = "<group>"; };
 		E715374F29F8B92200112BE6 /* BoxOfficeResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeResultDTO.swift; sourceTree = "<group>"; };
 		E715375129F8B93100112BE6 /* MovieDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDTO.swift; sourceTree = "<group>"; };
 		E7C1159829F61B5900497283 /* DailyBoxOfficeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeDTO.swift; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 			children = (
 				63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */,
 				63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */,
+				E708A97F2A00D6F500E6CDAD /* Network */,
 				E7C115CC29F7912B00497283 /* Model */,
 				E7C115CD29F7913E00497283 /* View */,
 				E7C115CE29F7914400497283 /* Controllers */,
@@ -99,6 +104,31 @@
 				63DF20FC2970E1A1005DF7D1 /* Info.plist */,
 			);
 			path = BoxOffice;
+			sourceTree = "<group>";
+		};
+		E708A97F2A00D6F500E6CDAD /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E708A9842A00D82F00E6CDAD /* Interface */,
+				E708A9802A00D7D300E6CDAD /* Implementation */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E708A9802A00D7D300E6CDAD /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				E708A9852A00D85E00E6CDAD /* NetworkConfigure.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		E708A9842A00D82F00E6CDAD /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				E708A9822A00D81900E6CDAD /* NetworkConfigurable.swift */,
+			);
+			path = Interface;
 			sourceTree = "<group>";
 		};
 		E7C115BF29F7606F00497283 /* BoxOfficeTests */ = {
@@ -255,9 +285,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E708A9832A00D81900E6CDAD /* NetworkConfigurable.swift in Sources */,
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
 				E715375029F8B92200112BE6 /* BoxOfficeResultDTO.swift in Sources */,
 				E715375229F8B93100112BE6 /* MovieDTO.swift in Sources */,
+				E708A9862A00D85E00E6CDAD /* NetworkConfigure.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
 				E7C1159929F61B5900497283 /* DailyBoxOfficeDTO.swift in Sources */,
