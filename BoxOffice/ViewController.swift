@@ -15,14 +15,18 @@ class ViewController: UIViewController {
         do {
             let api = URLPath.dailyBoxOffice(date: "20230501")
             let url = try api.configureURL()
-            var urlRequest = URLRequest(url: url)
+            let urlRequest = URLRequest(url: url)
 
             Networking().loadData(api.convertType, request: urlRequest) { data, error in
                 guard error == nil else {
-                    print(error)
+                    print(error as Any)
                     return
                 }
 
+                guard let data = data else {
+                    print("빈 데이터입니다")
+                    return
+                }
                 print(data)
             }
         } catch {

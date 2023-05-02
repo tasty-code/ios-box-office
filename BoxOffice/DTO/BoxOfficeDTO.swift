@@ -22,20 +22,17 @@ extension BoxOfficeDTO {
     }
 }
 
-private func formatter(date: String) -> String {
-    guard let date = date.components(separatedBy: "~").first else {
-        return ""
+private func formatter(date: String) -> Date {
+    guard let splittedStringDate = date.components(separatedBy: "~").first else {
+        return Date()
     }
 
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyyMMdd"
 
-    guard let convertDate = dateFormatter.date(from: date) else {
-        return ""
+    guard let date = dateFormatter.date(from: splittedStringDate) else {
+        return Date()
     }
 
-    let newDateFormatter = DateFormatter()
-    newDateFormatter.dateFormat = "yyyy년 MM월 dd일"
-
-    return newDateFormatter.string(from: convertDate)
+    return date
 }
