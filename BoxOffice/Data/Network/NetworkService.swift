@@ -10,40 +10,26 @@ import Foundation
 class NetworkService {
 
     private let session: URLSession
-    private let endPoint: APIEndPoint
-    
-    init(session: URLSession = URLSession(configuration: .default), endPoint: APIEndPoint) {
+
+    init(session: URLSession = URLSession(configuration: .default)) {
         self.session = session
-        self.endPoint = endPoint
     }
 
-    func request<T: Decodable>(from url: URL) async throws -> T {
+    func request<R: Decodable, E: RequestAndResponsable>(with endPoint: E) async throws -> R where E.Responese == R {
 
-        var result: Data?
-        var HTTPResponse: HTTPURLResponse?
+        let urlRequest = try endPoint.receiveURLRequest()
+        let (data, response) = try await session.data(for: urlRequest)
 
-        do {
-            let (data, response) = try await session.data(for: endPoint.urlRequest(from: url))
-            result = data
-            HTTPResponse = response as? HTTPURLResponse
-        } catch {
-            throw NetworkError.urlRequest
+        if let identifiedResponse = response as? HTTPURLResponse, !(200...299).contains(identifiedResponse.statusCode) {
+            try self.verify(with: identifiedResponse)
         }
-        
-        guard let identifiedData = result else {
-            throw NetworkError.emptyData
-        }
-        
-        guard let identifiedResponse = HTTPResponse else {
-            throw NetworkError.unknownError
-        }
-        
-        try self.verify(with: identifiedResponse)
-        
-        return try self.decode(with: identifiedData)
+
+        let decodedData: R = try self.decode(with: data)
+
+        return decodedData
     }
-    
-    func verify(with HTTPResponse: HTTPURLResponse) throws {
+
+    private func verify(with HTTPResponse: HTTPURLResponse) throws {
 
         switch HTTPResponse.statusCode {
         case (300...399):
@@ -56,18 +42,18 @@ class NetworkService {
             throw HTTPErrorType.networkFailError(HTTPResponse.statusCode)
         }
     }
-    
-    func decode<T: Decodable>(with apiData: Data) throws -> T {
+
+    private func decode<T: Decodable>(with apiData: Data) throws -> T {
 
         var decode: T
         let decoder = JSONDecoder()
-        
+
         do {
             decode = try decoder.decode(T.self, from: apiData) as T
         } catch {
             throw NetworkError.decodeError
         }
-        
+
         return decode
     }
 }
