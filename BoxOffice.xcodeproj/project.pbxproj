@@ -203,15 +203,43 @@
 			path = BoxOffice;
 			sourceTree = "<group>";
 		};
+		8E554B1E2A00D87800250F37 /* DailyBoxOffice */ = {
+			isa = PBXGroup;
+			children = (
+				8EEE4BB729F6737E0074302D /* DailyBoxOfficeResponse.swift */,
+				B42A7EEE29F6746200A3C535 /* BoxOfficeResult.swift */,
+				B42A7EF029F6747000A3C535 /* DailyBoxOffice.swift */,
+			);
+			path = DailyBoxOffice;
+			sourceTree = "<group>";
+		};
+		8E554B1F2A00D88800250F37 /* MovieDetail */ = {
+			isa = PBXGroup;
+			children = (
+				8E854F0429FB58F300F2F6F7 /* MovieDetailResponse.swift */,
+				8E854F0629FB590C00F2F6F7 /* MovieInfoResult.swift */,
+				8E854F0829FB591E00F2F6F7 /* MovieInfo.swift */,
+				8E854F0A29FB594300F2F6F7 /* Actor.swift */,
+				8E854F0C29FB595300F2F6F7 /* Audit.swift */,
+				8E854F0E29FB596400F2F6F7 /* Company.swift */,
+				8E854F1029FB597400F2F6F7 /* Director.swift */,
+				8E854F1229FB59A300F2F6F7 /* Genre.swift */,
+				8E854F1429FB59B300F2F6F7 /* Nation.swift */,
+				8E854F1629FB59C500F2F6F7 /* ShowType.swift */,
+				8E854F1829FB59DD00F2F6F7 /* Staff.swift */,
+			);
+			path = MovieDetail;
+			sourceTree = "<group>";
+		};
 		8E854EF329FA3BAD00F2F6F7 /* Provider */ = {
 			isa = PBXGroup;
 			children = (
 				8E854EF429FA3BB800F2F6F7 /* EndPointType.swift */,
 				8E854EF629FA3BF200F2F6F7 /* HTTPMethod.swift */,
 				8E854EF829FA3C0800F2F6F7 /* HTTPTask.swift */,
-				8E854F4529FBA3F100F2F6F7 /* URLSessionProtocol.swift */,
-				B41A9C7529FA3D7D00F34B16 /* NetworkRouter.swift */,
 				8E854EFC29FA459200F2F6F7 /* NetworkError.swift */,
+				B41A9C7529FA3D7D00F34B16 /* NetworkRouter.swift */,
+				8E854F4529FBA3F100F2F6F7 /* URLSessionProtocol.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -282,8 +310,8 @@
 		8E854F3429FB701A00F2F6F7 /* Dummy */ = {
 			isa = PBXGroup;
 			children = (
-				8E854F2129FB69F000F2F6F7 /* movie_detail_sample.json */,
 				B42D47F829F765DF009A3B04 /* box_office_sample.json */,
+				8E854F2129FB69F000F2F6F7 /* movie_detail_sample.json */,
 			);
 			path = Dummy;
 			sourceTree = "<group>";
@@ -291,11 +319,11 @@
 		8E854F3529FB704600F2F6F7 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				8E854F5829FBB88800F2F6F7 /* MockURLSession.swift */,
 				B435FA3629FF5D2F00E12A80 /* MockData.swift */,
-				B40822BA2A00A6A500FBA191 /* MockURLProtocol.swift */,
 				B40822C92A00CA7600FBA191 /* MockEndpoint.swift */,
 				8E854F9F2A00CD2B00F2F6F7 /* MockMovieEndPoint.swift */,
+				B40822BA2A00A6A500FBA191 /* MockURLProtocol.swift */,
+				8E854F5829FBB88800F2F6F7 /* MockURLSession.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -319,20 +347,8 @@
 		B42A7EED29F6744200A3C535 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8EEE4BB729F6737E0074302D /* DailyBoxOfficeResponse.swift */,
-				B42A7EEE29F6746200A3C535 /* BoxOfficeResult.swift */,
-				B42A7EF029F6747000A3C535 /* DailyBoxOffice.swift */,
-				8E854F0429FB58F300F2F6F7 /* MovieDetailResponse.swift */,
-				8E854F0629FB590C00F2F6F7 /* MovieInfoResult.swift */,
-				8E854F0829FB591E00F2F6F7 /* MovieInfo.swift */,
-				8E854F0A29FB594300F2F6F7 /* Actor.swift */,
-				8E854F0C29FB595300F2F6F7 /* Audit.swift */,
-				8E854F0E29FB596400F2F6F7 /* Company.swift */,
-				8E854F1029FB597400F2F6F7 /* Director.swift */,
-				8E854F1229FB59A300F2F6F7 /* Genre.swift */,
-				8E854F1429FB59B300F2F6F7 /* Nation.swift */,
-				8E854F1629FB59C500F2F6F7 /* ShowType.swift */,
-				8E854F1829FB59DD00F2F6F7 /* Staff.swift */,
+				8E554B1E2A00D87800250F37 /* DailyBoxOffice */,
+				8E554B1F2A00D88800250F37 /* MovieDetail */,
 			);
 			path = Model;
 			sourceTree = "<group>";

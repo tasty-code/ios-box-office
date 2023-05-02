@@ -43,7 +43,7 @@ final class NetworkManagerTests: XCTestCase {
         sut.fetchMovieDetail(endPoint: endpoint) { result in
             switch result {
             case .success(let movieDetailResponse):
-                let movieInfoCompanies = movieDetailResponse.movieInfoResult.movieInfo.companys
+                let movieInfoCompanies = movieDetailResponse.movieInfoResult.movieInfo.companies
                 XCTAssertTrue(movieInfoCompanies.isEmpty == false)
             case .failure:
                 XCTFail("성공해야 하는 요청이기에 Fail이면 안됨")

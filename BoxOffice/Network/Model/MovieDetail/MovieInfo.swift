@@ -22,7 +22,7 @@ struct MovieInfo: Decodable {
     let directors: [Director]
     let actors: [Actor]
     let showTypes: [ShowType]
-    let companys: [Company]
+    let companies: [Company]
     let audits: [Audit]
     let staffs: [Staff]
 
@@ -41,7 +41,7 @@ struct MovieInfo: Decodable {
         case directors
         case actors
         case showTypes
-        case companys
+        case companies = "companys"
         case audits
         case staffs
     }
