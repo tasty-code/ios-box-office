@@ -22,12 +22,6 @@ class BoxOfficeListCell: UICollectionViewListCell {
         
         return rankStack
     }()
-    
-    private let detailStackView: UIStackView = {
-        let detailStack = UIStackView()
-        
-        return detailStack
-    }()
 
     private let rank: UILabel = {
         let rankLabel = UILabel()
@@ -39,17 +33,5 @@ class BoxOfficeListCell: UICollectionViewListCell {
        let rankVariationLabel = UILabel()
         
         return rankVariationLabel
-    }()
-
-    private let movieName: UILabel = {
-        let movieName = UILabel()
-        
-        return movieName
-    }()
-    
-    private let audienceCount: UILabel = {
-        let audienceCount = UILabel()
-        
-        return audienceCount
     }()
 }

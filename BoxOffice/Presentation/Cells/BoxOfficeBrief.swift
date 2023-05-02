@@ -15,4 +15,16 @@ final class BoxOfficeBrief: UIStackView {
     required init(coder: NSCoder) {
         super.init(coder: coder)
     }
+
+    private let movieName: UILabel = {
+        let movieName = UILabel()
+
+        return movieName
+    }()
+
+    private let audienceCount: UILabel = {
+        let audienceCount = UILabel()
+
+        return audienceCount
+    }()
 }
