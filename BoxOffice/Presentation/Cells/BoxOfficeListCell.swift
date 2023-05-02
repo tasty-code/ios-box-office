@@ -10,11 +10,17 @@ import UIKit
 class BoxOfficeListCell: UICollectionViewListCell {
 
     static let identifier = String(describing: BoxOfficeListCell.self)
-
-    private let cellStackView: UIStackView = {
-        let cellStack = UIStackView()
+    
+    private lazy var listContentView = UIListContentView(configuration: defaultListContentConfiguration())
+    private let boxOfficeBrief = BoxOfficeBrief()
+    private let boxOfficeRank = BoxOfficeRank()
+    
+    override func updateConfiguration(using state: UICellConfigurationState) {
         
-        return cellStack
-    }()
+    }
 
+    private func defaultListContentConfiguration() -> UIListContentConfiguration {
+        return .subtitleCell()
+    }
+    
 }
