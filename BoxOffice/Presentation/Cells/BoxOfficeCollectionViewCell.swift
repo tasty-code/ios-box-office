@@ -9,14 +9,47 @@ import UIKit
 
 class BoxOfficeCollectionViewCell: UICollectionViewListCell {
 
-    static let cellIdentifier = "BoxOfficeCollectionViewCell"
+    static let identifier = String(describing: BoxOfficeCollectionViewCell.self)
 
-    let cellStack = UIStackView()
-    let rankStack = UIStackView()
-    let detailStack = UIStackView()
+    private let cellStackView: UIStackView = {
+        let cellStack = UIStackView()
+        
+        return cellStack
+    }()
+    
+    private let rankStackView: UIStackView = {
+        let rankStack = UIStackView()
+        
+        return rankStack
+    }()
+    
+    private let detailStackView: UIStackView = {
+        let detailStack = UIStackView()
+        
+        return detailStack
+    }()
 
-    let rankLabel = UILabel()
-    let rankVariationLabel = UILabel()
-    let movieName = UILabel()
-    let audienceCount = UILabel()
+    private let rank: UILabel = {
+        let rankLabel = UILabel()
+        
+        return rankLabel
+    }()
+    
+    private let rankVariation: UILabel = {
+       let rankVariationLabel = UILabel()
+        
+        return rankVariationLabel
+    }()
+
+    private let movieName: UILabel = {
+        let movieName = UILabel()
+        
+        return movieName
+    }()
+    
+    private let audienceCount: UILabel = {
+        let audienceCount = UILabel()
+        
+        return audienceCount
+    }()
 }
