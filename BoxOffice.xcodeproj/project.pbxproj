@@ -67,6 +67,7 @@
 		B4B813D32A0104CF00D32963 /* Number+FloatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B813D22A0104CF00D32963 /* Number+FloatType.swift */; };
 		B4B813D52A01086400D32963 /* UICollectionView+RegisterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B813D42A01086400D32963 /* UICollectionView+RegisterCell.swift */; };
 		B4B813D72A01095500D32963 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B813D62A01095500D32963 /* ReusableView.swift */; };
+		B4B813D92A0118ED00D32963 /* NumberUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B813D82A0118ED00D32963 /* NumberUtil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +148,7 @@
 		B4B813D22A0104CF00D32963 /* Number+FloatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+FloatType.swift"; sourceTree = "<group>"; };
 		B4B813D42A01086400D32963 /* UICollectionView+RegisterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+RegisterCell.swift"; sourceTree = "<group>"; };
 		B4B813D62A01095500D32963 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		B4B813D82A0118ED00D32963 /* NumberUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberUtil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -493,6 +495,7 @@
 			children = (
 				B4B813CF2A0102CD00D32963 /* UIViewPreview.swift */,
 				B4B813D62A01095500D32963 /* ReusableView.swift */,
+				B4B813D82A0118ED00D32963 /* NumberUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -724,6 +727,7 @@
 				8E854F4629FBA3F100F2F6F7 /* URLSessionProtocol.swift in Sources */,
 				8E854F1129FB597400F2F6F7 /* Director.swift in Sources */,
 				8E854F0329FA58DA00F2F6F7 /* MovieEndPoint.swift in Sources */,
+				B4B813D92A0118ED00D32963 /* NumberUtil.swift in Sources */,
 				B4B813CA2A00FF7900D32963 /* BoxOfficeListCell.swift in Sources */,
 				B4B813D72A01095500D32963 /* ReusableView.swift in Sources */,
 				8E854F0B29FB594300F2F6F7 /* Actor.swift in Sources */,

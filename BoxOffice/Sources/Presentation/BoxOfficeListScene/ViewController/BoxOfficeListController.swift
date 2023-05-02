@@ -15,6 +15,12 @@ final class BoxOfficeListController: UIViewController {
     
     // MARK: - Properties
     
+    private let dailyBoxOfficeList: [DailyBoxOffice]! = {
+        let data = MockData.boxOffice
+        let decodedData = try? JSONDecoder().decode(DailyBoxOfficeResponse.self, from: data!)
+        return decodedData?.boxOfficeResult.dailyBoxOfficeList
+    }()
+    
     // MARK: - UI Components
     
     private lazy var boxOfficeListCollectionView = UICollectionView(
@@ -48,7 +54,7 @@ extension BoxOfficeListController {
     }
     
     private func setUI() {
-        
+        setCurrentDateTitle()
     }
     
     private func setLayout() {
@@ -71,6 +77,13 @@ extension BoxOfficeListController {
         let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
         return UICollectionViewCompositionalLayout.list(using: configuration)
     }
+    
+    private func setCurrentDateTitle() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let formattedDate = dateFormatter.string(from: Date())
+        title = formattedDate
+    }
 }
 
 // MARK: UICollectionViewDataSource
@@ -78,12 +91,16 @@ extension BoxOfficeListController {
 extension BoxOfficeListController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return dailyBoxOfficeList.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(cellClass: BoxOfficeListCell.self, for: indexPath)
+        
+        let boxOffice = dailyBoxOfficeList[indexPath.row]
+        cell.configure(with: boxOffice)
+        
         return cell
     }
 }

@@ -23,6 +23,12 @@ final class BoxOfficeListCell: UICollectionViewCell {
         static let movieRankStatusLabelSkeletonText: String = "--"
         static let movieTitleLabelSkeletonText: String = "----"
         static let audienceCountLabelSkeletonText: String = "오늘 --- / 총 ---"
+        
+        static let movieRankLabelNewText = "신작"
+        
+        static let rankStatusUpPrefix = "▲"
+        static let rankStatusDownPrefix = "▼"
+        static let rankStatusStablePrefix = "-"
     }
     
     // MARK: - Properties
@@ -55,7 +61,7 @@ final class BoxOfficeListCell: UICollectionViewCell {
     
     private let movieTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = .preferredFont(forTextStyle: .title3)
         label.text = Constants.movieTitleLabelSkeletonText
         return label
     }()
@@ -90,8 +96,46 @@ final class BoxOfficeListCell: UICollectionViewCell {
     
     // MARK: - Public Methods
     
-    // MARK: - Private Methods
+    func configure(with dailyBoxOffice: DailyBoxOffice) {
+        movieRankLabel.text = dailyBoxOffice.rank
+        movieRankStatusLabel.attributedText = movieRankStatusLabelText(with: dailyBoxOffice)
+        movieTitleLabel.text = dailyBoxOffice.movieName
+        audienceCountLabel.text = audienceCountLabelText(with: dailyBoxOffice)
+    }
     
+    // MARK: - Private Methods
+    private func movieRankStatusLabelText(with dailyBoxOffice: DailyBoxOffice) -> NSAttributedString {
+        switch dailyBoxOffice.rankStatus {
+        case .new:
+            return NSAttributedString(string: Constants.movieRankLabelNewText,
+                                      attributes: [.foregroundColor: UIColor.red])
+        case .old:
+            let rankIntensity = Int(dailyBoxOffice.rankIntensity) ?? 0
+            
+            if rankIntensity == 0 {
+                return NSAttributedString(string: Constants.rankStatusStablePrefix + dailyBoxOffice.rankIntensity)
+            }
+            
+            let prefix = rankIntensity > 0 ? Constants.rankStatusUpPrefix : Constants.rankStatusDownPrefix
+            let prefixColor: UIColor = rankIntensity > 0 ? .red : .blue
+
+            let mutableAttributedString = NSMutableAttributedString()
+            mutableAttributedString.append(NSAttributedString(string: prefix,
+                                                              attributes: [.foregroundColor: prefixColor]))
+            
+            let absoluteRankIntensity = String(abs(rankIntensity))
+            mutableAttributedString.append(NSAttributedString(string: absoluteRankIntensity))
+            return mutableAttributedString
+        }
+    }
+    
+    private func audienceCountLabelText(with dailyBoxOffice: DailyBoxOffice) -> String {
+        guard let formattedDailyAudienceCount = NumberUtil.formatNumberWithCommas(dailyBoxOffice.dailyAudienceCount),
+              let formattedCumulativeAudience = NumberUtil.formatNumberWithCommas(dailyBoxOffice.cumulativeAudience) else {
+            return ""
+        }
+        return "오늘 \(formattedDailyAudienceCount) / 총 \(formattedCumulativeAudience)"
+    }
 }
 
 // MARK: - UI & Layout
