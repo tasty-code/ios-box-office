@@ -14,11 +14,9 @@ final class NetworkRouterTests: XCTestCase {
     
     func test_네트워킹에_실패했을때_router의_completion이_Error를_던진다() {
         let expectation = XCTestExpectation()
-        
+        let endpoint = MockEndpoint()
         let urlSession = MockURLSession(isFailRequest: true)
         sut = NetworkRouter(session: urlSession)
-        
-        let endpoint = MovieEndPoint.dailyBoxOffice(date: "231101")
         
         sut.request(endpoint) { result in
             switch result {
@@ -40,11 +38,9 @@ final class NetworkRouterTests: XCTestCase {
     
     func test_네트워킹에_성공했을때_data가_비어있지않는지_확인한다() {
         let expectation = XCTestExpectation()
-        
+        let endpoint = MockEndpoint()
         let urlSession = MockURLSession(isFailRequest: false)
         sut = NetworkRouter(session: urlSession)
-        
-        let endpoint = MovieEndPoint.dailyBoxOffice(date: "231101")
         
         sut.request(endpoint) { result in
             switch result {
