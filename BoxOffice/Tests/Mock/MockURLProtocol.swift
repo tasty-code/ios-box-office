@@ -8,6 +8,7 @@
 import Foundation
 
 final class MockURLProtocol: URLProtocol {
+    
     typealias RequestHandler = ((URLRequest) -> (Data?, HTTPURLResponse?, Error?))
     static var requestHandler: RequestHandler?
     
@@ -41,7 +42,5 @@ final class MockURLProtocol: URLProtocol {
         client?.urlProtocolDidFinishLoading(self)
     }
     
-    override func stopLoading() {
-        return
-    }
+    override func stopLoading() { }
 }
