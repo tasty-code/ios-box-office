@@ -129,6 +129,7 @@
 		5B0697C829FFE66800AE8F90 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				D96C74F729F914DC0002A097 /* Query */,
 				5B0697C929FFE67000AE8F90 /* Endpoint */,
 			);
 			path = Network;
@@ -228,7 +229,6 @@
 			isa = PBXGroup;
 			children = (
 				D9E6F76A29FA3C97007B542A /* Error */,
-				D96C74F729F914DC0002A097 /* Query */,
 				5B10174429F90D2600AE55F3 /* APIEndPoint.swift */,
 				5B6ADFAC29FA9A09001A1394 /* NetworkService.swift */,
 			);
