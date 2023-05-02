@@ -8,7 +8,7 @@
 import Foundation
 
 struct MovieDetailRequestDTO: Encodable {
-    let key: String = APIMagicLiteral.Key
+    let key: String = APIMagicLiteral.key
     var movieCode: String
     
     enum CodingKeys: String, CodingKey {
