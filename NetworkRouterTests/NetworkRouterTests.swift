@@ -37,4 +37,25 @@ final class NetworkRouterTests: XCTestCase {
         
         wait(for: [expectation])
     }
+    
+    func test_네트워킹에_성공했을때_data가_비어있지않는지_확인한다() {
+        let expectation = XCTestExpectation()
+        
+        let urlSession = MockURLSession(isFailRequest: false)
+        sut = NetworkRouter(session: urlSession)
+        
+        let endpoint = MovieEndPoint.dailyBoxOffice(date: "231101")
+        
+        sut.request(endpoint) { result in
+            switch result {
+            case .success(let data):
+                XCTAssertTrue(data.isEmpty == false)
+            case .failure:
+                XCTFail("Mock URLSession이 성공하는 세션이기에 Fail이면 안됨")
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation])
+    }
 }
