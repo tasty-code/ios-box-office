@@ -37,6 +37,4 @@ final class NetworkRouterTests: XCTestCase {
         
         wait(for: [expectation])
     }
-    
-    
 }

@@ -1,5 +1,5 @@
 //
-//  NetworkSession.swift
+//  URLSessionProtocol.swift
 //  BoxOffice
 //
 //  Created by devxsby on 2023/04/28.
@@ -12,4 +12,4 @@ protocol URLSessionProtocol {
                   completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
 }
 
-extension URLSession: URLSessionProtocol {}
+extension URLSession: URLSessionProtocol { }

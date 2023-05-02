@@ -18,7 +18,7 @@ final class NetworkRouter: NetworkRouterProtocol {
     
     // MARK: - Properties
     
-    private var task: URLSessionTask?
+    private var task: URLSessionDataTask?
     private let session: URLSessionProtocol
     
     // MARK: - Initialization
