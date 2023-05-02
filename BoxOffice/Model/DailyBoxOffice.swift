@@ -8,6 +8,6 @@
 import UIKit
 
 struct DailyBoxOffice: MovieDatable {
-    let date: String
+    let date: Date
     let movies: [Movie]
 }

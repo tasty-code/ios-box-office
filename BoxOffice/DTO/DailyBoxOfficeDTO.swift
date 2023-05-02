@@ -64,17 +64,3 @@ extension DailyBoxOfficeDTO {
                      code: code)
     }
 }
-
-private func formatter(date: String) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd"
-
-    guard let convertDate = dateFormatter.date(from: date) else {
-        return ""
-    }
-
-    let newDateFormatter = DateFormatter()
-    newDateFormatter.dateFormat = "yyyy년 MM월 dd일"
-
-    return newDateFormatter.string(from: convertDate)
-}
