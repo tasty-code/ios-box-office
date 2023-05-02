@@ -12,13 +12,22 @@ final class NetworkRouterTests: XCTestCase {
     
     var sut: NetworkRouter!
     
-    func test_네트워킹에_실패했을때_router의_completion이_Error를_던진다() {
+    override func tearDownWithError() throws {
+        sut = nil
+    }
+    
+    func test_request메서드가_실패했을때_router의_completion이_Error를_던진다() {
+        
+        // given
         let expectation = XCTestExpectation()
         let endpoint = MockEndpoint()
         let urlSession = MockURLSession(isFailRequest: true)
         sut = NetworkRouter(session: urlSession)
         
+        // when
         sut.request(endpoint) { result in
+            
+            // then
             switch result {
             case .success:
                 XCTFail("Mock URLSession이 실패하는 세션이기에 Success이면 안됨")
@@ -33,16 +42,21 @@ final class NetworkRouterTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation])
+        wait(for: [expectation], timeout: 1)
     }
     
-    func test_네트워킹에_성공했을때_data가_비어있지않는지_확인한다() {
+    func test_request메서드가_성공했을때_data가_비어있지않는지_확인한다() {
+        
+        // given
         let expectation = XCTestExpectation()
         let endpoint = MockEndpoint()
         let urlSession = MockURLSession(isFailRequest: false)
         sut = NetworkRouter(session: urlSession)
         
+        // when
         sut.request(endpoint) { result in
+            
+            // then
             switch result {
             case .success(let data):
                 XCTAssertTrue(data.isEmpty == false)
@@ -52,6 +66,6 @@ final class NetworkRouterTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation])
+        wait(for: [expectation], timeout: 1)
     }
 }

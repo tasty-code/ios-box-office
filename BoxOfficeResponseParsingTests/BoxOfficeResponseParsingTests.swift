@@ -25,6 +25,7 @@ final class BoxOfficeResponseParsingTests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
+        sutBoxOffice = nil
         sutMovieDetail = nil
     }
     

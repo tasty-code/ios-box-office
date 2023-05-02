@@ -12,14 +12,23 @@ final class NetworkManagerTests: XCTestCase {
     
     var sut: NetworkManager!
     
-    func test_일일영화정보_네트워킹에_성공했을때_결과값이_비어있지_않다() {
+    override func tearDownWithError() throws {
+        sut = nil
+    }
+    
+    func test_fetchDailyBoxOffice_성공했을때_결과값이_비어있지_않다() {
+        
+        // given
         let expectation = XCTestExpectation()
         let endpoint = MovieEndPoint.Mock.dailyBoxOffice
         let urlSession = MockURLSession(isFailRequest: false, successData: MockData.boxOffice)
         let router = NetworkRouter(session: urlSession)
         sut = NetworkManager(router: router)
         
+        // when
         sut.fetchDailyBoxOffice(endPoint: endpoint) { result in
+            
+            // then
             switch result {
             case .success(let dailyBoxOfficeResponse):
                 let dailyBoxOfficeList = dailyBoxOfficeResponse.boxOfficeResult.dailyBoxOfficeList
@@ -30,17 +39,22 @@ final class NetworkManagerTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation])
+        wait(for: [expectation], timeout: 1)
     }
     
-    func test_영화상세조회_네트워킹에_성공했을때_결과값이_비어있지_않다() {
+    func test_fetchMovieDetail_성공했을때_결과값이_비어있지_않다() {
+        
+        // given
         let expectation = XCTestExpectation()
         let endpoint = MovieEndPoint.Mock.movieDetail
         let urlSession = MockURLSession(isFailRequest: false, successData: MockData.movieDetail)
         let router = NetworkRouter(session: urlSession)
         sut = NetworkManager(router: router)
         
+        // when
         sut.fetchMovieDetail(endPoint: endpoint) { result in
+            
+            // then
             switch result {
             case .success(let movieDetailResponse):
                 let movieInfoCompanies = movieDetailResponse.movieInfoResult.movieInfo.companies
@@ -54,14 +68,19 @@ final class NetworkManagerTests: XCTestCase {
         wait(for: [expectation])
     }
     
-    func test_네트워킹에_실패했을때_manager의_completion이_Error를_던진다() {
+    func test_fetchMovieDetail_실패했을때_manager의_completion이_Error를_던진다() {
+        
+        // given
         let expectation = XCTestExpectation()
         let endpoint = MovieEndPoint.Mock.movieDetail
         let urlSession = MockURLSession(isFailRequest: true)
         let router = NetworkRouter(session: urlSession)
         sut = NetworkManager(router: router)
         
+        // when
         sut.fetchMovieDetail(endPoint: endpoint) { result in
+        
+            // then
             switch result {
             case .success:
                 XCTFail("실패하는 네트워킹이기에 Success이면 안됨")
@@ -76,17 +95,22 @@ final class NetworkManagerTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation])
+        wait(for: [expectation], timeout: 5)
     }
     
     func test_일치하지_않는_타입을_실패했을때_manager의_completion이_parseError를_던진다() {
+        
+        // given
         let expectation = XCTestExpectation()
         let endpoint = MovieEndPoint.Mock.movieDetail
         let urlSession = MockURLSession(isFailRequest: false, successData: MockData.movieDetail)
         let router = NetworkRouter(session: urlSession)
         sut = NetworkManager(router: router)
         
+        // when
         sut.fetchDailyBoxOffice(endPoint: endpoint) { result in
+            
+            // then
             switch result {
             case .success:
                 XCTFail("실패하는 네트워킹이기에 Success이면 안됨")
@@ -96,6 +120,6 @@ final class NetworkManagerTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation])
+        wait(for: [expectation], timeout: 5)
     }
 }
