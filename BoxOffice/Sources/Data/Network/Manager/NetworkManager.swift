@@ -34,7 +34,6 @@ final class NetworkManager {
     }
     
     // MARK: - Private Methods
-
     private func fetchData<T: Decodable>(_ endPoint: MovieEndPoint,
                                          completion: @escaping (Result<T, NetworkError>) -> Void) {
         router.request(endPoint) { [weak self] result in

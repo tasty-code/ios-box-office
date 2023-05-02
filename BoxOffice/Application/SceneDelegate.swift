@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let networkRouter = NetworkRouter()
         let networkManager = NetworkManager(router: networkRouter)
-        let viewController = ViewController(networkManager: networkManager)
+        let viewController = BoxOfficeListController(networkManager: networkManager)
         window.rootViewController = viewController
     }
 }

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  BoxOfficeListController.swift
 //  BoxOffice
 //
 //  Created by M&A on 13/01/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class BoxOfficeListController: UIViewController {
     
     // MARK: - Properties
     
