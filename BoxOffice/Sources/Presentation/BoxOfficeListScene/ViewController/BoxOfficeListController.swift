@@ -107,6 +107,10 @@ extension BoxOfficeListController: UICollectionViewDataSource {
         let boxOffice = dailyBoxOfficeList[indexPath.row]
         cell.configure(with: boxOffice)
         
+        cell.accessories = [
+            .disclosureIndicator()
+        ]
+        
         return cell
     }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BoxOfficeListCell: UICollectionViewCell {
+final class BoxOfficeListCell: UICollectionViewListCell {
     
     // MARK: - Constants
     
