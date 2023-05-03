@@ -136,8 +136,9 @@ final class BoxOfficeListCell: UICollectionViewCell {
     }
     
     private func audienceCountLabelText(with dailyBoxOffice: DailyBoxOffice) -> String {
-        guard let formattedDailyAudienceCount = NumberUtil.formatNumberWithCommas(dailyBoxOffice.dailyAudienceCount),
-              let formattedCumulativeAudience = NumberUtil.formatNumberWithCommas(dailyBoxOffice.cumulativeAudience) else {
+        
+        guard let formattedDailyAudienceCount = Int(dailyBoxOffice.dailyAudienceCount)?.formatWithCommas(),
+              let formattedCumulativeAudience = Int(dailyBoxOffice.cumulativeAudience)?.formatWithCommas() else {
             return ""
         }
         return "오늘 \(formattedDailyAudienceCount) / 총 \(formattedCumulativeAudience)"
