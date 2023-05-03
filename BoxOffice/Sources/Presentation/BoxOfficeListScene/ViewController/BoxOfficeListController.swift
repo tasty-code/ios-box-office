@@ -23,10 +23,11 @@ final class BoxOfficeListController: UIViewController {
     
     // MARK: - UI Components
     
-    private lazy var boxOfficeListCollectionView = UICollectionView(
-        frame: .zero,
-        collectionViewLayout: createCollectionViewLayout()
-    )
+    private lazy var boxOfficeListCollectionView: UICollectionView = {
+        let collectionview = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
+        collectionview.translatesAutoresizingMaskIntoConstraints = false
+        return collectionview
+    }()
     
     // MARK: - Initialization
     
@@ -55,16 +56,20 @@ extension BoxOfficeListController {
     
     private func setUI() {
         setCurrentDateTitle()
+        setBackgroundColor()
+    }
+    
+    private func setBackgroundColor() {
+        view.backgroundColor = .systemBackground
     }
     
     private func setLayout() {
         view.addSubview(boxOfficeListCollectionView)
-        boxOfficeListCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            boxOfficeListCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            boxOfficeListCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            boxOfficeListCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            boxOfficeListCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            boxOfficeListCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            boxOfficeListCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            boxOfficeListCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            boxOfficeListCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
@@ -89,6 +94,7 @@ extension BoxOfficeListController {
 // MARK: UICollectionViewDataSource
 
 extension BoxOfficeListController: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         return dailyBoxOfficeList.count

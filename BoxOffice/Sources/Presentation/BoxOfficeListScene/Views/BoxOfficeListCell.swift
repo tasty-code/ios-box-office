@@ -14,15 +14,17 @@ final class BoxOfficeListCell: UICollectionViewCell {
     enum Metric {
         static let movieRankStackViewSpacing = 8.f
         static let movieRankStackViewLeadingInset = 20.f
+        static let movieRanckStackViewVerticalInset = 10.f
+        static let movieRanckStackViewWidth = 50.f
         static let movieInfoStackViewSpacing = 8.f
         static let movieInfoStackViewLeadingInset = 20.f
     }
     
     enum Constants {
-        static let movieRankLabelSkeletonText: String = "-"
-        static let movieRankStatusLabelSkeletonText: String = "--"
-        static let movieTitleLabelSkeletonText: String = "----"
-        static let audienceCountLabelSkeletonText: String = "오늘 --- / 총 ---"
+        static let movieRankLabelSkeletonText = "-"
+        static let movieRankStatusLabelSkeletonText = "--"
+        static let movieTitleLabelSkeletonText = "----"
+        static let audienceCountLabelSkeletonText = "오늘 --- / 총 ---"
         
         static let movieRankLabelNewText = "신작"
         
@@ -37,6 +39,7 @@ final class BoxOfficeListCell: UICollectionViewCell {
     
     private let movieRankLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .largeTitle)
         label.text = Constants.movieRankLabelSkeletonText
         return label
@@ -44,6 +47,7 @@ final class BoxOfficeListCell: UICollectionViewCell {
     
     private let movieRankStatusLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .callout)
         label.text = Constants.movieRankStatusLabelSkeletonText
         return label
@@ -56,6 +60,7 @@ final class BoxOfficeListCell: UICollectionViewCell {
         ])
         stackView.axis = .vertical
         stackView.spacing = Metric.movieRankStackViewSpacing
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -80,6 +85,7 @@ final class BoxOfficeListCell: UICollectionViewCell {
         ])
         stackView.axis = .vertical
         stackView.spacing = Metric.movieInfoStackViewSpacing
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -108,7 +114,7 @@ final class BoxOfficeListCell: UICollectionViewCell {
         switch dailyBoxOffice.rankStatus {
         case .new:
             return NSAttributedString(string: Constants.movieRankLabelNewText,
-                                      attributes: [.foregroundColor: UIColor.red])
+                                      attributes: [.foregroundColor: UIColor.systemRed])
         case .old:
             let rankIntensity = Int(dailyBoxOffice.rankIntensity) ?? 0
             
@@ -117,7 +123,7 @@ final class BoxOfficeListCell: UICollectionViewCell {
             }
             
             let prefix = rankIntensity > 0 ? Constants.rankStatusUpPrefix : Constants.rankStatusDownPrefix
-            let prefixColor: UIColor = rankIntensity > 0 ? .red : .blue
+            let prefixColor: UIColor = rankIntensity > 0 ? .systemRed : .systemBlue
 
             let mutableAttributedString = NSMutableAttributedString()
             mutableAttributedString.append(NSAttributedString(string: prefix,
@@ -141,6 +147,7 @@ final class BoxOfficeListCell: UICollectionViewCell {
 // MARK: - UI & Layout
 
 extension BoxOfficeListCell {
+    
     private func setup() {
         setUI()
         setLayout()
@@ -151,20 +158,19 @@ extension BoxOfficeListCell {
     }
     
     private func setLayout() {
-        NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 100)
-        ])
         
         addSubview(movieRankStackView)
-        movieRankStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             movieRankStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
                                                         constant: Metric.movieRankStackViewLeadingInset),
-            movieRankStackView.centerYAnchor.constraint(equalTo: centerYAnchor)
+            movieRankStackView.topAnchor.constraint(equalTo: topAnchor,
+                                                    constant: Metric.movieRanckStackViewVerticalInset),
+            bottomAnchor.constraint(equalTo: movieRankStackView.bottomAnchor,
+                                    constant: Metric.movieRanckStackViewVerticalInset),
+            movieRankStackView.widthAnchor.constraint(equalToConstant: Metric.movieRanckStackViewWidth)
         ])
         
         addSubview(movieInfoStackView)
-        movieInfoStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             movieInfoStackView.leadingAnchor.constraint(equalTo: movieRankStackView.trailingAnchor,
                                                         constant: Metric.movieInfoStackViewLeadingInset),
