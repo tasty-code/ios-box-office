@@ -17,7 +17,7 @@ final class BoxOfficeListCell: UICollectionViewCell {
         static let movieRanckStackViewVerticalInset = 10.f
         static let movieRanckStackViewWidth = 50.f
         static let movieInfoStackViewSpacing = 8.f
-        static let movieInfoStackViewLeadingInset = 20.f
+        static let movieInfoStackViewHorizontalInset = 20.f
     }
     
     enum Constants {
@@ -110,6 +110,7 @@ final class BoxOfficeListCell: UICollectionViewCell {
     }
     
     // MARK: - Private Methods
+    
     private func movieRankStatusLabelText(with dailyBoxOffice: DailyBoxOffice) -> NSAttributedString {
         switch dailyBoxOffice.rankStatus {
         case .new:
@@ -119,7 +120,7 @@ final class BoxOfficeListCell: UICollectionViewCell {
             let rankIntensity = Int(dailyBoxOffice.rankIntensity) ?? 0
             
             if rankIntensity == 0 {
-                return NSAttributedString(string: Constants.rankStatusStablePrefix + dailyBoxOffice.rankIntensity)
+                return NSAttributedString(string: Constants.rankStatusStablePrefix)
             }
             
             let prefix = rankIntensity > 0 ? Constants.rankStatusUpPrefix : Constants.rankStatusDownPrefix
@@ -165,15 +166,17 @@ extension BoxOfficeListCell {
                                                         constant: Metric.movieRankStackViewLeadingInset),
             movieRankStackView.topAnchor.constraint(equalTo: topAnchor,
                                                     constant: Metric.movieRanckStackViewVerticalInset),
-            bottomAnchor.constraint(equalTo: movieRankStackView.bottomAnchor,
-                                    constant: Metric.movieRanckStackViewVerticalInset),
+            movieRankStackView.bottomAnchor.constraint(equalTo: bottomAnchor,
+                                                       constant: -Metric.movieRanckStackViewVerticalInset),
             movieRankStackView.widthAnchor.constraint(equalToConstant: Metric.movieRanckStackViewWidth)
         ])
         
         addSubview(movieInfoStackView)
         NSLayoutConstraint.activate([
             movieInfoStackView.leadingAnchor.constraint(equalTo: movieRankStackView.trailingAnchor,
-                                                        constant: Metric.movieInfoStackViewLeadingInset),
+                                                        constant: Metric.movieInfoStackViewHorizontalInset),
+            movieInfoStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                         constant: -Metric.movieInfoStackViewHorizontalInset),
             movieInfoStackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
