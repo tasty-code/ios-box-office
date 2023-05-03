@@ -23,3 +23,9 @@ struct DailyBoxOfficesDTO: Decodable {
         case movieNm, openDt, salesAmt, salesShare, salesInten, salesChange, salesAcc, audiCnt, audiInten, audiChange, audiAcc, scrnCnt, showCnt
     }
 }
+
+enum RankOldAndNewDTO: String, Decodable {
+
+    case new = "NEW"
+    case old = "OLD"
+}

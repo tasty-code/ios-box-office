@@ -12,6 +12,7 @@ struct BoxOfficeDTO: Decodable {
     let result: BoxOfficeResultDTO
 
     enum CodingKeys: String, CodingKey {
+        
         case result = "boxOfficeResult"
     }
 }
