@@ -9,7 +9,7 @@ import Foundation
 
 enum API {
     
-    case movie(date: String)
+    case movie(code: String)
     case boxofficeMovie(date: String)
     
 }
@@ -39,8 +39,8 @@ extension API {
     
     private var queryParameters: [String: String] {
         switch self {
-        case .movie(let movieCode):
-            return ["key": "f5eef3421c602c6cb7ea224104795888", "movieCd": movieCode]
+        case .movie(let code):
+            return ["key": "f5eef3421c602c6cb7ea224104795888", "movieCd": code]
         case .boxofficeMovie(let date):
             return ["key": "f5eef3421c602c6cb7ea224104795888", "targetDt": date]
         }

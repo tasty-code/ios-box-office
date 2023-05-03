@@ -9,6 +9,11 @@ import Foundation
 
 enum NetworkError: Error {
     
-    case components
+    case invalidURL
+    case requestFailed
+    case responseNotFound
+    case invalidResponse
+    case dataNotFound
+    case dataDecodingFailed
     
 }
