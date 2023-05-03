@@ -110,3 +110,15 @@ extension BoxOfficeListController: UICollectionViewDataSource {
         return cell
     }
 }
+
+// MARK: - Preview
+#if DEBUG
+import SwiftUI
+
+struct BoxOfficeListControllerPreView: PreviewProvider {
+    static var previews: some View {
+        UINavigationController(rootViewController: BoxOfficeListController())
+        .toPreview()
+    }
+}
+#endif

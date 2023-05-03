@@ -62,9 +62,9 @@
 		B435FA3729FF5D2F00E12A80 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B435FA3629FF5D2F00E12A80 /* MockData.swift */; };
 		B435FA4729FFAB8700E12A80 /* NetworkRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B435FA4629FFAB8700E12A80 /* NetworkRouterTests.swift */; };
 		B4503A552A01FB7700E3FA6C /* Int+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4503A542A01FB7700E3FA6C /* Int+Format.swift */; };
+		B4503A592A0239F500E3FA6C /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4503A582A0239F500E3FA6C /* UIViewController+Preview.swift */; };
 		B4B813C62A00FC9800D32963 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B813C52A00FC9800D32963 /* APIKeys.swift */; };
 		B4B813CA2A00FF7900D32963 /* BoxOfficeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B813C92A00FF7900D32963 /* BoxOfficeListCell.swift */; };
-		B4B813D02A0102CD00D32963 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B813CF2A0102CD00D32963 /* UIViewPreview.swift */; };
 		B4B813D32A0104CF00D32963 /* Number+FloatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B813D22A0104CF00D32963 /* Number+FloatType.swift */; };
 		B4B813D52A01086400D32963 /* UICollectionView+RegisterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B813D42A01086400D32963 /* UICollectionView+RegisterCell.swift */; };
 		B4B813D72A01095500D32963 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B813D62A01095500D32963 /* ReusableView.swift */; };
@@ -143,9 +143,9 @@
 		B435FA4429FFAB8700E12A80 /* NetworkRouterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkRouterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B435FA4629FFAB8700E12A80 /* NetworkRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouterTests.swift; sourceTree = "<group>"; };
 		B4503A542A01FB7700E3FA6C /* Int+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Format.swift"; sourceTree = "<group>"; };
+		B4503A582A0239F500E3FA6C /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
 		B4B813C52A00FC9800D32963 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		B4B813C92A00FF7900D32963 /* BoxOfficeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListCell.swift; sourceTree = "<group>"; };
-		B4B813CF2A0102CD00D32963 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
 		B4B813D22A0104CF00D32963 /* Number+FloatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+FloatType.swift"; sourceTree = "<group>"; };
 		B4B813D42A01086400D32963 /* UICollectionView+RegisterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+RegisterCell.swift"; sourceTree = "<group>"; };
 		B4B813D62A01095500D32963 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
@@ -493,7 +493,6 @@
 		B4B813CE2A0102C500D32963 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				B4B813CF2A0102CD00D32963 /* UIViewPreview.swift */,
 				B4B813D62A01095500D32963 /* ReusableView.swift */,
 			);
 			path = Utils;
@@ -505,6 +504,7 @@
 				B4B813D22A0104CF00D32963 /* Number+FloatType.swift */,
 				B4B813D42A01086400D32963 /* UICollectionView+RegisterCell.swift */,
 				B4503A542A01FB7700E3FA6C /* Int+Format.swift */,
+				B4503A582A0239F500E3FA6C /* UIViewController+Preview.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -722,8 +722,8 @@
 				8E94D1142A00F8D8001DC240 /* NetworkManager.swift in Sources */,
 				8E854F0729FB590C00F2F6F7 /* MovieInfoResult.swift in Sources */,
 				B40822BB2A00A6A500FBA191 /* MockURLProtocol.swift in Sources */,
+				B4503A592A0239F500E3FA6C /* UIViewController+Preview.swift in Sources */,
 				8E854F0D29FB595300F2F6F7 /* Audit.swift in Sources */,
-				B4B813D02A0102CD00D32963 /* UIViewPreview.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
 				8E854F4629FBA3F100F2F6F7 /* URLSessionProtocol.swift in Sources */,
 				8E854F1129FB597400F2F6F7 /* Director.swift in Sources */,
