@@ -9,4 +9,9 @@ import Foundation
 
 final class BoxOfficeListViewModel {
     
+    private let usecase: BoxOfficeListUsecase
+    
+    init(usecase: BoxOfficeListUsecase) {
+        self.usecase = usecase
+    }
 }

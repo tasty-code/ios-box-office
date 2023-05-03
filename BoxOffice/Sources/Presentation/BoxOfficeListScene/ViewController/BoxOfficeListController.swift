@@ -15,6 +15,8 @@ final class BoxOfficeListController: UIViewController {
     
     // MARK: - Properties
     
+    private let viewModel: BoxOfficeListViewModel
+    
     private let dailyBoxOfficeList: [DailyBoxOffice]! = {
         let data = MockData.boxOffice
         let decodedData = try? JSONDecoder().decode(DailyBoxOfficeResponse.self, from: data!)
@@ -30,6 +32,15 @@ final class BoxOfficeListController: UIViewController {
     }()
     
     // MARK: - Initialization
+    
+    init(viewModel: BoxOfficeListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - View Life Cycle
     
@@ -112,13 +123,13 @@ extension BoxOfficeListController: UICollectionViewDataSource {
 }
 
 // MARK: - Preview
-#if DEBUG
-import SwiftUI
-
-struct BoxOfficeListControllerPreView: PreviewProvider {
-    static var previews: some View {
-        UINavigationController(rootViewController: BoxOfficeListController())
-        .toPreview()
-    }
-}
-#endif
+//#if DEBUG
+//import SwiftUI
+//
+//struct BoxOfficeListControllerPreView: PreviewProvider {
+//    static var previews: some View {
+//        UINavigationController(rootViewController: BoxOfficeListController())
+//        .toPreview()
+//    }
+//}
+//#endif
