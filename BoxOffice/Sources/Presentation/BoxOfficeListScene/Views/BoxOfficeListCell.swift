@@ -17,7 +17,8 @@ final class BoxOfficeListCell: UICollectionViewListCell {
         static let movieRanckStackViewVerticalInset = 10.f
         static let movieRanckStackViewWidth = 50.f
         static let movieInfoStackViewSpacing = 8.f
-        static let movieInfoStackViewHorizontalInset = 20.f
+        static let movieInfoStackViewLeadingInset = 20.f
+        static let movieInfoStackViewTrailingInset = 30.f
     }
     
     enum Constants {
@@ -156,7 +157,7 @@ extension BoxOfficeListCell {
     }
     
     private func setUI() {
-        
+        addAccessory()
     }
     
     private func setLayout() {
@@ -175,10 +176,16 @@ extension BoxOfficeListCell {
         addSubview(movieInfoStackView)
         NSLayoutConstraint.activate([
             movieInfoStackView.leadingAnchor.constraint(equalTo: movieRankStackView.trailingAnchor,
-                                                        constant: Metric.movieInfoStackViewHorizontalInset),
+                                                        constant: Metric.movieInfoStackViewLeadingInset),
             movieInfoStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                         constant: -Metric.movieInfoStackViewHorizontalInset),
+                                                         constant: -Metric.movieInfoStackViewTrailingInset),
             movieInfoStackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
+    }
+    
+    private func addAccessory() {
+        accessories = [
+            .disclosureIndicator()
+        ]
     }
 }
