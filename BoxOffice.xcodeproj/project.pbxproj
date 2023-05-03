@@ -63,6 +63,7 @@
 		B435FA4729FFAB8700E12A80 /* NetworkRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B435FA4629FFAB8700E12A80 /* NetworkRouterTests.swift */; };
 		B4503A552A01FB7700E3FA6C /* Int+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4503A542A01FB7700E3FA6C /* Int+Format.swift */; };
 		B4503A592A0239F500E3FA6C /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4503A582A0239F500E3FA6C /* UIViewController+Preview.swift */; };
+		B4503A5D2A024B8900E3FA6C /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4503A5C2A024B8900E3FA6C /* Observable.swift */; };
 		B4B813C62A00FC9800D32963 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B813C52A00FC9800D32963 /* APIKeys.swift */; };
 		B4B813CA2A00FF7900D32963 /* BoxOfficeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B813C92A00FF7900D32963 /* BoxOfficeListCell.swift */; };
 		B4B813D32A0104CF00D32963 /* Number+FloatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B813D22A0104CF00D32963 /* Number+FloatType.swift */; };
@@ -144,6 +145,7 @@
 		B435FA4629FFAB8700E12A80 /* NetworkRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouterTests.swift; sourceTree = "<group>"; };
 		B4503A542A01FB7700E3FA6C /* Int+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Format.swift"; sourceTree = "<group>"; };
 		B4503A582A0239F500E3FA6C /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
+		B4503A5C2A024B8900E3FA6C /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		B4B813C52A00FC9800D32963 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		B4B813C92A00FF7900D32963 /* BoxOfficeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListCell.swift; sourceTree = "<group>"; };
 		B4B813D22A0104CF00D32963 /* Number+FloatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+FloatType.swift"; sourceTree = "<group>"; };
@@ -494,6 +496,7 @@
 			isa = PBXGroup;
 			children = (
 				B4B813D62A01095500D32963 /* ReusableView.swift */,
+				B4503A5C2A024B8900E3FA6C /* Observable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -711,6 +714,7 @@
 				B42A7EEF29F6746200A3C535 /* BoxOfficeResult.swift in Sources */,
 				8EEE4BB829F6737E0074302D /* DailyBoxOfficeResponse.swift in Sources */,
 				8E854F0529FB58F300F2F6F7 /* MovieDetailResponse.swift in Sources */,
+				B4503A5D2A024B8900E3FA6C /* Observable.swift in Sources */,
 				8E854EF929FA3C0800F2F6F7 /* HTTPTask.swift in Sources */,
 				B42A7EF129F6747000A3C535 /* DailyBoxOffice.swift in Sources */,
 				8E854F1729FB59C500F2F6F7 /* ShowType.swift in Sources */,

@@ -2,50 +2,42 @@
 //  Observable.swift
 //  BoxOffice
 //
-//  Created by Mason Kim on 2023/05/02.
+//  Created by Mason Kim on 2023/05/03.
 //
 
 import Foundation
 
 @propertyWrapper
-struct Observable<Value> {
+final class Observable<Value> {
     
-    // MARK: - Store
-    
-    private final class Store<Value> {
-        var listeners: [(Value) -> Void] = []
-    }
+    typealias Listener = (Value) -> Void
     
     // MARK: - Properties
     
-    private let store = Store<Value>()
-    
-    var projectedValue: Observable<Value> { self }
+    var listener: Listener?
     
     var wrappedValue: Value {
         didSet {
-            store.listeners.forEach { listener in
-                listener(wrappedValue)
-            }
+            listener?(wrappedValue)
         }
+    }
+    
+    var projectedValue: Observable<Value> {
+        self
+    }
+    
+    // MARK: - Initialization
+    
+    init(wrappedValue: Value) {
+        self.wrappedValue = wrappedValue
     }
     
     // MARK: - Public Methods
     
-    func bind(doesFireAtBind: Bool = false, listener: @escaping (Value) -> Void) {
-        store.listeners.append(listener)
-        if doesFireAtBind {
-            listener(wrappedValue)
-        }
-    }
-    
-    func dispose() {
-        store.listeners.removeAll()
-    }
-    
-    static func dispose(_ observables: [Observable]) {
-        observables.forEach {
-            $0.dispose()
+    func bind(isFireAtBind: Bool = true, listener: Listener?) {
+        self.listener = listener
+        if isFireAtBind {
+            listener?(wrappedValue)
         }
     }
 }
