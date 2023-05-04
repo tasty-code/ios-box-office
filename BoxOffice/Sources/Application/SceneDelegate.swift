@@ -19,8 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         window.makeKeyAndVisible()
         
-        let dicontainer = DIContainer()
-        let rootViewController = dicontainer.makeBoxOfficeListController()
+        let rootViewController = DIContainer.makeBoxOfficeListController()
         let navigationController = UINavigationController(rootViewController: rootViewController)
         window.rootViewController = navigationController
     }
