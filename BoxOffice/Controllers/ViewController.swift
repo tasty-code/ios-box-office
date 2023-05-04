@@ -9,7 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var boxOffice: DailyBoxOfficeDTO?
+    private var boxOffice: DailyBoxOfficeDTO?
+    private var movie: MovieDetailDTO?
     
     override func viewDidLoad() {
         super.viewDidLoad()
