@@ -11,20 +11,7 @@ class MovieViewController: UIViewController {
 
     var collectionView: UICollectionView?
 
-
-
     var movieArrays: [Movie] = [Movie(name: "존 윅 4", rank: BoxOffice.Rank(rank: 3, isEntry: false, variance: 0), audience: BoxOffice.Audience(today: 65019, accumulate: 1663651), code: 20231089)]
-
-
-
-//    init(collectionView: UICollectionView) {
-//        self.collectionView = collectionView
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +40,7 @@ class MovieViewController: UIViewController {
         } catch {
             print(error)
         }
+
         func makeUI() {
             view.backgroundColor = .white
 
@@ -65,7 +53,7 @@ class MovieViewController: UIViewController {
     }
 
     func setupCollectionView() {
-        var layoutconfig = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
+        let layoutconfig = UICollectionLayoutListConfiguration(appearance: .plain)
         let flowLayout = UICollectionViewCompositionalLayout.list(using: layoutconfig)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         guard let collectionView = collectionView else { return }
@@ -85,7 +73,7 @@ class MovieViewController: UIViewController {
 
 extension MovieViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movieArrays.count
+        return 5
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
