@@ -9,5 +9,5 @@ import Foundation
 
 protocol NetworkProvidable {
     
-    func request<EndPoint: RequestResponseProtocol>(_ endPoint: EndPoint) async throws -> Result<EndPoint.Response, NetworkError>
+    func request<Endpoint: RequestResponseProtocol>(_ endpoint: Endpoint) async throws -> Result<Endpoint.Response, NetworkError>
 }

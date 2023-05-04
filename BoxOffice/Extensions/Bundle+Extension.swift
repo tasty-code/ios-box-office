@@ -14,6 +14,7 @@ extension Bundle {
               let resource = NSDictionary(contentsOfFile: file),
               let key = resource["MovieAPIKey"] as? String else {
             print(NetworkError.notFoundAPIKey.localizedDescription)
+            
             return nil
         }
         
