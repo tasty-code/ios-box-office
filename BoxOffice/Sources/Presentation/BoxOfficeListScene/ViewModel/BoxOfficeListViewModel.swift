@@ -23,11 +23,8 @@ final class BoxOfficeListViewModel {
     }
     
     enum Constants {
-        static let movieRankLabelNewText = "신작"
-        
-        static let rankStatusUpPrefix = "▲"
-        static let rankStatusDownPrefix = "▼"
-        static let rankStatusStablePrefix = "-"
+        static let dailyAudiencePrefix = "오늘"
+        static let cumulativeAudiencePrefix = "총"
     }
     
     // MARK: - Properties
@@ -70,6 +67,7 @@ final class BoxOfficeListViewModel {
               let formattedCumulativeAudience = boxOffice.cumulativeAudience.formatWithCommas() else {
             return ""
         }
-        return "오늘 \(formattedDailyAudienceCount) / 총 \(formattedCumulativeAudience)"
+        return "\(Constants.dailyAudiencePrefix) \(formattedDailyAudienceCount) /"
+        + "\(Constants.cumulativeAudiencePrefix) \(formattedCumulativeAudience)"
     }
 }
