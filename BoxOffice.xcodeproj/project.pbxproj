@@ -37,6 +37,7 @@
 		F0500ABB2A035463001F448C /* NetworkSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0500ABA2A035463001F448C /* NetworkSessionProtocol.swift */; };
 		F0500ABE2A035550001F448C /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0500ABD2A035550001F448C /* NetworkSession.swift */; };
 		F0500AC02A0355C6001F448C /* URLResponse+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0500ABF2A0355C6001F448C /* URLResponse+Extension.swift */; };
+		F0500AC22A03669F001F448C /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0500AC12A03669F001F448C /* Date+Extension.swift */; };
 		F0560C5A29F7A15D0062FB01 /* JSONDeserializerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0560C5929F7A15D0062FB01 /* JSONDeserializerTest.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,7 @@
 		F0500ABA2A035463001F448C /* NetworkSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionProtocol.swift; sourceTree = "<group>"; };
 		F0500ABD2A035550001F448C /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
 		F0500ABF2A0355C6001F448C /* URLResponse+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLResponse+Extension.swift"; sourceTree = "<group>"; };
+		F0500AC12A03669F001F448C /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		F0560C5729F7A15D0062FB01 /* BoxOfficeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0560C5929F7A15D0062FB01 /* JSONDeserializerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDeserializerTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,6 +172,7 @@
 			children = (
 				80985DFC29FF5146008BF073 /* Bundle+Extension.swift */,
 				F0500ABF2A0355C6001F448C /* URLResponse+Extension.swift */,
+				F0500AC12A03669F001F448C /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				80A323BB2A03626300617897 /* NetworkProvider.swift in Sources */,
 				80A323B42A03529800617897 /* MovieInformationEndpoint.swift in Sources */,
 				80A323B92A03622900617897 /* NetworkProvidable.swift in Sources */,
+				F0500AC22A03669F001F448C /* Date+Extension.swift in Sources */,
 				F0500A5F2A0239D2001F448C /* MovieInformationDTO.swift in Sources */,
 				80985DFD29FF5146008BF073 /* Bundle+Extension.swift in Sources */,
 				F0500ABB2A035463001F448C /* NetworkSessionProtocol.swift in Sources */,

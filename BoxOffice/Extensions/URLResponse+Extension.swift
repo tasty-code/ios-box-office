@@ -14,8 +14,8 @@ extension URLResponse {
     }
 
     var checkResponse: Bool {
-        guard let httpResponse = self as? httpResponse, successRange.contains(httpResponse.statusCode) else {
-            return else
+        guard let httpResponse = self as? HTTPURLResponse, successRange.contains(httpResponse.statusCode) else {
+            return false
         }
 
         return true

@@ -13,7 +13,7 @@ extension Bundle {
         guard let file = self.path(forResource: "Info", ofType: "plist"),
               let resource = NSDictionary(contentsOfFile: file),
               let key = resource["MovieAPIKey"] as? String else {
-            print(NetworkError.NotFoundAPIKey.localizedDescription)
+            print(NetworkError.notFoundAPIKey.localizedDescription)
             return nil
         }
         
