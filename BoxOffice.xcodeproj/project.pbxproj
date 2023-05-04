@@ -26,6 +26,7 @@
 		80A323B42A03529800617897 /* MovieInformationEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A323B32A03529800617897 /* MovieInformationEndpoint.swift */; };
 		80A323B92A03622900617897 /* NetworkProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A323B82A03622900617897 /* NetworkProvidable.swift */; };
 		80A323BB2A03626300617897 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A323BA2A03626300617897 /* NetworkProvider.swift */; };
+		80A323BD2A0369A000617897 /* NetworkTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A323BC2A0369A000617897 /* NetworkTest.swift */; };
 		F036101C29F776D40036BBF0 /* JSONDeserializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F036101B29F776D40036BBF0 /* JSONDeserializable.swift */; };
 		F036101E29F7892C0036BBF0 /* JSONDesrializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F036101D29F7892C0036BBF0 /* JSONDesrializer.swift */; };
 		F04B579E29FA364A0079CDF8 /* box_office_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = F04B579D29FA364A0079CDF8 /* box_office_sample.json */; };
@@ -73,6 +74,7 @@
 		80A323B32A03529800617897 /* MovieInformationEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInformationEndpoint.swift; sourceTree = "<group>"; };
 		80A323B82A03622900617897 /* NetworkProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvidable.swift; sourceTree = "<group>"; };
 		80A323BA2A03626300617897 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
+		80A323BC2A0369A000617897 /* NetworkTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTest.swift; sourceTree = "<group>"; };
 		F036101B29F776D40036BBF0 /* JSONDeserializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDeserializable.swift; sourceTree = "<group>"; };
 		F036101D29F7892C0036BBF0 /* JSONDesrializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDesrializer.swift; sourceTree = "<group>"; };
 		F04B579D29FA364A0079CDF8 /* box_office_sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = box_office_sample.json; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				F04B579D29FA364A0079CDF8 /* box_office_sample.json */,
 				F0560C5929F7A15D0062FB01 /* JSONDeserializerTest.swift */,
 				80985E0129FF52DB008BF073 /* APIKeyTest.swift */,
+				80A323BC2A0369A000617897 /* NetworkTest.swift */,
 			);
 			path = BoxOfficeTests;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				80985E0229FF52DB008BF073 /* APIKeyTest.swift in Sources */,
+				80A323BD2A0369A000617897 /* NetworkTest.swift in Sources */,
 				F0560C5A29F7A15D0062FB01 /* JSONDeserializerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,6 +516,7 @@
 /* Begin XCBuildConfiguration section */
 		63DF20FD2970E1A1005DF7D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0500AB22A034C23001F448C /* APIKeys.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -572,6 +577,7 @@
 		};
 		63DF20FE2970E1A1005DF7D1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0500AB22A034C23001F448C /* APIKeys.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

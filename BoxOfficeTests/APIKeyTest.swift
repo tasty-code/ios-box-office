@@ -22,6 +22,6 @@ final class APIKeyTest: XCTestCase {
     }
 
     func test_APIKey를_호출할수있는지() {
-        XCTAssertNotNil(Bundle.main.apiKey)
+        XCTAssertEqual(Bundle.main.apiKey, "9aec3538db2b5ebc1405409110698317")
     }
 }
