@@ -7,10 +7,9 @@
 
 import Foundation
 
-typealias NetworkRouterCompletion = (Result<Data, NetworkError>) -> Void
-
 protocol NetworkRouterProtocol: AnyObject {
-    func request(_ endPoint: EndPointType, completion: @escaping NetworkRouterCompletion)
+    func request<T: Decodable>(_ endPoint: EndPointType,
+                               completion: @escaping (Result<T, NetworkError>) -> Void)
     func cancel()
 }
 
@@ -20,6 +19,7 @@ final class NetworkRouter: NetworkRouterProtocol {
     
     private var task: URLSessionDataTask?
     private let session: URLSessionProtocol
+    private let decoder = JSONDecoder()
     
     // MARK: - Initialization
     
@@ -29,20 +29,22 @@ final class NetworkRouter: NetworkRouterProtocol {
     
     // MARK: - Public Methods
     
-    func request(_ endPoint: EndPointType, completion: @escaping NetworkRouterCompletion) {
+    func request<T: Decodable>(_ endPoint: EndPointType,
+                               completion: @escaping (Result<T, NetworkError>) -> Void) {
+        
         guard let request = buildRequest(from: endPoint) else {
             completion(.failure(.invalidURL))
             return
         }
         
         task = session.dataTask(with: request, completionHandler: { data, response, error in
-            
             if let error = error {
                 completion(.failure(.transportError(error)))
                 return
             }
             
-            if let httpResponse = response as? HTTPURLResponse, !(200..<300).contains(httpResponse.statusCode) {
+            if let httpResponse = response as? HTTPURLResponse,
+               !(200..<300).contains(httpResponse.statusCode) {
                 completion(.failure(.responseError(statusCode: httpResponse.statusCode)))
                 return
             }
@@ -52,8 +54,14 @@ final class NetworkRouter: NetworkRouterProtocol {
                 return
             }
             
-            completion(.success(data))
+            do {
+                let decodedData = try self.decoder.decode(T.self, from: data)
+                completion(.success(decodedData))
+            } catch {
+                completion(.failure(.parseError))
+            }
         })
+        
         self.task?.resume()
     }
     
@@ -67,7 +75,7 @@ final class NetworkRouter: NetworkRouterProtocol {
         
         var urlComponents = URLComponents(string: endPoint.baseURL)
         urlComponents?.path += endPoint.path
-
+        
         switch endPoint.task {
         case .request:
             break
@@ -79,7 +87,7 @@ final class NetworkRouter: NetworkRouterProtocol {
         }
         
         guard let url = urlComponents?.url else { return nil }
-
+        
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = endPoint.httpMethod.rawValue
         

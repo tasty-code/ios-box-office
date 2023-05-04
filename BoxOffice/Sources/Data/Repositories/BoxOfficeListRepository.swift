@@ -12,21 +12,25 @@ final class BoxOfficeListRepository {
     typealias DailyBoxOfficeCompletion = (Result<DailyBoxOfficeResponse, NetworkError>) -> Void
     typealias MovieDetailCompletion = (Result<MovieDetailResponse, NetworkError>) -> Void
     
-    private let manager: NetworkManager
+    // MARK: - Properties
+    
+    private let router: NetworkRouterProtocol
     
     // MARK: - Initialization
     
-    init(manager: NetworkManager) {
-        self.manager = manager
+    init(router: NetworkRouterProtocol) {
+        self.router = router
     }
     
     // MARK: - Public Methods
     
-    func fetchDailyBoxOffice(endPoint: MovieEndPoint, completion: @escaping DailyBoxOfficeCompletion) {
-        manager.fetchData(endPoint, completion: completion)
+    func fetchDailyBoxOffice(endPoint: MovieEndPoint,
+                             completion: @escaping DailyBoxOfficeCompletion) {
+        router.request(endPoint, completion: completion)
     }
     
-    func fetchMovieDetail(endPoint: MovieEndPoint, completion: @escaping MovieDetailCompletion) {
-        manager.fetchData(endPoint, completion: completion)
+    func fetchMovieDetail(endPoint: MovieEndPoint,
+                          completion: @escaping MovieDetailCompletion) {
+        router.request(endPoint, completion: completion)
     }
 }

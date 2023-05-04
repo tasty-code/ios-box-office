@@ -1,6 +1,6 @@
 //
-//  NetworkManagerTests.swift
-//  NetworkManagerTests
+//  BoxOfficeListRepositoryTests.swift
+//  BoxOfficeListRepositoryTests
 //
 //  Created by Mason Kim on 2023/05/02.
 //
@@ -8,9 +8,9 @@
 import XCTest
 @testable import BoxOffice
 
-final class NetworkManagerTests: XCTestCase {
+final class BoxOfficeListRepositoryTests: XCTestCase {
     
-    var sut: NetworkManager!
+    var sut: BoxOfficeListRepository!
     
     override func tearDownWithError() throws {
         sut = nil
@@ -23,7 +23,7 @@ final class NetworkManagerTests: XCTestCase {
         let endpoint = MovieEndPoint.Mock.dailyBoxOffice
         let urlSession = MockURLSession(isFailRequest: false, successData: MockData.boxOffice)
         let router = NetworkRouter(session: urlSession)
-        sut = NetworkManager(router: router)
+        sut = BoxOfficeListRepository(router: router)
         
         // when
         sut.fetchDailyBoxOffice(endPoint: endpoint) { result in
@@ -49,7 +49,7 @@ final class NetworkManagerTests: XCTestCase {
         let endpoint = MovieEndPoint.Mock.movieDetail
         let urlSession = MockURLSession(isFailRequest: false, successData: MockData.movieDetail)
         let router = NetworkRouter(session: urlSession)
-        sut = NetworkManager(router: router)
+        sut = BoxOfficeListRepository(router: router)
         
         // when
         sut.fetchMovieDetail(endPoint: endpoint) { result in
@@ -75,7 +75,7 @@ final class NetworkManagerTests: XCTestCase {
         let endpoint = MovieEndPoint.Mock.movieDetail
         let urlSession = MockURLSession(isFailRequest: true)
         let router = NetworkRouter(session: urlSession)
-        sut = NetworkManager(router: router)
+        sut = BoxOfficeListRepository(router: router)
         
         // when
         sut.fetchMovieDetail(endPoint: endpoint) { result in
@@ -105,7 +105,7 @@ final class NetworkManagerTests: XCTestCase {
         let endpoint = MovieEndPoint.Mock.movieDetail
         let urlSession = MockURLSession(isFailRequest: false, successData: MockData.movieDetail)
         let router = NetworkRouter(session: urlSession)
-        sut = NetworkManager(router: router)
+        sut = BoxOfficeListRepository(router: router)
         
         // when
         sut.fetchDailyBoxOffice(endPoint: endpoint) { result in
