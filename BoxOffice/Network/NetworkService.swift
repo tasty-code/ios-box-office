@@ -10,7 +10,7 @@ import Foundation
 struct NetworkService {
     
     static func fetchBoxOfficeData(date: String, completion: @escaping (Result<DailyBoxOfficeDTO, Error>) -> Void) {
-        URLSession.shared.dataTask(with: API.boxofficeMovie(date: date).urlRequest) { data, response, error in
+        URLSession.shared.dataTask(with: API.dailyBoxOffice(date: date).urlRequest) { data, response, error in
             if let error = error {
                 completion(.failure(error))
                 return
@@ -37,7 +37,7 @@ struct NetworkService {
     }
     
     static func fetchMovieData(code: String, completion: @escaping (Result<MovieDetailDTO, Error>) -> Void) {
-        URLSession.shared.dataTask(with: API.movie(code: code).urlRequest) { data, response, error in
+        URLSession.shared.dataTask(with: API.movieDetail(code: code).urlRequest) { data, response, error in
             if let error = error {
                 completion(.failure(error))
                 return

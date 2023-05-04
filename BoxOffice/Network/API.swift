@@ -9,8 +9,8 @@ import Foundation
 
 enum API {
     
-    case movie(code: String)
-    case boxofficeMovie(date: String)
+    case movieDetail(code: String)
+    case dailyBoxOffice(date: String)
     
 }
 
@@ -18,7 +18,7 @@ extension API {
     
     private var baseURL: URL? {
         switch self {
-        case .movie, .boxofficeMovie:
+        case .movieDetail, .dailyBoxOffice:
             let url = URL(string: "https://kobis.or.kr/")
             return url
         }
@@ -30,18 +30,18 @@ extension API {
     
     private var path: String {
         switch self {
-        case .movie:
+        case .movieDetail:
             return "kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
-        case .boxofficeMovie:
+        case .dailyBoxOffice:
             return "kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
         }
     }
     
     private var queryParameters: [String: String] {
         switch self {
-        case .movie(let code):
+        case .movieDetail(let code):
             return ["key": "f5eef3421c602c6cb7ea224104795888", "movieCd": code]
-        case .boxofficeMovie(let date):
+        case .dailyBoxOffice(let date):
             return ["key": "f5eef3421c602c6cb7ea224104795888", "targetDt": date]
         }
     }
