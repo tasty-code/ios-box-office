@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - DailyBoxOfficeList
 struct DailyBoxOfficeList: Decodable {
     let rankNum: String
     let rank: String
