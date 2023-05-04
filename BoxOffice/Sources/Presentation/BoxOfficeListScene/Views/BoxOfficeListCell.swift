@@ -103,11 +103,15 @@ final class BoxOfficeListCell: UICollectionViewListCell {
     
     // MARK: - Public Methods
     
-    func configure(with dailyBoxOffice: DailyBoxOffice) {
-        movieRankLabel.text = dailyBoxOffice.rank
-        movieRankStatusLabel.attributedText = movieRankStatusLabelText(with: dailyBoxOffice)
-        movieTitleLabel.text = dailyBoxOffice.movieName
-        audienceCountLabel.text = audienceCountLabelText(with: dailyBoxOffice)
+//    func configure(with dailyBoxOffice: DailyBoxOffice) {
+//        movieRankLabel.text = dailyBoxOffice.rank
+//        movieRankStatusLabel.attributedText = movieRankStatusLabelText(with: dailyBoxOffice)
+//        movieTitleLabel.text = dailyBoxOffice.movieName
+//        audienceCountLabel.text = audienceCountLabelText(with: dailyBoxOffice)
+//    }
+    
+    func configure(with movieTitle: String) {
+        movieTitleLabel.text = movieTitle
     }
     
     // MARK: - Private Methods

@@ -8,11 +8,11 @@
 import Foundation
 
 struct BoxOfficeEntity {
-    let rank: String
-    let isNew: String
-    let rankIntensity: String
+    let rank: UInt
+    let isNew: Bool
+    let rankIntensity: String // 바꾸기
     let movieCode: String
     let movieName: String
-    let dailyAudienceCount: String
-    let cumulativeAudience: String
+    let dailyAudienceCount: UInt
+    let cumulativeAudience: UInt
 }

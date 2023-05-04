@@ -17,12 +17,6 @@ final class BoxOfficeListController: UIViewController {
     
     private let viewModel: BoxOfficeListViewModel
     
-    private let dailyBoxOfficeList: [DailyBoxOffice]! = {
-        let data = MockData.boxOffice
-        let decodedData = try? JSONDecoder().decode(DailyBoxOfficeResponse.self, from: data!)
-        return decodedData?.boxOfficeResult.dailyBoxOfficeList
-    }()
-    
     // MARK: - UI Components
     
     private lazy var boxOfficeListCollectionView: UICollectionView = {
@@ -46,6 +40,7 @@ final class BoxOfficeListController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindViewModels()
         setup()
     }
     
@@ -53,6 +48,16 @@ final class BoxOfficeListController: UIViewController {
     
     // MARK: - Private Methods
     
+    private func bindViewModels() {
+        viewModel.binding()
+        
+        viewModel.$movieTitles.bind(isFireAtBind: false) { [weak self] title in
+            print(title)
+            DispatchQueue.main.async {
+                self?.boxOfficeListCollectionView.reloadData()
+            }
+        }
+    }
 }
 
 // MARK: - UI & Layout
@@ -108,15 +113,13 @@ extension BoxOfficeListController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return dailyBoxOfficeList.count
+        return viewModel.movieTitles.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(cellClass: BoxOfficeListCell.self, for: indexPath)
-        
-        let boxOffice = dailyBoxOfficeList[indexPath.row]
-        cell.configure(with: boxOffice)
+        cell.configure(with: viewModel.movieTitles[indexPath.row])
         
         return cell
     }
