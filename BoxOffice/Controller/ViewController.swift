@@ -9,6 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var networkManager = Networking()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,20 +19,20 @@ class ViewController: UIViewController {
             let url = try api.configureURL()
             let urlRequest = URLRequest(url: url)
 
-            Networking().loadData(api.convertType, request: urlRequest) { data, error in
+            self.networkManager.loadData(api.convertType, request: urlRequest) { data, error in
                 guard error == nil else {
                     print(error as Any)
                     return
                 }
 
                 guard let data = data else {
-                    print("빈 데이터입니다")
+                    print("No Data")
                     return
                 }
                 print(data)
             }
         } catch {
-            print(error)
+            print(error.localizedDescription)
         }
     }
 }

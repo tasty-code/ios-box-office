@@ -23,7 +23,7 @@ class Networking {
             }
 
             guard let safeData = data else {
-                completion(nil, NetworkError.missingData)
+                completion(nil, NetworkError.missingData(response: response))
                 return
             }
 
