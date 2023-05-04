@@ -10,8 +10,8 @@ import Foundation
 final class BoxOfficeListViewModel {
     
     struct Input {
-        let viewDidLoad: Bool
-        let isRefreshed: Bool
+        @Observable var viewDidLoad: Bool = false
+        @Observable var isRefreshed: Bool = false
     }
     
     struct Output {
@@ -30,12 +30,16 @@ final class BoxOfficeListViewModel {
     // MARK: - Properties
     
     private let usecase: FetchBoxOfficeUsecase
-    @Observable private(set) var outputs: [Output] = []
+    
+    var input = Input()
+    @Observable private(set) var outputs = [Output]()
     
     // MARK: - Initialization
     
     init(usecase: FetchBoxOfficeUsecase) {
         self.usecase = usecase
+        
+        bindInput()
     }
     
     // MARK: - Public Methods
@@ -60,6 +64,18 @@ final class BoxOfficeListViewModel {
     }
     
     // MARK: - Private Methods
+    
+    private func bindInput() {
+        input.$isRefreshed.bind { isRefreshed in
+            guard isRefreshed else { return }
+            self.fetchBoxOffice()
+        }
+        
+        input.$viewDidLoad.bind { viewDidLoad in
+            guard viewDidLoad else { return }
+            self.fetchBoxOffice()
+        }
+    }
     
     private func audienceCountLabelText(with boxOffice: BoxOfficeEntity) -> String {
         

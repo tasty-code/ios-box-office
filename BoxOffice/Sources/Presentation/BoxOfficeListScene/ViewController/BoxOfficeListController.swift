@@ -21,16 +21,17 @@ final class BoxOfficeListController: UIViewController {
     
     private lazy var boxOfficeListCollectionView: UICollectionView = {
         let collectionview = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
-//        collectionview.refreshControl = refresher
+        collectionview.refreshControl = refreshControl
         collectionview.translatesAutoresizingMaskIntoConstraints = false
         return collectionview
     }()
     
-//    private let refresher: UIRefreshControl = {
-//        let rf = UIRefreshControl()
-//        rf.tintColor = .gray
-//        return rf
-//    }()
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .gray
+        refreshControl.addTarget(self, action: #selector(didRefresh), for: .valueChanged)
+        return refreshControl
+    }()
     
     // MARK: - Initialization
     
@@ -47,7 +48,7 @@ final class BoxOfficeListController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bindViewModels()
+        bindViewModel()
         setup()
     }
     
@@ -55,14 +56,25 @@ final class BoxOfficeListController: UIViewController {
     
     // MARK: - Private Methods
     
-    private func bindViewModels() {
-        viewModel.fetchBoxOffice()
+    private func bindViewModel() {
+        viewModel.input.viewDidLoad = true
         
-        viewModel.$outputs.bind { [weak self] outputs in // TODO: - output을 사용 안함. -> Diffable로 변경
+        viewModel.$outputs.bind { [weak self] _ in
+            guard let self = self else { return }
+            
             DispatchQueue.main.async {
-                self?.boxOfficeListCollectionView.reloadData()
+                if self.refreshControl.isRefreshing {
+                    self.refreshControl.endRefreshing()
+                    self.viewModel.input.isRefreshed = false
+                }
+                
+                self.boxOfficeListCollectionView.reloadData()
             }
         }
+    }
+    
+    @objc private func didRefresh() {
+        viewModel.input.isRefreshed = true
     }
 }
 
