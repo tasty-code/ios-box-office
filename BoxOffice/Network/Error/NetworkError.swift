@@ -11,4 +11,5 @@ enum NetworkError: Error {
     
     case notFoundAPIKey
     case outOfResponseCode
+    case failToMakeRequest
 }
