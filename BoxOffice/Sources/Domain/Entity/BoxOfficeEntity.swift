@@ -10,8 +10,8 @@ import Foundation
 struct BoxOfficeEntity {
     let rank: UInt
     let isNew: Bool
-    let rankIntensity: String // 바꾸기
-    let movieCode: String
+    let rankIntensity: Int
+    let movieCode: Int
     let movieName: String
     let dailyAudienceCount: UInt
     let cumulativeAudience: UInt

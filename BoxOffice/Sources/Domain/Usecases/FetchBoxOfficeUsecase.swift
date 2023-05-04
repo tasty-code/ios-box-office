@@ -7,23 +7,21 @@
 
 import Foundation
 
-final class BoxOfficeListUsecase {
+final class FetchBoxOfficeUsecase {
     
     // MARK: - Properties
     
-    private let repository: BoxOfficeListRepository
-    
-    private var fetchBoxOfficeCompletion: ((Result<DailyBoxOfficeListEntity, Error>) -> Void)?
+    private let repository: BoxOfficeRepository
 
     // MARK: - Initialization
     
-    init(repository: BoxOfficeListRepository) {
+    init(repository: BoxOfficeRepository) {
         self.repository = repository
     }
     
     // MARK: - Public Methods
     
-    func fetch(completion: @escaping(Result<DailyBoxOfficeListEntity, Error>) -> Void) {
+    func fetchBoxOffice(completion: @escaping(Result<[BoxOfficeEntity], Error>) -> Void) {
 
         repository.fetchDailyBoxOffice(endPoint: .dailyBoxOffice(date: "20230503")) { result in
             switch result {
@@ -43,6 +41,6 @@ final class BoxOfficeListUsecase {
     }
 }
 
-extension BoxOfficeListUsecase {
+extension FetchBoxOfficeUsecase {
     
 }

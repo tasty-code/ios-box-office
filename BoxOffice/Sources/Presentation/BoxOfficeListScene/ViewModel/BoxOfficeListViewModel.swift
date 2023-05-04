@@ -11,7 +11,7 @@ final class BoxOfficeListViewModel {
     
     // MARK: - Properties
     
-    private let usecase: BoxOfficeListUsecase
+    private let usecase: FetchBoxOfficeUsecase
     
 //    @Observable var rank = UInt()
 //    @Observable var isNew = Bool()
@@ -24,23 +24,17 @@ final class BoxOfficeListViewModel {
         
     // MARK: - Initialization
     
-    init(usecase: BoxOfficeListUsecase) {
+    init(usecase: FetchBoxOfficeUsecase) {
         self.usecase = usecase
     }
     
     // MARK: - Public Methods
     
-    func binding() {
-        load()
-    }
-    
-    // MARK: - Private Methods
-    
-    private func load() {
-        usecase.fetch() { [weak self] result in
+    func fetchBoxOffice() {
+        usecase.fetchBoxOffice { [weak self] result in
             switch result {
-            case .success(let boxOfficeEntity):
-                let movieNames = boxOfficeEntity.boxOfficeLists.map { $0.movieName }
+            case .success(let boxOfficeEntities):
+                let movieNames = boxOfficeEntities.map { $0.movieName }
                 self?.movieTitles = movieNames
             case .failure(let error):
                 print(error)

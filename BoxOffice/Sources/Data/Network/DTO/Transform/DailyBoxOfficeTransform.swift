@@ -8,22 +8,22 @@
 import Foundation
 
 extension BoxOfficeResult {
-    func toDomain() -> DailyBoxOfficeListEntity {
-        return .init(boxOfficeLists: dailyBoxOfficeList.map { $0.toDomain() })
+    func toDomain() -> [BoxOfficeEntity] {
+        return dailyBoxOfficeList.map { $0.toDomain() }
     }
 }
 
 extension DailyBoxOffice {
     func toDomain() -> BoxOfficeEntity {
-        let isNew: Bool = rankStatus.rawValue == "NEW" ? true : false
+        let isNew: Bool = rankStatus == .new ? true : false
         
-        return .init(rank: UInt(rank)!,
+        return .init(rank: UInt(rank) ?? 0,
                      isNew: isNew,
-                     rankIntensity: rankIntensity,
-                     movieCode: movieCode,
+                     rankIntensity: Int(rankIntensity) ?? 0,
+                     movieCode: Int(movieCode) ?? 0,
                      movieName: movieName,
-                     dailyAudienceCount: UInt(dailyAudienceCount)!,
-                     cumulativeAudience: UInt(cumulativeAudience)!
+                     dailyAudienceCount: UInt(dailyAudienceCount) ?? 0,
+                     cumulativeAudience: UInt(cumulativeAudience) ?? 0
         )
     }
 }

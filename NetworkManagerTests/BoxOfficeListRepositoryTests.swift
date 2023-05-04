@@ -10,7 +10,7 @@ import XCTest
 
 final class BoxOfficeListRepositoryTests: XCTestCase {
     
-    var sut: BoxOfficeListRepository!
+    var sut: BoxOfficeRepository!
     
     override func tearDownWithError() throws {
         sut = nil
@@ -23,7 +23,7 @@ final class BoxOfficeListRepositoryTests: XCTestCase {
         let endpoint = MovieEndPoint.Mock.dailyBoxOffice
         let urlSession = MockURLSession(isFailRequest: false, successData: MockData.boxOffice)
         let router = NetworkRouter(session: urlSession)
-        sut = BoxOfficeListRepository(router: router)
+        sut = BoxOfficeRepository(router: router)
         
         // when
         sut.fetchDailyBoxOffice(endPoint: endpoint) { result in
@@ -49,7 +49,7 @@ final class BoxOfficeListRepositoryTests: XCTestCase {
         let endpoint = MovieEndPoint.Mock.movieDetail
         let urlSession = MockURLSession(isFailRequest: false, successData: MockData.movieDetail)
         let router = NetworkRouter(session: urlSession)
-        sut = BoxOfficeListRepository(router: router)
+        sut = BoxOfficeRepository(router: router)
         
         // when
         sut.fetchMovieDetail(endPoint: endpoint) { result in
@@ -75,7 +75,7 @@ final class BoxOfficeListRepositoryTests: XCTestCase {
         let endpoint = MovieEndPoint.Mock.movieDetail
         let urlSession = MockURLSession(isFailRequest: true)
         let router = NetworkRouter(session: urlSession)
-        sut = BoxOfficeListRepository(router: router)
+        sut = BoxOfficeRepository(router: router)
         
         // when
         sut.fetchMovieDetail(endPoint: endpoint) { result in
@@ -105,7 +105,7 @@ final class BoxOfficeListRepositoryTests: XCTestCase {
         let endpoint = MovieEndPoint.Mock.movieDetail
         let urlSession = MockURLSession(isFailRequest: false, successData: MockData.movieDetail)
         let router = NetworkRouter(session: urlSession)
-        sut = BoxOfficeListRepository(router: router)
+        sut = BoxOfficeRepository(router: router)
         
         // when
         sut.fetchDailyBoxOffice(endPoint: endpoint) { result in

@@ -15,8 +15,8 @@ final class DIContainer {
     
     func makeBoxOfficeListController() -> BoxOfficeListController {
         let router = NetworkRouter()
-        let repository = BoxOfficeListRepository(router: router)
-        let usecase = BoxOfficeListUsecase(repository: repository)
+        let repository = BoxOfficeRepository(router: router)
+        let usecase = FetchBoxOfficeUsecase(repository: repository)
         let viewModel = BoxOfficeListViewModel(usecase: usecase)
         let viewController = BoxOfficeListController(viewModel: viewModel)
         return viewController

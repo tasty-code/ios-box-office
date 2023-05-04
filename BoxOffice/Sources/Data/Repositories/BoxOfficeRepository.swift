@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class BoxOfficeListRepository {
+final class BoxOfficeRepository {
     
     typealias DailyBoxOfficeCompletion = (Result<DailyBoxOfficeResponse, NetworkError>) -> Void
     typealias MovieDetailCompletion = (Result<MovieDetailResponse, NetworkError>) -> Void

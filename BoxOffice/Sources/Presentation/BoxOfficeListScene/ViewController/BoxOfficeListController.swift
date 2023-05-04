@@ -49,7 +49,7 @@ final class BoxOfficeListController: UIViewController {
     // MARK: - Private Methods
     
     private func bindViewModels() {
-        viewModel.binding()
+        viewModel.fetchBoxOffice()
         
         viewModel.$movieTitles.bind(isFireAtBind: false) { [weak self] title in
             print(title)
