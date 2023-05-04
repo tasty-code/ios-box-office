@@ -13,6 +13,7 @@ struct BoxOfficeResultDTO: Decodable {
     let dailyBoxOffices: [DailyBoxOfficesDTO]
 
     enum CodingKeys: String, CodingKey {
+        
         case type = "boxofficeType"
         case inqueryRange = "showRange"
         case dailyBoxOffices = "dailyBoxOfficeList"
