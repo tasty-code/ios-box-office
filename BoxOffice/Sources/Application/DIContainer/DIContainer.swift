@@ -9,7 +9,11 @@ import Foundation
 
 final class DIContainer {
     
-    static func makeBoxOfficeListController() -> BoxOfficeListController {
+    static let shared = DIContainer()
+    
+    private init() { }
+    
+    func makeBoxOfficeListController() -> BoxOfficeListController {
         let router = NetworkRouter()
         let manager = NetworkManager(router: router)
         let repository = BoxOfficeListRepository(manager: manager)
