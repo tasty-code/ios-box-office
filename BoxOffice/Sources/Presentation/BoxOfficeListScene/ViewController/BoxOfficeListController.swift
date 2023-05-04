@@ -51,8 +51,7 @@ final class BoxOfficeListController: UIViewController {
     private func bindViewModels() {
         viewModel.fetchBoxOffice()
         
-        viewModel.$movieTitles.bind(isFireAtBind: false) { [weak self] title in
-            print(title)
+        viewModel.$outputs.bind { [weak self] outputs in // TODO: - output을 사용 안함. -> Diffable로 변경
             DispatchQueue.main.async {
                 self?.boxOfficeListCollectionView.reloadData()
             }
@@ -113,26 +112,26 @@ extension BoxOfficeListController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return viewModel.movieTitles.count
+        return viewModel.outputs.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(cellClass: BoxOfficeListCell.self, for: indexPath)
-        cell.configure(with: viewModel.movieTitles[indexPath.row])
+        cell.configure(with: viewModel.outputs[indexPath.row])
         
         return cell
     }
 }
 
 // MARK: - Preview
-//#if DEBUG
-//import SwiftUI
-//
-//struct BoxOfficeListControllerPreView: PreviewProvider {
-//    static var previews: some View {
-//        UINavigationController(rootViewController: BoxOfficeListController())
-//        .toPreview()
-//    }
-//}
-//#endif
+#if DEBUG
+import SwiftUI
+
+struct BoxOfficeListControllerPreView: PreviewProvider {
+    static var previews: some View {
+        UINavigationController(rootViewController: DIContainer.shared.makeBoxOfficeListController())
+            .toPreview()
+    }
+}
+#endif

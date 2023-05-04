@@ -110,6 +110,13 @@ final class BoxOfficeListCell: UICollectionViewListCell {
 //        audienceCountLabel.text = audienceCountLabelText(with: dailyBoxOffice)
 //    }
     
+    func configure(with output: BoxOfficeListViewModel.Output) {
+        movieRankLabel.text = output.movieRankLabelText
+        movieRankStatusLabel.text = output.movieRankStatusLabelText // TODO: - Attributed 적용
+        movieTitleLabel.text = output.movieTitleLabelText
+        audienceCountLabel.text = output.audienceCountLabelText
+    }
+    
     func configure(with movieTitle: String) {
         movieTitleLabel.text = movieTitle
     }
