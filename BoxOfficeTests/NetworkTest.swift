@@ -47,7 +47,7 @@ final class NetworkTest: XCTestCase {
         do {
             let request = try endpoint.makeRequest()
             XCTAssertNotNil(request)
-            guard let url = URL(string: "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=9aec3538db2b5ebc1405409110698317&targetDt=20230503") else {
+            guard let url = URL(string: "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(Bundle.main.apiKey)&targetDt=20230503") else {
                 return
             }
             XCTAssertEqual(request, URLRequest(url: url))
