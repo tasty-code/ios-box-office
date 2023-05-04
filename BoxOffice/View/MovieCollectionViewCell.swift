@@ -7,39 +7,39 @@
 
 import UIKit
 
-class MovieCollectionViewCell: UICollectionViewCell {
+class MovieCollectionViewCell: UICollectionViewListCell {
 
     static let identifier = "MovieCell"
 
-    var rankLabel: UILabel = {
+    lazy var rankLabel: UILabel = {
         let label = UILabel()
         label.text = "1"
         return label
     }()
-    var oldAndNewLabel: UILabel = {
+    lazy var oldAndNewLabel: UILabel = {
         let label = UILabel()
         label.text = "진입"
         return label
     }()
-    var nameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "왕의 남자"
         return label
     }()
-    var audienceLabel: UILabel = {
+    lazy var audienceLabel: UILabel = {
         let label = UILabel()
         label.text = "총 백만명"
         return label
     }()
 
-    var lankStackView: UIStackView = {
-        let stackView = UIStackView()
+    lazy var lankStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [rankLabel, oldAndNewLabel])
         stackView.axis = .vertical
         return stackView
     }()
 
-    var nameStackView: UIStackView = {
-        let stackView = UIStackView()
+    lazy var nameStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [nameLabel, audienceLabel])
         stackView.axis = .vertical
         return stackView
     }()
@@ -54,30 +54,22 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
 
     func setLayout() {
+        accessories = [.disclosureIndicator()]
         contentView.addSubview(lankStackView)
         contentView.addSubview(nameStackView)
 
-        lankStackView.addSubview(rankLabel)
-        lankStackView.addSubview(oldAndNewLabel)
-        nameStackView.addSubview(nameLabel)
-        nameStackView.addSubview(audienceLabel)
-
-        rankLabel.translatesAutoresizingMaskIntoConstraints = false
-        oldAndNewLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        audienceLabel.translatesAutoresizingMaskIntoConstraints = false
         lankStackView.translatesAutoresizingMaskIntoConstraints = false
-
+        nameStackView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            lankStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            lankStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            lankStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            lankStackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2),
+            lankStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            lankStackView.topAnchor.constraint(equalTo: self.topAnchor),
+            lankStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            lankStackView.widthAnchor.constraint(equalToConstant: self.frame.width / 2),
 
-            nameStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            nameStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            nameStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            nameStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            nameStackView.topAnchor.constraint(equalTo: self.topAnchor),
+            nameStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             nameStackView.leadingAnchor.constraint(equalTo: lankStackView.trailingAnchor)
         ])
     }
