@@ -20,7 +20,7 @@
 		E708A98A2A00EBE700E6CDAD /* HTTPMethodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E708A9892A00EBE700E6CDAD /* HTTPMethodType.swift */; };
 		E708A98C2A00F4E800E6CDAD /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E708A98B2A00F4E800E6CDAD /* NetworkError.swift */; };
 		E708A9B92A01F8F800E6CDAD /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E708A9B82A01F8F800E6CDAD /* API.swift */; };
-		E708A9BD2A0244D500E6CDAD /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E708A9BC2A0244D500E6CDAD /* NetworkService.swift */; };
+		E708A9BD2A0244D500E6CDAD /* NetworkServable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E708A9BC2A0244D500E6CDAD /* NetworkServable.swift */; };
 		E715375029F8B92200112BE6 /* BoxOfficeResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E715374F29F8B92200112BE6 /* BoxOfficeResultDTO.swift */; };
 		E715375229F8B93100112BE6 /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E715375129F8B93100112BE6 /* MovieDTO.swift */; };
 		E7C1159929F61B5900497283 /* DailyBoxOfficeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C1159829F61B5900497283 /* DailyBoxOfficeDTO.swift */; };
@@ -52,7 +52,7 @@
 		E708A9892A00EBE700E6CDAD /* HTTPMethodType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethodType.swift; sourceTree = "<group>"; };
 		E708A98B2A00F4E800E6CDAD /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		E708A9B82A01F8F800E6CDAD /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		E708A9BC2A0244D500E6CDAD /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		E708A9BC2A0244D500E6CDAD /* NetworkServable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServable.swift; sourceTree = "<group>"; };
 		E715374F29F8B92200112BE6 /* BoxOfficeResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeResultDTO.swift; sourceTree = "<group>"; };
 		E715375129F8B93100112BE6 /* MovieDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDTO.swift; sourceTree = "<group>"; };
 		E7C1159829F61B5900497283 /* DailyBoxOfficeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeDTO.swift; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 				E708A9B82A01F8F800E6CDAD /* API.swift */,
 				E708A98B2A00F4E800E6CDAD /* NetworkError.swift */,
 				E708A9892A00EBE700E6CDAD /* HTTPMethodType.swift */,
-				E708A9BC2A0244D500E6CDAD /* NetworkService.swift */,
+				E708A9BC2A0244D500E6CDAD /* NetworkServable.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -294,7 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E708A9BD2A0244D500E6CDAD /* NetworkService.swift in Sources */,
+				E708A9BD2A0244D500E6CDAD /* NetworkServable.swift in Sources */,
 				E708A9B92A01F8F800E6CDAD /* API.swift in Sources */,
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
 				3BBD8C3A2A024C1400B4DFDC /* MovieDetailDTO.swift in Sources */,

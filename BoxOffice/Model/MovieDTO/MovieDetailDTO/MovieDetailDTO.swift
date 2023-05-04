@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieDetailDTO: Decodable {
+struct MovieDetailDTO: APIRepresentable {
     
     let code, name, englishName, originalName, productionYear, showTime, openDate, productionStatusName, typeName, nations, nationName, genreName, directors, peopleName, peopleEnglishName, actors, cast, castEnglishName, showTypes, showTypeGroupName, showTypeName, audits, auditNumber, watchGradeName, companies, companyCode, companyName, companyEnglishName, companyPartName, staffs, staffRoleName: String
     

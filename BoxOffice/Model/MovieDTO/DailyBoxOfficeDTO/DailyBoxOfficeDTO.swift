@@ -5,7 +5,7 @@
 //  Created by 신동오 on 2023/04/24.
 //
 
-struct DailyBoxOfficeDTO: Decodable {
+struct DailyBoxOfficeDTO: APIRepresentable {
     
     let boxOfficeResult: BoxOfficeResultDTO
     

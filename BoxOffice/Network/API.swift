@@ -66,3 +66,14 @@ extension API {
     }
     
 }
+
+extension API: NetworkServable {
+    
+    var dtoType: APIRepresentable.Type {
+        switch self {
+        case .movieDetail(_): return MovieDetailDTO.self
+        case .dailyBoxOffice(_): return DailyBoxOfficeDTO.self
+        }
+    }
+    
+}
