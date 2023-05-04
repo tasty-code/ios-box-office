@@ -61,7 +61,3 @@ extension NetworkServable {
     }
     
 }
-
-protocol APIRepresentable: Decodable {
-    
-}
