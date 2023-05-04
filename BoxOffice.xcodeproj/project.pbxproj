@@ -123,6 +123,24 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		E708A9BE2A03513300E6CDAD /* BoxOfficeDTO */ = {
+			isa = PBXGroup;
+			children = (
+				E7C1159829F61B5900497283 /* DailyBoxOfficeDTO.swift */,
+				E715374F29F8B92200112BE6 /* BoxOfficeResultDTO.swift */,
+				E715375129F8B93100112BE6 /* MovieDTO.swift */,
+			);
+			path = BoxOfficeDTO;
+			sourceTree = "<group>";
+		};
+		E708A9BF2A03515C00E6CDAD /* MovieDetailDTO */ = {
+			isa = PBXGroup;
+			children = (
+				3BBD8C392A024C1400B4DFDC /* MovieDetailDTO.swift */,
+			);
+			path = MovieDetailDTO;
+			sourceTree = "<group>";
+		};
 		E7C115BF29F7606F00497283 /* BoxOfficeTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,10 +186,8 @@
 		E7C115CF29F7915600497283 /* MovieDTO */ = {
 			isa = PBXGroup;
 			children = (
-				E7C1159829F61B5900497283 /* DailyBoxOfficeDTO.swift */,
-				E715374F29F8B92200112BE6 /* BoxOfficeResultDTO.swift */,
-				E715375129F8B93100112BE6 /* MovieDTO.swift */,
-				3BBD8C392A024C1400B4DFDC /* MovieDetailDTO.swift */,
+				E708A9BE2A03513300E6CDAD /* BoxOfficeDTO */,
+				E708A9BF2A03515C00E6CDAD /* MovieDetailDTO */,
 			);
 			path = MovieDTO;
 			sourceTree = "<group>";

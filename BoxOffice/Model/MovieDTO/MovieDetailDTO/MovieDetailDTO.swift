@@ -12,7 +12,6 @@ struct MovieDetailDTO: Decodable {
     let code, name, englishName, originalName, productionYear, showTime, openDate, productionStatusName, typeName, nations, nationName, genreName, directors, peopleName, peopleEnglishName, actors, cast, castEnglishName, showTypes, showTypeGroupName, showTypeName, audits, auditNumber, watchGradeName, companies, companyCode, companyName, companyEnglishName, companyPartName, staffs, staffRoleName: String
     
     enum CodingKeys: String, CodingKey {
-        
         case code = "movieCd"
         case name = "movieNm"
         case englishName = "movieNmEn"
@@ -38,7 +37,6 @@ struct MovieDetailDTO: Decodable {
         case companyPartName = "companyPartNm"
         case staffRoleName = "staffRoleNm"
         case nations, directors, actors, cast, showTypes, audits, staffs
-        
     }
     
 }
