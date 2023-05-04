@@ -9,5 +9,6 @@ import Foundation
 
 enum NetworkError: Error {
     
-    case NotFoundAPIKey
+    case notFoundAPIKey
+    case outOfResponseCode
 }
