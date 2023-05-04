@@ -16,10 +16,10 @@ final class BoxOfficeListViewModel {
     
     struct Output {
         let isNew: Bool
-        let movieRankLabelText: String // = dailyBoxOffice.rank
-        let movieRankStatusLabelText: String // = movieRankStatusLabelText(with: dailyBoxOffice)
-        let movieTitleLabelText: String // = dailyBoxOffice.movieName
-        let audienceCountLabelText: String // = audienceCountLabelText(with: dailyBoxOffice)
+        let movieRankLabelText: String
+        let movieRankIntensity: Int
+        let movieTitleLabelText: String
+        let audienceCountLabelText: String
     }
     
     enum Constants {
@@ -50,7 +50,7 @@ final class BoxOfficeListViewModel {
                 let outputs = boxOfficeEntities.map {
                     Output(isNew: $0.isNew,
                            movieRankLabelText: "\($0.rank)",
-                           movieRankStatusLabelText: "",
+                           movieRankIntensity: $0.rankIntensity,
                            movieTitleLabelText: $0.movieName,
                            audienceCountLabelText: self?.audienceCountLabelText(with: $0) ?? "")
                 }

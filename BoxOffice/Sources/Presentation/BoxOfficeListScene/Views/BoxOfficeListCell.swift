@@ -103,16 +103,9 @@ final class BoxOfficeListCell: UICollectionViewListCell {
     
     // MARK: - Public Methods
     
-//    func configure(with dailyBoxOffice: DailyBoxOffice) {
-//        movieRankLabel.text = dailyBoxOffice.rank
-//        movieRankStatusLabel.attributedText = movieRankStatusLabelText(with: dailyBoxOffice)
-//        movieTitleLabel.text = dailyBoxOffice.movieName
-//        audienceCountLabel.text = audienceCountLabelText(with: dailyBoxOffice)
-//    }
-    
     func configure(with output: BoxOfficeListViewModel.Output) {
         movieRankLabel.text = output.movieRankLabelText
-        movieRankStatusLabel.text = output.movieRankStatusLabelText // TODO: - Attributed 적용
+        movieRankStatusLabel.attributedText = movieRankStatusLabelText(with: output)
         movieTitleLabel.text = output.movieTitleLabelText
         audienceCountLabel.text = output.audienceCountLabelText
     }
@@ -123,29 +116,29 @@ final class BoxOfficeListCell: UICollectionViewListCell {
     
     // MARK: - Private Methods
     
-    private func movieRankStatusLabelText(with dailyBoxOffice: DailyBoxOffice) -> NSAttributedString {
-        switch dailyBoxOffice.rankStatus {
-        case .new:
+    private func movieRankStatusLabelText(with output: BoxOfficeListViewModel.Output) -> NSAttributedString {
+        if output.isNew {
             return NSAttributedString(string: Constants.movieRankLabelNewText,
                                       attributes: [.foregroundColor: UIColor.systemRed])
-        case .old:
-            let rankIntensity = Int(dailyBoxOffice.rankIntensity) ?? 0
-            
-            if rankIntensity == 0 {
-                return NSAttributedString(string: Constants.rankStatusStablePrefix)
-            }
-            
-            let prefix = rankIntensity > 0 ? Constants.rankStatusUpPrefix : Constants.rankStatusDownPrefix
-            let prefixColor: UIColor = rankIntensity > 0 ? .systemRed : .systemBlue
-
-            let mutableAttributedString = NSMutableAttributedString()
-            mutableAttributedString.append(NSAttributedString(string: prefix,
-                                                              attributes: [.foregroundColor: prefixColor]))
-            
-            let absoluteRankIntensity = String(abs(rankIntensity))
-            mutableAttributedString.append(NSAttributedString(string: absoluteRankIntensity))
-            return mutableAttributedString
         }
+        
+        let rankIntensity = output.movieRankIntensity
+        
+        if rankIntensity == 0 {
+            return NSAttributedString(string: Constants.rankStatusStablePrefix)
+        }
+        
+        let prefix = rankIntensity > 0 ? Constants.rankStatusUpPrefix : Constants.rankStatusDownPrefix
+        let prefixColor: UIColor = rankIntensity > 0 ? .systemRed : .systemBlue
+        
+        let mutableAttributedString = NSMutableAttributedString()
+        mutableAttributedString.append(NSAttributedString(string: prefix,
+                                                          attributes: [.foregroundColor: prefixColor]))
+        
+        let absoluteRankIntensity = String(abs(rankIntensity))
+        mutableAttributedString.append(NSAttributedString(string: absoluteRankIntensity))
+        return mutableAttributedString
+        
     }
     
     private func audienceCountLabelText(with dailyBoxOffice: DailyBoxOffice) -> String {

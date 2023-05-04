@@ -21,9 +21,16 @@ final class BoxOfficeListController: UIViewController {
     
     private lazy var boxOfficeListCollectionView: UICollectionView = {
         let collectionview = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
+//        collectionview.refreshControl = refresher
         collectionview.translatesAutoresizingMaskIntoConstraints = false
         return collectionview
     }()
+    
+//    private let refresher: UIRefreshControl = {
+//        let rf = UIRefreshControl()
+//        rf.tintColor = .gray
+//        return rf
+//    }()
     
     // MARK: - Initialization
     
