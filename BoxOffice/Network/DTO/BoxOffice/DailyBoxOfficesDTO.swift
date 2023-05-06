@@ -1,5 +1,5 @@
 //
-//  DailyBoxOfficeListDTO.swift
+//  DailyBoxOfficesDTO.swift
 //  BoxOffice
 //
 //  Created by Sunny on 2023/04/25.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DailyBoxOfficeListDTO: Decodable {
+struct DailyBoxOfficesDTO: Decodable {
     
     let rnum, rank, rankInten: String
     let rankOldAndNew: RankOldAndNewDTO
@@ -22,4 +22,10 @@ struct DailyBoxOfficeListDTO: Decodable {
         case movieCD = "movieCd"
         case movieNm, openDt, salesAmt, salesShare, salesInten, salesChange, salesAcc, audiCnt, audiInten, audiChange, audiAcc, scrnCnt, showCnt
     }
+}
+
+enum RankOldAndNewDTO: String, Decodable {
+
+    case new = "NEW"
+    case old = "OLD"
 }
