@@ -7,11 +7,12 @@
 
 import Foundation
 
-final class BoxOfficeListViewModel {
-    
-    struct Input {
-        @Observable var viewDidLoad: Bool = false
-        @Observable var isRefreshed: Bool = false
+final class BoxOfficeListViewModel: ViewModelType {
+
+    enum Input {
+        case `default`
+        case viewDidLoad
+        case isRefreshed
     }
     
     struct Output {
@@ -31,7 +32,7 @@ final class BoxOfficeListViewModel {
     
     private let usecase: FetchBoxOfficeUsecase
     
-    var input = Input()
+    @Observable var input: Input = .default
     @Observable private(set) var outputs = [Output]()
     
     // MARK: - Initialization
@@ -42,9 +43,16 @@ final class BoxOfficeListViewModel {
         bindInput()
     }
     
-    // MARK: - Public Methods
+    // MARK: - Private Methods
     
-    func fetchBoxOffice() {
+    private func bindInput() {
+        $input.bind { input in
+            guard input != .default else { return }
+            self.fetchBoxOffice()
+        }
+    }
+    
+    private func fetchBoxOffice() {
         usecase.fetchBoxOffice { [weak self] result in
             switch result {
             case .success(let boxOfficeEntities):
@@ -60,20 +68,6 @@ final class BoxOfficeListViewModel {
             case .failure(let error):
                 print(error)
             }
-        }
-    }
-    
-    // MARK: - Private Methods
-    
-    private func bindInput() {
-        input.$isRefreshed.bind { isRefreshed in
-            guard isRefreshed else { return }
-            self.fetchBoxOffice()
-        }
-        
-        input.$viewDidLoad.bind { viewDidLoad in
-            guard viewDidLoad else { return }
-            self.fetchBoxOffice()
         }
     }
     

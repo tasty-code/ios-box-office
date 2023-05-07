@@ -57,7 +57,7 @@ final class BoxOfficeListController: UIViewController {
     // MARK: - Private Methods
     
     private func bindViewModel() {
-        viewModel.input.viewDidLoad = true
+        viewModel.input = .viewDidLoad
         
         viewModel.$outputs.bind { [weak self] _ in
             guard let self = self else { return }
@@ -65,7 +65,6 @@ final class BoxOfficeListController: UIViewController {
             DispatchQueue.main.async {
                 if self.refreshControl.isRefreshing {
                     self.refreshControl.endRefreshing()
-                    self.viewModel.input.isRefreshed = false
                 }
                 
                 self.boxOfficeListCollectionView.reloadData()
@@ -74,7 +73,7 @@ final class BoxOfficeListController: UIViewController {
     }
     
     @objc private func didRefresh() {
-        viewModel.input.isRefreshed = true
+        viewModel.input = .isRefreshed
     }
 }
 
