@@ -16,6 +16,7 @@ final class DailyBoxOfficeViewController: UIViewController {
     typealias DataSource = UICollectionViewDiffableDataSource<Section, DailyBoxOffice>
     typealias SnapShot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>
 
+    private var loadingIndicatorView = UIActivityIndicatorView(style: .large)
     private let boxOfficeManager = BoxOfficeAPIManager()
     private var dailyBoxOfficeCollectionView: UICollectionView?
     private var dataSource: DataSource?
@@ -82,6 +83,7 @@ final class DailyBoxOfficeViewController: UIViewController {
     }
 
     private func fetchBoxOfficeData() {
+        showIndicatorview()
         let dashedYesterDayDate = dashedYesterdayDate()
         let yesterDayDate = dashedYesterDayDate.components(separatedBy: ["-"]).joined()
 
@@ -91,6 +93,8 @@ final class DailyBoxOfficeViewController: UIViewController {
             self?.movies = boxOffice.result.dailyBoxOfficeList
             DispatchQueue.main.async {
                 self?.navigationItem.title = dashedYesterDayDate
+
+                self?.hideIndicatorView()
             }
         }
     }
@@ -116,6 +120,33 @@ extension DailyBoxOfficeViewController {
         let formattedYesterdayDate = formatter.string(from: yesterdayDate)
 
         return formattedYesterdayDate
+    }
+
+}
+
+extension DailyBoxOfficeViewController {
+
+    private func window() -> UIWindow {
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        guard let window = windowScene?.windows.first else { return UIWindow()}
+
+        return window
+    }
+
+    private func showIndicatorview() {
+        let window = window()
+        loadingIndicatorView.frame = window.frame
+        loadingIndicatorView.color = .brown
+        window.addSubview(loadingIndicatorView)
+        loadingIndicatorView.startAnimating()
+    }
+
+    private func hideIndicatorView() {
+        let window = window()
+        let indicatorView = window.subviews.first { $0 is UIActivityIndicatorView }
+        guard let indicatorView else { return }
+        indicatorView.removeFromSuperview()
     }
 
 }
