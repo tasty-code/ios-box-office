@@ -7,26 +7,30 @@
 
 import UIKit
 
-class ViewController: UIViewController, NetworkServable {
+class ViewController: UIViewController {
     
+    private let networkService = NetworkService()
     private var dailyBoxOffice: DailyBoxOfficeDTO?
     private var movieDetail: MovieDetailDTO?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let sample = API.dailyBoxOffice(date: "20220101")
-        updateData(from: sample)
+        let sample = DailyBoxOfficeEndPoint(date: "20220202")
+        updateData(from: sample) {
+            self.dailyBoxOffice = $0
+        }
         
     }
     
-    func updateData(from api: API) {
-        fetchData(apiType: api) { result in
+    func updateData<T: APIRepresentable, E: EndPointProtocol>(from api: E, completion: @escaping (T?) -> Void) where E.DTO == T {
+        networkService.fetchData(endPoint: api) { result in
             switch result {
             case .success(let data):
-                self.dailyBoxOffice = data as? DailyBoxOfficeDTO
+                completion(data)
             case .failure(let error):
                 print(error.localizedDescription)
+                completion(nil)
             }
         }
     }
