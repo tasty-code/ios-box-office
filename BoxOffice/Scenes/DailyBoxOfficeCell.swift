@@ -12,6 +12,15 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
     static let identifier = String(describing: DailyBoxOfficeCell.self)
 
     private enum Constants {
+
+        static let upSymbolName: String = "arrowtriangle.up.fill"
+        static let downSymbolName: String = "arrowtriangle.down.fill"
+        static let noneChangeOfRankState = "-"
+        static let rankNewState: String = "신작"
+        static let today: String = "오늘 "
+        static let total: String = "/ 총"
+
+
         static let movieTitleLabelFontSize: CGFloat = 21.0
         static let audienceLabelFontSize: CGFloat = 17.0
         static let dailyRankNumberLabelFontSize: CGFloat = 35.0
@@ -85,12 +94,6 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
         configureConstraints()
     }
 
-    func configure(with movie: DailyBoxOffice) {
-        movieTitleLabel.text = movie.movieName
-        audienceLabel.text = movie.rank
-        audienceLabel.text = generateAudienceLabelText(with: movie)
-    }
-
     private func configureHierarchy() {
         rankVerticalStackView.addArrangedSubview(rankNumberLabel)
         rankVerticalStackView.addArrangedSubview(dailyRankChangesLabel)
@@ -119,8 +122,11 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
         titleAudienceVerticalStackView.leadingAnchor.constraint(equalTo: rankVerticalStackView.trailingAnchor, constant: .zero).isActive = true
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func configure(with movie: DailyBoxOffice) {
+        movieTitleLabel.text = movie.movieName
+        audienceLabel.text = movie.rank
+        audienceLabel.text = generateAudienceLabelText(with: movie)
+        setDailyRankChangesLabelText(with: movie)
     }
 
     private func generateAudienceLabelText(with movie: DailyBoxOffice) -> String {
@@ -134,9 +140,63 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
             return String(audienceCountNumber)
         }
 
-        let audienceLabelText = "오늘 \(dailyAudienceCount) / 총 \(audienceAccumulation)"
+        let audienceLabelText = Constants.today + dailyAudienceCount + Constants.total + audienceAccumulation
 
         return audienceLabelText
+    }
+
+    private func setDailyRankChangesLabelText(with movie: DailyBoxOffice) {
+        switch movie.rankOldAndNew {
+        case .new:
+            dailyRankChangesLabel.text = Constants.rankNewState
+            dailyRankChangesLabel.textColor = UIColor.systemRed
+            return
+        case .old:
+            setOldRankChangesLabelText(with: movie)
+            return
+        }
+    }
+
+    private func setOldRankChangesLabelText(with movie: DailyBoxOffice) {
+        guard let dailyRankChanges = Int(movie.dailyRankChanges) else { return }
+
+        if dailyRankChanges == 0 {
+            dailyRankChangesLabel.text = Constants.noneChangeOfRankState
+            return
+        }
+
+        if dailyRankChanges > 0 {
+            let image = UIImage(systemName: Constants.upSymbolName)?.withTintColor(.systemRed)
+            let dailytRankChangesText = generateRankChangesAttributedText(movie.dailyRankChanges,
+                                                                          with: image)
+            dailyRankChangesLabel.attributedText = dailytRankChangesText
+            return
+        }
+
+        if dailyRankChanges < 0 {
+            let image = UIImage(systemName: Constants.downSymbolName)?.withTintColor(.systemBlue)
+            let dailytRankChangesText = generateRankChangesAttributedText(movie.dailyRankChanges,
+                                                                          with: image)
+            dailyRankChangesLabel.attributedText = dailytRankChangesText
+            return
+        }
+    }
+
+    private func generateRankChangesAttributedText(_ text: String,
+                                                   with image: UIImage?) -> NSMutableAttributedString {
+        let attachment = NSTextAttachment()
+        attachment.image = image
+
+        let rankChangesAttributedText = NSMutableAttributedString(attachment: attachment)
+        let text = NSAttributedString(string: text)
+        rankChangesAttributedText.append(text)
+
+        return rankChangesAttributedText
+    }
+
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
 }
