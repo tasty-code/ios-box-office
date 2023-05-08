@@ -34,8 +34,6 @@ final class BoxOfficeListCell: UICollectionViewListCell {
         static let rankStatusStablePrefix = "-"
     }
     
-    // MARK: - Properties
-    
     // MARK: - UI Components
     
     private let movieRankLabel: UILabel = {

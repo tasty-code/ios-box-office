@@ -67,16 +67,18 @@ final class BoxOfficeListViewModel: ViewModelType {
     
     private func fetchBoxOffice(of date: Date) {
         usecase.fetchBoxOffice(of: date) { [weak self] result in
-            guard let self = self else { return}
+            guard let self = self else { return }
             
             switch result {
             case .success(let boxOfficeEntities):
                 let items = boxOfficeEntities.map {
-                    BoxOfficeCellItem(isNew: $0.isNew,
-                                       movieRankLabelText: "\($0.rank)",
-                                       movieRankIntensity: $0.rankIntensity,
-                                       movieTitleLabelText: $0.movieName,
-                                       audienceCountLabelText: self.audienceCountLabelText(with: $0))
+                    BoxOfficeCellItem(
+                        isNew: $0.isNew,
+                        movieRankLabelText: "\($0.rank)",
+                        movieRankIntensity: $0.rankIntensity,
+                        movieTitleLabelText: $0.movieName,
+                        audienceCountLabelText: self.audienceCountLabelText(with: $0)
+                    )
                 }
                 
                 self.output.cellItems = items

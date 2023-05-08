@@ -67,8 +67,6 @@ final class BoxOfficeListController: UIViewController {
         setup()
     }
     
-    // MARK: - Public Methods
-    
     // MARK: - Private Methods
     
     private func bindViewModel() {
@@ -105,11 +103,11 @@ extension BoxOfficeListController {
         setUI()
         setLayout()
         setupCollectionView()
-        activityIndicator.startAnimating()
     }
     
     private func setUI() {
         setBackgroundColor()
+        activityIndicator.startAnimating()
     }
     
     private func setBackgroundColor() {
@@ -117,9 +115,9 @@ extension BoxOfficeListController {
     }
     
     private func setLayout() {
-        view.addSubview(boxOfficeListCollectionView)
         view.addSubview(activityIndicator)
         
+        view.addSubview(boxOfficeListCollectionView)
         NSLayoutConstraint.activate([
             boxOfficeListCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             boxOfficeListCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -140,9 +138,10 @@ extension BoxOfficeListController {
     }
 }
 
-// MARK: UICollectionViewDataSource
+// MARK: - DataSource / Snapshot
 
 extension BoxOfficeListController {
+    
     private func setupCollectionViewDataSource() {
         dataSource = UICollectionViewDiffableDataSource(
             collectionView: boxOfficeListCollectionView,
@@ -180,6 +179,7 @@ extension BoxOfficeListController {
 }
 
 // MARK: - Preview
+
 #if DEBUG
 import SwiftUI
 
