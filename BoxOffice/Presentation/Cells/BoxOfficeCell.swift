@@ -41,8 +41,8 @@ class BoxOfficeCell: UICollectionViewCell {
             contentStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)
         ])
 
-        contentStackView.addArrangedSubview(boxOfficeRank)
-        contentStackView.addArrangedSubview(boxOfficeBrief)
+        contentStackView.addSubview(boxOfficeRank)
+        contentStackView.addSubview(boxOfficeBrief)
 
         boxOfficeRank.translatesAutoresizingMaskIntoConstraints = false
         boxOfficeBrief.translatesAutoresizingMaskIntoConstraints = false
