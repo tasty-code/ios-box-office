@@ -19,13 +19,19 @@ final class DailyBoxOfficeViewController: UIViewController {
     private let boxOfficeManager = BoxOfficeAPIManager()
     private var dataSource: DataSource?
     private var dailyBoxOfficeCollectionView: UICollectionView?
-    private var movies = [DailyBoxOffice]()
+    private var movies = [DailyBoxOffice]() {
+        didSet {
+            print("Updated")
+            applySnapShot()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
         configureCollectionView()
         configureDataSource()
+        fetchBoxOfficeData()
     }
 
     private func setUp() {
@@ -73,6 +79,13 @@ final class DailyBoxOfficeViewController: UIViewController {
             cell?.configure(with: movie)
 
             return cell
+        }
+    }
+
+    private func fetchBoxOfficeData() {
+        boxOfficeManager.fetchData(to: BoxOffice.self, endPoint: .boxOffice(targetDate: "20230426")) { data in
+            guard let boxOffice = data  as? BoxOffice else { return }
+            self.movies = boxOffice.result.dailyBoxOfficeList
         }
     }
 

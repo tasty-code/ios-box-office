@@ -18,7 +18,7 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
         static let noneChangeOfRankState = "-"
         static let rankNewState: String = "신작"
         static let today: String = "오늘 "
-        static let total: String = "/ 총"
+        static let total: String = "/ 총 "
 
 
         static let movieTitleLabelFontSize: CGFloat = 21.0
@@ -31,6 +31,7 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
         static let rankStackViewInset: CGFloat = 7.0
 
         static let titleStackViewInset: CGFloat = 16.0
+        static let titleStackViewTrailingInset: CGFloat = 40.0
     }
 
     private let numberFormatter: NumberFormatter = {
@@ -120,27 +121,29 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
         titleAudienceVerticalStackView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.titleStackViewInset).isActive = true
         titleAudienceVerticalStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.titleStackViewInset).isActive = true
         titleAudienceVerticalStackView.leadingAnchor.constraint(equalTo: rankVerticalStackView.trailingAnchor, constant: .zero).isActive = true
+        titleAudienceVerticalStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.titleStackViewTrailingInset).isActive = true
     }
 
     func configure(with movie: DailyBoxOffice) {
         movieTitleLabel.text = movie.movieName
-        audienceLabel.text = movie.rank
+        rankNumberLabel.text = movie.rank
         audienceLabel.text = generateAudienceLabelText(with: movie)
         setDailyRankChangesLabelText(with: movie)
     }
 
     private func generateAudienceLabelText(with movie: DailyBoxOffice) -> String {
-        let audienceAccumulationNumber = movie.audienceAccumulation
-        let audienceCountNumber = movie.audienceCount
+        guard let audienceAccumulationNumber = Int(movie.audienceAccumulation) as? NSNumber,
+              let audienceCountNumber = Int(movie.audienceCount) as? NSNumber else { return String() }
 
-        guard let audienceAccumulation = numberFormatter.string(for: audienceAccumulationNumber) else {
-            return String(audienceAccumulationNumber)
+        guard let audienceAccumulation = numberFormatter.string(from: audienceAccumulationNumber ) else {
+            return movie.audienceAccumulation
         }
-        guard let dailyAudienceCount = numberFormatter.string(for: audienceCountNumber) else {
-            return String(audienceCountNumber)
+        guard let dailyAudienceCount = numberFormatter.string(from: audienceCountNumber as NSNumber) else {
+            return movie.audienceCount
         }
 
         let audienceLabelText = Constants.today + dailyAudienceCount + Constants.total + audienceAccumulation
+        print(audienceLabelText)
 
         return audienceLabelText
     }
