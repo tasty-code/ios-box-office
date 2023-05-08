@@ -19,7 +19,7 @@ final class MockURLSession: URLSessionProtocol {
     }()
     
     let isFailRequest: Bool
-    let successData: Data!
+    let successMockData: MockData
     
     let successStatusCode = 200
     let failureStatusCode = 410
@@ -27,9 +27,9 @@ final class MockURLSession: URLSessionProtocol {
     // MARK: - Initialization
     
     init(isFailRequest: Bool = false,
-         successData: Data = MockData.boxOffice) {
+         successMockData: MockData = .boxOffice) {
         self.isFailRequest = isFailRequest
-        self.successData = successData
+        self.successMockData = successMockData
     }
     
     // MARK: - Public Methods
@@ -47,7 +47,7 @@ final class MockURLSession: URLSessionProtocol {
                                               headerFields: nil)
         
         let response = isFailRequest ? failureResponse : successResponse
-        let data = isFailRequest ? nil : successData
+        let data = isFailRequest ? nil : successMockData.data
         
         MockURLProtocol.requestHandler = { _ in
             return (data, response, nil)
