@@ -21,9 +21,9 @@ final class FetchBoxOfficeUsecase {
     
     // MARK: - Public Methods
     
-    func fetchBoxOffice(completion: @escaping(Result<[BoxOfficeEntity], Error>) -> Void) {
+    func fetchBoxOffice(of date: Date, completion: @escaping(Result<[BoxOfficeEntity], Error>) -> Void) {
         
-        repository.fetchDailyBoxOffice(endPoint: .dailyBoxOffice(date: Date().previousDate.formatted("yyyyMMdd"))) { result in
+        repository.fetchDailyBoxOffice(endPoint: .dailyBoxOffice(date: date.formatted("yyyyMMdd"))) { result in
             switch result {
             case .success(let boxOfficeResponse):
                 let boxOfficeListEntnty = boxOfficeResponse.boxOfficeResult.toDomain()

@@ -10,6 +10,7 @@ import Foundation
 final class BoxOfficeListViewModel: ViewModelType {
 
     enum Input {
+        case dateChanged(selectedDate: Date)
         case viewDidLoad
         case isRefreshed
     }
@@ -34,6 +35,8 @@ final class BoxOfficeListViewModel: ViewModelType {
     @Observable var input: Input?
     @Observable private(set) var outputs = [Output]()
     
+    @Observable private(set) var selectedDate = Date().previousDate
+    
     // MARK: - Initialization
     
     init(usecase: FetchBoxOfficeUsecase) {
@@ -47,12 +50,20 @@ final class BoxOfficeListViewModel: ViewModelType {
     private func bindInput() {
         $input.bind { input in
             guard let input = input else { return }
-            self.fetchBoxOffice()
+            switch input {
+            case .dateChanged(selectedDate: let date):
+                self.selectedDate = date
+                self.fetchBoxOffice(of: date)
+            case .viewDidLoad:
+                self.fetchBoxOffice(of: self.selectedDate)
+            case .isRefreshed:
+                self.fetchBoxOffice(of: self.selectedDate)
+            }
         }
     }
     
-    private func fetchBoxOffice() {
-        usecase.fetchBoxOffice { [weak self] result in
+    private func fetchBoxOffice(of date: Date) {
+        usecase.fetchBoxOffice(of: date) { [weak self] result in
             switch result {
             case .success(let boxOfficeEntities):
                 let outputs = boxOfficeEntities.map {

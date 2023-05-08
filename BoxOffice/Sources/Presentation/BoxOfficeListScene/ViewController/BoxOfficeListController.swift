@@ -75,8 +75,12 @@ final class BoxOfficeListController: UIViewController {
                 }
                 
                 self.appendSnapshot(with: outputs)
-//                self.boxOfficeListCollectionView.reloadData()
             }
+        }
+        
+        viewModel.$selectedDate.bind { [weak self] date in
+            guard let self else { return }
+            self.title = date.formatted("yyyy-MM-dd")
         }
     }
     
@@ -96,7 +100,6 @@ extension BoxOfficeListController {
     }
     
     private func setUI() {
-        setCurrentDateTitle()
         setBackgroundColor()
     }
     
@@ -123,10 +126,6 @@ extension BoxOfficeListController {
     private func createCollectionViewLayout() -> UICollectionViewLayout {
         let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
         return UICollectionViewCompositionalLayout.list(using: configuration)
-    }
-    
-    private func setCurrentDateTitle() {
-        title = Date().formatted("yyyy-MM-dd")
     }
 }
 
