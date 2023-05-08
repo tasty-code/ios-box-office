@@ -17,11 +17,10 @@ final class DailyBoxOfficeViewController: UIViewController {
     typealias SnapShot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>
 
     private let boxOfficeManager = BoxOfficeAPIManager()
-    private var dataSource: DataSource?
     private var dailyBoxOfficeCollectionView: UICollectionView?
+    private var dataSource: DataSource?
     private var movies = [DailyBoxOffice]() {
         didSet {
-            print("Updated")
             applySnapShot()
         }
     }
@@ -83,9 +82,16 @@ final class DailyBoxOfficeViewController: UIViewController {
     }
 
     private func fetchBoxOfficeData() {
-        boxOfficeManager.fetchData(to: BoxOffice.self, endPoint: .boxOffice(targetDate: "20230426")) { data in
-            guard let boxOffice = data  as? BoxOffice else { return }
-            self.movies = boxOffice.result.dailyBoxOfficeList
+        let dashedYesterDayDate = dashedYesterdayDate()
+        let yesterDayDate = dashedYesterDayDate.components(separatedBy: ["-"]).joined()
+
+        boxOfficeManager.fetchData(to: BoxOffice.self, endPoint: .boxOffice(targetDate: yesterDayDate))
+        { [weak self] data in
+            guard let boxOffice = data as? BoxOffice else { return }
+            self?.movies = boxOffice.result.dailyBoxOfficeList
+            DispatchQueue.main.async {
+                self?.navigationItem.title = dashedYesterDayDate
+            }
         }
     }
 
@@ -99,3 +105,17 @@ final class DailyBoxOfficeViewController: UIViewController {
 
 }
 
+extension DailyBoxOfficeViewController {
+
+    private func dashedYesterdayDate() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+
+        guard let yesterdayDate = Calendar.current.date(byAdding: .day, value: -1, to: date) else { return "" }
+        let formattedYesterdayDate = formatter.string(from: yesterdayDate)
+
+        return formattedYesterdayDate
+    }
+
+}
