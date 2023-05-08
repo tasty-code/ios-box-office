@@ -202,7 +202,7 @@
 				63DF20ED2970E1A0005DF7D1 /* BoxOffice */,
 				B42D47F029F760E6009A3B04 /* BoxOfficeResponseParsingTests */,
 				B435FA4529FFAB8700E12A80 /* NetworkRouterTests */,
-				B40822C12A00C8EB00FBA191 /* NetworkManagerTests */,
+				B40822C12A00C8EB00FBA191 /* BoxOfficeListRepositoryTests */,
 				63DF20EC2970E1A0005DF7D1 /* Products */,
 			);
 			indentWidth = 4;
@@ -463,12 +463,12 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		B40822C12A00C8EB00FBA191 /* NetworkManagerTests */ = {
+		B40822C12A00C8EB00FBA191 /* BoxOfficeListRepositoryTests */ = {
 			isa = PBXGroup;
 			children = (
 				B40822C22A00C8EB00FBA191 /* BoxOfficeListRepositoryTests.swift */,
 			);
-			path = NetworkManagerTests;
+			path = BoxOfficeListRepositoryTests;
 			sourceTree = "<group>";
 		};
 		B42D47F029F760E6009A3B04 /* BoxOfficeResponseParsingTests */ = {
