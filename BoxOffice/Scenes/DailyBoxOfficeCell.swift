@@ -143,7 +143,6 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
         }
 
         let audienceLabelText = Constants.today + dailyAudienceCount + Constants.total + audienceAccumulation
-        print(audienceLabelText)
 
         return audienceLabelText
     }

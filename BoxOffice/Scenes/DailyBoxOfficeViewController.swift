@@ -31,6 +31,7 @@ final class DailyBoxOfficeViewController: UIViewController {
         setUp()
         configureCollectionView()
         configureDataSource()
+        configureRefreshControl()
         fetchBoxOfficeData()
     }
 
@@ -93,7 +94,6 @@ final class DailyBoxOfficeViewController: UIViewController {
             self?.movies = boxOffice.result.dailyBoxOfficeList
             DispatchQueue.main.async {
                 self?.navigationItem.title = dashedYesterDayDate
-
                 self?.hideIndicatorView()
             }
         }
@@ -104,7 +104,9 @@ final class DailyBoxOfficeViewController: UIViewController {
         snapShot.appendSections([.main])
         snapShot.appendItems(movies)
 
-        dataSource?.apply(snapShot)
+        DispatchQueue.main.async {
+            self.dataSource?.apply(snapShot)
+        }
     }
 
 }
@@ -147,6 +149,19 @@ extension DailyBoxOfficeViewController {
         let indicatorView = window.subviews.first { $0 is UIActivityIndicatorView }
         guard let indicatorView else { return }
         indicatorView.removeFromSuperview()
+    }
+
+    private func configureRefreshControl() {
+        guard let dailyBoxOfficeCollectionView else { return }
+
+        dailyBoxOfficeCollectionView.refreshControl = UIRefreshControl()
+        dailyBoxOfficeCollectionView.refreshControl?.addTarget(self,
+                                                 action: #selector(handleRefreshControl),
+                                                 for: .valueChanged)
+    }
+
+    @objc private func handleRefreshControl() {
+        self.dailyBoxOfficeCollectionView?.refreshControl?.endRefreshing()
     }
 
 }
