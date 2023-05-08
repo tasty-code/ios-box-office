@@ -20,13 +20,7 @@ extension Int {
 }
 
 extension UInt {
-    private static let decimalNumberFormatter: NumberFormatter = {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        return numberFormatter
-    }()
-    
     func formatWithCommas() -> String? {
-        return Self.decimalNumberFormatter.string(from: self as NSNumber)
+        Int(self).formatWithCommas()
     }
 }
