@@ -28,7 +28,7 @@ class HomeViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
 
     private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: UICollectionViewLayout())
+        let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: configureOfCollectionViewLayout())
         collectionView.isScrollEnabled = true
         collectionView.showsVerticalScrollIndicator = true
         collectionView.clipsToBounds = true
@@ -37,8 +37,10 @@ class HomeViewController: UIViewController {
         
         return collectionView
     }()
-    
-    //MARK: - Private Method
+}
+
+//MARK: - Configure of CollectionViewLayout
+extension HomeViewController {
     private func configureOfMainViewLayout() {
         let safeArea = self.view.safeAreaLayoutGuide
         
@@ -60,8 +62,15 @@ class HomeViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor)
         ])
     }
+    
+    private func configureOfCollectionViewLayout() -> UICollectionViewLayout {
+        let configure = UICollectionLayoutListConfiguration(appearance: .plain)
+        let layout = UICollectionViewCompositionalLayout.list(using: configure)
+        return layout
+    }
 }
 
+//MARK: - Configure of DiffableDataSource
 extension HomeViewController {
     func configureDataSource() {
 
