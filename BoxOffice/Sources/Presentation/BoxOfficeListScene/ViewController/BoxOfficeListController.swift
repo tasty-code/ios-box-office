@@ -10,9 +10,7 @@ import UIKit
 final class BoxOfficeListController: UIViewController {
     
     // MARK: - Constants
-    
-    enum Metric {}
-    
+        
     enum Section: Int, CaseIterable {
         case list
     }

@@ -35,16 +35,15 @@ final class BoxOfficeListViewModel: ViewModelType {
     
     // MARK: - Properties
     
-    private let usecase: FetchBoxOfficeUsecase
+    private let usecase: FetchBoxOfficeUsecaseProtocol
     
     @Observable var input: Input?
     private(set) var output = Output()
     
     // MARK: - Initialization
     
-    init(usecase: FetchBoxOfficeUsecase) {
+    init(usecase: FetchBoxOfficeUsecaseProtocol) {
         self.usecase = usecase
-        
         bindInput()
     }
     
