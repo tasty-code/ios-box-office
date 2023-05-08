@@ -9,6 +9,8 @@ import UIKit
 
 final class DailyBoxOfficeCell: UICollectionViewListCell {
 
+    static let identifier = String(describing: DailyBoxOfficeCell.self)
+
     private enum Constants {
         static let movieTitleLabelFontSize: CGFloat = 21.0
         static let audienceLabelFontSize: CGFloat = 17.0
@@ -22,38 +24,50 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
         static let titleStackViewInset: CGFloat = 16.0
     }
 
-    static let identifier = String(describing: DailyBoxOfficeCell.self)
-
     private let movieTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: movieTitleFontSize)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: Constants.movieTitleLabelFontSize)
 
         return label
     }()
 
     private let audienceLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: audienceLabelFontSize)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: Constants.audienceLabelFontSize)
 
         return label
     }()
 
     private let rankNumberLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: dailyRankNumberLabelFontSize)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: Constants.dailyRankNumberLabelFontSize)
 
         return label
     }()
 
     private let dailyRankChangesLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: dailyRankChangesLabelFontSize)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: Constants.dailyRankChangesLabelFontSize)
 
         return label
+    }()
+
+    private let rankVerticalStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .fillProportionally
+
+        return stackView
+    }()
+
+    private let titleAudienceVerticalStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.distribution = .fillProportionally
+
+        return stackView
     }()
 
 
@@ -62,6 +76,35 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
 
         configureHierarchy()
         configureConstraints()
+    }
+
+    private func configureHierarchy() {
+        rankVerticalStackView.addArrangedSubview(rankNumberLabel)
+        rankVerticalStackView.addArrangedSubview(dailyRankChangesLabel)
+
+        titleAudienceVerticalStackView.addArrangedSubview(movieTitleLabel)
+        titleAudienceVerticalStackView.addArrangedSubview(audienceLabel)
+
+        addSubview(rankVerticalStackView)
+        addSubview(titleAudienceVerticalStackView)
+    }
+
+    private func configureConstraints() {
+        translatesAutoresizingMaskIntoConstraints = false
+        let cellHeightConstraint = contentView.heightAnchor.constraint(equalToConstant: 80)
+        cellHeightConstraint.priority = .defaultHigh
+        cellHeightConstraint.isActive = true
+
+        rankVerticalStackView.translatesAutoresizingMaskIntoConstraints = false
+        rankVerticalStackView.widthAnchor.constraint(equalToConstant: Constants.rankStackViewWidth).isActive = true
+        rankVerticalStackView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.rankStackViewInset).isActive = true
+        rankVerticalStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.rankStackViewInset).isActive = true
+        rankVerticalStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.rankStackViewleadingInset).isActive = true
+
+        titleAudienceVerticalStackView.translatesAutoresizingMaskIntoConstraints = false
+        titleAudienceVerticalStackView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.titleStackViewInset).isActive = true
+        titleAudienceVerticalStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.titleStackViewInset).isActive = true
+        titleAudienceVerticalStackView.leadingAnchor.constraint(equalTo: rankVerticalStackView.trailingAnchor, constant: .zero).isActive = true
     }
 
     required init?(coder: NSCoder) {
