@@ -117,16 +117,16 @@ extension BoxOfficeListController {
         guard isAnimated != activityIndicator.isAnimating else { return }
         
         if isAnimated {
-            activityIndicator.stopAnimating()
-        } else {
             activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
         }
     }
     
     private func setLayout() {
-        view.addSubview(activityIndicator)
-        
         view.addSubview(boxOfficeListCollectionView)
+        view.addSubview(activityIndicator)
+
         NSLayoutConstraint.activate([
             boxOfficeListCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             boxOfficeListCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
