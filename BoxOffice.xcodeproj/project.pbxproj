@@ -14,6 +14,7 @@
 		5B10173D29F675F000AE55F3 /* BoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932148D29F6670200E4C2D8 /* BoxOffice.swift */; };
 		5B10173E29F675F400AE55F3 /* DailyBoxOfficeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D932148F29F6671B00E4C2D8 /* DailyBoxOfficeList.swift */; };
 		5B10174529F90D2600AE55F3 /* APIEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B10174429F90D2600AE55F3 /* APIEndPoint.swift */; };
+		5B3F1BA22A08BB930062BE99 /* DailyBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3F1BA12A08BB930062BE99 /* DailyBoxOffice.swift */; };
 		5B6ADFAD29FA9A09001A1394 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6ADFAC29FA9A09001A1394 /* NetworkService.swift */; };
 		5B6ADFAF29FB6BAD001A1394 /* HTTPErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6ADFAE29FB6BAD001A1394 /* HTTPErrorType.swift */; };
 		5BA4711229F91DB600B8427C /* Basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA4711129F91DB600B8427C /* Basic.swift */; };
@@ -69,6 +70,7 @@
 		5B10173029F66C2F00AE55F3 /* MockMovieJSONDecodingTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MockMovieJSONDecodingTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B10173229F66C2F00AE55F3 /* MockMovieJSONDecodingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMovieJSONDecodingTest.swift; sourceTree = "<group>"; };
 		5B10174429F90D2600AE55F3 /* APIEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndPoint.swift; sourceTree = "<group>"; };
+		5B3F1BA12A08BB930062BE99 /* DailyBoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOffice.swift; sourceTree = "<group>"; };
 		5B6ADFAC29FA9A09001A1394 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		5B6ADFAE29FB6BAD001A1394 /* HTTPErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPErrorType.swift; sourceTree = "<group>"; };
 		5BA4711129F91DB600B8427C /* Basic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basic.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				D93257252A08BAC8000DFE73 /* Section.swift */,
+				5B3F1BA12A08BB930062BE99 /* DailyBoxOffice.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -515,6 +518,7 @@
 				D9876A292A00EB4800D81BA8 /* BoxOfficeRank.swift in Sources */,
 				D9DB45F729FFE483001C63B1 /* EndPoint.swift in Sources */,
 				5BA4712829FA677800B8427C /* Genre.swift in Sources */,
+				5B3F1BA22A08BB930062BE99 /* DailyBoxOffice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
