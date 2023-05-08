@@ -10,12 +10,11 @@ import Foundation
 final class BoxOfficeListViewModel: ViewModelType {
 
     enum Input {
-        case `default`
         case viewDidLoad
         case isRefreshed
     }
     
-    struct Output {
+    struct Output: Hashable {
         let isNew: Bool
         let movieRankLabelText: String
         let movieRankIntensity: Int
@@ -32,7 +31,7 @@ final class BoxOfficeListViewModel: ViewModelType {
     
     private let usecase: FetchBoxOfficeUsecase
     
-    @Observable var input: Input = .default
+    @Observable var input: Input?
     @Observable private(set) var outputs = [Output]()
     
     // MARK: - Initialization
@@ -47,7 +46,7 @@ final class BoxOfficeListViewModel: ViewModelType {
     
     private func bindInput() {
         $input.bind { input in
-            guard input != .default else { return }
+            guard let input = input else { return }
             self.fetchBoxOffice()
         }
     }

@@ -13,9 +13,16 @@ final class BoxOfficeListController: UIViewController {
     
     enum Metric {}
     
+    enum Section: Int, CaseIterable {
+        case list
+    }
+    
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, BoxOfficeListViewModel.Output>
+    
     // MARK: - Properties
     
     private let viewModel: BoxOfficeListViewModel
+    private var dataSource: DataSource?
     
     // MARK: - UI Components
     
@@ -59,7 +66,7 @@ final class BoxOfficeListController: UIViewController {
     private func bindViewModel() {
         viewModel.input = .viewDidLoad
         
-        viewModel.$outputs.bind { [weak self] _ in
+        viewModel.$outputs.bind { [weak self] outputs in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
@@ -67,7 +74,8 @@ final class BoxOfficeListController: UIViewController {
                     self.refreshControl.endRefreshing()
                 }
                 
-                self.boxOfficeListCollectionView.reloadData()
+                self.appendSnapshot(with: outputs)
+//                self.boxOfficeListCollectionView.reloadData()
             }
         }
     }
@@ -108,7 +116,8 @@ extension BoxOfficeListController {
     
     private func setupCollectionView() {
         boxOfficeListCollectionView.registerCell(cellClass: BoxOfficeListCell.self)
-        boxOfficeListCollectionView.dataSource = self
+        setupCollectionViewDataSource()
+        setupInitialSnapshot()
     }
     
     private func createCollectionViewLayout() -> UICollectionViewLayout {
@@ -126,19 +135,40 @@ extension BoxOfficeListController {
 
 // MARK: UICollectionViewDataSource
 
-extension BoxOfficeListController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int {
-        return viewModel.outputs.count
+extension BoxOfficeListController {
+    private func setupCollectionViewDataSource() {
+        dataSource = UICollectionViewDiffableDataSource(
+            collectionView: boxOfficeListCollectionView,
+            cellProvider: { collectionView, indexPath, dailyBoxOffice in
+                guard let section = Section(rawValue: indexPath.section) else {
+                    return UICollectionViewCell()
+                }
+                switch section {
+                case .list:
+                    let cell = collectionView.dequeueReusableCell(cellClass: BoxOfficeListCell.self, for: indexPath)
+                    cell.configure(with: dailyBoxOffice)
+                    return cell
+                }
+            }
+        )
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(cellClass: BoxOfficeListCell.self, for: indexPath)
-        cell.configure(with: viewModel.outputs[indexPath.row])
+    private func setupInitialSnapshot() {
+        guard let dataSource = dataSource else { return }
         
-        return cell
+        // Section 초기 설정
+        var snapshot = dataSource.snapshot()
+        snapshot.appendSections(Section.allCases)
+        dataSource.apply(snapshot)
+    }
+    
+    private func appendSnapshot(with outputs: [BoxOfficeListViewModel.Output]) {
+        guard let dataSource = dataSource else { return }
+
+        // list snapshot 설정
+        var listSnapshot = NSDiffableDataSourceSectionSnapshot<BoxOfficeListViewModel.Output>()
+        listSnapshot.append(outputs)
+        dataSource.apply(listSnapshot, to: .list)
     }
 }
 
