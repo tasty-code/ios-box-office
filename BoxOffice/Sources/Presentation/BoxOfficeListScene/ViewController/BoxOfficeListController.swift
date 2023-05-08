@@ -77,7 +77,8 @@ final class BoxOfficeListController: UIViewController {
                 if self.refreshControl.isRefreshing {
                     self.refreshControl.endRefreshing()
                 }
-                self.activityIndicator.stopAnimating()
+                self.setAnimatingActivityIndicator(isAnimated: false)
+                
                 self.appendSnapshot(with: items)
             }
         }
@@ -105,11 +106,21 @@ extension BoxOfficeListController {
     
     private func setUI() {
         setBackgroundColor()
-        activityIndicator.startAnimating()
+        setAnimatingActivityIndicator(isAnimated: true)
     }
     
     private func setBackgroundColor() {
         view.backgroundColor = .systemBackground
+    }
+    
+    private func setAnimatingActivityIndicator(isAnimated: Bool) {
+        guard isAnimated != activityIndicator.isAnimating else { return }
+        
+        if isAnimated {
+            activityIndicator.stopAnimating()
+        } else {
+            activityIndicator.startAnimating()
+        }
     }
     
     private func setLayout() {
