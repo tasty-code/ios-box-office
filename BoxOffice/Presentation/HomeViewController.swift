@@ -9,14 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    let navigationBar : UINavigationBar = {
-        let navigationBar = UINavigationBar()
-        let navigationItem = UINavigationItem(title: "2023-05-01")
-        navigationBar.setItems([navigationItem], animated: true)
-        
-        return navigationBar
-    }()
-
+    //MARK: - Initializer
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,18 +19,26 @@ class HomeViewController: UIViewController {
     }
     
     //MARK: - Private Property
-    private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
+    
+    private let navigationBar : UINavigationBar = {
+        let navigationBar = UINavigationBar()
+        let navigationItem = UINavigationItem(title: "2023-05-01")
+        navigationBar.setItems([navigationItem], animated: true)
+        
+        return navigationBar
+    }()
 
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: configureOfCollectionViewLayout())
         collectionView.isScrollEnabled = true
         collectionView.showsVerticalScrollIndicator = true
         collectionView.clipsToBounds = true
-        
-        //TODO: - Register of CollectionViewCell
+        collectionView.backgroundColor = .systemGray2
         
         return collectionView
     }()
+    
+    private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
 }
 
 //MARK: - Configure of CollectionViewLayout
