@@ -19,11 +19,13 @@ final class DailyBoxOfficeViewController: UIViewController {
     private let boxOfficeManager = BoxOfficeAPIManager()
     private var dataSource: DataSource?
     private var dailyBoxOfficeCollectionView: UICollectionView?
+    private var movies = [DailyBoxOffice]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
         configureCollectionView()
+        configureDataSource()
     }
 
     private func setUp() {
@@ -40,6 +42,16 @@ final class DailyBoxOfficeViewController: UIViewController {
         configureCollectionViewLayoutConstraint()
     }
 
+    private func createLayout() -> UICollectionViewCompositionalLayout {
+        let layout = UICollectionViewCompositionalLayout { section, layoutEnvironment in
+            let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+
+            return NSCollectionLayoutSection.list(using: configuration, layoutEnvironment: layoutEnvironment)
+        }
+
+        return layout
+    }
+
     private func configureCollectionViewLayoutConstraint() {
         guard let dailyBoxOfficeCollectionView else { return }
         let safeAreaGuide = view.safeAreaLayoutGuide
@@ -51,14 +63,25 @@ final class DailyBoxOfficeViewController: UIViewController {
         dailyBoxOfficeCollectionView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor).isActive = true
     }
 
-    private func createLayout() -> UICollectionViewCompositionalLayout {
-        let layout = UICollectionViewCompositionalLayout { section, layoutEnvironment in
-            let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+    private func configureDataSource() {
+        guard let dailyBoxOfficeCollectionView else { return }
+        dataSource = UICollectionViewDiffableDataSource(collectionView: dailyBoxOfficeCollectionView )
+        { collectionView, indexPath, movie in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DailyBoxOfficeCell.identifier,
+                                                          for: indexPath) as? DailyBoxOfficeCell
+            cell?.accessories = [.disclosureIndicator()]
+            cell?.configure(with: movie)
 
-            return NSCollectionLayoutSection.list(using: configuration, layoutEnvironment: layoutEnvironment)
+            return cell
         }
+    }
 
-        return layout
+    private func applySnapShot() {
+        var snapShot = SnapShot()
+        snapShot.appendSections([.main])
+        snapShot.appendItems(movies)
+
+        dataSource?.apply(snapShot)
     }
 
 }
