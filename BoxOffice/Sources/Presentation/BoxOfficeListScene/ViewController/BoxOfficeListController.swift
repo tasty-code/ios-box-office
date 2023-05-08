@@ -40,7 +40,7 @@ final class BoxOfficeListController: UIViewController {
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.center = self.view.center
+        activityIndicator.center = view.center
         activityIndicator.color = .gray
         activityIndicator.style = .medium
         return activityIndicator

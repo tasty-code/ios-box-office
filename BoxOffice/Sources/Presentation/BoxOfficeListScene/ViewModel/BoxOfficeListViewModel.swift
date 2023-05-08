@@ -9,6 +9,13 @@ import Foundation
 
 final class BoxOfficeListViewModel: ViewModelType {
     
+    // MARK: - Constants
+    
+    enum Constants {
+        static let dailyAudiencePrefix = "일일"
+        static let cumulativeAudiencePrefix = "총"
+    }
+    
     enum Input {
         case dateChanged(selectedDate: Date)
         case viewDidLoad
@@ -26,11 +33,6 @@ final class BoxOfficeListViewModel: ViewModelType {
         let movieRankIntensity: Int
         let movieTitleLabelText: String
         let audienceCountLabelText: String
-    }
-    
-    enum Constants {
-        static let dailyAudiencePrefix = "일일"
-        static let cumulativeAudiencePrefix = "총"
     }
     
     // MARK: - Properties
