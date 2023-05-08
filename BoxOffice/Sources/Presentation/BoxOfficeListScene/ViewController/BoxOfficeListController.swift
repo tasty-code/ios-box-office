@@ -126,10 +126,7 @@ extension BoxOfficeListController {
     }
     
     private func setCurrentDateTitle() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let formattedDate = dateFormatter.string(from: Date())
-        title = formattedDate
+        title = Date().formatted("yyyy-MM-dd")
     }
 }
 

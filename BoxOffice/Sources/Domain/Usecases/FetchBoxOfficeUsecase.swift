@@ -22,25 +22,16 @@ final class FetchBoxOfficeUsecase {
     // MARK: - Public Methods
     
     func fetchBoxOffice(completion: @escaping(Result<[BoxOfficeEntity], Error>) -> Void) {
-
-        repository.fetchDailyBoxOffice(endPoint: .dailyBoxOffice(date: "20230503")) { result in
+        
+        repository.fetchDailyBoxOffice(endPoint: .dailyBoxOffice(date: Date().previousDate.formatted("yyyyMMdd"))) { result in
             switch result {
             case .success(let boxOfficeResponse):
                 let boxOfficeListEntnty = boxOfficeResponse.boxOfficeResult.toDomain()
                 completion(.success(boxOfficeListEntnty))
+                print(boxOfficeResponse)
             case .failure(let error):
                 print(error)
             }
         }
     }
-    
-    // MARK: - Private Methods
-    
-    private func getCurrentDateTime() {
-        
-    }
-}
-
-extension FetchBoxOfficeUsecase {
-    
 }
