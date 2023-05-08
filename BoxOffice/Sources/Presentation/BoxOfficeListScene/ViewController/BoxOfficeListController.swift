@@ -44,9 +44,7 @@ final class BoxOfficeListController: UIViewController {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.center = self.view.center
         activityIndicator.color = UIColor.gray
-        activityIndicator.hidesWhenStopped = true
         activityIndicator.style = .medium
-        activityIndicator.stopAnimating()
         return activityIndicator
     }()
     
