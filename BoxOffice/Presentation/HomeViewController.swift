@@ -21,9 +21,12 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         configureOfMainViewLayout()
+        configureDataSource()
     }
     
     //MARK: - Private Property
+    private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
+
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: UICollectionViewLayout())
         collectionView.isScrollEnabled = true
@@ -56,5 +59,19 @@ class HomeViewController: UIViewController {
             collectionView.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor)
         ])
+    }
+}
+
+extension HomeViewController {
+    func configureDataSource() {
+
+        let cellRegistration = UICollectionView.CellRegistration<BoxOfficeListCell, DailyBoxOffice> { (cell, indexPath, dailyBoxOffice) in
+            cell.dailyBoxOffice = dailyBoxOffice
+            cell.accessories = [.disclosureIndicator()]
+        }
+
+        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { (collectionView, indexPath, dailyBoxOffice) in
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: dailyBoxOffice)
+        }
     }
 }

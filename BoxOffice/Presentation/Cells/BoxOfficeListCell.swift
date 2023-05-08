@@ -12,8 +12,8 @@ class BoxOfficeListCell: UICollectionViewListCell {
     static let identifier = String(describing: BoxOfficeListCell.self)
     
     private lazy var listContentView = UIListContentView(configuration: defaultListContentConfiguration())
-    private let boxOfficeBrief = BoxOfficeBrief()
-    private let boxOfficeRank = BoxOfficeRank()
+
+    var dailyBoxOffice: DailyBoxOffice?
     
     override func updateConfiguration(using state: UICellConfigurationState) {
         

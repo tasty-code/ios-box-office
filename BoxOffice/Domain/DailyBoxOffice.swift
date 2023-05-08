@@ -5,7 +5,7 @@
 //  Created by Jason on 2023/05/08.
 //
 
-import Foundation
+import UIKit
 
 struct DailyBoxOffice: Hashable {
     let rankEmoji: UIImage
