@@ -9,6 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    let networkService = NetworkService()
+    
     //MARK: - Initializer
     
     override func viewDidLoad() {
@@ -39,6 +41,18 @@ class HomeViewController: UIViewController {
     }()
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
+    
+    private func fetchData() -> BoxOfficeResult? {
+        let boxOfficeRequestDTO = BoxOfficeRequestDTO(targetDate: "20230507")
+        
+        var networkResult: BoxOfficeResult?
+        
+        Task {
+            let result = try await networkService.request(with: APIEndPoint.receiveBoxOffice(with: boxOfficeRequestDTO))
+            networkResult = result.boxOfficeResult
+        }
+        return networkResult
+    }
 }
 
 //MARK: - Configure of CollectionViewLayout
@@ -84,6 +98,7 @@ extension HomeViewController {
             cell.boxOfficeRank.setRank(by: dailyBoxOffice.rank.rank)
             cell.boxOfficeRank.setRankVaritaion(by: .red)
             
+            cell.reloadInputViews()
         }
 
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { (collectionView, indexPath, dailyBoxOffice) in
@@ -95,11 +110,23 @@ extension HomeViewController {
     }
 
     func initialSnapShot() -> NSDiffableDataSourceSnapshot<Section, DailyBoxOffice> {
-        let testEntity = [
-            DailyBoxOffice(rankEmoji: UIImage(), movieBrief: MovieBrief(movieName: "경관의 피", audienceCount: "오늘 64,050 / 총 69,228"), rank: Rank(rank: "1", movieType: "신작")),
-            DailyBoxOffice(rankEmoji: UIImage(systemName: "heart.fill") ?? UIImage(), movieBrief: MovieBrief(movieName: "영화 2", audienceCount: "123"), rank: Rank(rank: "123", movieType: "456")),
-            DailyBoxOffice(rankEmoji: UIImage(systemName: "star.fill") ?? UIImage(), movieBrief: MovieBrief(movieName: "영화 3", audienceCount: "123"), rank: Rank(rank: "123", movieType: "456"))
-        ]
+        
+//        let testEntity = [
+//            DailyBoxOffice(rankEmoji: UIImage(), movieBrief: MovieBrief(movieName: "경관의 피", audienceCount: "오늘 64,050 / 총 69,228"), rank: Rank(rank: "1", movieType: "신작")),
+//            DailyBoxOffice(rankEmoji: UIImage(systemName: "heart.fill") ?? UIImage(), movieBrief: MovieBrief(movieName: "영화 2", audienceCount: "123"), rank: Rank(rank: "123", movieType: "456")),
+//            DailyBoxOffice(rankEmoji: UIImage(systemName: "star.fill") ?? UIImage(), movieBrief: MovieBrief(movieName: "영화 3", audienceCount: "123"), rank: Rank(rank: "123", movieType: "456"))
+//        ]
+        
+        var testEntity = [DailyBoxOffice]()
+        
+        if let result = fetchData() {
+            result.dailyBoxOfficeList.forEach { dailyBoxOfficeList in
+                let data = DailyBoxOffice(rankEmoji: UIImage(systemName: "heart.fill")!,
+                               movieBrief: MovieBrief(movieName: dailyBoxOfficeList.movieName, audienceCount: dailyBoxOfficeList.audienceCount),
+                               rank: Rank(rank: dailyBoxOfficeList.rank, movieType: dailyBoxOfficeList.openDate))
+                testEntity.append(data)
+            }
+        }
 
         var snapshot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>()
         snapshot.appendSections([.main])
