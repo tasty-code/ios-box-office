@@ -16,7 +16,7 @@ final class NetworkTest: XCTestCase {
     override func setUpWithError() throws {
         
         try super.setUpWithError()
-        sut = NetworkProvider(session: NetworkSession())
+        sut = NetworkProvider()
     }
 
     override func tearDownWithError() throws {
