@@ -33,8 +33,22 @@ final class DailyBoxOfficeViewController: UIViewController {
 
     private func configureCollectionView() {
         dailyBoxOfficeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        guard let dailyBoxOfficeCollectionView = dailyBoxOfficeCollectionView else { return }
+        guard let dailyBoxOfficeCollectionView else { return }
         view.addSubview(dailyBoxOfficeCollectionView)
+        dailyBoxOfficeCollectionView.register(DailyBoxOfficeCell.self,
+                                              forCellWithReuseIdentifier: DailyBoxOfficeCell.identifier)
+        configureCollectionViewLayoutConstraint()
+    }
+
+    private func configureCollectionViewLayoutConstraint() {
+        guard let dailyBoxOfficeCollectionView else { return }
+        let safeAreaGuide = view.safeAreaLayoutGuide
+
+        dailyBoxOfficeCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        dailyBoxOfficeCollectionView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor).isActive = true
+        dailyBoxOfficeCollectionView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor).isActive = true
+        dailyBoxOfficeCollectionView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor).isActive = true
+        dailyBoxOfficeCollectionView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor).isActive = true
     }
 
     private func createLayout() -> UICollectionViewCompositionalLayout {
