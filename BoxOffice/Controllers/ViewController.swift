@@ -23,8 +23,10 @@ class ViewController: UIViewController, NetworkServable {
     func updateData(from api: API) {
         fetchData(apiType: api) { result in
             switch result {
-            case .success(let data): self.dailyBoxOffice = data as? DailyBoxOfficeDTO
-            case .failure(let error): print(error.localizedDescription)
+            case .success(let data):
+                self.dailyBoxOffice = data as? DailyBoxOfficeDTO
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
