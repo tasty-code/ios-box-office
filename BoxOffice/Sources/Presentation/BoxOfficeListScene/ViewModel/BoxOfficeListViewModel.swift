@@ -8,14 +8,19 @@
 import Foundation
 
 final class BoxOfficeListViewModel: ViewModelType {
-
+    
     enum Input {
         case dateChanged(selectedDate: Date)
         case viewDidLoad
         case isRefreshed
     }
     
-    struct Output: Hashable {
+    struct Output {
+        @Observable var cellItems = [BoxOfficeCellItem]()
+        @Observable var selectedDate = Date().previousDate
+    }
+    
+    struct BoxOfficeCellItem: Hashable {
         let isNew: Bool
         let movieRankLabelText: String
         let movieRankIntensity: Int
@@ -33,9 +38,7 @@ final class BoxOfficeListViewModel: ViewModelType {
     private let usecase: FetchBoxOfficeUsecase
     
     @Observable var input: Input?
-    @Observable private(set) var outputs = [Output]()
-    
-    @Observable private(set) var selectedDate = Date().previousDate
+    private(set) var output = Output()
     
     // MARK: - Initialization
     
@@ -52,29 +55,31 @@ final class BoxOfficeListViewModel: ViewModelType {
             guard let input = input else { return }
             switch input {
             case .dateChanged(selectedDate: let date):
-                self.selectedDate = date
+                self.output.selectedDate = date
                 self.fetchBoxOffice(of: date)
             case .viewDidLoad:
-                self.fetchBoxOffice(of: self.selectedDate)
+                self.fetchBoxOffice(of: self.output.selectedDate)
             case .isRefreshed:
-                self.fetchBoxOffice(of: self.selectedDate)
+                self.fetchBoxOffice(of: self.output.selectedDate)
             }
         }
     }
     
     private func fetchBoxOffice(of date: Date) {
         usecase.fetchBoxOffice(of: date) { [weak self] result in
+            guard let self = self else { return}
+            
             switch result {
             case .success(let boxOfficeEntities):
-                let outputs = boxOfficeEntities.map {
-                    Output(isNew: $0.isNew,
-                           movieRankLabelText: "\($0.rank)",
-                           movieRankIntensity: $0.rankIntensity,
-                           movieTitleLabelText: $0.movieName,
-                           audienceCountLabelText: self?.audienceCountLabelText(with: $0) ?? "")
+                let items = boxOfficeEntities.map {
+                    BoxOfficeCellItem(isNew: $0.isNew,
+                                       movieRankLabelText: "\($0.rank)",
+                                       movieRankIntensity: $0.rankIntensity,
+                                       movieTitleLabelText: $0.movieName,
+                                       audienceCountLabelText: self.audienceCountLabelText(with: $0))
                 }
                 
-                self?.outputs = outputs
+                self.output.cellItems = items
             case .failure(let error):
                 print(error)
             }

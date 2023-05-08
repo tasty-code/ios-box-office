@@ -17,7 +17,7 @@ final class BoxOfficeListController: UIViewController {
         case list
     }
     
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, BoxOfficeListViewModel.Output>
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, BoxOfficeListViewModel.BoxOfficeCellItem>
     
     // MARK: - Properties
     
@@ -66,7 +66,7 @@ final class BoxOfficeListController: UIViewController {
     private func bindViewModel() {
         viewModel.input = .viewDidLoad
         
-        viewModel.$outputs.bind { [weak self] outputs in
+        viewModel.output.$cellItems.bind { [weak self] items in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
@@ -74,11 +74,11 @@ final class BoxOfficeListController: UIViewController {
                     self.refreshControl.endRefreshing()
                 }
                 
-                self.appendSnapshot(with: outputs)
+                self.appendSnapshot(with: items)
             }
         }
         
-        viewModel.$selectedDate.bind { [weak self] date in
+        viewModel.output.$selectedDate.bind { [weak self] date in
             guard let self else { return }
             self.title = date.formatted("yyyy-MM-dd")
         }
@@ -135,14 +135,14 @@ extension BoxOfficeListController {
     private func setupCollectionViewDataSource() {
         dataSource = UICollectionViewDiffableDataSource(
             collectionView: boxOfficeListCollectionView,
-            cellProvider: { collectionView, indexPath, dailyBoxOffice in
+            cellProvider: { collectionView, indexPath, item in
                 guard let section = Section(rawValue: indexPath.section) else {
                     return UICollectionViewCell()
                 }
                 switch section {
                 case .list:
                     let cell = collectionView.dequeueReusableCell(cellClass: BoxOfficeListCell.self, for: indexPath)
-                    cell.configure(with: dailyBoxOffice)
+                    cell.configure(with: item)
                     return cell
                 }
             }
@@ -158,12 +158,12 @@ extension BoxOfficeListController {
         dataSource.apply(snapshot)
     }
     
-    private func appendSnapshot(with outputs: [BoxOfficeListViewModel.Output]) {
+    private func appendSnapshot(with items: [BoxOfficeListViewModel.BoxOfficeCellItem]) {
         guard let dataSource = dataSource else { return }
 
         // list snapshot 설정
-        var listSnapshot = NSDiffableDataSourceSectionSnapshot<BoxOfficeListViewModel.Output>()
-        listSnapshot.append(outputs)
+        var listSnapshot = NSDiffableDataSourceSectionSnapshot<BoxOfficeListViewModel.BoxOfficeCellItem>()
+        listSnapshot.append(items)
         dataSource.apply(listSnapshot, to: .list)
     }
 }

@@ -103,11 +103,11 @@ final class BoxOfficeListCell: UICollectionViewListCell {
     
     // MARK: - Public Methods
     
-    func configure(with output: BoxOfficeListViewModel.Output) {
-        movieRankLabel.text = output.movieRankLabelText
-        movieRankStatusLabel.attributedText = movieRankStatusLabelText(with: output)
-        movieTitleLabel.text = output.movieTitleLabelText
-        audienceCountLabel.text = output.audienceCountLabelText
+    func configure(with item: BoxOfficeListViewModel.BoxOfficeCellItem) {
+        movieRankLabel.text = item.movieRankLabelText
+        movieRankStatusLabel.attributedText = movieRankStatusLabelText(with: item)
+        movieTitleLabel.text = item.movieTitleLabelText
+        audienceCountLabel.text = item.audienceCountLabelText
     }
     
     func configure(with movieTitle: String) {
@@ -116,13 +116,13 @@ final class BoxOfficeListCell: UICollectionViewListCell {
     
     // MARK: - Private Methods
     
-    private func movieRankStatusLabelText(with output: BoxOfficeListViewModel.Output) -> NSAttributedString {
-        if output.isNew {
+    private func movieRankStatusLabelText(with item: BoxOfficeListViewModel.BoxOfficeCellItem) -> NSAttributedString {
+        if item.isNew {
             return NSAttributedString(string: Constants.movieRankLabelNewText,
                                       attributes: [.foregroundColor: UIColor.systemRed])
         }
         
-        let rankIntensity = output.movieRankIntensity
+        let rankIntensity = item.movieRankIntensity
         
         if rankIntensity == 0 {
             return NSAttributedString(string: Constants.rankStatusStablePrefix)
