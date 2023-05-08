@@ -40,6 +40,16 @@ final class BoxOfficeListController: UIViewController {
         return refreshControl
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.center = self.view.center
+        activityIndicator.color = UIColor.gray
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .medium
+        activityIndicator.stopAnimating()
+        return activityIndicator
+    }()
+    
     // MARK: - Initialization
     
     init(viewModel: BoxOfficeListViewModel) {
@@ -73,7 +83,7 @@ final class BoxOfficeListController: UIViewController {
                 if self.refreshControl.isRefreshing {
                     self.refreshControl.endRefreshing()
                 }
-                
+                self.activityIndicator.stopAnimating()
                 self.appendSnapshot(with: items)
             }
         }
@@ -97,6 +107,7 @@ extension BoxOfficeListController {
         setUI()
         setLayout()
         setupCollectionView()
+        activityIndicator.startAnimating()
     }
     
     private func setUI() {
@@ -109,6 +120,8 @@ extension BoxOfficeListController {
     
     private func setLayout() {
         view.addSubview(boxOfficeListCollectionView)
+        view.addSubview(activityIndicator)
+        
         NSLayoutConstraint.activate([
             boxOfficeListCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             boxOfficeListCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),

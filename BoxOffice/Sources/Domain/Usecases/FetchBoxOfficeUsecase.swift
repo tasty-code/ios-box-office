@@ -28,7 +28,6 @@ final class FetchBoxOfficeUsecase {
             case .success(let boxOfficeResponse):
                 let boxOfficeListEntnty = boxOfficeResponse.boxOfficeResult.toDomain()
                 completion(.success(boxOfficeListEntnty))
-                print(boxOfficeResponse)
             case .failure(let error):
                 print(error)
             }
