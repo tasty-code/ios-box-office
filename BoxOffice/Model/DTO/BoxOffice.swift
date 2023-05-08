@@ -40,6 +40,7 @@ struct DailyBoxOffice: Decodable, Hashable {
     let movieName: String
     let openDate: String
     let audienceAccumulation: String
+    let audienceCount: String
     let identifier = UUID()
 
     enum CodingKeys: String, CodingKey {
@@ -51,6 +52,7 @@ struct DailyBoxOffice: Decodable, Hashable {
         case movieName = "movieNm"
         case openDate = "openDt"
         case audienceAccumulation = "audiAcc"
+        case audienceCount = "audiCnt"
     }
 
     func hash(into hasher: inout Hasher) {

@@ -24,6 +24,13 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
         static let titleStackViewInset: CGFloat = 16.0
     }
 
+    private let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+
+        return formatter
+    }()
+
     private let movieTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: Constants.movieTitleLabelFontSize)
@@ -78,6 +85,12 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
         configureConstraints()
     }
 
+    func configure(with movie: DailyBoxOffice) {
+        movieTitleLabel.text = movie.movieName
+        audienceLabel.text = movie.rank
+        audienceLabel.text = generateAudienceLabelText(with: movie)
+    }
+
     private func configureHierarchy() {
         rankVerticalStackView.addArrangedSubview(rankNumberLabel)
         rankVerticalStackView.addArrangedSubview(dailyRankChangesLabel)
@@ -90,7 +103,6 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
     }
 
     private func configureConstraints() {
-        translatesAutoresizingMaskIntoConstraints = false
         let cellHeightConstraint = contentView.heightAnchor.constraint(equalToConstant: 80)
         cellHeightConstraint.priority = .defaultHigh
         cellHeightConstraint.isActive = true
@@ -109,6 +121,22 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func generateAudienceLabelText(with movie: DailyBoxOffice) -> String {
+        let audienceAccumulationNumber = movie.audienceAccumulation
+        let audienceCountNumber = movie.audienceCount
+
+        guard let audienceAccumulation = numberFormatter.string(for: audienceAccumulationNumber) else {
+            return String(audienceAccumulationNumber)
+        }
+        guard let dailyAudienceCount = numberFormatter.string(for: audienceCountNumber) else {
+            return String(audienceCountNumber)
+        }
+
+        let audienceLabelText = "오늘 \(dailyAudienceCount) / 총 \(audienceAccumulation)"
+
+        return audienceLabelText
     }
 
 }
