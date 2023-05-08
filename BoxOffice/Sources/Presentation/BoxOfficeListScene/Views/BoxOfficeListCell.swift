@@ -25,7 +25,7 @@ final class BoxOfficeListCell: UICollectionViewListCell {
         static let movieRankLabelSkeletonText = "-"
         static let movieRankStatusLabelSkeletonText = "--"
         static let movieTitleLabelSkeletonText = "----"
-        static let audienceCountLabelSkeletonText = "오늘 --- / 총 ---"
+        static let audienceCountLabelSkeletonText = "일일 --- / 총 ---"
         
         static let movieRankLabelNewText = "신작"
         
@@ -147,7 +147,7 @@ final class BoxOfficeListCell: UICollectionViewListCell {
               let formattedCumulativeAudience = Int(dailyBoxOffice.cumulativeAudience)?.formatWithCommas() else {
             return ""
         }
-        return "오늘 \(formattedDailyAudienceCount) / 총 \(formattedCumulativeAudience)"
+        return "일일 \(formattedDailyAudienceCount) / 총 \(formattedCumulativeAudience)"
     }
 }
 

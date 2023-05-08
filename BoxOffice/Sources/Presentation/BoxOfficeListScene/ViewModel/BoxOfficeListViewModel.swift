@@ -23,7 +23,7 @@ final class BoxOfficeListViewModel: ViewModelType {
     }
     
     enum Constants {
-        static let dailyAudiencePrefix = "오늘"
+        static let dailyAudiencePrefix = "일일"
         static let cumulativeAudiencePrefix = "총"
     }
     
@@ -76,7 +76,7 @@ final class BoxOfficeListViewModel: ViewModelType {
               let formattedCumulativeAudience = boxOffice.cumulativeAudience.formatWithCommas() else {
             return ""
         }
-        return "\(Constants.dailyAudiencePrefix) \(formattedDailyAudienceCount) /"
+        return "\(Constants.dailyAudiencePrefix) \(formattedDailyAudienceCount) / "
         + "\(Constants.cumulativeAudiencePrefix) \(formattedCumulativeAudience)"
     }
 }
