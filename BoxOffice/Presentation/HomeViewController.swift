@@ -76,9 +76,14 @@ extension HomeViewController {
 extension HomeViewController {
     func configureDataSource() {
 
-        let cellRegistration = UICollectionView.CellRegistration<BoxOfficeListCell, DailyBoxOffice> { (cell, indexPath, dailyBoxOffice) in
-            cell.dailyBoxOffice = dailyBoxOffice
-            cell.accessories = [.disclosureIndicator()]
+        let cellRegistration = UICollectionView.CellRegistration<BoxOfficeCell, DailyBoxOffice> { (cell, indexPath, dailyBoxOffice) in
+            cell.boxOfficeBrief.setMovieName(by: dailyBoxOffice.movieBrief.movieName)
+            cell.boxOfficeBrief.setAudienceCount(by: dailyBoxOffice.movieBrief.audienceCount)
+            cell.boxOfficeRank.setRankVariation(by: dailyBoxOffice.rank.movieType)
+            cell.boxOfficeRank.setRankVariation(by: dailyBoxOffice.rankEmoji)
+            cell.boxOfficeRank.setRank(by: dailyBoxOffice.rank.rank)
+            cell.boxOfficeRank.setRankVaritaion(by: .red)
+            
         }
 
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { (collectionView, indexPath, dailyBoxOffice) in
@@ -91,9 +96,9 @@ extension HomeViewController {
 
     func initialSnapShot() -> NSDiffableDataSourceSnapshot<Section, DailyBoxOffice> {
         let testEntity = [
-            DailyBoxOffice(rankEmoji: UIImage(systemName: "heart.fill") ?? UIImage(), movieBrief: MovieBrief(movieName: "영화 1", audienceCount: "123"), rank: Rank(rank: "123", movieType: "456")),
+            DailyBoxOffice(rankEmoji: UIImage(), movieBrief: MovieBrief(movieName: "경관의 피", audienceCount: "오늘 64,050 / 총 69,228"), rank: Rank(rank: "1", movieType: "신작")),
             DailyBoxOffice(rankEmoji: UIImage(systemName: "heart.fill") ?? UIImage(), movieBrief: MovieBrief(movieName: "영화 2", audienceCount: "123"), rank: Rank(rank: "123", movieType: "456")),
-            DailyBoxOffice(rankEmoji: UIImage(systemName: "heart.fill") ?? UIImage(), movieBrief: MovieBrief(movieName: "영화 3", audienceCount: "123"), rank: Rank(rank: "123", movieType: "456"))
+            DailyBoxOffice(rankEmoji: UIImage(systemName: "star.fill") ?? UIImage(), movieBrief: MovieBrief(movieName: "영화 3", audienceCount: "123"), rank: Rank(rank: "123", movieType: "456"))
         ]
 
         var snapshot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>()

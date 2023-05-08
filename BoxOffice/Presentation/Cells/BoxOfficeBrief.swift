@@ -22,7 +22,7 @@ final class BoxOfficeBrief: UIStackView {
 
     private let movieName: UILabel = {
         let movieName = UILabel()
-        movieName.font = .systemFont(ofSize: 20)
+        movieName.font = .systemFont(ofSize: 18)
         movieName.textColor = .black
         return movieName
     }()
@@ -36,9 +36,8 @@ final class BoxOfficeBrief: UIStackView {
     
     private func configuration() {
         axis = .vertical
-        spacing = 8
         alignment = .leading
-        distribution = .equalSpacing
+        distribution = .fillEqually
     }
     
     private func configurationOfComponents() {
