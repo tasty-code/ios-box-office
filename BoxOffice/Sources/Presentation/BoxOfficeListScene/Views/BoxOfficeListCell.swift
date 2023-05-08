@@ -164,24 +164,24 @@ extension BoxOfficeListCell {
     
     private func setLayout() {
         
-        addSubview(movieRankStackView)
+        contentView.addSubview(movieRankStackView)
         NSLayoutConstraint.activate([
-            movieRankStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
+            movieRankStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
                                                         constant: Metric.movieRankStackViewLeadingInset),
-            movieRankStackView.topAnchor.constraint(equalTo: topAnchor,
+            movieRankStackView.topAnchor.constraint(equalTo: contentView.topAnchor,
                                                     constant: Metric.movieRanckStackViewVerticalInset),
-            movieRankStackView.bottomAnchor.constraint(equalTo: bottomAnchor,
+            movieRankStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
                                                        constant: -Metric.movieRanckStackViewVerticalInset),
             movieRankStackView.widthAnchor.constraint(equalToConstant: Metric.movieRanckStackViewWidth)
         ])
         
-        addSubview(movieInfoStackView)
+        contentView.addSubview(movieInfoStackView)
         NSLayoutConstraint.activate([
             movieInfoStackView.leadingAnchor.constraint(equalTo: movieRankStackView.trailingAnchor,
                                                         constant: Metric.movieInfoStackViewLeadingInset),
-            movieInfoStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
+            movieInfoStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
                                                          constant: -Metric.movieInfoStackViewTrailingInset),
-            movieInfoStackView.centerYAnchor.constraint(equalTo: centerYAnchor)
+            movieInfoStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
     
