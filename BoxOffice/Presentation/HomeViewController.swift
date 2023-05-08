@@ -14,7 +14,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureOfMainViewLayout()
+        configureHierarchy()
         configureDataSource()
     }
     
@@ -43,7 +43,7 @@ class HomeViewController: UIViewController {
 
 //MARK: - Configure of CollectionViewLayout
 extension HomeViewController {
-    private func configureOfMainViewLayout() {
+    private func configureHierarchy() {
         let safeArea = self.view.safeAreaLayoutGuide
         
         self.view.backgroundColor = .white
@@ -84,5 +84,22 @@ extension HomeViewController {
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { (collectionView, indexPath, dailyBoxOffice) in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: dailyBoxOffice)
         }
+
+        let snapshot = initialSnapShot()
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+
+    func initialSnapShot() -> NSDiffableDataSourceSnapshot<Section, DailyBoxOffice> {
+        let testEntity = [
+            DailyBoxOffice(rankEmoji: UIImage(systemName: "heart.fill") ?? UIImage(), movieBrief: MovieBrief(movieName: "영화 1", audienceCount: "123"), rank: Rank(rank: "123", movieType: "456")),
+            DailyBoxOffice(rankEmoji: UIImage(systemName: "heart.fill") ?? UIImage(), movieBrief: MovieBrief(movieName: "영화 2", audienceCount: "123"), rank: Rank(rank: "123", movieType: "456")),
+            DailyBoxOffice(rankEmoji: UIImage(systemName: "heart.fill") ?? UIImage(), movieBrief: MovieBrief(movieName: "영화 3", audienceCount: "123"), rank: Rank(rank: "123", movieType: "456"))
+        ]
+
+        var snapshot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(testEntity)
+
+        return snapshot
     }
 }
