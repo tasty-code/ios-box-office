@@ -7,9 +7,9 @@
 
 import UIKit
 
-class BoxOfficeCell: UICollectionViewCell {
+class BoxOfficeListCell: UICollectionViewListCell {
 
-    static let identifier = String(describing: BoxOfficeCell.self)
+    static let identifier = String(describing: BoxOfficeListCell.self)
 
     var boxOfficeRank = BoxOfficeRank()
     var boxOfficeBrief = BoxOfficeBrief()
