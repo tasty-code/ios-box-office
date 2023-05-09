@@ -102,7 +102,7 @@ extension HomeViewController {
 extension HomeViewController {
     func configureDataSource() {
 
-        let cellRegistration = UICollectionView.CellRegistration<BoxOfficeCell, DailyBoxOffice> { (cell, indexPath, dailyBoxOffice) in
+        let cellRegistration = UICollectionView.CellRegistration<BoxOfficeListCell, DailyBoxOffice> { (cell, indexPath, dailyBoxOffice) in
             cell.boxOfficeBrief.setMovieName(by: dailyBoxOffice.movieBrief.movieName)
             cell.boxOfficeBrief.setAudienceCount(by: self.convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
                                                                                    accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
@@ -110,6 +110,8 @@ extension HomeViewController {
             cell.boxOfficeRank.setRankVariation(by: dailyBoxOffice.rankEmoji)
             cell.boxOfficeRank.setRank(by: dailyBoxOffice.rank.rank)
             cell.boxOfficeRank.setRankVaritaion(by: .red)
+            
+            cell.accessories = [.disclosureIndicator()]
         }
 
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { (collectionView, indexPath, dailyBoxOffice) in
