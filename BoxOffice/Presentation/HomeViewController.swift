@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
             let result = try await networkService.request(with: APIEndPoint.receiveBoxOffice(with: boxOfficeRequestDTO))
             networkResult = result.boxOfficeResult
             networkResult?.dailyBoxOfficeList.forEach({ officeList in
-                testEntity.append(DailyBoxOffice(rankEmoji: UIImage(systemName: "heart.fill")!, movieBrief: MovieBrief(movieName: officeList.movieName, audienceCount: officeList.audienceCount, audienceAccumulated: officeList.audienceAccumulate), rank: Rank(rank: officeList.rank, movieType: officeList.rankVariation)))
+                testEntity.append(DailyBoxOffice(rankEmoji: UIImage(systemName: "heart.fill")!, movieBrief: MovieBrief(movieName: officeList.movieName, audienceCount: officeList.audienceCount, audienceAccumulated: officeList.audienceAccumulate), rank: Rank(rank: officeList.rank, rankVariation: officeList.rankVariation)))
             })
             applySnapshot()
         }
@@ -107,10 +107,13 @@ extension HomeViewController {
             cell.boxOfficeBrief.setMovieName(by: dailyBoxOffice.movieBrief.movieName)
             cell.boxOfficeBrief.setAudienceCount(by: self.convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
                                                                                    accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
-            cell.boxOfficeRank.setRankVariation(by: dailyBoxOffice.rank.movieType)
+            
+            let rankVariation = self.determineRankVariation(with: dailyBoxOffice.rank.rankVariation)
+                                                       
+            cell.boxOfficeRank.setRankVariation(by: rankVariation.0)
             cell.boxOfficeRank.setRankVariation(by: dailyBoxOffice.rankEmoji)
             cell.boxOfficeRank.setRank(by: dailyBoxOffice.rank.rank)
-            cell.boxOfficeRank.setRankVaritaion(by: .red)
+            cell.boxOfficeRank.setRankVaritaion(by: rankVariation.1)
             
             cell.accessories = [.disclosureIndicator()]
         }
@@ -120,7 +123,18 @@ extension HomeViewController {
         }
     }
     
-    func convertToNumberFormatter(_ audienceCount: String, accumulated: String) -> String {
+    private func determineRankVariation(with rankVariation: String) -> (String, UIColor) {
+        var returnValue = ""
+        
+        guard rankVariation == "0" else {
+            return (rankVariation, UIColor.black)
+        }
+        returnValue = "신작"
+        
+        return (returnValue, UIColor.red)
+    }
+    
+    private func convertToNumberFormatter(_ audienceCount: String, accumulated: String) -> String {
         guard let audienceCount = Int(audienceCount), let audienceAccumulated = Int(accumulated) else {
             return ""
         }
