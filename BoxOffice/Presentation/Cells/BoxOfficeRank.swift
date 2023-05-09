@@ -77,7 +77,7 @@ extension BoxOfficeRank {
         rankVariation.textColor = color
     }
 
-    func setRankVariation(by emoji: UIImage, with color: UIColor) {
+    func setRankVariation(by emoji: UIImage?, with color: UIColor?) {
         rankEmoji.image = emoji
         rankEmoji.tintColor = color
     }
