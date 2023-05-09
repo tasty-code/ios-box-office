@@ -48,11 +48,10 @@ class BoxOfficeListCell: UICollectionViewListCell {
         boxOfficeBrief.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            boxOfficeRank.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 7),
+            boxOfficeRank.topAnchor.constraint(equalTo: contentStackView.topAnchor, constant: 7),
             boxOfficeRank.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
-            boxOfficeRank.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -7),
+            boxOfficeRank.bottomAnchor.constraint(equalTo: contentStackView.bottomAnchor, constant: -7),
             boxOfficeRank.widthAnchor.constraint(equalTo: contentStackView.widthAnchor, multiplier: 0.25),
-            boxOfficeRank.heightAnchor.constraint(equalTo: contentStackView.heightAnchor),
 
             boxOfficeBrief.topAnchor.constraint(equalTo: contentStackView.topAnchor, constant: 7),
             boxOfficeBrief.leadingAnchor.constraint(equalTo: boxOfficeRank.trailingAnchor),
