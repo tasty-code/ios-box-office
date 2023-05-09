@@ -90,9 +90,9 @@ final class DailyBoxOfficeViewController: UIViewController {
     private func fetchBoxOfficeData() {
         showIndicatorview()
         let yesterDay = Date.yesterDayDateConvertToString()
-        let dashDeletedYesterday = yesterDay.exceptDash()
+        let yesterdayDashExcepted = yesterDay.except(for: "-")
 
-        boxOfficeManager.fetchData(to: BoxOffice.self, endPoint: .boxOffice(targetDate: dashDeletedYesterday))
+        boxOfficeManager.fetchData(to: BoxOffice.self, endPoint: .boxOffice(targetDate: yesterdayDashExcepted))
         { [weak self] data in
             guard let boxOffice = data as? BoxOffice else { return }
             self?.movies = boxOffice.result.dailyBoxOfficeList

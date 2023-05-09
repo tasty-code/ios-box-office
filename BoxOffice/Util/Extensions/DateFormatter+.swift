@@ -18,7 +18,6 @@ extension Date {
 
     static func yesterDayDateConvertToString() -> String {
         let date = Date()
-        print(date)
         guard let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: date) else { return "-" }
         let formatter = Date.yearMonthDaySplitDashFormatter
 

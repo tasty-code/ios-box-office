@@ -9,8 +9,9 @@ import Foundation
 
 extension String {
 
-    func exceptDash() -> String {
-        let dashDeletedString = self.components(separatedBy: ["-"]).joined()
+    func except(for characterSet: String) -> String {
+        let charSet = CharacterSet(charactersIn: characterSet)
+        let dashDeletedString = self.components(separatedBy: charSet).joined()
 
         return dashDeletedString
     }
