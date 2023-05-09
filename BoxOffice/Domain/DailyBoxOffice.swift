@@ -16,6 +16,7 @@ struct DailyBoxOffice: Hashable {
 internal struct MovieBrief: Hashable {
     let movieName: String
     let audienceCount: String
+    let audienceAccumulated: String
 }
 
 internal struct Rank: Hashable {
