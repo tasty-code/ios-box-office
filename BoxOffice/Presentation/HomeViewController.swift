@@ -126,7 +126,7 @@ extension HomeViewController {
                                                                                    accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
             cell.boxOfficeRank.setRankVariation(by: rankVariation.0, with: rankVariation.1)
             
-            if dailyBoxOffice.rank.rankOldAndNew == RankOldAndNew.new || dailyBoxOffice.rank.rankVariation == "0" {
+            if dailyBoxOffice.rank.rankOldAndNew == RankOldAndNew.new || dailyBoxOffice.rank.rankVariation == MagicLiteral.zero {
                 cell.boxOfficeRank.setRankVariation(by: nil, with: nil)
             } else {
                 cell.boxOfficeRank.setRankVariation(by: rankImage.0, with: rankImage.1)
@@ -150,9 +150,9 @@ extension HomeViewController {
 
         switch rankOldAndNew {
         case .new:
-            return ("신작", UIColor.red)
+            return (MagicLiteral.newMovie, UIColor.red)
         case .old :
-            guard rankVariation == "0" else {
+            guard rankVariation == MagicLiteral.zero else {
                 return (rankVariation, UIColor.black)
             }
             return (returnValue, UIColor.black)
@@ -161,9 +161,9 @@ extension HomeViewController {
 
     private func determineVariationImage(with rankVariation: String) -> (UIImage, UIColor) {
         guard rankVariation.hasPrefix("-") else {
-            return (UIImage(systemName: "arrowtriangle.up.fill") ?? UIImage(), UIColor.red)
+            return (UIImage(systemName: MagicLiteral.upTriangle) ?? UIImage(), UIColor.red)
         }
-        return (UIImage(systemName: "arrowtriangle.down.fill") ?? UIImage(), UIColor.blue)
+        return (UIImage(systemName: MagicLiteral.downTriangle) ?? UIImage(), UIColor.blue)
     }
     
     private func convertToNumberFormatter(_ audienceCount: String, accumulated: String) -> String {
@@ -178,7 +178,7 @@ extension HomeViewController {
             return ""
         }
         
-        return "오늘 \(audienceResult) / 총 \(audienceAccumulatedCount)"
+        return MagicLiteral.todayAudience + audienceResult + MagicLiteral.totalAudience + audienceAccumulatedCount
     }
     
     private func receiveCurrentDate() -> String {
@@ -187,7 +187,7 @@ extension HomeViewController {
         }
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = MagicLiteral.dateFormat
         let currentDateString = formatter.string(from: date)
         
         return currentDateString
