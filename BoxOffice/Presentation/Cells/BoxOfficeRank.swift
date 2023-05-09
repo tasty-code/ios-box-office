@@ -72,15 +72,13 @@ extension BoxOfficeRank {
         rank.text = text
     }
 
-    func setRankVariation(by text: String) {
+    func setRankVariation(by text: String, with color: UIColor) {
         rankVariation.text = text
-    }
-
-    func setRankVaritaion(by color: UIColor) {
         rankVariation.textColor = color
     }
 
-    func setRankVariation(by emoji: UIImage) {
+    func setRankVariation(by emoji: UIImage, with color: UIColor) {
         rankEmoji.image = emoji
+        rankEmoji.tintColor = color
     }
 }
