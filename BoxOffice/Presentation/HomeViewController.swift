@@ -32,13 +32,26 @@ class HomeViewController: UIViewController {
 
         return navigationBar
     }()
+    
+    private lazy var refresh: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefreshControl) , for: .valueChanged)
+
+        return refreshControl
+    }()
+    
+    @objc func handleRefreshControl() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.refresh.endRefreshing()
+        }
+    }
 
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: configureOfCollectionViewLayout())
         collectionView.isScrollEnabled = true
         collectionView.showsVerticalScrollIndicator = true
         collectionView.clipsToBounds = true
-        collectionView.backgroundColor = .systemGray2
+        collectionView.refreshControl = refresh
 
         return collectionView
     }()
