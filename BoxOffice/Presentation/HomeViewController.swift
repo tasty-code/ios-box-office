@@ -28,6 +28,7 @@ class HomeViewController: UIViewController {
         let navigationBar = UINavigationBar()
         let navigationItem = UINavigationItem(title: "2023-05-01")
         navigationBar.setItems([navigationItem], animated: true)
+        navigationBar.isTranslucent = false
 
         return navigationBar
     }()
