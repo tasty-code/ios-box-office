@@ -19,7 +19,6 @@ class HomeViewController: UIViewController {
 
         configureHierarchy()
         configureDataSource()
-        initialSnapShot()
         fetchData()
     }
 
@@ -56,13 +55,14 @@ class HomeViewController: UIViewController {
             networkResult?.dailyBoxOfficeList.forEach({ officeList in
                 testEntity.append(DailyBoxOffice(rankEmoji: UIImage(systemName: "heart.fill")!, movieBrief: MovieBrief(movieName: officeList.movieName, audienceCount: officeList.audienceCount), rank: Rank(rank: officeList.rank, movieType: officeList.rankVariation)))
             })
-            applySnapshot(items: testEntity, section: Section.main)
+            applySnapshot()
         }
     }
 
-    private func applySnapshot(items: [DailyBoxOffice], section: Section) {
-        var snapshot = dataSource.snapshot()
-        snapshot.appendItems(items, toSection: section)
+    private func applySnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(testEntity)
         dataSource.apply(snapshot)
     }
 }
@@ -117,19 +117,5 @@ extension HomeViewController {
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: dailyBoxOffice)
         }
 
-    }
-
-    func initialSnapShot() {
-
-//        let testEntity = [
-//            DailyBoxOffice(rankEmoji: UIImage(), movieBrief: MovieBrief(movieName: "경관의 피", audienceCount: "오늘 64,050 / 총 69,228"), rank: Rank(rank: "1", movieType: "신작")),
-//            DailyBoxOffice(rankEmoji: UIImage(systemName: "heart.fill") ?? UIImage(), movieBrief: MovieBrief(movieName: "영화 2", audienceCount: "123"), rank: Rank(rank: "123", movieType: "456")),
-//            DailyBoxOffice(rankEmoji: UIImage(systemName: "star.fill") ?? UIImage(), movieBrief: MovieBrief(movieName: "영화 3", audienceCount: "123"), rank: Rank(rank: "123", movieType: "456"))
-//        ]
-
-        var snapshot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(testEntity)
-        dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
