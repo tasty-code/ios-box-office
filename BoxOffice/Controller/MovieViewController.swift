@@ -11,7 +11,7 @@ class MovieViewController: UIViewController {
 
     var collectionView: UICollectionView?
 
-    var movieArrays: [Movie] = [Movie(name: "존 윅 4", rank: BoxOffice.Rank(rank: 3, isEntry: false, variance: 0), audience: BoxOffice.Audience(today: 65019, accumulate: 1663651), code: 20231089)]
+    var movieArrays: [Movie] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class MovieViewController: UIViewController {
             let url = try api.configureURL()
             let urlRequest = URLRequest(url: url)
 
-            Networking().loadData(api.convertType, request: urlRequest) { data, error in
+            Networking().loadData(api.convertType, request: urlRequest) { [weak self] data, error in
                 guard error == nil else {
                     print(error as Any)
                     return
@@ -35,12 +35,15 @@ class MovieViewController: UIViewController {
                     print("빈 데이터입니다")
                     return
                 }
-                print(data)
+                self?.movieArrays = (data as! DailyBoxOffice).movies
+                DispatchQueue.main.async {
+                    self?.collectionView?.reloadData()
+                }
             }
         } catch {
             print(error)
         }
-
+//
         func makeUI() {
             view.backgroundColor = .white
 
@@ -59,7 +62,6 @@ class MovieViewController: UIViewController {
         guard let collectionView = collectionView else { return }
         view.addSubview(collectionView)
         collectionView.dataSource = self
-//        flowLayout.scrollDirection = .vertical
 
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -73,12 +75,12 @@ class MovieViewController: UIViewController {
 
 extension MovieViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return movieArrays.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
-
+        cell.configure(with: movieArrays[indexPath.row])
         return cell
     }
 
