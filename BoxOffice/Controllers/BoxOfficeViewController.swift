@@ -9,12 +9,17 @@ import UIKit
 
 class BoxOfficeViewController: UIViewController {
     
+    enum Section {
+        case main
+    }
+    
     // MARK: - Private
     private let networkService = NetworkService()
     private var dailyBoxOffice: DailyBoxOfficeDTO?
     private var movieDetail: MovieDetailDTO?
     
     private var movieCollectionView: UICollectionView! = nil
+    private var movieDataSource: UICollectionViewDiffableDataSource<Section, MovieDTO>! = nil
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -30,15 +35,36 @@ class BoxOfficeViewController: UIViewController {
     
     // MARK: - Private function
     private func setup() {
-        configureCollectionView()
+        configureMovieCollectionView()
+        configureMovieDataSource()
         configureUI()
+    }
+    
+    private func configureMovieDataSource() {
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, MovieDTO> { cell, indexPath, item in
+            var content = cell.defaultContentConfiguration()
+            content.text = item.name
+            cell.contentConfiguration = content
+        }
+        
+        movieDataSource = UICollectionViewDiffableDataSource<Section, MovieDTO>(collectionView: movieCollectionView) { collectionView, indexPath, itemIdentifier in
+            let cell = self.movieCollectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+            return cell
+        }
+        
+        let dummyData = MovieDTO(rank: "", rankInten: "", rankOldAndNew: "", code: "", name: "", openDate: "", salesAmount: "", salesShare: "", salesInten: "", salesChange: "", salesAcc: "", audienceCount: "", audienceInten: "", audienceChange: "", audienceAcc: "", screenCount: "", showCount: "")
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Section, MovieDTO>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems([dummyData])
+        movieDataSource.apply(snapshot)
     }
     
     private func configureUI() {
         view.addSubview(movieCollectionView)
     }
         
-    private func configureCollectionView() {
+    private func configureMovieCollectionView() {
         let config = UICollectionLayoutListConfiguration(appearance: .plain)
         let layout = UICollectionViewCompositionalLayout.list(using: config)
         let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
