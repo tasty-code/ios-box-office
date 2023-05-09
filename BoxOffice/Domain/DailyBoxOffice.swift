@@ -22,4 +22,5 @@ internal struct MovieBrief: Hashable {
 internal struct Rank: Hashable {
     let rank: String
     let rankVariation: String
+    let rankOldAndNew: RankOldAndNew
 }
