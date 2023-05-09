@@ -15,7 +15,7 @@ enum NetworkError: LocalizedError {
     case emptyData
     case failedDecoding
         
-    var errorDescription: String? {
+    var errorDescription: String {
         switch self {
         case .outOfResponseCode:
             return "응답코드가 정상코드 밖에 있습니다."

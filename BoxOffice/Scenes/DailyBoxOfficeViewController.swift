@@ -13,6 +13,10 @@ final class DailyBoxOfficeViewController: UIViewController {
         case main
     }
 
+    enum Constants {
+        static let formerNavigationItemTitle = "데이터 받아오는 중~!"
+    }
+
     typealias DataSource = UICollectionViewDiffableDataSource<Section, DailyBoxOffice>
     typealias SnapShot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>
 
@@ -36,7 +40,7 @@ final class DailyBoxOfficeViewController: UIViewController {
     }
 
     private func setUp() {
-        navigationItem.title = "데이터 받아오는 중~!"
+        navigationItem.title = Constants.formerNavigationItemTitle
         view.backgroundColor = .systemBackground
     }
 
@@ -85,15 +89,15 @@ final class DailyBoxOfficeViewController: UIViewController {
 
     private func fetchBoxOfficeData() {
         showIndicatorview()
-        let dashedYesterDayDate = dashedYesterdayDate()
-        let yesterDayDate = dashedYesterDayDate.components(separatedBy: ["-"]).joined()
+        let yesterDay = Date.yesterDayDateConvertToString()
+        let dashDeletedYesterday = yesterDay.exceptDash()
 
-        boxOfficeManager.fetchData(to: BoxOffice.self, endPoint: .boxOffice(targetDate: yesterDayDate))
+        boxOfficeManager.fetchData(to: BoxOffice.self, endPoint: .boxOffice(targetDate: dashDeletedYesterday))
         { [weak self] data in
             guard let boxOffice = data as? BoxOffice else { return }
             self?.movies = boxOffice.result.dailyBoxOfficeList
             DispatchQueue.main.async {
-                self?.navigationItem.title = dashedYesterDayDate
+                self?.navigationItem.title = yesterDay
                 self?.hideIndicatorView()
             }
         }
@@ -131,7 +135,7 @@ extension DailyBoxOfficeViewController {
     private func window() -> UIWindow {
         let scenes = UIApplication.shared.connectedScenes
         let windowScene = scenes.first as? UIWindowScene
-        guard let window = windowScene?.windows.first else { return UIWindow()}
+        guard let window = windowScene?.windows.first else { return UIWindow() }
 
         return window
     }
@@ -139,11 +143,11 @@ extension DailyBoxOfficeViewController {
     private func showIndicatorview() {
         let window = window()
         loadingIndicatorView.frame = window.frame
-        loadingIndicatorView.color = .brown
+        loadingIndicatorView.color = .systemBlue
         window.addSubview(loadingIndicatorView)
         loadingIndicatorView.startAnimating()
     }
-
+    
     private func hideIndicatorView() {
         let window = window()
         let indicatorView = window.subviews.first { $0 is UIActivityIndicatorView }
@@ -156,8 +160,8 @@ extension DailyBoxOfficeViewController {
 
         dailyBoxOfficeCollectionView.refreshControl = UIRefreshControl()
         dailyBoxOfficeCollectionView.refreshControl?.addTarget(self,
-                                                 action: #selector(handleRefreshControl),
-                                                 for: .valueChanged)
+                                                               action: #selector(handleRefreshControl),
+                                                               for: .valueChanged)
     }
 
     @objc private func handleRefreshControl() {
