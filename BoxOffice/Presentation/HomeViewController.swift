@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
             let result = try await networkService.request(with: APIEndPoint.receiveBoxOffice(with: boxOfficeRequestDTO))
             networkResult = result.boxOfficeResult
             networkResult?.dailyBoxOfficeList.forEach({ officeList in
-                testEntity.append(DailyBoxOffice(rankEmoji: UIImage(systemName: "heart.fill")!, movieBrief: MovieBrief(movieName: officeList.movieName, audienceCount: officeList.audienceCount, audienceAccumulated: officeList.audienceAccumulate), rank: Rank(rank: officeList.rank, rankVariation: officeList.rankVariation, rankOldAndNew: officeList.rankOldAndNew)))
+                testEntity.append(DailyBoxOffice(movieBrief: MovieBrief(movieName: officeList.movieName, audienceCount: officeList.audienceCount, audienceAccumulated: officeList.audienceAccumulate), rank: Rank(rank: officeList.rank, rankVariation: officeList.rankVariation, rankOldAndNew: officeList.rankOldAndNew)))
             })
             applySnapshot()
         }
@@ -109,11 +109,11 @@ extension HomeViewController {
                                                                                    accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
             
             let rankVariation = self.determineRankVariation(with: dailyBoxOffice.rank.rankVariation, and: dailyBoxOffice.rank.rankOldAndNew)
+            let rankImage = self.determineVariationImage(with: dailyBoxOffice.rank.rankVariation)
                                                        
-            cell.boxOfficeRank.setRankVariation(by: rankVariation.0)
-            cell.boxOfficeRank.setRankVariation(by: dailyBoxOffice.rankEmoji)
+            cell.boxOfficeRank.setRankVariation(by: rankVariation.0, with: rankVariation.1)
+            cell.boxOfficeRank.setRankVariation(by: rankImage.0, with: rankImage.1)
             cell.boxOfficeRank.setRank(by: dailyBoxOffice.rank.rank)
-            cell.boxOfficeRank.setRankVaritaion(by: rankVariation.1)
             
             cell.accessories = [.disclosureIndicator()]
         }
@@ -135,6 +135,13 @@ extension HomeViewController {
             }
             return (returnValue, UIColor.black)
         }
+    }
+
+    private func determineVariationImage(with rankVariation: String) -> (UIImage, UIColor) {
+        guard rankVariation.hasPrefix("-") else {
+            return (UIImage(systemName: "arrowtriangle.up.fill") ?? UIImage(), UIColor.red)
+        }
+        return (UIImage(systemName: "arrowtriangle.down.fill") ?? UIImage(), UIColor.blue)
     }
     
     private func convertToNumberFormatter(_ audienceCount: String, accumulated: String) -> String {
