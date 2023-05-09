@@ -9,6 +9,8 @@ import UIKit
 
 class MovieViewController: UIViewController {
 
+    let refreshControl = UIRefreshControl()
+
     var collectionView: UICollectionView?
 
     var movieArrays: [Movie] = []
@@ -19,6 +21,8 @@ class MovieViewController: UIViewController {
         makeUI()
         setupCollectionView()
         registerCollectionViewCell()
+        collectionView?.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
 
         do {
             let api = URLPath.dailyBoxOffice(date: "20230501")
@@ -47,8 +51,32 @@ class MovieViewController: UIViewController {
         func makeUI() {
             view.backgroundColor = .white
 
-            title = "20230501"
+            title = formatter(date: "20230501")
         }
+
+    }
+
+    @objc func refresh(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.refreshControl.endRefreshing()
+        }
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+            if (refreshControl.isRefreshing) {
+                self.refreshControl.endRefreshing()
+
+            }
+    }
+
+    private func formatter(date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        let convertDate = dateFormatter.date(from: date)!
+
+        let myFormatter = DateFormatter()
+        myFormatter.dateFormat = "yyyy-MM-dd"
+        return myFormatter.string(from: convertDate)
     }
 
     private func registerCollectionViewCell() {
