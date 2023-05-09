@@ -110,8 +110,6 @@ extension HomeViewController {
             cell.boxOfficeRank.setRankVariation(by: dailyBoxOffice.rankEmoji)
             cell.boxOfficeRank.setRank(by: dailyBoxOffice.rank.rank)
             cell.boxOfficeRank.setRankVaritaion(by: .red)
-
-            cell.reloadInputViews()
         }
 
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { (collectionView, indexPath, dailyBoxOffice) in
@@ -131,7 +129,6 @@ extension HomeViewController {
             return ""
         }
         
-//        return "오늘 \(audienceCount) / 총 \(accumulated)"
         return "오늘 \(audienceResult) / 총 \(audienceAccumulatedCount)"
     }
 }
