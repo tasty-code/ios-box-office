@@ -46,7 +46,7 @@ class HomeViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
 
     private func fetchData() {
-        let boxOfficeRequestDTO = BoxOfficeRequestDTO(targetDate: "20230507")
+        let boxOfficeRequestDTO = BoxOfficeRequestDTO(targetDate: "20220105")
 
         var networkResult: BoxOfficeResult?
 
@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
             let result = try await networkService.request(with: APIEndPoint.receiveBoxOffice(with: boxOfficeRequestDTO))
             networkResult = result.boxOfficeResult
             networkResult?.dailyBoxOfficeList.forEach({ officeList in
-                testEntity.append(DailyBoxOffice(rankEmoji: UIImage(systemName: "heart.fill")!, movieBrief: MovieBrief(movieName: officeList.movieName, audienceCount: officeList.audienceCount, audienceAccumulated: officeList.audienceAccumulate), rank: Rank(rank: officeList.rank, rankVariation: officeList.rankVariation)))
+                testEntity.append(DailyBoxOffice(rankEmoji: UIImage(systemName: "heart.fill")!, movieBrief: MovieBrief(movieName: officeList.movieName, audienceCount: officeList.audienceCount, audienceAccumulated: officeList.audienceAccumulate), rank: Rank(rank: officeList.rank, rankVariation: officeList.rankVariation, rankOldAndNew: officeList.rankOldAndNew)))
             })
             applySnapshot()
         }
@@ -108,7 +108,7 @@ extension HomeViewController {
             cell.boxOfficeBrief.setAudienceCount(by: self.convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
                                                                                    accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
             
-            let rankVariation = self.determineRankVariation(with: dailyBoxOffice.rank.rankVariation)
+            let rankVariation = self.determineRankVariation(with: dailyBoxOffice.rank.rankVariation, and: dailyBoxOffice.rank.rankOldAndNew)
                                                        
             cell.boxOfficeRank.setRankVariation(by: rankVariation.0)
             cell.boxOfficeRank.setRankVariation(by: dailyBoxOffice.rankEmoji)
@@ -123,15 +123,18 @@ extension HomeViewController {
         }
     }
     
-    private func determineRankVariation(with rankVariation: String) -> (String, UIColor) {
-        var returnValue = ""
-        
-        guard rankVariation == "0" else {
-            return (rankVariation, UIColor.black)
+    private func determineRankVariation(with rankVariation: String, and rankOldAndNew: RankOldAndNew) -> (String, UIColor) {
+        let returnValue = "-"
+
+        switch rankOldAndNew {
+        case .new:
+            return ("신작", UIColor.red)
+        case .old :
+            guard rankVariation == "0" else {
+                return (rankVariation, UIColor.black)
+            }
+            return (returnValue, UIColor.black)
         }
-        returnValue = "신작"
-        
-        return (returnValue, UIColor.red)
     }
     
     private func convertToNumberFormatter(_ audienceCount: String, accumulated: String) -> String {
