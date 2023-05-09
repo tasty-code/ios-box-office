@@ -117,21 +117,6 @@ final class DailyBoxOfficeViewController: UIViewController {
 
 extension DailyBoxOfficeViewController {
 
-    private func dashedYesterdayDate() -> String {
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-
-        guard let yesterdayDate = Calendar.current.date(byAdding: .day, value: -1, to: date) else { return "" }
-        let formattedYesterdayDate = formatter.string(from: yesterdayDate)
-
-        return formattedYesterdayDate
-    }
-
-}
-
-extension DailyBoxOfficeViewController {
-
     private func window() -> UIWindow {
         let scenes = UIApplication.shared.connectedScenes
         let windowScene = scenes.first as? UIWindowScene

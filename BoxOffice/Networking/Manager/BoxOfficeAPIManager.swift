@@ -21,7 +21,7 @@ struct BoxOfficeAPIManager {
         networkDispatcher.performRequest(urlRequest) { networkResult in
             switch networkResult {
             case .success(let data):
-                do {
+                do { 
                     let decodedData = try deserializer.deserialize(type: type, data: data)
                     completionHandler(decodedData)
                 }
