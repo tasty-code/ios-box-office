@@ -18,7 +18,7 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
         static let noneChangeOfRankState = "-"
         static let rankNewState: String = "신작"
         static let today: String = "오늘 "
-        static let total: String = "/ 총 "
+        static let total: String = " / 총 "
 
         static let movieTitleLabelFontSize: CGFloat = 21.0
         static let audienceLabelFontSize: CGFloat = 17.0
