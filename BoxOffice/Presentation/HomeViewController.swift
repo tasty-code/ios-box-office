@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureHierarchy()
         configureDataSource()
         fetchData()
@@ -24,9 +24,9 @@ class HomeViewController: UIViewController {
 
     //MARK: - Private Property
 
-    private let navigationBar : UINavigationBar = {
+    private lazy var navigationBar : UINavigationBar = {
         let navigationBar = UINavigationBar()
-        let navigationItem = UINavigationItem(title: "2023-05-01")
+        let navigationItem = UINavigationItem(title: receiveCurrentDate())
         navigationBar.setItems([navigationItem], animated: true)
         navigationBar.isTranslucent = false
 
@@ -59,7 +59,8 @@ class HomeViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
 
     private func fetchData() {
-        let boxOfficeRequestDTO = BoxOfficeRequestDTO(targetDate: "20220105")
+        let yesterdayDate = receiveCurrentDate().split(separator: "-").joined()
+        let boxOfficeRequestDTO = BoxOfficeRequestDTO(targetDate: yesterdayDate)
 
         var networkResult: BoxOfficeResult?
 
@@ -125,7 +126,7 @@ extension HomeViewController {
                                                                                    accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
             cell.boxOfficeRank.setRankVariation(by: rankVariation.0, with: rankVariation.1)
             
-            if dailyBoxOffice.rank.rankOldAndNew == RankOldAndNew.new {
+            if dailyBoxOffice.rank.rankOldAndNew == RankOldAndNew.new || dailyBoxOffice.rank.rankVariation == "0" {
                 cell.boxOfficeRank.setRankVariation(by: nil, with: nil)
             } else {
                 cell.boxOfficeRank.setRankVariation(by: rankImage.0, with: rankImage.1)
@@ -140,7 +141,10 @@ extension HomeViewController {
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: dailyBoxOffice)
         }
     }
-    
+}
+
+//MARK: - Method
+extension HomeViewController {
     private func determineRankVariation(with rankVariation: String, and rankOldAndNew: RankOldAndNew) -> (String, UIColor) {
         let returnValue = "-"
 
@@ -175,5 +179,17 @@ extension HomeViewController {
         }
         
         return "오늘 \(audienceResult) / 총 \(audienceAccumulatedCount)"
+    }
+    
+    private func receiveCurrentDate() -> String {
+        guard let date = Calendar.current.date(byAdding: .day, value: -1, to: Date()) else {
+            return ""
+        }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let currentDateString = formatter.string(from: date)
+        
+        return currentDateString
     }
 }
