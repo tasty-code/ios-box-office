@@ -20,7 +20,6 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
         static let today: String = "오늘 "
         static let total: String = "/ 총 "
 
-
         static let movieTitleLabelFontSize: CGFloat = 21.0
         static let audienceLabelFontSize: CGFloat = 17.0
         static let dailyRankNumberLabelFontSize: CGFloat = 35.0
