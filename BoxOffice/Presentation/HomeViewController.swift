@@ -103,16 +103,21 @@ extension HomeViewController {
 extension HomeViewController {
     func configureDataSource() {
 
-        let cellRegistration = UICollectionView.CellRegistration<BoxOfficeListCell, DailyBoxOffice> { (cell, indexPath, dailyBoxOffice) in
-            cell.boxOfficeBrief.setMovieName(by: dailyBoxOffice.movieBrief.movieName)
-            cell.boxOfficeBrief.setAudienceCount(by: self.convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
-                                                                                   accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
+        let cellRegistration = UICollectionView.CellRegistration<BoxOfficeListCell, DailyBoxOffice> { [self] (cell, indexPath, dailyBoxOffice) in
+            let rankVariation = determineRankVariation(with: dailyBoxOffice.rank.rankVariation, and: dailyBoxOffice.rank.rankOldAndNew)
+            let rankImage = determineVariationImage(with: dailyBoxOffice.rank.rankVariation)
             
-            let rankVariation = self.determineRankVariation(with: dailyBoxOffice.rank.rankVariation, and: dailyBoxOffice.rank.rankOldAndNew)
-            let rankImage = self.determineVariationImage(with: dailyBoxOffice.rank.rankVariation)
-                                                       
+            cell.boxOfficeBrief.setMovieName(by: dailyBoxOffice.movieBrief.movieName)
+            cell.boxOfficeBrief.setAudienceCount(by: convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
+                                                                                   accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
             cell.boxOfficeRank.setRankVariation(by: rankVariation.0, with: rankVariation.1)
-            cell.boxOfficeRank.setRankVariation(by: rankImage.0, with: rankImage.1)
+            
+            if dailyBoxOffice.rank.rankOldAndNew == RankOldAndNew.new {
+                cell.boxOfficeRank.setRankVariation(by: nil, with: nil)
+            } else {
+                cell.boxOfficeRank.setRankVariation(by: rankImage.0, with: rankImage.1)
+            }
+            
             cell.boxOfficeRank.setRank(by: dailyBoxOffice.rank.rank)
             
             cell.accessories = [.disclosureIndicator()]
