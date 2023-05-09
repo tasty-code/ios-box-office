@@ -35,10 +35,10 @@ class BoxOfficeListCell: UICollectionViewListCell {
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            contentStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
+            contentStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             contentStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            contentStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            contentStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)
+            contentStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -40),
+            contentStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
         ])
 
         contentStackView.addSubview(boxOfficeRank)
@@ -48,10 +48,11 @@ class BoxOfficeListCell: UICollectionViewListCell {
         boxOfficeBrief.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            boxOfficeRank.topAnchor.constraint(equalTo: contentStackView.topAnchor),
+            boxOfficeRank.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 7),
             boxOfficeRank.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
-            boxOfficeRank.bottomAnchor.constraint(equalTo: contentStackView.bottomAnchor),
+            boxOfficeRank.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -7),
             boxOfficeRank.widthAnchor.constraint(equalTo: contentStackView.widthAnchor, multiplier: 0.25),
+            boxOfficeRank.heightAnchor.constraint(equalTo: contentStackView.heightAnchor),
 
             boxOfficeBrief.topAnchor.constraint(equalTo: contentStackView.topAnchor, constant: 7),
             boxOfficeBrief.leadingAnchor.constraint(equalTo: boxOfficeRank.trailingAnchor),
