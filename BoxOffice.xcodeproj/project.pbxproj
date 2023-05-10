@@ -69,7 +69,6 @@
 		7697227129FBAA1D002D77E7 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		7697227429FBADC7002D77E7 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		76A084422A00DB2400799CEE /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
-		76BCBAEC29F6564C006B989F /* MovieAPI.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = MovieAPI.xcconfig; sourceTree = "<group>"; };
 		76D585DB29F775C800EAB343 /* DailyBoxOfficeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeDTO.swift; sourceTree = "<group>"; };
 		76D585DD29F78AB700EAB343 /* DailyBoxOfficeResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeResultDTO.swift; sourceTree = "<group>"; };
 		76D585DF29F78B3400EAB343 /* BoxOfficeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeDTO.swift; sourceTree = "<group>"; };
@@ -144,7 +143,6 @@
 				F65983D62A03650B000F7BF7 /* MovieAPI.xcconfig */,
 				63DF20F72970E1A1005DF7D1 /* Assets.xcassets */,
 				63DF20FC2970E1A1005DF7D1 /* Info.plist */,
-				76BCBAEC29F6564C006B989F /* MovieAPI.xcconfig */,
 			);
 			path = BoxOffice;
 			sourceTree = "<group>";
@@ -411,6 +409,7 @@
 /* Begin XCBuildConfiguration section */
 		63DF20FD2970E1A1005DF7D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F65983D62A03650B000F7BF7 /* MovieAPI.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -471,6 +470,7 @@
 		};
 		63DF20FE2970E1A1005DF7D1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F65983D62A03650B000F7BF7 /* MovieAPI.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
