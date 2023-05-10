@@ -12,16 +12,16 @@ class HomeViewController: UIViewController {
     // MARK: - Property
 
     var networkService: NetworkService
-    var testEntity: [DailyBoxOffice]
+    var dailyBoxOfficeStorage: [DailyBoxOffice]
     var decideHelper: Decidable
     var formatter: Convertible
 
     //MARK: - Initializer
 
-    init(networkService: NetworkService, testEntity: [DailyBoxOffice], decideHelper: DecideHelper) {
+    init(networkService: NetworkService, testEntity: [DailyBoxOffice], decideHelper: Selector) {
         self.networkService = NetworkService()
-        self.testEntity = [DailyBoxOffice]()
-        self.decideHelper = DecideHelper()
+        self.dailyBoxOfficeStorage = [DailyBoxOffice]()
+        self.decideHelper = Selector()
         self.formatter = Formatter()
 
         super.init(nibName: nil, bundle: nil)
@@ -29,8 +29,8 @@ class HomeViewController: UIViewController {
 
     required init?(coder: NSCoder) {
         self.networkService = NetworkService()
-        self.testEntity = [DailyBoxOffice]()
-        self.decideHelper = DecideHelper()
+        self.dailyBoxOfficeStorage = [DailyBoxOffice]()
+        self.decideHelper = Selector()
         self.formatter = Formatter()
 
         super.init(coder: coder)
@@ -84,7 +84,7 @@ class HomeViewController: UIViewController {
             let result = try await networkService.request(with: APIEndPoint.receiveBoxOffice(with: boxOfficeRequestDTO))
             networkResult = result.boxOfficeResult
             networkResult?.dailyBoxOfficeList.forEach({ officeList in
-                testEntity.append(DailyBoxOffice(movieBrief: MovieBrief(movieName: officeList.movieName, audienceCount: officeList.audienceCount, audienceAccumulated: officeList.audienceAccumulate), rank: Rank(rank: officeList.rank, rankVariation: officeList.rankVariation, rankOldAndNew: officeList.rankOldAndNew)))
+                dailyBoxOfficeStorage.append(DailyBoxOffice(movieBrief: MovieBrief(movieName: officeList.movieName, audienceCount: officeList.audienceCount, audienceAccumulated: officeList.audienceAccumulate), rank: Rank(rank: officeList.rank, rankVariation: officeList.rankVariation, rankOldAndNew: officeList.rankOldAndNew)))
             })
             applySnapshot()
         }
@@ -93,7 +93,7 @@ class HomeViewController: UIViewController {
     private func applySnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(testEntity)
+        snapshot.appendItems(dailyBoxOfficeStorage)
         dataSource.apply(snapshot)
     }
 
