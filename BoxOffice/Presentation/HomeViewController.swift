@@ -9,10 +9,32 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    let networkService = NetworkService()
-    var testEntity = [DailyBoxOffice]()
+    // MARK: - Property
+
+    var networkService: NetworkService
+    var testEntity: [DailyBoxOffice]
+    var decideHelper: Decidable
+    var formatter: Convertible
 
     //MARK: - Initializer
+
+    init(networkService: NetworkService, testEntity: [DailyBoxOffice], decideHelper: DecideHelper) {
+        self.networkService = NetworkService()
+        self.testEntity = [DailyBoxOffice]()
+        self.decideHelper = DecideHelper()
+        self.formatter = Formatter()
+
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        self.networkService = NetworkService()
+        self.testEntity = [DailyBoxOffice]()
+        self.decideHelper = DecideHelper()
+        self.formatter = Formatter()
+
+        super.init(coder: coder)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +48,7 @@ class HomeViewController: UIViewController {
 
     private lazy var navigationBar : UINavigationBar = {
         let navigationBar = UINavigationBar()
-        let navigationItem = UINavigationItem(title: receiveCurrentDate())
+        let navigationItem = UINavigationItem(title: formatter.receiveCurrentDate())
         navigationBar.setItems([navigationItem], animated: true)
         navigationBar.isTranslucent = false
 
@@ -39,12 +61,6 @@ class HomeViewController: UIViewController {
 
         return refreshControl
     }()
-    
-    @objc func handleRefreshControl() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.refresh.endRefreshing()
-        }
-    }
 
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: configureOfCollectionViewLayout())
@@ -59,7 +75,7 @@ class HomeViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
 
     private func fetchData() {
-        let yesterdayDate = receiveCurrentDate().split(separator: "-").joined()
+        let yesterdayDate = formatter.receiveCurrentDate().split(separator: "-").joined()
         let boxOfficeRequestDTO = BoxOfficeRequestDTO(targetDate: yesterdayDate)
 
         var networkResult: BoxOfficeResult?
@@ -79,6 +95,12 @@ class HomeViewController: UIViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(testEntity)
         dataSource.apply(snapshot)
+    }
+
+    @objc func handleRefreshControl() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.refresh.endRefreshing()
+        }
     }
 }
 
@@ -118,11 +140,11 @@ extension HomeViewController {
     func configureDataSource() {
 
         let cellRegistration = UICollectionView.CellRegistration<BoxOfficeListCell, DailyBoxOffice> { [self] (cell, indexPath, dailyBoxOffice) in
-            let rankVariation = determineRankVariation(with: dailyBoxOffice.rank.rankVariation, and: dailyBoxOffice.rank.rankOldAndNew)
-            let rankImage = determineVariationImage(with: dailyBoxOffice.rank.rankVariation)
+            let rankVariation = decideHelper.determineRankVariation(with: dailyBoxOffice.rank.rankVariation, and: dailyBoxOffice.rank.rankOldAndNew)
+            let rankImage = decideHelper.determineVariationImage(with: dailyBoxOffice.rank.rankVariation)
             
             cell.boxOfficeBrief.setMovieName(by: dailyBoxOffice.movieBrief.movieName)
-            cell.boxOfficeBrief.setAudienceCount(by: convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
+            cell.boxOfficeBrief.setAudienceCount(by: formatter.convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
                                                                                    accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
             cell.boxOfficeRank.setRankVariation(by: rankVariation.0, with: rankVariation.1)
             
@@ -140,56 +162,5 @@ extension HomeViewController {
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { (collectionView, indexPath, dailyBoxOffice) in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: dailyBoxOffice)
         }
-    }
-}
-
-//MARK: - Method
-extension HomeViewController {
-    private func determineRankVariation(with rankVariation: String, and rankOldAndNew: RankOldAndNew) -> (String, UIColor) {
-        let returnValue = "-"
-
-        switch rankOldAndNew {
-        case .new:
-            return (MagicLiteral.newMovie, UIColor.red)
-        case .old :
-            guard rankVariation == MagicLiteral.zero else {
-                return (rankVariation, UIColor.black)
-            }
-            return (returnValue, UIColor.black)
-        }
-    }
-
-    private func determineVariationImage(with rankVariation: String) -> (UIImage, UIColor) {
-        guard rankVariation.hasPrefix("-") else {
-            return (UIImage(systemName: MagicLiteral.upTriangle) ?? UIImage(), UIColor.red)
-        }
-        return (UIImage(systemName: MagicLiteral.downTriangle) ?? UIImage(), UIColor.blue)
-    }
-    
-    private func convertToNumberFormatter(_ audienceCount: String, accumulated: String) -> String {
-        guard let audienceCount = Int(audienceCount), let audienceAccumulated = Int(accumulated) else {
-            return ""
-        }
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        
-        guard let audienceResult = numberFormatter.string(for: audienceCount),
-                let audienceAccumulatedCount = numberFormatter.string(for: audienceAccumulated) else {
-            return ""
-        }
-        
-        return MagicLiteral.todayAudience + audienceResult + MagicLiteral.totalAudience + audienceAccumulatedCount
-    }
-    
-    private func receiveCurrentDate() -> String {
-        guard let date = Calendar.current.date(byAdding: .day, value: -1, to: Date()) else {
-            return ""
-        }
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = MagicLiteral.dateFormat
-        let currentDateString = formatter.string(from: date)
-        
-        return currentDateString
     }
 }
