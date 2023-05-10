@@ -1,5 +1,5 @@
 //
-//  DecideHelper.swift
+//  Selector.swift
 //  BoxOffice
 //
 //  Created by 이상윤 on 2023/05/10.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct DecideHelper: Decidable {
+struct Selector: Decidable {
     func determineRankVariation(with rankVariation: String, and rankOldAndNew: RankOldAndNew) -> (String, UIColor) {
         let returnValue = "-"
 
