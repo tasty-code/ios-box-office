@@ -1,5 +1,5 @@
 //
-//  CollectionViewModel.swift
+//  CollectionViewLayout.swift
 //  BoxOffice
 //
 //  Created by Sunny on 2023/05/10.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-struct CollectionViewModel {
+struct CollectionViewLayout {
     
-    static func createLayout() -> UICollectionViewLayout {
+    static func create() -> UICollectionViewLayout {
         
         let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
         let layout = UICollectionViewCompositionalLayout.list(using: configuration)

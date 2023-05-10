@@ -12,7 +12,7 @@ class BoxOfficeViewController: UIViewController {
     private var dataSource: UICollectionViewDataSource?
     
     private lazy var collectionView: UICollectionView = {
-        let collectionView =  UICollectionView(frame: view.bounds, collectionViewLayout: CollectionViewModel.createLayout())
+        let collectionView =  UICollectionView(frame: view.bounds, collectionViewLayout: CollectionViewLayout.create())
         collectionView.register(cell: CustomListCell.self)
         return collectionView
     }()
