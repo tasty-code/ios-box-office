@@ -11,10 +11,10 @@ final class CustomListCell: UICollectionViewListCell {
 
     var boxOfficeItem: BoxOfficeItem?
 
-    private let rankNumberTextView = UILabel(fontSize: .largeTitle)
-    private let rankDetailTextView = UILabel(fontSize: .callout)
-    private let movieNameTextView = UILabel(fontSize: .title3)
-    private let movieDetailTextView = UILabel()
+    private let rankNumberLabel = UILabel(fontSize: .largeTitle)
+    private let rankDetailLabel = UILabel(fontSize: .callout)
+    private let movieNameLabel = UILabel(fontSize: .title3)
+    private let movieDetailLabel = UILabel()
 
     override func updateConfiguration(using state: UICellConfigurationState) {
 
@@ -23,10 +23,10 @@ final class CustomListCell: UICollectionViewListCell {
         configureHierarchy()
         configureSeparator()
 
-        rankNumberTextView.text = boxOfficeItem?.rank.number
-        rankDetailTextView.attributedText = boxOfficeItem?.rank.detail
-        movieNameTextView.text = boxOfficeItem?.name
-        movieDetailTextView.text = boxOfficeItem?.audience
+        rankNumberLabel.text = boxOfficeItem?.rank.number
+        rankDetailLabel.attributedText = boxOfficeItem?.rank.detail
+        movieNameLabel.text = boxOfficeItem?.name
+        movieDetailLabel.text = boxOfficeItem?.audience
 
     }
 
@@ -38,9 +38,9 @@ final class CustomListCell: UICollectionViewListCell {
 
     private func configureHierarchy() {
 
-        let rankStackView = UIVerticalStackView(arrangedSubviews: [rankNumberTextView, rankDetailTextView], alignment: .center)
+        let rankStackView = UIVerticalStackView(arrangedSubviews: [rankNumberLabel, rankDetailLabel], alignment: .center)
 
-        let movieStackView = UIVerticalStackView(arrangedSubviews: [movieNameTextView, movieDetailTextView], alignment: .leading)
+        let movieStackView = UIVerticalStackView(arrangedSubviews: [movieNameLabel, movieDetailLabel], alignment: .leading)
 
         contentView.addSubview(rankStackView)
         contentView.addSubview(movieStackView)
