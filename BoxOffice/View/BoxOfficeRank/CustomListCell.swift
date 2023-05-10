@@ -11,32 +11,10 @@ final class CustomListCell: UICollectionViewListCell {
 
     var boxOfficeItem: BoxOfficeItem?
 
-    private let rankNumberTextView: UILabel = {
-        let textView = UILabel(frame: .zero)
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.font = .preferredFont(forTextStyle: .largeTitle)
-        return textView
-    }()
-
-    private let rankDetailTextView: UILabel = {
-        let textView = UILabel(frame: .zero)
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.font = .preferredFont(forTextStyle: .callout)
-        return textView
-    }()
-
-    private let movieNameTextView: UILabel = {
-        let textView = UILabel(frame: .zero)
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.font = .preferredFont(forTextStyle: .title3)
-        return textView
-    }()
-
-    private let movieDetailTextView: UILabel = {
-        let textView = UILabel(frame: .zero)
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
-    }()
+    private let rankNumberTextView = UILabel(fontSize: .largeTitle)
+    private let rankDetailTextView = UILabel(fontSize: .callout)
+    private let movieNameTextView = UILabel(fontSize: .title3)
+    private let movieDetailTextView = UILabel()
 
     override func updateConfiguration(using state: UICellConfigurationState) {
 
@@ -60,23 +38,9 @@ final class CustomListCell: UICollectionViewListCell {
 
     private func configureHierarchy() {
 
-        let rankStackView: UIStackView = {
-            let stackView = UIStackView(arrangedSubviews: [rankNumberTextView, rankDetailTextView])
-            stackView.axis = .vertical
-            stackView.alignment = .center
-            stackView.translatesAutoresizingMaskIntoConstraints = false
+        let rankStackView = UIVerticalStackView(arrangedSubviews: [rankNumberTextView, rankDetailTextView], alignment: .center)
 
-            return stackView
-        }()
-
-        let movieStackView: UIStackView = {
-            let stackView = UIStackView(arrangedSubviews: [movieNameTextView, movieDetailTextView])
-            stackView.axis = .vertical
-            stackView.alignment = .leading
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-
-            return stackView
-        }()
+        let movieStackView = UIVerticalStackView(arrangedSubviews: [movieNameTextView, movieDetailTextView], alignment: .leading)
 
         contentView.addSubview(rankStackView)
         contentView.addSubview(movieStackView)

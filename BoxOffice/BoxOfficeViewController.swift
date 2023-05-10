@@ -13,7 +13,7 @@ class BoxOfficeViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         let collectionView =  UICollectionView(frame: view.bounds, collectionViewLayout: CollectionViewModel.createLayout())
-        collectionView.register(CustomListCell.self, forCellWithReuseIdentifier: "\(CustomListCell.self)")
+        collectionView.register(cell: CustomListCell.self)
         return collectionView
     }()
     
@@ -36,4 +36,3 @@ class BoxOfficeViewController: UIViewController {
         collectionView.dataSource = dataSource
     }
 }
-

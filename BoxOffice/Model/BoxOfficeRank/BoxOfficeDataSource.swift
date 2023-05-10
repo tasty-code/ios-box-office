@@ -15,12 +15,8 @@ final class BoxOfficeDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cellIdentifier = "\(CustomListCell.self)"
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? CustomListCell else {
-            return UICollectionViewCell()
-        }
-        
+
+        let cell = collectionView.dequeue(cell: CustomListCell.self, for: indexPath)
         cell.boxOfficeItem = BoxOfficeItem.mock[indexPath.item]
         
         return cell
