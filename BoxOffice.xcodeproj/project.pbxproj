@@ -148,11 +148,11 @@
 		63DF20ED2970E1A0005DF7D1 /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
+				80DB65852A0B84B600373449 /* Controller */,
 				F0BDED402A0B27740076A8EE /* View */,
 				80DB652D2A09DABB00373449 /* Model */,
 				80985DFB29FF50C2008BF073 /* Extensions */,
 				80985DDE29F78BFA008BF073 /* Resources */,
-				63DF20F22970E1A0005DF7D1 /* BoxOfficeViewController.swift */,
 				63DF20FC2970E1A1005DF7D1 /* Info.plist */,
 			);
 			path = BoxOffice;
@@ -292,6 +292,14 @@
 				80DB652F2A09DB9500373449 /* Rank.swift */,
 			);
 			path = BoxOfficeRank;
+			sourceTree = "<group>";
+		};
+		80DB65852A0B84B600373449 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				63DF20F22970E1A0005DF7D1 /* BoxOfficeViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		F036101829F776960036BBF0 /* Serialization */ = {
