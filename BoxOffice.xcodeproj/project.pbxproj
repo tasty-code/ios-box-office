@@ -157,12 +157,12 @@
 			path = Endpoint;
 			sourceTree = "<group>";
 		};
-		5B0697CC29FFEE7F00AE8F90 /* DataMapping */ = {
+		5B0697CC29FFEE7F00AE8F90 /* DataStructure */ = {
 			isa = PBXGroup;
 			children = (
 				D932149129F6673000E4C2D8 /* MovieDTO */,
 			);
-			path = DataMapping;
+			path = DataStructure;
 			sourceTree = "<group>";
 		};
 		5B0697CD29FFEE9900AE8F90 /* Response */ = {
@@ -233,7 +233,7 @@
 		5B10174229F90CD300AE55F3 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				5B0697CC29FFEE7F00AE8F90 /* DataMapping */,
+				5B0697CC29FFEE7F00AE8F90 /* DataStructure */,
 				5B10174329F90CDB00AE55F3 /* Network */,
 			);
 			path = Data;
