@@ -42,6 +42,7 @@
 		F0500AC02A0355C6001F448C /* URLResponse+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0500ABF2A0355C6001F448C /* URLResponse+Extension.swift */; };
 		F0500AC22A03669F001F448C /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0500AC12A03669F001F448C /* Date+Extension.swift */; };
 		F0560C5A29F7A15D0062FB01 /* JSONDeserializerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0560C5929F7A15D0062FB01 /* JSONDeserializerTest.swift */; };
+		F0BDED432A0B27A40076A8EE /* CustomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BDED422A0B27A40076A8EE /* CustomListCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		F0500AC12A03669F001F448C /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		F0560C5729F7A15D0062FB01 /* BoxOfficeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0560C5929F7A15D0062FB01 /* JSONDeserializerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDeserializerTest.swift; sourceTree = "<group>"; };
+		F0BDED422A0B27A40076A8EE /* CustomListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 		63DF20ED2970E1A0005DF7D1 /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
+				F0BDED402A0B27740076A8EE /* View */,
 				80DB652D2A09DABB00373449 /* Model */,
 				80985DFB29FF50C2008BF073 /* Extensions */,
 				80985DDE29F78BFA008BF073 /* Resources */,
@@ -365,6 +368,22 @@
 			path = BoxOfficeTests;
 			sourceTree = "<group>";
 		};
+		F0BDED402A0B27740076A8EE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F0BDED412A0B278E0076A8EE /* BoxOfficeRank */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F0BDED412A0B278E0076A8EE /* BoxOfficeRank */ = {
+			isa = PBXGroup;
+			children = (
+				F0BDED422A0B27A40076A8EE /* CustomListCell.swift */,
+			);
+			path = BoxOfficeRank;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -474,6 +493,7 @@
 				80A323AC2A0349CF00617897 /* Requestable.swift in Sources */,
 				80A323B02A034AC700617897 /* RequestResponseProtocol.swift in Sources */,
 				80A323BB2A03626300617897 /* NetworkProvider.swift in Sources */,
+				F0BDED432A0B27A40076A8EE /* CustomListCell.swift in Sources */,
 				80A323B42A03529800617897 /* MovieInformationEndpoint.swift in Sources */,
 				80A323B92A03622900617897 /* NetworkProvidable.swift in Sources */,
 				F0500AC22A03669F001F448C /* Date+Extension.swift in Sources */,
@@ -668,7 +688,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -696,7 +716,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
