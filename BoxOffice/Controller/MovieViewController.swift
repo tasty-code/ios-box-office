@@ -13,16 +13,20 @@ class MovieViewController: UIViewController {
 
     var collectionView: UICollectionView?
 
+    var loadingIndicatorView: UIActivityIndicatorView = {
+        let indicatorView = UIActivityIndicatorView()
+        indicatorView.color = .gray
+        indicatorView.style = .large
+        return indicatorView
+    }()
+
     var movieArrays: [Movie] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         makeUI()
-        setupCollectionView()
+        setup()
         registerCollectionViewCell()
-        collectionView?.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
 
         do {
             let api = URLPath.dailyBoxOffice(date: "20230501")
@@ -41,19 +45,25 @@ class MovieViewController: UIViewController {
                 }
                 self?.movieArrays = (data as! DailyBoxOffice).movies
                 DispatchQueue.main.async {
+                    self?.loadingIndicatorView.stopAnimating()
                     self?.collectionView?.reloadData()
                 }
             }
         } catch {
             print(error)
         }
-//
-        func makeUI() {
-            view.backgroundColor = .white
+    }
 
-            title = formatter(date: "20230501")
-        }
+    private func setup() {
+        setupCollectionView()
+        setupLoadingIndicatorView()
+        setupRefreshControl()
+    }
 
+    private func makeUI() {
+        view.backgroundColor = .white
+
+        title = formatter(date: "20230501")
     }
 
     @objc func refresh(){
@@ -62,11 +72,9 @@ class MovieViewController: UIViewController {
         }
     }
 
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-            if (refreshControl.isRefreshing) {
-                self.refreshControl.endRefreshing()
-
-            }
+    private func setupRefreshControl() {
+        collectionView?.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
     }
 
     private func formatter(date: String) -> String {
@@ -83,7 +91,7 @@ class MovieViewController: UIViewController {
         collectionView?.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
     }
 
-    func setupCollectionView() {
+    private func setupCollectionView() {
         let layoutconfig = UICollectionLayoutListConfiguration(appearance: .plain)
         let flowLayout = UICollectionViewCompositionalLayout.list(using: layoutconfig)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
@@ -99,6 +107,14 @@ class MovieViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
+
+    private func setupLoadingIndicatorView() {
+        view.addSubview(loadingIndicatorView)
+        loadingIndicatorView.startAnimating()
+        loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        loadingIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        loadingIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
 }
 
 extension MovieViewController: UICollectionViewDataSource {
@@ -111,7 +127,4 @@ extension MovieViewController: UICollectionViewDataSource {
         cell.configure(with: movieArrays[indexPath.row])
         return cell
     }
-
-
 }
-
