@@ -28,6 +28,8 @@ class BoxOfficeViewController: UIViewController {
         let sample = DailyBoxOfficeEndPoint(date: "20220202")
         updateData(from: sample) {
             self.dailyBoxOffice = $0
+            let movies = self.dailyBoxOffice?.boxOfficeResult.dailyBoxOfficeList ?? []
+            self.applyDataSource(movies)
         }
         
         setup()
@@ -52,12 +54,9 @@ class BoxOfficeViewController: UIViewController {
             return cell
         }
         
-        let dummyData = MovieDTO(rank: "", rankInten: "", rankOldAndNew: "", code: "", name: "", openDate: "", salesAmount: "", salesShare: "", salesInten: "", salesChange: "", salesAcc: "", audienceCount: "", audienceInten: "", audienceChange: "", audienceAcc: "", screenCount: "", showCount: "")
+        let defaultData = MovieDTO(rank: "", rankInten: "", rankOldAndNew: "", code: "", name: "", openDate: "", salesAmount: "", salesShare: "", salesInten: "", salesChange: "", salesAcc: "", audienceCount: "", audienceInten: "", audienceChange: "", audienceAcc: "", screenCount: "", showCount: "")
         
-        var snapshot = NSDiffableDataSourceSnapshot<Section, MovieDTO>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems([dummyData])
-        movieDataSource.apply(snapshot)
+        applyDataSource([defaultData])
     }
     
     private func configureUI() {
@@ -82,6 +81,13 @@ class BoxOfficeViewController: UIViewController {
                 completion(nil)
             }
         }
+    }
+    
+    private func applyDataSource(_ movies: [MovieDTO]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, MovieDTO>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(movies)
+        movieDataSource.apply(snapshot)
     }
     
 }
