@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Rank: Hashable {
+struct Rank {
     
     let number: String
     let detail: NSMutableAttributedString
@@ -34,7 +34,8 @@ struct Rank: Hashable {
         detail.append(attachment)
         
         if rankIntensity != .zero {
-            let description = NSAttributedString(string: rankIntensity.description)
+            let absoluteValue = abs(rankIntensity)
+            let description = NSAttributedString(string: absoluteValue.description)
             detail.append(description)
         }
     }

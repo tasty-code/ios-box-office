@@ -22,9 +22,6 @@ final class CustomListCell: UICollectionViewListCell {
         let textView = UILabel(frame: .zero)
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = .preferredFont(forTextStyle: .callout)
-        if textView.attributedText == NSAttributedString(string: "신작") {
-            textView.textColor = .systemRed
-        }
         return textView
     }()
 
@@ -67,8 +64,6 @@ final class CustomListCell: UICollectionViewListCell {
             let stackView = UIStackView(arrangedSubviews: [rankNumberTextView, rankDetailTextView])
             stackView.axis = .vertical
             stackView.alignment = .center
-            stackView.distribution = .fillEqually
-            stackView.spacing = 2
             stackView.translatesAutoresizingMaskIntoConstraints = false
 
             return stackView
@@ -78,8 +73,6 @@ final class CustomListCell: UICollectionViewListCell {
             let stackView = UIStackView(arrangedSubviews: [movieNameTextView, movieDetailTextView])
             stackView.axis = .vertical
             stackView.alignment = .leading
-            stackView.distribution = .fillEqually
-            stackView.spacing = 2
             stackView.translatesAutoresizingMaskIntoConstraints = false
 
             return stackView
@@ -89,8 +82,8 @@ final class CustomListCell: UICollectionViewListCell {
         contentView.addSubview(movieStackView)
 
         NSLayoutConstraint.activate([
-            rankStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            rankStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            rankStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            rankStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             rankStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
             rankStackView.widthAnchor.constraint(lessThanOrEqualToConstant: 50),
             rankStackView.widthAnchor.constraint(equalToConstant: 50),

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BoxOfficeItem: Hashable {
+struct BoxOfficeItem {
     
     let rank: Rank
     let name: String
