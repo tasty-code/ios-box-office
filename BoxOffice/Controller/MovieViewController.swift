@@ -10,9 +10,14 @@ import UIKit
 class MovieViewController: UIViewController {
 
     let refreshControl = UIRefreshControl()
+    var movieArrays: [Movie] = []
+    var searchDate: String = "" {
+        willSet {
+            title = DateFormatter().movieDateFormatter(date: newValue)
+        }
+    }
 
     var collectionView: UICollectionView?
-
     var loadingIndicatorView: UIActivityIndicatorView = {
         let indicatorView = UIActivityIndicatorView()
         indicatorView.color = .gray
@@ -20,16 +25,23 @@ class MovieViewController: UIViewController {
         return indicatorView
     }()
 
-    var movieArrays: [Movie] = []
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        makeUI()
         setup()
-        registerCollectionViewCell()
 
+        searchDate = "20230509"
+        loadMovie(for: searchDate)
+    }
+
+    @objc func refresh(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.refreshControl.endRefreshing()
+        }
+    }
+
+    private func loadMovie(for date: String) {
         do {
-            let api = URLPath.dailyBoxOffice(date: "20230501")
+            let api = URLPath.dailyBoxOffice(date: date)
             let url = try api.configureURL()
             let urlRequest = URLRequest(url: url)
 
@@ -53,49 +65,30 @@ class MovieViewController: UIViewController {
             print(error)
         }
     }
+}
 
+//MARK: - setup
+extension MovieViewController {
     private func setup() {
+        makeUI()
         setupCollectionView()
         setupLoadingIndicatorView()
         setupRefreshControl()
+        registerCollectionViewCell()
     }
 
     private func makeUI() {
         view.backgroundColor = .white
-
-        title = formatter(date: "20230501")
-    }
-
-    @objc func refresh(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.refreshControl.endRefreshing()
-        }
-    }
-
-    private func setupRefreshControl() {
-        collectionView?.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-    }
-
-    private func formatter(date: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd"
-        let convertDate = dateFormatter.date(from: date)!
-
-        let myFormatter = DateFormatter()
-        myFormatter.dateFormat = "yyyy-MM-dd"
-        return myFormatter.string(from: convertDate)
-    }
-
-    private func registerCollectionViewCell() {
-        collectionView?.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
+        title = DateFormatter().movieDateFormatter(date: searchDate)
     }
 
     private func setupCollectionView() {
         let layoutconfig = UICollectionLayoutListConfiguration(appearance: .plain)
         let flowLayout = UICollectionViewCompositionalLayout.list(using: layoutconfig)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+
         guard let collectionView = collectionView else { return }
+
         view.addSubview(collectionView)
         collectionView.dataSource = self
 
@@ -115,8 +108,18 @@ class MovieViewController: UIViewController {
         loadingIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         loadingIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
+
+    private func setupRefreshControl() {
+        collectionView?.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+    }
+
+    private func registerCollectionViewCell() {
+        collectionView?.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
+    }
 }
 
+//MARK: - CollectionView DataSource
 extension MovieViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movieArrays.count
@@ -126,5 +129,17 @@ extension MovieViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
         cell.configure(with: movieArrays[indexPath.row])
         return cell
+    }
+}
+
+private extension DateFormatter {
+    func movieDateFormatter(date: String) -> String {
+        self.dateFormat = "yyyyMMdd"
+        guard let convertDate = self.date(from: date) else {
+            return date
+        }
+
+        self.dateFormat = "yyyy-MM-dd"
+        return self.string(from: convertDate)
     }
 }
