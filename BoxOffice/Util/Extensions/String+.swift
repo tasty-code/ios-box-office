@@ -9,11 +9,11 @@ import Foundation
 
 extension String {
 
-    func except(for characterSet: String) -> String {
+    func without(_ characterSet: String) -> String {
         let charSet = CharacterSet(charactersIn: characterSet)
-        let dashDeletedString = self.components(separatedBy: charSet).joined()
+        let trimmedString = self.components(separatedBy: charSet).joined()
 
-        return dashDeletedString
+        return trimmedString
     }
 
 }
