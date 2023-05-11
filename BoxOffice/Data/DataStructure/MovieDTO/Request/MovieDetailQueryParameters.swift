@@ -1,5 +1,5 @@
 //
-//  BoxOfficeRequestDTO.swift
+//  MovieDetailQueryParameters.swift
 //  BoxOffice
 //
 //  Created by Jason on 2023/05/01.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct BoxOfficeRequestDTO: Encodable {
+struct MovieDetailQueryParameters: Encodable {
     let key: String = APIMagicLiteral.key
-    var targetDate: String
+    var movieCode: String
     
     enum CodingKeys: String, CodingKey {
         case key = "key"
-        case targetDate = "targetDt"
+        case movieCode = "movieCd"
     }
 }

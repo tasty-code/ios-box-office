@@ -76,7 +76,7 @@ class HomeViewController: UIViewController {
 
     private func fetchData() {
         let yesterdayDate = formatter.receiveCurrentDate().split(separator: "-").joined()
-        let boxOfficeRequestDTO = BoxOfficeRequestDTO(targetDate: yesterdayDate)
+        let boxOfficeRequestDTO = BoxOfficeQueryParameters(targetDate: yesterdayDate)
 
         var networkResult: BoxOfficeResult?
 
