@@ -9,31 +9,45 @@ import UIKit
 
 class MovieViewController: UIViewController {
 
-    let refreshControl = UIRefreshControl()
-    var movieArrays: [Movie] = []
-    var searchDate: String = "" {
+    private var movieArrays: [Movie] = []
+    private var searchDate: String = "" {
         willSet {
             title = DateFormatter().movieDateFormatter(date: newValue)
         }
     }
 
-    var collectionView: UICollectionView?
-    var loadingIndicatorView: UIActivityIndicatorView = {
+    private lazy var collectionView: UICollectionView = {
+        let layoutconfig = UICollectionLayoutListConfiguration(appearance: .plain)
+        let flowLayout = UICollectionViewCompositionalLayout.list(using: layoutconfig)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
+        collectionView.dataSource = self
+        return collectionView
+    }()
+
+    private lazy var loadingIndicatorView: UIActivityIndicatorView = {
         let indicatorView = UIActivityIndicatorView()
         indicatorView.color = .gray
         indicatorView.style = .large
+        indicatorView.center = view.center
         return indicatorView
+    }()
+
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return refreshControl
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-
         searchDate = "20230509"
         loadMovie(for: searchDate)
     }
 
-    @objc func refresh(){
+    @objc private func refresh(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.refreshControl.endRefreshing()
         }
@@ -58,7 +72,7 @@ class MovieViewController: UIViewController {
                 self?.movieArrays = (data as! DailyBoxOffice).movies
                 DispatchQueue.main.async {
                     self?.loadingIndicatorView.stopAnimating()
-                    self?.collectionView?.reloadData()
+                    self?.collectionView.reloadData()
                 }
             }
         } catch {
@@ -70,28 +84,22 @@ class MovieViewController: UIViewController {
 //MARK: - setup
 extension MovieViewController {
     private func setup() {
-        makeUI()
-        setupCollectionView()
-        setupLoadingIndicatorView()
-        setupRefreshControl()
-        registerCollectionViewCell()
+        setUI()
+        addSubviews()
+        setLayout()
     }
 
-    private func makeUI() {
+    private func setUI() {
         view.backgroundColor = .white
         title = DateFormatter().movieDateFormatter(date: searchDate)
     }
 
-    private func setupCollectionView() {
-        let layoutconfig = UICollectionLayoutListConfiguration(appearance: .plain)
-        let flowLayout = UICollectionViewCompositionalLayout.list(using: layoutconfig)
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-
-        guard let collectionView = collectionView else { return }
-
+    private func addSubviews() {
         view.addSubview(collectionView)
-        collectionView.dataSource = self
+        view.addSubview(loadingIndicatorView)
+    }
 
+    private func setLayout() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -99,23 +107,6 @@ extension MovieViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
-    }
-
-    private func setupLoadingIndicatorView() {
-        view.addSubview(loadingIndicatorView)
-        loadingIndicatorView.startAnimating()
-        loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-        loadingIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        loadingIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    }
-
-    private func setupRefreshControl() {
-        collectionView?.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-    }
-
-    private func registerCollectionViewCell() {
-        collectionView?.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
     }
 }
 
