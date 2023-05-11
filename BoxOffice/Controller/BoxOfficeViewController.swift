@@ -10,18 +10,15 @@ import UIKit
 class BoxOfficeViewController: UIViewController {
     
     private var dataSource: UICollectionViewDataSource?
-    
-    private lazy var collectionView: UICollectionView = {
-        let collectionView =  UICollectionView(frame: view.bounds, collectionViewLayout: CollectionViewLayout.create())
-        collectionView.register(cell: CustomListCell.self)
-        return collectionView
-    }()
-    
+
+    private lazy var collectionView = BoxOfficeCollectionView(frame: view.bounds)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureHierarchy()
         configureDataSource()
+        configureRefreshControl()
     }
     
     private func configureHierarchy() {
@@ -34,5 +31,22 @@ class BoxOfficeViewController: UIViewController {
         
         self.dataSource = BoxOfficeDataSource()
         collectionView.dataSource = dataSource
+    }
+}
+
+extension BoxOfficeViewController {
+
+    func configureRefreshControl() {
+        collectionView.refreshControl = UIRefreshControl()
+        collectionView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+    }
+
+    @objc func handleRefreshControl() {
+        // 네트워크로 데이터 불러오는 작업 수행
+        collectionView.reloadData()
+
+        DispatchQueue.main.async {
+           self.collectionView.refreshControl?.endRefreshing()
+        }
     }
 }
