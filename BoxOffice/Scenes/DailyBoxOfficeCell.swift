@@ -15,7 +15,7 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
 
         static let upSymbolName: String = "arrowtriangle.up.fill"
         static let downSymbolName: String = "arrowtriangle.down.fill"
-        static let noneChangeOfRankState = "-"
+        static let noneChangeOfRankState: String = "-"
         static let rankNewState: String = "신작"
         static let today: String = "오늘 "
         static let total: String = " / 총 "
