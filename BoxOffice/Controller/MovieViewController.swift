@@ -22,6 +22,7 @@ class MovieViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
         collectionView.dataSource = self
+        collectionView.delegate = self
         return collectionView
     }()
 
@@ -133,5 +134,12 @@ private extension DateFormatter {
 
         self.dateFormat = "yyyy-MM-dd"
         return self.string(from: convertDate)
+    }
+}
+
+extension MovieViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let nextVC = MovieDetailViewController()
+        show(nextVC, sender: nil)
     }
 }
