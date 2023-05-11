@@ -30,6 +30,7 @@ class MovieViewController: UIViewController {
         indicatorView.color = .gray
         indicatorView.style = .large
         indicatorView.center = view.center
+        indicatorView.startAnimating()
         return indicatorView
     }()
 
