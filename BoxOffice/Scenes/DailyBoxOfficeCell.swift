@@ -88,12 +88,15 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
         return stackView
     }()
 
-
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         configureHierarchy()
         configureConstraints()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     private func configureHierarchy() {
@@ -130,13 +133,15 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
     }
 
     private func generateAudienceLabelText(with movie: DailyBoxOffice) -> String {
+        var audienceLabelText = Constants.today + movie.audienceAccumulation + Constants.total + movie.audienceCount
+
         guard let audienceAccumulationNumber = Int(movie.audienceAccumulation),
-              let audienceCountNumber = Int(movie.audienceCount) else { return String() }
+              let audienceCountNumber = Int(movie.audienceCount) else { return audienceLabelText }
 
         let audienceAccumulation =  audienceAccumulationNumber.decimalizedString
         let dailyAudienceCount = audienceCountNumber.decimalizedString
 
-        let audienceLabelText = Constants.today + dailyAudienceCount + Constants.total + audienceAccumulation
+        audienceLabelText = Constants.today + dailyAudienceCount + Constants.total + audienceAccumulation
 
         return audienceLabelText
     }
@@ -188,11 +193,6 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
         rankChangesAttributedText.append(text)
 
         return rankChangesAttributedText
-    }
-
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 
 }

@@ -9,16 +9,16 @@ import UIKit
 
 final class DailyBoxOfficeViewController: UIViewController {
 
-    enum Section {
+    private enum Section {
         case main
     }
 
-    enum Constants {
+    private enum Constants {
         static let formerNavigationItemTitle = "데이터 받아오는 중~!"
     }
 
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, DailyBoxOffice>
-    typealias SnapShot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>
+    private typealias DataSource = UICollectionViewDiffableDataSource<Section, DailyBoxOffice>
+    private typealias SnapShot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>
 
     private var loadingIndicatorView = UIActivityIndicatorView(style: .large)
     private let boxOfficeManager = BoxOfficeAPIManager()
@@ -32,14 +32,14 @@ final class DailyBoxOfficeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUp()
+        setUpUI()
         configureCollectionView()
         configureDataSource()
         configureRefreshControl()
         fetchBoxOfficeData()
     }
 
-    private func setUp() {
+    private func setUpUI() {
         navigationItem.title = Constants.formerNavigationItemTitle
         view.backgroundColor = .systemBackground
     }
