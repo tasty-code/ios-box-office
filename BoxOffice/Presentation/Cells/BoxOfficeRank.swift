@@ -10,14 +10,14 @@ import UIKit
 final class BoxOfficeRank: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configuration()
-        configurationOfComponents()
+        configureOfStackView()
+        configureOfComponents()
     }
 
     required init(coder: NSCoder) {
         super.init(coder: coder)
-        configuration()
-        configurationOfComponents()
+        configureOfStackView()
+        configureOfComponents()
     }
 
     private var information: UIStackView = {
@@ -47,7 +47,7 @@ final class BoxOfficeRank: UIStackView {
         return rankVariationLabel
     }()
 
-    private func configuration() {
+    private func configureOfStackView() {
         axis = .vertical
         spacing = 3
         alignment = .center
@@ -58,7 +58,7 @@ final class BoxOfficeRank: UIStackView {
         information.distribution = .equalSpacing
     }
 
-    private func configurationOfComponents() {
+    private func configureOfComponents() {
         addArrangedSubview(rank)
         addArrangedSubview(information)
         information.addArrangedSubview(rankEmoji)

@@ -10,14 +10,14 @@ import UIKit
 final class BoxOfficeBrief: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configuration()
-        configurationOfComponents()
+        configureOfStackView()
+        configureOfComponents()
     }
 
     required init(coder: NSCoder) {
         super.init(coder: coder)
-        configuration()
-        configurationOfComponents()
+        configureOfStackView()
+        configureOfComponents()
     }
 
     private let movieName: UILabel = {
@@ -34,13 +34,13 @@ final class BoxOfficeBrief: UIStackView {
         return audienceCount
     }()
     
-    private func configuration() {
+    private func configureOfStackView() {
         axis = .vertical
         alignment = .leading
         distribution = .fillEqually
     }
     
-    private func configurationOfComponents() {
+    private func configureOfComponents() {
         addArrangedSubview(movieName)
         addArrangedSubview(audienceCount)
     }
