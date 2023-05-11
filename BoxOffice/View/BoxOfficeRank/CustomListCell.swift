@@ -9,6 +9,16 @@ import UIKit
 
 final class CustomListCell: UICollectionViewListCell {
 
+    enum Constants {
+        
+        static let rankStackViewVertical: CGFloat = 10
+        static let rankStackViewLeading: CGFloat = 30
+        static let rankStackViewWidth: CGFloat = 50
+        
+        static let movieStackViewVertical: CGFloat = 15
+        static let movieStackViewLeading: CGFloat = 20
+    }
+    
     var boxOfficeItem: BoxOfficeItem?
 
     private let rankNumberLabel = UILabel(fontSize: .largeTitle)
@@ -46,15 +56,15 @@ final class CustomListCell: UICollectionViewListCell {
         contentView.addSubview(movieStackView)
 
         NSLayoutConstraint.activate([
-            rankStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.RankStackView.vertical),
-            rankStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.RankStackView.vertical),
-            rankStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.RankStackView.leading),
-            rankStackView.widthAnchor.constraint(lessThanOrEqualToConstant: Constants.RankStackView.width),
-            rankStackView.widthAnchor.constraint(equalToConstant: Constants.RankStackView.width),
+            rankStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.rankStackViewVertical),
+            rankStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.rankStackViewVertical),
+            rankStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.rankStackViewLeading),
+            rankStackView.widthAnchor.constraint(lessThanOrEqualToConstant: Constants.rankStackViewWidth),
+            rankStackView.widthAnchor.constraint(equalToConstant: Constants.rankStackViewWidth),
 
-            movieStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.MovieStackView.vertical),
-            movieStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.MovieStackView.vertical),
-            movieStackView.leadingAnchor.constraint(equalTo: rankStackView.trailingAnchor, constant: Constants.MovieStackView.leading)
+            movieStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.movieStackViewVertical),
+            movieStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.movieStackViewVertical),
+            movieStackView.leadingAnchor.constraint(equalTo: rankStackView.trailingAnchor, constant: Constants.movieStackViewLeading)
         ])
     }
 
