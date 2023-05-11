@@ -43,9 +43,9 @@ class BoxOfficeViewController: UIViewController {
     
     private func configureMovieDataSource() {
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, MovieDTO> { cell, indexPath, item in
-            var content = cell.defaultContentConfiguration()
-            content.text = item.name
-            cell.contentConfiguration = content
+            var config = cell.defaultContentConfiguration()
+            config.text = item.name
+            cell.contentConfiguration = config
         }
         
         movieDataSource = UICollectionViewDiffableDataSource<Section, MovieDTO>(collectionView: movieCollectionView) { collectionView, indexPath, itemIdentifier in
@@ -69,7 +69,6 @@ class BoxOfficeViewController: UIViewController {
         }
         let layout = UICollectionViewCompositionalLayout.list(using: config)
         let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-        collectionView.backgroundColor = .systemPink
         movieCollectionView = collectionView
     }
     
