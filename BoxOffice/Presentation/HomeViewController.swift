@@ -20,6 +20,7 @@ final class HomeViewController: UIViewController {
         self.dailyBoxOfficeStorage = dailyBoxOfficeStorage
         self.selector = selector
         self.formatter = formatter
+        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -29,6 +30,7 @@ final class HomeViewController: UIViewController {
         self.dailyBoxOfficeStorage = [DailyBoxOffice]()
         self.selector = Selector()
         self.formatter = Formatter()
+        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
 
         super.init(coder: coder)
     }
@@ -37,6 +39,7 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         configureOfNavigationBar()
+        configureOfCollectionView()
         configureHierarchy()
         configureDataSource()
         fetchData()
@@ -48,6 +51,7 @@ final class HomeViewController: UIViewController {
     private var dailyBoxOfficeStorage: [DailyBoxOffice]
     private var selector: Decidable
     private var formatter: Convertible
+    private var collectionView: UICollectionView
     
     private lazy var refresh: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -56,15 +60,13 @@ final class HomeViewController: UIViewController {
         return refreshControl
     }()
 
-    private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: createCollectionViewLayout())
+    private func configureOfCollectionView() {
+        collectionView.collectionViewLayout = createCollectionViewLayout()
         collectionView.isScrollEnabled = true
         collectionView.showsVerticalScrollIndicator = true
         collectionView.clipsToBounds = false
         collectionView.refreshControl = refresh
-
-        return collectionView
-    }()
+    }
 
     private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
 
