@@ -26,7 +26,11 @@ class BoxOfficeViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
-        let sample = DailyBoxOfficeEndPoint(date: "20230510")
+            
+        let yesterday = Date.yesterday
+        let yesterdayString = yesterday.string(format: .yyyyMMdd)
+        
+        let sample = DailyBoxOfficeEndPoint(date: yesterdayString)
         updateData(from: sample) {
             self.dailyBoxOffice = $0
             DispatchQueue.main.async {
@@ -37,14 +41,19 @@ class BoxOfficeViewController: UIViewController {
     
     // MARK: - Private function
     private func setup() {
+        updateNavigationTitle()
         configureMovieCollectionView()
         configureMovieDataSource()
         configureUI()
     }
     
-    // MARK: - DataSource
+    private func updateNavigationTitle() {
+        let yesterday = Date.yesterday
+        let yesterdayString = yesterday.string(format: .yyyy_MM_dd)
+        self.navigationController?.navigationBar.topItem?.title = yesterdayString
+    }   
+    
     private func configureMovieDataSource() {
-        // MARK: - CellRegistration
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, MovieDTO> { cell, indexPath, item in
             // config 생성
             var config = cell.defaultContentConfiguration()
@@ -108,7 +117,6 @@ class BoxOfficeViewController: UIViewController {
             cell.contentConfiguration = config
         }
         
-        // MARK: - 위에서 만든 Data 등록
         movieDataSource = UICollectionViewDiffableDataSource<Section, MovieDTO>(collectionView: movieCollectionView) { collectionView, indexPath, itemIdentifier in
             let cell = self.movieCollectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
             return cell
@@ -170,3 +178,28 @@ fileprivate extension String {
     }
     
 }
+
+fileprivate extension Date {
+    
+    static var yesterday: Date {
+        return Date(timeIntervalSinceNow: -24 * 60 * 60)
+    }
+    
+}
+
+fileprivate extension Date {
+    
+    enum DateFormat: String {
+        case yyyy_MM_dd = "yyyy-MM-dd"
+        case yyyyMMdd = "yyyyMMdd"
+    }
+    
+    func string(format: DateFormat) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format.rawValue
+        
+        return formatter.string(from: self)
+    }
+
+}
+
