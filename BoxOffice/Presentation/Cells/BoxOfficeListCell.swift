@@ -9,8 +9,8 @@ import UIKit
 
 class BoxOfficeListCell: UICollectionViewListCell, Gettable {
 
-    var boxOfficeRank = RankView()
-    var boxOfficeBrief = SummaryInformationView()
+    var rankView = RankView()
+    var summaryInformationView = SummaryInformationView()
 
     override init(frame: CGRect) {
         super .init(frame: frame)
@@ -39,22 +39,22 @@ class BoxOfficeListCell: UICollectionViewListCell, Gettable {
             contentStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
         ])
 
-        contentStackView.addSubview(boxOfficeRank)
-        contentStackView.addSubview(boxOfficeBrief)
+        contentStackView.addSubview(rankView)
+        contentStackView.addSubview(summaryInformationView)
 
-        boxOfficeRank.translatesAutoresizingMaskIntoConstraints = false
-        boxOfficeBrief.translatesAutoresizingMaskIntoConstraints = false
+        rankView.translatesAutoresizingMaskIntoConstraints = false
+        summaryInformationView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            boxOfficeRank.topAnchor.constraint(equalTo: contentStackView.topAnchor, constant: 7),
-            boxOfficeRank.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
-            boxOfficeRank.bottomAnchor.constraint(equalTo: contentStackView.bottomAnchor, constant: -7),
-            boxOfficeRank.widthAnchor.constraint(equalTo: contentStackView.widthAnchor, multiplier: 0.25),
+            rankView.topAnchor.constraint(equalTo: contentStackView.topAnchor, constant: 7),
+            rankView.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
+            rankView.bottomAnchor.constraint(equalTo: contentStackView.bottomAnchor, constant: -7),
+            rankView.widthAnchor.constraint(equalTo: contentStackView.widthAnchor, multiplier: 0.25),
 
-            boxOfficeBrief.topAnchor.constraint(equalTo: contentStackView.topAnchor, constant: 7),
-            boxOfficeBrief.leadingAnchor.constraint(equalTo: boxOfficeRank.trailingAnchor),
-            boxOfficeBrief.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor),
-            boxOfficeBrief.bottomAnchor.constraint(equalTo: contentStackView.bottomAnchor, constant: -7)
+            summaryInformationView.topAnchor.constraint(equalTo: contentStackView.topAnchor, constant: 7),
+            summaryInformationView.leadingAnchor.constraint(equalTo: rankView.trailingAnchor),
+            summaryInformationView.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor),
+            summaryInformationView.bottomAnchor.constraint(equalTo: contentStackView.bottomAnchor, constant: -7)
         ])
     }
 }

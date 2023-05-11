@@ -141,18 +141,18 @@ extension HomeViewController {
             let rankVariation = decideHelper.determineRankVariation(with: dailyBoxOffice.rank.rankVariation, and: dailyBoxOffice.rank.rankOldAndNew)
             let rankImage = decideHelper.determineVariationImage(with: dailyBoxOffice.rank.rankVariation)
             
-            cell.boxOfficeBrief.setMovieName(by: dailyBoxOffice.movieBrief.movieName)
-            cell.boxOfficeBrief.setAudienceCount(by: formatter.convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
+            cell.summaryInformationView.setMovieName(by: dailyBoxOffice.movieBrief.movieName)
+            cell.summaryInformationView.setAudienceCount(by: formatter.convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
                                                                                    accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
-            cell.boxOfficeRank.setRankVariation(by: rankVariation.0, with: rankVariation.1)
+            cell.rankView.setRankVariation(by: rankVariation.0, with: rankVariation.1)
             
             if dailyBoxOffice.rank.rankOldAndNew == RankOldAndNew.new || dailyBoxOffice.rank.rankVariation == MagicLiteral.zero {
-                cell.boxOfficeRank.setRankVariation(by: nil, with: nil)
+                cell.rankView.setRankVariation(by: nil, with: nil)
             } else {
-                cell.boxOfficeRank.setRankVariation(by: rankImage.0, with: rankImage.1)
+                cell.rankView.setRankVariation(by: rankImage.0, with: rankImage.1)
             }
             
-            cell.boxOfficeRank.setRank(by: dailyBoxOffice.rank.rank)
+            cell.rankView.setRank(by: dailyBoxOffice.rank.rank)
             
             cell.accessories = [.disclosureIndicator()]
         }
