@@ -13,10 +13,6 @@ final class DailyBoxOfficeViewController: UIViewController {
         case main
     }
 
-    private enum Constants {
-        static let formerNavigationItemTitle = "데이터 받아오는 중~!"
-    }
-
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, DailyBoxOffice>
     private typealias SnapShot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>
 
@@ -40,7 +36,6 @@ final class DailyBoxOfficeViewController: UIViewController {
     }
 
     private func setUpUI() {
-        navigationItem.title = Constants.formerNavigationItemTitle
         view.backgroundColor = .systemBackground
     }
 
