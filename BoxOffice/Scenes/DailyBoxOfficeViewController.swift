@@ -32,10 +32,10 @@ final class DailyBoxOfficeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        showIndicatorview()
         setUpUI()
         configureCollectionView()
         configureDataSource()
-        configureRefreshControl()
         fetchBoxOfficeData()
     }
 
@@ -47,10 +47,12 @@ final class DailyBoxOfficeViewController: UIViewController {
     private func configureCollectionView() {
         dailyBoxOfficeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         guard let dailyBoxOfficeCollectionView else { return }
+        dailyBoxOfficeCollectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(dailyBoxOfficeCollectionView)
         dailyBoxOfficeCollectionView.register(DailyBoxOfficeCell.self,
                                               forCellWithReuseIdentifier: DailyBoxOfficeCell.identifier)
         configureCollectionViewLayoutConstraint()
+        configureRefreshControl()
     }
 
     private func createLayout() -> UICollectionViewCompositionalLayout {
@@ -66,8 +68,6 @@ final class DailyBoxOfficeViewController: UIViewController {
     private func configureCollectionViewLayoutConstraint() {
         guard let dailyBoxOfficeCollectionView else { return }
         let safeAreaGuide = view.safeAreaLayoutGuide
-
-        dailyBoxOfficeCollectionView.translatesAutoresizingMaskIntoConstraints = false
         dailyBoxOfficeCollectionView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor).isActive = true
         dailyBoxOfficeCollectionView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor).isActive = true
         dailyBoxOfficeCollectionView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor).isActive = true
@@ -96,6 +96,7 @@ final class DailyBoxOfficeViewController: UIViewController {
             guard let boxOffice = data as? BoxOffice else { return }
             self?.movies = boxOffice.result.dailyBoxOffices
             DispatchQueue.main.async {
+                self?.dailyBoxOfficeCollectionView?.refreshControl?.endRefreshing()
                 self?.navigationItem.title = yesterDay
                 self?.hideIndicatorView()
             }
@@ -149,7 +150,7 @@ extension DailyBoxOfficeViewController {
     }
 
     @objc private func handleRefreshControl() {
-        self.dailyBoxOfficeCollectionView?.refreshControl?.endRefreshing()
+        fetchBoxOfficeData()
     }
 
 }
