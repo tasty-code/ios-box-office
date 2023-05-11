@@ -23,16 +23,8 @@ final class BoxOfficeListViewModel: ViewModelType {
     }
     
     struct Output {
-        @Observable var cellItems = [BoxOfficeCellItem]()
+        @Observable var cellItems = [BoxOfficeListCell.Item]()
         @Observable var selectedDate = Date().previousDate
-    }
-    
-    struct BoxOfficeCellItem: Hashable {
-        let isNew: Bool
-        let movieRankLabelText: String
-        let movieRankIntensity: Int
-        let movieTitleLabelText: String
-        let audienceCountLabelText: String
     }
     
     // MARK: - Properties
@@ -73,7 +65,7 @@ final class BoxOfficeListViewModel: ViewModelType {
             switch result {
             case .success(let boxOfficeEntities):
                 let items = boxOfficeEntities.map {
-                    BoxOfficeCellItem(
+                    BoxOfficeListCell.Item(
                         isNew: $0.isNew,
                         movieRankLabelText: "\($0.rank)",
                         movieRankIntensity: $0.rankIntensity,
