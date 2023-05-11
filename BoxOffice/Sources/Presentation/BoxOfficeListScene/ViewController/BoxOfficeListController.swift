@@ -15,7 +15,7 @@ final class BoxOfficeListController: UIViewController {
         case list
     }
     
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, BoxOfficeListViewModel.BoxOfficeCellItem>
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, BoxOfficeListCell.Item>
     
     // MARK: - Properties
     
@@ -177,11 +177,11 @@ extension BoxOfficeListController {
         dataSource.apply(snapshot)
     }
     
-    private func appendSnapshot(with items: [BoxOfficeListViewModel.BoxOfficeCellItem]) {
+    private func appendSnapshot(with items: [BoxOfficeListCell.Item]) {
         guard let dataSource = dataSource else { return }
 
         // list snapshot 설정
-        var listSnapshot = NSDiffableDataSourceSectionSnapshot<BoxOfficeListViewModel.BoxOfficeCellItem>()
+        var listSnapshot = NSDiffableDataSourceSectionSnapshot<BoxOfficeListCell.Item>()
         listSnapshot.append(items)
         dataSource.apply(listSnapshot, to: .list)
     }
