@@ -9,13 +9,6 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    // MARK: - Property
-
-    var networkService: NetworkService
-    var dailyBoxOfficeStorage: [DailyBoxOffice]
-    var decideHelper: Decidable
-    var formatter: Convertible
-
     //MARK: - Initializer
 
     init(networkService: NetworkService, testEntity: [DailyBoxOffice], decideHelper: Selector) {
@@ -45,6 +38,11 @@ class HomeViewController: UIViewController {
     }
 
     //MARK: - Private Property
+    
+    private var networkService: NetworkService
+    private var dailyBoxOfficeStorage: [DailyBoxOffice]
+    private var decideHelper: Decidable
+    private var formatter: Convertible
 
     private lazy var navigationBar : UINavigationBar = {
         let navigationBar = UINavigationBar()
@@ -74,6 +72,11 @@ class HomeViewController: UIViewController {
 
     private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
 
+}
+
+//MARK: - Private Method
+extension HomeViewController {
+    
     private func fetchData() {
         let yesterdayDate = formatter.receiveCurrentDate().split(separator: "-").joined()
         let boxOfficeQueryParameters = BoxOfficeQueryParameters(targetDate: yesterdayDate)
@@ -104,6 +107,7 @@ class HomeViewController: UIViewController {
 
 //MARK: - Configure of CollectionViewLayout
 extension HomeViewController {
+    
     private func configureHierarchy() {
         let safeArea = self.view.safeAreaLayoutGuide
 
@@ -135,7 +139,8 @@ extension HomeViewController {
 
 //MARK: - Configure of DiffableDataSource
 extension HomeViewController {
-    func configureDataSource() {
+    
+    private func configureDataSource() {
 
         let cellRegistration = UICollectionView.CellRegistration<BoxOfficeListCell, DailyBoxOffice> { [self] (cell, indexPath, dailyBoxOffice) in
             let rankVariation = decideHelper.determineRankVariation(with: dailyBoxOffice.rank.rankVariation, and: dailyBoxOffice.rank.rankOldAndNew)
