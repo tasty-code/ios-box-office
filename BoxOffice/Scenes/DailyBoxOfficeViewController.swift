@@ -28,10 +28,10 @@ final class DailyBoxOfficeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        showIndicatorview()
         setUpUI()
         configureCollectionView()
         configureDataSource()
+        showIndicatorview()
         fetchBoxOfficeData()
     }
 
@@ -91,9 +91,9 @@ final class DailyBoxOfficeViewController: UIViewController {
             guard let boxOffice = data as? BoxOffice else { return }
             self?.movies = boxOffice.result.dailyBoxOffices
             DispatchQueue.main.async {
-                self?.dailyBoxOfficeCollectionView?.refreshControl?.endRefreshing()
+                self?.removeIndicatorView()
+                self?.endRefresh()
                 self?.navigationItem.title = yesterDay
-                self?.hideIndicatorView()
             }
         }
     }
@@ -112,27 +112,15 @@ final class DailyBoxOfficeViewController: UIViewController {
 
 extension DailyBoxOfficeViewController {
 
-    private func window() -> UIWindow {
-        let scenes = UIApplication.shared.connectedScenes
-        let windowScene = scenes.first as? UIWindowScene
-        guard let window = windowScene?.windows.first else { return UIWindow() }
-
-        return window
-    }
-
     private func showIndicatorview() {
-        let window = window()
-        loadingIndicatorView.frame = window.frame
+        loadingIndicatorView.frame = view.frame
         loadingIndicatorView.color = .systemBlue
-        window.addSubview(loadingIndicatorView)
+        view.addSubview(loadingIndicatorView)
         loadingIndicatorView.startAnimating()
     }
     
-    private func hideIndicatorView() {
-        let window = window()
-        let indicatorView = window.subviews.first { $0 is UIActivityIndicatorView }
-        guard let indicatorView else { return }
-        indicatorView.removeFromSuperview()
+    private func removeIndicatorView() {
+        loadingIndicatorView.removeFromSuperview()
     }
 
     private func configureRefreshControl() {
@@ -142,6 +130,10 @@ extension DailyBoxOfficeViewController {
         dailyBoxOfficeCollectionView.refreshControl?.addTarget(self,
                                                                action: #selector(handleRefreshControl),
                                                                for: .valueChanged)
+    }
+
+    private func endRefresh() {
+        dailyBoxOfficeCollectionView?.refreshControl?.endRefreshing()
     }
 
     @objc private func handleRefreshControl() {
