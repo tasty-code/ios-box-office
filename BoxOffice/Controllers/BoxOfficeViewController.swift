@@ -61,7 +61,12 @@ class BoxOfficeViewController: UIViewController {
     }
         
     private func configureMovieCollectionView() {
-        let config = UICollectionLayoutListConfiguration(appearance: .plain)
+        var config = UICollectionLayoutListConfiguration(appearance: .plain)
+        if #available(iOS 14.5, *) {
+            config.separatorConfiguration.bottomSeparatorVisibility = .hidden
+            config.separatorConfiguration.topSeparatorVisibility = .visible
+            config.separatorConfiguration.topSeparatorInsets = .init(top: 0, leading: -100, bottom: 0, trailing: -100)
+        }
         let layout = UICollectionViewCompositionalLayout.list(using: config)
         let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
         collectionView.backgroundColor = .systemPink
