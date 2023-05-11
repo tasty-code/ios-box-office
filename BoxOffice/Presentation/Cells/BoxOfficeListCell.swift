@@ -14,15 +14,15 @@ class BoxOfficeListCell: UICollectionViewListCell, Gettable {
 
     override init(frame: CGRect) {
         super .init(frame: frame)
-        setUpAllUIComponents()
+        configureOfAllUIComponents()
     }
 
     required init?(coder: NSCoder) {
         super .init(coder: coder)
-        setUpAllUIComponents()
+        configureOfAllUIComponents()
     }
     
-    private func setUpAllUIComponents() {
+    private func configureOfAllUIComponents() {
 
         let contentStackView = UIStackView()
         contentStackView.axis = .horizontal
