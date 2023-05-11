@@ -8,7 +8,7 @@
 import Foundation
 
 struct BoxOfficeQueryParameters: Encodable {
-    let key: String = APIMagicLiteral.key
+    let key = Bundle.main.infoDictionary?["BoxOfficeAPIKEY"] as? String
     var targetDate: String
     
     enum CodingKeys: String, CodingKey {
