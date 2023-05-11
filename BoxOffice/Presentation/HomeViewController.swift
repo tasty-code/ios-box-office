@@ -60,7 +60,7 @@ final class HomeViewController: UIViewController {
         let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: createCollectionViewLayout())
         collectionView.isScrollEnabled = true
         collectionView.showsVerticalScrollIndicator = true
-        collectionView.clipsToBounds = true
+        collectionView.clipsToBounds = false
         collectionView.refreshControl = refresh
 
         return collectionView
@@ -70,6 +70,7 @@ final class HomeViewController: UIViewController {
 
     private func configureOfNavigationBar() {
         navigationItem.title = formatter.receiveCurrentDate()
+        self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.isTranslucent = false
     }
 }
