@@ -95,7 +95,7 @@ final class DailyBoxOfficeViewController: UIViewController {
         boxOfficeManager.fetchData(to: BoxOffice.self, endPoint: .boxOffice(targetDate: yesterdayDashExcepted))
         { [weak self] data in
             guard let boxOffice = data as? BoxOffice else { return }
-            self?.movies = boxOffice.result.dailyBoxOfficeList
+            self?.movies = boxOffice.result.dailyBoxOffices
             DispatchQueue.main.async {
                 self?.navigationItem.title = yesterDay
                 self?.hideIndicatorView()
