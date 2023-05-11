@@ -9,11 +9,42 @@ import Foundation
 
 extension Date {
 
-    var yesterday: String {
-        let yesterdayDate = self - 86400
-        let formatter = DateFormatter()
-        formatter.dateFormat = "YYYYMMdd"
+    enum DateType {
 
-        return formatter.string(from: yesterdayDate)
+        case network
+        case title
+
+        var format: String {
+            switch self {
+            case .network:
+                return "YYYYMMdd"
+            case .title:
+                return "YYYY-MM-dd"
+            }
+        }
+    }
+
+    static var yesterday: Date {
+        let today = Date()
+        let secondOfDay: TimeInterval = 86400
+
+        return today - secondOfDay
+    }
+
+    func formatData(type: DateType) -> String {
+
+        let formatter = DateFormatter()
+
+        switch type {
+        case .network:
+            formatter.dateFormat = type.format
+        case .title:
+            formatter.dateFormat = type.format
+        }
+
+        return formatter.string(from: self)
     }
 }
+
+
+
