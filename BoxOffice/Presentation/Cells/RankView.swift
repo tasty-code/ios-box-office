@@ -1,5 +1,5 @@
 //
-//  BoxOfficeRank.swift
+//  RankView.swift
 //  BoxOffice
 //
 //  Created by 이상윤 on 2023/05/02.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BoxOfficeRank: UIStackView {
+final class RankView: UIStackView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -67,7 +67,7 @@ final class BoxOfficeRank: UIStackView {
     }()
 }
 
-extension BoxOfficeRank {
+extension RankView {
 
     func setRank(by text: String) {
         rank.text = text
