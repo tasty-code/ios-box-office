@@ -20,7 +20,7 @@ final class BoxOfficeListController: UIViewController {
     // MARK: - Properties
     
     private let viewModel: BoxOfficeListViewModel
-    private var dataSource: DataSource?
+    private lazy var dataSource: DataSource = makeDataSource()
     
     // MARK: - UI Components
     
@@ -137,7 +137,6 @@ extension BoxOfficeListController {
     
     private func setupCollectionView() {
         boxOfficeListCollectionView.registerCell(cellClass: BoxOfficeListCell.self)
-        setupCollectionViewDataSource()
         setupInitialSnapshot()
     }
     
@@ -151,8 +150,8 @@ extension BoxOfficeListController {
 
 extension BoxOfficeListController {
     
-    private func setupCollectionViewDataSource() {
-        dataSource = UICollectionViewDiffableDataSource(
+    private func makeDataSource() -> DataSource {
+        UICollectionViewDiffableDataSource(
             collectionView: boxOfficeListCollectionView,
             cellProvider: { collectionView, indexPath, item in
                 guard let section = Section(rawValue: indexPath.section) else {
@@ -169,8 +168,6 @@ extension BoxOfficeListController {
     }
     
     private func setupInitialSnapshot() {
-        guard let dataSource = dataSource else { return }
-        
         // Section 초기 설정
         var snapshot = dataSource.snapshot()
         snapshot.appendSections(Section.allCases)
@@ -178,8 +175,6 @@ extension BoxOfficeListController {
     }
     
     private func appendSnapshot(with items: [BoxOfficeListCell.Item]) {
-        guard let dataSource = dataSource else { return }
-
         // list snapshot 설정
         var listSnapshot = NSDiffableDataSourceSectionSnapshot<BoxOfficeListCell.Item>()
         listSnapshot.append(items)
