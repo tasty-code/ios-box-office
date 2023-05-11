@@ -11,11 +11,15 @@ final class HomeViewController: UIViewController {
 
     //MARK: - Initializer
 
-    init(networkService: NetworkService, testEntity: [DailyBoxOffice], decideHelper: Selector) {
-        self.networkService = NetworkService()
-        self.dailyBoxOfficeStorage = [DailyBoxOffice]()
-        self.decideHelper = Selector()
-        self.formatter = Formatter()
+    init(networkService: NetworkService = NetworkService(),
+         dailyBoxOfficeStorage: [DailyBoxOffice] = [DailyBoxOffice](),
+         selector: Selector = Selector(),
+         formatter: Formatter = Formatter()
+    ) {
+        self.networkService = networkService
+        self.dailyBoxOfficeStorage = dailyBoxOfficeStorage
+        self.selector = selector
+        self.formatter = formatter
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -23,7 +27,7 @@ final class HomeViewController: UIViewController {
     required init?(coder: NSCoder) {
         self.networkService = NetworkService()
         self.dailyBoxOfficeStorage = [DailyBoxOffice]()
-        self.decideHelper = Selector()
+        self.selector = Selector()
         self.formatter = Formatter()
 
         super.init(coder: coder)
@@ -31,7 +35,8 @@ final class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        configureOfNavigationBar()
         configureHierarchy()
         configureDataSource()
         fetchData()
@@ -41,17 +46,8 @@ final class HomeViewController: UIViewController {
     
     private var networkService: NetworkService
     private var dailyBoxOfficeStorage: [DailyBoxOffice]
-    private var decideHelper: Decidable
+    private var selector: Decidable
     private var formatter: Convertible
-
-    private lazy var navigationBar : UINavigationBar = {
-        let navigationBar = UINavigationBar()
-        let navigationItem = UINavigationItem(title: formatter.receiveCurrentDate())
-        navigationBar.setItems([navigationItem], animated: true)
-        navigationBar.isTranslucent = false
-
-        return navigationBar
-    }()
     
     private lazy var refresh: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -72,6 +68,10 @@ final class HomeViewController: UIViewController {
 
     private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
 
+    private func configureOfNavigationBar() {
+        navigationItem.title = formatter.receiveCurrentDate()
+        self.navigationController?.navigationBar.isTranslucent = false
+    }
 }
 
 //MARK: - Private Method
@@ -111,22 +111,13 @@ extension HomeViewController {
     private func configureHierarchy() {
         let safeArea = self.view.safeAreaLayoutGuide
 
-        self.view.backgroundColor = .white
-        self.view.addSubview(navigationBar)
-        navigationBar.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            navigationBar.topAnchor.constraint(equalTo: safeArea.topAnchor),
-            navigationBar.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-            navigationBar.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
-        ])
-
         self.view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: navigationBar.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor)
+            collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
         ])
     }
 
@@ -143,12 +134,12 @@ extension HomeViewController {
     private func configureDataSource() {
 
         let cellRegistration = UICollectionView.CellRegistration<BoxOfficeListCell, DailyBoxOffice> { [self] (cell, indexPath, dailyBoxOffice) in
-            let rankVariation = decideHelper.determineRankVariation(with: dailyBoxOffice.rank.rankVariation, and: dailyBoxOffice.rank.rankOldAndNew)
-            let rankImage = decideHelper.determineVariationImage(with: dailyBoxOffice.rank.rankVariation)
+            let rankVariation = selector.determineRankVariation(with: dailyBoxOffice.rank.rankVariation, and: dailyBoxOffice.rank.rankOldAndNew)
+            let rankImage = selector.determineVariationImage(with: dailyBoxOffice.rank.rankVariation)
             
             cell.summaryInformationView.setMovieName(by: dailyBoxOffice.movieBrief.movieName)
             cell.summaryInformationView.setAudienceCount(by: formatter.convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
-                                                                                   accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
+                                                                                                accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
             cell.rankView.setRankVariation(by: rankVariation.0, with: rankVariation.1)
             
             if dailyBoxOffice.rank.rankOldAndNew == RankOldAndNew.new || dailyBoxOffice.rank.rankVariation == MagicLiteral.zero {
