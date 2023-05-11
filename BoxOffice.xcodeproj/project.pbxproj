@@ -52,6 +52,7 @@
 		D9876A232A00C97D00D81BA8 /* BoxOfficeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9876A222A00C97D00D81BA8 /* BoxOfficeListCell.swift */; };
 		D9876A272A00E8BE00D81BA8 /* BoxOfficeBrief.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9876A262A00E8BE00D81BA8 /* BoxOfficeBrief.swift */; };
 		D9876A292A00EB4800D81BA8 /* BoxOfficeRank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9876A282A00EB4800D81BA8 /* BoxOfficeRank.swift */; };
+		D9C9064C2A0C8BE1008B747E /* Gettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C9064B2A0C8BE1008B747E /* Gettable.swift */; };
 		D9DB45F729FFE483001C63B1 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DB45F629FFE483001C63B1 /* EndPoint.swift */; };
 		D9DB45F929FFE755001C63B1 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DB45F829FFE755001C63B1 /* Requestable.swift */; };
 		D9E6F76C29FA3CB5007B542A /* URLComponentsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E6F76B29FA3CB5007B542A /* URLComponentsError.swift */; };
@@ -115,6 +116,7 @@
 		D9876A222A00C97D00D81BA8 /* BoxOfficeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListCell.swift; sourceTree = "<group>"; };
 		D9876A262A00E8BE00D81BA8 /* BoxOfficeBrief.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeBrief.swift; sourceTree = "<group>"; };
 		D9876A282A00EB4800D81BA8 /* BoxOfficeRank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeRank.swift; sourceTree = "<group>"; };
+		D9C9064B2A0C8BE1008B747E /* Gettable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gettable.swift; sourceTree = "<group>"; };
 		D9DB45F629FFE483001C63B1 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		D9DB45F829FFE755001C63B1 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		D9E6F76B29FA3CB5007B542A /* URLComponentsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponentsError.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 			children = (
 				D9343D932A0B5246008FCFEA /* Decidable.swift */,
 				D9343D952A0B56FD008FCFEA /* Convertible.swift */,
+				D9C9064B2A0C8BE1008B747E /* Gettable.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 				5BA4711429FA465D00B8427C /* APIMagicLiteral.swift in Sources */,
 				D9DB45F929FFE755001C63B1 /* Requestable.swift in Sources */,
 				5BA4712C29FA67E900B8427C /* ShowType.swift in Sources */,
+				D9C9064C2A0C8BE1008B747E /* Gettable.swift in Sources */,
 				5B6ADFAF29FB6BAD001A1394 /* HTTPErrorType.swift in Sources */,
 				5BA4712529FA670E00B8427C /* Director.swift in Sources */,
 				D9343D962A0B56FD008FCFEA /* Convertible.swift in Sources */,
