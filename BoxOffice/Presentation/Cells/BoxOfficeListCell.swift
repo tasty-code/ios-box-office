@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BoxOfficeListCell: UICollectionViewListCell, Gettable {
+final class BoxOfficeListCell: UICollectionViewListCell, Gettable {
 
     var rankView = RankView()
     var summaryInformationView = SummaryInformationView()
