@@ -102,6 +102,13 @@ final class BoxOfficeListCell: UICollectionViewListCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View Life Cycle
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        resetUIComponents()
+    }
+    
     // MARK: - Public Methods
     
     func configure(with item: BoxOfficeListCell.Item) {
@@ -116,6 +123,14 @@ final class BoxOfficeListCell: UICollectionViewListCell {
     }
     
     // MARK: - Private Methods
+    
+    private func resetUIComponents() {
+        movieRankLabel.text = ""
+        movieRankStatusLabel.attributedText = NSAttributedString(string: "")
+        movieTitleLabel.text = ""
+        audienceCountLabel.text = ""
+        movieTitleLabel.text = ""
+    }
     
     private func movieRankStatusLabelText(with item: BoxOfficeListCell.Item) -> NSAttributedString {
         if item.isNew {
