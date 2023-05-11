@@ -1,5 +1,5 @@
 //
-//  BoxOfficeBrief.swift
+//  SummaryInformationView.swift
 //  BoxOffice
 //
 //  Created by 이상윤 on 2023/05/02.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BoxOfficeBrief: UIStackView {
+final class SummaryInformationView: UIStackView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,7 +47,7 @@ final class BoxOfficeBrief: UIStackView {
     }()
 }
 
-extension BoxOfficeBrief {
+extension SummaryInformationView {
     func setMovieName(by text: String) {
         movieName.text = text
     }
