@@ -81,7 +81,7 @@ class BoxOfficeViewController: UIViewController {
             else {
                 if item.rankInten == "0" {
                     rankStatusLabel.text = "-"
-                    
+                    rankStatusStackView.removeArrangedSubview(rankStatusImage)
                 }
                 else if item.rankInten.hasPrefix("-") {
                     rankStatusLabel.text = item.rankInten.replacingOccurrences(of: "-", with: "")
