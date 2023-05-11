@@ -24,19 +24,8 @@ class BoxOfficeViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setup()
-            
-        let yesterday = Date.yesterday
-        let yesterdayString = yesterday.string(format: .yyyyMMdd)
-        
-        let sample = DailyBoxOfficeEndPoint(date: yesterdayString)
-        updateData(from: sample) {
-            self.dailyBoxOffice = $0
-            DispatchQueue.main.async {
-                self.applyMovieDataSource()
-            }
-        }
+        updateYesterdayData()
     }
     
     // MARK: - Private function
@@ -44,6 +33,7 @@ class BoxOfficeViewController: UIViewController {
         updateNavigationTitle()
         configureMovieCollectionView()
         configureMovieDataSource()
+        configureRefreshControl()
         configureUI()
     }
     
@@ -51,7 +41,19 @@ class BoxOfficeViewController: UIViewController {
         let yesterday = Date.yesterday
         let yesterdayString = yesterday.string(format: .yyyy_MM_dd)
         self.navigationController?.navigationBar.topItem?.title = yesterdayString
-    }   
+    }
+    
+    private func configureMovieCollectionView() {
+        var config = UICollectionLayoutListConfiguration(appearance: .plain)
+        if #available(iOS 14.5, *) {
+            config.separatorConfiguration.bottomSeparatorVisibility = .hidden
+            config.separatorConfiguration.topSeparatorVisibility = .visible
+            config.separatorConfiguration.topSeparatorInsets = .init(top: 0, leading: -100, bottom: 0, trailing: -100)
+        }
+        let layout = UICollectionViewCompositionalLayout.list(using: config)
+        let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+        movieCollectionView = collectionView
+    }
     
     private func configureMovieDataSource() {
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, MovieDTO> { cell, indexPath, item in
@@ -77,10 +79,11 @@ class BoxOfficeViewController: UIViewController {
             let leftStackView = UIStackView(arrangedSubviews: [rankLabel, rankStatusStackView])
             leftStackView.axis = .vertical
             
+            // disclosureIndicator 추가
+            cell.accessories = [.disclosureIndicator()]
+            
             cell.accessories.append(.customView(configuration: .init(customView: leftStackView, placement: .leading())))
             
-            // disclosureIndicator 추가
-            cell.accessories.append(.disclosureIndicator())
             
             // 랭크, 등락 text 추가
             if item.rankOldAndNew == "NEW" {
@@ -127,20 +130,41 @@ class BoxOfficeViewController: UIViewController {
         }
     }
     
+    private func configureRefreshControl() {
+        let refreshControl: UIRefreshControl = {
+            let control = UIRefreshControl()
+            
+            return control
+        }()
+        
+        movieCollectionView.addSubview(refreshControl)
+        movieCollectionView.refreshControl = refreshControl
+        movieCollectionView.refreshControl?.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
+    }
+    
     private func configureUI() {
         view.addSubview(movieCollectionView)
     }
     
-    private func configureMovieCollectionView() {
-        var config = UICollectionLayoutListConfiguration(appearance: .plain)
-        if #available(iOS 14.5, *) {
-            config.separatorConfiguration.bottomSeparatorVisibility = .hidden
-            config.separatorConfiguration.topSeparatorVisibility = .visible
-            config.separatorConfiguration.topSeparatorInsets = .init(top: 0, leading: -100, bottom: 0, trailing: -100)
+    @objc
+    private func refreshCollectionView() {
+        if movieCollectionView.refreshControl?.isRefreshing != false {
+            movieCollectionView.refreshControl?.endRefreshing()
         }
-        let layout = UICollectionViewCompositionalLayout.list(using: config)
-        let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-        movieCollectionView = collectionView
+        updateYesterdayData()
+    }
+    
+    private func updateYesterdayData() {
+        let yesterday = Date.yesterday
+        let yesterdayString = yesterday.string(format: .yyyyMMdd)
+        
+        let sample = DailyBoxOfficeEndPoint(date: yesterdayString)
+        updateData(from: sample) {
+            self.dailyBoxOffice = $0
+            DispatchQueue.main.async {
+                self.applyMovieDataSource()
+            }
+        }
     }
     
     private func updateData<T: APIRepresentable, E: EndPointProtocol>(from api: E, completion: @escaping (T?) -> Void) where E.DTO == T {
