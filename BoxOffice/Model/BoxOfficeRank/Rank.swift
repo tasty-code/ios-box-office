@@ -51,10 +51,10 @@ extension Rank {
         
         let imageAttachment = NSTextAttachment()
         
-        if number == 0 {
+        if number == .zero {
             imageAttachment.image = dashMark
         } else {
-            imageAttachment.image = number > 0 ? plusMark : minusMark
+            imageAttachment.image = number > .zero ? plusMark : minusMark
         }
         
         return imageAttachment

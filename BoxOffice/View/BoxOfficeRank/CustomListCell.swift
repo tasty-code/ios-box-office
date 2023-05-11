@@ -46,15 +46,15 @@ final class CustomListCell: UICollectionViewListCell {
         contentView.addSubview(movieStackView)
 
         NSLayoutConstraint.activate([
-            rankStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            rankStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            rankStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
-            rankStackView.widthAnchor.constraint(lessThanOrEqualToConstant: 50),
-            rankStackView.widthAnchor.constraint(equalToConstant: 50),
+            rankStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.RankStackView.vertical),
+            rankStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.RankStackView.vertical),
+            rankStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.RankStackView.leading),
+            rankStackView.widthAnchor.constraint(lessThanOrEqualToConstant: Constants.RankStackView.width),
+            rankStackView.widthAnchor.constraint(equalToConstant: Constants.RankStackView.width),
 
-            movieStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
-            movieStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
-            movieStackView.leadingAnchor.constraint(equalTo: rankStackView.trailingAnchor, constant: 20)
+            movieStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.MovieStackView.vertical),
+            movieStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.MovieStackView.vertical),
+            movieStackView.leadingAnchor.constraint(equalTo: rankStackView.trailingAnchor, constant: Constants.MovieStackView.leading)
         ])
     }
 
