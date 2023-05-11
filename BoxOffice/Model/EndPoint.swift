@@ -91,7 +91,8 @@ extension EndPoint {
         case .dailyBoxOffice, .movieInformation:
             return request
         case .moviePoster:
-            request.addValue("KakaoAK ",
+            let api = Bundle.main.object(forInfoDictionaryKey: "POSTER_API_KEY") as? String ?? ""
+            request.addValue("KakaoAK \(api)",
                              forHTTPHeaderField: "Authorization")
             return request
         }
