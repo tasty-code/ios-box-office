@@ -8,7 +8,7 @@
 import UIKit
 
 class Networking {
-    func loadData(_ method: EndPoint, completion: @escaping (MovieDatable?, Error?) -> Void) {
+    func loadData(from method: EndPoint, completion: @escaping (MovieDatable?, Error?) -> Void) {
         do {
             let urlRequest = try method.makeRequest()
 
@@ -41,8 +41,8 @@ class Networking {
         }
     }
 
-    func loadImage(_ method: EndPoint, completion: @escaping (UIImage?, Error?) -> Void) {
-        loadData(method) { poster, error in
+    func loadImage(form method: EndPoint, completion: @escaping (UIImage?, Error?) -> Void) {
+        loadData(from: method) { poster, error in
             guard error == nil else {
                 completion(nil, error)
                 return
