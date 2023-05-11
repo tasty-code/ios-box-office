@@ -8,6 +8,7 @@
 import UIKit
 
 final class BoxOfficeBrief: UIStackView {
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureOfStackView()
@@ -19,7 +20,18 @@ final class BoxOfficeBrief: UIStackView {
         configureOfStackView()
         configureOfComponents()
     }
-
+    
+    private func configureOfStackView() {
+        axis = .vertical
+        alignment = .leading
+        distribution = .fillEqually
+    }
+    
+    private func configureOfComponents() {
+        addArrangedSubview(movieName)
+        addArrangedSubview(audienceCount)
+    }
+    
     private let movieName: UILabel = {
         let movieName = UILabel()
         movieName.font = .systemFont(ofSize: 20)
@@ -33,17 +45,6 @@ final class BoxOfficeBrief: UIStackView {
         audienceCount.textColor = .black
         return audienceCount
     }()
-    
-    private func configureOfStackView() {
-        axis = .vertical
-        alignment = .leading
-        distribution = .fillEqually
-    }
-    
-    private func configureOfComponents() {
-        addArrangedSubview(movieName)
-        addArrangedSubview(audienceCount)
-    }
 }
 
 extension BoxOfficeBrief {

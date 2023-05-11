@@ -8,6 +8,7 @@
 import UIKit
 
 final class BoxOfficeRank: UIStackView {
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureOfStackView()
@@ -20,6 +21,24 @@ final class BoxOfficeRank: UIStackView {
         configureOfComponents()
     }
 
+    private func configureOfStackView() {
+        axis = .vertical
+        spacing = 3
+        alignment = .center
+        distribution = .equalSpacing
+
+        information.axis = .horizontal
+        information.alignment = .center
+        information.distribution = .equalSpacing
+    }
+
+    private func configureOfComponents() {
+        addArrangedSubview(rank)
+        addArrangedSubview(information)
+        information.addArrangedSubview(rankEmoji)
+        information.addArrangedSubview(rankVariation)
+    }
+    
     private var information: UIStackView = {
         let information = UIStackView()
 
@@ -46,24 +65,6 @@ final class BoxOfficeRank: UIStackView {
 
         return rankVariationLabel
     }()
-
-    private func configureOfStackView() {
-        axis = .vertical
-        spacing = 3
-        alignment = .center
-        distribution = .equalSpacing
-
-        information.axis = .horizontal
-        information.alignment = .center
-        information.distribution = .equalSpacing
-    }
-
-    private func configureOfComponents() {
-        addArrangedSubview(rank)
-        addArrangedSubview(information)
-        information.addArrangedSubview(rankEmoji)
-        information.addArrangedSubview(rankVariation)
-    }
 }
 
 extension BoxOfficeRank {
