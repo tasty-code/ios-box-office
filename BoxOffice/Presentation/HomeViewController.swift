@@ -60,21 +60,7 @@ final class HomeViewController: UIViewController {
         return refreshControl
     }()
 
-    private func configureOfCollectionView() {
-        collectionView.collectionViewLayout = createCollectionViewLayout()
-        collectionView.isScrollEnabled = true
-        collectionView.showsVerticalScrollIndicator = true
-        collectionView.clipsToBounds = false
-        collectionView.refreshControl = refresh
-    }
-
     private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
-
-    private func configureOfNavigationBar() {
-        navigationItem.title = formatter.receiveCurrentDate()
-        self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.navigationBar.isTranslucent = false
-    }
 }
 
 //MARK: - Private Method
@@ -111,6 +97,12 @@ extension HomeViewController {
 //MARK: - Configure of CollectionViewLayout
 extension HomeViewController {
     
+    private func configureOfNavigationBar() {
+        navigationItem.title = formatter.receiveCurrentDate()
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.isTranslucent = false
+    }
+    
     private func configureHierarchy() {
         let safeArea = self.view.safeAreaLayoutGuide
 
@@ -122,6 +114,14 @@ extension HomeViewController {
             collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
         ])
+    }
+    
+    private func configureOfCollectionView() {
+        collectionView.isScrollEnabled = true
+        collectionView.showsVerticalScrollIndicator = true
+        collectionView.clipsToBounds = false
+        collectionView.collectionViewLayout = createCollectionViewLayout()
+        collectionView.refreshControl = refresh
     }
 
     private func createCollectionViewLayout() -> UICollectionViewLayout {
