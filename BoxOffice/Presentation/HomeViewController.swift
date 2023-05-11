@@ -76,12 +76,12 @@ class HomeViewController: UIViewController {
 
     private func fetchData() {
         let yesterdayDate = formatter.receiveCurrentDate().split(separator: "-").joined()
-        let boxOfficeRequestDTO = BoxOfficeQueryParameters(targetDate: yesterdayDate)
+        let boxOfficeQueryParameters = BoxOfficeQueryParameters(targetDate: yesterdayDate)
 
         var networkResult: BoxOfficeResult?
 
         Task {
-            let result = try await networkService.request(with: APIEndPoint.receiveBoxOffice(with: boxOfficeRequestDTO))
+            let result = try await networkService.request(with: APIEndPoint.receiveBoxOffice(with: boxOfficeQueryParameters))
             networkResult = result.boxOfficeResult
             networkResult?.dailyBoxOfficeList.forEach({ officeList in
                 dailyBoxOfficeStorage.append(DailyBoxOffice(movieBrief: MovieBrief(movieName: officeList.movieName, audienceCount: officeList.audienceCount, audienceAccumulated: officeList.audienceAccumulate), rank: Rank(rank: officeList.rank, rankVariation: officeList.rankVariation, rankOldAndNew: officeList.rankOldAndNew)))
