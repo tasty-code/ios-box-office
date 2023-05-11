@@ -9,8 +9,8 @@ import UIKit
 
 class BoxOfficeListCell: UICollectionViewListCell, Gettable {
 
-    var boxOfficeRank = BoxOfficeRank()
-    var boxOfficeBrief = BoxOfficeBrief()
+    var boxOfficeRank = RankView()
+    var boxOfficeBrief = SummaryInformationView()
 
     override init(frame: CGRect) {
         super .init(frame: frame)
