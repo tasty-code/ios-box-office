@@ -11,7 +11,7 @@ final class BoxOfficeListViewModel: ViewModelType {
     
     // MARK: - Constants
     
-    enum Constants {
+    private enum Constants {
         static let dailyAudiencePrefix = "일일"
         static let cumulativeAudiencePrefix = "총"
     }

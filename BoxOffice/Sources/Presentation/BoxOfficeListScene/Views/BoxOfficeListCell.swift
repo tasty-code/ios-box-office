@@ -11,17 +11,12 @@ final class BoxOfficeListCell: UICollectionViewListCell {
     
     // MARK: - Constants
     
-    enum Metric {
-        static let movieRankStackViewSpacing = 8.f
-        static let movieRankStackViewLeadingInset = 20.f
-        static let movieRanckStackViewVerticalInset = 10.f
-        static let movieRanckStackViewWidth = 50.f
-        static let movieInfoStackViewSpacing = 8.f
-        static let movieInfoStackViewLeadingInset = 20.f
-        static let movieInfoStackViewTrailingInset = 30.f
+    private enum Metric {
+        static let stackViewSpacing: CGFloat = 8
+        static let horizontalInset: CGFloat = 20
     }
     
-    enum Constants {
+    private enum Constants {
         static let movieRankLabelSkeletonText = "-"
         static let movieRankStatusLabelSkeletonText = "--"
         static let movieTitleLabelSkeletonText = "----"
@@ -66,7 +61,7 @@ final class BoxOfficeListCell: UICollectionViewListCell {
             movieRankStatusLabel
         ])
         stackView.axis = .vertical
-        stackView.spacing = Metric.movieRankStackViewSpacing
+        stackView.spacing = Metric.stackViewSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -91,7 +86,7 @@ final class BoxOfficeListCell: UICollectionViewListCell {
             audienceCountLabel
         ])
         stackView.axis = .vertical
-        stackView.spacing = Metric.movieInfoStackViewSpacing
+        stackView.spacing = Metric.stackViewSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -175,20 +170,20 @@ extension BoxOfficeListCell {
         contentView.addSubview(movieRankStackView)
         NSLayoutConstraint.activate([
             movieRankStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
-                                                        constant: Metric.movieRankStackViewLeadingInset),
+                                                        constant: Metric.horizontalInset),
             movieRankStackView.topAnchor.constraint(equalTo: contentView.topAnchor,
-                                                    constant: Metric.movieRanckStackViewVerticalInset),
+                                                    constant: 10),
             movieRankStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
-                                                       constant: -Metric.movieRanckStackViewVerticalInset),
-            movieRankStackView.widthAnchor.constraint(equalToConstant: Metric.movieRanckStackViewWidth)
+                                                       constant: -10),
+            movieRankStackView.widthAnchor.constraint(equalToConstant: 50)
         ])
         
         contentView.addSubview(movieInfoStackView)
         NSLayoutConstraint.activate([
             movieInfoStackView.leadingAnchor.constraint(equalTo: movieRankStackView.trailingAnchor,
-                                                        constant: Metric.movieInfoStackViewLeadingInset),
+                                                        constant: Metric.horizontalInset),
             movieInfoStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
-                                                         constant: -Metric.movieInfoStackViewTrailingInset),
+                                                         constant: -30),
             movieInfoStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
