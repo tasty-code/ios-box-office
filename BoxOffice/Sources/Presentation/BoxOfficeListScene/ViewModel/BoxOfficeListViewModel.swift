@@ -67,10 +67,10 @@ final class BoxOfficeListViewModel: ViewModelType {
                 let items = boxOfficeEntities.map {
                     BoxOfficeListCell.Item(
                         isNew: $0.isNew,
-                        movieRankLabelText: "\($0.rank)",
-                        movieRankIntensity: $0.rankIntensity,
-                        movieTitleLabelText: $0.movieName,
-                        audienceCountLabelText: self.audienceCountLabelText(with: $0)
+                        name: $0.movieName,
+                        rank: "\($0.rank)",
+                        rankIntensity: $0.rankIntensity,
+                        audienceCount: self.audienceCountLabelText(with: $0)
                     )
                 }
                 
