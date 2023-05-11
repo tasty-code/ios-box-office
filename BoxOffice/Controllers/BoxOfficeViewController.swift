@@ -25,13 +25,14 @@ class BoxOfficeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let sample = DailyBoxOfficeEndPoint(date: "20220202")
+        setup()
+        let sample = DailyBoxOfficeEndPoint(date: "20230510")
         updateData(from: sample) {
             self.dailyBoxOffice = $0
-            self.applyMovieDataSource()
+            DispatchQueue.main.async {
+                self.applyMovieDataSource()
+            }
         }
-        
-        setup()
     }
     
     // MARK: - Private function
@@ -41,25 +42,87 @@ class BoxOfficeViewController: UIViewController {
         configureUI()
     }
     
+    // MARK: - DataSource
     private func configureMovieDataSource() {
+        // MARK: - CellRegistration
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, MovieDTO> { cell, indexPath, item in
+            // config 생성
             var config = cell.defaultContentConfiguration()
+            
+            // 랭크, 등락 Label생성
+            let rankLabel = UILabel()
+            rankLabel.textAlignment = .center
+            rankLabel.text = item.rank
+            rankLabel.font = .preferredFont(forTextStyle: .title1)
+            
+            
+            let rankStatusLabel = UILabel()
+            rankStatusLabel.textAlignment = .center
+            
+            let rankStatusImage = UIImageView()
+            
+            let rankStatusStackView = UIStackView(arrangedSubviews: [rankStatusImage, rankStatusLabel])
+            rankStatusStackView.axis = .horizontal
+            rankStatusStackView.alignment = .center
+            
+            let leftStackView = UIStackView(arrangedSubviews: [rankLabel, rankStatusStackView])
+            leftStackView.axis = .vertical
+            
+            cell.accessories.append(.customView(configuration: .init(customView: leftStackView, placement: .leading())))
+            
+            // disclosureIndicator 추가
+            cell.accessories.append(.disclosureIndicator())
+            
+            // 랭크, 등락 text 추가
+            if item.rankOldAndNew == "NEW" {
+                rankStatusLabel.text = "신작"
+                rankStatusLabel.textColor = .systemRed
+            }
+            else {
+                if item.rankInten == "0" {
+                    rankStatusLabel.text = "-"
+                    
+                }
+                else if item.rankInten.hasPrefix("-") {
+                    rankStatusLabel.text = item.rankInten.replacingOccurrences(of: "-", with: "")
+                    rankStatusImage.image = UIImage(systemName: "arrowtriangle.up.fill")
+                    rankStatusImage.tintColor = .systemRed
+                }
+                else {
+                    rankStatusLabel.text = item.rankInten
+                    rankStatusImage.image = UIImage(systemName: "arrowtriangle.down.fill")
+                    rankStatusImage.tintColor = .systemBlue
+                }
+            }
+
+            // 텍스트 입력
+            let todayCount = item.audienceCount.formatDecimal() ?? ""
+            let totalCount = item.audienceAcc.formatDecimal() ?? ""
+
             config.text = item.name
+            config.secondaryText = "오늘 \(todayCount) / 총 \(totalCount)"
+            config.textProperties.font = .preferredFont(forTextStyle: .title3)
+            config.secondaryTextProperties.font = .preferredFont(forTextStyle: .subheadline)
+            
+            // 설정 완료
             cell.contentConfiguration = config
         }
         
+        // MARK: - 위에서 만든 Data 등록
         movieDataSource = UICollectionViewDiffableDataSource<Section, MovieDTO>(collectionView: movieCollectionView) { collectionView, indexPath, itemIdentifier in
             let cell = self.movieCollectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
             return cell
         }
         
-        applyMovieDataSource()
+        DispatchQueue.main.async {
+            self.applyMovieDataSource()
+        }
     }
     
     private func configureUI() {
         view.addSubview(movieCollectionView)
     }
-        
+    
     private func configureMovieCollectionView() {
         var config = UICollectionLayoutListConfiguration(appearance: .plain)
         if #available(iOS 14.5, *) {
@@ -94,3 +157,16 @@ class BoxOfficeViewController: UIViewController {
     
 }
 
+fileprivate extension String {
+    
+    func formatDecimal() -> String? {
+        guard let number = Int(self) else {
+            return nil
+        }
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
+        return numberFormatter.string(from: NSNumber(value: number))
+    }
+    
+}
