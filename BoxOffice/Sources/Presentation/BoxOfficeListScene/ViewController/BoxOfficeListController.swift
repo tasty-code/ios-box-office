@@ -61,14 +61,18 @@ final class BoxOfficeListController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bindViewModel()
         setup()
+        bindViewModel()
+        notifyViewDidLoad()
     }
     
     // MARK: - Private Methods
     
-    private func bindViewModel() {
+    private func notifyViewDidLoad() {
         viewModel.input = .viewDidLoad
+    }
+    
+    private func bindViewModel() {
         
         viewModel.output.$cellItems.bind { [weak self] items in
             guard let self = self else { return }
