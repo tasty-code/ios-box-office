@@ -63,7 +63,7 @@ class HomeViewController: UIViewController {
     }()
 
     private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: configureOfCollectionViewLayout())
+        let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: createCollectionViewLayout())
         collectionView.isScrollEnabled = true
         collectionView.showsVerticalScrollIndicator = true
         collectionView.clipsToBounds = true
@@ -128,7 +128,7 @@ extension HomeViewController {
         ])
     }
 
-    private func configureOfCollectionViewLayout() -> UICollectionViewLayout {
+    private func createCollectionViewLayout() -> UICollectionViewLayout {
         let configure = UICollectionLayoutListConfiguration(appearance: .plain)
         let layout = UICollectionViewCompositionalLayout.list(using: configure)
         return layout
