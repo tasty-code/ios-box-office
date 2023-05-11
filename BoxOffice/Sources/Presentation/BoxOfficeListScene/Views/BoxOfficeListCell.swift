@@ -36,10 +36,10 @@ final class BoxOfficeListCell: UICollectionViewListCell {
     
     struct Item: Hashable {
         let isNew: Bool
-        let movieRankLabelText: String
-        let movieRankIntensity: Int
-        let movieTitleLabelText: String
-        let audienceCountLabelText: String
+        let name: String
+        let rank: String
+        let rankIntensity: Int
+        let audienceCount: String
     }
     
     // MARK: - UI Components
@@ -110,10 +110,10 @@ final class BoxOfficeListCell: UICollectionViewListCell {
     // MARK: - Public Methods
     
     func configure(with item: BoxOfficeListCell.Item) {
-        movieRankLabel.text = item.movieRankLabelText
+        movieRankLabel.text = item.rank
         movieRankStatusLabel.attributedText = movieRankStatusLabelText(with: item)
-        movieTitleLabel.text = item.movieTitleLabelText
-        audienceCountLabel.text = item.audienceCountLabelText
+        movieTitleLabel.text = item.name
+        audienceCountLabel.text = item.audienceCount
     }
     
     func configure(with movieTitle: String) {
@@ -128,7 +128,7 @@ final class BoxOfficeListCell: UICollectionViewListCell {
                                       attributes: [.foregroundColor: UIColor.systemRed])
         }
         
-        let rankIntensity = item.movieRankIntensity
+        let rankIntensity = item.rankIntensity
         
         if rankIntensity == 0 {
             return NSAttributedString(string: Constants.rankStatusStablePrefix)
