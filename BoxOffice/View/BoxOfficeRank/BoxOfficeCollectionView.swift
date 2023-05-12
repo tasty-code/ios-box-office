@@ -19,6 +19,7 @@ class BoxOfficeCollectionView: UICollectionView {
     init(frame: CGRect) {
         super.init(frame: frame, collectionViewLayout: UICollectionViewLayout())
         self.collectionViewLayout = self.layout
+        self.translatesAutoresizingMaskIntoConstraints = false
 
         let cell = CustomListCell.self
         self.register(cell: cell)

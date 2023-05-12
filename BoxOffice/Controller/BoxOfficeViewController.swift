@@ -11,7 +11,7 @@ class BoxOfficeViewController: UIViewController {
     
     private var dataSource: UICollectionViewDataSource?
 
-    private lazy var collectionView = BoxOfficeCollectionView(frame: view.bounds)
+    private lazy var collectionView = BoxOfficeCollectionView(frame: .zero)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +24,15 @@ class BoxOfficeViewController: UIViewController {
     
     private func configureHierarchy() {
         
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            collectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
     
     private func configureDataSource() {

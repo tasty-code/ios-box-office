@@ -17,6 +17,7 @@ final class CustomListCell: UICollectionViewListCell {
         
         static let movieStackViewVertical: CGFloat = 15
         static let movieStackViewLeading: CGFloat = 20
+        static let movieStackViewTrailing: CGFloat = -30
     }
     
     var boxOfficeItem: BoxOfficeItem?
@@ -37,9 +38,8 @@ final class CustomListCell: UICollectionViewListCell {
         rankDetailLabel.attributedText = boxOfficeItem?.rank.detail
         movieNameLabel.text = boxOfficeItem?.name
         movieDetailLabel.text = boxOfficeItem?.audience
-
     }
-
+    
     private func configureSeparator() {
 
         let constraint = separatorLayoutGuide.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
@@ -47,9 +47,8 @@ final class CustomListCell: UICollectionViewListCell {
     }
 
     private func configureHierarchy() {
-
+    
         let rankStackView = UIVerticalStackView(arrangedSubviews: [rankNumberLabel, rankDetailLabel], alignment: .center)
-
         let movieStackView = UIVerticalStackView(arrangedSubviews: [movieNameLabel, movieDetailLabel], alignment: .leading)
 
         contentView.addSubview(rankStackView)
@@ -64,7 +63,8 @@ final class CustomListCell: UICollectionViewListCell {
 
             movieStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.movieStackViewVertical),
             movieStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.movieStackViewVertical),
-            movieStackView.leadingAnchor.constraint(equalTo: rankStackView.trailingAnchor, constant: Constants.movieStackViewLeading)
+            movieStackView.leadingAnchor.constraint(equalTo: rankStackView.trailingAnchor, constant: Constants.movieStackViewLeading),
+            movieStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.movieStackViewTrailing)
         ])
     }
 
