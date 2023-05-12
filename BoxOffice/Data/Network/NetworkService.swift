@@ -14,6 +14,17 @@ final class NetworkService {
     init(session: URLSession = URLSession(configuration: .default)) {
         self.session = session
     }
+    
+    func loadData() {
+        
+        Task {
+            let yesterdayDate = Formatter.receiveCurrentDate.split(separator: "-").joined()
+            let boxOfficeQueryParameters = BoxOfficeQueryParameters(targetDate: yesterdayDate)
+            let result = try await request(with: APIEndPoint.receiveBoxOffice(with: boxOfficeQueryParameters))
+            
+            NotificationCenter.default.post(name: .loadedBoxOfficeData, object: result.boxOfficeResult.dailyBoxOfficeList)
+        }
+    }
 
     func request<R: Decodable, E: RequestAndResponsable>(with endPoint: E) async throws -> R where E.Responese == R {
 
