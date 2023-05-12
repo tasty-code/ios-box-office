@@ -8,7 +8,7 @@
 import UIKit
 
 struct DocumentDTO: Codable {
-    let collection: CollectionDTO?
+    let collection: String?
     let datetime: String?
     let displaySitename: String?
     let docURL: String?

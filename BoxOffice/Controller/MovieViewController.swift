@@ -93,6 +93,7 @@ extension MovieViewController {
     private func addSubviews() {
         view.addSubview(collectionView)
         view.addSubview(loadingIndicatorView)
+        
     }
 
     private func setLayout() {
@@ -133,16 +134,27 @@ private extension DateFormatter {
 
 extension MovieViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let name = movieArrays[indexPath.row].name
-        let posterEndPoint = EndPoint.moviePoster(title: name)
+        let movie = movieArrays[indexPath.row]
+        let posterEndPoint = EndPoint.moviePoster(title: movie.name)
+        let movieDetailEndPoint = EndPoint.movieInformation(code: movie.code.description)
         let nextVC = MovieDetailViewController()
+        nextVC.title = movie.name
+
         Networking().loadImage(form: posterEndPoint) { image, error in
             if let error = error {
                 print(error)
             }
+
             if let image = image {
-                nextVC.setImage(image: image)
-                print("갓챠!~")
+                DispatchQueue.main.async {
+                    nextVC.setImage(image: image)
+                }
+            }
+        }
+
+        Networking().loadData(from: movieDetailEndPoint) { movieInformation, error in
+            if let movieInformation = movieInformation {
+                print(movieInformation)
             }
         }
         show(nextVC, sender: nil)
