@@ -18,7 +18,7 @@ final class BoxOfficeResponseParsingTests: XCTestCase {
             sutMovieDetail = try Data(contentsOf: movieDetailFileLocation)
         )
         
-        let boxOfficeFileLocation = Bundle.main.url(forResource: "box_office_sample", withExtension: "json")!
+        let boxOfficeFileLocation = Bundle.main.url(forResource: "box_office_sample1", withExtension: "json")!
         XCTAssertNoThrow(
             sutBoxOffice = try Data(contentsOf: boxOfficeFileLocation)
         )
