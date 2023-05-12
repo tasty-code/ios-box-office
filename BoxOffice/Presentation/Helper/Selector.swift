@@ -8,24 +8,44 @@
 import UIKit
 
 struct Selector: Decidable {
-    func determineRankVariation(with rankVariation: String, and rankOldAndNew: RankOldAndNew) -> (String, UIColor) {
+    func determineRankVariation(with rankVariation: String, and rankOldAndNew: RankOldAndNew) -> String {
+
         let returnValue = "-"
 
         switch rankOldAndNew {
         case .new:
-            return (MagicLiteral.newMovie, UIColor.red)
+            return MagicLiteral.newMovie
         case .old :
             guard rankVariation == MagicLiteral.zero else {
-                return (rankVariation, UIColor.black)
+                return rankVariation
             }
-            return (returnValue, UIColor.black)
+            return returnValue
         }
     }
 
-    func determineVariationImage(with rankVariation: String) -> (UIImage, UIColor) {
-        guard rankVariation.hasPrefix("-") else {
-            return (UIImage(systemName: MagicLiteral.upTriangle) ?? UIImage(), UIColor.red)
+    func determineRankVariationColor(with rankOldAndNew: RankOldAndNew) -> UIColor {
+
+        switch rankOldAndNew {
+        case .new:
+            return UIColor.red
+        case .old:
+            return UIColor.black
         }
-        return (UIImage(systemName: MagicLiteral.downTriangle) ?? UIImage(), UIColor.blue)
+    }
+
+    func determineVariationImage(with rankVariation: String) -> UIImage {
+
+        guard rankVariation.hasPrefix("-") else {
+            return UIImage(systemName: MagicLiteral.upTriangle) ?? UIImage()
+        }
+        return UIImage(systemName: MagicLiteral.downTriangle) ?? UIImage()
+    }
+
+    func determineVariationImageColor(with rankVariation: String) -> UIColor {
+
+        guard rankVariation.hasPrefix("-") else {
+            return UIColor.red
+        }
+        return UIColor.blue
     }
 }

@@ -8,6 +8,8 @@
 import UIKit
 
 protocol Decidable {
-    func determineRankVariation(with rankVariation: String, and rankOldAndNew: RankOldAndNew) -> (String, UIColor)
-    func determineVariationImage(with rankVariation: String) -> (UIImage, UIColor)
+    func determineRankVariation(with rankVariation: String, and rankOldAndNew: RankOldAndNew) -> String
+    func determineRankVariationColor(with rankOldAndNew: RankOldAndNew) -> UIColor
+    func determineVariationImage(with rankVariation: String) -> UIImage
+    func determineVariationImageColor(with rankVariation: String) -> UIColor
 }
