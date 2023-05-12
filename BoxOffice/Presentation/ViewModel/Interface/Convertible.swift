@@ -8,13 +8,13 @@
 import Foundation
 
 protocol Convertible {
-    var receiveCurrentDate: String { get }
+    static var receiveCurrentDate: String { get }
 
     func convertToNumberFormatter(_ audienceCount: String, accumulated: String) -> String
 }
 
 extension Convertible {
-    var receiveCurrentDate: String {
+    static var receiveCurrentDate: String {
         
         guard let date = Calendar.current.date(byAdding: .day, value: -1, to: Date()) else {
             return ""
