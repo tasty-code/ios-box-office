@@ -17,7 +17,9 @@ final class HomeViewController: UIViewController {
         configureOfNavigationBar()
         configureOfCollectionView()
         configureHierarchy()
+        
         configureDataSource()
+        applySnapshot()
     }
     
     //MARK: - Private Property
@@ -25,7 +27,7 @@ final class HomeViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
     
     private let selector: Selector = Selector()
-    private let vieModel = BoxOfficeViewModel()
+    private let viewModel = BoxOfficeViewModel()
     
     private lazy var refresh: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -40,12 +42,17 @@ final class HomeViewController: UIViewController {
 extension HomeViewController {
 
     private func applySnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>()
+        var snapshot = dataSource.snapshot()
         
+            let previousItems = snapshot.itemIdentifiers(inSection: .main)
+        snapshot.deleteItems(previousItems)
         
-        snapshot.appendSections([.main])
-//        snapshot.appendItems(dailyBoxOfficeStorage)
-        dataSource.apply(snapshot)
+        self.viewModel.transformIntoDailyBoxOffice { dailyBoxOfficeStorage in
+            DispatchQueue.main.async {
+                snapshot.appendItems(dailyBoxOfficeStorage)
+                self.dataSource.apply(snapshot)
+            }
+        }
     }
 
     @objc func handleRefreshControl() {
@@ -104,8 +111,8 @@ extension HomeViewController {
             let rankImageColor = selector.determineVariationImageColor(with: dailyBoxOffice.rank.rankVariation)
             
             cell.summaryInformationView.setMovieName(by: dailyBoxOffice.movieBrief.movieName)
-//            cell.summaryInformationView.setAudienceCount(by: formatter.convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
-//                                                                                                accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
+            cell.summaryInformationView.setAudienceCount(by: Formatter().convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
+                                                                                                accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
             cell.rankView.setRankVariation(by: rankVariation)
             cell.rankView.setRankVariation(by: rankVariationColor)
             
@@ -125,5 +132,11 @@ extension HomeViewController {
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { (collectionView, indexPath, dailyBoxOffice) in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: dailyBoxOffice)
         }
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems([])
+        
+        dataSource.apply(snapshot)
     }
 }
