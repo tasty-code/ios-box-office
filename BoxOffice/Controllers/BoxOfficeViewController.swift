@@ -48,6 +48,7 @@ final class BoxOfficeViewController: UIViewController {
         configureMovieDataSource()
         configureRefreshControl()
         configureUI()
+        animateLoadLabel()
     }
     
     private func updateNavigationTitle() {
@@ -109,7 +110,6 @@ final class BoxOfficeViewController: UIViewController {
         loadLabel.translatesAutoresizingMaskIntoConstraints = false
         loadLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         loadLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        loadLabel.layer.zPosition = .greatestFiniteMagnitude
     }
     
     private func updateYesterdayData() {
@@ -143,6 +143,15 @@ final class BoxOfficeViewController: UIViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(movies ?? [])
         movieDataSource.apply(snapshot)
+    }
+    
+    private func animateLoadLabel() {
+        let opacityKeyframe = CAKeyframeAnimation(keyPath: "opacity")
+        opacityKeyframe.values = [0.2, 0.5, 0.8, 0.5, 0.2]
+        opacityKeyframe.keyTimes = [0, 0.3, 0.5, 0.8, 1]
+        opacityKeyframe.duration = 0.8
+        opacityKeyframe.repeatCount = .infinity
+        loadLabel.layer.add(opacityKeyframe, forKey: "loading")
     }
     
 }
