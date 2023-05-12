@@ -15,11 +15,24 @@ class BoxOfficeViewController: UIViewController {
     
     // MARK: - Private
     private let networkService = NetworkService()
-    private var dailyBoxOffice: DailyBoxOfficeDTO?
+    private var dailyBoxOffice: DailyBoxOfficeDTO? {
+        didSet {
+            DispatchQueue.main.async {
+                self.loadLabel.removeFromSuperview()
+            }
+        }
+    }
     private var movieDetail: MovieDetailDTO?
     
     private var movieCollectionView: UICollectionView! = nil
     private var movieDataSource: UICollectionViewDiffableDataSource<Section, MovieDTO>! = nil
+    
+    let loadLabel: UILabel = {
+        let label = UILabel()
+        label.text = "loading..."
+        label.textAlignment = .center
+        return label
+    }()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -144,6 +157,12 @@ class BoxOfficeViewController: UIViewController {
     
     private func configureUI() {
         view.addSubview(movieCollectionView)
+        
+        view.addSubview(loadLabel)
+        loadLabel.translatesAutoresizingMaskIntoConstraints = false
+        loadLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loadLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        loadLabel.layer.zPosition = .greatestFiniteMagnitude
     }
     
     @objc
