@@ -138,17 +138,22 @@ extension HomeViewController {
 
         let cellRegistration = UICollectionView.CellRegistration<BoxOfficeListCell, DailyBoxOffice> { [self] (cell, indexPath, dailyBoxOffice) in
             let rankVariation = selector.determineRankVariation(with: dailyBoxOffice.rank.rankVariation, and: dailyBoxOffice.rank.rankOldAndNew)
+            let rankVariationColor = selector.determineRankVariationColor(with: dailyBoxOffice.rank.rankOldAndNew)
             let rankImage = selector.determineVariationImage(with: dailyBoxOffice.rank.rankVariation)
+            let rankImageColor = selector.determineVariationImageColor(with: dailyBoxOffice.rank.rankVariation)
             
             cell.summaryInformationView.setMovieName(by: dailyBoxOffice.movieBrief.movieName)
             cell.summaryInformationView.setAudienceCount(by: formatter.convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
                                                                                                 accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
-            cell.rankView.setRankVariation(by: rankVariation.0, with: rankVariation.1)
+            cell.rankView.setRankVariation(by: rankVariation)
+            cell.rankView.setRankVariation(by: rankVariationColor)
             
             if dailyBoxOffice.rank.rankOldAndNew == RankOldAndNew.new || dailyBoxOffice.rank.rankVariation == MagicLiteral.zero {
-                cell.rankView.setRankVariation(by: nil, with: nil)
+                cell.rankView.setRankImage(by: UIImage())
+                cell.rankView.setRankImage(by: .black)
             } else {
-                cell.rankView.setRankVariation(by: rankImage.0, with: rankImage.1)
+                cell.rankView.setRankImage(by: rankImage)
+                cell.rankView.setRankImage(by: rankImageColor)
             }
             
             cell.rankView.setRank(by: dailyBoxOffice.rank.rank)
