@@ -8,30 +8,8 @@
 import UIKit
 
 final class HomeViewController: UIViewController {
-
+    
     //MARK: - Initializer
-
-    init(networkService: NetworkService = NetworkService(),
-         dailyBoxOfficeStorage: [DailyBoxOffice] = [DailyBoxOffice](),
-         selector: Selector = Selector(),
-         collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-    ) {
-        self.networkService = networkService
-        self.dailyBoxOfficeStorage = dailyBoxOfficeStorage
-        self.selector = selector
-        self.collectionView = collectionView
-
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        self.networkService = NetworkService()
-        self.dailyBoxOfficeStorage = [DailyBoxOffice]()
-        self.selector = Selector()
-        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-
-        super.init(coder: coder)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,15 +18,14 @@ final class HomeViewController: UIViewController {
         configureOfCollectionView()
         configureHierarchy()
         configureDataSource()
-        fetchData()
     }
-
-    //MARK: - Private Property
     
-    private var networkService: NetworkService
-    private var dailyBoxOfficeStorage: [DailyBoxOffice]
-    private var selector: Decidable
-    private var collectionView: UICollectionView
+    //MARK: - Private Property
+    private let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
+    
+    private let selector: Selector = Selector()
+    private let vieModel = BoxOfficeViewModel()
     
     private lazy var refresh: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -57,30 +34,17 @@ final class HomeViewController: UIViewController {
         return refreshControl
     }()
 
-    private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
 }
 
 //MARK: - Private Method
 extension HomeViewController {
-    
-    private func fetchData() {
-        let yesterdayDate = Formatter.receiveCurrentDate.split(separator: "-").joined()
-        let boxOfficeQueryParameters = BoxOfficeQueryParameters(targetDate: yesterdayDate)
-
-        Task {
-            let result = try await networkService.request(with: APIEndPoint.receiveBoxOffice(with: boxOfficeQueryParameters))
-            
-            result.boxOfficeResult.dailyBoxOfficeList.forEach({ officeList in
-                dailyBoxOfficeStorage.append(DailyBoxOffice(movieBrief: MovieBrief(movieName: officeList.movieName, audienceCount: officeList.audienceCount, audienceAccumulated: officeList.audienceAccumulate), rank: Rank(rank: officeList.rank, rankVariation: officeList.rankVariation, rankOldAndNew: officeList.rankOldAndNew)))
-            })
-            applySnapshot()
-        }
-    }
 
     private func applySnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>()
+        
+        
         snapshot.appendSections([.main])
-        snapshot.appendItems(dailyBoxOfficeStorage)
+//        snapshot.appendItems(dailyBoxOfficeStorage)
         dataSource.apply(snapshot)
     }
 
@@ -141,7 +105,7 @@ extension HomeViewController {
             
             cell.summaryInformationView.setMovieName(by: dailyBoxOffice.movieBrief.movieName)
 //            cell.summaryInformationView.setAudienceCount(by: formatter.convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
-                                                                                                accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
+//                                                                                                accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
             cell.rankView.setRankVariation(by: rankVariation)
             cell.rankView.setRankVariation(by: rankVariationColor)
             
