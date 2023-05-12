@@ -30,6 +30,7 @@ class Networking {
                 }
 
                 guard let decodedData = self.loadJSON(method.convertType, data: safeData) as? Convertable else {
+                    print("json 실패")
                     completion(nil, NetworkError.decodingError)
                     return
                 }
@@ -49,6 +50,7 @@ class Networking {
             }
 
             guard let poster = poster as? MoviePoster else {
+                print("error: convert Poster")
                 completion(nil, NetworkError.decodingError)
                 return
             }
@@ -56,6 +58,7 @@ class Networking {
             let posterURL = poster.url.replacingOccurrences(of: "http://", with: "https://")
 
             guard let url = URL(string: posterURL) else {
+                print("URL 실패")
                 completion(nil, NetworkError.decodingError)
                 return
             }
