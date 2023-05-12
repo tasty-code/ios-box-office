@@ -20,17 +20,17 @@ struct BoxOfficeResult: Decodable {
 
     let type: String
     let rangeOfDate: String
-    let dailyBoxOfficeList: [DailyBoxOfficeList]
+    let dailyBoxOffices: [DailyBoxOffice]
 
     enum CodingKeys: String, CodingKey {
         case type = "boxofficeType"
         case rangeOfDate = "showRange"
-        case dailyBoxOfficeList
+        case dailyBoxOffices = "dailyBoxOfficeList"
     }
 
 }
 
-struct DailyBoxOfficeList: Decodable {
+struct DailyBoxOffice: Decodable, Hashable {
 
     let orderNumber: String
     let rank: String
@@ -40,6 +40,8 @@ struct DailyBoxOfficeList: Decodable {
     let movieName: String
     let openDate: String
     let audienceAccumulation: String
+    let audienceCount: String
+    let identifier = UUID()
 
     enum CodingKeys: String, CodingKey {
         case orderNumber = "rnum"
@@ -50,6 +52,15 @@ struct DailyBoxOfficeList: Decodable {
         case movieName = "movieNm"
         case openDate = "openDt"
         case audienceAccumulation = "audiAcc"
+        case audienceCount = "audiCnt"
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
+
+    static func == (lhs: DailyBoxOffice, rhs: DailyBoxOffice) -> Bool {
+        lhs.identifier == rhs.identifier
     }
 
 }

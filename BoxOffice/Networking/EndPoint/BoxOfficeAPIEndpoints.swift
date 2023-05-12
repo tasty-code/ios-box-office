@@ -36,7 +36,7 @@ extension BoxOfficeAPIEndpoints {
         urlCompoenets?.queryItems = endPoint.queryItems
 
         guard let url = urlCompoenets?.url else { return nil }
-        var urlRequest = URLRequest(url: url)
+        let urlRequest = URLRequest(url: url)
 
         return urlRequest
     }
