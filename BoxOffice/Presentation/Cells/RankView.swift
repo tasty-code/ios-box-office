@@ -73,13 +73,21 @@ extension RankView {
         rank.text = text
     }
 
-    func setRankVariation(by text: String, with color: UIColor) {
-        rankVariation.text = text
+    func setRankVariation(by text: String) {
+        if let convertedText = Int(text) {
+            rankVariation.text = String(describing: abs(convertedText))
+        }
+    }
+
+    func setRankVariation(by color: UIColor) {
         rankVariation.textColor = color
     }
 
-    func setRankVariation(by emoji: UIImage?, with color: UIColor?) {
+    func setRankImage(by emoji: UIImage?) {
         rankEmoji.image = emoji
+    }
+
+    func setRankImage(by color: UIColor?) {
         rankEmoji.tintColor = color
     }
 }
