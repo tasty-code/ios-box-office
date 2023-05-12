@@ -10,9 +10,11 @@ import Foundation
 final class NetworkService {
 
     private let session: URLSession
+    private var networkResult: [DailyBoxOfficeList]
 
-    init(session: URLSession = URLSession(configuration: .default)) {
-        self.session = session
+    init() {
+        self.session = URLSession(configuration: .default)
+        self.networkResult = [DailyBoxOfficeList]()
     }
     
     func loadData() {
@@ -20,10 +22,14 @@ final class NetworkService {
         Task {
             let yesterdayDate = Formatter.receiveCurrentDate.split(separator: "-").joined()
             let boxOfficeQueryParameters = BoxOfficeQueryParameters(targetDate: yesterdayDate)
-            let result = try await request(with: APIEndPoint.receiveBoxOffice(with: boxOfficeQueryParameters))
-            
-            NotificationCenter.default.post(name: .loadedBoxOfficeData, object: result.boxOfficeResult.dailyBoxOfficeList)
+            let swapResult = try await request(with: APIEndPoint.receiveBoxOffice(with: boxOfficeQueryParameters)).boxOfficeResult.dailyBoxOfficeList
+            swap(to: swapResult)
+            NotificationCenter.default.post(name: .loadedBoxOfficeData, object: networkResult)
         }
+    }
+    
+    func swap(to newResult: [DailyBoxOfficeList]) {
+        networkResult = newResult
     }
 
     func request<R: Decodable, E: RequestAndResponsable>(with endPoint: E) async throws -> R where E.Responese == R {
