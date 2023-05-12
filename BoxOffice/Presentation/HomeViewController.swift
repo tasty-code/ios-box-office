@@ -67,7 +67,7 @@ final class HomeViewController: UIViewController {
 extension HomeViewController {
     
     private func fetchData() {
-        let yesterdayDate = formatter.receiveCurrentDate().split(separator: "-").joined()
+        let yesterdayDate = formatter.receiveCurrentDate.split(separator: "-").joined()
         let boxOfficeQueryParameters = BoxOfficeQueryParameters(targetDate: yesterdayDate)
 
         Task {
@@ -98,7 +98,7 @@ extension HomeViewController {
 extension HomeViewController {
     
     private func configureOfNavigationBar() {
-        navigationItem.title = formatter.receiveCurrentDate()
+        navigationItem.title = formatter.receiveCurrentDate
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.isTranslucent = false
     }
