@@ -14,39 +14,37 @@ class MovieDetailViewController: UIViewController {
         return imageView
     }()
 
-    var categoryLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
-
-    var contentLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
-
-    lazy var infoStackView: UIStackView = {
+    lazy var movieStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.addArrangedSubview(categoryLabel)
-        stackView.addArrangedSubview(contentLabel)
+        stackView.axis = .vertical
+        stackView.spacing = 5
         return stackView
     }()
+
+    func stackViewfor8() {
+        for i in 1...8 {
+            let movieInformationView = MovieInformaionView(category: "야하 \(i)", content: "이히")
+            movieStackView.addArrangedSubview(movieInformationView)
+        }
+    }
 
     override func viewDidLoad() {   
         super.viewDidLoad()
         view.backgroundColor = .white
         view.addSubview(movieImageView)
-        view.addSubview(infoStackView)
+        view.addSubview(movieStackView)
         setLayout()
-        categoryLabel.text = "안녕"
-        contentLabel.text = "하세요"
+        stackViewfor8()
     }
 
-
+    func setImage(image: UIImage) {
+        movieImageView.image = image
+    }
+    
     func setLayout() {
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
-        infoStackView.translatesAutoresizingMaskIntoConstraints = false
+        movieStackView.translatesAutoresizingMaskIntoConstraints = false
+//        infoStackView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             movieImageView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -54,9 +52,12 @@ class MovieDetailViewController: UIViewController {
             movieImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 10),
             movieImageView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 150),
 
-            infoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            infoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            infoStackView.topAnchor.constraint(equalTo: movieImageView.bottomAnchor)
+            movieStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            movieStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            movieStackView.topAnchor.constraint(equalTo: movieImageView.bottomAnchor),
+
+//            infoStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+//            infoStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor)
         ])
     }
 }

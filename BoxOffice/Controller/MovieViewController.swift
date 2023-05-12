@@ -133,7 +133,18 @@ private extension DateFormatter {
 
 extension MovieViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let name = movieArrays[indexPath.row].name
+        let posterEndPoint = EndPoint.moviePoster(title: name)
         let nextVC = MovieDetailViewController()
+        Networking().loadImage(form: posterEndPoint) { image, error in
+            if let error = error {
+                print(error)
+            }
+            if let image = image {
+                nextVC.setImage(image: image)
+                print("갓챠!~")
+            }
+        }
         show(nextVC, sender: nil)
     }
 }

@@ -7,9 +7,9 @@
 
 import UIKit
 
-enum CollectionDTO: Codable {
-    case blog
-    case cafe
-    case etc
-    case news
+struct CollectionDTO: Codable {
+    let blog: String?
+    let cafe: String?
+    let etc: String?
+    let news: String?
 }
