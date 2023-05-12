@@ -51,7 +51,7 @@ extension EndPoint {
         case .movieInformation(let code):
             return URLQueryItem(name: "movieCd", value: code)
         case .moviePoster(let title):
-            return URLQueryItem(name: "query", value: "\(title) 포스터")
+            return URLQueryItem(name: "query", value: "\(title) 영화 포스터")
         }
     }
 
