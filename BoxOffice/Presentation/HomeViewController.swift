@@ -14,13 +14,14 @@ final class HomeViewController: UIViewController {
     init(networkService: NetworkService = NetworkService(),
          dailyBoxOfficeStorage: [DailyBoxOffice] = [DailyBoxOffice](),
          selector: Selector = Selector(),
-         formatter: Formatter = Formatter()
+         formatter: Formatter = Formatter(),
+         collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     ) {
         self.networkService = networkService
         self.dailyBoxOfficeStorage = dailyBoxOfficeStorage
         self.selector = selector
         self.formatter = formatter
-        self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        self.collectionView = collectionView
 
         super.init(nibName: nil, bundle: nil)
     }
