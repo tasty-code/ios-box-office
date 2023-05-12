@@ -78,9 +78,7 @@ final class BoxOfficeViewController: UIViewController {
             return cell
         }
         
-        DispatchQueue.main.async {
-            self.applyMovieDataSource()
-        }
+        applyMovieDataSource()
     }
     
     private func configureRefreshControl() {
