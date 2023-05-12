@@ -7,24 +7,24 @@
 
 import UIKit
 
-class MovieCollectionViewListCell: UICollectionViewListCell {
+final class MovieCollectionViewListCell: UICollectionViewListCell {
     
-    let rankLabel: UILabel = {
+    private let rankLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .title1)
         return label
     }()
     
-    let rankStatusLabel: UILabel = {
+    private let rankStatusLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         return label
     }()
     
-    let rankStatusImage = UIImageView()
+    private let rankStatusImage = UIImageView()
     
-    lazy var rankStatusStackView: UIStackView = {
+    private lazy var rankStatusStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .center
@@ -33,7 +33,7 @@ class MovieCollectionViewListCell: UICollectionViewListCell {
         return stackView
     }()
     
-    lazy var leftStackView: UIStackView = {
+    private lazy var leftStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
@@ -54,7 +54,15 @@ class MovieCollectionViewListCell: UICollectionViewListCell {
         configureLayout()
     }
     
-    func configureLayout() {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        rankLabel.text = nil
+        rankStatusLabel.text = nil
+        rankStatusImage.image = nil
+        rankStatusImage.isHidden = false
+    }
+    
+    private func configureLayout() {
         accessories = [.disclosureIndicator()]
         accessories.append(.customView(configuration: .init(customView: leftStackView, placement: .leading())))
     }
@@ -70,7 +78,7 @@ class MovieCollectionViewListCell: UICollectionViewListCell {
         else {
             if movie.rankInten == "0" {
                 rankStatusLabel.text = "-"
-                rankStatusStackView.removeArrangedSubview(rankStatusImage)
+                rankStatusImage.isHidden = true
             }
             else if movie.rankInten.hasPrefix("-") {
                 rankStatusLabel.text = movie.rankInten.replacingOccurrences(of: "-", with: "")
@@ -94,7 +102,6 @@ class MovieCollectionViewListCell: UICollectionViewListCell {
         config.textProperties.font = .preferredFont(forTextStyle: .title3)
         config.secondaryTextProperties.font = .preferredFont(forTextStyle: .subheadline)
         
-        // 설정 완료
         self.contentConfiguration = config
     }
     

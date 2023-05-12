@@ -7,14 +7,14 @@
 
 import UIKit
 
-class BoxOfficeViewController: UIViewController {
+final class BoxOfficeViewController: UIViewController {
     
     enum Section {
         case main
     }
     
     // MARK: - Private
-    private let networkService = NetworkService()
+    private let networkService = NetworkService()   
     private var dailyBoxOffice: DailyBoxOfficeDTO? {
         didSet {
             DispatchQueue.main.async {
@@ -27,7 +27,7 @@ class BoxOfficeViewController: UIViewController {
     private var movieCollectionView: UICollectionView! = nil
     private var movieDataSource: UICollectionViewDiffableDataSource<Section, MovieDTO>! = nil
     
-    let loadLabel: UILabel = {
+    private let loadLabel: UILabel = {
         let label = UILabel()
         label.text = "loading..."
         label.textAlignment = .center
@@ -94,6 +94,14 @@ class BoxOfficeViewController: UIViewController {
         movieCollectionView.refreshControl?.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
     }
     
+    @objc
+    private func refreshCollectionView() {
+        if movieCollectionView.refreshControl?.isRefreshing != false {
+            movieCollectionView.refreshControl?.endRefreshing()
+        }
+        updateYesterdayData()
+    }
+    
     private func configureUI() {
         view.addSubview(movieCollectionView)
         
@@ -102,14 +110,6 @@ class BoxOfficeViewController: UIViewController {
         loadLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         loadLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         loadLabel.layer.zPosition = .greatestFiniteMagnitude
-    }
-    
-    @objc
-    private func refreshCollectionView() {
-        if movieCollectionView.refreshControl?.isRefreshing != false {
-            movieCollectionView.refreshControl?.endRefreshing()
-        }
-        updateYesterdayData()
     }
     
     private func updateYesterdayData() {
@@ -146,19 +146,16 @@ class BoxOfficeViewController: UIViewController {
     }
     
 }
-fileprivate extension Date {
-    
-    static var yesterday: Date {
-        return Date(timeIntervalSinceNow: -24 * 60 * 60)
-    }
-    
-}
 
 fileprivate extension Date {
     
     enum DateFormat: String {
         case yyyy_MM_dd = "yyyy-MM-dd"
         case yyyyMMdd = "yyyyMMdd"
+    }
+    
+    static var yesterday: Date {
+        return Date(timeIntervalSinceNow: -24 * 60 * 60)
     }
     
     func string(format: DateFormat) -> String {
