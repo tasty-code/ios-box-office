@@ -32,13 +32,9 @@
 		80DB65572A0B382B00373449 /* BoxOfficeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DB65562A0B382B00373449 /* BoxOfficeDataSource.swift */; };
 		80DB65592A0B3DCC00373449 /* BoxOfficeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DB65582A0B3DCC00373449 /* BoxOfficeCollectionView.swift */; };
 		80DB65A82A0E133000373449 /* APIKeys.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 80DB65A72A0E133000373449 /* APIKeys.xcconfig */; };
-<<<<<<< HEAD
 		80DB65AF2A0E2EBA00373449 /* ViewDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DB65AE2A0E2EBA00373449 /* ViewDisplayable.swift */; };
 		80DB65B42A0E2F1900373449 /* PresentationDispatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DB65B32A0E2F1900373449 /* PresentationDispatchable.swift */; };
 		80DB65B62A0E2F3400373449 /* BoxOfficeDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DB65B52A0E2F3400373449 /* BoxOfficeDispatcher.swift */; };
-=======
-		F01B42DF2A0E254200F86E17 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B42DE2A0E254200F86E17 /* ActivityIndicatorView.swift */; };
->>>>>>> 8e75d8a3ac21d2e5bdcf091f8c8ddf028d266058
 		F036101C29F776D40036BBF0 /* JSONDeserializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F036101B29F776D40036BBF0 /* JSONDeserializable.swift */; };
 		F036101E29F7892C0036BBF0 /* JSONDesrializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F036101D29F7892C0036BBF0 /* JSONDesrializer.swift */; };
 		F04B579E29FA364A0079CDF8 /* box_office_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = F04B579D29FA364A0079CDF8 /* box_office_sample.json */; };
@@ -96,13 +92,9 @@
 		80DB65562A0B382B00373449 /* BoxOfficeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeDataSource.swift; sourceTree = "<group>"; };
 		80DB65582A0B3DCC00373449 /* BoxOfficeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeCollectionView.swift; sourceTree = "<group>"; };
 		80DB65A72A0E133000373449 /* APIKeys.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = APIKeys.xcconfig; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		80DB65AE2A0E2EBA00373449 /* ViewDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDisplayable.swift; sourceTree = "<group>"; };
 		80DB65B32A0E2F1900373449 /* PresentationDispatchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationDispatchable.swift; sourceTree = "<group>"; };
 		80DB65B52A0E2F3400373449 /* BoxOfficeDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeDispatcher.swift; sourceTree = "<group>"; };
-=======
-		F01B42DE2A0E254200F86E17 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
->>>>>>> 8e75d8a3ac21d2e5bdcf091f8c8ddf028d266058
 		F036101B29F776D40036BBF0 /* JSONDeserializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDeserializable.swift; sourceTree = "<group>"; };
 		F036101D29F7892C0036BBF0 /* JSONDesrializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDesrializer.swift; sourceTree = "<group>"; };
 		F04B579D29FA364A0079CDF8 /* box_office_sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = box_office_sample.json; sourceTree = "<group>"; };
@@ -468,7 +460,6 @@
 			isa = PBXGroup;
 			children = (
 				F0BDED462A0B58DB0076A8EE /* UIVerticalStackView.swift */,
-				F01B42DE2A0E254200F86E17 /* ActivityIndicatorView.swift */,
 				F0BDED412A0B278E0076A8EE /* BoxOfficeRank */,
 			);
 			path = View;
@@ -595,7 +586,6 @@
 				80DB65B62A0E2F3400373449 /* BoxOfficeDispatcher.swift in Sources */,
 				80A323AC2A0349CF00617897 /* Requestable.swift in Sources */,
 				80A323B02A034AC700617897 /* RequestResponseProtocol.swift in Sources */,
-				F01B42DF2A0E254200F86E17 /* ActivityIndicatorView.swift in Sources */,
 				80A323BB2A03626300617897 /* NetworkProvider.swift in Sources */,
 				F0BDED432A0B27A40076A8EE /* CustomListCell.swift in Sources */,
 				80A323B42A03529800617897 /* MovieInformationEndpoint.swift in Sources */,
