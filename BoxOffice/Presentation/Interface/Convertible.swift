@@ -8,10 +8,9 @@
 import Foundation
 
 protocol Convertible {
-    func convertToNumberFormatter(_ audienceCount: String, accumulated: String) -> String
-//    func receiveCurrentDate() -> String
-    
     var receiveCurrentDate: String { get }
+
+    func convertToNumberFormatter(_ audienceCount: String, accumulated: String) -> String
 }
 
 extension Convertible {

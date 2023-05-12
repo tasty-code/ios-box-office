@@ -9,6 +9,7 @@ import Foundation
 
 struct Formatter: Convertible {
     func convertToNumberFormatter(_ audienceCount: String, accumulated: String) -> String {
+
         guard let audienceCount = Int(audienceCount), let audienceAccumulated = Int(accumulated) else {
             return ""
         }
@@ -21,17 +22,5 @@ struct Formatter: Convertible {
         }
 
         return MagicLiteral.todayAudience + audienceResult + MagicLiteral.totalAudience + audienceAccumulatedCount
-    }
-
-    func receiveCurrentDate() -> String {
-        guard let date = Calendar.current.date(byAdding: .day, value: -1, to: Date()) else {
-            return ""
-        }
-
-        let formatter = DateFormatter()
-        formatter.dateFormat = MagicLiteral.dateFormat
-        let currentDateString = formatter.string(from: date)
-
-        return currentDateString
     }
 }
