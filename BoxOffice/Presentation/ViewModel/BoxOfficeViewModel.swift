@@ -9,30 +9,19 @@ import Foundation
 
 final class BoxOfficeViewModel {
     
-    //    private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
-    private var networkService: NetworkService
-    private var selector: Decidable
-    private var formatter: Convertible
-    
-    
     init() {
         self.networkService = NetworkService()
         self.selector = Selector()
         self.formatter = Formatter()
     }
     
-    func apply() {
-        let dailyBoxOfficeStorage = transformIntoDailyBoxOffice()
-        
-    }
+    private var networkService: NetworkService
+    private var selector: Decidable
+    private var formatter: Convertible
     
-    private func transformIntoDailyBoxOffice() -> [DailyBoxOffice] {
-        var boxOfficeStorage = [DailyBoxOffice]()
+    func transformIntoDailyBoxOffice(completion: @escaping ([DailyBoxOffice]) -> () ) {
         
-        networkService.loadData()
-        NotificationCenter.default.addObserver(forName: .loadedBoxOfficeData,
-                                               object: NetworkService.self,
-                                               queue: .current) { notification in
+        NotificationCenter.default.addObserver(forName: .loadedBoxOfficeData, object: nil, queue: nil) { notification in
             
             guard let receivedFromNetworkService = notification.object as? [DailyBoxOfficeList] else { return }
             
@@ -45,8 +34,12 @@ final class BoxOfficeViewModel {
                                           rankVariation: dailyBoxOfficeList.rankVariation,
                                           rankOldAndNew: dailyBoxOfficeList.rankOldAndNew))
             }
-            boxOfficeStorage = temporaryStorage
+            completion(temporaryStorage)
         }
-        return boxOfficeStorage
+        
+        DispatchQueue.global().async {
+            self.networkService.loadData()
+        }
     }
 }
+
