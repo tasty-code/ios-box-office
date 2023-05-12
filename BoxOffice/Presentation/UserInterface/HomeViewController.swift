@@ -14,13 +14,11 @@ final class HomeViewController: UIViewController {
     init(networkService: NetworkService = NetworkService(),
          dailyBoxOfficeStorage: [DailyBoxOffice] = [DailyBoxOffice](),
          selector: Selector = Selector(),
-         formatter: Formatter = Formatter(),
          collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     ) {
         self.networkService = networkService
         self.dailyBoxOfficeStorage = dailyBoxOfficeStorage
         self.selector = selector
-        self.formatter = formatter
         self.collectionView = collectionView
 
         super.init(nibName: nil, bundle: nil)
@@ -30,7 +28,6 @@ final class HomeViewController: UIViewController {
         self.networkService = NetworkService()
         self.dailyBoxOfficeStorage = [DailyBoxOffice]()
         self.selector = Selector()
-        self.formatter = Formatter()
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
 
         super.init(coder: coder)
@@ -51,7 +48,6 @@ final class HomeViewController: UIViewController {
     private var networkService: NetworkService
     private var dailyBoxOfficeStorage: [DailyBoxOffice]
     private var selector: Decidable
-    private var formatter: Convertible
     private var collectionView: UICollectionView
     
     private lazy var refresh: UIRefreshControl = {
@@ -68,7 +64,7 @@ final class HomeViewController: UIViewController {
 extension HomeViewController {
     
     private func fetchData() {
-        let yesterdayDate = formatter.receiveCurrentDate.split(separator: "-").joined()
+        let yesterdayDate = Formatter.receiveCurrentDate.split(separator: "-").joined()
         let boxOfficeQueryParameters = BoxOfficeQueryParameters(targetDate: yesterdayDate)
 
         Task {
@@ -99,7 +95,7 @@ extension HomeViewController {
 extension HomeViewController {
     
     private func configureOfNavigationBar() {
-        navigationItem.title = formatter.receiveCurrentDate
+        navigationItem.title = Formatter.receiveCurrentDate
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.isTranslucent = false
     }
@@ -144,7 +140,7 @@ extension HomeViewController {
             let rankImageColor = selector.determineVariationImageColor(with: dailyBoxOffice.rank.rankVariation)
             
             cell.summaryInformationView.setMovieName(by: dailyBoxOffice.movieBrief.movieName)
-            cell.summaryInformationView.setAudienceCount(by: formatter.convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
+//            cell.summaryInformationView.setAudienceCount(by: formatter.convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
                                                                                                 accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
             cell.rankView.setRankVariation(by: rankVariation)
             cell.rankView.setRankVariation(by: rankVariationColor)
