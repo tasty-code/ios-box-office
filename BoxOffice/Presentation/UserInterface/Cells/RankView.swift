@@ -9,6 +9,8 @@ import UIKit
 
 final class RankView: UIStackView {
     
+    //MARK: - Initializer
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureOfStackView()
@@ -21,6 +23,8 @@ final class RankView: UIStackView {
         configureOfComponents()
     }
 
+    //MARK: - Private Method
+    
     private func configureOfStackView() {
         axis = .vertical
         spacing = 3
@@ -39,6 +43,8 @@ final class RankView: UIStackView {
         information.addArrangedSubview(rankVariation)
     }
     
+    //MARK: - Private Property
+
     private var information: UIStackView = {
         let information = UIStackView()
 
@@ -53,7 +59,7 @@ final class RankView: UIStackView {
         return rankLabel
     }()
 
-    private lazy var rankEmoji: UIImageView = {
+    private let rankEmoji: UIImageView = {
         let rankEmoji = UIImageView()
 
         return rankEmoji
@@ -67,6 +73,7 @@ final class RankView: UIStackView {
     }()
 }
 
+//MARK: - Methods that define the attribute of UI components
 extension RankView {
 
     func setRank(by text: String) {

@@ -9,13 +9,14 @@ import Foundation
 
 final class NetworkService {
 
-    private let session: URLSession
-    private var networkResult: [DailyBoxOfficeList]
-
+    //MARK: - Initializer
+    
     init() {
         self.session = URLSession(configuration: .default)
         self.networkResult = [DailyBoxOfficeList]()
     }
+    
+    //MARK: - Method
     
     func loadData() {
         
@@ -27,6 +28,8 @@ final class NetworkService {
             NotificationCenter.default.post(name: .loadedBoxOfficeData, object: networkResult)
         }
     }
+    
+    //MARK: - Private Method
     
     private func swap(to newResult: [DailyBoxOfficeList]) {
         networkResult = newResult
@@ -73,4 +76,14 @@ final class NetworkService {
 
         return decode
     }
+    
+    //MARK: - Private Property
+
+    private let session: URLSession
+    private var networkResult: [DailyBoxOfficeList]
+}
+
+//MARK: - Use by extending Notification.Name
+extension Notification.Name {
+    static let loadedBoxOfficeData = Notification.Name("loadedBoxOfficeData")
 }

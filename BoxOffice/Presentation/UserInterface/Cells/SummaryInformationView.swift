@@ -9,6 +9,8 @@ import UIKit
 
 final class SummaryInformationView: UIStackView {
     
+    //MARK: - Initializer
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureOfStackView()
@@ -21,6 +23,8 @@ final class SummaryInformationView: UIStackView {
         configureOfComponents()
     }
     
+    //MARK: - Private Method
+    
     private func configureOfStackView() {
         axis = .vertical
         alignment = .leading
@@ -32,6 +36,8 @@ final class SummaryInformationView: UIStackView {
         addArrangedSubview(audienceCount)
     }
     
+    //MARK: - Private Property
+
     private let movieName: UILabel = {
         let movieName = UILabel()
         movieName.font = .systemFont(ofSize: 20)
@@ -47,6 +53,7 @@ final class SummaryInformationView: UIStackView {
     }()
 }
 
+//MARK: - Methods that define the attribute of UI components
 extension SummaryInformationView {
     func setMovieName(by text: String) {
         movieName.text = text

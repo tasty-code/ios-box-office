@@ -8,9 +8,13 @@
 import UIKit
 
 final class BoxOfficeListCell: UICollectionViewListCell, Gettable {
+    
+    //MARK: - Property
 
     var rankView = RankView()
     var summaryInformationView = SummaryInformationView()
+    
+    //MARK: - Initializer
 
     override init(frame: CGRect) {
         super .init(frame: frame)
@@ -21,6 +25,8 @@ final class BoxOfficeListCell: UICollectionViewListCell, Gettable {
         super .init(coder: coder)
         configureOfAllUIComponents()
     }
+    
+    //MARK: - Private Method
     
     private func configureOfAllUIComponents() {
 
