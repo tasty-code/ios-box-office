@@ -13,19 +13,27 @@ final class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        view.backgroundColor = .systemBackground
+        
         configureOfNavigationBar()
         configureOfCollectionView()
-        configureHierarchy()
         
+        configureOfActivityIndicator()
+        checkOfAnimatingActivityIndicator(isAnimated: true)
+        
+        configureHierarchy()
         configureDataSource()
         applySnapshot()
     }
     
     //MARK: - Private Property
+    private let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 300, height: 100)))
+    
     private let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
     private let viewModel = BoxOfficeViewModel()
+    
     
     private lazy var refresh: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -39,10 +47,25 @@ final class HomeViewController: UIViewController {
 //MARK: - Private Method
 extension HomeViewController {
     
+    private func configureOfActivityIndicator() {
+        activityIndicator.center = self.view.center
+        activityIndicator.color = .darkGray
+        activityIndicator.style = .large
+        activityIndicator.isHidden = false
+    }
+    
+    private func checkOfAnimatingActivityIndicator(isAnimated: Bool) {
+        guard isAnimated != activityIndicator.isAnimating else { return }
+                
+        if isAnimated {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+    }
+    
     private func configureOfNavigationBar() {
         navigationItem.title = Getter.receiveCurrentDate
-        self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.navigationBar.isTranslucent = false
     }
     
     private func configureOfCollectionView() {
@@ -50,6 +73,7 @@ extension HomeViewController {
         collectionView.isPrefetchingEnabled = false
         collectionView.showsVerticalScrollIndicator = true
         collectionView.clipsToBounds = false
+        collectionView.backgroundColor = .systemBackground
         collectionView.collectionViewLayout = createCollectionViewLayout()
         collectionView.refreshControl = refresh
     }
@@ -60,11 +84,15 @@ extension HomeViewController {
         let previousItems = snapshot.itemIdentifiers(inSection: .main)
         snapshot.deleteItems(previousItems)
         
+        
         self.viewModel.transformIntoDailyBoxOffice { dailyBoxOfficeStorage in
-            DispatchQueue.main.async {
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                self.checkOfAnimatingActivityIndicator(isAnimated: false)
+                
                 snapshot.appendItems(dailyBoxOfficeStorage)
                 self.dataSource.apply(snapshot)
-            }
+            })
         }
     }
 
@@ -82,8 +110,10 @@ extension HomeViewController {
     
     private func configureHierarchy() {
         let safeArea = self.view.safeAreaLayoutGuide
-
+        
         self.view.addSubview(collectionView)
+        self.view.addSubview(activityIndicator)
+        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
