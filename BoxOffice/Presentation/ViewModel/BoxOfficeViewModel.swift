@@ -26,7 +26,7 @@ final class BoxOfficeViewModel {
             
             let temporaryStorage = receivedFromNetworkService.map { dailyBoxOfficeList in
                 
-                DailyBoxOffice(movieBrief: MovieBrief(movieName: dailyBoxOfficeList.movieName,
+                DailyBoxOffice(uuid: UUID(), movieBrief: MovieBrief(movieName: dailyBoxOfficeList.movieName,
                                                       audienceCount: dailyBoxOfficeList.audienceCount,
                                                       audienceAccumulated: dailyBoxOfficeList.audienceAccumulate),
                                rank: Rank(rank: dailyBoxOfficeList.rank,

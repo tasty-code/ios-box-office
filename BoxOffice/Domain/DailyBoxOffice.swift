@@ -8,6 +8,7 @@
 import UIKit
 
 struct DailyBoxOffice: Hashable {
+    let uuid: UUID
     var rankEmoji: UIImage?
     let movieBrief: MovieBrief
     let rank: Rank
