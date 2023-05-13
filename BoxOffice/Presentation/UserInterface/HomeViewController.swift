@@ -105,7 +105,7 @@ extension HomeViewController {
     
     private func configureDataSource() {
         
-        let cellRegistration = UICollectionView.CellRegistration<BoxOfficeListCell, DailyBoxOffice> { (cell, indexPath, dailyBoxOffice) in
+        let cellRegistration = UICollectionView.CellRegistration<BoxOfficeListCell, DailyBoxOffice> { (cell, _, dailyBoxOffice) in
             cell.configureOfCellRegistration(with: dailyBoxOffice)
         }
 

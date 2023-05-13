@@ -7,4 +7,4 @@
 
 import Foundation
 
-struct Getter: Gettable { }
+struct Getter: Gettable {}
