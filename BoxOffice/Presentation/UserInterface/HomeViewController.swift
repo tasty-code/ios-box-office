@@ -25,8 +25,6 @@ final class HomeViewController: UIViewController {
     //MARK: - Private Property
     private let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
-    
-    private let selector: Selector = Selector()
     private let viewModel = BoxOfficeViewModel()
     
     private lazy var refresh: UIRefreshControl = {
@@ -40,11 +38,26 @@ final class HomeViewController: UIViewController {
 
 //MARK: - Private Method
 extension HomeViewController {
+    
+    private func configureOfNavigationBar() {
+        navigationItem.title = Getter.receiveCurrentDate
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.isTranslucent = false
+    }
+    
+    private func configureOfCollectionView() {
+        collectionView.isScrollEnabled = true
+        collectionView.isPrefetchingEnabled = false
+        collectionView.showsVerticalScrollIndicator = true
+        collectionView.clipsToBounds = false
+        collectionView.collectionViewLayout = createCollectionViewLayout()
+        collectionView.refreshControl = refresh
+    }
 
     private func applySnapshot() {
         var snapshot = dataSource.snapshot()
         
-            let previousItems = snapshot.itemIdentifiers(inSection: .main)
+        let previousItems = snapshot.itemIdentifiers(inSection: .main)
         snapshot.deleteItems(previousItems)
         
         self.viewModel.transformIntoDailyBoxOffice { dailyBoxOfficeStorage in
@@ -56,6 +69,8 @@ extension HomeViewController {
     }
 
     @objc func handleRefreshControl() {
+        applySnapshot()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.refresh.endRefreshing()
         }
@@ -64,12 +79,6 @@ extension HomeViewController {
 
 //MARK: - Configure of CollectionViewLayout
 extension HomeViewController {
-    
-    private func configureOfNavigationBar() {
-        navigationItem.title = Formatter.receiveCurrentDate
-        self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.navigationBar.isTranslucent = false
-    }
     
     private func configureHierarchy() {
         let safeArea = self.view.safeAreaLayoutGuide
@@ -83,14 +92,6 @@ extension HomeViewController {
             collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor)
         ])
     }
-    
-    private func configureOfCollectionView() {
-        collectionView.isScrollEnabled = true
-        collectionView.showsVerticalScrollIndicator = true
-        collectionView.clipsToBounds = false
-        collectionView.collectionViewLayout = createCollectionViewLayout()
-        collectionView.refreshControl = refresh
-    }
 
     private func createCollectionViewLayout() -> UICollectionViewLayout {
         let configure = UICollectionLayoutListConfiguration(appearance: .plain)
@@ -103,33 +104,12 @@ extension HomeViewController {
 extension HomeViewController {
     
     private func configureDataSource() {
-
-        let cellRegistration = UICollectionView.CellRegistration<BoxOfficeListCell, DailyBoxOffice> { [self] (cell, indexPath, dailyBoxOffice) in
-            let rankVariation = selector.determineRankVariation(with: dailyBoxOffice.rank.rankVariation, and: dailyBoxOffice.rank.rankOldAndNew)
-            let rankVariationColor = selector.determineRankVariationColor(with: dailyBoxOffice.rank.rankOldAndNew)
-            let rankImage = selector.determineVariationImage(with: dailyBoxOffice.rank.rankVariation)
-            let rankImageColor = selector.determineVariationImageColor(with: dailyBoxOffice.rank.rankVariation)
-            
-            cell.summaryInformationView.setMovieName(by: dailyBoxOffice.movieBrief.movieName)
-            cell.summaryInformationView.setAudienceCount(by: Formatter().convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
-                                                                                                accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
-            cell.rankView.setRankVariation(by: rankVariation)
-            cell.rankView.setRankVariation(by: rankVariationColor)
-            
-            if dailyBoxOffice.rank.rankOldAndNew == RankOldAndNew.new || dailyBoxOffice.rank.rankVariation == MagicLiteral.zero {
-                cell.rankView.setRankImage(by: UIImage())
-                cell.rankView.setRankImage(by: .black)
-            } else {
-                cell.rankView.setRankImage(by: rankImage)
-                cell.rankView.setRankImage(by: rankImageColor)
-            }
-            
-            cell.rankView.setRank(by: dailyBoxOffice.rank.rank)
-            
-            cell.accessories = [.disclosureIndicator()]
+        
+        let cellRegistration = UICollectionView.CellRegistration<BoxOfficeListCell, DailyBoxOffice> { (cell, indexPath, dailyBoxOffice) in
+            cell.configureOfCellRegistration(with: dailyBoxOffice)
         }
 
-        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { (collectionView, indexPath, dailyBoxOffice) in
+        dataSource = UICollectionViewDiffableDataSource<Section, DailyBoxOffice>(collectionView: collectionView) { (collectionView, indexPath, dailyBoxOffice) in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: dailyBoxOffice)
         }
         

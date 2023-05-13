@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BoxOfficeListCell: UICollectionViewListCell, Gettable {
+final class BoxOfficeListCell: UICollectionViewListCell, Gettable, Convertible {
     
     //MARK: - Property
 
@@ -25,8 +25,6 @@ final class BoxOfficeListCell: UICollectionViewListCell, Gettable {
         super .init(coder: coder)
         configureOfAllUIComponents()
     }
-    
-    //MARK: - Private Method
     
     private func configureOfAllUIComponents() {
 
@@ -63,4 +61,39 @@ final class BoxOfficeListCell: UICollectionViewListCell, Gettable {
             summaryInformationView.bottomAnchor.constraint(equalTo: contentStackView.bottomAnchor, constant: -7)
         ])
     }
+    
+    func configureOfCellRegistration(with dailyBoxOffice: DailyBoxOffice) {
+            
+        let rankVariation = selector.determineRankVariation(with: dailyBoxOffice.rank.rankVariation,
+                                                   and: dailyBoxOffice.rank.rankOldAndNew)
+        
+        let rankVariationColor = selector.determineRankVariationColor(with: dailyBoxOffice.rank.rankOldAndNew)
+        let rankImage = selector.determineVariationImage(with: dailyBoxOffice.rank.rankVariation)
+        let rankImageColor = selector.determineVariationImageColor(with: dailyBoxOffice.rank.rankVariation)
+            
+            
+        //MARK: - Cell Configure
+        summaryInformationView.setMovieName(by: dailyBoxOffice.movieBrief.movieName)
+        
+        summaryInformationView.setAudienceCount(by: convertToNumberFormatter(dailyBoxOffice.movieBrief.audienceCount,
+                                                                                  accumulated: dailyBoxOffice.movieBrief.audienceAccumulated))
+        
+        rankView.setRankVariation(by: rankVariation)
+        rankView.setRankVariation(by: rankVariationColor)
+        
+        if dailyBoxOffice.rank.rankOldAndNew == RankOldAndNew.new || dailyBoxOffice.rank.rankVariation == MagicLiteral.zero {
+            rankView.setRankImage(by: UIImage())
+            rankView.setRankImage(by: .black)
+        } else {
+            rankView.setRankImage(by: rankImage)
+            rankView.setRankImage(by: rankImageColor)
+        }
+        
+        rankView.setRank(by: dailyBoxOffice.rank.rank)
+        
+        accessories = [.disclosureIndicator()]
+        }
+    
+    //MARK: - Private Property
+    private let selector = Selector()
 }
