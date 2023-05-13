@@ -14,17 +14,9 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
-        
-        configureOfNavigationBar()
-        configureOfCollectionView()
-        
-        configureOfActivityIndicator()
-        checkOfAnimatingActivityIndicator(isAnimated: true)
-        
+        configureUIComponents()
         configureHierarchy()
         configureDataSource()
-        applySnapshot()
     }
     
     //MARK: - Private Property
@@ -32,6 +24,7 @@ final class HomeViewController: UIViewController {
     
     private let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
+    
     private let viewModel = BoxOfficeViewModel()
     
     
@@ -47,13 +40,6 @@ final class HomeViewController: UIViewController {
 //MARK: - Private Method
 extension HomeViewController {
     
-    private func configureOfActivityIndicator() {
-        activityIndicator.center = self.view.center
-        activityIndicator.color = .darkGray
-        activityIndicator.style = .large
-        activityIndicator.isHidden = false
-    }
-    
     private func checkOfAnimatingActivityIndicator(isAnimated: Bool) {
         guard isAnimated != activityIndicator.isAnimating else { return }
                 
@@ -62,20 +48,6 @@ extension HomeViewController {
         } else {
             activityIndicator.stopAnimating()
         }
-    }
-    
-    private func configureOfNavigationBar() {
-        navigationItem.title = Getter.receiveCurrentDate
-    }
-    
-    private func configureOfCollectionView() {
-        collectionView.isScrollEnabled = true
-        collectionView.isPrefetchingEnabled = false
-        collectionView.showsVerticalScrollIndicator = true
-        collectionView.clipsToBounds = false
-        collectionView.backgroundColor = .systemBackground
-        collectionView.collectionViewLayout = createCollectionViewLayout()
-        collectionView.refreshControl = refresh
     }
 
     private func applySnapshot() {
@@ -187,5 +159,7 @@ extension HomeViewController {
         snapshot.appendItems([])
         
         dataSource.apply(snapshot)
+        
+        applySnapshot()
     }
 }
