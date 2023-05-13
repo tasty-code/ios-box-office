@@ -13,8 +13,6 @@ final class BoxOfficeViewModel {
     
     init() {
         self.networkService = NetworkService()
-        self.selector = Selector()
-        self.formatter = Formatter()
     }
     
     //MARK: - Mehtod
@@ -26,7 +24,7 @@ final class BoxOfficeViewModel {
             
             let temporaryStorage = receivedFromNetworkService.map { dailyBoxOfficeList in
                 
-                DailyBoxOffice(uuid: UUID(), movieBrief: MovieBrief(movieName: dailyBoxOfficeList.movieName,
+                DailyBoxOffice(movieBrief: MovieBrief(movieName: dailyBoxOfficeList.movieName,
                                                       audienceCount: dailyBoxOfficeList.audienceCount,
                                                       audienceAccumulated: dailyBoxOfficeList.audienceAccumulate),
                                rank: Rank(rank: dailyBoxOfficeList.rank,
@@ -44,7 +42,4 @@ final class BoxOfficeViewModel {
     //MARK: - Private Property
     
     private var networkService: NetworkService
-    private var selector: Decidable
-    private var formatter: Convertible
 }
-
