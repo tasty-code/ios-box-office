@@ -27,7 +27,6 @@ final class HomeViewController: UIViewController {
     
     private let viewModel = BoxOfficeViewModel()
     
-    
     private lazy var refresh: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefreshControl) , for: .valueChanged)
