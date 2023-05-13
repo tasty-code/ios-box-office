@@ -8,22 +8,24 @@
 import Foundation
 
 protocol Convertible {
-    static var receiveCurrentDate: String { get }
-
     func convertToNumberFormatter(_ audienceCount: String, accumulated: String) -> String
 }
 
 extension Convertible {
-    static var receiveCurrentDate: String {
-        
-        guard let date = Calendar.current.date(byAdding: .day, value: -1, to: Date()) else {
+    
+    func convertToNumberFormatter(_ audienceCount: String, accumulated: String) -> String {
+
+        guard let audienceCount = Int(audienceCount), let audienceAccumulated = Int(accumulated) else {
+            return ""
+        }
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+
+        guard let audienceResult = numberFormatter.string(for: audienceCount),
+                let audienceAccumulatedCount = numberFormatter.string(for: audienceAccumulated) else {
             return ""
         }
 
-        let formatter = DateFormatter()
-        formatter.dateFormat = MagicLiteral.dateFormat
-        let currentDateString = formatter.string(from: date)
-
-        return currentDateString
+        return MagicLiteral.todayAudience + audienceResult + MagicLiteral.totalAudience + audienceAccumulatedCount
     }
 }
