@@ -25,7 +25,7 @@ final class HomeViewController: UIViewController {
     private let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
     private var dataSource: UICollectionViewDiffableDataSource<Section, DailyBoxOffice>!
     
-    private let viewModel = BoxOfficeViewModel()
+    private let boxOfficeViewModel = BoxOfficeViewModel()
     
     private lazy var refresh: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -56,7 +56,7 @@ extension HomeViewController {
         snapshot.deleteItems(previousItems)
         
         
-        self.viewModel.transformIntoDailyBoxOffice { dailyBoxOfficeStorage in
+        self.boxOfficeViewModel.transformIntoDailyBoxOffice { dailyBoxOfficeStorage in
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 self.checkOfAnimatingActivityIndicator(isAnimated: false)
