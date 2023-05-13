@@ -28,11 +28,11 @@ final class NetworkService {
         }
     }
     
-    func swap(to newResult: [DailyBoxOfficeList]) {
+    private func swap(to newResult: [DailyBoxOfficeList]) {
         networkResult = newResult
     }
 
-    func request<R: Decodable, E: RequestAndResponsable>(with endPoint: E) async throws -> R where E.Responese == R {
+    private func request<R: Decodable, E: RequestAndResponsable>(with endPoint: E) async throws -> R where E.Responese == R {
 
         let urlRequest = try endPoint.receiveURLRequest()
         let (data, response) = try await session.data(for: urlRequest)
