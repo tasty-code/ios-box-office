@@ -105,6 +105,45 @@ extension HomeViewController {
     }
 }
 
+//MARK: - Configure of UIComponents
+extension HomeViewController {
+    
+    private func configureUIComponents() {
+        configureSuperView()
+        configureOfNavigationBar()
+        configureOfActivityIndicator()
+        configureOfCollectionView()
+        
+        checkOfAnimatingActivityIndicator(isAnimated: true)
+    }
+    
+    private func configureSuperView() {
+        view.backgroundColor = .systemBackground
+    }
+    
+    private func configureOfNavigationBar() {
+        navigationItem.title = Getter.receiveCurrentDate
+    }
+    
+    private func configureOfActivityIndicator() {
+        activityIndicator.center = self.view.center
+        activityIndicator.color = .darkGray
+        activityIndicator.style = .large
+        activityIndicator.isHidden = false
+    }
+    
+    private func configureOfCollectionView() {
+        collectionView.isScrollEnabled = true
+        collectionView.isPrefetchingEnabled = false
+        collectionView.showsVerticalScrollIndicator = true
+        collectionView.clipsToBounds = false
+        collectionView.backgroundColor = .systemBackground
+        collectionView.collectionViewLayout = createCollectionViewLayout()
+        collectionView.refreshControl = refresh
+    }
+}
+
+
 //MARK: - Configure of CollectionViewLayout
 extension HomeViewController {
     
