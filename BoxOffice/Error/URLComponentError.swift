@@ -13,6 +13,6 @@ enum URLComponentsError: Error {
 
 extension URLComponentsError: LocalizedError {
     var errorDescription: String? {
-        return NSLocalizedString("Component's requirements are not met \(self)", comment: "")
+        return "Component's requirements are not met \(self)"
     }
 }
