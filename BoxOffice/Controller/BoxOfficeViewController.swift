@@ -10,6 +10,7 @@ import UIKit
 class BoxOfficeViewController: UIViewController {
     
     private var dataSource: UICollectionViewDataSource?
+    private let presentationProvider = PresentationProvider()
 
     private lazy var collectionView = BoxOfficeCollectionView(frame: .zero)
     private lazy var indicatorView = ActivityIndicatorView(frame: view.bounds)
@@ -18,6 +19,8 @@ class BoxOfficeViewController: UIViewController {
         super.viewDidLoad()
 
         title = Date.yesterday.formatData(type: .title)
+        presentationProvider.delegate = self
+
         configureHierarchy()
         configureDataSource()
         configureRefreshControl()
@@ -39,8 +42,24 @@ class BoxOfficeViewController: UIViewController {
     
     private func configureDataSource() {
         
-        self.dataSource = BoxOfficeDataSource()
-        collectionView.dataSource = dataSource
+        let boxOfficeDataSource = BoxOfficeDataSource()
+        boxOfficeDataSource.boxOffices = self.presentationProvider.getBoxOffices()
+        dataSource = boxOfficeDataSource
+
+        DispatchQueue.main.async {
+            self.collectionView.dataSource = self.dataSource
+        }
+    }
+}
+
+extension BoxOfficeViewController: PresentationDelegate {
+
+    func call() {
+        self.configureDataSource()
+        
+        DispatchQueue.main.async {
+            self.indicatorView.stopAnimating()
+        }
     }
 }
 
