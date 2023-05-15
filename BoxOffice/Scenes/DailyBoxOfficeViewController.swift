@@ -16,10 +16,15 @@ final class DailyBoxOfficeViewController: UIViewController {
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, DailyBoxOffice>
     private typealias SnapShot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>
 
-    private var loadingIndicatorView = UIActivityIndicatorView(style: .large)
+    private let loadingIndicatorView = UIActivityIndicatorView(style: .large)
     private let boxOfficeManager = BoxOfficeAPIManager()
-    private var dailyBoxOfficeCollectionView: UICollectionView?
     private var dataSource: DataSource?
+    private lazy var dailyBoxOfficeCollectionView : UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+
+        return collectionView
+    }()
     private var movies = [DailyBoxOffice]() {
         didSet {
             applySnapShot()
@@ -31,7 +36,7 @@ final class DailyBoxOfficeViewController: UIViewController {
         setUpUI()
         configureCollectionView()
         configureDataSource()
-        showIndicatorview()
+        addIndicatorview()
         fetchBoxOfficeData()
     }
 
@@ -40,9 +45,6 @@ final class DailyBoxOfficeViewController: UIViewController {
     }
 
     private func configureCollectionView() {
-        dailyBoxOfficeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        guard let dailyBoxOfficeCollectionView else { return }
-        dailyBoxOfficeCollectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(dailyBoxOfficeCollectionView)
         dailyBoxOfficeCollectionView.register(DailyBoxOfficeCell.self,
                                               forCellWithReuseIdentifier: DailyBoxOfficeCell.identifier)
@@ -61,7 +63,6 @@ final class DailyBoxOfficeViewController: UIViewController {
     }
 
     private func configureCollectionViewLayoutConstraint() {
-        guard let dailyBoxOfficeCollectionView else { return }
         let safeAreaGuide = view.safeAreaLayoutGuide
         dailyBoxOfficeCollectionView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor).isActive = true
         dailyBoxOfficeCollectionView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor).isActive = true
@@ -70,7 +71,6 @@ final class DailyBoxOfficeViewController: UIViewController {
     }
 
     private func configureDataSource() {
-        guard let dailyBoxOfficeCollectionView else { return }
         dataSource = UICollectionViewDiffableDataSource(collectionView: dailyBoxOfficeCollectionView )
         { collectionView, indexPath, movie in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DailyBoxOfficeCell.identifier,
@@ -103,16 +103,14 @@ final class DailyBoxOfficeViewController: UIViewController {
         snapShot.appendSections([.main])
         snapShot.appendItems(movies)
 
-        DispatchQueue.main.async {
-            self.dataSource?.apply(snapShot)
-        }
+        self.dataSource?.apply(snapShot)
     }
 
 }
 
 extension DailyBoxOfficeViewController {
 
-    private func showIndicatorview() {
+    private func addIndicatorview() {
         loadingIndicatorView.frame = view.frame
         loadingIndicatorView.color = .systemBlue
         view.addSubview(loadingIndicatorView)
@@ -124,8 +122,6 @@ extension DailyBoxOfficeViewController {
     }
 
     private func configureRefreshControl() {
-        guard let dailyBoxOfficeCollectionView else { return }
-
         dailyBoxOfficeCollectionView.refreshControl = UIRefreshControl()
         dailyBoxOfficeCollectionView.refreshControl?.addTarget(self,
                                                                action: #selector(handleRefreshControl),
@@ -133,7 +129,7 @@ extension DailyBoxOfficeViewController {
     }
 
     private func endRefresh() {
-        dailyBoxOfficeCollectionView?.refreshControl?.endRefreshing()
+        dailyBoxOfficeCollectionView.refreshControl?.endRefreshing()
     }
 
     @objc private func handleRefreshControl() {
