@@ -81,9 +81,12 @@ extension RankView {
     }
 
     func setRankVariation(by text: String) {
-        if let convertedText = Int(text) {
-            rankVariation.text = String(describing: abs(convertedText))
+        guard text != "-", let convertedText = Int(text) else {
+            rankVariation.text = text
+            return
         }
+
+        rankVariation.text = String(describing: abs(convertedText))
     }
 
     func setRankVariation(by color: UIColor) {
