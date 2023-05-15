@@ -46,7 +46,8 @@ final class DailyBoxOfficeViewController: UIViewController {
 
     private func configureCollectionView() {
         view.addSubview(dailyBoxOfficeCollectionView)
-        dailyBoxOfficeCollectionView.register(DailyBoxOfficeCell.self,
+        dailyBoxOfficeCollectionView.register(
+            DailyBoxOfficeCell.self,
                                               forCellWithReuseIdentifier: DailyBoxOfficeCell.identifier)
         configureCollectionViewLayoutConstraint()
         configureRefreshControl()
@@ -56,7 +57,9 @@ final class DailyBoxOfficeViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout { section, layoutEnvironment in
             let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
 
-            return NSCollectionLayoutSection.list(using: configuration, layoutEnvironment: layoutEnvironment)
+            return NSCollectionLayoutSection.list(
+                using: configuration,
+                layoutEnvironment: layoutEnvironment)
         }
 
         return layout
@@ -64,17 +67,25 @@ final class DailyBoxOfficeViewController: UIViewController {
 
     private func configureCollectionViewLayoutConstraint() {
         let safeAreaGuide = view.safeAreaLayoutGuide
-        dailyBoxOfficeCollectionView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor).isActive = true
-        dailyBoxOfficeCollectionView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor).isActive = true
-        dailyBoxOfficeCollectionView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor).isActive = true
-        dailyBoxOfficeCollectionView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor).isActive = true
+        dailyBoxOfficeCollectionView.leadingAnchor.constraint(
+            equalTo: safeAreaGuide.leadingAnchor).isActive = true
+        dailyBoxOfficeCollectionView.trailingAnchor.constraint(
+            equalTo: safeAreaGuide.trailingAnchor).isActive = true
+        dailyBoxOfficeCollectionView.bottomAnchor.constraint(
+            equalTo: safeAreaGuide.bottomAnchor).isActive = true
+        dailyBoxOfficeCollectionView.topAnchor.constraint(
+            equalTo: safeAreaGuide.topAnchor).isActive = true
     }
 
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource(collectionView: dailyBoxOfficeCollectionView )
+        dataSource = UICollectionViewDiffableDataSource(
+            collectionView: dailyBoxOfficeCollectionView )
         { collectionView, indexPath, movie in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DailyBoxOfficeCell.identifier,
-                                                          for: indexPath) as? DailyBoxOfficeCell
+
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: DailyBoxOfficeCell.identifier,
+                for: indexPath) as? DailyBoxOfficeCell
+            
             cell?.accessories = [.disclosureIndicator()]
             cell?.configure(with: movie)
 
@@ -86,23 +97,26 @@ final class DailyBoxOfficeViewController: UIViewController {
         let yesterDay = Date.yesterDayDateConvertToString()
         let yesterdayDashExcepted = yesterDay.without("-")
 
-        boxOfficeManager.fetchData(to: BoxOffice.self, endPoint: .boxOffice(targetDate: yesterdayDashExcepted))
-        { [weak self] data in
-            guard let boxOffice = data as? BoxOffice else { return }
-            self?.movies = boxOffice.result.dailyBoxOffices
-            DispatchQueue.main.async {
-                self?.removeIndicatorView()
-                self?.endRefresh()
-                self?.navigationItem.title = yesterDay
+        Task{
+            guard let decodedData = try await boxOfficeManager.fetchData(
+                to: BoxOffice.self,
+                endPoint: .boxOffice(targetDate: yesterdayDashExcepted)) else {
+                return
             }
+
+            guard let boxOffice = decodedData as? BoxOffice else { return }
+            movies = boxOffice.result.dailyBoxOffices
+            self.navigationItem.title = yesterDay
+            self.removeIndicatorView()
+            self.endRefresh()
         }
     }
+
 
     private func applySnapShot() {
         var snapShot = SnapShot()
         snapShot.appendSections([.main])
         snapShot.appendItems(movies)
-
         self.dataSource?.apply(snapShot)
     }
 

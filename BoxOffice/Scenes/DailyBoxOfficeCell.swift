@@ -42,28 +42,32 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
 
     private let movieTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: Constants.movieTitleLabelFontSize)
+        label.font = .systemFont(
+            ofSize: Constants.movieTitleLabelFontSize)
 
         return label
     }()
 
     private let audienceLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: Constants.audienceLabelFontSize)
+        label.font = .systemFont(
+            ofSize: Constants.audienceLabelFontSize)
 
         return label
     }()
 
     private let rankNumberLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: Constants.dailyRankNumberLabelFontSize)
+        label.font = .systemFont(
+            ofSize: Constants.dailyRankNumberLabelFontSize)
 
         return label
     }()
 
     private let dailyRankChangesLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: Constants.dailyRankChangesLabelFontSize)
+        label.font = .systemFont(
+            ofSize: Constants.dailyRankChangesLabelFontSize)
 
         return label
     }()
@@ -114,15 +118,30 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
         cellHeightConstraint.priority = .defaultHigh
         cellHeightConstraint.isActive = true
 
-        rankVerticalStackView.widthAnchor.constraint(equalToConstant: Constants.rankStackViewWidth).isActive = true
-        rankVerticalStackView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.rankStackViewInset).isActive = true
-        rankVerticalStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.rankStackViewInset).isActive = true
-        rankVerticalStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.rankStackViewleadingInset).isActive = true
+        rankVerticalStackView.widthAnchor.constraint(
+            equalToConstant: Constants.rankStackViewWidth).isActive = true
+        rankVerticalStackView.topAnchor.constraint(
+            equalTo: topAnchor,
+            constant: Constants.rankStackViewInset).isActive = true
+        rankVerticalStackView.bottomAnchor.constraint(
+            equalTo: bottomAnchor,
+            constant: -Constants.rankStackViewInset).isActive = true
+        rankVerticalStackView.leadingAnchor.constraint(
+            equalTo: leadingAnchor,
+            constant: Constants.rankStackViewleadingInset).isActive = true
 
-        titleAudienceVerticalStackView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.titleStackViewInset).isActive = true
-        titleAudienceVerticalStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.titleStackViewInset).isActive = true
-        titleAudienceVerticalStackView.leadingAnchor.constraint(equalTo: rankVerticalStackView.trailingAnchor, constant: .zero).isActive = true
-        titleAudienceVerticalStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.titleStackViewTrailingInset).isActive = true
+        titleAudienceVerticalStackView.topAnchor.constraint(
+            equalTo: topAnchor,
+            constant: Constants.titleStackViewInset).isActive = true
+        titleAudienceVerticalStackView.bottomAnchor.constraint(
+            equalTo: bottomAnchor,
+            constant: -Constants.titleStackViewInset).isActive = true
+        titleAudienceVerticalStackView.leadingAnchor.constraint(
+            equalTo: rankVerticalStackView.trailingAnchor,
+            constant: .zero).isActive = true
+        titleAudienceVerticalStackView.trailingAnchor.constraint(
+            equalTo: trailingAnchor,
+            constant: -Constants.titleStackViewTrailingInset).isActive = true
     }
 
     func configure(with movie: DailyBoxOffice) {
@@ -168,16 +187,18 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
 
         if dailyRankChanges > 0 {
             let image = UIImage(systemName: Constants.upSymbolName)?.withTintColor(.systemRed)
-            let dailytRankChangesText = generateRankChangesAttributedText(movie.dailyRankChanges,
-                                                                          with: image)
+            let dailytRankChangesText = generateRankChangesAttributedText(
+                movie.dailyRankChanges,
+                with: image)
             dailyRankChangesLabel.attributedText = dailytRankChangesText
             return
         }
 
         if dailyRankChanges < 0 {
             let image = UIImage(systemName: Constants.downSymbolName)?.withTintColor(.systemBlue)
-            let dailytRankChangesText = generateRankChangesAttributedText(movie.dailyRankChanges,
-                                                                          with: image)
+            let dailytRankChangesText = generateRankChangesAttributedText(
+                movie.dailyRankChanges,
+                with: image)
             dailyRankChangesLabel.attributedText = dailytRankChangesText
             return
         }
