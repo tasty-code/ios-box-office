@@ -9,7 +9,7 @@ import XCTest
 @testable import BoxOffice
 
 final class APIKeyTest: XCTestCase {
-    
+
     var sut: String!
 
     override func setUpWithError() throws {
@@ -22,6 +22,8 @@ final class APIKeyTest: XCTestCase {
     }
 
     func test_APIKey를_호출할수있는지() {
-        XCTAssertNotEqual(Bundle.main.apiKey, "")
+        sut = Bundle.main.apiKey
+
+        XCTAssertNotEqual(sut, "")
     }
 }

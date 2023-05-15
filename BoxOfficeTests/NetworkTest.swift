@@ -16,7 +16,7 @@ final class NetworkTest: XCTestCase {
     override func setUpWithError() throws {
         
         try super.setUpWithError()
-        sut = NetworkProvider(session: NetworkSession())
+        sut = NetworkProvider()
     }
 
     override func tearDownWithError() throws {
@@ -43,11 +43,14 @@ final class NetworkTest: XCTestCase {
     }
 
     func test_URLRequest가_만들어지는지() {
+        guard let apiKey = Bundle.main.apiKey else {
+            return
+        }
         
         do {
             let request = try endpoint.makeRequest()
             XCTAssertNotNil(request)
-            guard let url = URL(string: "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(Bundle.main.apiKey)&targetDt=20230503") else {
+            guard let url = URL(string: "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(apiKey)&targetDt=20230503") else {
                 return
             }
             XCTAssertEqual(request, URLRequest(url: url))

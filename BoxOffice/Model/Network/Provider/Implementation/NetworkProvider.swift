@@ -12,7 +12,7 @@ final class NetworkProvider: NetworkProvidable {
     private let session: NetworkSessionProtocol
     private let deserializer = JSONDeserializer()
     
-    init(session: NetworkSessionProtocol) {
+    init(session: NetworkSessionProtocol = NetworkSession()) {
         self.session = session
     }
     
