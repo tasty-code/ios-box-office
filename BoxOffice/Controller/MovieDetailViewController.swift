@@ -11,6 +11,13 @@ class MovieDetailViewController: UIViewController {
 
     private let scrollView = UIScrollView()
 
+    var movie: Movie?
+    var movieInformation: MovieInformation? {
+        didSet {
+            stackViewfor8()
+        }
+    }
+
     private var contentView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -33,10 +40,26 @@ class MovieDetailViewController: UIViewController {
 
 
     func stackViewfor8() {
-        for i in 1...100 {
-            let movieInformationView = MovieInformaionView(category: "야하 \(i)", content: "이히")
-            movieStackView.addArrangedSubview(movieInformationView)
+        dump(movieInformation)
+        guard let movie = movieInformation else { return }
+        DispatchQueue.main.async {
+            let directorLabel = MovieInformaionView(category: "감독", content: self.unwrap(array: movie.directors))
+            let productLabel = MovieInformaionView(category: "제작년도", content: movie.productYear)
+            let openDateLabel = MovieInformaionView(category: "개봉일", content: movie.openDate)
+            let showTimeLabel = MovieInformaionView(category: "상영시간", content: movie.showTime)
+            let nationLabel = MovieInformaionView(category: "제작국가", content: self.unwrap(array: movie.nations))
+            let genreLabel = MovieInformaionView(category: "장르", content: self.unwrap(array: movie.genres))
+            let actorLabel = MovieInformaionView(category: "배우", content: self.unwrap(array: movie.actors))
+            self.movieStackView.addArrangedSubview(directorLabel)
+            self.movieStackView.addArrangedSubview(productLabel)
+            self.movieStackView.addArrangedSubview(openDateLabel)
+            self.movieStackView.addArrangedSubview(showTimeLabel)
+            self.movieStackView.addArrangedSubview(nationLabel)
+            self.movieStackView.addArrangedSubview(genreLabel)
+            self.movieStackView.addArrangedSubview(actorLabel)
+
         }
+
     }
 
 
@@ -50,13 +73,42 @@ class MovieDetailViewController: UIViewController {
         contentView.addArrangedSubview(movieStackView)
 
         setLayout()
-        stackViewfor8()
+        configureUI()
     }
 
-    func setImage(image: UIImage) {
-        movieImageView.image = image
+    func configureUI() {
+        guard let movie = movie else { return }
+
+        let posterEndPoint = EndPoint.moviePoster(title: movie.name)
+        let movieDetailEndPoint = EndPoint.movieInformation(code: movie.code.description)
+        self.title = movie.name
+
+        Networking().loadImage(form: posterEndPoint) { image, error in
+            if let error = error {
+                print(error)
+            }
+
+            if let image = image {
+                DispatchQueue.main.async {
+                    self.movieImageView.image = image
+                }
+            }
+        }
+
+        Networking().loadData(from: movieDetailEndPoint) { movieInformation, error in
+            if let movieInformation = movieInformation {
+                print(movieInformation)
+                self.movieInformation = movieInformation as! MovieInformation
+            }
+        }
+
     }
-    
+
+    func unwrap(array: [String]) -> String {
+        guard !array.isEmpty else { return "" }
+        return array.joined(separator: ", ")
+    }
+
     private func setLayout() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false

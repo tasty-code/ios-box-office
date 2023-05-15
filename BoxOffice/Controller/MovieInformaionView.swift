@@ -21,9 +21,19 @@ class MovieInformaionView: UIStackView {
         contentLabel.text = content
 
         axis = .horizontal
-        distribution = .fillEqually
+        distribution = .fill
         addArrangedSubview(categoryLabel)
         addArrangedSubview(contentLabel)
+        setUI()
+    }
+
+    func setUI() {
+        categoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        categoryLabel.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        categoryLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        categoryLabel.textAlignment = .center
+
+        contentLabel.numberOfLines = 0
     }
 
     required init(coder: NSCoder) {
