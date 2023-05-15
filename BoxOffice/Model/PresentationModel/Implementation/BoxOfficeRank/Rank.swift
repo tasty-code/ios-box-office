@@ -12,7 +12,7 @@ struct Rank {
     let number: String
     let detail: NSMutableAttributedString
     
-    init(rank: String, rankIntensity: String, rankOldAndNew: RankOldAndNewDTO ) {
+    init(rank: String, rankIntensity: String, rankOldAndNew: RankOldAndNewDTO) {
         self.number = rank
         self.detail = NSMutableAttributedString()
         
