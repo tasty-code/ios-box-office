@@ -47,6 +47,8 @@ final class CustomListCell: UICollectionViewListCell {
     }
 
     private func configureHierarchy() {
+        
+        self.accessories = [.disclosureIndicator()]
     
         let rankStackView = UIVerticalStackView(arrangedSubviews: [rankNumberLabel, rankDetailLabel], alignment: .center)
         let movieStackView = UIVerticalStackView(arrangedSubviews: [movieNameLabel, movieDetailLabel], alignment: .leading)
