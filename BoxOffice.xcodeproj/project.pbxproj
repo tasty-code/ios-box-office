@@ -27,6 +27,8 @@
 		80A323B92A03622900617897 /* NetworkProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A323B82A03622900617897 /* NetworkProvidable.swift */; };
 		80A323BB2A03626300617897 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A323BA2A03626300617897 /* NetworkProvider.swift */; };
 		80A323BD2A0369A000617897 /* NetworkTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A323BC2A0369A000617897 /* NetworkTest.swift */; };
+		80A9FDF02A11C28D001EAB03 /* PresentationProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A9FDEF2A11C28D001EAB03 /* PresentationProvidable.swift */; };
+		80A9FDF22A11C2D0001EAB03 /* PresentationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A9FDF12A11C2D0001EAB03 /* PresentationProvider.swift */; };
 		80DB65302A09DB9500373449 /* Rank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DB652F2A09DB9500373449 /* Rank.swift */; };
 		80DB65332A0A080E00373449 /* BoxOfficeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DB65322A0A080E00373449 /* BoxOfficeItem.swift */; };
 		80DB65572A0B382B00373449 /* BoxOfficeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DB65562A0B382B00373449 /* BoxOfficeDataSource.swift */; };
@@ -88,6 +90,8 @@
 		80A323B82A03622900617897 /* NetworkProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvidable.swift; sourceTree = "<group>"; };
 		80A323BA2A03626300617897 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		80A323BC2A0369A000617897 /* NetworkTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTest.swift; sourceTree = "<group>"; };
+		80A9FDEF2A11C28D001EAB03 /* PresentationProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationProvidable.swift; sourceTree = "<group>"; };
+		80A9FDF12A11C2D0001EAB03 /* PresentationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationProvider.swift; sourceTree = "<group>"; };
 		80DB652F2A09DB9500373449 /* Rank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rank.swift; sourceTree = "<group>"; };
 		80DB65322A0A080E00373449 /* BoxOfficeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeItem.swift; sourceTree = "<group>"; };
 		80DB65562A0B382B00373449 /* BoxOfficeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeDataSource.swift; sourceTree = "<group>"; };
@@ -284,6 +288,31 @@
 			path = Interface;
 			sourceTree = "<group>";
 		};
+		80A9FDEC2A11C26E001EAB03 /* PresentationProvider */ = {
+			isa = PBXGroup;
+			children = (
+				80A9FDEE2A11C27B001EAB03 /* Interface */,
+				80A9FDED2A11C275001EAB03 /* Implementation */,
+			);
+			path = PresentationProvider;
+			sourceTree = "<group>";
+		};
+		80A9FDED2A11C275001EAB03 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				80A9FDF12A11C2D0001EAB03 /* PresentationProvider.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		80A9FDEE2A11C27B001EAB03 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				80A9FDEF2A11C28D001EAB03 /* PresentationProvidable.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
 		80DB652D2A09DABB00373449 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +343,7 @@
 		80DB65A92A0E2E4700373449 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				80A9FDEC2A11C26E001EAB03 /* PresentationProvider */,
 				80DB65B02A0E2EF600373449 /* Dispatcher */,
 			);
 			path = Presentation;
@@ -585,6 +615,7 @@
 				80A323B22A034FE800617897 /* DailyBoxOfficeEndpoint.swift in Sources */,
 				80DB65AF2A0E2EBA00373449 /* ViewDisplayable.swift in Sources */,
 				F036101E29F7892C0036BBF0 /* JSONDesrializer.swift in Sources */,
+				80A9FDF22A11C2D0001EAB03 /* PresentationProvider.swift in Sources */,
 				F0BDED4B2A0B5BA20076A8EE /* UICollectionReusableView+Extension.swift in Sources */,
 				80DB65B62A0E2F3400373449 /* BoxOfficeDispatcher.swift in Sources */,
 				80A323AC2A0349CF00617897 /* Requestable.swift in Sources */,
@@ -604,6 +635,7 @@
 				80985DDB29F7741D008BF073 /* BoxOfficeResultDTO.swift in Sources */,
 				80DB65332A0A080E00373449 /* BoxOfficeItem.swift in Sources */,
 				80DB65B42A0E2F1900373449 /* PresentationDispatchable.swift in Sources */,
+				80A9FDF02A11C28D001EAB03 /* PresentationProvidable.swift in Sources */,
 				F0500A612A023A72001F448C /* MovieInformationResultDTO.swift in Sources */,
 				80985DF529F7A214008BF073 /* BoxOfficeDTO.swift in Sources */,
 				80A323AE2A034A8900617897 /* Responsable.swift in Sources */,
