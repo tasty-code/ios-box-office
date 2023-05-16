@@ -48,7 +48,7 @@ final class DailyBoxOfficeViewController: UIViewController {
         view.addSubview(dailyBoxOfficeCollectionView)
         dailyBoxOfficeCollectionView.register(
             DailyBoxOfficeCell.self,
-                                              forCellWithReuseIdentifier: DailyBoxOfficeCell.identifier)
+            forCellWithReuseIdentifier: DailyBoxOfficeCell.identifier)
         configureCollectionViewLayoutConstraint()
         configureRefreshControl()
     }
@@ -78,8 +78,7 @@ final class DailyBoxOfficeViewController: UIViewController {
     }
 
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource(
-            collectionView: dailyBoxOfficeCollectionView )
+        dataSource = UICollectionViewDiffableDataSource(collectionView: dailyBoxOfficeCollectionView)
         { collectionView, indexPath, movie in
 
             let cell = collectionView.dequeueReusableCell(
@@ -100,7 +99,8 @@ final class DailyBoxOfficeViewController: UIViewController {
         Task{
             guard let decodedData = try await boxOfficeManager.fetchData(
                 to: BoxOffice.self,
-                endPoint: .boxOffice(targetDate: yesterdayDashExcepted)) else {
+                endPoint: .boxOffice(targetDate: yesterdayDashExcepted))
+            else {
                 return
             }
 
@@ -137,9 +137,11 @@ extension DailyBoxOfficeViewController {
 
     private func configureRefreshControl() {
         dailyBoxOfficeCollectionView.refreshControl = UIRefreshControl()
-        dailyBoxOfficeCollectionView.refreshControl?.addTarget(self,
-                                                               action: #selector(handleRefreshControl),
-                                                               for: .valueChanged)
+        dailyBoxOfficeCollectionView.refreshControl?.addTarget(
+            self,
+            action: #selector(handleRefreshControl),
+            for: .valueChanged
+        )
     }
 
     private func endRefresh() {

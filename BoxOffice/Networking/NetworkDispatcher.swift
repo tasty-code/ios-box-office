@@ -15,14 +15,11 @@ struct NetworkDispatcher {
     func performRequest(_ urlRequest: URLRequest?) async throws -> NetworkResult {
         let session = URLSession.shared
 
-        guard let urlRequest else {
-            return .failure(.invalidURL)
-        }
+        guard let urlRequest else { return .failure(.invalidURL) }
 
         let (data, response) = try await session.data(for: urlRequest)
-        guard response.isValidResponse else {
-            return .failure(.outOfResponseCode)
-        }
+        guard response.isValidResponse else { return .failure(.outOfResponseCode) }
+
         return NetworkResult.success(data)
     }
 

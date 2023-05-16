@@ -22,22 +22,25 @@ final class BoxOfficeNetworkTest: XCTestCase {
     func test_BoxOfficeAPI_호출이_정상적으로_되는지() {
         let expectation = XCTestExpectation()
 
-        sut.fetchData(to: BoxOffice.self,
-                      endPoint: BoxOfficeAPIEndpoints.boxOffice(targetDate: "20230430")
-        ) { decodedData in
+        Task {
+            let decodedData = try await sut.fetchData(
+                to: BoxOffice.self,
+                endPoint: BoxOfficeAPIEndpoints.boxOffice(targetDate: "20230430")
+            )
             XCTAssertNotNil(decodedData)
             expectation.fulfill()
         }
-
         wait(for: [expectation], timeout: 10.0)
     }
 
     func test_MoiveDetailAPI_호출이_정상적으로_되는지() {
         let expectation = XCTestExpectation()
 
-        sut.fetchData(to: MovieDetail.self,
-                      endPoint: BoxOfficeAPIEndpoints.movieDetail(movieCode: "20227890")
-        ) { decodedData in
+        Task {
+            let decodedData = try await sut.fetchData(
+                to: MovieDetail.self,
+                endPoint: BoxOfficeAPIEndpoints.movieDetail(movieCode: "20227890")
+            )
             XCTAssertNotNil(decodedData)
             expectation.fulfill()
         }

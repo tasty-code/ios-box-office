@@ -182,6 +182,7 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
 
         if dailyRankChanges == 0 {
             dailyRankChangesLabel.text = Constants.noneChangeOfRankState
+
             return
         }
 
@@ -191,6 +192,7 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
                 movie.dailyRankChanges,
                 with: image)
             dailyRankChangesLabel.attributedText = dailytRankChangesText
+
             return
         }
 
@@ -198,14 +200,17 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
             let image = UIImage(systemName: Constants.downSymbolName)?.withTintColor(.systemBlue)
             let dailytRankChangesText = generateRankChangesAttributedText(
                 movie.dailyRankChanges,
-                with: image)
+                with: image
+            )
             dailyRankChangesLabel.attributedText = dailytRankChangesText
+
             return
         }
     }
 
-    private func generateRankChangesAttributedText(_ text: String,
-                                                   with image: UIImage?) -> NSMutableAttributedString {
+    private func generateRankChangesAttributedText(
+        _ text: String,
+        with image: UIImage?) -> NSMutableAttributedString {
         let attachment = NSTextAttachment()
         attachment.image = image
 
