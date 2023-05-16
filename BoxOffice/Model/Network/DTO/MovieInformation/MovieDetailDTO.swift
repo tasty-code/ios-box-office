@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieDetailDTO: Codable {
+struct MovieDetailDTO: Decodable {
 
     let movieCD, movieNm, movieNmEn, movieNmOg: String
     let showTm, prdtYear, openDt, prdtStatNm: String
@@ -28,17 +28,17 @@ struct MovieDetailDTO: Codable {
     }
 }
 
-struct ActorDTO: Codable {
+struct ActorDTO: Decodable {
 
     let peopleNm, peopleNmEn, cast, castEn: String
 }
 
-struct AuditDTO: Codable {
+struct AuditDTO: Decodable {
 
     let auditNo, watchGradeNm: String
 }
 
-struct CompanyDTO: Codable {
+struct CompanyDTO: Decodable {
 
     let companyCD, companyNm, companyNmEn, companyPartNm: String
 
@@ -48,27 +48,27 @@ struct CompanyDTO: Codable {
     }
 }
 
-struct DirectorDTO: Codable {
+struct DirectorDTO: Decodable {
 
     let peopleNm, peopleNmEn: String
 }
 
-struct GenreDTO: Codable {
+struct GenreDTO: Decodable {
 
     let genreNm: String
 }
 
-struct NationDTO: Codable {
+struct NationDTO: Decodable {
 
     let nationNm: String
 }
 
-struct ShowTypeDTO: Codable {
+struct ShowTypeDTO: Decodable {
 
     let showTypeGroupNm, showTypeNm: String
 }
 
-struct StaffDTO: Codable {
+struct StaffDTO: Decodable {
 
     let peopleNm, peopleNmEn, staffRoleNm: String
 }

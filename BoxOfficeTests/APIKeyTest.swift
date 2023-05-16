@@ -22,7 +22,7 @@ final class APIKeyTest: XCTestCase {
     }
 
     func test_APIKey를_호출할수있는지() {
-        sut = Bundle.main.apiKey
+        sut = Bundle.main.movieAPIKey
 
         XCTAssertNotEqual(sut, "")
     }
