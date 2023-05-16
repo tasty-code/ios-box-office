@@ -12,7 +12,7 @@ class MovieDetailViewController: UIViewController {
     private let scrollView = UIScrollView()
 
     var movie: Movie?
-    var movieInformation: MovieInformation? {
+    private var movieInformation: MovieInformation? {
         didSet {
             setMovieData()
         }
@@ -76,7 +76,7 @@ class MovieDetailViewController: UIViewController {
         configureUI()
     }
 
-    func configureUI() {
+    private func configureUI() {
         guard let movie = movie else { return }
 
         let posterEndPoint = EndPoint.moviePoster(title: movie.name)
@@ -102,7 +102,7 @@ class MovieDetailViewController: UIViewController {
         }
     }
 
-    func unwrap(array: [String]) -> String {
+    private func unwrap(array: [String]) -> String {
         guard !array.isEmpty else { return "" }
         return array.joined(separator: ", ")
     }
@@ -121,7 +121,6 @@ class MovieDetailViewController: UIViewController {
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
-            movieImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             movieImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             movieImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             movieImageView.heightAnchor.constraint(equalTo: movieImageView.widthAnchor, multiplier: 1.3 / 1),
