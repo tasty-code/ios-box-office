@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct BoxOfficeAPIManager {
+struct NetworkAPIManager {
     
     private let deserializer = JSONDeserializer()
     private let networkDispatcher = NetworkDispatcher()
     
     func fetchData(
         to type: Decodable.Type,
-        endPoint: BoxOfficeAPIEndpoints) async throws -> Decodable? {
+        endPoint: APIEndpoint) async throws -> Decodable? {
             let urlRequest = endPoint.urlRequest
             let result = try await networkDispatcher.performRequest(urlRequest)
 

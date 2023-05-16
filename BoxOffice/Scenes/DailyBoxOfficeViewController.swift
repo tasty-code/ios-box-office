@@ -17,7 +17,7 @@ final class DailyBoxOfficeViewController: UIViewController {
     private typealias SnapShot = NSDiffableDataSourceSnapshot<Section, DailyBoxOffice>
 
     private let loadingIndicatorView = UIActivityIndicatorView(style: .large)
-    private let boxOfficeManager = BoxOfficeAPIManager()
+    private let boxOfficeManager = NetworkAPIManager()
     private var dataSource: DataSource?
     private lazy var dailyBoxOfficeCollectionView : UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
@@ -95,11 +95,12 @@ final class DailyBoxOfficeViewController: UIViewController {
     private func fetchBoxOfficeData() {
         let yesterDay = Date.yesterDayDateConvertToString()
         let yesterdayDashExcepted = yesterDay.without("-")
+        let boxOfficeEndPoint = BoxOfficeAPIEndpoints.boxOffice(targetDate: yesterdayDashExcepted)
 
         Task{
             guard let decodedData = try await boxOfficeManager.fetchData(
                 to: BoxOffice.self,
-                endPoint: .boxOffice(targetDate: yesterdayDashExcepted))
+                endPoint: boxOfficeEndPoint)
             else {
                 return
             }
