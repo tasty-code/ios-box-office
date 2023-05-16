@@ -22,6 +22,7 @@
 		76D585DE29F78AB700EAB343 /* DailyBoxOfficeResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D585DD29F78AB700EAB343 /* DailyBoxOfficeResultDTO.swift */; };
 		76D585E029F78B3400EAB343 /* BoxOfficeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D585DF29F78B3400EAB343 /* BoxOfficeDTO.swift */; };
 		76FCD63D29FF4BF4009B0825 /* MovieInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FCD63C29FF4BF4009B0825 /* MovieInformation.swift */; };
+		F641FB902A11D1C8001F08DE /* Convertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F659834229FF5A69000F7BF7 /* Convertable.swift */; };
 		F659832D29FF44F2000F7BF7 /* MovieDetailInformationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F659832C29FF44F2000F7BF7 /* MovieDetailInformationDTO.swift */; };
 		F659832F29FF4A19000F7BF7 /* ActorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F659832E29FF4A19000F7BF7 /* ActorDTO.swift */; };
 		F659833129FF4AA2000F7BF7 /* StaffDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F659833029FF4AA2000F7BF7 /* StaffDTO.swift */; };
@@ -388,6 +389,7 @@
 				F66085CD29F78C3900A39D5A /* DailyBoxOfficeResultDTO.swift in Sources */,
 				762E2B7029FA45D900551153 /* Rank.swift in Sources */,
 				F66085CE29F78C3C00A39D5A /* DailyBoxOfficeDTO.swift in Sources */,
+				F641FB902A11D1C8001F08DE /* Convertable.swift in Sources */,
 				F66085BB29F66A6C00A39D5A /* BoxOfficeTests.swift in Sources */,
 				F66085CC29F78C3700A39D5A /* BoxOfficeDTO.swift in Sources */,
 				F66085D429F79F0900A39D5A /* Movie.swift in Sources */,
