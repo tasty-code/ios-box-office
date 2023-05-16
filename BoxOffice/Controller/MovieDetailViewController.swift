@@ -14,7 +14,7 @@ class MovieDetailViewController: UIViewController {
     var movie: Movie?
     var movieInformation: MovieInformation? {
         didSet {
-            stackViewfor8()
+            setMovieData()
         }
     }
 
@@ -40,29 +40,28 @@ class MovieDetailViewController: UIViewController {
     }()
 
 
-    func stackViewfor8() {
-        dump(movieInformation)
+    func setMovieData() {
         guard let movie = movieInformation else { return }
         DispatchQueue.main.async {
             let directorLabel = MovieInformaionView(category: "감독", content: self.unwrap(array: movie.directors))
             let productLabel = MovieInformaionView(category: "제작년도", content: movie.productYear)
-            let openDateLabel = MovieInformaionView(category: "개봉일", content: movie.openDate)
+            let openDateLabel = MovieInformaionView(category: "개봉일", content: DateFormatter().movieDateFormatter(date: movie.openDate))
             let showTimeLabel = MovieInformaionView(category: "상영시간", content: movie.showTime)
+            let watchGradeName = MovieInformaionView(category: "관람등급", content: movie.audits)
             let nationLabel = MovieInformaionView(category: "제작국가", content: self.unwrap(array: movie.nations))
             let genreLabel = MovieInformaionView(category: "장르", content: self.unwrap(array: movie.genres))
             let actorLabel = MovieInformaionView(category: "배우", content: self.unwrap(array: movie.actors))
+            
             self.movieStackView.addArrangedSubview(directorLabel)
             self.movieStackView.addArrangedSubview(productLabel)
             self.movieStackView.addArrangedSubview(openDateLabel)
             self.movieStackView.addArrangedSubview(showTimeLabel)
+            self.movieStackView.addArrangedSubview(watchGradeName)
             self.movieStackView.addArrangedSubview(nationLabel)
             self.movieStackView.addArrangedSubview(genreLabel)
             self.movieStackView.addArrangedSubview(actorLabel)
-
         }
-
     }
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,11 +97,9 @@ class MovieDetailViewController: UIViewController {
 
         Networking().loadData(from: movieDetailEndPoint) { movieInformation, error in
             if let movieInformation = movieInformation {
-                print(movieInformation)
                 self.movieInformation = movieInformation as? MovieInformation
             }
         }
-
     }
 
     func unwrap(array: [String]) -> String {

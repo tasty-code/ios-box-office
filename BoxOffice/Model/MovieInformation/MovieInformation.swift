@@ -20,4 +20,5 @@ struct MovieInformation: MovieDatable {
     let nations: [Nation]
     let genres: [Genre]
     let actors: [Actor]
+    let audits: String
 }

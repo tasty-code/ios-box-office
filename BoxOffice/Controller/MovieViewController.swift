@@ -120,7 +120,7 @@ extension MovieViewController: UICollectionViewDataSource {
     }
 }
 
-private extension DateFormatter {
+extension DateFormatter {
     func movieDateFormatter(date: String) -> String {
         self.dateFormat = "yyyyMMdd"
         guard let convertDate = self.date(from: date) else {
