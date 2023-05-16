@@ -12,7 +12,7 @@ final class PresentationProvider: PresentationProvidable {
     private let boxOfficeDispatcher = BoxOfficeDispatcher()
     private var boxOffices: [BoxOfficeItem] = []
     
-    weak var delegate: PresentationDelegate?
+    var boxOfficeCall: (() -> Void)?
     
     private var date: String {
         didSet {
@@ -25,7 +25,6 @@ final class PresentationProvider: PresentationProvidable {
         self.loadBoxOffices(date: date)
     }
     
-    
     func loadBoxOffices(date: String) {
         
         let endpoint = DailyBoxOfficeEndpoint(date: date)
@@ -35,16 +34,11 @@ final class PresentationProvider: PresentationProvidable {
             let boxoffices = try await boxOfficeDispatcher.convert(from: networkData)
             self.boxOffices = boxoffices
             
-            // 추후 삭제 -> notification center 변경
-            delegate?.call()
+            boxOfficeCall?()
         }
     }
     
     func getBoxOffices() -> [BoxOfficeItem] {
         return self.boxOffices
     }
-}
-
-protocol PresentationDelegate: AnyObject {
-    func call()
 }
