@@ -7,25 +7,25 @@
 
 import UIKit
 
+fileprivate enum Section {
+    
+    case main
+    
+}
+
 final class BoxOfficeViewController: UIViewController {
     
-    enum Section {
-        case main
-    }
-    
     // MARK: - Private
+    
     private let networkService = NetworkService()   
     private var dailyBoxOffice: DailyBoxOfficeDTO? {
         didSet {
-            DispatchQueue.main.async {
-                self.loadLabel.removeFromSuperview()
-            }
+            removeLoadLabel()
         }
     }
     private var movieDetail: MovieDetailDTO?
-    
-    private var movieCollectionView: UICollectionView! = nil
-    private var movieDataSource: UICollectionViewDiffableDataSource<Section, MovieDTO>! = nil
+    private var movieCollectionView: UICollectionView!
+    private var movieDataSource: UICollectionViewDiffableDataSource<Section, MovieDTO>!
     
     private let loadLabel: UILabel = {
         let label = UILabel()
@@ -35,6 +35,7 @@ final class BoxOfficeViewController: UIViewController {
     }()
     
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -42,6 +43,13 @@ final class BoxOfficeViewController: UIViewController {
     }
     
     // MARK: - Private function
+    
+    private func removeLoadLabel() {
+        DispatchQueue.main.async {
+            self.loadLabel.removeFromSuperview()
+        }
+    }
+    
     private func setup() {
         updateNavigationTitle()
         configureMovieCollectionView()
@@ -65,7 +73,7 @@ final class BoxOfficeViewController: UIViewController {
             config.separatorConfiguration.topSeparatorInsets = .init(top: 0, leading: -100, bottom: 0, trailing: -100)
         }
         let layout = UICollectionViewCompositionalLayout.list(using: config)
-        let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: view.safeAreaLayoutGuide.layoutFrame, collectionViewLayout: layout)
         movieCollectionView = collectionView
     }
     
@@ -123,7 +131,7 @@ final class BoxOfficeViewController: UIViewController {
         }
     }
     
-    private func updateData<T: APIRepresentable, E: EndPointProtocol>(from api: E, completion: @escaping (T?) -> Void) where E.DTO == T {
+    private func updateData<E: EndPointProtocol>(from api: E, completion: @escaping (E.DTO?) -> Void)  {
         networkService.fetchData(endPoint: api) { result in
             switch result {
             case .success(let data):
