@@ -22,6 +22,12 @@ extension BoxOfficeAPIEndpoint {
         static let movieDetailURLPath = "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
     }
 
+    private enum QueryConstant {
+        static let apiKeyQueryName = "key"
+        static let apiKeyQueryValue = "6c4b02fc76306e47a3ada0534d4cc519"
+        static let movieCodeQueryName = "movieCd"
+        static let targetDateQueryName = "targetDt"
+    }
 
     var endPoint: EndPoint {
         switch self {
@@ -40,13 +46,6 @@ extension BoxOfficeAPIEndpoint {
         }
     }
     
-    private enum QueryConstant {
-        static let apiKeyQueryName = "key"
-        static let apiKeyQueryValue = "6c4b02fc76306e47a3ada0534d4cc519"
-        static let movieCodeQueryName = "movieCd"
-        static let targetDateQueryName = "targetDt"
-    }
-    
     func makeQueryItems() -> [URLQueryItem] {
         let apiKeyQueryItem = URLQueryItem(
             name: QueryConstant.apiKeyQueryName,
@@ -57,13 +56,13 @@ extension BoxOfficeAPIEndpoint {
         case .boxOffice(let date):
             let dateQueryItem = URLQueryItem(
                 name: QueryConstant.targetDateQueryName,
-                value: "\(date)"
+                value: date
             )
             return [apiKeyQueryItem, dateQueryItem]
         case .movieDetail(let code):
             let movieCodeQueryItem = URLQueryItem(
                 name: QueryConstant.movieCodeQueryName,
-                value: "\(code)"
+                value: code
             )
             return [apiKeyQueryItem, movieCodeQueryItem]
         }

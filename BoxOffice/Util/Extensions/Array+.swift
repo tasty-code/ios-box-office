@@ -28,7 +28,7 @@ extension Array<String> {
             description = description + ", " + element
         }
 
-        guard description != "" else { return "-" }
+        guard description != "" else { return Constant.noneText }
 
         return description
     }

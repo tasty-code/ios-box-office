@@ -9,6 +9,30 @@ import UIKit
 
 class MovieDetailView: UIView {
 
+    private enum MovieDetailViewConstant {
+        static let directorLabelText = "감독"
+        static let yearsOfProductionLabelText = "제작년도"
+        static let openDateLabelText = "개봉일"
+        static let runningTimeLabelText = "상영시간"
+        static let movieRatingLabelText = "관람등급"
+        static let nationLabelText = "제작국가"
+        static let genreLabelText = "장르"
+        static let actorsLabelText = "배우"
+
+        static let minuteText = "분"
+
+
+        static let movieImageLeadingAndTrailingInset = 20.0
+        static let movieImageHeightMulitplierRatio = 1.3
+
+        static let movieDetailVerticalStackViewSpacing = 2.0
+        static let movieDetailVerticalStackViewTopAnchorInset = 10.0
+        static let movieDetailVerticalStackViewBottomAnchorInset = 10.0
+        static let movieDetailVerticalStackViewLeadingAndTrailingInset = 10.0
+
+        static let keyLabelWidthMultiplierRatio = 0.3
+    }
+
     private let movieDetailScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -28,19 +52,19 @@ class MovieDetailView: UIView {
     private let movieImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "hourglass")
+        imageView.image = UIImage(systemName: Constant.noneImageCallName )
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
 
-    private let directorKeyLabel = MovieDetailKeyLabel(text: "감독")
-    private let yearOfProductionKeyLabel = MovieDetailKeyLabel(text: "제작년도")
-    private let openDateKeyLabel = MovieDetailKeyLabel(text: "개봉일")
-    private let runningTimeKeyLabel = MovieDetailKeyLabel(text: "상영시간")
-    private let movieRatingKeyLabel = MovieDetailKeyLabel(text: "관람등급")
-    private let nationKeyLabel = MovieDetailKeyLabel(text: "제작국가")
-    private let genreKeyLabel = MovieDetailKeyLabel(text: "장르")
-    private let actorsKeyLabel = MovieDetailKeyLabel(text: "배우")
+    private let directorKeyLabel = MovieDetailKeyLabel(text: MovieDetailViewConstant.directorLabelText)
+    private let yearOfProductionKeyLabel = MovieDetailKeyLabel(text: MovieDetailViewConstant.yearsOfProductionLabelText)
+    private let openDateKeyLabel = MovieDetailKeyLabel(text: MovieDetailViewConstant.openDateLabelText)
+    private let runningTimeKeyLabel = MovieDetailKeyLabel(text: MovieDetailViewConstant.runningTimeLabelText)
+    private let movieRatingKeyLabel = MovieDetailKeyLabel(text: MovieDetailViewConstant.movieRatingLabelText)
+    private let nationKeyLabel = MovieDetailKeyLabel(text: MovieDetailViewConstant.nationLabelText)
+    private let genreKeyLabel = MovieDetailKeyLabel(text: MovieDetailViewConstant.genreLabelText)
+    private let actorsKeyLabel = MovieDetailKeyLabel(text: MovieDetailViewConstant.actorsLabelText)
 
     private let directorValueLabel = MovieDetailValueLabel()
     private let yearOfProductionValueLabel = MovieDetailValueLabel()
@@ -88,7 +112,7 @@ class MovieDetailView: UIView {
                                actorsInfoStackView]
         )
         stackView.alignment = .fill
-        stackView.spacing = 2
+        stackView.spacing = MovieDetailViewConstant.movieDetailVerticalStackViewSpacing
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -114,9 +138,9 @@ class MovieDetailView: UIView {
         directorValueLabel.text = movie.director.description
         yearOfProductionValueLabel.text = movie.yearOfProduction
         openDateValueLabel.text = movie.openDate.yearMonthDaySplitDash
-        runningTimeValueLabel.text = "\(movie.runningTime)분"
-        movieRatingValueLabel.text = movie.movieRating ?? "-"
-        nationValueLabel.text = movie.nation ?? "-"
+        runningTimeValueLabel.text = movie.runningTime + MovieDetailViewConstant.minuteText
+        movieRatingValueLabel.text = movie.movieRating ?? Constant.noneText
+        nationValueLabel.text = movie.nation ?? Constant.noneText
         genreValueLabel.text = movie.genres.description
         actorsValueLabel.text = movie.actors.description
     }
@@ -158,24 +182,24 @@ class MovieDetailView: UIView {
     private func configureMovieImageViewLayoutConstraint() {
         NSLayoutConstraint.activate([
             movieImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            movieImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            movieImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            movieImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1.3),
+            movieImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: MovieDetailViewConstant.movieImageLeadingAndTrailingInset),
+            movieImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -MovieDetailViewConstant.movieImageLeadingAndTrailingInset),
+            movieImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: MovieDetailViewConstant.movieImageHeightMulitplierRatio),
         ])
     }
 
     private func configureMovieDetailVerticalStackViewLayoutConstraint() {
         NSLayoutConstraint.activate([
-            movieDetailVerticalStackView.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 10),
-            movieDetailVerticalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            movieDetailVerticalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            movieDetailVerticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 10)
+            movieDetailVerticalStackView.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: MovieDetailViewConstant.movieDetailVerticalStackViewTopAnchorInset),
+            movieDetailVerticalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: MovieDetailViewConstant.movieDetailVerticalStackViewLeadingAndTrailingInset),
+            movieDetailVerticalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -MovieDetailViewConstant.movieDetailVerticalStackViewLeadingAndTrailingInset),
+            movieDetailVerticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: MovieDetailViewConstant.movieDetailVerticalStackViewBottomAnchorInset)
         ])
     }
 
     private func configureKeyLabelayoutContraint() {
         [directorKeyLabel, yearOfProductionKeyLabel, openDateKeyLabel, runningTimeKeyLabel, movieRatingKeyLabel, nationKeyLabel, genreKeyLabel, actorsKeyLabel].forEach { label in
-            label.widthAnchor.constraint(equalTo: movieDetailVerticalStackView.widthAnchor, multiplier: 0.3).isActive = true
+            label.widthAnchor.constraint(equalTo: movieDetailVerticalStackView.widthAnchor, multiplier: MovieDetailViewConstant.keyLabelWidthMultiplierRatio).isActive = true
         }
     }
 

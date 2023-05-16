@@ -43,6 +43,7 @@
 		F134B13E29FF58B3005C5800 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C5438B29F7A5890056F1BD /* EndPoint.swift */; };
 		F134B13F29FF58B6005C5800 /* BoxOfficeAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF2FE529F7A73C001B5BCF /* BoxOfficeAPIEndpoint.swift */; };
 		F1809B712A13414700113153 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1809B702A13414700113153 /* Array+.swift */; };
+		F1809B732A13758800113153 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1809B722A13758800113153 /* Constant.swift */; };
 		F1C7C1A129F6394E0060B95A /* BoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C7C1A029F6394E0060B95A /* BoxOffice.swift */; };
 		F1FF2FC829F65782001B5BCF /* JSONDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FF2FC729F65782001B5BCF /* JSONDeserializer.swift */; };
 		F1FF2FD929F658C4001B5BCF /* BoxOfficeMock.json in Resources */ = {isa = PBXBuildFile; fileRef = 8739F26229F655D40000BA9E /* BoxOfficeMock.json */; };
@@ -98,6 +99,7 @@
 		F134B12D29FF5834005C5800 /* BoxOfficeNetworkTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeNetworkTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F134B12F29FF5834005C5800 /* BoxOfficeNetworkTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeNetworkTest.swift; sourceTree = "<group>"; };
 		F1809B702A13414700113153 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
+		F1809B722A13758800113153 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		F1C7C1A029F6394E0060B95A /* BoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOffice.swift; sourceTree = "<group>"; };
 		F1FF2FC729F65782001B5BCF /* JSONDeserializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDeserializer.swift; sourceTree = "<group>"; };
 		F1FF2FCF29F658A4001B5BCF /* BoxOfficeDeserializerTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeDeserializerTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -244,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				872B0F4C29FA518500EF91D0 /* Extensions */,
+				F1809B722A13758800113153 /* Constant.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -470,6 +473,7 @@
 				87F1013129FA386C002CD11A /* NetworkError.swift in Sources */,
 				F121530C2A1316B9002B9224 /* SearchImageAPIEndPoint.swift in Sources */,
 				873B96DA2A09D51100C19C81 /* DateFormatter+.swift in Sources */,
+				F1809B732A13758800113153 /* Constant.swift in Sources */,
 				877FE76D2A1342F800F2B36E /* SearchedImage.swift in Sources */,
 				874C11792A131EF9000499FF /* MovieDetailViewController.swift in Sources */,
 				87C5438C29F7A5890056F1BD /* EndPoint.swift in Sources */,

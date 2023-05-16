@@ -28,12 +28,14 @@ extension SearchImageAPIEndPoint {
         static let authorizationHeaderName = "Authorization"
         static let authorizationHeaderValue = "KakaoAK e37dbfb127b8ed041816c0ddd0c96a4a"
         static let searchQueryName = "query"
+
+        static let moviePosterSearchQueryValueSuffix = " 영화 포스터"
     }
 
     var searchQueryValue: String {
         switch self {
         case .moviePoster(let name):
-            return "\(name) 영화 포스터"
+            return name + QueryConstant.moviePosterSearchQueryValueSuffix
         }
     }
 

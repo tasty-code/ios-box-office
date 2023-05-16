@@ -9,6 +9,12 @@ import UIKit
 
 class MovieDetailHorizontalStackView: UIStackView {
 
+    private enum MovieDetailHorizontalStackViewConstant {
+        static let topBottomlayoutMargins = 5.0
+        static let rightLeftlayoutMargins = 3.0
+        static let borderWidth = 1.0
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -24,12 +30,17 @@ class MovieDetailHorizontalStackView: UIStackView {
     }
 
     private func configureUI() {
-        self.layoutMargins = .init(top: 5.0, left: 3, bottom: 5.0, right: 3)
+        self.layoutMargins = .init(
+            top: MovieDetailHorizontalStackViewConstant.topBottomlayoutMargins,
+            left: MovieDetailHorizontalStackViewConstant.rightLeftlayoutMargins,
+            bottom: MovieDetailHorizontalStackViewConstant.topBottomlayoutMargins,
+            right: MovieDetailHorizontalStackViewConstant.rightLeftlayoutMargins
+        )
         self.isLayoutMarginsRelativeArrangement = true
         self.alignment = .fill
         self.axis = .horizontal
         self.layer.borderColor = UIColor.gray.cgColor
-        self.layer.borderWidth = 1
+        self.layer.borderWidth = MovieDetailHorizontalStackViewConstant.borderWidth
     }
 
 }

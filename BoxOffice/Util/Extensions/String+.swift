@@ -9,6 +9,10 @@ import Foundation
 
 extension String {
 
+    private enum StringConstant {
+        static let hyphen = "-"
+    }
+
     func without(_ characterSet: String) -> String {
         let charSet = CharacterSet(charactersIn: characterSet)
         let trimmedString = self.components(separatedBy: charSet).joined()
@@ -20,8 +24,8 @@ extension String {
         guard self.count == 8 else { return self }
 
         var strings = Array(self)
-        strings.insert("-", at: 4)
-        strings.insert("-", at: 7)
+        strings.insert(contentsOf: StringConstant.hyphen, at: 4)
+        strings.insert(contentsOf: StringConstant.hyphen, at: 7)
 
         return String(strings)
     }

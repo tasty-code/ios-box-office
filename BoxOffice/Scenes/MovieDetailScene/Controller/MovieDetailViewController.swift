@@ -100,8 +100,8 @@ class MovieDetailViewController: UIViewController {
         let openDate = movieInformation.openDate
         let yearOfProduction = movieInformation.yearOfProduction
         let runningTime = movieInformation.runningTime
-        let movieRating = movieInformation.audits[safe: 0]?.movieRating
-        let nation = movieInformation.nations[safe: 0]?.name
+        let movieRating = movieInformation.audits[safe: .zero]?.movieRating
+        let nation = movieInformation.nations[safe: .zero]?.name
         let genres = movieInformation.genres.map { $0.name }
         let actors = movieInformation.actors.map { $0.name }
 

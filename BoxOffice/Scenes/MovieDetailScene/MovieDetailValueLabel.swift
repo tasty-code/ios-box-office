@@ -19,9 +19,9 @@ final class MovieDetailValueLabel: UILabel {
     }
 
     private func configureUI() {
-        self.text = "-"
+        self.text = Constant.noneText
         self.textAlignment = .left
-        self.numberOfLines = 0
+        self.numberOfLines = .zero
     }
 
 }

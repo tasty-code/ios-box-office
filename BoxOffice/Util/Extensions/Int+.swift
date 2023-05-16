@@ -13,7 +13,7 @@ extension Int {
         guard let decimalizedString = Formatter.decimalStyleNumber.string(
             from: self as NSNumber)
         else {
-            return ""
+            return String()
         }
         
         return decimalizedString
