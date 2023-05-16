@@ -770,7 +770,6 @@
 		};
 		63DF21002970E1A1005DF7D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B3F1BD42A1316340062BE99 /* BoxOffice+APIKEY.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -799,7 +798,6 @@
 		};
 		63DF21012970E1A1005DF7D1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B3F1BD42A1316340062BE99 /* BoxOffice+APIKEY.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
