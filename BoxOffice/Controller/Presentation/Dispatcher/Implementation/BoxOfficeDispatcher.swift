@@ -12,7 +12,7 @@ struct BoxOfficeDispatcher: PresentationDispatchable {
     typealias ViewModel = BoxOfficeItem
     typealias Endpoint = DailyBoxOfficeEndpoint
     
-    func convert(from networkData: BoxOfficeDTO) async throws -> [BoxOfficeItem] {
+    func convert(from networkData: BoxOfficeDTO) throws -> [BoxOfficeItem] {
         
         let data = networkData.result.dailyBoxOffices
         var boxOffices = [ViewModel]()
