@@ -18,3 +18,12 @@ struct DailyBoxOfficeResultDTO: Decodable {
         case dailyBoxOfficeList
     }
 }
+
+extension DailyBoxOfficeResultDTO {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        boxOfficeType = try container.decode(String.self, forKey: .boxOfficeType)
+        showRange = try container.decode(String.self, forKey: .showRange)
+        dailyBoxOfficeList = try container.decode([DailyBoxOfficeDTO].self, forKey: .dailyBoxOfficeList)
+    }
+}
