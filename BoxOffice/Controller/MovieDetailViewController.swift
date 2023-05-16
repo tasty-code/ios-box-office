@@ -20,8 +20,9 @@ class MovieDetailViewController: UIViewController {
 
     private var contentView: UIStackView = {
         let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.spacing = 10
         return stackView
     }()
 
@@ -98,7 +99,7 @@ class MovieDetailViewController: UIViewController {
         Networking().loadData(from: movieDetailEndPoint) { movieInformation, error in
             if let movieInformation = movieInformation {
                 print(movieInformation)
-                self.movieInformation = movieInformation as! MovieInformation
+                self.movieInformation = movieInformation as? MovieInformation
             }
         }
 
@@ -120,19 +121,16 @@ class MovieDetailViewController: UIViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
             contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
             movieImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            movieImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 10),
-            movieImageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -10),
-            movieImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1.3 / 1),
+            movieImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            movieImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            movieImageView.heightAnchor.constraint(equalTo: movieImageView.widthAnchor, multiplier: 1.3 / 1),
 
             movieStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             movieStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant:  -5),
-            movieStackView.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 5),
         ])
     }
 }
