@@ -79,10 +79,10 @@
 		5B10173229F66C2F00AE55F3 /* MockMovieJSONDecodingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMovieJSONDecodingTest.swift; sourceTree = "<group>"; };
 		5B10174429F90D2600AE55F3 /* APIEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndPoint.swift; sourceTree = "<group>"; };
 		5B3F1BA12A08BB930062BE99 /* DailyBoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOffice.swift; sourceTree = "<group>"; };
-		5B3F1BC52A0C79F70062BE99 /* BoxOffice+APIKEY.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BoxOffice+APIKEY.xcconfig"; sourceTree = "<group>"; };
 		5B3F1BC82A0DF9A10062BE99 /* BoxOfficeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeViewModel.swift; sourceTree = "<group>"; };
 		5B3F1BCC2A0F5B250062BE99 /* Selector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selector.swift; sourceTree = "<group>"; };
 		5B3F1BCE2A0F6B150062BE99 /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
+		5B3F1BD42A1316340062BE99 /* BoxOffice+APIKEY.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BoxOffice+APIKEY.xcconfig"; sourceTree = "<group>"; };
 		5B6ADFAC29FA9A09001A1394 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		5B6ADFAE29FB6BAD001A1394 /* HTTPErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPErrorType.swift; sourceTree = "<group>"; };
 		5BA4711129F91DB600B8427C /* Basic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basic.swift; sourceTree = "<group>"; };
@@ -221,7 +221,7 @@
 			children = (
 				63DF20F72970E1A1005DF7D1 /* Assets.xcassets */,
 				63DF20FC2970E1A1005DF7D1 /* Info.plist */,
-				5B3F1BC52A0C79F70062BE99 /* BoxOffice+APIKEY.xcconfig */,
+				5B3F1BD42A1316340062BE99 /* BoxOffice+APIKEY.xcconfig */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -770,7 +770,6 @@
 		};
 		63DF21002970E1A1005DF7D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B3F1BC52A0C79F70062BE99 /* BoxOffice+APIKEY.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -799,7 +798,6 @@
 		};
 		63DF21012970E1A1005DF7D1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B3F1BC52A0C79F70062BE99 /* BoxOffice+APIKEY.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
