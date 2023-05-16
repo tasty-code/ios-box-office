@@ -165,6 +165,7 @@ extension DailyBoxOfficeViewController: UICollectionViewDelegate {
             BoxOfficeAPIManager: boxOfficeManager
         )
         movieDetailViewController.navigationItem.title = movie.movieName
+        dailyBoxOfficeCollectionView.deselectItem(at: indexPath, animated: true)
         self.navigationController?.pushViewController(movieDetailViewController, animated: true)
     }
 

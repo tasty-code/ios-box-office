@@ -63,7 +63,7 @@ class MovieDetailViewController: UIViewController {
             )
             guard let movie = decodedMovieData as? MovieDetail else { return }
             let movieDetailModel = convertToMovieDetailModel(from: movie)
-            print(movieDetailModel)
+            movieDetailView.configure(with: movieDetailModel)
         }
     }
 
@@ -84,8 +84,7 @@ class MovieDetailViewController: UIViewController {
 
             switch imageResult {
             case .success(let data):
-                print(data)
-                return
+                movieDetailView.configureImage(with: data)
             case .failure(let error):
                 print(error.errorDescription)
             }

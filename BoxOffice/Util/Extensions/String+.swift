@@ -16,4 +16,14 @@ extension String {
         return trimmedString
     }
 
+    var yearMonthDaySplitDash: String {
+        guard self.count == 8 else { return self }
+
+        var strings = Array(self)
+        strings.insert("-", at: 4)
+        strings.insert("-", at: 7)
+
+        return String(strings)
+    }
+
 }

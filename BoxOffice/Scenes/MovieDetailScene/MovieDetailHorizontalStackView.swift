@@ -24,7 +24,7 @@ class MovieDetailHorizontalStackView: UIStackView {
     }
 
     private func configureUI() {
-        self.layoutMargins = .init(top: 8.0, left: 0, bottom: 8.0, right: 0)
+        self.layoutMargins = .init(top: 5.0, left: 3, bottom: 5.0, right: 3)
         self.isLayoutMarginsRelativeArrangement = true
         self.alignment = .fill
         self.axis = .horizontal

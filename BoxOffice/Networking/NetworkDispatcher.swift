@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct NetworkDispatcher {
 
     typealias NetworkResult = Result<Data, NetworkError>

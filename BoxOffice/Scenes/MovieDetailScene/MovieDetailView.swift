@@ -29,7 +29,7 @@ class MovieDetailView: UIView {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(systemName: "hourglass")
-
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
 
@@ -96,47 +96,87 @@ class MovieDetailView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         configureHierachy()
-        configuratLayoutConstraints()
+        configureLayoutConstraints()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func configureImage(with imageData: Data) {
+        DispatchQueue.main.async {
+            self.movieImageView.image = UIImage(data: imageData)
+        }
+    }
+
+    func configure(with movie: MovieDetailViewController.MovieDetailModel) {
+        directorValueLabel.text = movie.director.description
+        yearOfProductionValueLabel.text = movie.yearOfProduction
+        openDateValueLabel.text = movie.openDate.yearMonthDaySplitDash
+        runningTimeValueLabel.text = "\(movie.runningTime)분"
+        movieRatingValueLabel.text = movie.movieRating ?? "-"
+        nationValueLabel.text = movie.nation ?? "-"
+        genreValueLabel.text = movie.genres.description
+        actorsValueLabel.text = movie.actors.description
+    }
+
     private func configureHierachy() {
         addSubview(movieDetailScrollView)
         movieDetailScrollView.addSubview(contentView)
-
         contentView.addSubview(movieImageView)
         contentView.addSubview(movieDetailVerticalStackView)
     }
 
-    private func configuratLayoutConstraints() {
+    private func configureLayoutConstraints() {
+        configureScrollViewLayoutConstraint()
+        configureContentViewLayoutConstraint()
+        configureMovieImageViewLayoutConstraint()
+        configureMovieDetailVerticalStackViewLayoutConstraint()
+        configureKeyLabelayoutContraint()
+    }
+
+    private func configureScrollViewLayoutConstraint() {
         NSLayoutConstraint.activate([
             movieDetailScrollView.topAnchor.constraint(equalTo: topAnchor),
             movieDetailScrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             movieDetailScrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            movieDetailScrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            movieDetailScrollView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
 
+    private func configureContentViewLayoutConstraint() {
+        NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: movieDetailScrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: movieDetailScrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: movieDetailScrollView.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: movieDetailScrollView.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: movieDetailScrollView.widthAnchor),
-
-            movieImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            movieImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            movieImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            movieImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1.1),
-
-            movieDetailVerticalStackView.topAnchor.constraint(equalTo: movieImageView.bottomAnchor),
-            movieDetailVerticalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            movieDetailVerticalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            movieDetailVerticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-
+            contentView.widthAnchor.constraint(equalTo: movieDetailScrollView.widthAnchor)
         ])
+    }
+
+    private func configureMovieImageViewLayoutConstraint() {
+        NSLayoutConstraint.activate([
+            movieImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            movieImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            movieImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            movieImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1.3),
+        ])
+    }
+
+    private func configureMovieDetailVerticalStackViewLayoutConstraint() {
+        NSLayoutConstraint.activate([
+            movieDetailVerticalStackView.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 10),
+            movieDetailVerticalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            movieDetailVerticalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            movieDetailVerticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 10)
+        ])
+    }
+
+    private func configureKeyLabelayoutContraint() {
+        [directorKeyLabel, yearOfProductionKeyLabel, openDateKeyLabel, runningTimeKeyLabel, movieRatingKeyLabel, nationKeyLabel, genreKeyLabel, actorsKeyLabel].forEach { label in
+            label.widthAnchor.constraint(equalTo: movieDetailVerticalStackView.widthAnchor, multiplier: 0.3).isActive = true
+        }
     }
 
 }

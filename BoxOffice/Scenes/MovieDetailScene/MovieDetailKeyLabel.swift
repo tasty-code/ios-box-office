@@ -20,11 +20,12 @@ final class MovieDetailKeyLabel: UILabel {
     convenience init(text: String) {
         self.init(frame: CGRect())
         self.text = text
+        self.translatesAutoresizingMaskIntoConstraints = false
         configureUI()
     }
 
     private func configureUI() {
-        self.font = UIFont.boldSystemFont(ofSize: 15)
+        self.font = UIFont.boldSystemFont(ofSize: 18)
         self.textAlignment = .center
     }
 
