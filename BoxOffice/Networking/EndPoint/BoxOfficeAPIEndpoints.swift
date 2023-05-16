@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BoxOfficeAPIEndpoints {
+enum BoxOfficeAPIEndpoints: APIEndpoint {
 
     case boxOffice(targetDate: String)
     case movieDetail(movieCode: String)
@@ -16,33 +16,28 @@ enum BoxOfficeAPIEndpoints {
 
 extension BoxOfficeAPIEndpoints {
 
-    private var endPoint: EndPoint {
+    private enum URLConstants {
+        static let baseURL = "https://www.kobis.or.kr"
+        static let boxOfficeURLPath = "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
+        static let movieDetailURLPath = "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
+    }
+
+
+    var endPoint: EndPoint {
         switch self {
         case .boxOffice:
             return EndPoint(
-                baseURL: "https://www.kobis.or.kr",
-                path: "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json",
+                baseURL: URLConstants.baseURL,
+                path: URLConstants.boxOfficeURLPath,
                 queryItems: makeQueryItems()
             )
         case .movieDetail:
             return EndPoint(
-                baseURL: "https://www.kobis.or.kr",
-                path: "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json",
+                baseURL: URLConstants.baseURL,
+                path: URLConstants.movieDetailURLPath,
                 queryItems: makeQueryItems()
             )
         }
-    }
-
-    var urlRequest: URLRequest? {
-        var urlCompoenets = URLComponents(string: endPoint.baseURL)
-
-        urlCompoenets?.path = endPoint.path
-        urlCompoenets?.queryItems = endPoint.queryItems
-
-        guard let url = urlCompoenets?.url else { return nil }
-        let urlRequest = URLRequest(url: url)
-
-        return urlRequest
     }
     
     private enum QueryConstant {
@@ -52,7 +47,7 @@ extension BoxOfficeAPIEndpoints {
         static let targetDateQueryName = "targetDt"
     }
     
-    private func makeQueryItems() -> [URLQueryItem] {
+    func makeQueryItems() -> [URLQueryItem] {
         let apiKeyQueryItem = URLQueryItem(
             name: QueryConstant.apiKeyQueryName,
             value: QueryConstant.apiKeyQueryValue
