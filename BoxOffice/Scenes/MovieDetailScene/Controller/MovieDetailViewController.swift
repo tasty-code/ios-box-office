@@ -22,8 +22,8 @@ class MovieDetailViewController: UIViewController {
     }
 
     var movie: DailyBoxOffice?
-    var networkAPIManager: NetworkAPIManager
-    var networkDispatcher: NetworkDispatcher
+    let networkAPIManager: NetworkAPIManager
+    let networkDispatcher: NetworkDispatcher
 
     lazy var movieDetailView: MovieDetailView = {
         let view = MovieDetailView(frame: view.frame)
@@ -44,13 +44,13 @@ class MovieDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.addSubview(movieDetailView)
         fetchBoxOfficeDetailData()
     }
 
     private func fetchBoxOfficeDetailData() {
         fetchMovieInformation()
+        fetchMoviePosterImage()
     }
 
     private func fetchMovieInformation() {
@@ -60,9 +60,36 @@ class MovieDetailViewController: UIViewController {
         Task {
             let decodedMovieData = try await networkAPIManager.fetchData(
                 to: MovieDetail.self,
-                endPoint: movieDetailEndPoint)
+                endPoint: movieDetailEndPoint
+            )
             guard let movie = decodedMovieData as? MovieDetail else { return }
             let movieDetailModel = convertToMovieDetailModel(from: movie)
+            print(movieDetailModel)
+        }
+    }
+
+    private func fetchMoviePosterImage() {
+        guard let movieName = movie?.movieName else { return }
+        let imageURLEndPoint = SearchImageAPIEndPoint.moviePoster(name: movieName)
+
+        Task {
+            let decodedImageURLData = try await networkAPIManager.fetchData(
+                to: SearchedImage.self,
+                endPoint: imageURLEndPoint
+            )
+            guard let imageURLModel = decodedImageURLData as? SearchedImage else { return }
+            guard let imageURLString = imageURLModel.imageURL else { return }
+            guard let imageURL = URL(string: imageURLString) else { return }
+            let imageURLRequest = URLRequest(url: imageURL)
+            let imageResult = try await networkDispatcher.performRequest(imageURLRequest)
+
+            switch imageResult {
+            case .success(let data):
+                print(data)
+                return
+            case .failure(let error):
+                print(error.errorDescription)
+            }
         }
     }
 
