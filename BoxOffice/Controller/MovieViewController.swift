@@ -61,16 +61,16 @@ class MovieViewController: UIViewController {
             let urlRequest = URLRequest(url: url)
 
             Networking().loadData(api.convertType, request: urlRequest) { [weak self] data, error in
-                guard error == nil else {
-                    print(error as Any)
-                    return
+                if let error = error {
+                    print(error)
                 }
 
-                guard let data = data else {
+                if let data = data {
+                    self?.movieArrays = (data as! DailyBoxOffice).movies
+                } else {
                     print("빈 데이터입니다")
-                    return
                 }
-                self?.movieArrays = (data as! DailyBoxOffice).movies
+
                 DispatchQueue.main.async {
                     self?.loadingIndicatorView.stopAnimating()
                     self?.collectionView.reloadData()
@@ -78,6 +78,7 @@ class MovieViewController: UIViewController {
             }
         } catch {
             print(error)
+            loadingIndicatorView.stopAnimating()
         }
     }
 }
