@@ -1,0 +1,96 @@
+//
+//  MovieDetailViewController.swift
+//  BoxOffice
+//
+//  Created by 김용재 on 2023/05/16.
+//
+
+import UIKit
+
+class MovieDetailViewController: UIViewController {
+
+    struct MovieDetailModel {
+        let imageSearchName: String
+        let director: [String]
+        let yearOfProduction: String
+        let openDate: String
+        let runningTime: String
+        let movieRating: String?
+        let nation: String?
+        let genres: [String]
+        let actors: [String]
+    }
+
+    var movie: DailyBoxOffice?
+    var networkAPIManager: NetworkAPIManager
+    var networkDispatcher: NetworkDispatcher
+
+    lazy var movieDetailView: MovieDetailView = {
+        let view = MovieDetailView(frame: view.frame)
+
+        return view
+    }()
+
+    init(movie: DailyBoxOffice, BoxOfficeAPIManager: NetworkAPIManager) {
+        self.movie = movie
+        self.networkAPIManager = BoxOfficeAPIManager
+        self.networkDispatcher = BoxOfficeAPIManager.networkDispatcher
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view.addSubview(movieDetailView)
+        fetchBoxOfficeDetailData()
+    }
+
+    private func fetchBoxOfficeDetailData() {
+        fetchMovieInformation()
+    }
+
+    private func fetchMovieInformation() {
+        guard let movieCode = movie?.movieCode else { return }
+        let movieDetailEndPoint = BoxOfficeAPIEndpoint.movieDetail(movieCode: movieCode)
+
+        Task {
+            let decodedMovieData = try await networkAPIManager.fetchData(
+                to: MovieDetail.self,
+                endPoint: movieDetailEndPoint)
+            guard let movie = decodedMovieData as? MovieDetail else { return }
+            let movieDetailModel = convertToMovieDetailModel(from: movie)
+        }
+    }
+
+    private func convertToMovieDetailModel(from movie: MovieDetail) -> MovieDetailModel {
+        let movieInformation = movie.movieInformationResult.movieInformation
+
+        let movieName = movieInformation.name
+        let imageSearchName = "\(movieName) 영화 포스터"
+        let director = movieInformation.directors.map { $0.name }
+        let openDate = movieInformation.openDate
+        let yearOfProduction = movieInformation.yearOfProduction
+        let runningTime = movieInformation.runningTime
+        let movieRating = movieInformation.audits[safe: 0]?.movieRating
+        let nation = movieInformation.nations[safe: 0]?.name
+        let genres = movieInformation.genres.map { $0.name }
+        let actors = movieInformation.actors.map { $0.name }
+
+        return MovieDetailModel(
+            imageSearchName: imageSearchName,
+            director: director,
+            yearOfProduction: yearOfProduction,
+            openDate: openDate,
+            runningTime: runningTime,
+            movieRating: movieRating,
+            nation: nation,
+            genres: genres,
+            actors: actors)
+    }
+    
+
+}

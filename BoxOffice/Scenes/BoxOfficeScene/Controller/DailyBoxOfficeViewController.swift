@@ -95,7 +95,7 @@ final class DailyBoxOfficeViewController: UIViewController {
     private func fetchBoxOfficeData() {
         let yesterDay = Date.yesterDayDateConvertToString()
         let yesterdayDashExcepted = yesterDay.without("-")
-        let boxOfficeEndPoint = BoxOfficeAPIEndpoints.boxOffice(targetDate: yesterdayDashExcepted)
+        let boxOfficeEndPoint = BoxOfficeAPIEndpoint.boxOffice(targetDate: yesterdayDashExcepted)
 
         Task{
             guard let decodedData = try await boxOfficeManager.fetchData(

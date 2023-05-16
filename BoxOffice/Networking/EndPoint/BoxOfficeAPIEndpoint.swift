@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum BoxOfficeAPIEndpoints: APIEndpoint {
+enum BoxOfficeAPIEndpoint: APIEndpoint {
 
     case boxOffice(targetDate: String)
     case movieDetail(movieCode: String)
 
 }
 
-extension BoxOfficeAPIEndpoints {
+extension BoxOfficeAPIEndpoint {
 
     private enum URLConstants {
         static let baseURL = "https://www.kobis.or.kr"

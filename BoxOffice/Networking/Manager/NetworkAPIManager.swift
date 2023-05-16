@@ -10,7 +10,7 @@ import Foundation
 struct NetworkAPIManager {
     
     private let deserializer = JSONDeserializer()
-    private let networkDispatcher = NetworkDispatcher()
+    let networkDispatcher = NetworkDispatcher()
     
     func fetchData(
         to type: Decodable.Type,
