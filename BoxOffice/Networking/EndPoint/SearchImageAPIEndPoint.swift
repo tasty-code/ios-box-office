@@ -26,7 +26,7 @@ extension SearchImageAPIEndPoint {
         static let sizeQueryName = "size"
         static let sizeQueryValue = "1"
         static let authorizationHeaderName = "Authorization"
-        static let authorizationHeaderValue = ""
+        static let authorizationHeaderValue = "KakaoAK e37dbfb127b8ed041816c0ddd0c96a4a"
         static let searchQueryName = "query"
     }
 

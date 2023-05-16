@@ -11,6 +11,7 @@ class MovieDetailView: UIView {
 
     private let movieDetailScrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = .systemBackground
 
         return scrollView
@@ -89,16 +90,53 @@ class MovieDetailView: UIView {
         stackView.alignment = .fill
         stackView.spacing = 2
         stackView.axis = .vertical
-
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+
+        configureHierachy()
+        configuratLayoutConstraints()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func configureHierachy() {
+        addSubview(movieDetailScrollView)
+        movieDetailScrollView.addSubview(contentView)
+
+        contentView.addSubview(movieImageView)
+        contentView.addSubview(movieDetailVerticalStackView)
+    }
+
+    private func configuratLayoutConstraints() {
+        NSLayoutConstraint.activate([
+            movieDetailScrollView.topAnchor.constraint(equalTo: topAnchor),
+            movieDetailScrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            movieDetailScrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            movieDetailScrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+
+            contentView.topAnchor.constraint(equalTo: movieDetailScrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: movieDetailScrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: movieDetailScrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: movieDetailScrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: movieDetailScrollView.widthAnchor),
+
+            movieImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            movieImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            movieImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            movieImageView.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1.1),
+
+            movieDetailVerticalStackView.topAnchor.constraint(equalTo: movieImageView.bottomAnchor),
+            movieDetailVerticalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            movieDetailVerticalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            movieDetailVerticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+
+        ])
     }
 
 }

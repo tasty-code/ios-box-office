@@ -27,7 +27,6 @@ class MovieDetailViewController: UIViewController {
 
     lazy var movieDetailView: MovieDetailView = {
         let view = MovieDetailView(frame: view.frame)
-
         return view
     }()
 
