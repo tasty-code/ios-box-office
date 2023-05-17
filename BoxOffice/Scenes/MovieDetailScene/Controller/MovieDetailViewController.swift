@@ -92,9 +92,6 @@ class MovieDetailViewController: UIViewController {
 
     private func convertToMovieDetailModel(from movie: MovieDetail) -> MovieDetailModel {
         let movieInformation = movie.movieInformationResult.movieInformation
-
-        let movieName = movieInformation.name
-        let imageSearchName = movieName
         let director = movieInformation.directors.map { $0.name }
         let openDate = movieInformation.openDate
         let yearOfProduction = movieInformation.yearOfProduction
