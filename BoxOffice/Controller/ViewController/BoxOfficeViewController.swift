@@ -35,6 +35,7 @@ class BoxOfficeViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
         view.addSubview(indicatorView)
+        configureSelectDateButton()
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -69,14 +70,15 @@ class BoxOfficeViewController: UIViewController {
 }
 
 extension BoxOfficeViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-         let selectMovie = boxOffices[indexPath.item]
+        let selectMovie = boxOffices[indexPath.item]
         let movieInformationViewController = MovieInformationViewController(movieCode: selectMovie.movieCode)
-         movieInformationViewController.title = selectMovie.name
+        movieInformationViewController.title = selectMovie.name
 
-         navigationController?.pushViewController(movieInformationViewController, animated: true)
-     }
+        navigationController?.pushViewController(movieInformationViewController, animated: true)
+    }
 }
 
 extension BoxOfficeViewController {

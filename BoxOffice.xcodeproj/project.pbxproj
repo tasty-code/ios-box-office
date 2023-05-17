@@ -56,6 +56,7 @@
 		F0500AC02A0355C6001F448C /* URLResponse+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0500ABF2A0355C6001F448C /* URLResponse+Extension.swift */; };
 		F0500AC22A03669F001F448C /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0500AC12A03669F001F448C /* Date+Extension.swift */; };
 		F0560C5A29F7A15D0062FB01 /* JSONDeserializerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0560C5929F7A15D0062FB01 /* JSONDeserializerTest.swift */; };
+		F05FF5AE2A14BF810054CAB3 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05FF5AD2A14BF810054CAB3 /* CalendarViewController.swift */; };
 		F0BB4A5E2A137669005FB016 /* MovieInformationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BB4A5D2A137669005FB016 /* MovieInformationItem.swift */; };
 		F0BB4A632A144580005FB016 /* APIKeys.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F0BB4A622A144580005FB016 /* APIKeys.xcconfig */; };
 		F0BDED432A0B27A40076A8EE /* CustomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BDED422A0B27A40076A8EE /* CustomListCell.swift */; };
@@ -129,6 +130,7 @@
 		F0500AC12A03669F001F448C /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		F0560C5729F7A15D0062FB01 /* BoxOfficeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0560C5929F7A15D0062FB01 /* JSONDeserializerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDeserializerTest.swift; sourceTree = "<group>"; };
+		F05FF5AD2A14BF810054CAB3 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		F0BB4A5D2A137669005FB016 /* MovieInformationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInformationItem.swift; sourceTree = "<group>"; };
 		F0BB4A622A144580005FB016 /* APIKeys.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = APIKeys.xcconfig; sourceTree = "<group>"; };
 		F0BDED422A0B27A40076A8EE /* CustomListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomListCell.swift; sourceTree = "<group>"; };
