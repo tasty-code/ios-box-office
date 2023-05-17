@@ -22,11 +22,12 @@ final class CalendarViewController: UIViewController {
     
     private func configureCalendarView() {
 
-        let gregorianCalendar = Calendar(identifier: .gregorian)
+        let gregorianCalendar = Calendar.current
         calendarView.calendar = gregorianCalendar
+        calendarView.timeZone = TimeZone(identifier: "Asia/Seoul")
         calendarView.locale = Locale(identifier: "ko-KR")
         calendarView.fontDesign = .rounded
-        calendarView.visibleDateComponents = gregorianCalendar.dateComponents([.year, .month, .day], from: Date())
+        calendarView.visibleDateComponents = gregorianCalendar.dateComponents([.year, .month, .day], from: Date.yesterday)
 
         calendarView.availableDateRange = DateInterval(start: Date.distantPast, end: Date.yesterday)
         
@@ -40,9 +41,10 @@ extension CalendarViewController: UICalendarSelectionSingleDateDelegate {
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
 
         guard let selectedDateComponent = dateComponents,
-              let selectedDate = Calendar.current.date(from: selectedDateComponent) else { return }
+              let selectedDate = calendarView.calendar.date(from: selectedDateComponent),
+              let formatDate = calendarView.calendar.date(bySettingHour: 9, minute: 0, second: 0, of: selectedDate) else { return }
 
-        changedDate?(selectedDate)
+        changedDate?(formatDate)
 
         self.dismiss(animated: true)
     }
