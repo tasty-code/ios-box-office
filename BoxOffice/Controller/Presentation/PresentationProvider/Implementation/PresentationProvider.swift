@@ -90,6 +90,11 @@ final class PresentationProvider: PresentationProvidable {
 
         self.date = date
     }
+
+    func updateMovieCode(_ movieCode: String) {
+
+        self.movieCode = movieCode
+    }
 }
 
 protocol MovieInformationPresentationDelegate: AnyObject {

@@ -21,7 +21,9 @@ class BoxOfficeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        collectionView.delegate = self
+
         configureHierarchy()
         setupInitialBoxOffices()
         configureRefreshControl()
@@ -63,6 +65,17 @@ class BoxOfficeViewController: UIViewController {
             }
         }
     }
+}
+
+extension BoxOfficeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+         let selectMovie = boxOffices[indexPath.item]
+
+         let movieInformationViewController = MovieInformationViewController(movieCode: selectMovie.movieCode)
+         movieInformationViewController.title = selectMovie.name
+         navigationController?.pushViewController(movieInformationViewController, animated: true)
+     }
 }
 
 extension BoxOfficeViewController {

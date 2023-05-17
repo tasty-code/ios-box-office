@@ -12,10 +12,12 @@ struct BoxOfficeItem: ViewDisplayable {
     let rank: Rank
     let name: String
     let audience: String
+    let movieCode: String
 
-    init(rank: Rank, name: String, audienceCount: String, audienceAccount: String) {
+    init(rank: Rank, name: String, audienceCount: String, audienceAccount: String, movieCode: String) {
         self.rank = rank
         self.name = name
         self.audience = "오늘 \(audienceCount.formatted()) / 총 \(audienceAccount.formatted())"
+        self.movieCode = movieCode
     }
 }

@@ -23,7 +23,8 @@ struct BoxOfficeDispatcher: PresentationDispatchable {
                                                  rankOldAndNew: eachData.rankOldAndNew),
                                       name: eachData.movieNm,
                                       audienceCount: eachData.audiCnt,
-                                      audienceAccount: eachData.audiAcc)
+                                      audienceAccount: eachData.audiAcc,
+                                      movieCode: eachData.movieCD)
             boxOffices.append(boxOffice)
         }
         
