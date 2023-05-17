@@ -13,6 +13,7 @@ extension String {
     }
 
     func formatted() -> String {
+        
         let number = self.changeToInt
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal

@@ -11,6 +11,7 @@ class MovieInformationViewController: UIViewController {
     
     private let presentationProvider = PresentationProvider()
     private let movieInformationView = MovieInformationView()
+    private lazy var indicatorView = ActivityIndicatorView(frame: view.bounds)
     
     init(movieCode: String) {
         presentationProvider.updateMovieCode(movieCode)
@@ -22,18 +23,19 @@ class MovieInformationViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
+        super.viewDidLoad()
+
         setupMovieInformationView()
         configureMovieInformation()
     }
     
     override func loadView() {
+
         self.view = movieInformationView
     }
     
     private func setupMovieInformationView() {
-        
         let movieInformation = presentationProvider.getMovieInformation()
         movieInformationView.information = movieInformation
     }
@@ -42,6 +44,14 @@ class MovieInformationViewController: UIViewController {
         
         presentationProvider.movieInformationCall = {
             self.setupMovieInformationView()
+
+            DispatchQueue.main.async {
+                self.indicatorView.stopAnimating()
+            }
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        view.addSubview(indicatorView)
     }
 }

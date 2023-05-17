@@ -16,6 +16,7 @@ final class NetworkSession: NetworkSessionProtocol {
     }
 
     func data(from urlRequest: URLRequest) async throws -> NetworkResult {
+
         let (data, response) = try await session.data(for: urlRequest)
 
         guard response.checkResponse else {

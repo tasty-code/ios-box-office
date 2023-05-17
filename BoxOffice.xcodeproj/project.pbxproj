@@ -201,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				802D0EB32A1476DE00C25A3C /* MovieInformationView.swift */,
+				802D0EB52A14770900C25A3C /* MovieInformationStackView.swift */,
 			);
 			path = MovieInformation;
 			sourceTree = "<group>";
@@ -544,7 +545,6 @@
 				F0BDED462A0B58DB0076A8EE /* UIVerticalStackView.swift */,
 				802D0EB22A1476CB00C25A3C /* MovieInformation */,
 				F0BDED412A0B278E0076A8EE /* BoxOfficeRank */,
-				802D0EB52A14770900C25A3C /* MovieInformationStackView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

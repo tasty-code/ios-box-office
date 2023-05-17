@@ -15,11 +15,11 @@ struct MovieInformationDispatcher: PresentationDispatchable {
     func convert(from networkData: MovieInformationDTO) throws -> [MovieInformationItem] {
         
         let data = networkData.result.movieIformation
-        let movieInformation = [ViewModel(movieName: data.movieNm,
+        let movieInformation = [ViewModel(movieName: data.movieName,
                                           directors: data.directors,
-                                          productionYear: data.prdtYear,
-                                         openDate: data.openDt,
-                                          showTime: data.showTm,
+                                          productionYear: data.productionYear,
+                                          openDate: data.openDate,
+                                          showTime: data.showTime,
                                           audits: data.audits,
                                           nations: data.nations,
                                           genres: data.genres,
@@ -41,11 +41,12 @@ struct MovieInformationDispatcher: PresentationDispatchable {
     
     func convertImage(from networkData: MoviePosterDTO) throws -> UIImage? {
         
-        let urlString = networkData.documents.first?.imageURL ?? ""
+        let urlString = networkData.result.first?.imageURL ?? ""
         guard var urlComponents = URLComponents(string: urlString) else {
             return nil
         }
         urlComponents.scheme = "https"
+        
         guard let url = urlComponents.url else {
             return nil
         }

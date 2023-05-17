@@ -44,6 +44,7 @@ class MovieInformationStackView: UIStackView {
     }
     
     func updateDataLabel(_ data: String?) {
+        
         dataLabel.text = data
     }
 }

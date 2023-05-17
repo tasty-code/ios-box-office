@@ -20,6 +20,7 @@ class BoxOfficeViewController: UIViewController {
     private lazy var indicatorView = ActivityIndicatorView(frame: view.bounds)
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
         collectionView.delegate = self
@@ -71,9 +72,9 @@ extension BoxOfficeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
          let selectMovie = boxOffices[indexPath.item]
-
-         let movieInformationViewController = MovieInformationViewController(movieCode: selectMovie.movieCode)
+        let movieInformationViewController = MovieInformationViewController(movieCode: selectMovie.movieCode)
          movieInformationViewController.title = selectMovie.name
+
          navigationController?.pushViewController(movieInformationViewController, animated: true)
      }
 }
@@ -81,6 +82,7 @@ extension BoxOfficeViewController: UICollectionViewDelegate {
 extension BoxOfficeViewController {
 
     func configureRefreshControl() {
+        
         collectionView.refreshControl = UIRefreshControl()
         collectionView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
     }

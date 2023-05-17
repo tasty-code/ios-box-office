@@ -50,6 +50,7 @@ final class PresentationProvider: PresentationProvidable {
 
         Task {
             let networkData = try await self.movieInformationDispatcher.fetch(endpoint: movieInformationEndpoint)
+
             guard var movieInformation = try self.movieInformationDispatcher.convert(from: networkData).first else { return }
 
             movieInformation.poster = try await loadMoviePoster(movieName: movieInformation.movieName)
@@ -64,7 +65,6 @@ final class PresentationProvider: PresentationProvidable {
         let moviePosterEndpoint = MoviePosterEndpoint(movieName: movieName)
 
         let networkData = try await self.movieInformationDispatcher.fetchMoviePosterDTO(moviePosterEndpoint)
-        // 추후 NSCache 처리 해야한다.
         let moviePoster = try self.movieInformationDispatcher.convertImage(from: networkData)
 
         return moviePoster

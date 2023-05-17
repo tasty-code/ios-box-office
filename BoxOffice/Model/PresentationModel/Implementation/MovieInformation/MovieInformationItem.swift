@@ -28,19 +28,19 @@ struct MovieInformationItem: ViewDisplayable {
         self.openDate = openDate
         self.showTime = showTime
 
-        let director = directors.first?.peopleNm ?? ""
+        let director = directors.first?.peopleName ?? ""
         self.director = director
 
-        let auditGrade = audits.first?.watchGradeNm ?? ""
+        let auditGrade = audits.first?.watchGrade ?? ""
         self.auditGrade = auditGrade
 
-        let nation = nations.first?.nationNm ?? ""
+        let nation = nations.first?.nationName ?? ""
         self.nation = nation
 
-        let genre = genres.map { $0.genreNm }.joined(separator: ", ")
+        let genre = genres.map { $0.genreName }.joined(separator: ", ")
         self.genre = genre
 
-        let actor = actors.map { $0.peopleNm }.joined(separator: ", ")
+        let actor = actors.map { $0.peopleName }.joined(separator: ", ")
         self.actor = actor
     }
 }

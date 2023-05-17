@@ -9,9 +9,9 @@ import Foundation
 
 struct MovieDetailDTO: Decodable {
 
-    let movieCD, movieNm, movieNmEn, movieNmOg: String
-    let showTm, prdtYear, openDt, prdtStatNm: String
-    let typeNm: String
+    let movieCode, movieName, movieEnglishName, movieOriginalName: String
+    let showTime, productionYear, openDate, productionStatusName: String
+    let typeName: String
     let nations: [NationDTO]
     let genres: [GenreDTO]
     let directors: [DirectorDTO]
@@ -23,52 +23,106 @@ struct MovieDetailDTO: Decodable {
 
     enum CodingKeys: String, CodingKey {
 
-        case movieCD = "movieCd"
-        case movieNm, movieNmEn, movieNmOg, showTm, prdtYear, openDt, prdtStatNm, typeNm, nations, genres, directors, actors, showTypes, companys, audits, staffs
+        case movieCode = "movieCd"
+        case movieName = "movieNm"
+        case movieEnglishName = "movieNmEn"
+        case movieOriginalName = "movieNmOg"
+        case showTime = "showTm"
+        case productionYear = "prdtYear"
+        case openDate = "openDt"
+        case productionStatusName = "prdtStatNm"
+        case typeName = "typeNm"
+        case nations, genres, directors, actors, showTypes, companys, audits, staffs
     }
 }
 
 struct ActorDTO: Decodable {
 
-    let peopleNm, peopleNmEn, cast, castEn: String
+    let peopleName, peopleEnglishName, cast, castEnglish: String
+
+    enum CodingKeys: String, CodingKey {
+
+        case peopleName = "peopleNm"
+        case peopleEnglishName = "peopleNmEn"
+        case castEnglish = "castEn"
+        case cast
+    }
 }
 
 struct AuditDTO: Decodable {
 
-    let auditNo, watchGradeNm: String
+    let auditNumber, watchGrade: String
+
+    enum CodingKeys: String, CodingKey {
+
+        case auditNumber = "auditNo"
+        case watchGrade = "watchGradeNm"
+    }
 }
 
 struct CompanyDTO: Decodable {
 
-    let companyCD, companyNm, companyNmEn, companyPartNm: String
+    let companyCode, companyName, companyEnglishName, companyPart: String
 
     enum CodingKeys: String, CodingKey {
-        case companyCD = "companyCd"
-        case companyNm, companyNmEn, companyPartNm
+
+        case companyCode = "companyCd"
+        case companyName = "companyNm"
+        case companyEnglishName = "companyNmEn"
+        case companyPart = "companyPartNm"
     }
 }
 
 struct DirectorDTO: Decodable {
 
-    let peopleNm, peopleNmEn: String
+    let peopleName, peopleEnglishName: String
+
+    enum CodingKeys: String, CodingKey {
+
+        case peopleName = "peopleNm"
+        case peopleEnglishName = "peopleNmEn"
+    }
 }
 
 struct GenreDTO: Decodable {
 
-    let genreNm: String
+    let genreName: String
+
+    enum CodingKeys: String, CodingKey {
+
+        case genreName = "genreNm"
+    }
 }
 
 struct NationDTO: Decodable {
 
-    let nationNm: String
+    let nationName: String
+
+    enum CodingKeys: String, CodingKey {
+
+        case nationName = "nationNm"
+    }
 }
 
 struct ShowTypeDTO: Decodable {
 
-    let showTypeGroupNm, showTypeNm: String
+    let showTypeGroupName, showTypeName: String
+
+    enum CodingKeys: String, CodingKey {
+
+        case showTypeGroupName = "showTypeGroupNm"
+        case showTypeName = "showTypeNm"
+    }
 }
 
 struct StaffDTO: Decodable {
 
-    let peopleNm, peopleNmEn, staffRoleNm: String
+    let peopleName, peopleEnglishName, staffRoleName: String
+
+    enum CodingKeys: String, CodingKey {
+
+        case peopleName = "peopleNm"
+        case peopleEnglishName = "peopleNmEn"
+        case staffRoleName = "staffRoleNm"
+    }
 }
