@@ -13,7 +13,8 @@ final class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotification), name: .transformedBoxOfficeData, object: nil)
         configureUIComponents()
         configureHierarchy()
         configureDataSource()
@@ -38,6 +39,12 @@ final class HomeViewController: UIViewController {
 
 //MARK: - Private Method
 extension HomeViewController {
+
+    @objc private func receiveNotification(notification: Notification) {
+        guard let receivedData = notification.userInfo?["transformedBoxOfficeData"] as? [DailyBoxOffice] else { return }
+
+        applySnapshot(with: receivedData)
+    }
     
     private func checkOfAnimatingActivityIndicator(isAnimated: Bool) {
         guard isAnimated != activityIndicator.isAnimating else { return }
@@ -49,26 +56,22 @@ extension HomeViewController {
         }
     }
 
-    private func applySnapshot() {
+    private func applySnapshot(with dailyBoxOfficeStorage: [DailyBoxOffice]) {
         var snapshot = dataSource.snapshot()
         
         let previousItems = snapshot.itemIdentifiers(inSection: .main)
         snapshot.deleteItems(previousItems)
-        
-        
-        self.boxOfficeViewModel.transformIntoDailyBoxOffice { dailyBoxOfficeStorage in
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                self.checkOfAnimatingActivityIndicator(isAnimated: false)
-                
-                snapshot.appendItems(dailyBoxOfficeStorage)
-                self.dataSource.apply(snapshot)
-            })
-        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+            self.checkOfAnimatingActivityIndicator(isAnimated: false)
+
+            snapshot.appendItems(dailyBoxOfficeStorage)
+            self.dataSource.apply(snapshot)
+        })
     }
 
     @objc func handleRefreshControl() {
-        applySnapshot()
+        self.boxOfficeViewModel.transformIntoDailyBoxOffice()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.refresh.endRefreshing()
@@ -159,6 +162,6 @@ extension HomeViewController {
         
         dataSource.apply(snapshot)
         
-        applySnapshot()
+        self.boxOfficeViewModel.transformIntoDailyBoxOffice()
     }
 }
