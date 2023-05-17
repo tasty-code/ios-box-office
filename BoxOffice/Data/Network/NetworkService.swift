@@ -7,15 +7,30 @@
 
 import Foundation
 
-class NetworkService {
+final class NetworkService {
 
-    private let session: URLSession
-
-    init(session: URLSession = URLSession(configuration: .default)) {
-        self.session = session
+    //MARK: - Initializer
+    
+    init() {
+        self.session = URLSession(configuration: .default)
     }
+    
+    //MARK: - Method
+    
+    func loadData(completion: @escaping ([DailyBoxOfficeList]) -> Void) {
+        
+        Task {
+            let yesterdayDate = Getter.receiveCurrentDate.split(separator: "-").joined()
+            let boxOfficeQueryParameters = BoxOfficeQueryParameters(targetDate: yesterdayDate)
+            let networkResult = try await request(with: APIEndPoint.receiveBoxOffice(with: boxOfficeQueryParameters)).boxOfficeResult.dailyBoxOfficeList
 
-    func request<R: Decodable, E: RequestAndResponsable>(with endPoint: E) async throws -> R where E.Responese == R {
+            completion(networkResult)
+        }
+    }
+    
+    //MARK: - Private Method
+
+    private func request<R: Decodable, E: RequestAndResponsable>(with endPoint: E) async throws -> R where E.Responese == R {
 
         let urlRequest = try endPoint.receiveURLRequest()
         let (data, response) = try await session.data(for: urlRequest)
@@ -56,4 +71,8 @@ class NetworkService {
 
         return decode
     }
+    
+    //MARK: - Private Property
+
+    private let session: URLSession
 }
