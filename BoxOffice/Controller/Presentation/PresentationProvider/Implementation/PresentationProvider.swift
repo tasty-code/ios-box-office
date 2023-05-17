@@ -16,8 +16,7 @@ final class PresentationProvider: PresentationProvidable {
     private var movieInformation: MovieInformationItem?
     
     var boxOfficeCall: (() -> Void)?
-    weak var movieInformationDelegate: MovieInformationPresentationDelegate?
-
+    var movieInformationCall: (() -> Void)?
     
     private var date: Date = Date.yesterday {
         didSet {
@@ -56,7 +55,7 @@ final class PresentationProvider: PresentationProvidable {
             movieInformation.poster = try await loadMoviePoster(movieName: movieInformation.movieName)
             self.movieInformation = movieInformation
 
-            movieInformationDelegate?.callMovieInformation()
+            movieInformationCall?()
         }
     }
 
@@ -95,8 +94,4 @@ final class PresentationProvider: PresentationProvidable {
 
         self.movieCode = movieCode
     }
-}
-
-protocol MovieInformationPresentationDelegate: AnyObject {
-    func callMovieInformation()
 }
