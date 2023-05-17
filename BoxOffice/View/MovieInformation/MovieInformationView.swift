@@ -9,6 +9,9 @@ import UIKit
 
 final class MovieInformationView: UIView {
     
+    private let scrollView = UIScrollView()
+    private let contentView = UIStackView()
+    
     var information: MovieInformationItem? {
         didSet {
             configureMovieInformation()
@@ -35,6 +38,7 @@ final class MovieInformationView: UIView {
         
         self.backgroundColor = .systemBackground
         
+        configureScrollView()
         configureMovieInformation()
         configureHierarchy()
     }
@@ -58,21 +62,36 @@ final class MovieInformationView: UIView {
         }
     }
     
+    private func configureScrollView() {
+        
+        self.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+        ])
+    }
+    
     private func configureHierarchy() {
         
         let totalStackView: UIStackView = {
             let arrangedSubviews = [ moviePoster, directorStackView, productionYearStackView, openDateStackView, showTimeStackView, auditGradeStackView, nationStackView, genreStackView, actorStackView ]
             let stackView = UIVerticalStackView(arrangedSubviews: arrangedSubviews)
             stackView.spacing = 7
-            stackView.translatesAutoresizingMaskIntoConstraints = false
             return stackView
         }()
         
-        self.addSubview(totalStackView)
-        NSLayoutConstraint.activate([
-            totalStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            totalStackView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 15),
-            totalStackView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -15)
-        ])
+        contentView.addArrangedSubview(totalStackView)
     }
 }
