@@ -22,18 +22,17 @@ class BoxOfficeViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
 
         collectionView.delegate = self
 
         configureHierarchy()
         setupInitialBoxOffices()
         configureRefreshControl()
-        configureSelectDateButton()
     }
     
     private func configureHierarchy() {
         
+        view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
         view.addSubview(indicatorView)
         
@@ -98,24 +97,5 @@ extension BoxOfficeViewController {
             self.collectionView.refreshControl?.endRefreshing()
             self.collectionView.isScrollEnabled = true
         }
-    }
-}
-
-extension BoxOfficeViewController {
-
-    func configureSelectDateButton() {
-        
-        let dateButton = UIBarButtonItem(title: "날짜선택", style: .plain, target: self, action: #selector(dateButtonAction(_:)))
-        self.navigationItem.rightBarButtonItem = dateButton
-    }
-
-    @objc func dateButtonAction(_ sender: UIBarButtonItem) {
-        
-        let calendarViewController = CalendarViewController()
-        calendarViewController.changedDate = { date in
-            self.indicatorView.startAnimating()
-            self.presentationProvider.updateDate(date)
-        }
-        self.present(calendarViewController, animated: true)
     }
 }
