@@ -24,6 +24,7 @@
 		76DFEF5C2A0CBE7B000FB85C /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DFEF5B2A0CBE7B000FB85C /* MovieDetailViewController.swift */; };
 		76ED63E42A0DD3CF00BC5B1F /* MovieInformaionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ED63E32A0DD3CF00BC5B1F /* MovieInformaionView.swift */; };
 		76FCD63D29FF4BF4009B0825 /* MovieInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FCD63C29FF4BF4009B0825 /* MovieInformation.swift */; };
+		F641FBB22A145328001F08DE /* CalanderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F641FBB12A145328001F08DE /* CalanderViewController.swift */; };
 		F659832D29FF44F2000F7BF7 /* MovieDetailInformationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F659832C29FF44F2000F7BF7 /* MovieDetailInformationDTO.swift */; };
 		F659832F29FF4A19000F7BF7 /* ActorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F659832E29FF4A19000F7BF7 /* ActorDTO.swift */; };
 		F659833129FF4AA2000F7BF7 /* StaffDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F659833029FF4AA2000F7BF7 /* StaffDTO.swift */; };
@@ -81,6 +82,7 @@
 		76DFEF5B2A0CBE7B000FB85C /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		76ED63E32A0DD3CF00BC5B1F /* MovieInformaionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInformaionView.swift; sourceTree = "<group>"; };
 		76FCD63C29FF4BF4009B0825 /* MovieInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInformation.swift; sourceTree = "<group>"; };
+		F641FBB12A145328001F08DE /* CalanderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalanderViewController.swift; sourceTree = "<group>"; };
 		F659832C29FF44F2000F7BF7 /* MovieDetailInformationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailInformationDTO.swift; sourceTree = "<group>"; };
 		F659832E29FF4A19000F7BF7 /* ActorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorDTO.swift; sourceTree = "<group>"; };
 		F659833029FF4AA2000F7BF7 /* StaffDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffDTO.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				63DF20F22970E1A0005DF7D1 /* MovieViewController.swift */,
 				76DFEF5B2A0CBE7B000FB85C /* MovieDetailViewController.swift */,
 				76ED63E32A0DD3CF00BC5B1F /* MovieInformaionView.swift */,
+				F641FBB12A145328001F08DE /* CalanderViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				76D585DC29F775C800EAB343 /* DailyBoxOfficeDTO.swift in Sources */,
 				F659832D29FF44F2000F7BF7 /* MovieDetailInformationDTO.swift in Sources */,
 				F66085D129F78F2600A39D5A /* DailyBoxOffice.swift in Sources */,
+				F641FBB22A145328001F08DE /* CalanderViewController.swift in Sources */,
 				76FCD63D29FF4BF4009B0825 /* MovieInformation.swift in Sources */,
 				76D585DE29F78AB700EAB343 /* DailyBoxOfficeResultDTO.swift in Sources */,
 				63DF20F32970E1A0005DF7D1 /* MovieViewController.swift in Sources */,
@@ -498,7 +502,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -553,7 +557,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -576,7 +580,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -603,7 +607,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

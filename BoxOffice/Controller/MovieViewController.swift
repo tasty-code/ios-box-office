@@ -13,6 +13,8 @@ class MovieViewController: UIViewController {
     private var searchDate: String = "" {
         willSet {
             title = DateFormatter().movieDateFormatter(date: newValue)
+            loadingIndicatorView.startAnimating()
+            loadMovie(for: newValue)
         }
     }
 
@@ -45,14 +47,18 @@ class MovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        searchDate = "20230509"
-        loadMovie(for: searchDate)
     }
 
     @objc private func refresh(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.refreshControl.endRefreshing()
         }
+    }
+
+    @objc private func loadCalendar() {
+        let nextVC = CalanderViewController()
+        nextVC.delegate = self
+        present(nextVC, animated: true)
     }
 
     private func loadMovie(for date: String) {
@@ -88,6 +94,12 @@ extension MovieViewController {
     private func setUI() {
         view.backgroundColor = .white
         title = DateFormatter().movieDateFormatter(date: searchDate)
+
+        let button = UIBarButtonItem(title: "날짜 선택", style: .plain, target: self, action: #selector(loadCalendar))
+        navigationItem.rightBarButtonItem = button
+
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
+        searchDate = DateFormatter().movieDateFormatter(date: yesterday)
     }
 
     private func addSubviews() {
@@ -130,6 +142,11 @@ extension DateFormatter {
         self.dateFormat = "yyyy-MM-dd"
         return self.string(from: convertDate)
     }
+
+    func movieDateFormatter(date: Date) -> String {
+        self.dateFormat = "yyyyMMdd"
+        return self.string(from: date)
+    }
 }
 
 extension MovieViewController: UICollectionViewDelegate {
@@ -138,5 +155,11 @@ extension MovieViewController: UICollectionViewDelegate {
         let nextVC = MovieDetailViewController()
         nextVC.movie = movie
         show(nextVC, sender: nil)
+    }
+}
+
+extension MovieViewController: CalanderDelegate {
+    func selectedDate(date: Date) {
+        searchDate = DateFormatter().movieDateFormatter(date: date)
     }
 }
