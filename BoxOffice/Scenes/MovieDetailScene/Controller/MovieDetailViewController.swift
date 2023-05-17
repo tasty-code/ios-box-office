@@ -10,7 +10,6 @@ import UIKit
 class MovieDetailViewController: UIViewController {
 
     struct MovieDetailModel {
-        let imageSearchName: String
         let director: [String]
         let yearOfProduction: String
         let openDate: String
@@ -95,7 +94,7 @@ class MovieDetailViewController: UIViewController {
         let movieInformation = movie.movieInformationResult.movieInformation
 
         let movieName = movieInformation.name
-        let imageSearchName = "\(movieName) 영화 포스터"
+        let imageSearchName = movieName
         let director = movieInformation.directors.map { $0.name }
         let openDate = movieInformation.openDate
         let yearOfProduction = movieInformation.yearOfProduction
@@ -106,7 +105,6 @@ class MovieDetailViewController: UIViewController {
         let actors = movieInformation.actors.map { $0.name }
 
         return MovieDetailModel(
-            imageSearchName: imageSearchName,
             director: director,
             yearOfProduction: yearOfProduction,
             openDate: openDate,
@@ -116,6 +114,5 @@ class MovieDetailViewController: UIViewController {
             genres: genres,
             actors: actors)
     }
-    
 
 }

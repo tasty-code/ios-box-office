@@ -8,10 +8,10 @@
 import Foundation
 
 struct NetworkAPIManager {
-    
+
     private let deserializer = JSONDeserializer()
     let networkDispatcher = NetworkDispatcher()
-    
+
     func fetchData(
         to type: Decodable.Type,
         endPoint: APIEndpoint) async throws -> Decodable? {
@@ -27,5 +27,5 @@ struct NetworkAPIManager {
                 return nil
             }
         }
-    
+
 }

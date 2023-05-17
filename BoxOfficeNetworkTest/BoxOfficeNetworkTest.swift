@@ -9,10 +9,10 @@ import XCTest
 
 final class BoxOfficeNetworkTest: XCTestCase {
 
-    var sut: BoxOfficeAPIManager!
+    var sut: NetworkAPIManager!
 
     override func setUpWithError() throws {
-        sut = BoxOfficeAPIManager()
+        sut = NetworkAPIManager()
     }
 
     override func tearDownWithError() throws {
@@ -25,7 +25,7 @@ final class BoxOfficeNetworkTest: XCTestCase {
         Task {
             let decodedData = try await sut.fetchData(
                 to: BoxOffice.self,
-                endPoint: BoxOfficeAPIEndpoints.boxOffice(targetDate: "20230430")
+                endPoint: BoxOfficeAPIEndpoint.boxOffice(targetDate: "20230430")
             )
             XCTAssertNotNil(decodedData)
             expectation.fulfill()
@@ -39,7 +39,7 @@ final class BoxOfficeNetworkTest: XCTestCase {
         Task {
             let decodedData = try await sut.fetchData(
                 to: MovieDetail.self,
-                endPoint: BoxOfficeAPIEndpoints.movieDetail(movieCode: "20227890")
+                endPoint: BoxOfficeAPIEndpoint.movieDetail(movieCode: "20227890")
             )
             XCTAssertNotNil(decodedData)
             expectation.fulfill()

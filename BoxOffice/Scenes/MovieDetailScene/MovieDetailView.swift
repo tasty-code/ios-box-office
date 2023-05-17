@@ -54,6 +54,7 @@ class MovieDetailView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(systemName: Constant.noneImageCallName )
         imageView.contentMode = .scaleAspectFit
+
         return imageView
     }()
 
@@ -198,8 +199,17 @@ class MovieDetailView: UIView {
     }
 
     private func configureKeyLabelayoutContraint() {
-        [directorKeyLabel, yearOfProductionKeyLabel, openDateKeyLabel, runningTimeKeyLabel, movieRatingKeyLabel, nationKeyLabel, genreKeyLabel, actorsKeyLabel].forEach { label in
-            label.widthAnchor.constraint(equalTo: movieDetailVerticalStackView.widthAnchor, multiplier: MovieDetailViewConstant.keyLabelWidthMultiplierRatio).isActive = true
+        [directorKeyLabel,
+         yearOfProductionKeyLabel,
+         openDateKeyLabel,
+         runningTimeKeyLabel,
+         movieRatingKeyLabel,
+         nationKeyLabel,
+         genreKeyLabel,
+         actorsKeyLabel].forEach { label in
+            label.widthAnchor.constraint(
+                equalTo: movieDetailVerticalStackView.widthAnchor,
+                multiplier: MovieDetailViewConstant.keyLabelWidthMultiplierRatio).isActive = true
         }
     }
 

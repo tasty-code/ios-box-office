@@ -190,7 +190,8 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
             let image = UIImage(systemName: Constants.upSymbolName)?.withTintColor(.systemRed)
             let dailytRankChangesText = generateRankChangesAttributedText(
                 movie.dailyRankChanges,
-                with: image)
+                with: image
+            )
             dailyRankChangesLabel.attributedText = dailytRankChangesText
 
             return

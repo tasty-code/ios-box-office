@@ -49,7 +49,8 @@ final class DailyBoxOfficeViewController: UIViewController {
         dailyBoxOfficeCollectionView.delegate = self
         dailyBoxOfficeCollectionView.register(
             DailyBoxOfficeCell.self,
-            forCellWithReuseIdentifier: DailyBoxOfficeCell.identifier)
+            forCellWithReuseIdentifier: DailyBoxOfficeCell.identifier
+        )
         configureCollectionViewLayoutConstraint()
         configureRefreshControl()
     }
