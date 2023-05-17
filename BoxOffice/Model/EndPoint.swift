@@ -55,14 +55,21 @@ extension EndPoint {
         }
     }
 
-    private var koficAPIKEY: URLQueryItem? {
+    func apiKey() throws -> String {
+        var api: String?
+
         switch self {
         case .dailyBoxOffice, .movieInformation:
-            let api = Bundle.main.object(forInfoDictionaryKey: "MOVIE_API_KEY") as? String
-            return URLQueryItem(name: "key", value: api)
-        default:
-            return nil
+            api = Bundle.main.object(forInfoDictionaryKey: "MOVIE_API_KEY") as? String
+        case .moviePoster:
+            api = Bundle.main.object(forInfoDictionaryKey: "POSTER_API_KEY") as? String
         }
+
+        guard let api = api, !api.isEmpty else {
+            throw NetworkError.missingAPIKEY
+        }
+
+        return api
     }
 
     func configureURL() throws -> URL {
@@ -72,8 +79,13 @@ extension EndPoint {
 
         component.path = path
         component.queryItems = [queryItem]
-        if let api = koficAPIKEY {
-            component.queryItems?.append(api)
+
+        switch self {
+        case .dailyBoxOffice, .movieInformation:
+            let api = try apiKey()
+            component.queryItems?.append(URLQueryItem(name: "key", value: api))
+        case .moviePoster:
+            break
         }
 
         guard let url = component.url else {
@@ -91,7 +103,7 @@ extension EndPoint {
         case .dailyBoxOffice, .movieInformation:
             return request
         case .moviePoster:
-            let api = Bundle.main.object(forInfoDictionaryKey: "POSTER_API_KEY") as? String ?? ""
+            let api = try apiKey()
             request.addValue("KakaoAK \(api)",
                              forHTTPHeaderField: "Authorization")
             return request

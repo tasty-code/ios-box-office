@@ -9,6 +9,7 @@ import UIKit
 
 enum NetworkError: Error {
     case transportError
+    case missingAPIKEY
     case missingData
     case decodingError
 }

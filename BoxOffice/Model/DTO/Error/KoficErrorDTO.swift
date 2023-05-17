@@ -7,6 +7,6 @@
 
 import UIKit
 
-struct KoficErrorDTO {
+struct KoficErrorDTO: Decodable {
     let faultInfo: ErrorDTO?
 }

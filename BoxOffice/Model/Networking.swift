@@ -13,15 +13,13 @@ class Networking {
             let urlRequest = try method.makeRequest()
 
             URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-                guard error == nil else {
+                if error != nil {
                     completion(nil, NetworkError.transportError)
                     return
                 }
 
-                guard let response = response as? HTTPURLResponse,
-                      (200...299).contains(response.statusCode) else {
-//                    completion(nil, NetworkError.serverError)
-                    return
+                if let httpError = self.handleHTTPError(data: data, from: method, with: response) {
+                    completion(nil, httpError)
                 }
 
                 guard let safeData = data else {
@@ -75,5 +73,31 @@ class Networking {
         } catch {
             return nil
         }
+    }
+
+    private func handleHTTPError(data: Data?, from method: EndPoint, with response: URLResponse?) -> HTTPError? {
+        guard let data = data,
+              let httpCode = (response as? HTTPURLResponse)?.statusCode else {
+            return HTTPError.notFound
+        }
+
+        guard case .moviePoster = method, (200...299).contains(httpCode) else {
+            return nil
+        }
+
+        switch method {
+        case .moviePoster:
+            if let decodedData = try? JSONDecoder().decode(ErrorDTO.self, from: data),
+               let httpError = decodedData.convert(with: httpCode) {
+                return httpError
+            }
+        case .dailyBoxOffice, .movieInformation:
+            if let decodedData = try? JSONDecoder().decode(KoficErrorDTO.self, from: data),
+               let httpError = decodedData.faultInfo?.convert(with: httpCode) {
+                return httpError
+            }
+        }
+
+        return nil
     }
 }
