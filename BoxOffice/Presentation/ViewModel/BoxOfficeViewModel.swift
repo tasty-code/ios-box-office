@@ -16,30 +16,30 @@ final class BoxOfficeViewModel {
     }
     
     //MARK: - Mehtod
-    func transformIntoDailyBoxOffice(completion: @escaping ([DailyBoxOffice]) -> () ) {
-        
-        NotificationCenter.default.addObserver(forName: .loadedBoxOfficeData, object: nil, queue: nil) { notification in
-            
-            guard let receivedFromNetworkService = notification.object as? [DailyBoxOfficeList] else { return }
-            
-            let temporaryStorage = receivedFromNetworkService.map { dailyBoxOfficeList in
-                
-                DailyBoxOffice(movieBrief: MovieBrief(movieName: dailyBoxOfficeList.movieName,
-                                                      audienceCount: dailyBoxOfficeList.audienceCount,
-                                                      audienceAccumulated: dailyBoxOfficeList.audienceAccumulate),
-                               rank: Rank(rank: dailyBoxOfficeList.rank,
-                                          rankVariation: dailyBoxOfficeList.rankVariation,
-                                          rankOldAndNew: dailyBoxOfficeList.rankOldAndNew))
-            }
-            completion(temporaryStorage)
-        }
+    func transformIntoDailyBoxOffice() {
         
         DispatchQueue.global().async {
-            self.networkService.loadData()
+            self.networkService.loadData() { dailyBoxOfficeLists in
+                let dailyBoxOfficeStorage = dailyBoxOfficeLists.map { dailyBoxOfficeList in
+
+                    DailyBoxOffice(movieBrief: MovieBrief(movieName: dailyBoxOfficeList.movieName,
+                                                          audienceCount: dailyBoxOfficeList.audienceCount,
+                                                          audienceAccumulated: dailyBoxOfficeList.audienceAccumulate),
+                                   rank: Rank(rank: dailyBoxOfficeList.rank,
+                                              rankVariation: dailyBoxOfficeList.rankVariation,
+                                              rankOldAndNew: dailyBoxOfficeList.rankOldAndNew))
+                }
+                NotificationCenter.default.post(name: .transformedBoxOfficeData, object: nil, userInfo: ["transformedBoxOfficeData": dailyBoxOfficeStorage])
+            }
         }
     }
     
     //MARK: - Private Property
     
     private var networkService: NetworkService
+}
+
+//MARK: - Use by extending Notification.Name
+extension Notification.Name {
+    static let transformedBoxOfficeData = Notification.Name("transformedBoxOfficeData")
 }
