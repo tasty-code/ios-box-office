@@ -65,6 +65,7 @@ final class PresentationProvider: PresentationProvidable {
         let moviePosterEndpoint = MoviePosterEndpoint(movieName: movieName)
 
         let networkData = try await self.movieInformationDispatcher.fetchMoviePosterDTO(moviePosterEndpoint)
+     
         let moviePoster = try self.movieInformationDispatcher.convertImage(from: networkData)
 
         return moviePoster
