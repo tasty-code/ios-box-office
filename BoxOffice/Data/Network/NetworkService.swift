@@ -13,27 +13,22 @@ final class NetworkService {
     
     init() {
         self.session = URLSession(configuration: .default)
-        self.networkResult = [DailyBoxOfficeList]()
     }
     
     //MARK: - Method
     
-    func loadData() {
+    func loadData(completion: @escaping ([DailyBoxOfficeList]) -> Void) {
         
         Task {
             let yesterdayDate = Getter.receiveCurrentDate.split(separator: "-").joined()
             let boxOfficeQueryParameters = BoxOfficeQueryParameters(targetDate: yesterdayDate)
-            let swapResult = try await request(with: APIEndPoint.receiveBoxOffice(with: boxOfficeQueryParameters)).boxOfficeResult.dailyBoxOfficeList
-            swap(to: swapResult)
-            NotificationCenter.default.post(name: .loadedBoxOfficeData, object: networkResult)
+            let networkResult = try await request(with: APIEndPoint.receiveBoxOffice(with: boxOfficeQueryParameters)).boxOfficeResult.dailyBoxOfficeList
+
+            completion(networkResult)
         }
     }
     
     //MARK: - Private Method
-    
-    private func swap(to newResult: [DailyBoxOfficeList]) {
-        networkResult = newResult
-    }
 
     private func request<R: Decodable, E: RequestAndResponsable>(with endPoint: E) async throws -> R where E.Responese == R {
 
@@ -80,10 +75,4 @@ final class NetworkService {
     //MARK: - Private Property
 
     private let session: URLSession
-    private var networkResult: [DailyBoxOfficeList]
-}
-
-//MARK: - Use by extending Notification.Name
-extension Notification.Name {
-    static let loadedBoxOfficeData = Notification.Name("loadedBoxOfficeData")
 }
