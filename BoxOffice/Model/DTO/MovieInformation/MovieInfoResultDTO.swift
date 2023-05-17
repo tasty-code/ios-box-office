@@ -16,3 +16,11 @@ struct MovieInfoResultDTO: Decodable {
         case source
     }
 }
+
+extension MovieInfoResultDTO {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        movieInformation = try? container.decode(MovieInformationDTO.self, forKey: .movieInformation)
+        source = try? container.decode(String.self, forKey: .source)
+    }
+}

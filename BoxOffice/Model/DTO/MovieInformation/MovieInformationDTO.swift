@@ -46,3 +46,26 @@ struct MovieInformationDTO: Decodable {
         case staffs
     }
 }
+
+extension MovieInformationDTO {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        movieCode = try? container.decode(String.self, forKey: .movieCode)
+        movieName = try? container.decode(String.self, forKey: .movieName)
+        movieEnglishName = try? container.decode(String.self, forKey: .movieEnglishName)
+        movieOriginalName = try? container.decode(String.self, forKey: .movieOriginalName)
+        showTime = try? container.decode(String.self, forKey: .showTime)
+        productYear = try? container.decode(String.self, forKey: .productYear)
+        openDate = try? container.decode(String.self, forKey: .openDate)
+        productStatus = try? container.decode(String.self, forKey: .productStatus)
+        movieType = try? container.decode(String.self, forKey: .movieType)
+        nations = try? container.decode([NationDTO].self, forKey: .nations)
+        genres = try? container.decode([GenreDTO].self, forKey: .genres)
+        directors = try? container.decode([DirectorDTO].self, forKey: .directors)
+        actors = try? container.decode([ActorDTO].self, forKey: .actors)
+        showTypes = try? container.decode([ShowTypeDTO].self, forKey: .showTypes)
+        companys = try? container.decode([CompanyDTO].self, forKey: .companys)
+        audits = try? container.decode([AuditDTO].self, forKey: .audits)
+        staffs = try? container.decode([StaffDTO].self, forKey: .staffs)
+    }
+}

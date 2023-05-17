@@ -24,8 +24,8 @@ final class BoxOfficeTests: XCTestCase {
         }
 
         let decodeData = try JSONDecoder().decode(BoxOfficeDTO.self, from: data)
-        let dailyBoxOffice = decodeData.convert()
-        let result = dailyBoxOffice.movies.last
+        let dailyBoxOffice = decodeData.convert() as? DailyBoxOffice
+        let result = dailyBoxOffice?.movies.last
         let expected = Movie(name: "아머드 사우루스: 기계공룡제국의 침략", rank: Rank(rank: 10, isEntry: false, variance: 2), audience: Audience(today: 2802, accumulate: 6333), code: 20231106)
 
         XCTAssertEqual(result, expected)

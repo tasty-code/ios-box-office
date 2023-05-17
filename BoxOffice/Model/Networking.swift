@@ -27,23 +27,12 @@ class Networking {
                 return
             }
 
-            guard let decodedData = self.loadJSON(T.self, data: safeData) as? T else {
+            guard let decodedData = try? JSONDecoder().decode(T.self, from: safeData) else {
                 completion(nil, NetworkError.decodingError)
                 return
             }
 
             completion(decodedData.convert(), nil)
         }.resume()
-    }
-
-    private func loadJSON<T: Convertable>(_ method: T.Type, data: Data) -> Decodable? {
-        let decoder = JSONDecoder()
-
-        do {
-            let decodedData = try decoder.decode(method, from: data)
-            return decodedData
-        } catch {
-            return nil
-        }
     }
 }
