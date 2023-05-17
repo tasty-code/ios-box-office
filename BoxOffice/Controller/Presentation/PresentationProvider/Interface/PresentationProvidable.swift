@@ -5,9 +5,11 @@
 //  Created by Sunny on 2023/05/15.
 //
 
-import Foundation
+import UIKit
 
 protocol PresentationProvidable {
 
-    func loadBoxOffices(date: String) async throws
+    func loadBoxOffices() async throws
+    func loadMovieInformation()
+    func loadMoviePoster(movieName: String) async throws -> UIImage?
 }
