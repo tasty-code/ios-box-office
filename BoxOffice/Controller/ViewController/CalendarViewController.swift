@@ -7,22 +7,20 @@
 
 import UIKit
 
-class CalendarViewController: UIViewController {
+final class CalendarViewController: UIViewController {
 
-    var calendarView = UICalendarView()
-
-    var calendarCall: ((Date) -> Void)?
+    private lazy var calendarView = UICalendarView(frame: view.bounds)
+    var changedDate: ((Date) -> Void)?
 
     override func viewDidLoad() {
-
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
 
         view.addSubview(calendarView)
         configureCalendarView()
     }
-
-    func configureCalendarView() {
+    
+    private func configureCalendarView() {
 
         let gregorianCalendar = Calendar(identifier: .gregorian)
         calendarView.calendar = gregorianCalendar
@@ -31,16 +29,7 @@ class CalendarViewController: UIViewController {
         calendarView.visibleDateComponents = gregorianCalendar.dateComponents([.year, .month, .day], from: Date())
 
         calendarView.availableDateRange = DateInterval(start: Date.distantPast, end: Date.yesterday)
-
-        calendarView.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            calendarView.topAnchor.constraint(equalTo: view.topAnchor),
-            calendarView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            calendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            calendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-
+        
         let dateSelection = UICalendarSelectionSingleDate(delegate: self)
         calendarView.selectionBehavior = dateSelection
     }
@@ -53,7 +42,7 @@ extension CalendarViewController: UICalendarSelectionSingleDateDelegate {
         guard let selectedDateComponent = dateComponents,
               let selectedDate = Calendar.current.date(from: selectedDateComponent) else { return }
 
-        calendarCall?(selectedDate)
+        changedDate?(selectedDate)
 
         self.dismiss(animated: true)
     }

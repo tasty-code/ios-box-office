@@ -105,13 +105,15 @@ extension BoxOfficeViewController {
 extension BoxOfficeViewController {
 
     func configureSelectDateButton() {
+        
         let dateButton = UIBarButtonItem(title: "날짜선택", style: .plain, target: self, action: #selector(dateButtonAction(_:)))
         self.navigationItem.rightBarButtonItem = dateButton
     }
 
     @objc func dateButtonAction(_ sender: UIBarButtonItem) {
+        
         let calendarViewController = CalendarViewController()
-        calendarViewController.calendarCall = { date in
+        calendarViewController.changedDate = { date in
             self.indicatorView.startAnimating()
             self.presentationProvider.updateDate(date)
         }
