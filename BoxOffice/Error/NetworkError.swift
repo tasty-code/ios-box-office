@@ -5,11 +5,10 @@
 //  Created by Bora Yang on 2023/04/28.
 //
 
-import Foundation
+import UIKit
 
 enum NetworkError: Error {
     case transportError
-    case serverError
     case missingData
     case decodingError
 }

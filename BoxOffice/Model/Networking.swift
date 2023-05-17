@@ -20,7 +20,7 @@ class Networking {
 
                 guard let response = response as? HTTPURLResponse,
                       (200...299).contains(response.statusCode) else {
-                    completion(nil, NetworkError.serverError)
+//                    completion(nil, NetworkError.serverError)
                     return
                 }
 
