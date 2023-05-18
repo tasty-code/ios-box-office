@@ -56,10 +56,10 @@ class BoxOfficeViewController: UIViewController {
     private func configureDataSource(completionHandler: @escaping (() -> Void)) {
 
         presentationProvider.boxOfficeCall = { [weak self] in
-            let boxOfficeDataSource = BoxOfficeDataSource()
             
             guard let boxOffices = self?.boxOffices else { return }
-            boxOfficeDataSource.boxOffices = boxOffices
+            let boxOfficeDataSource = BoxOfficeDataSource(boxOffices: boxOffices)
+            
             self?.dataSource = boxOfficeDataSource
 
             DispatchQueue.main.async {

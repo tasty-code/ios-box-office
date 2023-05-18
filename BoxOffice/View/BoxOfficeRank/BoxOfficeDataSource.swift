@@ -9,7 +9,11 @@ import UIKit
 
 final class BoxOfficeDataSource: NSObject, UICollectionViewDataSource {
 
-    var boxOffices: [BoxOfficeItem] = []
+    private var boxOffices: [BoxOfficeItem] = []
+    
+    init(boxOffices: [BoxOfficeItem]) {
+        self.boxOffices = boxOffices
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
