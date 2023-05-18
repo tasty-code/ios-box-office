@@ -48,21 +48,23 @@ class BoxOfficeViewController: UIViewController {
     private func setupInitialBoxOffices() {
         
         presentationProvider.loadBoxOffices()
-        configureDataSource {
-            self.indicatorView.stopAnimating()
+        configureDataSource { [weak self] in
+            self?.indicatorView.stopAnimating()
         }
     }
     
     private func configureDataSource(completionHandler: @escaping (() -> Void)) {
 
-        presentationProvider.boxOfficeCall = {
+        presentationProvider.boxOfficeCall = { [weak self] in
             let boxOfficeDataSource = BoxOfficeDataSource()
-            boxOfficeDataSource.boxOffices = self.boxOffices
-            self.dataSource = boxOfficeDataSource
+            
+            guard let boxOffices = self?.boxOffices else { return }
+            boxOfficeDataSource.boxOffices = boxOffices
+            self?.dataSource = boxOfficeDataSource
 
             DispatchQueue.main.async {
-                self.title = self.presentationProvider.getBoxOfficeDate()
-                self.collectionView.dataSource = self.dataSource
+                self?.title = self?.presentationProvider.getBoxOfficeDate()
+                self?.collectionView.dataSource = self?.dataSource
                 completionHandler()
             }
         }
@@ -94,10 +96,10 @@ extension BoxOfficeViewController {
         self.presentationProvider.loadBoxOffices()
         self.collectionView.isScrollEnabled = false
 
-        configureDataSource {
-            self.collectionView.reloadData()
-            self.collectionView.refreshControl?.endRefreshing()
-            self.collectionView.isScrollEnabled = true
+        configureDataSource { [weak self] in
+            self?.collectionView.reloadData()
+            self?.collectionView.refreshControl?.endRefreshing()
+            self?.collectionView.isScrollEnabled = true
         }
     }
 }
