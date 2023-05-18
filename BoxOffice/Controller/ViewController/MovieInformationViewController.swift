@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieInformationViewController: UIViewController {
+final class MovieInformationViewController: UIViewController {
     
     private let presentationProvider = PresentationProvider()
     private let movieInformationView = MovieInformationView()
@@ -52,6 +52,8 @@ class MovieInformationViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+
+        super.viewWillAppear(animated)
         view.addSubview(indicatorView)
     }
 }

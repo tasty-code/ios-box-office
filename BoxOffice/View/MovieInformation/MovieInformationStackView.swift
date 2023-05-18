@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieInformationStackView: UIStackView {
+final class MovieInformationStackView: UIStackView {
     
     private let titleLabel: UILabel = {
         var label = UILabel(fontSize: .headline)
