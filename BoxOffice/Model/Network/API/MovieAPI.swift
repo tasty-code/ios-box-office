@@ -31,7 +31,7 @@ enum MovieAPI {
 
     var query: [URLQueryItem] {
         var queryItem = [URLQueryItem]()
-        let keyParameter = URLQueryItem(name: "key", value: Bundle.main.apiKey)
+        let keyParameter = URLQueryItem(name: "key", value: Bundle.main.movieAPIKey)
         queryItem.append(keyParameter)
 
         switch self {

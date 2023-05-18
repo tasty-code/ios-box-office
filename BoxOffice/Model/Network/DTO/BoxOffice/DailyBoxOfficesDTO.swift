@@ -9,18 +9,30 @@ import Foundation
 
 struct DailyBoxOfficesDTO: Decodable {
     
-    let rnum, rank, rankInten: String
+    let rankNumber, rank, rankIntensity: String
     let rankOldAndNew: RankOldAndNewDTO
-    let movieCD, movieNm, openDt, salesAmt: String
-    let salesShare, salesInten, salesChange, salesAcc: String
-    let audiCnt, audiInten, audiChange, audiAcc: String
-    let scrnCnt, showCnt: String
+    let movieCode, movieName, openDate, salesAmount: String
+    let salesShare, salesIntensity, salesChange, salesAccount: String
+    let audienceCount, audienceIntensity, audienceChange, audienceAccount: String
+    let screenCount, showCount: String
 
     enum CodingKeys: String, CodingKey {
-        
-        case rnum, rank, rankInten, rankOldAndNew
-        case movieCD = "movieCd"
-        case movieNm, openDt, salesAmt, salesShare, salesInten, salesChange, salesAcc, audiCnt, audiInten, audiChange, audiAcc, scrnCnt, showCnt
+
+        case rankNumber = "rnum"
+        case rankIntensity = "rankInten"
+        case movieName = "movieNm"
+        case movieCode = "movieCd"
+        case openDate = "openDt"
+        case salesAmount = "salesAmt"
+        case salesIntensity = "salesInten"
+        case salesAccount = "salesAcc"
+        case audienceCount = "audiCnt"
+        case audienceIntensity = "audiInten"
+        case audienceChange = "audiChange"
+        case audienceAccount = "audiAcc"
+        case screenCount = "scrnCnt"
+        case showCount = "showCnt"
+        case rank, rankOldAndNew, salesShare, salesChange
     }
 }
 

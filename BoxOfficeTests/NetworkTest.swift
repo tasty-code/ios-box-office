@@ -43,7 +43,7 @@ final class NetworkTest: XCTestCase {
     }
 
     func test_URLRequest가_만들어지는지() {
-        guard let apiKey = Bundle.main.apiKey else {
+        guard let apiKey = Bundle.main.movieAPIKey else {
             return
         }
         

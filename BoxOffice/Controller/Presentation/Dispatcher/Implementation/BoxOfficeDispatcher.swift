@@ -12,17 +12,19 @@ struct BoxOfficeDispatcher: PresentationDispatchable {
     typealias ViewModel = BoxOfficeItem
     typealias Endpoint = DailyBoxOfficeEndpoint
     
-    func convert(from networkData: BoxOfficeDTO) async throws -> [BoxOfficeItem] {
+    func convert(from networkData: BoxOfficeDTO) throws -> [BoxOfficeItem] {
         
         let data = networkData.result.dailyBoxOffices
         var boxOffices = [ViewModel]()
 
         data.forEach { eachData in
             let boxOffice = ViewModel(rank: Rank(rank: eachData.rank,
-                                                 rankIntensity: eachData.rankInten,
+                                                 rankIntensity: eachData.rankIntensity,
                                                  rankOldAndNew: eachData.rankOldAndNew),
-                                      name: eachData.movieNm,
-                                      audience: eachData.audiAcc)
+                                      name: eachData.movieName,
+                                      audienceCount: eachData.audienceCount,
+                                      audienceAccount: eachData.audienceAccount,
+                                      movieCode: eachData.movieCode)
             boxOffices.append(boxOffice)
         }
         
