@@ -19,7 +19,7 @@ struct NetworkDispatcher {
         let (data, response) = try await session.data(for: urlRequest)
         guard response.isValidResponse else { return .failure(.outOfResponseCode) }
 
-        return NetworkResult.success(data)
+        return .success(data)
     }
 
 }

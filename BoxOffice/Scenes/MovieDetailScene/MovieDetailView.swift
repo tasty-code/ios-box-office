@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieDetailView: UIView {
+final class MovieDetailView: UIView {
 
     private enum MovieDetailViewConstant {
         static let directorLabelText = "감독"
@@ -20,7 +20,6 @@ class MovieDetailView: UIView {
         static let actorsLabelText = "배우"
 
         static let minuteText = "분"
-
 
         static let movieImageLeadingAndTrailingInset = 20.0
         static let movieImageHeightMulitplierRatio = 1.3

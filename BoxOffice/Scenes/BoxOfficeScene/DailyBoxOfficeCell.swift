@@ -42,32 +42,28 @@ final class DailyBoxOfficeCell: UICollectionViewListCell {
 
     private let movieTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(
-            ofSize: Constants.movieTitleLabelFontSize)
+        label.font = .systemFont(ofSize: Constants.movieTitleLabelFontSize)
 
         return label
     }()
 
     private let audienceLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(
-            ofSize: Constants.audienceLabelFontSize)
+        label.font = .systemFont(ofSize: Constants.audienceLabelFontSize)
 
         return label
     }()
 
     private let rankNumberLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(
-            ofSize: Constants.dailyRankNumberLabelFontSize)
+        label.font = .systemFont(ofSize: Constants.dailyRankNumberLabelFontSize)
 
         return label
     }()
 
     private let dailyRankChangesLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(
-            ofSize: Constants.dailyRankChangesLabelFontSize)
+        label.font = .systemFont(ofSize: Constants.dailyRankChangesLabelFontSize)
 
         return label
     }()

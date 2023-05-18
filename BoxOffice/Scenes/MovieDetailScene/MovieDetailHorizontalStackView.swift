@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieDetailHorizontalStackView: UIStackView {
+final class MovieDetailHorizontalStackView: UIStackView {
 
     private enum MovieDetailHorizontalStackViewConstant {
         static let topBottomlayoutMargins = 5.0

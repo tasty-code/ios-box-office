@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieDetailViewController: UIViewController {
+final class MovieDetailViewController: UIViewController {
 
     struct MovieDetailModel {
         let director: [String]
@@ -21,10 +21,10 @@ class MovieDetailViewController: UIViewController {
     }
 
     var movie: DailyBoxOffice?
-    let networkAPIManager: NetworkAPIManager
-    let networkDispatcher: NetworkDispatcher
+    private let networkAPIManager: NetworkAPIManager
+    private let networkDispatcher: NetworkDispatcher
 
-    lazy var movieDetailView: MovieDetailView = {
+    private lazy var movieDetailView: MovieDetailView = {
         let view = MovieDetailView(frame: view.frame)
         return view
     }()

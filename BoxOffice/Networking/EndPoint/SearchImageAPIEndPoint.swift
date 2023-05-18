@@ -9,7 +9,7 @@ import Foundation
 
 enum SearchImageAPIEndPoint: APIEndpoint {
 
-case moviePoster(name: String)
+    case moviePoster(name: String)
 
 }
 
