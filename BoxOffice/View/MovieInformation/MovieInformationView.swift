@@ -39,7 +39,6 @@ final class MovieInformationView: UIView {
         self.backgroundColor = .systemBackground
         
         configureScrollView()
-        configureMovieInformation()
         configureHierarchy()
     }
     
