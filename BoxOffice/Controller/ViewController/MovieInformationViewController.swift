@@ -42,11 +42,11 @@ class MovieInformationViewController: UIViewController {
     
     func configureMovieInformation() {
         
-        presentationProvider.movieInformationCall = {
-            self.setupMovieInformationView()
+        presentationProvider.movieInformationCall = { [weak self] in
+            self?.setupMovieInformationView()
 
             DispatchQueue.main.async {
-                self.indicatorView.stopAnimating()
+                self?.indicatorView.stopAnimating()
             }
         }
     }

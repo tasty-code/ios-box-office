@@ -48,8 +48,8 @@ class BoxOfficeViewController: UIViewController {
     private func setupInitialBoxOffices() {
         
         presentationProvider.loadBoxOffices()
-        configureDataSource {
-            self.indicatorView.stopAnimating()
+        configureDataSource { [weak self] in
+            self?.indicatorView.stopAnimating()
         }
     }
     
