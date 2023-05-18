@@ -36,8 +36,9 @@ final class MovieInformationViewController: UIViewController {
     }
     
     private func setupMovieInformationView() {
+        
         let movieInformation = presentationProvider.getMovieInformation()
-        movieInformationView.information = movieInformation
+        movieInformationView.updateInformation(information: movieInformation)
     }
     
     func configureMovieInformation() {

@@ -12,7 +12,7 @@ final class MovieInformationView: UIView {
     private let scrollView = UIScrollView()
     private let contentView = UIStackView()
     
-    var information: MovieInformationItem? {
+    private var information: MovieInformationItem? {
         didSet {
             configureMovieInformation()
         }
@@ -45,6 +45,10 @@ final class MovieInformationView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func updateInformation(information: MovieInformationItem?) {
+        self.information = information
     }
     
     func configureMovieInformation() {
