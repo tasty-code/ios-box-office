@@ -107,9 +107,9 @@ final class DailyBoxOfficeViewController: UIViewController {
             } catch {
                 print(error.localizedDescription)
             }
-            self.navigationItem.title = yesterDay
-            self.removeIndicatorView()
-            self.endRefresh()
+            navigationItem.title = yesterDay
+            removeIndicatorView()
+            endRefresh()
         }
     }
 
@@ -117,7 +117,7 @@ final class DailyBoxOfficeViewController: UIViewController {
         var snapShot = SnapShot()
         snapShot.appendSections([.main])
         snapShot.appendItems(movies)
-        self.dataSource.apply(snapShot)
+        dataSource.apply(snapShot)
     }
 
 }
@@ -164,7 +164,7 @@ extension DailyBoxOfficeViewController: UICollectionViewDelegate {
         )
         movieDetailViewController.navigationItem.title = movie.movieName
         dailyBoxOfficeCollectionView.deselectItem(at: indexPath, animated: true)
-        self.navigationController?.pushViewController(movieDetailViewController, animated: true)
+        navigationController?.pushViewController(movieDetailViewController, animated: true)
     }
 
 }

@@ -32,7 +32,7 @@ final class MovieDetailViewController: UIViewController {
     init(movie: DailyBoxOffice, BoxOfficeAPIManager: NetworkAPIManager) {
         self.movie = movie
         self.networkAPIManager = BoxOfficeAPIManager
-        self.networkDispatcher = BoxOfficeAPIManager.networkDispatcher
+        self.networkDispatcher = NetworkDispatcher()
         super.init(nibName: nil, bundle: nil)
     }
 
