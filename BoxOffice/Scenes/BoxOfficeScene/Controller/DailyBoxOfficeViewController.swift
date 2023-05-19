@@ -18,7 +18,7 @@ final class DailyBoxOfficeViewController: UIViewController {
 
     private let loadingIndicatorView = UIActivityIndicatorView(style: .large)
     private let boxOfficeManager = NetworkAPIManager()
-    private var dataSource: DataSource?
+    private lazy var dataSource: DataSource = configureDataSource()
     private lazy var dailyBoxOfficeCollectionView : UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,7 +35,6 @@ final class DailyBoxOfficeViewController: UIViewController {
         super.viewDidLoad()
         setUpUI()
         configureCollectionView()
-        configureDataSource()
         addIndicatorview()
         fetchBoxOfficeData()
     }
@@ -79,8 +78,8 @@ final class DailyBoxOfficeViewController: UIViewController {
             equalTo: safeAreaGuide.topAnchor).isActive = true
     }
 
-    private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource(collectionView: dailyBoxOfficeCollectionView)
+    private func configureDataSource() -> DataSource {
+        let dataSource = DataSource(collectionView: dailyBoxOfficeCollectionView)
         { collectionView, indexPath, movie in
 
             let cell = collectionView.dequeueReusableCell(
@@ -92,6 +91,7 @@ final class DailyBoxOfficeViewController: UIViewController {
 
             return cell
         }
+        return dataSource
     }
 
     private func fetchBoxOfficeData() {
@@ -120,7 +120,7 @@ final class DailyBoxOfficeViewController: UIViewController {
         var snapShot = SnapShot()
         snapShot.appendSections([.main])
         snapShot.appendItems(movies)
-        self.dataSource?.apply(snapShot)
+        self.dataSource.apply(snapShot)
     }
 
 }
@@ -160,7 +160,7 @@ extension DailyBoxOfficeViewController {
 extension DailyBoxOfficeViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movie = dataSource?.itemIdentifier(for: indexPath) else { return }
+        guard let movie = dataSource.itemIdentifier(for: indexPath) else { return }
         let movieDetailViewController = MovieDetailViewController(
             movie: movie,
             BoxOfficeAPIManager: boxOfficeManager
