@@ -21,6 +21,11 @@ final class DailyBoxOfficeViewController: UIViewController {
     private lazy var dataSource: DataSource = configureDataSource()
     private lazy var dailyBoxOfficeCollectionView : UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        collectionView.register(
+            DailyBoxOfficeCell.self,
+            forCellWithReuseIdentifier: DailyBoxOfficeCell.identifier
+        )
+        collectionView.delegate = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
         return collectionView
@@ -33,23 +38,18 @@ final class DailyBoxOfficeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpUI()
+        configureAttributes()
         configureCollectionView()
         addIndicatorview()
         fetchBoxOfficeData()
     }
 
-    private func setUpUI() {
+    private func configureAttributes() {
         view.backgroundColor = .systemBackground
     }
 
     private func configureCollectionView() {
         view.addSubview(dailyBoxOfficeCollectionView)
-        dailyBoxOfficeCollectionView.delegate = self
-        dailyBoxOfficeCollectionView.register(
-            DailyBoxOfficeCell.self,
-            forCellWithReuseIdentifier: DailyBoxOfficeCell.identifier
-        )
         configureCollectionViewLayoutConstraint()
         configureRefreshControl()
     }
@@ -100,21 +100,18 @@ final class DailyBoxOfficeViewController: UIViewController {
         let boxOfficeEndPoint = BoxOfficeAPIEndpoint.boxOffice(targetDate: yesterdayDashExcepted)
 
         Task{
-            guard let decodedData = try await boxOfficeManager.fetchData(
-                to: BoxOffice.self,
-                endPoint: boxOfficeEndPoint)
-            else {
-                return
+            do {
+                let decodedData = try await boxOfficeManager.fetchData(to: BoxOffice.self, endPoint: boxOfficeEndPoint)
+                guard let boxOffice = decodedData as? BoxOffice else { return }
+                movies = boxOffice.result.dailyBoxOffices
+            } catch {
+                print(error.localizedDescription)
             }
-
-            guard let boxOffice = decodedData as? BoxOffice else { return }
-            movies = boxOffice.result.dailyBoxOffices
             self.navigationItem.title = yesterDay
             self.removeIndicatorView()
             self.endRefresh()
         }
     }
-
 
     private func applySnapShot() {
         var snapShot = SnapShot()

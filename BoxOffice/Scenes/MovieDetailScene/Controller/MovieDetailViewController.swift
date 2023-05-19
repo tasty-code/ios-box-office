@@ -56,13 +56,18 @@ final class MovieDetailViewController: UIViewController {
         let movieDetailEndPoint = BoxOfficeAPIEndpoint.movieDetail(movieCode: movieCode)
 
         Task {
-            let decodedMovieData = try await networkAPIManager.fetchData(
-                to: MovieDetail.self,
-                endPoint: movieDetailEndPoint
-            )
-            guard let movie = decodedMovieData as? MovieDetail else { return }
-            let movieDetailModel = convertToMovieDetailModel(from: movie)
-            movieDetailView.configure(with: movieDetailModel)
+            do {
+                let decodedMovieData = try await networkAPIManager.fetchData(
+                    to: MovieDetail.self,
+                    endPoint: movieDetailEndPoint
+                )
+                guard let movie = decodedMovieData as? MovieDetail else { return }
+                let movieDetailModel = convertToMovieDetailModel(from: movie)
+                movieDetailView.configure(with: movieDetailModel)
+            }
+            catch {
+                print(error.localizedDescription)
+            }
         }
     }
 
@@ -71,21 +76,27 @@ final class MovieDetailViewController: UIViewController {
         let imageURLEndPoint = SearchImageAPIEndPoint.moviePoster(name: movieName)
 
         Task {
-            let decodedImageURLData = try await networkAPIManager.fetchData(
-                to: SearchedImage.self,
-                endPoint: imageURLEndPoint
-            )
-            guard let imageURLModel = decodedImageURLData as? SearchedImage else { return }
-            guard let imageURLString = imageURLModel.imageURL else { return }
-            guard let imageURL = URL(string: imageURLString) else { return }
-            let imageURLRequest = URLRequest(url: imageURL)
-            let imageResult = try await networkDispatcher.performRequest(imageURLRequest)
+            do {
+                let decodedImageURLData = try await networkAPIManager.fetchData(
+                    to: SearchedImage.self,
+                    endPoint: imageURLEndPoint
+                )
+                guard let imageURLModel = decodedImageURLData as? SearchedImage else { return }
+                guard let imageURLString = imageURLModel.imageURL else { return }
+                guard let imageURL = URL(string: imageURLString) else { return }
+                let imageURLRequest = URLRequest(url: imageURL)
 
-            switch imageResult {
-            case .success(let data):
-                movieDetailView.configureImage(with: data)
-            case .failure(let error):
-                print(error.errorDescription)
+                let imageResult = try await networkDispatcher.performRequest(imageURLRequest)
+
+                switch imageResult {
+                case .success(let data):
+                    movieDetailView.configureImage(with: data)
+                case .failure(let error):
+                    print(error.errorDescription)
+                }
+            }
+            catch {
+                print(error.localizedDescription)
             }
         }
     }
