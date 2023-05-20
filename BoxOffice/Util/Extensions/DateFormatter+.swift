@@ -11,7 +11,12 @@ extension Date {
 
     static func yesterDayDateConvertToString() -> String {
         let date = Date()
-        guard let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: date) else { return "20220324" }
+        guard let yesterDay = Calendar.current.date(
+            byAdding: .day,
+            value: -1, to: date)
+        else {
+            return "20220324"
+        }
         let formatter = Formatter.dateWithDash
 
         return formatter.string(from: yesterDay)
