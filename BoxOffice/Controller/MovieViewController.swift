@@ -23,6 +23,7 @@ class MovieViewController: UIViewController {
         collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.refreshControl = refreshControl
         return collectionView
     }()
 
@@ -37,7 +38,6 @@ class MovieViewController: UIViewController {
 
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         return refreshControl
     }()
