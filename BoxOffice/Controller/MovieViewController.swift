@@ -56,30 +56,23 @@ class MovieViewController: UIViewController {
     }
 
     private func loadMovie(for date: String) {
-        do {
-            let api = URLPath.dailyBoxOffice(date: date)
-            let url = try api.configureURL()
-            let urlRequest = URLRequest(url: url)
+        let api = EndPoint.dailyBoxOffice(date: date)
 
-            Networking().loadData(api.convertType, request: urlRequest) { [weak self] data, error in
-                if let error = error {
-                    print(error)
-                }
-
-                if let data = data {
-                    self?.movieArrays = (data as! DailyBoxOffice).movies
-                } else {
-                    print("빈 데이터입니다")
-                }
-
-                DispatchQueue.main.async {
-                    self?.loadingIndicatorView.stopAnimating()
-                    self?.collectionView.reloadData()
-                }
+        Networking().loadData(from: api) { [weak self] data, error in
+            if let error = error {
+                print(error)
             }
-        } catch {
-            print(error)
-            loadingIndicatorView.stopAnimating()
+
+            if let data = data {
+                self?.movieArrays = (data as! DailyBoxOffice).movies
+            } else {
+                print("빈 데이터입니다")
+            }
+
+            DispatchQueue.main.async {
+                self?.loadingIndicatorView.stopAnimating()
+                self?.collectionView.reloadData()
+            }
         }
     }
 }
