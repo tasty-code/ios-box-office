@@ -5,12 +5,12 @@
 //  Created by Bora Yang on 2023/04/28.
 //
 
-import Foundation
+import UIKit
 
 enum NetworkError: Error {
     case transportError
-    case serverError
-    case missingData(response: HTTPURLResponse)
+    case missingAPIKEY
+    case missingData
     case decodingError
 }
 
@@ -19,10 +19,10 @@ extension NetworkError: LocalizedError {
         switch self {
         case .transportError:
             return "Task failed"
-        case .serverError:
-            return "The server responds with an unexpected format or status code."
-        case .missingData(let response):
-            return "No Data: \(response)"
+        case .missingAPIKEY:
+            return "Missing API KEY"
+        case .missingData:
+            return "No Data"
         case .decodingError:
             return "The data received from the server is unable to be decoded as the expected type."
         }

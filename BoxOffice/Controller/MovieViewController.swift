@@ -13,6 +13,8 @@ class MovieViewController: UIViewController {
     private var searchDate: String = "" {
         willSet {
             title = DateFormatter().movieDateFormatter(date: newValue)
+            loadingIndicatorView.startAnimating()
+            loadMovie(for: newValue)
         }
     }
 
@@ -22,6 +24,8 @@ class MovieViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
         collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.refreshControl = refreshControl
         return collectionView
     }()
 
@@ -36,7 +40,6 @@ class MovieViewController: UIViewController {
 
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         return refreshControl
     }()
@@ -44,8 +47,6 @@ class MovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        searchDate = "20230509"
-        loadMovie(for: searchDate)
     }
 
     @objc private func refresh(){
@@ -54,31 +55,30 @@ class MovieViewController: UIViewController {
         }
     }
 
+    @objc private func loadCalendar() {
+        let nextVC = CalanderViewController()
+        nextVC.delegate = self
+        present(nextVC, animated: true)
+    }
+
     private func loadMovie(for date: String) {
-        do {
-            let api = URLPath.dailyBoxOffice(date: date)
-            let url = try api.configureURL()
-            let urlRequest = URLRequest(url: url)
+        let api = EndPoint.dailyBoxOffice(date: date)
 
-            Networking().loadData(api.convertType, request: urlRequest) { [weak self] data, error in
-                if let error = error {
-                    print(error)
-                }
-
-                if let data = data {
-                    self?.movieArrays = (data as! DailyBoxOffice).movies
-                } else {
-                    print("빈 데이터입니다")
-                }
-
-                DispatchQueue.main.async {
-                    self?.loadingIndicatorView.stopAnimating()
-                    self?.collectionView.reloadData()
-                }
+        Networking().loadData(from: api) { [weak self] data, error in
+            if let error = error {
+                print(error)
             }
-        } catch {
-            print(error)
-            loadingIndicatorView.stopAnimating()
+
+            if let data = data {
+                self?.movieArrays = (data as! DailyBoxOffice).movies
+            } else {
+                print("빈 데이터입니다")
+            }
+
+            DispatchQueue.main.async {
+                self?.loadingIndicatorView.stopAnimating()
+                self?.collectionView.reloadData()
+            }
         }
     }
 }
@@ -94,11 +94,18 @@ extension MovieViewController {
     private func setUI() {
         view.backgroundColor = .white
         title = DateFormatter().movieDateFormatter(date: searchDate)
+
+        let button = UIBarButtonItem(title: "날짜 선택", style: .plain, target: self, action: #selector(loadCalendar))
+        navigationItem.rightBarButtonItem = button
+
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
+        searchDate = DateFormatter().movieDateFormatter(date: yesterday)
     }
 
     private func addSubviews() {
         view.addSubview(collectionView)
         view.addSubview(loadingIndicatorView)
+        
     }
 
     private func setLayout() {
@@ -125,7 +132,7 @@ extension MovieViewController: UICollectionViewDataSource {
     }
 }
 
-private extension DateFormatter {
+extension DateFormatter {
     func movieDateFormatter(date: String) -> String {
         self.dateFormat = "yyyyMMdd"
         guard let convertDate = self.date(from: date) else {
@@ -134,5 +141,25 @@ private extension DateFormatter {
 
         self.dateFormat = "yyyy-MM-dd"
         return self.string(from: convertDate)
+    }
+
+    func movieDateFormatter(date: Date) -> String {
+        self.dateFormat = "yyyyMMdd"
+        return self.string(from: date)
+    }
+}
+
+extension MovieViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = movieArrays[indexPath.row]
+        let nextVC = MovieDetailViewController()
+        nextVC.movie = movie
+        show(nextVC, sender: nil)
+    }
+}
+
+extension MovieViewController: CalanderDelegate {
+    func selectedDate(date: Date) {
+        searchDate = DateFormatter().movieDateFormatter(date: date)
     }
 }
