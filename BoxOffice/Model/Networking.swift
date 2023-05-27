@@ -20,6 +20,7 @@ class Networking {
 
                 if let httpError = self.handleHTTPError(data: data, from: method, with: response) {
                     completion(nil, httpError)
+                    return
                 }
 
                 guard let safeData = data else {
@@ -70,13 +71,10 @@ class Networking {
             return HTTPError.notFound
         }
 
-        guard case .moviePoster = method, (200...299).contains(httpCode) else {
-            return nil
-        }
-
         switch method {
         case .moviePoster:
-            if let decodedData = try? JSONDecoder().decode(ErrorDTO.self, from: data),
+            if !(200...299).contains(httpCode),
+               let decodedData = try? JSONDecoder().decode(ErrorDTO.self, from: data),
                let httpError = decodedData.convert(with: httpCode) {
                 return httpError
             }
