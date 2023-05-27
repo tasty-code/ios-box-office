@@ -16,3 +16,11 @@ struct ShowTypeDTO: Decodable {
         case showTypeName = "showTypeNm"
     }
 }
+
+extension ShowTypeDTO {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        showTypeGroupName = try container.decode(String.self, forKey: .showTypeGroupName)
+        showTypeName = try container.decode(String.self, forKey: .showTypeName)
+    }
+}

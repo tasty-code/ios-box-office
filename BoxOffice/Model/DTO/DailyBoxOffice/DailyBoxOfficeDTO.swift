@@ -50,7 +50,32 @@ struct DailyBoxOfficeDTO: Decodable {
 }
 
 extension DailyBoxOfficeDTO {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        index = try container.decode(String.self, forKey: .index)
+        rank = try container.decode(String.self, forKey: .rank)
+        rankVariance = try container.decode(String.self, forKey: .rankVariance)
+        rankOldAndNew = try container.decode(String.self, forKey: .rankOldAndNew)
+        movieCode = try container.decode(String.self, forKey: .movieCode)
+        movieName = try container.decode(String.self, forKey: .movieName)
+        releaseDate = try container.decode(String.self, forKey: .releaseDate)
+        salesAmount = try container.decode(String.self, forKey: .salesAmount)
+        salesShare = try container.decode(String.self, forKey: .salesShare)
+        salesVariance = try container.decode(String.self, forKey: .salesVariance)
+        salesChange = try container.decode(String.self, forKey: .salesChange)
+        salesAccumulate = try container.decode(String.self, forKey: .salesAccumulate)
+        audiencePerDay = try container.decode(String.self, forKey: .audiencePerDay)
+        audienceVariance = try container.decode(String.self, forKey: .audienceVariance)
+        audienceChange = try container.decode(String.self, forKey: .audienceChange)
+        audienceAccumlate = try container.decode(String.self, forKey: .audienceAccumlate)
+        screenCount = try container.decode(String.self, forKey: .screenCount)
+        showCount = try container.decode(String.self, forKey: .showCount)
+    }
+}
+
+extension DailyBoxOfficeDTO {
     func convert() -> Movie {
+
         let rank = UInt(self.rank) ?? 0
         let rankVariance = Int(self.rankVariance) ?? 0
         let rankOldAndNew = self.rankOldAndNew == "NEW"

@@ -9,6 +9,17 @@ import UIKit
 
 struct BoxOfficeDTO: Decodable, Convertable {
     let boxOfficeResult: DailyBoxOfficeResultDTO
+
+    enum CodingKeys: String, CodingKey {
+        case boxOfficeResult
+    }
+}
+
+extension BoxOfficeDTO {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        boxOfficeResult = try container.decode(DailyBoxOfficeResultDTO.self, forKey: .boxOfficeResult)
+    }
 }
 
 extension BoxOfficeDTO {

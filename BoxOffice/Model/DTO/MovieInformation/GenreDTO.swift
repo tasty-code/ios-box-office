@@ -14,3 +14,10 @@ struct GenreDTO: Decodable {
         case genreName = "genreNm"
     }
 }
+
+extension GenreDTO {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        genreName = try container.decode(String.self, forKey: .genreName)
+    }
+}
