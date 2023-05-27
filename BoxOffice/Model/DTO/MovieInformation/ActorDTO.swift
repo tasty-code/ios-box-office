@@ -20,3 +20,13 @@ struct ActorDTO: Decodable {
         case castingEnglishName = "castEn"
     }
 }
+
+extension ActorDTO {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        peopleName = try container.decode(String.self, forKey: .peopleName)
+        peopleEnglishName = try container.decode(String.self, forKey: .peopleEnglishName)
+        castingName = try container.decode(String.self, forKey:.castingName)
+        castingEnglishName = try container.decode(String.self, forKey:.castingEnglishName)
+    }
+}

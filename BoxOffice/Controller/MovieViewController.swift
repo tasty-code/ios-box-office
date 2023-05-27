@@ -25,6 +25,7 @@ class MovieViewController: UIViewController {
         collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.refreshControl = refreshControl
         return collectionView
     }()
 
@@ -39,7 +40,6 @@ class MovieViewController: UIViewController {
 
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         return refreshControl
     }()
@@ -65,16 +65,16 @@ class MovieViewController: UIViewController {
         let api = EndPoint.dailyBoxOffice(date: date)
 
         Networking().loadData(from: api) { [weak self] data, error in
-            guard error == nil else {
-                print(error as Any)
-                return
+            if let error = error {
+                print(error)
             }
 
-            guard let data = data else {
+            if let data = data {
+                self?.movieArrays = (data as! DailyBoxOffice).movies
+            } else {
                 print("빈 데이터입니다")
-                return
             }
-            self?.movieArrays = (data as! DailyBoxOffice).movies
+
             DispatchQueue.main.async {
                 self?.loadingIndicatorView.stopAnimating()
                 self?.collectionView.reloadData()

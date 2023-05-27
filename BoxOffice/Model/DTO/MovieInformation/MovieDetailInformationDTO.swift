@@ -9,6 +9,17 @@ import UIKit
 
 struct MovieDetailInformationDTO: Decodable, Convertable {
     let movieInfoResult: MovieInfoResultDTO
+
+    enum CodingKeys: String, CodingKey {
+        case movieInfoResult
+    }
+}
+
+extension MovieDetailInformationDTO {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        movieInfoResult = try container.decode(MovieInfoResultDTO.self, forKey: .movieInfoResult)
+    }
 }
 
 extension MovieDetailInformationDTO {

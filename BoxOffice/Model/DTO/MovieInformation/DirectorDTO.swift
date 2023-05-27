@@ -16,3 +16,11 @@ struct DirectorDTO: Decodable {
         case peopleEnglishName = "peopleNmEn"
     }
 }
+
+extension DirectorDTO {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        peopleName = try container.decode(String.self, forKey: .peopleName)
+        peopleEnglishName = try container.decode(String.self, forKey: .peopleEnglishName)
+    }
+}

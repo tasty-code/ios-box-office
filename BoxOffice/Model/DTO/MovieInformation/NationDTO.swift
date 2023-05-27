@@ -14,3 +14,10 @@ struct NationDTO: Decodable {
         case nationName = "nationNm"
     }
 }
+
+extension NationDTO {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        nationName = try container.decode(String.self, forKey: .nationName)
+    }
+}
