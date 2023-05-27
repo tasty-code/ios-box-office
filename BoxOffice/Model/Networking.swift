@@ -27,7 +27,7 @@ class Networking {
                     return
                 }
 
-                guard let decodedData = self.loadJSON(method.convertType, data: safeData) as? Convertable else {
+                guard let decodedData = try? JSONDecoder().decode(method.convertType, from: safeData) else {
                     completion(nil, NetworkError.decodingError)
                     return
                 }
@@ -61,17 +61,6 @@ class Networking {
             if let data = try? Data(contentsOf: url) {
                 completion(UIImage(data: data), nil)
             }
-        }
-    }
-
-    private func loadJSON<T: Convertable>(_ method: T.Type, data: Data) -> Decodable? {
-        let decoder = JSONDecoder()
-
-        do {
-            let decodedData = try decoder.decode(method, from: data)
-            return decodedData
-        } catch {
-            return nil
         }
     }
 
