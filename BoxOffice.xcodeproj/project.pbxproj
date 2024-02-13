@@ -14,6 +14,7 @@
 		63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
 		95AC03C32B7B0E4700173FB5 /* BoxOfficeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AC03C22B7B0E4700173FB5 /* BoxOfficeTests.swift */; };
+		95AC03CF2B7B21F200173FB5 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 95AC03CE2B7B21F200173FB5 /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		63DF20FC2970E1A1005DF7D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95AC03C02B7B0E4700173FB5 /* BoxOfficeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95AC03C22B7B0E4700173FB5 /* BoxOfficeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeTests.swift; sourceTree = "<group>"; };
+		95AC03CE2B7B21F200173FB5 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		63DF20E22970E1A0005DF7D1 = {
 			isa = PBXGroup;
 			children = (
+				95AC03CE2B7B21F200173FB5 /* .swiftlint.yml */,
 				63DF20ED2970E1A0005DF7D1 /* BoxOffice */,
 				95AC03C12B7B0E4700173FB5 /* BoxOfficeTests */,
 				63DF20EC2970E1A0005DF7D1 /* Products */,
@@ -78,8 +81,7 @@
 		63DF20ED2970E1A0005DF7D1 /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
-				63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */,
-				63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */,
+				95AC03D02B7B23A800173FB5 /* App */,
 				63DF20F22970E1A0005DF7D1 /* ViewController.swift */,
 				63DF20F42970E1A0005DF7D1 /* Main.storyboard */,
 				63DF20F72970E1A1005DF7D1 /* Assets.xcassets */,
@@ -97,6 +99,15 @@
 			path = BoxOfficeTests;
 			sourceTree = "<group>";
 		};
+		95AC03D02B7B23A800173FB5 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */,
+				63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -104,6 +115,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63DF20FF2970E1A1005DF7D1 /* Build configuration list for PBXNativeTarget "BoxOffice" */;
 			buildPhases = (
+				95AC03C92B7B202000173FB5 /* SwiftLint */,
 				63DF20E72970E1A0005DF7D1 /* Sources */,
 				63DF20E82970E1A0005DF7D1 /* Frameworks */,
 				63DF20E92970E1A0005DF7D1 /* Resources */,
@@ -178,6 +190,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95AC03CF2B7B21F200173FB5 /* .swiftlint.yml in Resources */,
 				63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */,
 				63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */,
 				63DF20F62970E1A0005DF7D1 /* Main.storyboard in Resources */,
@@ -192,6 +205,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		95AC03C92B7B202000173FB5 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		63DF20E72970E1A0005DF7D1 /* Sources */ = {
