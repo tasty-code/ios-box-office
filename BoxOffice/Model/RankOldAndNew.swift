@@ -7,4 +7,5 @@
 
 enum RankOldAndNew: String, Codable {
     case old = "OLD"
+    case new = "NEW"
 }

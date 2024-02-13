@@ -76,9 +76,9 @@
 		276ED7732B7B015700D37EBF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				276ED76B2B7B006D00D37EBF /* MovieManager.swift */,
 				276ED7692B7B006400D37EBF /* Movie.swift */,
 				276ED76D2B7B010D00D37EBF /* BoxOfficeResult.swift */,
-				276ED76B2B7B006D00D37EBF /* MovieManager.swift */,
 				276ED76F2B7B012900D37EBF /* DailyBoxOfficeList.swift */,
 				276ED7712B7B013E00D37EBF /* RankOldAndNew.swift */,
 			);

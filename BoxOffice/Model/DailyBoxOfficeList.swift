@@ -16,8 +16,22 @@ struct DailyBoxOfficeList: Codable {
     let scrnCnt, showCnt: String
 
     enum CodingKeys: String, CodingKey {
-        case rnum, rank, rankInten, rankOldAndNew
-        case movieCD = "movieCd"
-        case movieNm, openDt, salesAmt, salesShare, salesInten, salesChange, salesAcc, audiCnt, audiInten, audiChange, audiAcc, scrnCnt, showCnt
+        case rnum = "number"
+        case rankInten = "rankChanged"
+        case rank, rankOldAndNew
+        case movieCD = "code"
+        case movieNm = "name"
+        case openDt = "openDate"
+        case salesAmt = "salesAmount"
+        case salesShare
+        case salesInten = "salesChanged"
+        case salesChange = "salesRatio"
+        case salesAcc = "salesAccumulated"
+        case audiCnt = "audiencesCount"
+        case audiInten = "audiencesChanged"
+        case audiChange = "audiencesChangeRatio"
+        case audiAcc = "audiencesAccumulated"
+        case scrnCnt = "screenCount"
+        case showCnt = "showCount"
     }
 }
