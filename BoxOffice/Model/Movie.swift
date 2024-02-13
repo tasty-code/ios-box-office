@@ -8,7 +8,3 @@
 struct Movie: Codable {
     let boxOfficeResult: BoxOfficeResult
 }
-// MARK: - DailyBoxOfficeList
-
-
-
