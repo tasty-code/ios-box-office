@@ -18,12 +18,15 @@ final class BoxOffice: Decodable {
         self.parsedData = parseJSONData()
     }
     
-    private func parseJSONData() -> BoxOfficeResult? {
+    func parseJSONData(_ data: Data? = nil) -> BoxOfficeResult? {
+        
         guard let fileLocation = Bundle.main.url(forResource: "box_office_sample", withExtension: "json") else {
             return nil
         }
         do {
-            let jsonData = try Data(contentsOf: fileLocation)
+            guard let jsonData = data == nil ? try Data(contentsOf: fileLocation) : data else {
+                return nil
+            }
             let decoder = JSONDecoder()
             let data = try decoder.decode(BoxOfficeResult.self, from: jsonData)
             return data

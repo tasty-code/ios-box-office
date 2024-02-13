@@ -22,7 +22,5 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(dataSource.parsedData?.boxOfficeResult.dailyBoxOfficeList)
     }
 }
-
