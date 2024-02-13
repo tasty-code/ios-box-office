@@ -14,11 +14,6 @@ struct BoxOfficeResult: Codable {
 
 // MARK: - DailyBoxOfficeList
 struct DailyBoxOfficeList: Codable {
-  enum EntryStatus: String, Codable {
-    case new = "NEW"
-    case old = "OLD"
-  }
-  
   let index: String
   let rank: String
   let rankChange: String
@@ -58,4 +53,9 @@ struct DailyBoxOfficeList: Codable {
     case screenCount = "scrnCnt"
     case showCount = "showCnt"
   }
+}
+
+enum EntryStatus: String, Codable {
+  case new = "NEW"
+  case old = "OLD"
 }
