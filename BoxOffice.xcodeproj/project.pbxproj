@@ -61,16 +61,48 @@
 		63DF20ED2970E1A0005DF7D1 /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
+				F44E98492B7B96F6003F61EF /* App */,
+				F44E984C2B7B973A003F61EF /* Supportings */,
+				F44E984A2B7B970F003F61EF /* ViewController */,
+				F44E984B2B7B971C003F61EF /* DTO */,
+			);
+			path = BoxOffice;
+			sourceTree = "<group>";
+		};
+		F44E98492B7B96F6003F61EF /* App */ = {
+			isa = PBXGroup;
+			children = (
 				63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */,
 				63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */,
-				63DF20F22970E1A0005DF7D1 /* ViewController.swift */,
-				894DE28A2B7B7CE800ED865A /* SearchDailyBoxOffice.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F44E984A2B7B970F003F61EF /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
 				63DF20F42970E1A0005DF7D1 /* Main.storyboard */,
+				63DF20F22970E1A0005DF7D1 /* ViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F44E984B2B7B971C003F61EF /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				894DE28A2B7B7CE800ED865A /* SearchDailyBoxOffice.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		F44E984C2B7B973A003F61EF /* Supportings */ = {
+			isa = PBXGroup;
+			children = (
 				63DF20F72970E1A1005DF7D1 /* Assets.xcassets */,
 				63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */,
 				63DF20FC2970E1A1005DF7D1 /* Info.plist */,
 			);
-			path = BoxOffice;
+			path = Supportings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,7 +351,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BoxOffice/Info.plist;
+				INFOPLIST_FILE = BoxOffice/Supportings/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -347,7 +379,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BoxOffice/Info.plist;
+				INFOPLIST_FILE = BoxOffice/Supportings/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
