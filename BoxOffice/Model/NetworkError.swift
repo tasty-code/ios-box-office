@@ -5,8 +5,11 @@
 //  Created by 강창현 on 2/13/24.
 //
 
-enum NetworkError: Error {
+enum NetworkError: Error, CaseIterable {
+    case invalidURLError
+    case invalidResponseError
     case redirectionError
     case clientError
     case serverError
+    case decodingError
 }
