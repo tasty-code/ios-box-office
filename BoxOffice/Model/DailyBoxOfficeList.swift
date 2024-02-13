@@ -8,30 +8,30 @@
 import Foundation
 
 struct DailyBoxOfficeList: Codable {
-    let rnum, rank, rankInten: String
+    let number, rank, rankChanged: String
     let rankOldAndNew: RankOldAndNew
-    let movieCD, movieNm, openDt, salesAmt: String
-    let salesShare, salesInten, salesChange, salesAcc: String
-    let audiCnt, audiInten, audiChange, audiAcc: String
-    let scrnCnt, showCnt: String
+    let code, name, openDate, salesAmount: String
+    let salesShare, salesChanged, salesRatio, salesAccumulated: String
+    let audiencesCount, audiencesChanged, audiencesChangeRatio, audiencesAccumulated: String
+    let screenCount, showCount: String
 
     enum CodingKeys: String, CodingKey {
-        case rnum = "number"
-        case rankInten = "rankChanged"
+        case number = "rnum"
+        case rankChanged = "rankInten"
         case rank, rankOldAndNew
-        case movieCD = "code"
-        case movieNm = "name"
-        case openDt = "openDate"
-        case salesAmt = "salesAmount"
+        case code = "movieCd"
+        case name = "movieNm"
+        case openDate = "openDt"
+        case salesAmount = "salesAmt"
         case salesShare
-        case salesInten = "salesChanged"
-        case salesChange = "salesRatio"
-        case salesAcc = "salesAccumulated"
-        case audiCnt = "audiencesCount"
-        case audiInten = "audiencesChanged"
-        case audiChange = "audiencesChangeRatio"
-        case audiAcc = "audiencesAccumulated"
-        case scrnCnt = "screenCount"
-        case showCnt = "showCount"
+        case salesChanged = "salesInten"
+        case salesRatio = "salesChange"
+        case salesAccumulated = "salesAcc"
+        case audiencesCount = "audiCnt"
+        case audiencesChanged = "audiInten"
+        case audiencesChangeRatio = "audiChange"
+        case audiencesAccumulated = "audiAcc"
+        case screenCount = "scrnCnt"
+        case showCount = "showCnt"
     }
 }
