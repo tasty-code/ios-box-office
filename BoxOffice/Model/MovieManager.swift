@@ -19,6 +19,7 @@ extension MovieManager {
             switch result {
             case .success(let movies):
                 completion(.success(movies))
+                self.movieData = movies
             case .failure(let error):
                 completion(.failure(error))
             }
