@@ -7,13 +7,9 @@
 
 import Foundation
 
-final class BoxOfficeDTO: Decodable {
+final class BoxOfficeDTO {
     
     private(set) var parsedData: BoxOfficeDetail? = nil
-    
-    enum CodingKeys: String, CodingKey {
-        case parsedData = "boxOfficeResult"
-    }
     
     init() {
         self.parsedData = parseJSONData()
