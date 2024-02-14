@@ -6,30 +6,30 @@
 //
 
 import XCTest
+@testable import BoxOffice
 
 final class BoxOfficeTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+    let sut = MovieManager()
+    
+    func test_date가_20230101이고_데이터_파싱이_올바르게_됐을_때_fetchMovie는_nil이_아니다() {
+        // given
+        let date = "20170319"
+        
+        // when
+        let expectation = XCTestExpectation(description: "데이터 패치 중...")
+        
+        sut.fetchMovies(date: date) { result in
+            switch result {
+            case .success(let movies):
+                // then
+                print(movies)
+                XCTAssertNotNil(movies)
+            case .failure(let error):
+                // then
+                XCTFail("데이터 파싱 에러 발생: \(error))")
+            }
+            expectation.fulfill()
         }
+        wait(for: [expectation], timeout: 5.0)
     }
-
 }
