@@ -20,6 +20,18 @@ final class BoxOfficeUnitTests: XCTestCase {
         sut = nil
     }
     
+    func test_파일이름과타입이름이맞다면__Error를던지지않음() throws {
+        
+        // given
+        let fileName = "BoxOfficeSample"
+        let fileType = "json"
+        
+        // when
+        
+        // then
+        XCTAssertNoThrow(try sut.loadData(from: fileName, of: fileType))
+    }
+    
     func test_BoxOfficeSample_json을불러올때_dailyBoxOfficeList는10개이다() throws {
         // given
         let expectedResult = 10
@@ -35,7 +47,7 @@ final class BoxOfficeUnitTests: XCTestCase {
         // given
         let expectedResult = 18
         // when
-        guard let loadedData = try sut.loadData(from: "BoxOfficeSample", of: "json") 
+        guard let loadedData = try sut.loadData(from: "BoxOfficeSample", of: "json")
         else { return }
         let result = Mirror(reflecting: loadedData.boxOfficeResult.dailyBoxOfficeList[0]).children.count
         // then
