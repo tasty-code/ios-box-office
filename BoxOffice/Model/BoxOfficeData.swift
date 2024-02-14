@@ -5,8 +5,6 @@
 //  Created by Jin-Mac on 2/14/24.
 //
 
-import Foundation
-
 struct BoxOfficeData: Codable {
     let boxOfficeResult: BoxOfficeResult
 }
