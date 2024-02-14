@@ -3,13 +3,16 @@ import Foundation
 
 struct JsonDecoder<Element: Codable> {
     
-    func loadData(from fileName: String, of fileType: String) -> Element? {
-        
-        guard let filePath = try? loadFilePath(from: fileName, of: fileType),
-              let data = try? loadFileData(from: filePath),
-              let jsonData = try? decodeFileData(from: data) else { return nil }
-
-        return jsonData
+    func loadData(from fileName: String, of fileType: String) throws -> Element? {
+        do {
+            let filePath = try loadFilePath(from: fileName, of: fileType)
+            let data = try loadFileData(from: filePath)
+            let jsonData = try decodeFileData(from: data)
+            return jsonData
+        } catch {
+            print(JsonParsingError.fileLoadError.errorMessage)
+            throw JsonParsingError.fileLoadError
+        }
     }
     
     private func loadFilePath(from fileName: String, of fileType: String) throws -> String {
