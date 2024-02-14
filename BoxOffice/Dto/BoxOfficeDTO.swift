@@ -14,7 +14,7 @@ struct BoxOfficeDTO: Decodable {
 
 extension BoxOfficeDTO {
     enum CodingKeys: String, CodingKey {
-        case boxOfficeType = "CodingKeyDefinitions"
+        case boxOfficeType = "boxOfficeType"
         case showRange = "showRange"
         case movieBoxOfficeList = "dailyBoxOfficeList"
     }
