@@ -15,6 +15,7 @@
 		63DF20F62970E1A0005DF7D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F42970E1A0005DF7D1 /* Main.storyboard */; };
 		63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
+		C77ADAB82B7C766A0069AE0F /* JsonParsingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ADAB72B7C766A0069AE0F /* JsonParsingError.swift */; };
 		C7C8D3332B7C5EA9009DE42F /* BoxOfficeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C8D3322B7C5EA9009DE42F /* BoxOfficeData.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		63DF20F72970E1A1005DF7D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63DF20FA2970E1A1005DF7D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63DF20FC2970E1A1005DF7D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C77ADAB72B7C766A0069AE0F /* JsonParsingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonParsingError.swift; sourceTree = "<group>"; };
 		C7C8D3322B7C5EA9009DE42F /* BoxOfficeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +94,7 @@
 			children = (
 				63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */,
 				C7C8D3322B7C5EA9009DE42F /* BoxOfficeData.swift */,
+				C77ADAB72B7C766A0069AE0F /* JsonParsingError.swift */,
 				63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */,
 				63DF20F22970E1A0005DF7D1 /* ViewController.swift */,
 				08DCFED62B7C5722002E22EA /* BoxofficeSample.json */,
@@ -213,6 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C77ADAB82B7C766A0069AE0F /* JsonParsingError.swift in Sources */,
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
 				C7C8D3332B7C5EA9009DE42F /* BoxOfficeData.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
