@@ -1,5 +1,3 @@
-import Foundation
-
 // MARK: - Movies
 struct SearchDailyBoxOffice: Codable {
   let boxOfficeResult: BoxOfficeResult
