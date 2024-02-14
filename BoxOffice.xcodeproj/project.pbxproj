@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15F45BDE2B7CBEB5006D9D28 /* BoxOfficeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F45BDD2B7CBEB5006D9D28 /* BoxOfficeData.swift */; };
 		63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */; };
 		63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */; };
 		63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF20F22970E1A0005DF7D1 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15F45BDD2B7CBEB5006D9D28 /* BoxOfficeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeData.swift; sourceTree = "<group>"; };
 		63DF20EB2970E1A0005DF7D1 /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		63DF20ED2970E1A0005DF7D1 /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
+				15F45BDD2B7CBEB5006D9D28 /* BoxOfficeData.swift */,
 				63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */,
 				63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */,
 				63DF20F22970E1A0005DF7D1 /* ViewController.swift */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
+				15F45BDE2B7CBEB5006D9D28 /* BoxOfficeData.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
 			);
