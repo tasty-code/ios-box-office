@@ -10,10 +10,19 @@ struct BoxOfficeDTO: Decodable {
         self.showRange = showRange
         self.movieBoxOfficeList = movieBoxOfficeList
     }
+
 }
 
-enum BoxofficeCodingKeys: String, CodingKey {
-    case boxOfficeType = "boxofficeType"
-    case showRange = "showRange"
-    case movieBoxOfficeList = "dailyBoxOfficeList"
+extension BoxOfficeDTO {
+    enum CodingKeys: String, CodingKey {
+        case boxOfficeType = "boxofficeType"
+        case showRange = "showRange"
+        case movieBoxOfficeList = "dailyBoxOfficeList"
+    }
+}
+
+extension BoxOfficeDTO {
+    func boxOfficeList() -> Array<MovieBoxOfficeDTO> {
+        return movieBoxOfficeList
+    }
 }

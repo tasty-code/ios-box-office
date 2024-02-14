@@ -1,4 +1,4 @@
-enum RankOldAndNew {
-    case old
-    case new
+enum RankOldAndNew: String {
+    case old = "OLD"
+    case new = "NEW"
 }

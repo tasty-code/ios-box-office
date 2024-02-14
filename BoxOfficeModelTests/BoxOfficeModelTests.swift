@@ -4,27 +4,62 @@ import XCTest
 
 final class BoxOfficeModelTests: XCTestCase {
 
+    var sut: JsonLoader!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = JsonLoader()
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func test_박스오피스_json을_읽어서_BoxOfficeDTO로_파싱할_수_있다() {
+        // given
+        let expectation: MovieBoxOfficeDTO = MovieBoxOfficeDTO(
+                                                rank: "1",
+                                                rankChangesWithPreviousDay: "0",
+                                                rankOldAndNew: "NEW",
+                                                movieCode: "20199882",
+                                                movieName: "경관의 피",
+                                                openingDate: "2022-01-05",
+                                                salesAmount: "584559330",
+                                                salesShare: "34.2",
+                                                salesChangesWithPreviousDay: "584559330",
+                                                salesChangesRatioWithPreviousDay: "100",
+                                                salesAccumulation: "631402330",
+                                                audienceCount: "64050",
+                                                audienceCountChangesWithPreviousDay: "64050",
+                                                audienceCountChangesRatioWithPreviousDay: "100",
+                                                audienceAccumulation: "69228",
+                                                screenCount: "1171",
+                                                showingCount: "4416")
+        // when
+        let result = sut.loadjson()?.boxOfficeDTO().boxOfficeList()[0]
+        // then
+        XCTAssertEqual(expectation, result)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_파싱된_DTO를_Model로_변환시킬_수_있다() {
+        // given
+        let expectation: MovieBoxOffice = MovieBoxOffice(
+                                                rank: 1,
+                                                rankChangesWithPreviousDay: 0,
+                                                rankOldAndNew: .new,
+                                                movieCode: "20199882",
+                                                movieName: "경관의 피",
+                                                openingDate: "2022-01-05".toDate()!,
+                                                salesAmount: 584559330,
+                                                salesShare: 34.2,
+                                                salesChangesWithPreviousDay: 584559330,
+                                                salesChangesRatioWithPreviousDay: 100,
+                                                salesAccumulation: 631402330,
+                                                audienceCount: 64050,
+                                                audienceCountChangesWithPreviousDay: 64050,
+                                                audienceCountChangesRatioWithPreviousDay: 100,
+                                                audienceAccumulation: 69228,
+                                                screenCount: 1171,
+                                                showingCount: 4416)
+        // when
+        let result = sut.loadjson()?.boxOfficeDTO().boxOfficeList()[0].toMovieBoxOffice()
+        // then
+        XCTAssertEqual(expectation, result)
     }
 
 }

@@ -1,8 +1,11 @@
-//
-//  BoxOfficeResultDTO.swift
-//  BoxOffice
-//
-//  Created by Wooseok on 2/14/24.
-//
-
 import Foundation
+
+struct BoxOfficeResultDTO: Decodable {
+    private let boxOfficeResult: BoxOfficeDTO
+}
+
+extension BoxOfficeResultDTO {
+    func boxOfficeDTO() -> BoxOfficeDTO {
+        return boxOfficeResult
+    }
+}
