@@ -19,26 +19,6 @@ struct MovieBoxOffice {
     private let screenCount: Int
     private let showingCount: Int
     
-    init(rank: Int, rankChangesWithPreviousDay: Int, rankOldAndNew: RankOldAndNew, movieCode: String, movieName: String, openingDate: Date, salesAmount: Int, salesShare: Double, salesChangesWithPreviousDay: Int, salesChangesRatioWithPreviousDay: Double, salesAccumulation: Int, audienceCount: Int, audienceCountChangesWithPreviousDay: Int, audienceCountChangesRatioWithPreviousDay: Double, audienceAccumulation: Int, screenCount: Int, showingCount: Int) {
-        self.rank = rank
-        self.rankChangesWithPreviousDay = rankChangesWithPreviousDay
-        self.rankOldAndNew = rankOldAndNew
-        self.movieCode = movieCode
-        self.movieName = movieName
-        self.openingDate = openingDate
-        self.salesAmount = salesAmount
-        self.salesShare = salesShare
-        self.salesChangesWithPreviousDay = salesChangesWithPreviousDay
-        self.salesChangesRatioWithPreviousDay = salesChangesRatioWithPreviousDay
-        self.salesAccumulation = salesAccumulation
-        self.audienceCount = audienceCount
-        self.audienceCountChangesWithPreviousDay = audienceCountChangesWithPreviousDay
-        self.audienceCountChangesRatioWithPreviousDay = audienceCountChangesRatioWithPreviousDay
-        self.audienceAccumulation = audienceAccumulation
-        self.screenCount = screenCount
-        self.showingCount = showingCount
-    }
-    
     init(from movieBoxOfficeDTO: MovieBoxOfficeDTO) {
         self.rank = Int(movieBoxOfficeDTO.rank) ?? 0
         self.rankChangesWithPreviousDay = Int(movieBoxOfficeDTO.rankChangesWithPreviousDay) ?? 0
@@ -58,8 +38,4 @@ struct MovieBoxOffice {
         self.screenCount = Int(movieBoxOfficeDTO.screenCount) ?? 0
         self.showingCount = Int(movieBoxOfficeDTO.showingCount) ?? 0
     }
-}
-
-extension MovieBoxOffice: Equatable {
-    
 }
