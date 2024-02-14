@@ -21,6 +21,28 @@ struct MovieBoxOfficeDTO: Decodable {
 }
 
 extension MovieBoxOfficeDTO {
+    enum CodingKeys: String, CodingKey {
+        case rank = "rank"
+        case rankChangesWithPreviousDay = "rankInten"
+        case rankOldAndNew = "rankOldAndNew"
+        case movieCode = "movieCd"
+        case movieName = "movieNm"
+        case openingDate = "openDt"
+        case salesAmount = "salesAmt"
+        case salesShare = "salesShare"
+        case salesChangesWithPreviousDay = "salesInten"
+        case salesChangesRatioWithPreviousDay = "salesChange"
+        case salesAccumulation = "salesAcc"
+        case audienceCount = "audiCnt"
+        case audienceCountChangesWithPreviousDay = "audiInten"
+        case audienceCountChangesRatioWithPreviousDay = "audiChange"
+        case audienceAccumulation = "audiAcc"
+        case screenCount = "scrnCnt"
+        case showingCount = "showCnt"
+    }
+}
+
+extension MovieBoxOfficeDTO {
     func toMovieBoxOffice() -> MovieBoxOffice {
         return MovieBoxOffice(from: self)
     }
