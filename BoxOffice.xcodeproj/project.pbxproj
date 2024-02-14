@@ -13,10 +13,10 @@
 		63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
 		772025692B7C7E4E00439CFD /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772025682B7C7E4E00439CFD /* BaseTestCase.swift */; };
-		7720256B2B7C81F600439CFD /* MockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7720256A2B7C81F600439CFD /* MockData.json */; };
 		95AC03C32B7B0E4700173FB5 /* BoxOfficeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AC03C22B7B0E4700173FB5 /* BoxOfficeTests.swift */; };
 		95AC03CF2B7B21F200173FB5 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 95AC03CE2B7B21F200173FB5 /* .swiftlint.yml */; };
 		95AC03D42B7C4F0A00173FB5 /* BoxOfficeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AC03D32B7C4F0A00173FB5 /* BoxOfficeData.swift */; };
+		95AC03D72B7C9A9200173FB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +38,6 @@
 		63DF20FA2970E1A1005DF7D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63DF20FC2970E1A1005DF7D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		772025682B7C7E4E00439CFD /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
-		7720256A2B7C81F600439CFD /* MockData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockData.json; sourceTree = "<group>"; };
 		95AC03C02B7B0E4700173FB5 /* BoxOfficeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95AC03C22B7B0E4700173FB5 /* BoxOfficeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeTests.swift; sourceTree = "<group>"; };
 		95AC03CE2B7B21F200173FB5 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -124,7 +123,6 @@
 			children = (
 				772025682B7C7E4E00439CFD /* BaseTestCase.swift */,
 				95AC03C22B7B0E4700173FB5 /* BoxOfficeTests.swift */,
-				7720256A2B7C81F600439CFD /* MockData.json */,
 			);
 			path = BoxOfficeTests;
 			sourceTree = "<group>";
@@ -230,7 +228,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7720256B2B7C81F600439CFD /* MockData.json in Resources */,
+				95AC03D72B7C9A9200173FB5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +237,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		95AC03C92B7B202000173FB5 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
