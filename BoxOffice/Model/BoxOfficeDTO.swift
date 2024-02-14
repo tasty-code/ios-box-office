@@ -8,6 +8,7 @@
 import Foundation
 
 final class BoxOfficeDTO: Decodable {
+    
     private(set) var parsedData: BoxOfficeResult? = nil
     
     enum CodingKeys: String, CodingKey {
@@ -17,7 +18,9 @@ final class BoxOfficeDTO: Decodable {
     init() {
         self.parsedData = parseJSONData()
     }
-    
+}
+
+extension BoxOfficeDTO {
     func parseJSONData(_ data: Data? = nil) -> BoxOfficeResult? {
         
         guard let fileLocation = Bundle.main.url(forResource: "box_office_sample", withExtension: "json") else {

@@ -9,6 +9,7 @@ import XCTest
 @testable import BoxOffice
 
 final class BoxOfficeTests: XCTestCase {
+    
     var sut: BoxOfficeDTO?
     
     override func setUpWithError() throws {
