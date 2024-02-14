@@ -10,7 +10,11 @@ class ViewController: UIViewController {
     }
     
     private func loadData() {
-        guard let boxOffice = try? JsonDecoder<BoxOfficeData>().loadData(from: "BoxOfficeSample", of: "json") else { return }
+        guard 
+            let boxOffice = try? JsonDecoder<BoxOfficeData>().loadData(from: "BoxOfficeSample", of: "json")
+        else {
+            return
+        }
         print(boxOffice)
     }
 }
