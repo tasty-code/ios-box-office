@@ -12,14 +12,14 @@ final class APIService {
         guard 
             let url = URL(string: urlString)
         else {
-            completion(.failure(.invalidURLError))
+            completion(.failure(.unknownError))
             return
         }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             DispatchQueue.main.async {
                 guard error == nil else {
-                    completion(.failure(.unknownError))
+                    completion(.failure(.requestFailError))
                     return
                 }
                 

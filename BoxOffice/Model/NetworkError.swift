@@ -10,7 +10,7 @@ import Foundation
 enum NetworkError: LocalizedError {
     case unknownError
     case noDataError
-    case invalidURLError
+    case requestFailError
     case invalidResponseError
     case redirectionError
     case clientError
@@ -23,8 +23,8 @@ enum NetworkError: LocalizedError {
             return "알 수 없는 에러 발생"
         case .noDataError:
             return "데이터가 존재하지 않습니다."
-        case .invalidURLError:
-            return "잘못된 URL 주소 입니다."
+        case .requestFailError:
+            return "요청에 실패 했습니다."
         case .invalidResponseError:
             return "잘못된 요청 입니다."
         case .redirectionError:
