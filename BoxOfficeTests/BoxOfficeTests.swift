@@ -27,7 +27,7 @@ final class BoxOfficeTests: XCTestCase {
         let result = sut?.parseJSONData(input)
         
         // then
-        XCTAssertEqual(result?.boxOfficeResult.dailyBoxOfficeList[0].movieName, expectation, "예상되는 값은 경관의 피")
+        XCTAssertEqual(result?.dailyBoxOfficeList[0].movieName, expectation, "예상되는 값은 경관의 피")
     }
     
     func test_json을_파싱했을때_알맞은_타입으로_파싱되었는가() {
@@ -41,6 +41,6 @@ final class BoxOfficeTests: XCTestCase {
         guard let result = sut?.parseJSONData(input) else { return }
         
         // then
-        XCTAssertTrue(type(of: result.boxOfficeResult.boxofficeType) == expectation, "예상되는 값은 true")
+        XCTAssertTrue(type(of: result.boxofficeType) == expectation, "예상되는 값은 true")
     }
 }
