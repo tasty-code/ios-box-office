@@ -7,11 +7,6 @@
 
 import Foundation
 
-enum RankOldAndNew: String, Codable {
-    case new = "NEW"
-    case old = "OLD"
-}
-
 struct BoxOfficeData: Codable {
     let boxOfficeResult: BoxOfficeResult
 }
@@ -60,4 +55,9 @@ struct DailyBoxOfficeList: Codable {
         case showCount = "showCnt"
         case rankOldAndNew, rank, movieCd
     }
+}
+
+enum RankOldAndNew: String, Codable {
+    case new = "NEW"
+    case old = "OLD"
 }
