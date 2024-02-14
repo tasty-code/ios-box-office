@@ -9,9 +9,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let dataSource: BoxOffice
+    private let dataSource: BoxOfficeDTO
     
-    init(dataSource: BoxOffice) {
+    init(dataSource: BoxOfficeDTO) {
         self.dataSource = dataSource
         super.init(nibName: nil, bundle: nil)
     }

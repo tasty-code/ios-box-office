@@ -9,10 +9,10 @@ import XCTest
 @testable import BoxOffice
 
 final class BoxOfficeTests: XCTestCase {
-    var sut: BoxOffice?
+    var sut: BoxOfficeDTO?
     
     override func setUpWithError() throws {
-        sut = BoxOffice()
+        sut = BoxOfficeDTO()
     }
     
     func test_json을_전달했을때_BoxOfficeResult_구조체로_파싱되었는가() {
