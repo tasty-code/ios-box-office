@@ -26,6 +26,7 @@
 		BDFE90122B7C97870091339F /* BoxOfficeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFE8FE62B7C80120091339F /* BoxOfficeType.swift */; };
 		BDFE90132B7C97890091339F /* MovieBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFE8FE82B7C81030091339F /* MovieBoxOffice.swift */; };
 		BDFE90142B7C978B0091339F /* RankOldAndNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFE8FEA2B7C82530091339F /* RankOldAndNew.swift */; };
+		BDFE90172B7C988C0091339F /* box_office_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = BDFE90162B7C988C0091339F /* box_office_sample.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		BDFE8FEA2B7C82530091339F /* RankOldAndNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankOldAndNew.swift; sourceTree = "<group>"; };
 		BDFE90062B7C97710091339F /* BoxOfficeModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDFE90082B7C97710091339F /* BoxOfficeModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeModelTests.swift; sourceTree = "<group>"; };
+		BDFE90162B7C988C0091339F /* box_office_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = box_office_sample.json; path = BoxOffice/box_office_sample.json; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,9 +134,18 @@
 		BDFE90072B7C97710091339F /* BoxOfficeModelTests */ = {
 			isa = PBXGroup;
 			children = (
+				BDFE90152B7C97D80091339F /* resources */,
 				BDFE90082B7C97710091339F /* BoxOfficeModelTests.swift */,
 			);
 			path = BoxOfficeModelTests;
+			sourceTree = "<group>";
+		};
+		BDFE90152B7C97D80091339F /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				BDFE90162B7C988C0091339F /* box_office_sample.json */,
+			);
+			path = resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,6 +240,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDFE90172B7C988C0091339F /* box_office_sample.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
