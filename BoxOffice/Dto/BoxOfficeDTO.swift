@@ -10,12 +10,11 @@ struct BoxOfficeDTO: Decodable {
         self.showRange = showRange
         self.movieBoxOfficeList = movieBoxOfficeList
     }
-
 }
 
 extension BoxOfficeDTO {
     enum CodingKeys: String, CodingKey {
-        case boxOfficeType = "boxofficeType"
+        case boxOfficeType = "CodingKeyDefinitions"
         case showRange = "showRange"
         case movieBoxOfficeList = "dailyBoxOfficeList"
     }

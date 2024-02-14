@@ -106,6 +106,7 @@
 		63DF20ED2970E1A0005DF7D1 /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
+				BD56989C2B7CCF3D00704CCA /* Enum */,
 				BDFE901D2B7CB2FE0091339F /* Extension */,
 				990300D12B7B4B47009569CA /* .swiftlint.yml */,
 				99FF17F42B7C8D7300736329 /* Dto */,
@@ -130,13 +131,20 @@
 			path = Dto;
 			sourceTree = "<group>";
 		};
+		BD56989C2B7CCF3D00704CCA /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				BDFE8FE62B7C80120091339F /* BoxOfficeType.swift */,
+				BDFE8FEA2B7C82530091339F /* RankOldAndNew.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		BDFE8FE22B7C4F960091339F /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				BDFE8FE42B7C7F650091339F /* BoxOffice.swift */,
-				BDFE8FE62B7C80120091339F /* BoxOfficeType.swift */,
 				BDFE8FE82B7C81030091339F /* MovieBoxOffice.swift */,
-				BDFE8FEA2B7C82530091339F /* RankOldAndNew.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
