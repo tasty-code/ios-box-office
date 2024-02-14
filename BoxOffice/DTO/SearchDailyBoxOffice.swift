@@ -1,17 +1,23 @@
 // MARK: - Movies
-struct SearchDailyBoxOffice: Codable {
+struct SearchDailyBoxOffice: Decodable {
   let boxOfficeResult: BoxOfficeResult
 }
 
 // MARK: - BoxOfficeResult
-struct BoxOfficeResult: Codable {
+struct BoxOfficeResult: Decodable {
   let boxOfficeType: String
   let showRange: String
-  let dailyBoxOfficeList: [DailyBoxOfficeList]
+  let list: [DailyBoxOfficeList]
+  
+  enum CodingKeys: String, CodingKey {
+    case boxOfficeType = "boxofficeType"
+    case showRange
+    case list = "dailyBoxOfficeList"
+  }
 }
 
 // MARK: - DailyBoxOfficeList
-struct DailyBoxOfficeList: Codable {
+struct DailyBoxOfficeList: Decodable {
   let index: String
   let rank: String
   let rankChange: String
