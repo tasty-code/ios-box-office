@@ -27,6 +27,7 @@
 		BDFE90132B7C97890091339F /* MovieBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFE8FE82B7C81030091339F /* MovieBoxOffice.swift */; };
 		BDFE90142B7C978B0091339F /* RankOldAndNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFE8FEA2B7C82530091339F /* RankOldAndNew.swift */; };
 		BDFE90172B7C988C0091339F /* box_office_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = BDFE90162B7C988C0091339F /* box_office_sample.json */; };
+		BDFE90192B7C99F00091339F /* JsonLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFE90182B7C99F00091339F /* JsonLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		BDFE90062B7C97710091339F /* BoxOfficeModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDFE90082B7C97710091339F /* BoxOfficeModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeModelTests.swift; sourceTree = "<group>"; };
 		BDFE90162B7C988C0091339F /* box_office_sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = box_office_sample.json; path = BoxOffice/box_office_sample.json; sourceTree = SOURCE_ROOT; };
+		BDFE90182B7C99F00091339F /* JsonLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 			children = (
 				BDFE90152B7C97D80091339F /* resources */,
 				BDFE90082B7C97710091339F /* BoxOfficeModelTests.swift */,
+				BDFE90182B7C99F00091339F /* JsonLoader.swift */,
 			);
 			path = BoxOfficeModelTests;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				BDFE900F2B7C97800091339F /* BoxOfficeDTO.swift in Sources */,
 				BDFE90142B7C978B0091339F /* RankOldAndNew.swift in Sources */,
 				BDFE90132B7C97890091339F /* MovieBoxOffice.swift in Sources */,
+				BDFE90192B7C99F00091339F /* JsonLoader.swift in Sources */,
 				BDFE90102B7C97820091339F /* MovieBoxOfficeDTO.swift in Sources */,
 				BDFE90112B7C97840091339F /* BoxOffice.swift in Sources */,
 				BDFE90122B7C97870091339F /* BoxOfficeType.swift in Sources */,
