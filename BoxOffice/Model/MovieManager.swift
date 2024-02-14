@@ -12,42 +12,16 @@ final class MovieManager {
 }
 
 extension MovieManager {
-    typealias NetworkResult = (Result<Movie,NetworkError>)
-    func fetchMovie(date: String, completion: @escaping (NetworkResult) -> ()) -> Movie? {
-        guard
-            let url: URL = URL(string: "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=\(date)")
-        else {
-            completion(.failure(.invalidURLError))
-            return nil
-        }
+    func fetchMovies(date: String, completion: @escaping (Result<Movie, NetworkError>) -> Void) {
+        let urlString = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=\(date)"
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard error == nil else { return }
-            guard let response = response as? HTTPURLResponse else {
-                completion(.failure(.invalidResponseError))
-                return
+        APIService.fetchData(urlString: urlString) { (result: Result<Movie, NetworkError>) in
+            switch result {
+            case .success(let movies):
+                completion(.success(movies))
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            switch response.statusCode {
-            case 300..<400:
-                return completion(.failure(.redirectionError))
-            case 400..<500:
-                return completion(.failure(.clientError))
-            case 500..<600:
-                return completion(.failure(.serverError))
-            default:
-                break
-            }
-            
-            guard let data = data else { return }
-            DispatchQueue.main.async {
-                do {
-                    self.movieData = try JSONDecoder().decode(Movie.self, from: data)
-                } catch {
-                    completion(.failure(.decodingError))
-                }
-            }
-        }.resume()
-        return movieData
+        }
     }
 }
