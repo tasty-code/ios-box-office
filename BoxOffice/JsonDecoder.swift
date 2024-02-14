@@ -10,8 +10,7 @@ struct JsonDecoder<Element: Codable> {
             let jsonData = try decodeFileData(from: data)
             return jsonData
         } catch {
-            print(JsonParsingError.fileLoadError.errorMessage)
-            throw JsonParsingError.fileLoadError
+            return nil
         }
     }
     

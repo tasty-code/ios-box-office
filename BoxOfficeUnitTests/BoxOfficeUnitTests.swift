@@ -20,16 +20,14 @@ final class BoxOfficeUnitTests: XCTestCase {
         sut = nil
     }
     
-    func test_파일이름과타입이름이맞다면__Error를던지지않음() throws {
-        
+    func test_파일이름과타입이름이맞다면_loadData를하면_nil값이아님() throws {
         // given
         let fileName = "BoxOfficeSample"
         let fileType = "json"
-        
         // when
-        
+        let result = try sut.loadData(from: fileName, of: fileType)
         // then
-        XCTAssertNoThrow(try sut.loadData(from: fileName, of: fileType))
+        XCTAssertNotNil(result)
     }
     
     func test_BoxOfficeSample_json을불러올때_dailyBoxOfficeList는10개이다() throws {
