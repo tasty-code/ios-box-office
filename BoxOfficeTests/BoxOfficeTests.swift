@@ -73,6 +73,6 @@ final class BoxOfficeTests: XCTestCase {
             }
             expectation.fulfill()
         }
-        wait(for: [expectation])
+        wait(for: [expectation], timeout: 5.0)
     }
 }
