@@ -8,24 +8,15 @@
 import Foundation
 
 final class BoxOfficeDTO {
-    
-    private(set) var parsedData: BoxOfficeDetail? = nil
-    
-    init() {
-        self.parsedData = parseJSONData()
-    }
-}
-
-extension BoxOfficeDTO {
     func requestData(with url: String) async throws -> Data? {
-        guard let URL = URL(string: url) else { 
+        guard let URL = URL(string: url) else {
             return nil
         }
         
         let data = try await URLSession.shared.data(from: URL)
         
         guard let httpResponse = data.1 as? HTTPURLResponse,
-              (200...299).contains(httpResponse.statusCode) else { 
+              (200...299).contains(httpResponse.statusCode) else {
             return nil
         }
         
