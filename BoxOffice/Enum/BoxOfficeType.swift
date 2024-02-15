@@ -1,3 +1,0 @@
-enum BoxOfficeType {
-    case daily
-}
