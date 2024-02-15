@@ -8,17 +8,30 @@
 import Foundation
 
 struct DailyBoxOfficeList: Codable {
-    let number, rank, rankChanged: String
+    let number: String
+    let rank: String
+    let rankChanged: String
     let rankOldAndNew: RankOldAndNew
-    let code, name, openDate, salesAmount: String
-    let salesShare, salesChanged, salesRatio, salesAccumulated: String
-    let audiencesCount, audiencesChanged, audiencesChangeRatio, audiencesAccumulated: String
-    let screenCount, showCount: String
+    let code: String
+    let name: String
+    let openDate: String
+    let salesAmount: String
+    let salesShare: String
+    let salesChanged: String
+    let salesRatio: String
+    let salesAccumulated: String
+    let audiencesCount: String
+    let audiencesChanged: String
+    let audiencesChangeRatio: String
+    let audiencesAccumulated: String
+    let screenCount: String
+    let showCount: String
 
     enum CodingKeys: String, CodingKey {
         case number = "rnum"
         case rankChanged = "rankInten"
-        case rank, rankOldAndNew
+        case rank
+        case rankOldAndNew
         case code = "movieCd"
         case name = "movieNm"
         case openDate = "openDt"
