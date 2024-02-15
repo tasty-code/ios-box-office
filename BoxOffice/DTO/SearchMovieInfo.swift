@@ -1,3 +1,4 @@
+// swiftlint:disable nesting
 struct SearchMovieInfo: Decodable {
   struct MovieInfoResult: Decodable {
     struct MovieInfo: Decodable {
@@ -132,3 +133,4 @@ struct SearchMovieInfo: Decodable {
   
   let movieInfoResult: MovieInfoResult
 }
+// swiftlint:enable nesting

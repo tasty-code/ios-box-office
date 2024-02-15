@@ -1,3 +1,4 @@
+// swiftlint:disable nesting
 struct SearchDailyBoxOffice: Decodable {
   struct BoxOfficeResult: Decodable {
     struct DailyBoxOfficeList: Decodable {
@@ -60,3 +61,4 @@ struct SearchDailyBoxOffice: Decodable {
   
   let boxOfficeResult: BoxOfficeResult
 }
+// swiftlint:enable nesting
