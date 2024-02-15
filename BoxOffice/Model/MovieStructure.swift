@@ -9,11 +9,20 @@ import Foundation
 
 struct MovieDetailInformation: Decodable {
     let movieInformationResult: MovieInformationResult
+    
+    enum CodingKeys: String, CodingKey {
+        case movieInformationResult = "movieInfoResult"
+    }
 }
 
 struct MovieInformationResult: Decodable {
     let movieInformation: MovieInformation
     let source: String
+    
+    enum CodingKeys: String, CodingKey {
+        case movieInformation = "movieInfo"
+        case source
+    }
 }
 
 struct MovieInformation: Decodable {
@@ -45,7 +54,8 @@ struct MovieInformation: Decodable {
         case openDate = "openDt"
         case productionStatusName = "prdtStatNm"
         case typeName = "typeNm"
-        case nations, genres, directors, actors, showTypes, companies, audits, staffs
+        case companies = "companys"
+        case nations, genres, directors, actors, showTypes, audits, staffs
     }
 }
 
