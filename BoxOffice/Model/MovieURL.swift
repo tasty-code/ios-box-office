@@ -10,7 +10,7 @@ import Foundation
 struct MovieURL {
     
     static func makeURL(date: String) -> String {
-        let key = Bundle.main.apiKey
+        guard let key = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String else { return "" }
         var url: String {
             return "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(String(describing: key))&targetDt=\(date)"
         }

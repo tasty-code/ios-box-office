@@ -13,7 +13,7 @@ final class BoxOfficeTests: XCTestCase {
     func test_date가_20230101이고_데이터_파싱이_올바르게_됐을_때_fetchData는_nil이_아니다() {
         // given
         let date = "20170319"
-        var urlString = MovieURL.makeURL(date: date)
+        let urlString = MovieURL.makeURL(date: date)
         
         // when
         let expectation = XCTestExpectation(description: "데이터 패치 중...")
