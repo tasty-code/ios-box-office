@@ -1,13 +1,13 @@
 
 import Foundation
 
-struct BoxOfficeData: Codable {
+struct BoxOfficeDataResponse: Codable {
     let boxOfficeResult: BoxOfficeResult
 }
 
 // MARK: - BoxOfficeResult
 struct BoxOfficeResult: Codable {
-    let boxofficeType, showRange: String
+    let boxOfficeType, showRange: String
     let dailyBoxOfficeList: [DailyBoxOfficeInfo]
     
     enum CodingKeys: String, CodingKey {
@@ -43,7 +43,7 @@ struct DailyBoxOfficeInfo: Codable {
     }
 }
 
-enum RankOldAndNew: String, Codable {
+enum GenerationCheck: String, Codable {
     case new = "NEW"
     case old = "OLD"
 }

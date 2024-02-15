@@ -9,36 +9,36 @@ import Foundation
 
 extension DailyBoxOfficeInfo: Equatable {
     static func == (lhs: DailyBoxOfficeInfo, rhs: DailyBoxOfficeInfo) -> Bool {
-        return lhs.rnum == rhs.rnum &&
+        return lhs.number == rhs.number &&
         lhs.rank == rhs.rank &&
-        lhs.rankInten == rhs.rankInten &&
+        lhs.rankFluctuation == rhs.rankFluctuation &&
         lhs.rankOldAndNew == rhs.rankOldAndNew &&
-        lhs.movieCD == rhs.movieCD &&
-        lhs.openDt == rhs.openDt &&
-        lhs.salesAmt == rhs.salesAmt &&
+        lhs.movieCode == rhs.movieCode &&
+        lhs.openDate == rhs.openDate &&
+        lhs.salesAmount == rhs.salesAmount &&
         lhs.salesShare == rhs.salesShare &&
-        lhs.salesInten == rhs.salesInten &&
+        lhs.salesFluctuation == rhs.salesFluctuation &&
         lhs.salesChange == rhs.salesChange &&
-        lhs.salesAcc == rhs.salesAcc &&
-        lhs.audiCnt == rhs.audiCnt &&
-        lhs.audiInten == rhs.audiInten &&
-        lhs.audiChange == rhs.audiChange &&
-        lhs.audiAcc == rhs.audiAcc &&
-        lhs.scrnCnt == rhs.scrnCnt &&
-        lhs.showCnt == rhs.showCnt
+        lhs.salesAccumulation == rhs.salesAccumulation &&
+        lhs.audienceCount == rhs.audienceCount &&
+        lhs.audienceFluctuation == rhs.audienceFluctuation &&
+        lhs.audienceChange == rhs.audienceChange &&
+        lhs.audienceAccumulation == rhs.audienceAccumulation &&
+        lhs.screenCount == rhs.screenCount &&
+        lhs.showCount == rhs.showCount
     }
 }
 
 extension BoxOfficeResult: Equatable {
      static func == (lhs: BoxOfficeResult, rhs: BoxOfficeResult) -> Bool {
-        return lhs.boxofficeType == rhs.boxofficeType &&
+         return lhs.boxOfficeType == rhs.boxOfficeType &&
         lhs.showRange == rhs.showRange &&
          lhs.dailyBoxOfficeList == rhs.dailyBoxOfficeList
     }
 }
 
-extension BoxOfficeData: Equatable {
-     static func == (lhs: BoxOfficeData, rhs: BoxOfficeData) -> Bool {
+extension BoxOfficeDataResponse: Equatable {
+     static func == (lhs: BoxOfficeDataResponse, rhs: BoxOfficeDataResponse) -> Bool {
         return lhs.boxOfficeResult == rhs.boxOfficeResult
     }
 }
