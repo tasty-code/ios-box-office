@@ -25,7 +25,7 @@ struct DailyBoxOfficeList: Decodable {
     let openingDay: String
     let salesAmount: String
     let salesShare: String
-    let salesChanageValue: String
+    let salesChangeValue: String
     let salesChangeRate: String
     let salesAccumulation: String
     let audienceCount: String
@@ -56,7 +56,7 @@ extension DailyBoxOfficeList {
         case openingDay = "openDt"
         case salesAmount = "salesAmt"
         case salesShare
-        case salesChanageValue = "salesInten"
+        case salesChangeValue = "salesInten"
         case salesChangeRate = "salesChange"
         case salesAccumulation = "salesAcc"
         case audienceCount = "audiCnt"
