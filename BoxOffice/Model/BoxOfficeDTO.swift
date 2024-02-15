@@ -23,22 +23,11 @@ final class BoxOfficeDTO {
         return data.0
     }
     
-    func parseJSONData<T: Decodable>(_ data: Data? = nil) -> T? {
-        
-        guard let fileLocation = Bundle.main.url(forResource: "box_office_sample", withExtension: "json") else {
-            return nil
-        }
-        
+    func parseJSONData<T: Decodable>(_ data: Data) -> T? {
         do {
-            guard let jsonData = data == nil ? try Data(contentsOf: fileLocation) : data else {
-                return nil
-            }
-            
             let decoder = JSONDecoder()
-            let data = try decoder.decode(T.self, from: jsonData)
-            
+            let data = try decoder.decode(T.self, from: data)
             return data
-            
         } catch {
             print(error)
             return nil
