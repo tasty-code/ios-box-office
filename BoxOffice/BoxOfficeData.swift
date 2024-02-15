@@ -8,7 +8,7 @@ struct BoxOfficeData: Codable {
 // MARK: - BoxOfficeResult
 struct BoxOfficeResult: Codable {
     let boxofficeType, showRange: String
-    let dailyBoxOfficeList: [DailyBoxOfficeList]
+    let dailyBoxOfficeList: [DailyBoxOfficeInfo]
     
     enum CodingKeys: String, CodingKey {
         case showRange, dailyBoxOfficeList
@@ -17,7 +17,7 @@ struct BoxOfficeResult: Codable {
 }
 
 // MARK: - DailyBoxOfficeList
-struct DailyBoxOfficeList: Codable {
+struct DailyBoxOfficeInfo: Codable {
     let number, rank, rankFluctuation, rankOldAndNew: String
     let movieCode, movieName, openDate: String
     let salesAmount, salesShare, salesFluctuation, salesChange, salesAccumulation: String

@@ -7,8 +7,8 @@
 
 import Foundation
 
-extension DailyBoxOfficeList: Equatable {
-    static func == (lhs: DailyBoxOfficeList, rhs: DailyBoxOfficeList) -> Bool {
+extension DailyBoxOfficeInfo: Equatable {
+    static func == (lhs: DailyBoxOfficeInfo, rhs: DailyBoxOfficeInfo) -> Bool {
         return lhs.rnum == rhs.rnum &&
         lhs.rank == rhs.rank &&
         lhs.rankInten == rhs.rankInten &&
