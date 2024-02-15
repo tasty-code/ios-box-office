@@ -32,7 +32,7 @@ extension BoxOfficeDTO {
         return data.0
     }
     
-    func parseJSONData(_ data: Data? = nil) -> BoxOfficeDetail? {
+    func parseJSONData<T: Decodable>(_ data: Data? = nil) -> T? {
         
         guard let fileLocation = Bundle.main.url(forResource: "box_office_sample", withExtension: "json") else {
             return nil
@@ -44,9 +44,9 @@ extension BoxOfficeDTO {
             }
             
             let decoder = JSONDecoder()
-            let data = try decoder.decode(BoxOfficeResult.self, from: jsonData)
+            let data = try decoder.decode(T.self, from: jsonData)
             
-            return data.boxOfficeResult
+            return data
             
         } catch {
             print(error)
