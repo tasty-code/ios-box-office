@@ -55,7 +55,6 @@
 		C14DF4B42B7DAE49009E3258 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		C14DF4B62B7DAF3A009E3258 /* Private.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Private.plist; sourceTree = "<group>"; };
 		C14DF4B82B7DAF97009E3258 /* MovieURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieURL.swift; sourceTree = "<group>"; };
-		C1D5F31D2B7DF3ED00E190B2 /* Private.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Private.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +136,6 @@
 		63DF20E22970E1A0005DF7D1 = {
 			isa = PBXGroup;
 			children = (
-				C1D5F31D2B7DF3ED00E190B2 /* Private.xcconfig */,
 				63DF20ED2970E1A0005DF7D1 /* BoxOffice */,
 				276ED7612B7B002600D37EBF /* BoxOfficeTests */,
 				63DF20EC2970E1A0005DF7D1 /* Products */,
@@ -322,7 +320,6 @@
 /* Begin XCBuildConfiguration section */
 		276ED7662B7B002600D37EBF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C1D5F31D2B7DF3ED00E190B2 /* Private.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -482,7 +479,6 @@
 		};
 		63DF21002970E1A1005DF7D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C1D5F31D2B7DF3ED00E190B2 /* Private.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

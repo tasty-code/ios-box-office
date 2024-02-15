@@ -8,7 +8,6 @@
 import Foundation
 
 extension Bundle {
-    
     var apiKey: String {
         guard 
             let file = self.path(forResource: "Private", ofType: "plist"),
