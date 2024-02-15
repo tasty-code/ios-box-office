@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class APIService {
+struct APIService {
     static func fetchData<T: Decodable>(urlString: String, completion: @escaping (Result<T, NetworkError>) -> Void) {
         guard 
             let url = URL(string: urlString)
