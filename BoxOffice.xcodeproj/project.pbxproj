@@ -10,7 +10,7 @@
 		15F45BDE2B7CBEB5006D9D28 /* BoxOfficeDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F45BDD2B7CBEB5006D9D28 /* BoxOfficeDataResponse.swift */; };
 		15F45BE02B7CC1EB006D9D28 /* JsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F45BDF2B7CC1EB006D9D28 /* JsonData.swift */; };
 		4EFE78BA2B7CBFBE00AA9CED /* BoxOfficeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFE78B92B7CBFBE00AA9CED /* BoxOfficeTests.swift */; };
-		4EFE78C12B7CC0CF00AA9CED /* extension+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFE78C02B7CC0CF00AA9CED /* extension+.swift */; };
+		4EFE78C12B7CC0CF00AA9CED /* BoxOfficeDataResponse+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFE78C02B7CC0CF00AA9CED /* BoxOfficeDataResponse+.swift */; };
 		63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */; };
 		63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */; };
 		63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF20F22970E1A0005DF7D1 /* ViewController.swift */; };
@@ -34,7 +34,7 @@
 		15F45BDF2B7CC1EB006D9D28 /* JsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonData.swift; sourceTree = "<group>"; };
 		4EFE78B72B7CBFBE00AA9CED /* BoxOfficeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EFE78B92B7CBFBE00AA9CED /* BoxOfficeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeTests.swift; sourceTree = "<group>"; };
-		4EFE78C02B7CC0CF00AA9CED /* extension+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension+.swift"; sourceTree = "<group>"; };
+		4EFE78C02B7CC0CF00AA9CED /* BoxOfficeDataResponse+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BoxOfficeDataResponse+.swift"; sourceTree = "<group>"; };
 		63DF20EB2970E1A0005DF7D1 /* BoxOffice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoxOffice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,9 +63,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E0382DF2B7E531F009F3F8A /* JsonData */ = {
+			isa = PBXGroup;
+			children = (
+				15F45BDF2B7CC1EB006D9D28 /* JsonData.swift */,
+			);
+			path = JsonData;
+			sourceTree = "<group>";
+		};
+		4E0382E02B7E539D009F3F8A /* BoxOfficeDataResponse+ */ = {
+			isa = PBXGroup;
+			children = (
+				4EFE78C02B7CC0CF00AA9CED /* BoxOfficeDataResponse+.swift */,
+			);
+			path = "BoxOfficeDataResponse+";
+			sourceTree = "<group>";
+		};
 		4EFE78B82B7CBFBE00AA9CED /* BoxOfficeTests */ = {
 			isa = PBXGroup;
 			children = (
+				4E0382E02B7E539D009F3F8A /* BoxOfficeDataResponse+ */,
+				4E0382DF2B7E531F009F3F8A /* JsonData */,
 				4EFE78B92B7CBFBE00AA9CED /* BoxOfficeTests.swift */,
 			);
 			path = BoxOfficeTests;
@@ -93,8 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				15F45BDD2B7CBEB5006D9D28 /* BoxOfficeDataResponse.swift */,
-				4EFE78C02B7CC0CF00AA9CED /* extension+.swift */,
-				15F45BDF2B7CC1EB006D9D28 /* JsonData.swift */,
 				63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */,
 				63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */,
 				63DF20F22970E1A0005DF7D1 /* ViewController.swift */,
@@ -216,7 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
-				4EFE78C12B7CC0CF00AA9CED /* extension+.swift in Sources */,
+				4EFE78C12B7CC0CF00AA9CED /* BoxOfficeDataResponse+.swift in Sources */,
 				15F45BDE2B7CBEB5006D9D28 /* BoxOfficeDataResponse.swift in Sources */,
 				15F45BE02B7CC1EB006D9D28 /* JsonData.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
