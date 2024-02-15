@@ -28,16 +28,10 @@ disabled_rules:
 
 # 옵트 인 룰
 opt_in_rules:
-  - indentation_width # 인덴트 룰 적용
   - closure_end_indentation # 클로저의 끝 괄호를 시작한 행과의 들여쓰기 맞춤
   - empty_count # count보다 isEmpty 선호
   - empty_string # == ""보다 isEmpty 선호
   - sorted_imports # import 시 알파벳 순 정렬
-
-# 인덴트 커스텀 정의
-indentation_width:
-  indentation_width: 4
-  include_comments: false
 
 # 타입 네이밍 커스텀 정의
 type_name:

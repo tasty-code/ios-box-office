@@ -19,7 +19,7 @@ struct MovieBoxOffice {
     private let screenCount: Int
     private let showingCount: Int
     
-    init(from movieBoxOfficeDTO: MovieBoxOfficeDTO) {
+    init(from movieBoxOfficeDTO: BoxOfficeResponseDTO.BoxOfficeDTO.MovieBoxOfficeDTO) {
         self.rank = Int(movieBoxOfficeDTO.rank) ?? 0
         self.rankChangesWithPreviousDay = Int(movieBoxOfficeDTO.rankChangesWithPreviousDay) ?? 0
         self.rankOldAndNew = movieBoxOfficeDTO.rankOldAndNew == RankOldAndNew.new.rawValue ? .new : .old
