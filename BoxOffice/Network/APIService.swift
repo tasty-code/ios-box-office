@@ -18,7 +18,9 @@ final class APIService {
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             DispatchQueue.main.async {
-                guard error == nil else {
+                guard 
+                    error == nil
+                else {
                     completion(.failure(.requestFailError))
                     return
                 }
@@ -43,7 +45,8 @@ final class APIService {
                 
                 guard
                     let data = data
-                else { completion(.failure(.noDataError))
+                else { 
+                    completion(.failure(.noDataError))
                     return
                 }
                 
