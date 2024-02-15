@@ -13,7 +13,8 @@ final class MovieManager {
 
 extension MovieManager {
     private func fetchMovies(date: String, completion: @escaping (Result<Movie, NetworkError>) -> Void) {
-        let urlString = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=\(date)"
+        
+        var urlString = MovieURL.makeURL(date: date)
         
         APIService.fetchData(urlString: urlString) { (result: Result<Movie, NetworkError>) in
             switch result {
