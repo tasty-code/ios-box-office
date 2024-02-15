@@ -42,7 +42,9 @@ final class BoxOfficeTests: BaseTestCase {
     
     func test_mock데이터가_Parsing_후_dailyBoxOfficeList안에_다섯번째_요소의_movieName이_해피_뉴_이어_반환() {
         var result: String!
+        var movieCode: String!
         var expectation: String?
+        var expectationCode: String?
         
         given {
             guard let dataAsset = NSDataAsset(name: "MockData", bundle: Bundle(for: BoxOfficeTests.self)) else {
@@ -50,14 +52,17 @@ final class BoxOfficeTests: BaseTestCase {
             }
             mockData = dataAsset
             expectation = "해피 뉴 이어"
+            expectationCode = "20217807"
         }
         
         when {
             sut = try? JSONDecoder().decode(BoxOfficeData.self, from: mockData.data)
             result = sut.boxOfficeResult.dailyBoxOfficeList[4].movieName
+            movieCode = sut.boxOfficeResult.dailyBoxOfficeList[4].movieCode
         }
         
         then {
+            XCTAssertEqual(movieCode, expectationCode)
             XCTAssertEqual(result, expectation)
         }
     }
