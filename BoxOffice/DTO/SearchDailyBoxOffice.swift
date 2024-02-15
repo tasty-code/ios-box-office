@@ -1,15 +1,11 @@
-// MARK: - Movies
 struct SearchDailyBoxOffice: Decodable {
-  // MARK: - BoxOfficeResult
   struct BoxOfficeResult: Decodable {
-    // MARK: - DailyBoxOfficeList
     struct DailyBoxOfficeList: Decodable {
-      // MARK: - EntryStatus
       enum EntryStatus: String, Codable {
         case new = "NEW"
         case old = "OLD"
       }
-
+      
       let index: String
       let rank: String
       let rankChange: String

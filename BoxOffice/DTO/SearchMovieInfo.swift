@@ -1,10 +1,6 @@
-// MARK: - SearchMovieInfo
 struct SearchMovieInfo: Decodable {
-  // MARK: - MovieInfoResult
   struct MovieInfoResult: Decodable {
-    // MARK: - MovieInfo
     struct MovieInfo: Decodable {
-      // MARK: - Nation
       struct Nation: Decodable {
         let nationName: String
         
@@ -12,8 +8,7 @@ struct SearchMovieInfo: Decodable {
           case nationName = "nationNm"
         }
       }
-
-      // MARK: - Genre
+      
       struct Genre: Decodable {
         let genreName: String
         
@@ -21,8 +16,7 @@ struct SearchMovieInfo: Decodable {
           case genreName = "genreNm"
         }
       }
-
-      // MARK: - Director
+      
       struct Director: Decodable {
         let name: String
         let englishName: String
@@ -32,14 +26,13 @@ struct SearchMovieInfo: Decodable {
           case englishName = "peopleNmEn"
         }
       }
-
-      // MARK: - Actor
+      
       struct Actor: Decodable {
         let name: String
         let englishName: String
         let castingName: String
         let castingEnglishName: String
-            
+        
         enum CodingKeys: String, CodingKey {
           case name = "peopleNm"
           case englishName = "peopleNmEn"
@@ -47,8 +40,7 @@ struct SearchMovieInfo: Decodable {
           case castingEnglishName = "castEn"
         }
       }
-
-      // MARK: - ShowType
+      
       struct ShowType: Decodable {
         let showTypeGroup: String
         let showTypeName: String
@@ -58,8 +50,7 @@ struct SearchMovieInfo: Decodable {
           case showTypeName = "showTypeNm"
         }
       }
-
-      // MARK: - Company
+      
       struct Company: Decodable {
         let companyCode: String
         let companyName: String
@@ -73,8 +64,7 @@ struct SearchMovieInfo: Decodable {
           case companyParticipationType = "companyPartNm"
         }
       }
-
-      // MARK: - Audit
+      
       struct Audit: Decodable {
         let auditCode: String
         let rating: String
@@ -84,8 +74,7 @@ struct SearchMovieInfo: Decodable {
           case rating = "watchGradeNm"
         }
       }
-
-      // MARK: - Staff
+      
       struct Staff: Decodable {
         let name: String
         let englishName: String
@@ -136,10 +125,10 @@ struct SearchMovieInfo: Decodable {
         case staffs
       }
     }
-
+    
     let movieInfo: MovieInfo
     let source: String
   }
-
+  
   let movieInfoResult: MovieInfoResult
 }
