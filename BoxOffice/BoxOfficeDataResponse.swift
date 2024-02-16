@@ -21,7 +21,6 @@ struct BoxOfficeDataResponse: Codable {
     }
 }
 
-// MARK: - DailyBoxOfficeList
 struct DailyBoxOfficeInfo: Codable {
     let number: String
     let rank: String
