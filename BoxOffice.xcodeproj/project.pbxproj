@@ -122,8 +122,6 @@
 		8A8903842B7B756200E0A48D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				63DF20F72970E1A1005DF7D1 /* Assets.xcassets */,
-				63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -152,6 +150,8 @@
 		9B8ACB442B7F292200AF2527 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				63DF20F72970E1A1005DF7D1 /* Assets.xcassets */,
+				63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
