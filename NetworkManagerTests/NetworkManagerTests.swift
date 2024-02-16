@@ -19,7 +19,7 @@ final class NetworkManagerTests: XCTestCase {
         sut = nil
     }
 
-    func test_fetchDailyBoxOffice_succesee() {
+    func test_fetchDailyBoxOffice_success() {
         let promise = expectation(description: "")
         
         guard let data = DailyBoxOfficeData.json.data(using: .utf8) else { return }
@@ -28,6 +28,24 @@ final class NetworkManagerTests: XCTestCase {
         var result: BoxOfficeDataResponse?
         
         sut.fetchDailyBoxOffice(date: "20240210") { response, error in
+            result = response
+            XCTAssertEqual(result, expectation)
+            
+            promise.fulfill()
+        }
+        
+        wait(for: [promise], timeout: 10)
+    }
+    
+    func test_fetchDetail_success() {
+        let promise = expectation(description: "")
+        
+        guard let data = MovieDetailData.json.data(using: .utf8) else { return }
+        
+        let expectation: MovieDetail? = try? JSONDecoder().decode(MovieDetail.self, from: data)
+        var result: MovieDetail?
+        
+        sut.fetchDetail(code: "20236180") { response, error in
             result = response
             XCTAssertEqual(result, expectation)
             
