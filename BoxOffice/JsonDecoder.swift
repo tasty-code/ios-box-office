@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct JsonDecoder<Element: Codable> {
+struct JsonDecoder<Element: Decodable> {
     
     func loadData(from fileName: String, of fileType: String) throws -> Element? {
         guard
