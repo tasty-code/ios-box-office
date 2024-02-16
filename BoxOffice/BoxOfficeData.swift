@@ -19,7 +19,7 @@ struct DailyBoxOfficeList: Codable {
     let audienceCount, audienceIntenstity, audienceChange, audienceAccount: String
     let screenCount, showCount: String
 
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case rankNumber = "rnum"
         case rank
         case rankIntensity = "rankInten"
