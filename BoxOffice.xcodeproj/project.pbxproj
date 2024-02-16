@@ -71,6 +71,42 @@
 			path = TestJsonData;
 			sourceTree = "<group>";
 		};
+		4E0382F22B7FB7B2009F3F8A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				15F45BDD2B7CBEB5006D9D28 /* BoxOfficeDataResponse.swift */,
+				4E0382F02B7FB3B6009F3F8A /* MovieInfo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4E0382F32B7FB81E009F3F8A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				63DF20F22970E1A0005DF7D1 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4E0382F42B7FB844009F3F8A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				63DF20F42970E1A0005DF7D1 /* Main.storyboard */,
+				63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4E0382F52B7FB86A009F3F8A /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */,
+				63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */,
+				63DF20F72970E1A1005DF7D1 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		4EFE78B82B7CBFBE00AA9CED /* BoxOfficeTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,14 +137,10 @@
 		63DF20ED2970E1A0005DF7D1 /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
-				15F45BDD2B7CBEB5006D9D28 /* BoxOfficeDataResponse.swift */,
-				4E0382F02B7FB3B6009F3F8A /* MovieInfo.swift */,
-				63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */,
-				63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */,
-				63DF20F22970E1A0005DF7D1 /* ViewController.swift */,
-				63DF20F42970E1A0005DF7D1 /* Main.storyboard */,
-				63DF20F72970E1A1005DF7D1 /* Assets.xcassets */,
-				63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */,
+				4E0382F52B7FB86A009F3F8A /* Resource */,
+				4E0382F32B7FB81E009F3F8A /* Controller */,
+				4E0382F42B7FB844009F3F8A /* View */,
+				4E0382F22B7FB7B2009F3F8A /* Model */,
 				63DF20FC2970E1A1005DF7D1 /* Info.plist */,
 			);
 			path = BoxOffice;
