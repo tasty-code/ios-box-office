@@ -98,11 +98,11 @@
 		63DF20ED2970E1A0005DF7D1 /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
-				63DF20FC2970E1A1005DF7D1 /* Info.plist */,
+				9B8ACB432B7F291000AF2527 /* Utility */,
+				9B8ACB442B7F292200AF2527 /* Resource */,
 				8A8903852B7B756A00E0A48D /* Controller */,
 				8A8903842B7B756200E0A48D /* View */,
 				8A8903832B7B755800E0A48D /* Model */,
-				8A7E8B4E2B7DFC7300B73165 /* APIKey.plist */,
 			);
 			path = BoxOffice;
 			sourceTree = "<group>";
@@ -110,13 +110,9 @@
 		8A8903832B7B755800E0A48D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9BB8EAB32B7B0D5D00B33116 /* box_office_sample.json */,
-				8A8903862B7B775400E0A48D /* BoxOfficeStructure.swift */,
 				8A760EB42B7C4F9C00199C18 /* BoxOfficeDTO.swift */,
+				8A8903862B7B775400E0A48D /* BoxOfficeStructure.swift */,
 				9BB8EB062B7DE94500B33116 /* MovieStructure.swift */,
-				8A7E8B4C2B7DFA3600B73165 /* KoreanFilmCouncilURLEnumeration.swift */,
-				8A7E8B502B7DFD8300B73165 /* BoxOffice_BundleExtension.swift */,
-				8A7E8B522B7E32CD00B73165 /* HTTPStatusError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,12 +136,64 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		9B8ACB432B7F291000AF2527 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				9B8ACB462B7F2ADA00AF2527 /* Extension */,
+				9B8ACB452B7F2AC200AF2527 /* Enumeration */,
+				63DF20FC2970E1A1005DF7D1 /* Info.plist */,
+				8A7E8B4E2B7DFC7300B73165 /* APIKey.plist */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		9B8ACB442B7F292200AF2527 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		9B8ACB452B7F2AC200AF2527 /* Enumeration */ = {
+			isa = PBXGroup;
+			children = (
+				8A7E8B4C2B7DFA3600B73165 /* KoreanFilmCouncilURLEnumeration.swift */,
+				8A7E8B522B7E32CD00B73165 /* HTTPStatusError.swift */,
+			);
+			path = Enumeration;
+			sourceTree = "<group>";
+		};
+		9B8ACB462B7F2ADA00AF2527 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8A7E8B502B7DFD8300B73165 /* BoxOffice_BundleExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		9B8ACB472B7F2B1B00AF2527 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				9BB8EAB32B7B0D5D00B33116 /* box_office_sample.json */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		9B8ACB482B7F2B3500AF2527 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				8A7E8B542B7E37B400B73165 /* FakeBoxOfficeDTO.swift */,
+				9B8ACB412B7E229900AF2527 /* FakeServer.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		9BB8EADE2B7B7DA900B33116 /* BoxOfficeTests */ = {
 			isa = PBXGroup;
 			children = (
+				9B8ACB482B7F2B3500AF2527 /* Utility */,
+				9B8ACB472B7F2B1B00AF2527 /* Resource */,
 				9BB8EADF2B7B7DA900B33116 /* BoxOfficeTests.swift */,
-				9B8ACB412B7E229900AF2527 /* FakeServer.swift */,
-				8A7E8B542B7E37B400B73165 /* FakeBoxOfficeDTO.swift */,
 				8A7E8B562B7E385700B73165 /* RequestDataTests.swift */,
 			);
 			path = BoxOfficeTests;
