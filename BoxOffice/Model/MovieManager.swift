@@ -14,7 +14,7 @@ final class MovieManager {
 extension MovieManager {
     private func fetchMovies(date: String, completion: @escaping (Result<Movie, NetworkError>) -> Void) {
         
-        var urlString = MovieURL.makeURL(date: date)
+        let urlString = MovieURL.makeURL(date: date)
         
         APIService.fetchData(urlString: urlString) { (result: Result<Movie, NetworkError>) in
             switch result {
