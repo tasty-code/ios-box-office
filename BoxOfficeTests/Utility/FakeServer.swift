@@ -34,8 +34,8 @@ struct FakeServer {
             
             return (input, HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil))
         
-        case .movieDetailInfomation("", ""):
-            guard fakeURL_MovieDetailInfomation == url.absoluteString else {
+        case .movieDetailInformation("", ""):
+            guard fakeURL_MovieDetailInformation == url.absoluteString else {
                 throw HTTPStatusError.clientError
             }
             
