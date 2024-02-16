@@ -1,6 +1,6 @@
 //
-//  BoxOfficeTests.swift
-//  BoxOfficeTests
+//  ParseJSONDataTests.swift
+//  ParseJSONDataTests
 //
 //  Created by LeeSeongYeon on 2024/02/13.
 //
@@ -8,7 +8,7 @@
 import XCTest
 @testable import BoxOffice
 
-final class BoxOfficeTests: XCTestCase {
+final class ParseJSONDataTests: XCTestCase {
     
     func test_parseJSONData_성공시_BoxOfficeResult_인스턴스를_반환하는가() {
         // given
