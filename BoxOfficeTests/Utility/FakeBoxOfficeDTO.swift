@@ -9,7 +9,7 @@ import Foundation
 @testable import BoxOffice
 
 struct FakeBoxOfficeDTO {
-    static func requestData(with url: String) async -> Data? {
+    static func requestData(with url: String) -> Data? {
         do {
             guard let URL = URL(string: url) else {
                 return nil

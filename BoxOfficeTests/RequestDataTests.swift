@@ -26,12 +26,7 @@ final class RequestDataTests: XCTestCase {
             let expectation = try Data(contentsOf: sample)
             
             // when
-            var result: Data? = nil
-            do {
-                result = try FakeBoxOfficeDTO.requestData(with: input)
-            } catch {
-                print(error.localizedDescription)
-            }
+            let result = FakeBoxOfficeDTO.requestData(with: input)
             
             // then
             XCTAssertEqual(expectation, result, "true 를 반환해야 함")
