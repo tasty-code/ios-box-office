@@ -9,10 +9,9 @@ import UIKit
 
 final class BoxOfficeViewController: UIViewController {
     
-    private let dataSource: BoxOfficeDTO
+    private var dataSource: BoxOfficeResult? = nil
     
-    init(dataSource: BoxOfficeDTO) {
-        self.dataSource = dataSource
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
     

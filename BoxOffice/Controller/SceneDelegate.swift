@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let viewController = BoxOfficeViewController(dataSource: BoxOfficeDTO())
+        let viewController = BoxOfficeViewController()
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
     }
