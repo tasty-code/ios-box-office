@@ -6,6 +6,7 @@
 //
 
 struct Movie: Codable {
-    let boxOfficeResult: BoxOfficeResult
-    let movieInfoResult: MovieInfoResult
+    let boxOfficeResult: BoxOfficeResult?
+    let movieInfoResult: MovieInfoResult?
 }
+
