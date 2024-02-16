@@ -20,4 +20,23 @@ struct NetworkManager {
             completion(movie, nil)
         }.resume()
     }
+    
+    func fetchDetail(completion: @escaping (MovieDetail?, Error?) -> Void) {
+        guard let url = URL(string: "http://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=ab168a1eb56e21306b897acd3d4653ce&movieCd=20240210") else { return }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else { completion(nil, error)
+                return
+            }
+            
+            guard let data = data else { return }
+            guard let movie = try? JSONDecoder().decode(MovieDetail.self, from: data) else { return }
+            completion(movie, nil)
+        }.resume()
+    }
 }
