@@ -20,10 +20,9 @@ final class BoxOfficeTest: XCTestCase {
         // given
         let expectation: String? = "일별 박스오피스"
         // when
-        let result: BoxOfficeResultDTO? = sut.parseJson()
-        let boxOfficeType: String? = result?.boxOfficeResult.boxOfficeType
+        let result = sut.parseJson()?.boxOfficeResult.boxOfficeType
         // then
-        XCTAssertEqual(expectation, boxOfficeType)
+        XCTAssertEqual(expectation, result)
     }
 
 }
