@@ -2,12 +2,13 @@
 import Foundation
 
 struct NetworkManager {
+    let urlSession = URLSession.shared
     let key = "ab168a1eb56e21306b897acd3d4653ce"
     
     func fetchDailyBoxOffice(date: String, completion: @escaping (BoxOfficeDataResponse?, Error?) -> Void) {
         guard let url = URL(string: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(key)&targetDt=\(date)") else { return }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        urlSession.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(nil, FetchError.invalidURL)
                 return
@@ -30,7 +31,7 @@ struct NetworkManager {
     func fetchDetail(code: String, completion: @escaping (MovieDetail?, Error?) -> Void) {
         guard let url = URL(string: "http://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=\(key)&movieCd=\(code)") else { return }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        urlSession.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(nil, FetchError.invalidURL)
                 return
