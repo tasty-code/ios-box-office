@@ -53,9 +53,9 @@ final class BoxOfficeTests: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
     }
     
-    func test_url이_잘못된_주소로_데이터_파싱_됐을_때_fetchMovie에서_requestFailError_감지발생() {
+    func test_url이_잘못된_주소로_데이터_파싱_됐을_때_fetchMovie에서_invalidURLError_감지발생() {
         // given
-        let url = "😄😄😄😄"
+        let url = "https:// www.  asdasdasdasd 어ㅏㅏ우워ㅏㅏㅏㅏㅇㅇㅇ아ㅏ누ㅜ자ㅜ럼ㄴ류ㅓㅂㅈ구ㅏ물눠ㅠ"
         
         // when
         let expectation = XCTestExpectation(description: "데이터 패치 중...")
@@ -67,7 +67,7 @@ final class BoxOfficeTests: XCTestCase {
                 XCTFail("데이터 파싱 성공: \(movies))")
             case .failure(let error):
                 // then
-                XCTAssertEqual(error, NetworkError.requestFailError)
+                XCTAssertEqual(error, NetworkError.invalidURLError)
             }
             expectation.fulfill()
         }
