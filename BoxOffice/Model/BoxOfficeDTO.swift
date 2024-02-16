@@ -15,12 +15,22 @@ struct BoxOfficeDTO {
         
         let data = try await URLSession.shared.data(from: URL)
         
-        guard let httpResponse = data.1 as? HTTPURLResponse,
-              (200...299).contains(httpResponse.statusCode) else {
+        guard let httpResponse = data.1 as? HTTPURLResponse else {
             return nil
         }
         
-        return data.0
+        switch httpResponse.statusCode {
+        case 200...299:
+            return data.0
+        case 300...399:
+            throw HTTPStatusError.redirection
+        case 400...499:
+            throw HTTPStatusError.clientError
+        case 500...599:
+            throw HTTPStatusError.serverError
+        default:
+            return nil
+        }
     }
     
     static func parseJSONData<T: Decodable>(_ data: Data) -> T? {
