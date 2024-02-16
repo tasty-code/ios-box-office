@@ -12,7 +12,7 @@ struct APIService {
         guard 
             let url = URL(string: urlString)
         else {
-            completion(.failure(.unknownError))
+            completion(.failure(.invalidURLError))
             return
         }
         
