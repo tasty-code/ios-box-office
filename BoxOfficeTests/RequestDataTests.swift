@@ -16,22 +16,27 @@ final class RequestDataTests: XCTestCase {
          sut = FakeBoxOfficeDTO()
     }
 
-    func test_일별박스오피스_API문서를_요청했을때_알맞은응답을수신하는가() {
+    func test_일별박스오피스_API문서를_요청했을때_알맞은데이터를수신하는가() {
         // given
-        let input: String = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20120101"
-        let expectation = """
-        {"boxOfficeResult":{"boxofficeType":"일별 박스오피스","showRange":"20220105~20220105","dailyBoxOfficeList":[{"rnum":"1","rank":"1","rankInten":"0","rankOldAndNew":"NEW","movieCd":"20199882","movieNm":"경관의 피","openDt":"2022-01-05","salesAmt":"584559330","salesShare":"34.2","salesInten":"584559330","salesChange":"100","salesAcc":"631402330","audiCnt":"64050","audiInten":"64050","audiChange":"100","audiAcc":"69228","scrnCnt":"1171","showCnt":"4416"}]}}
-        """.data(using: .utf8)
-        
-        // when
-        var result: Data? = nil
         do {
-            result = try sut?.requestData(with: input)
+            let input: String = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20220105"
+            guard let sample = Bundle.main.url(forResource: "box_office_sample", withExtension: "json") else {
+                return
+            }
+            let expectation = try Data(contentsOf: sample)
+            
+            // when
+            var result: Data? = nil
+            do {
+                result = try FakeBoxOfficeDTO.requestData(with: input)
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+            // then
+            XCTAssertEqual(expectation, result, "true 를 반환해야 함")
         } catch {
             print(error.localizedDescription)
         }
-        
-        // then
-        XCTAssertEqual(expectation, result, "true 를 반환해야 함")
     }
 }
