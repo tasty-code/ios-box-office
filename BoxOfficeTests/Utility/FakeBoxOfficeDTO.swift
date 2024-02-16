@@ -7,8 +7,8 @@
 
 import Foundation
 
-final class FakeBoxOfficeDTO {
-    func requestData(with url: String) throws -> Data? {
+struct FakeBoxOfficeDTO {
+    static func requestData(with url: String) throws -> Data? {
         guard let URL = URL(string: url) else {
             return nil
         }

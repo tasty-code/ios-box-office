@@ -8,16 +8,16 @@
 import Foundation
 @testable import BoxOffice
 
-class FakeServer {
-    static let fakeURL_MovieDetailInfomation: String = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd=20124079"
+struct FakeServer {
+    static let fakeURL_MovieDetailInformation: String = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd=20124079"
     static let fakeURL_DailyBoxOffice: String = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20120101"
     
-    class func data(from url: URL) throws -> (Data?, HTTPURLResponse?) {
+    static func data(from url: URL) throws -> (Data?, HTTPURLResponse?) {
         let type: KoreanFilmCouncilURLEnumeration?
         if url.absoluteString.contains("searchDailyBoxOfficeList") {
             type = .dailyBoxOffice("", "")
         } else if url.absoluteString.contains("searchMovieInfo") {
-            type = .movieDetailInfomation("", "")
+            type = .movieDetailInformation("", "")
         } else {
             throw HTTPStatusError.clientError
         }

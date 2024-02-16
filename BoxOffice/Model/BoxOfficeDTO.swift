@@ -7,8 +7,8 @@
 
 import Foundation
 
-final class BoxOfficeDTO {
-    func requestData(with url: String) async throws -> Data? {
+struct BoxOfficeDTO {
+    static func requestData(with url: String) async throws -> Data? {
         guard let URL = URL(string: url) else {
             return nil
         }
@@ -23,7 +23,7 @@ final class BoxOfficeDTO {
         return data.0
     }
     
-    func parseJSONData<T: Decodable>(_ data: Data) -> T? {
+    static func parseJSONData<T: Decodable>(_ data: Data) -> T? {
         do {
             let decoder = JSONDecoder()
             let data = try decoder.decode(T.self, from: data)
