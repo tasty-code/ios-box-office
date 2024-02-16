@@ -2,37 +2,58 @@
 import Foundation
 
 struct BoxOfficeDataResponse: Codable {
-    let boxOfficeResult: BoxOfficeResult
-}
-
-// MARK: - BoxOfficeResult
-struct BoxOfficeResult: Codable {
-    let boxOfficeType, showRange: String
-    let dailyBoxOfficeList: [DailyBoxOfficeInfo]
+    let boxOfficeType: String?
+    let showRange: String?
+    let dailyBoxOfficeList: [DailyBoxOfficeInfo]?
     
     enum CodingKeys: String, CodingKey {
-        case showRange, dailyBoxOfficeList
+        case showRange
+        case dailyBoxOfficeList
         case boxOfficeType = "boxofficeType"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.boxOfficeType = try container.decodeIfPresent(String.self, forKey: .boxOfficeType)
+        self.showRange = try container.decodeIfPresent(String.self, forKey: .showRange)
+        self.dailyBoxOfficeList = try container.decodeIfPresent([DailyBoxOfficeInfo].self, forKey: .dailyBoxOfficeList)
+        
     }
 }
 
 // MARK: - DailyBoxOfficeList
 struct DailyBoxOfficeInfo: Codable {
-    let number, rank, rankFluctuation, rankOldAndNew: String
-    let movieCode, movieName, openDate: String
-    let salesAmount, salesShare, salesFluctuation, salesChange, salesAccumulation: String
-    let audienceCount, audienceFluctuation, audienceChange, audienceAccumulation: String
-    let screenCount, showCount: String
+    let number: String
+    let rank: String
+    let rankFluctuation: String
+    let rankOldAndNew: String
+    let movieCode: String
+    let movieName: String
+    let openDate: String
+    let salesAmount: String
+    let salesShare: String
+    let salesFluctuation: String
+    let salesChange: String
+    let salesAccumulation: String
+    let audienceCount: String
+    let audienceFluctuation: String
+    let audienceChange: String
+    let audienceAccumulation: String
+    let screenCount: String
+    let showCount: String
 
     enum CodingKeys: String, CodingKey {
-        case rank, rankOldAndNew, salesShare, salesChange
         case number = "rnum"
+        case rank
         case rankFluctuation = "rankInten"
+        case rankOldAndNew
         case movieCode = "movieCd"
         case movieName = "movieNm"
         case openDate = "openDt"
         case salesAmount = "salesAmt"
+        case salesShare
         case salesFluctuation = "salesInten"
+        case salesChange
         case salesAccumulation = "salesAcc"
         case audienceCount = "audiCnt"
         case audienceFluctuation = "audiInten"
