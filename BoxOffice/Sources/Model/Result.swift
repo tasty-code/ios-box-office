@@ -8,6 +8,6 @@
 import Foundation
 
 enum Result {
-    case success(BoxOfficeDTO)
+    case success(BoxOfficeResponseDTO)
     case failure(NetworkError)
 }

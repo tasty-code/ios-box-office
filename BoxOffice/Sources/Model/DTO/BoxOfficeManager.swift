@@ -14,8 +14,7 @@ class BoxOffice {
         let dailyResponse = DailyBoxOfficeResponse(
             urlString: "https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json",
             keyValue: "2c7b3f6025093cbb1df0f1e819bf8c65",
-            targetDtValue: "20240215")
-//            targetDtValue: date)
+            targetDtValue: date)
         guard let request = dailyResponse.request() else {
             return
         }

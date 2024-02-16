@@ -8,7 +8,7 @@
 import Foundation
 
 class JsonParser {
-    func parseBoxOfficeSample() -> BoxOfficeDTO? {
+    func parseBoxOfficeSample() -> BoxOfficeResponseDTO? {
         guard let path = Bundle.main.path(forResource: "box_office_sample", ofType: "json"),
               let jsonString = try? String(contentsOfFile: path)
         else {
@@ -18,7 +18,7 @@ class JsonParser {
         let decoder = JSONDecoder()
         let data = jsonString.data(using: .utf8)
         guard let data = data,
-              let result = try? decoder.decode(BoxOfficeDTO.self, from: data)
+              let result = try? decoder.decode(BoxOfficeResponseDTO.self, from: data)
         else {
             return nil
         }

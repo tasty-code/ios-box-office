@@ -55,7 +55,7 @@ class DailyBoxOfficeResponse {
             if let response: HTTPURLResponse = response as? HTTPURLResponse {
                 // 요청 성공 (StatusCode가 200번대)
                 if successRange.contains(response.statusCode) {
-                    guard let userInfo: BoxOfficeDTO = try? JSONDecoder().decode(BoxOfficeDTO.self, from: data) else {
+                    guard let userInfo: BoxOfficeResponseDTO = try? JSONDecoder().decode(BoxOfficeResponseDTO.self, from: data) else {
                         return
                     }
                     completionHandler(.success(userInfo))
