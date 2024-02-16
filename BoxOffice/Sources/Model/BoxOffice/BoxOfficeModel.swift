@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK: - BoxOfficeResponse
-struct BoxOfficeResponse: Codable {
+// MARK: - BoxOfficeDTO
+struct BoxOfficeDTO: Codable {
     let boxOfficeResult: BoxOfficeResult
 }
 

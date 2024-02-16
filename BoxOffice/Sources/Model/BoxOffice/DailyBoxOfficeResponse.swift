@@ -1,18 +1,22 @@
 //
-//  DailyBoxOffice.swift
+//  URLSession.swift
 //  BoxOffice
 //
-//  Created by Roh on 2/14/24.
+//  Created by Roh on 2/16/24.
 //
 
 import Foundation
 
-class BoxOffice {
+class DailyBoxOfficeResponse {
     private var urlRequest: URLRequest?
-    private let group = DispatchGroup()
+    private var urlString: String
+    private var keyValue: String
+    private var targetDtValue: String
     
-    func startLoad() {
-        
+    init(urlString: String, keyValue: String, targetDtValue: String) {
+        self.urlString = urlString
+        self.keyValue = keyValue
+        self.targetDtValue = targetDtValue
     }
     
     func request() -> URLRequest? {
@@ -34,15 +38,10 @@ class BoxOffice {
                 print("failure \(error.localizedDescription)")
             }
         })
-//        DispatchQueue.global().async(group: group) { [self] in
-//            
-//            group.leave()
-//        }
     }
     
-    private func setSession(request: URLRequest, completionHandler: @escaping (Result) -> ())  {
-        
-        let session: URLSession = URLSession(configuration: .default)
+    private func setSession(request: URLRequest, completionHandler: @escaping (Result) -> ()) {
+        let session: URLSession = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
             let successRange: Range = (200..<300)
             // 통신 성공
@@ -54,27 +53,24 @@ class BoxOffice {
             }
             
             if let response: HTTPURLResponse = response as? HTTPURLResponse {
-                debugPrint("status code: \(response.statusCode)")
-                
                 // 요청 성공 (StatusCode가 200번대)
-                if successRange.contains(response.statusCode){
-                    // decode
-                    guard let userInfo: BoxOfficeResponse = try? JSONDecoder().decode(BoxOfficeResponse.self, from: data) else { return
+                if successRange.contains(response.statusCode) {
+                    guard let userInfo: BoxOfficeDTO = try? JSONDecoder().decode(BoxOfficeDTO.self, from: data) else {
+                        return
                     }
                     completionHandler(.success(userInfo))
                 } else { //요청 실패 (Status code가 200대 아님)
                     completionHandler(.failure(NetworkError.serverError(code: response.statusCode)))
                 }
             }
-            
         }.resume()
     }
     
     
     private func setURL() -> URL? {
-        let urlString = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
-        let keyValue = "2c7b3f6025093cbb1df0f1e819bf8c65"
-        let targetDtValue = "20240212"
+//        let urlString = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
+//        let keyValue = "2c7b3f6025093cbb1df0f1e819bf8c65"
+//        let targetDtValue = "20240212"
         
         guard var urlComponents: URLComponents = URLComponents(string: urlString) else {
             return nil
@@ -91,4 +87,5 @@ class BoxOffice {
         
         return url
     }
+
 }
