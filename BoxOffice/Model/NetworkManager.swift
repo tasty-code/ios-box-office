@@ -2,8 +2,8 @@
 import Foundation
 
 struct NetworkManager {
-    let urlSession = URLSession.shared
-    let key = "ab168a1eb56e21306b897acd3d4653ce"
+    private let urlSession = URLSession.shared
+    private let key = "ab168a1eb56e21306b897acd3d4653ce"
     
     func fetchDailyBoxOffice(date: String, completion: @escaping (BoxOfficeDataResponse?, Error?) -> Void) {
         guard let url = URL(string: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(key)&targetDt=\(date)") else { return }

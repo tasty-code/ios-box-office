@@ -29,7 +29,7 @@ struct MovieInfo: Codable {
     let audits: [Audit]
     let staffs: [Staff]
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case movieCode = "movieCd"
         case movieName = "movieNm"
         case movieEnglishName = "movieNmEn"
@@ -56,7 +56,7 @@ struct Actor: Codable {
     let cast: String
     let castEnglish: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case cast
         case peopleName = "peopleNm"
         case peopleEnglishName = "peopleNmEn"
@@ -68,7 +68,7 @@ struct Audit: Codable {
     let auditNumber: String
     let watchGradeName: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case auditNumber = "auditNo"
         case watchGradeName = "watchGradeNm"
     }
@@ -80,7 +80,7 @@ struct Company: Codable {
     let companyEnglishName: String
     let companyPartName: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case companyCode = "companyCd"
         case companyName = "companyNm"
         case companyEnglishName = "companyNmEn"
@@ -92,7 +92,7 @@ struct Director: Codable {
     let peopleName: String
     let peopleEnglishName: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case peopleName = "peopleNm"
         case peopleEnglishName = "peopleNmEn"
     }
@@ -101,7 +101,7 @@ struct Director: Codable {
 struct Genre: Codable {
     let genreName: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case genreName = "genreNm"
     }
 }
@@ -109,7 +109,7 @@ struct Genre: Codable {
 struct Nation: Codable {
     let nationName: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case nationName = "nationNm"
     }
 }
@@ -118,7 +118,7 @@ struct ShowType: Codable {
     let showTypeGroupName: String
     let showTypeName: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case showTypeGroupName = "showTypeGroupNm"
         case showTypeName = "showTypeNm"
     }
@@ -129,7 +129,7 @@ struct Staff: Codable {
     let peopleEnglishName: String
     let staffRoleName: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case peopleName = "peopleNm"
         case peopleEnglishName = "peopleNmEn"
         case staffRoleName = "staffRoleNm"

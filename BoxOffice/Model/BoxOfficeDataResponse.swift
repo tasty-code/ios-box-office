@@ -6,7 +6,7 @@ struct BoxOfficeDataResponse: Codable {
     let showRange: String?
     let dailyBoxOfficeList: [DailyBoxOfficeInfo]?
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case showRange
         case dailyBoxOfficeList
         case boxOfficeType = "boxofficeType"
@@ -40,8 +40,8 @@ struct DailyBoxOfficeInfo: Codable {
     let audienceAccumulation: String
     let screenCount: String
     let showCount: String
-
-    enum CodingKeys: String, CodingKey {
+    
+    private enum CodingKeys: String, CodingKey {
         case number = "rnum"
         case rank
         case rankFluctuation = "rankInten"
