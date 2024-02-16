@@ -6,15 +6,34 @@
 //
 
 import XCTest
+@testable import BoxOffice
 
 final class NetworkManagerTests: XCTestCase {
+    var sut: NetworkManager!
 
     override func setUpWithError() throws {
-        
+        sut = NetworkManager()
     }
 
     override func tearDownWithError() throws {
-        
+        sut = nil
     }
 
+    func test_fetchDailyBoxOffice_succesee() {
+        let promise = expectation(description: "")
+        
+        guard let data = DailyBoxOfficeData.json.data(using: .utf8) else { return }
+        
+        let expectation: BoxOfficeDataResponse? = try? JSONDecoder().decode(BoxOfficeDataResponse.self, from: data)
+        var result: BoxOfficeDataResponse?
+        
+        sut.fetchDailyBoxOffice(date: "20240210") { response, error in
+            result = response
+            XCTAssertEqual(result, expectation)
+            
+            promise.fulfill()
+        }
+        
+        wait(for: [promise], timeout: 10)
+    }
 }
