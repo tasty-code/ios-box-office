@@ -10,12 +10,6 @@ import XCTest
 
 final class RequestDataTests: XCTestCase {
 
-    var sut: FakeBoxOfficeDTO?
-    
-    override func setUpWithError() throws {
-         sut = FakeBoxOfficeDTO()
-    }
-
     func test_일별박스오피스_API문서를_요청했을때_알맞은데이터를수신하는가() {
         // given
         do {
