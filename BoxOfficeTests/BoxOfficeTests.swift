@@ -14,7 +14,7 @@ final class BoxOfficeTests: XCTestCase {
         // given
 
         
-        guard let data = JsonData.josnData.data(using: .utf8) else { return }
+        guard let data = TestJsonData.josnData.data(using: .utf8) else { return }
         //when
         do {
             let jsonData = try JSONDecoder().decode(BoxOfficeDataResponse.self, from: data)

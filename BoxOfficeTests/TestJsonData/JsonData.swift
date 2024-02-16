@@ -1,8 +1,8 @@
 
 import Foundation
 
-struct JsonData {
-    static let josnData = 
+struct TestJsonData {
+    static let josnData =
     """
     {
         "boxOfficeResult":{

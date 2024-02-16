@@ -63,27 +63,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4E0382DF2B7E531F009F3F8A /* JsonData */ = {
+		4E0382DF2B7E531F009F3F8A /* TestJsonData */ = {
 			isa = PBXGroup;
 			children = (
 				15F45BDF2B7CC1EB006D9D28 /* JsonData.swift */,
 			);
-			path = JsonData;
+			path = TestJsonData;
 			sourceTree = "<group>";
 		};
-		4E0382E02B7E539D009F3F8A /* BoxOfficeDataResponse+ */ = {
+		4E0382E02B7E539D009F3F8A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				4EFE78C02B7CC0CF00AA9CED /* BoxOfficeDataResponse+.swift */,
 			);
-			path = "BoxOfficeDataResponse+";
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		4EFE78B82B7CBFBE00AA9CED /* BoxOfficeTests */ = {
 			isa = PBXGroup;
 			children = (
-				4E0382E02B7E539D009F3F8A /* BoxOfficeDataResponse+ */,
-				4E0382DF2B7E531F009F3F8A /* JsonData */,
+				4E0382E02B7E539D009F3F8A /* Extension */,
+				4E0382DF2B7E531F009F3F8A /* TestJsonData */,
 				4EFE78B92B7CBFBE00AA9CED /* BoxOfficeTests.swift */,
 			);
 			path = BoxOfficeTests;
