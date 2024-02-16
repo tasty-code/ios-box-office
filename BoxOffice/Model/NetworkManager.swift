@@ -4,8 +4,8 @@ import Foundation
 struct NetworkManager {
     let key = "ab168a1eb56e21306b897acd3d4653ce"
     
-    func fetchDailyBoxOffice(completion: @escaping (BoxOfficeDataResponse?, Error?) -> Void) {
-        guard let url = URL(string: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(key)&targetDt=20240210") else { return }
+    func fetchDailyBoxOffice(date: String, completion: @escaping (BoxOfficeDataResponse?, Error?) -> Void) {
+        guard let url = URL(string: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(key)&targetDt=\(date)") else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
@@ -27,8 +27,8 @@ struct NetworkManager {
         }.resume()
     }
     
-    func fetchDetail(completion: @escaping (MovieDetail?, Error?) -> Void) {
-        guard let url = URL(string: "http://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=\(key)&movieCd=20240210") else { return }
+    func fetchDetail(code: String, completion: @escaping (MovieDetail?, Error?) -> Void) {
+        guard let url = URL(string: "http://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=\(key)&movieCd=\(code)") else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
