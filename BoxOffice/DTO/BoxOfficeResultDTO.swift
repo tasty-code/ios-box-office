@@ -22,7 +22,7 @@ extension BoxOfficeResultDTO {
 extension BoxOfficeResultDTO.BoxOfficeDTO {
     enum CodingKeys: String, CodingKey {
         case dateRange = "showRange"
-        case boxOfficeType
+        case boxOfficeType = "boxofficeType"
         case dailyBoxOfficeList
     }
 }
