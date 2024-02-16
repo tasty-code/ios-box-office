@@ -73,4 +73,45 @@ final class BoxOfficeTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 5.0)
     }
+    
+    func test_오늘날짜_영화_데이터_파싱이_올바르게_됐을_때_fetchData에_boxOfficeResult는_nil이_아니다() {
+        // given
+        let urlString = MovieURL.makeYesterdayBoxOfficeURL()
+        // when
+        let expectation = XCTestExpectation(description: "데이터 패치 중...")
+        
+        APIService.fetchData(urlString: urlString) { (result: Result<Movie, NetworkError>) in
+            switch result {
+            case .success(let movies):
+                // then
+                XCTAssertNotNil(movies)
+            case .failure(let error):
+                // then
+                XCTFail("데이터 파싱 에러 발생: \(error))")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func test_특정_영화_코드로_데이터_파싱이_올바르게_됐을_때_fetchData에_movieInfoResult는_nil이_아니다() {
+        // given
+        let urlString = MovieURL.makeMovieDetailURL(code: "20124079")
+        
+        // when
+        let expectation = XCTestExpectation(description: "데이터 패치 중...")
+        
+        APIService.fetchData(urlString: urlString) { (result: Result<Movie, NetworkError>) in
+            switch result {
+            case .success(let movies):
+                // then
+                XCTAssertNotNil(movies)
+            case .failure(let error):
+                // then
+                XCTFail("데이터 파싱 에러 발생: \(error))")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
 }
