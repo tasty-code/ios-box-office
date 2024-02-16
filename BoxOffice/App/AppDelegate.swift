@@ -13,3 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+/// 배포/디버깅 환경에 따라 키값 글로벌 선언
+var ENV: APIKeyable {
+    #if DEBUG
+    return DebugEnvironment()
+    #else
+    return ProdEnvironment()
+    #endif
+}
