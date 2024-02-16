@@ -66,7 +66,7 @@ extension BoxOfficeResponseDTO.BoxOfficeDTO.MovieBoxOfficeDTO {
 
 extension BoxOfficeResponseDTO.BoxOfficeDTO {
     func toModel() -> BoxOffice {
-        return .init(boxofficeType: .daily,
+        return .init(boxofficeType: BoxOfficeType(boxofficeType: self.boxOfficeType),
                      showRange: self.showRange,
                      movieBoxOfficeList: self.movieBoxOfficeList.map { $0.toModel() })
     }
