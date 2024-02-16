@@ -13,10 +13,10 @@ final class MovieManager {
 
 extension MovieManager {
     private func fetchMovies(date: String, completion: @escaping (Result<Movie, NetworkError>) -> Void) {
-        
+        let apiService = APIService()
         let urlString = MovieURL.makeDailyBoxOfficeURL(date: date)
         
-        APIService.fetchData(urlString: urlString) { (result: Result<Movie, NetworkError>) in
+        apiService.fetchData(urlString: urlString) { (result: Result<Movie, NetworkError>) in
             switch result {
             case .success(let movies):
                 completion(.success(movies))

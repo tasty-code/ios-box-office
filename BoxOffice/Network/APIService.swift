@@ -8,15 +8,21 @@
 import Foundation
 
 struct APIService {
-    static func fetchData<T: Decodable>(urlString: String, completion: @escaping (Result<T, NetworkError>) -> Void) {
-        guard 
+    private let session: URLSessionProtocol
+    
+    init(session: URLSessionProtocol = URLSession.shared) {
+        self.session = session
+    }
+    
+    func fetchData<T: Decodable>(urlString: String, completion: @escaping (Result<T, NetworkError>) -> Void) {
+        guard
             let url = URL(string: urlString)
         else {
             completion(.failure(.invalidURLError))
             return
         }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        self.session.dataTask(with: url) { data, response, error in
             DispatchQueue.main.async {
                 guard 
                     error == nil
