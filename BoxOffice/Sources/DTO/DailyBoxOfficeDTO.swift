@@ -1,5 +1,5 @@
 //
-//  UserResponse.swift
+//  DailyBoxOfficeDTO.swift
 //  BoxOffice
 //
 //  Created by Roh on 2/13/24.
@@ -7,18 +7,15 @@
 
 import Foundation
 
-// MARK: - BoxOfficeDTO
 struct DailyBoxOfficeDTO: Codable {
     let boxOfficeResult: BoxOfficeResult
 }
 
-// MARK: - BoxOfficeResult
 struct BoxOfficeResult: Codable {
     let boxofficeType, showRange: String
     let dailyBoxOfficeList: [DailyBoxOfficeList]
 }
 
-// MARK: - DailyBoxOfficeList
 struct DailyBoxOfficeList: Codable {
     let rnum, rank, rankInten: String
     let rankOldAndNew: RankOldAndNew

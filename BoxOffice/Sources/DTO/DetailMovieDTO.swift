@@ -28,22 +28,18 @@ struct MovieInfo: Codable {
     }
 }
 
-// MARK: - Actor
 struct Actors: Codable {
     let peopleNm, peopleNmEn, cast, castEn: String
 }
 
-// MARK: - Director
 struct Director: Codable {
     let peopleNm, peopleNmEn: String
 }
 
-// MARK: - Genre
 struct Genre: Codable {
     let genreNm: String
 }
 
-// MARK: - Nation
 struct Nation: Codable {
     let nationNm: String
 }
@@ -63,5 +59,3 @@ struct Audits: Codable {
 struct Staffs: Codable {
     let peopleNm, peopleNmEn, staffRoleNm: String
 }
-
-

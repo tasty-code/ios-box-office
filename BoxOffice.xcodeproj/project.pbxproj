@@ -106,14 +106,6 @@
 			path = BoxOffice;
 			sourceTree = "<group>";
 		};
-		CC06C5732B7F52D000A7066A /* JsonParser */ = {
-			isa = PBXGroup;
-			children = (
-				CC968A882B7CDC9E00869511 /* JsonParser.swift */,
-			);
-			path = JsonParser;
-			sourceTree = "<group>";
-		};
 		CC06C5762B7F71E000A7066A /* KobisInterface */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,9 +130,9 @@
 			children = (
 				CC76BA232B80FC3D00E6B3B6 /* KobisService */,
 				CC06C5762B7F71E000A7066A /* KobisInterface */,
-				CC06C5732B7F52D000A7066A /* JsonParser */,
 				CC968A6E2B7B942600869511 /* NetworkError.swift */,
 				CC968A772B7CCC8900869511 /* Result.swift */,
+				CC968A882B7CDC9E00869511 /* JsonParser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

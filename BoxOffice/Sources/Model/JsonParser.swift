@@ -8,8 +8,8 @@
 import Foundation
 
 class JsonParser {
-    func parseBoxOfficeSample() -> DailyBoxOfficeDTO? {
-        guard let path = Bundle.main.path(forResource: "box_office_sample", ofType: "json"),
+    func parseBoxOfficeSample(resourse: String) -> DailyBoxOfficeDTO? {
+        guard let path = Bundle.main.path(forResource: resourse, ofType: "json"),
               let jsonString = try? String(contentsOfFile: path)
         else {
             return nil

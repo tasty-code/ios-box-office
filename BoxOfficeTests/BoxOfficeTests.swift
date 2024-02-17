@@ -9,18 +9,18 @@ import XCTest
 @testable import BoxOffice
 
 final class BoxOfficeTests: XCTestCase {
-    var sut: JsonParser!
+    var sutJsonParser: JsonParser!
     var sutBoxOffice: BoxOfficeManager!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = JsonParser()
+        sutJsonParser = JsonParser()
         sutBoxOffice = BoxOfficeManager()
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        sut = nil
+        sutJsonParser = nil
         sutBoxOffice = nil
     }
     
@@ -29,7 +29,7 @@ final class BoxOfficeTests: XCTestCase {
         let result = "일별 박스오피스"
         
         //when
-        guard let parseResult = sut.parseBoxOfficeSample() else {
+        guard let parseResult = sutJsonParser.parseBoxOfficeSample(resourse: "box_office_sample") else {
             return
         }
         let boxOfficeType = parseResult.boxOfficeResult.boxofficeType
@@ -43,7 +43,7 @@ final class BoxOfficeTests: XCTestCase {
         let result = "씽2게더"
         
         //when
-        guard let parseResult = sut.parseBoxOfficeSample() else {
+        guard let parseResult = sutJsonParser.parseBoxOfficeSample(resourse: "box_office_sample") else {
             return
         }
         let movieName = parseResult.boxOfficeResult.dailyBoxOfficeList[2].movieNm
@@ -73,7 +73,7 @@ final class BoxOfficeTests: XCTestCase {
             case .failure(_):
                 boxOfficeType = nil
             }
-            expectation.fulfill() // 작업 완료 알림.
+            expectation.fulfill()
         })
         wait(for: [expectation])
         
@@ -101,7 +101,7 @@ final class BoxOfficeTests: XCTestCase {
             case .failure(_):
                 boxOfficeType = nil
             }
-            expectation.fulfill() // 작업 완료 알림.
+            expectation.fulfill()
         })
         wait(for: [expectation])
         
@@ -129,7 +129,7 @@ final class BoxOfficeTests: XCTestCase {
             case .failure(_):
                 director = nil
             }
-            expectation.fulfill() // 작업 완료 알림.
+            expectation.fulfill()
         })
         wait(for: [expectation])
         
