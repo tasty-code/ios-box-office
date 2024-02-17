@@ -18,7 +18,9 @@ struct DetailMovieManager {
         self.keyValue = keyValue
         self.code = code
     }
-    
+}
+
+extension DetailMovieManager: kobisService {
     func request() -> URLRequest? {
         guard let url = setURL() else {
             return nil
@@ -31,7 +33,6 @@ struct DetailMovieManager {
     
     func response(request: URLRequest, completionHandler: @escaping (Result<Any, Error>) -> ()) {
         let session: URLSession = URLSession.shared
-        print(request)
         session.dataTask(with: request) { (data, response, error) in
             let successRange: Range = (200..<300)
             guard let data: Data = data,
@@ -44,7 +45,6 @@ struct DetailMovieManager {
             if let response: HTTPURLResponse = response as? HTTPURLResponse {
                 if successRange.contains(response.statusCode) {
                     guard let userInfo: DetailMovieDTO = try? JSONDecoder().decode(DetailMovieDTO.self, from: data) else {
-//                        print(error)
                         return
                     }
                     completionHandler(.success(userInfo))
@@ -55,7 +55,7 @@ struct DetailMovieManager {
         }.resume()
     }
     
-    private func setURL() -> URL? {
+    func setURL() -> URL? {
         guard var urlComponents: URLComponents = URLComponents(string: urlString) else {
             return nil
         }

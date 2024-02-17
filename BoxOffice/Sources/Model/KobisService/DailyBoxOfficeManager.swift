@@ -18,7 +18,9 @@ struct DailyBoxOfficeManager {
         self.keyValue = keyValue
         self.targetDtValue = targetDtValue
     }
-    
+}
+
+extension DailyBoxOfficeManager: kobisService {
     func request() -> URLRequest? {
         guard let url = setURL() else {
             return nil
@@ -43,6 +45,7 @@ struct DailyBoxOfficeManager {
             if let response: HTTPURLResponse = response as? HTTPURLResponse {
                 if successRange.contains(response.statusCode) {
                     guard let userInfo: DailyBoxOfficeDTO = try? JSONDecoder().decode(DailyBoxOfficeDTO.self, from: data) else {
+                        completionHandler(.failure(NetworkError.decodingError))
                         return
                     }
                     completionHandler(.success(userInfo))
@@ -53,7 +56,7 @@ struct DailyBoxOfficeManager {
         }.resume()
     }
     
-    private func setURL() -> URL? {
+    func setURL() -> URL? {
         guard var urlComponents: URLComponents = URLComponents(string: urlString) else {
             return nil
         }
