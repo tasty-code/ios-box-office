@@ -14,6 +14,7 @@
 		63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
 		CC06C5752B7F6B2F00A7066A /* KobisAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC06C5742B7F6B2F00A7066A /* KobisAPI.swift */; };
+		CC76BA212B80FA9000E6B3B6 /* KobisService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC76BA202B80FA9000E6B3B6 /* KobisService.swift */; };
 		CC968A6D2B7B78BE00869511 /* DailyBoxOfficeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC968A6C2B7B78BE00869511 /* DailyBoxOfficeDTO.swift */; };
 		CC968A6F2B7B942600869511 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC968A6E2B7B942600869511 /* NetworkError.swift */; };
 		CC968A712B7C4D4700869511 /* BoxOfficeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC968A702B7C4D4700869511 /* BoxOfficeManager.swift */; };
@@ -46,6 +47,7 @@
 		63DF20FA2970E1A1005DF7D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63DF20FC2970E1A1005DF7D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC06C5742B7F6B2F00A7066A /* KobisAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisAPI.swift; sourceTree = "<group>"; };
+		CC76BA202B80FA9000E6B3B6 /* KobisService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisService.swift; sourceTree = "<group>"; };
 		CC968A6C2B7B78BE00869511 /* DailyBoxOfficeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeDTO.swift; sourceTree = "<group>"; };
 		CC968A6E2B7B942600869511 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		CC968A702B7C4D4700869511 /* BoxOfficeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeManager.swift; sourceTree = "<group>"; };
@@ -112,24 +114,33 @@
 			path = JsonParser;
 			sourceTree = "<group>";
 		};
-		CC06C5762B7F71E000A7066A /* API */ = {
+		CC06C5762B7F71E000A7066A /* KobisInterface */ = {
 			isa = PBXGroup;
 			children = (
 				CC06C5742B7F6B2F00A7066A /* KobisAPI.swift */,
 			);
-			path = API;
+			path = KobisInterface;
+			sourceTree = "<group>";
+		};
+		CC76BA232B80FC3D00E6B3B6 /* KobisService */ = {
+			isa = PBXGroup;
+			children = (
+				CC968A702B7C4D4700869511 /* BoxOfficeManager.swift */,
+				CCED740E2B7EF51F007DAD2E /* DailyBoxOfficeManager.swift */,
+				CC76BA202B80FA9000E6B3B6 /* KobisService.swift */,
+				CCC9735D2B802C4000ECE6FD /* DetailMovieManager.swift */,
+			);
+			path = KobisService;
 			sourceTree = "<group>";
 		};
 		CC968A6B2B7B787400869511 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CC06C5762B7F71E000A7066A /* API */,
+				CC76BA232B80FC3D00E6B3B6 /* KobisService */,
+				CC06C5762B7F71E000A7066A /* KobisInterface */,
 				CC06C5732B7F52D000A7066A /* JsonParser */,
 				CC968A6E2B7B942600869511 /* NetworkError.swift */,
 				CC968A772B7CCC8900869511 /* Result.swift */,
-				CC968A702B7C4D4700869511 /* BoxOfficeManager.swift */,
-				CCED740E2B7EF51F007DAD2E /* DailyBoxOfficeManager.swift */,
-				CCC9735D2B802C4000ECE6FD /* DetailMovieManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -298,6 +309,7 @@
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
 				CC968A892B7CDC9E00869511 /* JsonParser.swift in Sources */,
 				CC968A6F2B7B942600869511 /* NetworkError.swift in Sources */,
+				CC76BA212B80FA9000E6B3B6 /* KobisService.swift in Sources */,
 				CCC9735E2B802C4000ECE6FD /* DetailMovieManager.swift in Sources */,
 				CCC9735C2B80295200ECE6FD /* DetailMovieDTO.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
