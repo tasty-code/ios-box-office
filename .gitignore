@@ -15,6 +15,9 @@ Pods/
 .AppleDouble
 .LSOverride
 
+# Hide API Key
+*.xcconfig
+
 # Icon must end with two \r
 Icon
 
