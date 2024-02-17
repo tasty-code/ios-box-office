@@ -7,7 +7,8 @@
 
 import Foundation
 
-enum Result {
-    case success(BoxOfficeResponseDTO)
+enum Result<T, Error> {
+    case success(T)
     case failure(NetworkError)
 }
+

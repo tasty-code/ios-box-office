@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - BoxOfficeDTO
-struct BoxOfficeResponseDTO: Codable {
+struct DailyBoxOfficeDTO: Codable {
     let boxOfficeResult: BoxOfficeResult
 }
 
