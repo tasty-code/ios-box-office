@@ -110,8 +110,7 @@
 				F44E984A2B7B970F003F61EF /* ViewController */,
 				F44E984B2B7B971C003F61EF /* DTO */,
 				F44E98682B7C7C6C003F61EF /* FileProvider */,
-				F44E98932B825E13003F61EF /* NetworkService.swift */,
-				F44E98952B8266A3003F61EF /* DataRequestable.swift */,
+				F44E98972B8267B3003F61EF /* Network */,
 			);
 			path = BoxOffice;
 			sourceTree = "<group>";
@@ -180,6 +179,15 @@
 				F44E98642B7C7C23003F61EF /* BundleResourceError.swift */,
 			);
 			path = FileProvider;
+			sourceTree = "<group>";
+		};
+		F44E98972B8267B3003F61EF /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F44E98932B825E13003F61EF /* NetworkService.swift */,
+				F44E98952B8266A3003F61EF /* DataRequestable.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
