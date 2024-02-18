@@ -25,18 +25,18 @@ protocol NetworkRequestable {
 }
 
 struct NetworkService {
-  private let session: URLSession
+  private let requester: DataRequestable
   
-  init(session: URLSession) {
-    self.session = session
+  init(requester: DataRequestable) {
+    self.requester = requester
   }
 }
 
 extension NetworkService: NetworkRequestable {
   func requestData(request: URLRequestConvertible) async -> Result<Data, NetworkServiceError> {
     do {
-      let (data, response) = try await self.session.data(for: request.toURLRequest())
-      guard 
+      let (data, response) = try await self.requester.requestData(with: request.toURLRequest())
+      guard
         let httpResponse = response as? HTTPURLResponse,
         httpResponse.statusCode == 200
       else {
