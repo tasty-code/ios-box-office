@@ -1,0 +1,38 @@
+disabled_rules:
+- force_cast
+- trailing_whitespace
+- trailing_comma
+- class_delegate_protocol
+- sorted_imports
+- closure_parameter_position
+- unused_optional_binding
+
+force_unwrapping:
+  severity: error
+
+function_body_length:
+- 15 # warning
+- 30 # error
+
+type_body_length:
+- 200 # warning
+- 400 # error
+
+line_length:
+- 150 # warning
+- 200 # error
+
+nesting:
+  type_level:
+    - 2
+
+indentation_width:
+  indentation_width: 2
+  include_comments: false
+
+opt_in_rules:
+- force_unwrapping
+- indentation_width
+- sorted_imports
+- multiline_arguments
+- multiline_parameters_brackets
