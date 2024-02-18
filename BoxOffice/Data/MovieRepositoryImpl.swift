@@ -37,7 +37,7 @@ extension MovieRepositoryImpl: MovieRepository {
       // TODO: 이 부분 한 줄로
       let key = "f5eef3421c602c6cb7ea224104795888"
       let date = "20240210"
-      let urlString = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(key)&targetDt=\(date)"
+      let urlString = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(key)&targetDt=\(date)"
       guard let url = URL(string: urlString) else {
         return .failure(.urlError)
       }
