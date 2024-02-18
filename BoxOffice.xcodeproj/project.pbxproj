@@ -125,7 +125,7 @@
 			path = KobisService;
 			sourceTree = "<group>";
 		};
-		CC968A6B2B7B787400869511 /* Model */ = {
+		CC76BA242B819AC800E6B3B6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				CC76BA232B80FC3D00E6B3B6 /* KobisService */,
@@ -133,6 +133,14 @@
 				CC968A6E2B7B942600869511 /* NetworkError.swift */,
 				CC968A772B7CCC8900869511 /* Result.swift */,
 				CC968A882B7CDC9E00869511 /* JsonParser.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		CC968A6B2B7B787400869511 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CC76BA242B819AC800E6B3B6 /* Network */,
 			);
 			path = Model;
 			sourceTree = "<group>";
