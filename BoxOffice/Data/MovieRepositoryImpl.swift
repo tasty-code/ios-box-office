@@ -10,7 +10,7 @@ import Foundation
 enum MovieRepositoryError: Error {
   case urlError
   case decodingError
-  case networkServiceError
+  case networkServiceError(NetworkServiceError)
   case unknownError
 }
 
@@ -86,7 +86,8 @@ extension MovieRepositoryImpl: MovieRepository {
     if error is DecodingError {
       return .decodingError
     } else if let networkServiceError = error as? NetworkServiceError {
-      return .networkServiceError
+      // TODO: 나중에 view로 presenting 할 거 고민
+      return .networkServiceError(networkServiceError)
     } else {
       return .unknownError
     }
