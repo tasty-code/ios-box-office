@@ -164,7 +164,6 @@ struct Staff: Decodable {
     let role: String
     
     private enum CodingKeys: String, CodingKey {
-    private enum CodingKeys: String, CodingKey {
         case name = "peopleNm"
         case englishName = "peopleNmEn"
         case role = "staffRoleNm"
