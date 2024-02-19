@@ -103,7 +103,6 @@
 				9B8ACB432B7F291000AF2527 /* Utility */,
 				9B8ACB442B7F292200AF2527 /* Resource */,
 				8A8903852B7B756A00E0A48D /* Controller */,
-				8A8903842B7B756200E0A48D /* View */,
 				8A8903832B7B755800E0A48D /* Model */,
 			);
 			path = BoxOffice;
@@ -117,13 +116,6 @@
 				9BB8EB062B7DE94500B33116 /* MovieStructure.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		8A8903842B7B756200E0A48D /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		8A8903852B7B756A00E0A48D /* Controller */ = {
