@@ -1,10 +1,3 @@
-//
-//  NetworkRequest.swift
-//  BoxOffice
-//
-//  Created by Effie on 2/19/24.
-//
-
 struct NetworkRequest {
   
 }
