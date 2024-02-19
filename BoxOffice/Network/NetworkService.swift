@@ -12,7 +12,7 @@ final class DefaultNetworkService {
     private let sessionManager: NetworkSessionManager
     
     init(config: NetworkConfigurable,
-        sessionManager: NetworkSessionManager = DefaultNetworkSessionManager()
+         sessionManager: NetworkSessionManager = DefaultNetworkSessionManager()
     ) {
         self.sessionManager = sessionManager
         self.config = config
