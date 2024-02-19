@@ -31,9 +31,9 @@ final class DefaultNetworkService {
 extension DefaultNetworkService: NetworkService {
     private func request(request: URLRequest,
                          completion: @escaping CompletionHandler) -> URLSessionTask {
-        let sessionDataTask = sessionManager.request(request) { data, response, requestError in
+        let sessionDataTask = sessionManager.request(request) { [weak self] data, response, requestError in
             if let requestError = requestError {
-                completion(.failure(self.networkError(response, requestError, data)))
+                completion(.failure(self?.networkError(response, requestError, data) ?? .generic(requestError)))
             } else {
                 completion(.success(data))
             }
