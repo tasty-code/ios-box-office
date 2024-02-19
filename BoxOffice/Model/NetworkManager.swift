@@ -4,50 +4,55 @@ import Foundation
 struct NetworkManager {
     private let urlSession = URLSession.shared
     private let key = "ab168a1eb56e21306b897acd3d4653ce"
-    
-    func fetchDailyBoxOffice(date: String, completion: @escaping (BoxOfficeDataResponse?, Error?) -> Void) {
-        guard let url = URL(string: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(key)&targetDt=\(date)") else { return }
-        
-        urlSession.dataTask(with: url) { data, response, error in
-            if let error = error {
-                completion(nil, FetchError.invalidURL)
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else { completion(nil, FetchError.invalidResponse)
-                return
-            }
-            
-            guard let data = data else { return }
-            guard let movie = try? JSONDecoder().decode(BoxOfficeDataResponse.self, from: data) else {
-                completion(nil, FetchError.invalidData)
-                return
-            }
-            
-            completion(movie, nil)
-        }.resume()
+    private var urlComponents = URLComponents()
+
+    mutating func fetchDailyBoxOffice() {
+        let modifyUrl = modifyUrlComponent(path: MovieOffice.DailyUrl)
+        let finalUrl = modifyUrl?.appending("targetDt", value: "20240101")
+        taskUrl(finalUrl: finalUrl, type:BoxOfficeData.self )
     }
     
-    func fetchDetail(code: String, completion: @escaping (MovieDetail?, Error?) -> Void) {
-        guard let url = URL(string: "http://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=\(key)&movieCd=\(code)") else { return }
+    mutating func fetchInfoBoxOffice() {
+        let modifyUrl = modifyUrlComponent(path: MovieOffice.InfoUrl)
+        let finalUrl = modifyUrl?.appending("movieCd", value: "20124079")
+        taskUrl(finalUrl: finalUrl, type:MovieDetail.self )
+    }
+    
+    func taskUrl<T: Codable>(finalUrl: URL?, type: T.Type) {
+        guard let url = finalUrl else {
+            return
+        }
+        let urlRequest = URLRequest(url: url)
         
-        urlSession.dataTask(with: url) { data, response, error in
+        let dataTask = urlSession.dataTask(with: url) { (data, response, error) in
             if let error = error {
-                completion(nil, FetchError.invalidURL)
+                print("Request error: ", error)
                 return
             }
-            
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else { completion(nil, FetchError.invalidResponse)
+            guard let response = response as? HTTPURLResponse,(200...299).contains(response.statusCode) else {
                 return
             }
-            
-            guard let data = data else { return }
-            guard let movie = try? JSONDecoder().decode(MovieDetail.self, from: data) else {
-                completion(nil, FetchError.invalidData)
+            guard let data = data else {
                 return
             }
-            
-            completion(movie, nil)
-        }.resume()
+            guard let movie = try? JSONDecoder().decode(T.self, from: data) else {
+               return
+            }
+        }
+        dataTask.resume()
+    }
+    
+    mutating func modifyUrlComponent(path: String) -> URL? {
+        urlComponents.scheme = "https"
+        urlComponents.host = "www.kobis.or.kr"
+        urlComponents.path = "\(path)"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "key", value: "ab168a1eb56e21306b897acd3d4653ce")
+        ]
+        
+        return urlComponents.url
     }
 }
+
+
+

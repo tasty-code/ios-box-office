@@ -8,6 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var test = NetworkManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
