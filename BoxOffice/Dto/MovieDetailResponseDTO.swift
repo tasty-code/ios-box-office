@@ -33,7 +33,7 @@ extension MovieDetailResponseDTO.MovieInfoResultDTO {
     }
 }
 extension MovieDetailResponseDTO.MovieInfoResultDTO.MovieDTO {
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case movieCode = "movieCd"
         case movieName = "movieNm"
         case englishMovieName = "movieNmEn"
@@ -87,7 +87,7 @@ extension MovieDetailResponseDTO.MovieInfoResultDTO.MovieDTO {
 struct Nation: Decodable {
     let name: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case name = "nationNm"
     }
 }
@@ -95,7 +95,7 @@ struct Nation: Decodable {
 struct Genre: Decodable {
     let name: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case name = "genreNm"
     }
 }
@@ -104,7 +104,7 @@ struct Director: Decodable {
     let name: String
     let englishName: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case name = "peopleNm"
         case englishName = "peopleNmEn"
     }
@@ -116,7 +116,7 @@ struct Actor: Decodable {
     let role: String
     let castEnglish: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case name = "peopleNm"
         case englishName = "peopleNmEn"
         case role = "cast"
@@ -128,7 +128,7 @@ struct ShowType: Decodable {
     let groupName: String
     let name: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case groupName = "showTypeGroupNm"
         case name = "showTypeNm"
     }
@@ -140,7 +140,7 @@ struct Company: Decodable {
     let englishName: String
     let partName: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case code = "companyCd"
         case name = "companyNm"
         case englishName = "companyNmEn"
@@ -152,7 +152,7 @@ struct Audit: Decodable {
     let auditNumber: String
     let rating: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case auditNumber = "auditNo"
         case rating = "watchGradeNm"
     }
@@ -163,7 +163,8 @@ struct Staff: Decodable {
     let englishName: String
     let role: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case name = "peopleNm"
         case englishName = "peopleNmEn"
         case role = "staffRoleNm"
