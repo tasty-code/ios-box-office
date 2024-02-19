@@ -13,9 +13,9 @@
 		63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
 		990300D22B7B4B47009569CA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 990300D12B7B4B47009569CA /* .swiftlint.yml */; };
-		99C28D342B82DFBD004A43E3 /* MovieInfoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C28D332B82DFBD004A43E3 /* MovieInfoResponseDTO.swift */; };
 		99C28D362B82E013004A43E3 /* MovieInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C28D352B82E013004A43E3 /* MovieInfo.swift */; };
 		99C28D382B82E01F004A43E3 /* MovieInfoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C28D372B82E01F004A43E3 /* MovieInfoList.swift */; };
+		99C28D3C2B82E340004A43E3 /* MovieDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C28D3B2B82E340004A43E3 /* MovieDetailResponseDTO.swift */; };
 		BD56989B2B7CC7A500704CCA /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFE901E2B7CB3160091339F /* String+.swift */; };
 		BD5698A32B7D9BE800704CCA /* BoxOfficeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5698A22B7D9BE800704CCA /* BoxOfficeResponseDTO.swift */; };
 		BD5698A52B7D9CBA00704CCA /* BoxOfficeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5698A22B7D9BE800704CCA /* BoxOfficeResponseDTO.swift */; };
@@ -52,9 +52,9 @@
 		63DF20FA2970E1A1005DF7D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63DF20FC2970E1A1005DF7D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		990300D12B7B4B47009569CA /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		99C28D332B82DFBD004A43E3 /* MovieInfoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieInfoResponseDTO.swift; path = "../../../../../.Trash/ios-box-office 오전 9.59.22/BoxOffice/Dto/MovieInfoResponseDTO.swift"; sourceTree = "<group>"; };
 		99C28D352B82E013004A43E3 /* MovieInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfo.swift; sourceTree = "<group>"; };
 		99C28D372B82E01F004A43E3 /* MovieInfoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoList.swift; sourceTree = "<group>"; };
+		99C28D3B2B82E340004A43E3 /* MovieDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailResponseDTO.swift; sourceTree = "<group>"; };
 		BD5698A22B7D9BE800704CCA /* BoxOfficeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeResponseDTO.swift; sourceTree = "<group>"; };
 		BDFE8FE42B7C7F650091339F /* BoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOffice.swift; sourceTree = "<group>"; };
 		BDFE8FE62B7C80120091339F /* BoxOfficeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeType.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				BD5698A22B7D9BE800704CCA /* BoxOfficeResponseDTO.swift */,
-				99C28D332B82DFBD004A43E3 /* MovieInfoResponseDTO.swift */,
+				99C28D3B2B82E340004A43E3 /* MovieDetailResponseDTO.swift */,
 			);
 			path = Dto;
 			sourceTree = "<group>";
@@ -308,10 +308,10 @@
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
 				BDFE8FEB2B7C82530091339F /* RankOldAndNew.swift in Sources */,
 				BDFE8FE92B7C81030091339F /* MovieBoxOffice.swift in Sources */,
-				99C28D342B82DFBD004A43E3 /* MovieInfoResponseDTO.swift in Sources */,
 				BDFE901F2B7CB3160091339F /* String+.swift in Sources */,
 				BDFE8FE72B7C80120091339F /* BoxOfficeType.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
+				99C28D3C2B82E340004A43E3 /* MovieDetailResponseDTO.swift in Sources */,
 				BDFE8FE52B7C7F650091339F /* BoxOffice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
