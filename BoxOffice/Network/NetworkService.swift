@@ -1,7 +1,7 @@
 import Foundation
 
 protocol NetworkRequestable {
-  func requestData(request: URLRequest) async -> Result<Data, NetworkServiceError>
+  func requestData(request: URLRequestConvertible) async -> Result<Data, NetworkServiceError>
 }
 
 struct NetworkService {
@@ -15,9 +15,9 @@ struct NetworkService {
 extension NetworkService: NetworkRequestable {
   typealias FinalError = NetworkServiceError
   
-  func requestData(request: URLRequest) async -> Result<Data, FinalError> {
+  func requestData(request: URLRequestConvertible) async -> Result<Data, FinalError> {
     do {
-      let (data, response) = try await self.requester.requestData(with: request)
+      let (data, response) = try await self.requester.requestData(with: request.toURLRequest())
       guard let httpResponse = response as? HTTPURLResponse else {
         throw NetworkServiceError.invalidHTTPResponse
         // TODO: 어느 게 나은지

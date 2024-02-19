@@ -20,14 +20,7 @@ struct MovieRepositoryImpl {
 extension MovieRepositoryImpl: MovieRepository {
   func getDailyBoxOffice() async -> Result<SearchDailyBoxOffice, MovieRepositoryError> {
     do {
-      // TODO: 이 부분 한 줄로
-      let key = "f5eef3421c602c6cb7ea224104795888"
-      let date = "20240210"
-      let urlString = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(key)&targetDt=\(date)"
-      guard let url = URL(string: urlString) else {
-        return .failure(.urlError)
-      }
-      let request = URLRequest(url: url)
+      let request = MovieRequest.dailyBoxOffice(year: 2024, month: 1, day: 1)
       let result = await self.requester.requestData(request: request)
       switch result {
       case .success(let data):
@@ -46,14 +39,7 @@ extension MovieRepositoryImpl: MovieRepository {
     movieCode: String
   ) async -> Result<SearchMovieInfo, MovieRepositoryError> {
     do {
-      // TODO: 이 부분 한 줄로
-      let key = "f5eef3421c602c6cb7ea224104795888"
-      let date = "20240210"
-      let urlString = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=\(key)&movieCd=\(movieCode)"
-      guard let url = URL(string: urlString) else {
-        return .failure(.urlError)
-      }
-      let request = URLRequest(url: url)
+      let request = MovieRequest.movieInfo(code: movieCode)
       let result = await self.requester.requestData(request: request)
       switch result {
       case .success(let data):
