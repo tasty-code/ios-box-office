@@ -13,18 +13,14 @@ struct NetworkService {
 }
 
 extension NetworkService: NetworkRequestable {
-  typealias FinalError = NetworkServiceError
-  
-  func requestData(request: URLRequestConvertible) async -> Result<Data, FinalError> {
+  func requestData(request: URLRequestConvertible) async -> Result<Data, NetworkServiceError> {
     do {
       let (data, response) = try await self.requester.requestData(with: request.toURLRequest())
       guard let httpResponse = response as? HTTPURLResponse else {
-        throw NetworkServiceError.invalidHTTPResponse
-        // TODO: 어느 게 나은지
-//        return .failure(NetworkServiceError.invalidHTTPResponse)
+        return .failure(NetworkServiceError.invalidHTTPResponse)
       }
       guard httpResponse.statusCode == 200 else {
-        throw NetworkServiceError.noSuccess
+        return .failure(NetworkServiceError.noSuccess)
       }
       return .success(data)
     } catch {

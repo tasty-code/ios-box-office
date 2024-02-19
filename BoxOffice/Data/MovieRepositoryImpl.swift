@@ -1,8 +1,6 @@
 import Foundation
 
 protocol MovieRepository {
-  // TODO: 도메인 객체로 바꾸기
-  // TODO: 지금은 파라미터 없는 형태인데 고민해보기
   func getDailyBoxOffice() async -> Result<SearchDailyBoxOffice, MovieRepositoryError>
   func getMovieDetail(movieCode: String) async -> Result<SearchMovieInfo, MovieRepositoryError>
 }
@@ -53,12 +51,13 @@ extension MovieRepositoryImpl: MovieRepository {
       return .failure(finalError)
     }
   }
-  
-  private func convertErrorToMovieRepositoryError(_ error: Error) -> MovieRepositoryError {
+}
+
+private extension MovieRepositoryImpl {
+  func convertErrorToMovieRepositoryError(_ error: Error) -> MovieRepositoryError {
     if error is DecodingError {
       return .decodingError
     } else if let networkServiceError = error as? NetworkServiceError {
-      // TODO: 나중에 view로 presenting 할 거 고민
       return .networkServiceError(networkServiceError)
     } else {
       return .unknownError
