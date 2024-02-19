@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum KoreanFilmCouncilURLEnumeration {
-    case dailyBoxOffice(String, String)
-    case movieDetailInformation(String, String)
+enum KoreanFilmCouncilURL {
+    case dailyBoxOffice(key: String, targetDate: String)
+    case movieDetailInformation(key: String, movieCode: String)
     
     var url: String {
         switch self {
