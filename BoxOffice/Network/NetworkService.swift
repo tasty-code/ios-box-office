@@ -5,7 +5,6 @@ enum NetworkError: Error {
     case notConnected
     case cancelled
     case generic(Error)
-    case urlGeneration
 }
 
 protocol NetworkService {
