@@ -1,25 +1,5 @@
 import Foundation
 
-enum NetworkServiceError: Error {
-  case urlError(error: URLError)
-  case invalidHTTPResponse
-  case noSuccess
-}
-
-protocol URLRequestConvertible {
-  func toURLRequest() -> URLRequest
-}
-
-struct NetworkRequest {
-  
-}
-
-//extension NetworkRequest: URLRequestConvertible {
-//  func toURLRequest() -> URLRequest {
-//    return .init(url: .init(string: "") )
-//  }
-//}
-
 protocol NetworkRequestable {
   func requestData(request: URLRequest) async -> Result<Data, NetworkServiceError>
 }

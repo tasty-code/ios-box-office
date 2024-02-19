@@ -28,6 +28,9 @@
 		F44E98942B825E13003F61EF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98932B825E13003F61EF /* NetworkService.swift */; };
 		F44E98962B8266A3003F61EF /* DataRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98952B8266A3003F61EF /* DataRequestable.swift */; };
 		F44E989B2B826A99003F61EF /* MovieRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E989A2B826A99003F61EF /* MovieRepositoryImpl.swift */; };
+		F44E989E2B82E641003F61EF /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E989D2B82E641003F61EF /* NetworkRequest.swift */; };
+		F44E98A02B82E662003F61EF /* NetworkServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E989F2B82E662003F61EF /* NetworkServiceError.swift */; };
+		F44E98A22B82E67A003F61EF /* URLRequestConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98A12B82E67A003F61EF /* URLRequestConvertible.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +67,9 @@
 		F44E98932B825E13003F61EF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		F44E98952B8266A3003F61EF /* DataRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRequestable.swift; sourceTree = "<group>"; };
 		F44E989A2B826A99003F61EF /* MovieRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepositoryImpl.swift; sourceTree = "<group>"; };
+		F44E989D2B82E641003F61EF /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		F44E989F2B82E662003F61EF /* NetworkServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceError.swift; sourceTree = "<group>"; };
+		F44E98A12B82E67A003F61EF /* URLRequestConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestConvertible.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +195,9 @@
 			children = (
 				F44E98932B825E13003F61EF /* NetworkService.swift */,
 				F44E98952B8266A3003F61EF /* DataRequestable.swift */,
+				F44E989D2B82E641003F61EF /* NetworkRequest.swift */,
+				F44E989F2B82E662003F61EF /* NetworkServiceError.swift */,
+				F44E98A12B82E67A003F61EF /* URLRequestConvertible.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -328,12 +337,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F44E989E2B82E641003F61EF /* NetworkRequest.swift in Sources */,
 				F44E98942B825E13003F61EF /* NetworkService.swift in Sources */,
 				F44E98652B7C7C23003F61EF /* BundleResourceError.swift in Sources */,
 				894DE2AD2B7DE8F500ED865A /* SearchMovieInfo.swift in Sources */,
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
 				F44E98672B7C7C41003F61EF /* BundleResourceManager.swift in Sources */,
+				F44E98A22B82E67A003F61EF /* URLRequestConvertible.swift in Sources */,
+				F44E98A02B82E662003F61EF /* NetworkServiceError.swift in Sources */,
 				F44E98962B8266A3003F61EF /* DataRequestable.swift in Sources */,
 				F44E98612B7C7AF7003F61EF /* FileProvidable.swift in Sources */,
 				F44E98632B7C7B23003F61EF /* FileExtension.swift in Sources */,
