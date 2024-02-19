@@ -37,7 +37,7 @@ struct BoxOfficeMovie: Decodable {
     let screenCount: String
     let showCount: String
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case index = "rnum"
         case rank
         case rankChangedAmount = "rankInten"
