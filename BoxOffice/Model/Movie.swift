@@ -1,6 +1,6 @@
 import Foundation
 
-struct MovieInfoList {
+struct Movie {
     let movieCode: Int
     let movieName: String
     let englishMovieName: String

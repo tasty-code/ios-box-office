@@ -6,13 +6,13 @@ struct MovieDetailResponseDTO: Decodable {
 
 extension MovieDetailResponseDTO {
     struct MovieInfoResultDTO: Decodable {
-        let movieInfo: MovieInfoDTO
+        let movieInfo: MovieDTO
         let source: String
     }
 }
 
 extension MovieDetailResponseDTO.MovieInfoResultDTO {
-    struct MovieInfoDTO: Decodable {
+    struct MovieDTO: Decodable {
         let movieCode: String
         let movieName: String
         let englishMovieName: String
@@ -32,7 +32,7 @@ extension MovieDetailResponseDTO.MovieInfoResultDTO {
         let staffs: [Staff]
     }
 }
-extension MovieDetailResponseDTO.MovieInfoResultDTO.MovieInfoDTO {
+extension MovieDetailResponseDTO.MovieInfoResultDTO.MovieDTO {
     enum CodingKeys: String, CodingKey {
         case movieCode = "movieCd"
         case movieName = "movieNm"
@@ -54,15 +54,15 @@ extension MovieDetailResponseDTO.MovieInfoResultDTO.MovieInfoDTO {
     }
 }
 
-extension MovieDetailResponseDTO.MovieInfoResultDTO.MovieInfoDTO {
-    func toModel() -> MovieInfoList? {
+extension MovieDetailResponseDTO.MovieInfoResultDTO.MovieDTO {
+    func toModel() -> Movie? {
         guard let movieCode = Int(movieCode),
               let productionYear = Int(productionYear),
               let duration = Int(duration),
               let openingDate = openingDate.toDate() else {
             return nil
         }
-        return MovieInfoList(
+        return Movie(
             movieCode: movieCode,
             movieName: movieName,
             englishMovieName: englishMovieName,
