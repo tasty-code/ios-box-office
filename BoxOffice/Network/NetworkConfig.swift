@@ -29,9 +29,9 @@ struct ApiDataNetworkConfig {
     let method: HTTPMethodType
     
     init(baseURL: String,
-          path: String,
-          queryParameters: [String: String] = [:],
-          method: HTTPMethodType = .get
+         path: String,
+         queryParameters: [String: String] = [:],
+         method: HTTPMethodType = .get
      ) {
         self.baseURL = baseURL
         self.path = path
