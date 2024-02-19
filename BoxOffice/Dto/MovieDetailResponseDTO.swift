@@ -25,7 +25,7 @@ extension MovieDetailResponseDTO.MovieInfoResultDTO {
         let nations: [Nation]
         let genres: [Genre]
         let directors: [Director]
-        let actors: [Actor]
+        let actors: [Performer]
         let showTypes: [ShowType]
         let companies: [Company]
         let audits: [Audit]

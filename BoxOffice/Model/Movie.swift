@@ -13,7 +13,7 @@ struct Movie {
     private let nations: [Nation]
     private let genres: [Genre]
     private let directors: [Director]
-    private let actors: [Actor]
+    private let actors: [Performer]
     private let showTypes: [ShowType]
     private let companies: [Company]
     private let audits: [Audit]
@@ -46,7 +46,7 @@ struct Director: Decodable {
     }
 }
 
-struct Actor: Decodable {
+struct Performer: Decodable {
     let name: String
     let englishName: String
     let role: String
