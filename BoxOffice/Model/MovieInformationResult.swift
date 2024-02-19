@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct MovieDetailInformation: Decodable {
-    let movieInformationResult: MovieInformationResult
+struct MovieInformationResult: Decodable {
+    let movieInformationResult: MovieInformationDetail
     
     enum CodingKeys: String, CodingKey {
         case movieInformationResult = "movieInfoResult"
     }
 }
 
-struct MovieInformationResult: Decodable {
+struct MovieInformationDetail: Decodable {
     let movieInformation: MovieInformation
     let source: String
     
