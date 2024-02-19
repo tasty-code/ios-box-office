@@ -20,6 +20,10 @@
 		BD5698A52B7D9CBA00704CCA /* BoxOfficeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5698A22B7D9BE800704CCA /* BoxOfficeResponseDTO.swift */; };
 		BDFD201B2B836A1300E84042 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFD201A2B836A1300E84042 /* NetworkService.swift */; };
 		BDFD201D2B836C9900E84042 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFD201C2B836C9900E84042 /* NetworkConfig.swift */; };
+		BDFD20202B837BDA00E84042 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFD201A2B836A1300E84042 /* NetworkService.swift */; };
+		BDFD20212B837BDC00E84042 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFD201C2B836C9900E84042 /* NetworkConfig.swift */; };
+		BDFD20222B837FE000E84042 /* MovieDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C28D3B2B82E340004A43E3 /* MovieDetailResponseDTO.swift */; };
+		BDFD20232B837FE900E84042 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C28D372B82E01F004A43E3 /* Movie.swift */; };
 		BDFE8FE52B7C7F650091339F /* BoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFE8FE42B7C7F650091339F /* BoxOffice.swift */; };
 		BDFE8FE72B7C80120091339F /* BoxOfficeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFE8FE62B7C80120091339F /* BoxOfficeType.swift */; };
 		BDFE8FE92B7C81030091339F /* MovieBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFE8FE82B7C81030091339F /* MovieBoxOffice.swift */; };
@@ -332,11 +336,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDFD20202B837BDA00E84042 /* NetworkService.swift in Sources */,
+				BDFD20212B837BDC00E84042 /* NetworkConfig.swift in Sources */,
 				BD5698A52B7D9CBA00704CCA /* BoxOfficeResponseDTO.swift in Sources */,
 				BDFE90092B7C97710091339F /* BoxOfficeModelTests.swift in Sources */,
+				BDFD20222B837FE000E84042 /* MovieDetailResponseDTO.swift in Sources */,
 				BD56989B2B7CC7A500704CCA /* String+.swift in Sources */,
 				BDFE90142B7C978B0091339F /* RankOldAndNew.swift in Sources */,
 				BDFE90132B7C97890091339F /* MovieBoxOffice.swift in Sources */,
+				BDFD20232B837FE900E84042 /* Movie.swift in Sources */,
 				BDFE90192B7C99F00091339F /* JsonLoader.swift in Sources */,
 				BDFE90112B7C97840091339F /* BoxOffice.swift in Sources */,
 				BDFE90122B7C97870091339F /* BoxOfficeType.swift in Sources */,
