@@ -23,7 +23,7 @@ struct APIService {
         }
         
         self.session.dataTask(with: url) { data, response, error in
-            DispatchQueue.main.async {
+            DispatchQueue.global().async {
                 guard 
                     error == nil
                 else {
