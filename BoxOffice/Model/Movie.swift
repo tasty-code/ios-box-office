@@ -110,7 +110,7 @@ enum ProductionStatus: String {
     case released   = "개봉"
     case unreleased = "미개봉"
     
-    init?(rawValue: String) {
+    init(rawValue: String) {
         switch rawValue {
         case ProductionStatus.released.rawValue:
             self = .released
@@ -125,7 +125,7 @@ enum RuntimeType: String {
     case short = "단편"
     case middle = "중편"
     
-    init?(rawValue: String) {
+    init(rawValue: String) {
         switch rawValue {
         case RuntimeType.long.rawValue:
             self = .long
@@ -146,8 +146,8 @@ extension Movie {
         self.productionYear = Int(movieDTO.productionYear) ?? 0
         self.duration = Int(movieDTO.duration) ?? 0
         self.openingDate = movieDTO.openingDate.toDate() ?? Date()
-        self.productionStatus = ProductionStatus(rawValue: movieDTO.productionStatus) ?? .unreleased
-        self.runtimeType = RuntimeType(rawValue: movieDTO.runtimeType) ?? .middle
+        self.productionStatus = ProductionStatus(rawValue: movieDTO.productionStatus)
+        self.runtimeType = RuntimeType(rawValue: movieDTO.runtimeType)
         self.nations = movieDTO.nations
         self.genres = movieDTO.genres
         self.directors = movieDTO.directors

@@ -21,4 +21,3 @@ final class BoxOfficeModelTests: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
 }
-

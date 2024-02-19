@@ -32,6 +32,7 @@ extension MovieDetailResponseDTO.MovieInfoResultDTO {
         let staffs: [Staff]
     }
 }
+
 extension MovieDetailResponseDTO.MovieInfoResultDTO.MovieDTO {
     private enum CodingKeys: String, CodingKey {
         case movieCode = "movieCd"
