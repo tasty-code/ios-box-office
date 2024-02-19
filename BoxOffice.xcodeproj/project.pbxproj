@@ -31,6 +31,7 @@
 		F44E989E2B82E641003F61EF /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E989D2B82E641003F61EF /* NetworkRequest.swift */; };
 		F44E98A02B82E662003F61EF /* NetworkServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E989F2B82E662003F61EF /* NetworkServiceError.swift */; };
 		F44E98A22B82E67A003F61EF /* URLRequestConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98A12B82E67A003F61EF /* URLRequestConvertible.swift */; };
+		F44E98A42B82EF2E003F61EF /* MovieRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98A32B82EF2E003F61EF /* MovieRepositoryError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		F44E989D2B82E641003F61EF /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		F44E989F2B82E662003F61EF /* NetworkServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceError.swift; sourceTree = "<group>"; };
 		F44E98A12B82E67A003F61EF /* URLRequestConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestConvertible.swift; sourceTree = "<group>"; };
+		F44E98A32B82EF2E003F61EF /* MovieRepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepositoryError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				F44E989A2B826A99003F61EF /* MovieRepositoryImpl.swift */,
+				F44E98A32B82EF2E003F61EF /* MovieRepositoryError.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				894DE28B2B7B7CE800ED865A /* SearchDailyBoxOffice.swift in Sources */,
 				F44E989B2B826A99003F61EF /* MovieRepositoryImpl.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
+				F44E98A42B82EF2E003F61EF /* MovieRepositoryError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,12 +1,5 @@
 import Foundation
 
-enum MovieRepositoryError: Error {
-  case urlError
-  case decodingError
-  case networkServiceError(NetworkServiceError)
-  case unknownError
-}
-
 protocol MovieRepository {
   // TODO: 도메인 객체로 바꾸기
   // TODO: 지금은 파라미터 없는 형태인데 고민해보기
