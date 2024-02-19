@@ -1,7 +1,7 @@
 import Foundation
 
 enum URLSCheme: String {
-    case https = "https"
+    case https
 }
 
 enum HTTPMethodType: String {
