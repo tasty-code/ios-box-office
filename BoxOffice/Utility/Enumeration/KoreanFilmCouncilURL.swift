@@ -8,15 +8,21 @@
 import Foundation
 
 enum KoreanFilmCouncilURL {
-    case dailyBoxOffice(key: String, queryValue: String)
-    case movieDetailInformation(key: String, queryValue: String)
+    case dailyBoxOffice(queryValue: String)
+    case movieDetailInformation(queryValue: String)
     
     var url: String {
+        let apiKey: String = Bundle.main.apiKey
+        let path: String = "https://kobis.or.kr/kobisopenapi/webservice/rest/"
+        
         switch self {
-        case .dailyBoxOffice(let key, let targetDate):
-            return "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(key)&targetDt=\(targetDate)"
-        case .movieDetailInformation(let key, let movieCode):
-            return "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=\(key)&movieCd=\(movieCode)"
+        case .dailyBoxOffice(let targetDate):
+            let url = path + "boxoffice/searchDailyBoxOfficeList.json?key=\(apiKey)&targetDt=\(targetDate)"
+            return url
+            
+        case .movieDetailInformation(let movieCode):
+            let url = path + "movie/searchMovieInfo.json?key=\(apiKey)&movieCd=\(movieCode)"
+            return url
         }
     }
 }

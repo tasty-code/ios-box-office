@@ -9,7 +9,6 @@ import Foundation
 
 struct NetworkManager {
     private(set) var urlSession: URLSession?
-    private(set) var apiKey: String = Bundle.main.apiKey
     
     init(urlSession: URLSession) {
         self.urlSession = urlSession
