@@ -13,15 +13,14 @@ enum MovieRequest {
     return ["kobisopenapi", "webservice", "rest"]
   }
   
-  case dailyBoxOffice(year: Int, month: Int, day: Int)
+  case dailyBoxOffice(dateString: String)
   case movieInfo(code: String)
 }
 
 extension MovieRequest {
   private var networkRequest: NetworkRequest {
     switch self {
-    case .dailyBoxOffice(let year, let month, let day):
-      // 20240101 이런식으로
+    case let .dailyBoxOffice(dateString):
       return .init(
         method: .get,
         baseURLString: Self.baseURLString,
@@ -31,7 +30,7 @@ extension MovieRequest {
         ],
         queries: [
           Self.keyQuery,
-          .init(name: "targetDt", value: "20240101")
+          .init(name: "targetDt", value: dateString)
         ]
       )
     case .movieInfo(let code):
