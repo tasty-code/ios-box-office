@@ -5,6 +5,6 @@
 //  Created by 강창현 on 2/19/24.
 //
 
-struct MovieDetail: Codable {
+struct MovieInfomationDetail: Codable {
     let movieInfoResult: MovieInfoResult
 }

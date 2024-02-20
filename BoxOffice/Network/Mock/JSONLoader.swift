@@ -8,10 +8,8 @@
 import Foundation
 
 struct JSONLoader {
-    static func load() -> Data? {
-        let fileName: String = "box_office"
+    static func load(fileName: String) -> Data? {
         let extensionType = "json"
-        
         guard
             let fileLocation = Bundle.main.url(forResource: fileName, withExtension: extensionType)
         else {

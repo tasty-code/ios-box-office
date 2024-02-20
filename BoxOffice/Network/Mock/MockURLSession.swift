@@ -20,7 +20,7 @@ final class MockURLSession: URLSessionProtocol {
         with url: URL,
         completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void
     ) -> URLSessionDataTaskProtocol {
-        return MockURLSessionDataTask(closure: {
+        return MockURLSessionDataTask(completionHandler: {
             completionHandler(
                 self.response.data,
                 self.response.urlResponse,
@@ -28,11 +28,4 @@ final class MockURLSession: URLSessionProtocol {
             )}
         )
     }
-}
-
-protocol URLSessionProtocol {
-    func dataTask(
-        with url: URL,
-        completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void
-    ) -> URLSessionDataTaskProtocol
 }

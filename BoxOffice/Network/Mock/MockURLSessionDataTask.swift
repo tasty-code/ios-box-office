@@ -8,17 +8,13 @@
 import Foundation
 
 final class MockURLSessionDataTask: URLSessionDataTaskProtocol {
-    private let closure: () -> Void
+    private let completionHandler: () -> Void
     
-    init(closure: @escaping () -> Void) {
-        self.closure = closure
+    init(completionHandler: @escaping () -> Void) {
+        self.completionHandler = completionHandler
     }
     
     func resume() {
-        closure()
+        completionHandler()
     }
-}
-
-protocol URLSessionDataTaskProtocol {
-    func resume()
 }
