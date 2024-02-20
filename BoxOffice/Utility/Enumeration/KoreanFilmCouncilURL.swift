@@ -12,7 +12,12 @@ enum KoreanFilmCouncilURL {
     case movieDetailInformation(queryValue: String)
     
     var url: String {
-        let apiKey: String = Bundle.main.apiKey
+        let apiKey: String = {
+            guard let apiKey = Bundle.main.infoDictionary?["API_KEY"] as? String else {
+                return ""
+            }
+            return apiKey
+        }()
         let path: String = "https://kobis.or.kr/kobisopenapi/webservice/rest/"
         
         switch self {
