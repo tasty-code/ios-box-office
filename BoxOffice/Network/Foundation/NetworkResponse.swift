@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct NetworkResponse {
+    let data: Data
+    let response: HTTPURLResponse
+}
