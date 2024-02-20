@@ -8,9 +8,9 @@
 import Foundation
 
 struct NetworkManager {
-    private(set) var urlSession: URLSession?
+    private(set) var urlSession: URLSessionProtocol?
     
-    init(urlSession: URLSession) {
+    init(urlSession: URLSessionProtocol) {
         self.urlSession = urlSession
     }
     
@@ -25,7 +25,7 @@ struct NetworkManager {
     
     func request(_ request: URLRequest, into type: KoreanFilmCouncilURL) async -> NetworkDataProtocol? {
         do {
-            guard let (data, response) = try await urlSession?.data(for: request) else {
+            guard let (data, response) = try await urlSession?.data(for: request, delegate: nil) else {
                 return nil
             }
             guard let httpResponse = response as? HTTPURLResponse else {
