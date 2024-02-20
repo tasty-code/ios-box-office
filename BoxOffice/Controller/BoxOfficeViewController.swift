@@ -9,18 +9,13 @@ import UIKit
 
 final class BoxOfficeViewController: UIViewController {
     
-    private var dataSource: BoxOfficeResult? = nil
+    private var dataSource: NetworkDataProtocol? = nil
+    private let networkManager: NetworkManager
     
-    init() {
+    init(dataSource: BoxOfficeResult? = nil, networkManager: NetworkManager) {
+        self.dataSource = dataSource
+        self.networkManager = networkManager
         super.init(nibName: nil, bundle: nil)
-        Task {
-            let apiKey: String = Bundle.main.apiKey
-            guard let jsonData = await BoxOfficeDTO.requestData(with: KoreanFilmCouncilURLEnumeration.dailyBoxOffice(apiKey, "20240215").url) else {
-                return
-            }
-            dataSource = BoxOfficeDTO.parseJSONData(jsonData)
-            print(dataSource)
-        }
     }
     
     required init?(coder: NSCoder) {
@@ -29,5 +24,14 @@ final class BoxOfficeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Task {
+            let type: KoreanFilmCouncilURL = .dailyBoxOffice(queryValue: "20120419")
+            guard let request = networkManager.makeRequest(type),
+                  let data = await networkManager.request(request, into: type) else {
+                return
+            }
+            dataSource = data
+
+        }
     }
 }
