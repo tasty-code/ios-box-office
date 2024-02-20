@@ -29,10 +29,9 @@ extension DefaultNetworkService: NetworkService {
     
     func request(apiConfig: any Requestable,
                  completion: @escaping CompletionHandler) -> URLSessionTask? {
-        guard var urlRequest = apiConfig.toURLRequest() else {
+        guard let urlRequest = apiConfig.toURLRequest() else {
             return nil
         }
-        urlRequest.httpMethod = apiConfig.method.rawValue
         let sessionDataTask = sessionManager.request(urlRequest) { [weak self] data, response, requestError in
             if let requestError = requestError {
                 completion(.failure(self?.networkError(response, requestError, data) ?? .generic(requestError)))
