@@ -15,6 +15,7 @@
 		772025692B7C7E4E00439CFD /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772025682B7C7E4E00439CFD /* BaseTestCase.swift */; };
 		7773387B2B848C0200143672 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7773387A2B848C0200143672 /* Requestable.swift */; };
 		7773387D2B848C2400143672 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7773387C2B848C2400143672 /* NetworkResponse.swift */; };
+		7773387F2B848D1200143672 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7773387E2B848D1200143672 /* NetworkProvider.swift */; };
 		777338812B848DCA00143672 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777338802B848DCA00143672 /* NetworkConstants.swift */; };
 		777338832B848DE600143672 /* NetworkEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777338822B848DE600143672 /* NetworkEnvironment.swift */; };
 		777338852B848E0800143672 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777338842B848E0800143672 /* TargetType.swift */; };
@@ -49,6 +50,7 @@
 		772025682B7C7E4E00439CFD /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		7773387A2B848C0200143672 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		7773387C2B848C2400143672 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
+		7773387E2B848D1200143672 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		777338802B848DCA00143672 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		777338822B848DE600143672 /* NetworkEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEnvironment.swift; sourceTree = "<group>"; };
 		777338842B848E0800143672 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				952AD2C72B848A4800598680 /* NetworkResult.swift */,
 				7773387A2B848C0200143672 /* Requestable.swift */,
 				7773387C2B848C2400143672 /* NetworkResponse.swift */,
+				7773387E2B848D1200143672 /* NetworkProvider.swift */,
 				777338802B848DCA00143672 /* NetworkConstants.swift */,
 				777338822B848DE600143672 /* NetworkEnvironment.swift */,
 				777338842B848E0800143672 /* TargetType.swift */,
@@ -313,6 +316,7 @@
 				777338852B848E0800143672 /* TargetType.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
 				952AD2C42B84880A00598680 /* NetworkError.swift in Sources */,
+				7773387F2B848D1200143672 /* NetworkProvider.swift in Sources */,
 				952AD2C12B8484B300598680 /* MovieData.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
 				952AD2C82B848A4800598680 /* NetworkResult.swift in Sources */,
