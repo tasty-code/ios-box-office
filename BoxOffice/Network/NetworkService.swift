@@ -1,31 +1,41 @@
 import Foundation
 
+enum NetworkError: Error {
+    case error(statusCode: Int, data: Data?)
+    case notConnected
+    case cancelled
+    case generic(Error)
+    case dataError
+}
+
 protocol NetworkService {
-    typealias CompletionHandler = (Result<Data?, Error>) -> Void
+    typealias CompletionHandler = (Result<Data?, NetworkError>) -> Void
     
-    func request(completion: @escaping CompletionHandler) -> URLSessionTask?
+    func request(apiConfig: any Requestable,
+                 completion: @escaping CompletionHandler) -> URLSessionTask?
 }
 
 final class DefaultNetworkService {
-    
-    private let config: NetworkConfigurable
     private let sessionManager: NetworkSessionManager
     
-    init(config: NetworkConfigurable,
-        sessionManager: NetworkSessionManager = DefaultNetworkSessionManager()
+    init(sessionManager: NetworkSessionManager = DefaultNetworkSessionManager()
     ) {
         self.sessionManager = sessionManager
-        self.config = config
     }
     
 }
 
 extension DefaultNetworkService: NetworkService {
-    private func request(request: URLRequest,
-                         completion: @escaping CompletionHandler) -> URLSessionTask {
-        let sessionDataTask = sessionManager.request(request) { data, response, requestError in
+    
+    func request(apiConfig: any Requestable,
+                 completion: @escaping CompletionHandler) -> URLSessionTask? {
+        guard var urlRequest = apiConfig.toURLRequest() else {
+            return nil
+        }
+        urlRequest.httpMethod = apiConfig.method.rawValue
+        let sessionDataTask = sessionManager.request(urlRequest) { [weak self] data, response, requestError in
             if let requestError = requestError {
-                completion(.failure(requestError))
+                completion(.failure(self?.networkError(response, requestError, data) ?? .generic(requestError)))
             } else {
                 completion(.success(data))
             }
@@ -33,14 +43,21 @@ extension DefaultNetworkService: NetworkService {
         return sessionDataTask
     }
     
-    func request(completion: @escaping CompletionHandler) -> URLSessionTask? {
-        let urlComponents = config.toURLComponents()
-        guard let url = urlComponents.url else {
-            return nil
+    private func networkError(_ urlResponse: URLResponse?,
+                              _ error: Error,
+                              _ data: Data?) -> NetworkError {
+        if let response = urlResponse as? HTTPURLResponse {
+            return .error(statusCode: response.statusCode, data: data)
         }
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = config.method.rawValue
-        return request(request: URLRequest(url: url), completion: completion)
+        let code = URLError.Code(rawValue: (error as NSError).code)
+        switch code {
+        case .notConnectedToInternet:
+            return .notConnected
+        case .cancelled:
+            return .cancelled
+        default:
+            return .generic(error)
+        }
     }
 }
 

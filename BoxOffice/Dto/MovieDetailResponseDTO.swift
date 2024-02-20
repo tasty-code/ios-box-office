@@ -60,5 +60,3 @@ extension MovieDetailResponseDTO.MovieInfoResultDTO.MovieDTO {
         return .init(from: self)
     }
 }
-
-
