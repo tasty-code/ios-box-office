@@ -1,39 +1,13 @@
 import Foundation
 
-protocol DataTransferDispatchQueue {
-    func asyncExecute(work: @escaping () -> Void)
-}
-
-extension DispatchQueue: DataTransferDispatchQueue {
-    func asyncExecute(work: @escaping () -> Void) {
-        async(group: nil, execute: work)
-    }
-}
-
 protocol DataTransferService {
     typealias CompletionHandler<T> = (Result<T, Error>) -> Void
     
-    @discardableResult
-    func request<T: Decodable, E: Requestable>(
-        with endpoint: E,
-        on queue: DataTransferDispatchQueue,
-        completion: @escaping CompletionHandler<T>
-    ) -> URLSessionTask? where E.Response == T
-    
-    @discardableResult
     func request<T: Decodable, E: Requestable>(
         with endpoint: E,
         completion: @escaping CompletionHandler<T>
     ) -> URLSessionTask? where E.Response == T
-
-    @discardableResult
-    func request<E: Requestable>(
-        with endpoint: E,
-        on queue: DataTransferDispatchQueue,
-        completion: @escaping CompletionHandler<Void>
-    ) -> URLSessionTask? where E.Response == Void
     
-    @discardableResult
     func request<E: Requestable>(
         with endpoint: E,
         completion: @escaping CompletionHandler<Void>
@@ -54,47 +28,31 @@ extension DefaultDataTransferService: DataTransferService {
     
     func request<T: Decodable, E: Requestable>(
         with endpoint: E,
-        on queue: DataTransferDispatchQueue,
         completion: @escaping CompletionHandler<T>
     ) -> URLSessionTask? where E.Response == T {
-        return networkService.request { result in
+        return networkService.request(apiConfig: endpoint) { result in
             switch result {
             case .success(let data):
                 let result: Result<T, Error> = self.decode(data: data, decoder: endpoint.responseDecoder)
-                queue.asyncExecute { completion(result) }
+                completion(result)
             case .failure(let error):
-                queue.asyncExecute { completion(.failure(error)) }
+                completion(.failure(error))
             }
         }
     }
     
-    func request<T: Decodable, E: Requestable>(
-        with endpoint: E,
-        completion: @escaping CompletionHandler<T>
-    ) -> URLSessionTask? where E.Response == T {
-        return request(with: endpoint, on: DispatchQueue.main, completion: completion)
-    }
-
     func request<E>(
         with endpoint: E,
-        on queue: DataTransferDispatchQueue,
         completion: @escaping CompletionHandler<Void>
-    ) -> URLSessionTask? where E: Requestable, E.Response == Void {
-        return networkService.request { result in
+    ) -> URLSessionTask? where E : Requestable, E.Response == Void {
+        return networkService.request(apiConfig: endpoint) { result in
             switch result {
             case .success:
-                queue.asyncExecute { completion(.success(())) }
+                completion(.success(()))
             case .failure(let error):
-                queue.asyncExecute { completion(.failure(error)) }
+                completion(.failure(error))
             }
         }
-    }
-
-    func request<E>(
-        with endpoint: E,
-        completion: @escaping CompletionHandler<Void>
-    ) -> URLSessionTask? where E: Requestable, E.Response == Void {
-        return request(with: endpoint, on: DispatchQueue.main, completion: completion)
     }
 
     private func decode<T: Decodable>(
