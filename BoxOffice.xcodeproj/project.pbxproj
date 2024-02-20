@@ -27,6 +27,7 @@
 		BDFD20252B83AB5600E84042 /* DataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFD20242B83AB5600E84042 /* DataTransferService.swift */; };
 		BDFD20262B844E5300E84042 /* DataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFD20242B83AB5600E84042 /* DataTransferService.swift */; };
 		BDFD20282B84507600E84042 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFD20272B84507600E84042 /* NetworkServiceTests.swift */; };
+		BDFD202A2B84660600E84042 /* box_office_sample_2.json in Resources */ = {isa = PBXBuildFile; fileRef = BDFD20292B84660600E84042 /* box_office_sample_2.json */; };
 		BDFE8FE52B7C7F650091339F /* BoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFE8FE42B7C7F650091339F /* BoxOffice.swift */; };
 		BDFE8FE72B7C80120091339F /* BoxOfficeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFE8FE62B7C80120091339F /* BoxOfficeType.swift */; };
 		BDFE8FE92B7C81030091339F /* MovieBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFE8FE82B7C81030091339F /* MovieBoxOffice.swift */; };
@@ -67,6 +68,7 @@
 		BDFD201C2B836C9900E84042 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
 		BDFD20242B83AB5600E84042 /* DataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferService.swift; sourceTree = "<group>"; };
 		BDFD20272B84507600E84042 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
+		BDFD20292B84660600E84042 /* box_office_sample_2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = box_office_sample_2.json; sourceTree = "<group>"; };
 		BDFE8FE42B7C7F650091339F /* BoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOffice.swift; sourceTree = "<group>"; };
 		BDFE8FE62B7C80120091339F /* BoxOfficeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeType.swift; sourceTree = "<group>"; };
 		BDFE8FE82B7C81030091339F /* MovieBoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBoxOffice.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				BDFE90162B7C988C0091339F /* box_office_sample.json */,
+				BDFD20292B84660600E84042 /* box_office_sample_2.json */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDFD202A2B84660600E84042 /* box_office_sample_2.json in Resources */,
 				BDFE90172B7C988C0091339F /* box_office_sample.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
