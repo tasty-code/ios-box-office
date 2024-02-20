@@ -14,7 +14,7 @@ struct NetworkManager {
         self.urlSession = urlSession
     }
     
-    func makeRequest(_ type: KoreanFilmCouncilURL, httpMethod: String = "GET") async -> URLRequest? {
+    func makeRequest(_ type: KoreanFilmCouncilURL, httpMethod: String = "GET") -> URLRequest? {
         guard let url = URL(string: type.url) else {
             return nil
         }
