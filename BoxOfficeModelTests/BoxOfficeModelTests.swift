@@ -6,7 +6,6 @@ import Foundation
 final class BoxOfficeModelTests: XCTestCase {
 
     var sut: Data!
-    
     override func setUpWithError() throws {
         sut = JsonLoader.loadjson(fileName: "box_office_sample")!
     }

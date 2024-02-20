@@ -2,7 +2,8 @@ import Foundation
 
 class JsonLoader {
     static func loadjson(fileName: String) -> Data? {
-        guard let fileLocation = Bundle(for: BoxOfficeModelTests.self).path(forResource: fileName, ofType: "json") else {
+        guard let fileLocation = Bundle(for: BoxOfficeModelTests.self).path(forResource: fileName, ofType: "json")
+        else {
             print("notFound")
             return nil
         }
