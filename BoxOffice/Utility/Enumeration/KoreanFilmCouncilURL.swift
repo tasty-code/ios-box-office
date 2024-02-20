@@ -28,9 +28,9 @@ enum KoreanFilmCouncilURL {
     
     var dataType: NetworkDataProtocol.Type {
         switch self {
-        case .dailyBoxOffice(let queryValue):
+        case .dailyBoxOffice:
             return BoxOfficeResult.self
-        case .movieDetailInformation(let queryValue):
+        case .movieDetailInformation:
             return MovieInformationResult.self
         }
     }
