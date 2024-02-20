@@ -14,7 +14,7 @@
 		63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
 		CC06C5752B7F6B2F00A7066A /* KobisAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC06C5742B7F6B2F00A7066A /* KobisAPI.swift */; };
-		CC76BA212B80FA9000E6B3B6 /* KobisService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC76BA202B80FA9000E6B3B6 /* KobisService.swift */; };
+		CC76BA212B80FA9000E6B3B6 /* KobisProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC76BA202B80FA9000E6B3B6 /* KobisProtocol.swift */; };
 		CC968A6D2B7B78BE00869511 /* DailyBoxOfficeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC968A6C2B7B78BE00869511 /* DailyBoxOfficeDTO.swift */; };
 		CC968A6F2B7B942600869511 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC968A6E2B7B942600869511 /* NetworkError.swift */; };
 		CC968A712B7C4D4700869511 /* BoxOfficeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC968A702B7C4D4700869511 /* BoxOfficeManager.swift */; };
@@ -23,6 +23,9 @@
 		CCC9735C2B80295200ECE6FD /* DetailMovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9735B2B80295200ECE6FD /* DetailMovieDTO.swift */; };
 		CCC9735E2B802C4000ECE6FD /* DetailMovieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9735D2B802C4000ECE6FD /* DetailMovieManager.swift */; };
 		CCDEC3492B82E69400F7566D /* box_office_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = CCDEC3482B82E69400F7566D /* box_office_sample.json */; };
+		CCDEC3BC2B848EB500F7566D /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEC3BB2B848EB500F7566D /* NetworkSession.swift */; };
+		CCDEC3BE2B848EF500F7566D /* NetworkSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEC3BD2B848EF500F7566D /* NetworkSessionProtocol.swift */; };
+		CCDEC3C22B849B8B00F7566D /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDEC3C12B849B8B00F7566D /* NetworkResponse.swift */; };
 		CCED740F2B7EF51F007DAD2E /* DailyBoxOfficeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED740E2B7EF51F007DAD2E /* DailyBoxOfficeManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +49,7 @@
 		63DF20FA2970E1A1005DF7D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63DF20FC2970E1A1005DF7D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC06C5742B7F6B2F00A7066A /* KobisAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisAPI.swift; sourceTree = "<group>"; };
-		CC76BA202B80FA9000E6B3B6 /* KobisService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisService.swift; sourceTree = "<group>"; };
+		CC76BA202B80FA9000E6B3B6 /* KobisProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisProtocol.swift; sourceTree = "<group>"; };
 		CC968A6C2B7B78BE00869511 /* DailyBoxOfficeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeDTO.swift; sourceTree = "<group>"; };
 		CC968A6E2B7B942600869511 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		CC968A702B7C4D4700869511 /* BoxOfficeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeManager.swift; sourceTree = "<group>"; };
@@ -56,6 +59,9 @@
 		CCC9735B2B80295200ECE6FD /* DetailMovieDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieDTO.swift; sourceTree = "<group>"; };
 		CCC9735D2B802C4000ECE6FD /* DetailMovieManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieManager.swift; sourceTree = "<group>"; };
 		CCDEC3482B82E69400F7566D /* box_office_sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = box_office_sample.json; sourceTree = "<group>"; };
+		CCDEC3BB2B848EB500F7566D /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
+		CCDEC3BD2B848EF500F7566D /* NetworkSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionProtocol.swift; sourceTree = "<group>"; };
+		CCDEC3C12B849B8B00F7566D /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 		CCED740E2B7EF51F007DAD2E /* DailyBoxOfficeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOfficeManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,30 +110,12 @@
 			path = BoxOffice;
 			sourceTree = "<group>";
 		};
-		CC76BA232B80FC3D00E6B3B6 /* KobisService */ = {
-			isa = PBXGroup;
-			children = (
-				CC968A702B7C4D4700869511 /* BoxOfficeManager.swift */,
-				CCED740E2B7EF51F007DAD2E /* DailyBoxOfficeManager.swift */,
-				CC76BA202B80FA9000E6B3B6 /* KobisService.swift */,
-				CCC9735D2B802C4000ECE6FD /* DetailMovieManager.swift */,
-			);
-			path = KobisService;
-			sourceTree = "<group>";
-		};
-		CC76BA242B819AC800E6B3B6 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				CC968A6E2B7B942600869511 /* NetworkError.swift */,
-				CC968A882B7CDC9E00869511 /* JsonParser.swift */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		CC968A6B2B7B787400869511 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CC76BA242B819AC800E6B3B6 /* Network */,
+				CCDEC3C12B849B8B00F7566D /* NetworkResponse.swift */,
+				CC968A6E2B7B942600869511 /* NetworkError.swift */,
+				CC968A882B7CDC9E00869511 /* JsonParser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -148,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				CC968A742B7C53AE00869511 /* Application */,
+				CCDEC3B82B848DC800F7566D /* Network */,
 				CCDEC3A42B836B9300F7566D /* API */,
 				CC968A6B2B7B787400869511 /* Model */,
 				CCED74102B7EF65F007DAD2E /* DTO */,
@@ -184,10 +173,54 @@
 		CCDEC3A42B836B9300F7566D /* API */ = {
 			isa = PBXGroup;
 			children = (
-				CC06C5742B7F6B2F00A7066A /* KobisAPI.swift */,
-				CC76BA232B80FC3D00E6B3B6 /* KobisService */,
+				CCDEC3C42B849C3500F7566D /* Implementation */,
+				CCDEC3C32B849C2900F7566D /* Interface */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		CCDEC3B82B848DC800F7566D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				CCDEC3BA2B848E8500F7566D /* Interface */,
+				CCDEC3B92B848E6800F7566D /* Implementation */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		CCDEC3B92B848E6800F7566D /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				CCDEC3BB2B848EB500F7566D /* NetworkSession.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		CCDEC3BA2B848E8500F7566D /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				CCDEC3BD2B848EF500F7566D /* NetworkSessionProtocol.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		CCDEC3C32B849C2900F7566D /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				CC76BA202B80FA9000E6B3B6 /* KobisProtocol.swift */,
+				CC06C5742B7F6B2F00A7066A /* KobisAPI.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		CCDEC3C42B849C3500F7566D /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				CC968A702B7C4D4700869511 /* BoxOfficeManager.swift */,
+				CCED740E2B7EF51F007DAD2E /* DailyBoxOfficeManager.swift */,
+				CCC9735D2B802C4000ECE6FD /* DetailMovieManager.swift */,
+			);
+			path = Implementation;
 			sourceTree = "<group>";
 		};
 		CCED74102B7EF65F007DAD2E /* DTO */ = {
@@ -302,14 +335,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC968A6D2B7B78BE00869511 /* DailyBoxOfficeDTO.swift in Sources */,
+				CCDEC3BE2B848EF500F7566D /* NetworkSessionProtocol.swift in Sources */,
 				CC06C5752B7F6B2F00A7066A /* KobisAPI.swift in Sources */,
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
 				CC968A892B7CDC9E00869511 /* JsonParser.swift in Sources */,
 				CC968A6F2B7B942600869511 /* NetworkError.swift in Sources */,
-				CC76BA212B80FA9000E6B3B6 /* KobisService.swift in Sources */,
+				CC76BA212B80FA9000E6B3B6 /* KobisProtocol.swift in Sources */,
 				CCC9735E2B802C4000ECE6FD /* DetailMovieManager.swift in Sources */,
+				CCDEC3BC2B848EB500F7566D /* NetworkSession.swift in Sources */,
 				CCC9735C2B80295200ECE6FD /* DetailMovieDTO.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
+				CCDEC3C22B849B8B00F7566D /* NetworkResponse.swift in Sources */,
 				CCED740F2B7EF51F007DAD2E /* DailyBoxOfficeManager.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
 				CC968A712B7C4D4700869511 /* BoxOfficeManager.swift in Sources */,

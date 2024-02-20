@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol kobisService {
+protocol KobisProtocol {
     func request() -> URLRequest?
     func response(request: URLRequest, completionHandler: @escaping (Result<Any, Error>) -> ())
     func setURL() -> URL?

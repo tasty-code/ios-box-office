@@ -9,8 +9,7 @@ import Foundation
 
 enum NetworkError: LocalizedError {
     case invalidURL
-    case transportError
     case serverError(code: Int)
-    case missingData
+    case responseNotFound
     case decodingError
 }
