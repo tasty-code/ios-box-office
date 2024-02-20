@@ -20,6 +20,7 @@
 		777338832B848DE600143672 /* NetworkEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777338822B848DE600143672 /* NetworkEnvironment.swift */; };
 		777338852B848E0800143672 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777338842B848E0800143672 /* TargetType.swift */; };
 		7773388B2B849B0E00143672 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7773388A2B849B0E00143672 /* BaseAPI.swift */; };
+		777338902B849BFB00143672 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7773388F2B849BFB00143672 /* MovieService.swift */; };
 		952AD2C12B8484B300598680 /* MovieData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952AD2C02B8484B300598680 /* MovieData.swift */; };
 		952AD2C42B84880A00598680 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952AD2C32B84880A00598680 /* NetworkError.swift */; };
 		952AD2C62B84898000598680 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952AD2C52B84898000598680 /* HTTPMethod.swift */; };
@@ -56,6 +57,7 @@
 		777338822B848DE600143672 /* NetworkEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEnvironment.swift; sourceTree = "<group>"; };
 		777338842B848E0800143672 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		7773388A2B849B0E00143672 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
+		7773388F2B849BFB00143672 /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
 		952AD2C02B8484B300598680 /* MovieData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieData.swift; sourceTree = "<group>"; };
 		952AD2C32B84880A00598680 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		952AD2C52B84898000598680 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -167,9 +169,18 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		7773388E2B849BD800143672 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				7773388F2B849BFB00143672 /* MovieService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		952AD2C22B8487EE00598680 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				7773388E2B849BD800143672 /* Service */,
 				777338892B849B0100143672 /* API */,
 				772025642B7C7D6300439CFD /* Model */,
 				777338792B848BBD00143672 /* Foundation */,
@@ -334,6 +345,7 @@
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
 				7773388B2B849B0E00143672 /* BaseAPI.swift in Sources */,
 				952AD2C82B848A4800598680 /* NetworkResult.swift in Sources */,
+				777338902B849BFB00143672 /* MovieService.swift in Sources */,
 				777338832B848DE600143672 /* NetworkEnvironment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
