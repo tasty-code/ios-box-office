@@ -35,6 +35,9 @@
 		F44E98AB2B83810A003F61EF /* MovieRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98AA2B83810A003F61EF /* MovieRequest.swift */; };
 		F44E98B82B848BA1003F61EF /* NetworkRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98B72B848BA1003F61EF /* NetworkRequestable.swift */; };
 		F44E98BA2B848C07003F61EF /* URLSession+NetworkRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98B92B848C07003F61EF /* URLSession+NetworkRequestable.swift */; };
+		F44E98C12B849241003F61EF /* MovieRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98C02B849241003F61EF /* MovieRepositoryTests.swift */; };
+		F44E98C42B849DB0003F61EF /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98C32B849DB0003F61EF /* MockURLSession.swift */; };
+		F44E98C62B849DFB003F61EF /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98C52B849DFB003F61EF /* MockNetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +81,9 @@
 		F44E98AA2B83810A003F61EF /* MovieRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRequest.swift; sourceTree = "<group>"; };
 		F44E98B72B848BA1003F61EF /* NetworkRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestable.swift; sourceTree = "<group>"; };
 		F44E98B92B848C07003F61EF /* URLSession+NetworkRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+NetworkRequestable.swift"; sourceTree = "<group>"; };
+		F44E98C02B849241003F61EF /* MovieRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepositoryTests.swift; sourceTree = "<group>"; };
+		F44E98C32B849DB0003F61EF /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
+		F44E98C52B849DFB003F61EF /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +180,7 @@
 			children = (
 				F44E98552B7C774A003F61EF /* BoxOfficeTests.swift */,
 				F44E988D2B7DF621003F61EF /* SearchMovieInfoTests.swift */,
+				F44E98C22B849D78003F61EF /* Repository */,
 			);
 			path = BoxOfficeTests;
 			sourceTree = "<group>";
@@ -260,6 +267,24 @@
 				F44E98A32B82EF2E003F61EF /* MovieRepositoryError.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		F44E98C22B849D78003F61EF /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				F44E98C72B84B49E003F61EF /* TestDouble */,
+				F44E98C02B849241003F61EF /* MovieRepositoryTests.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		F44E98C72B84B49E003F61EF /* TestDouble */ = {
+			isa = PBXGroup;
+			children = (
+				F44E98C32B849DB0003F61EF /* MockURLSession.swift */,
+				F44E98C52B849DFB003F61EF /* MockNetworkService.swift */,
+			);
+			path = TestDouble;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,8 +440,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F44E98C62B849DFB003F61EF /* MockNetworkService.swift in Sources */,
+				F44E98C12B849241003F61EF /* MovieRepositoryTests.swift in Sources */,
 				F44E98562B7C774A003F61EF /* BoxOfficeTests.swift in Sources */,
 				F44E985C2B7C775F003F61EF /* SearchDailyBoxOffice.swift in Sources */,
+				F44E98C42B849DB0003F61EF /* MockURLSession.swift in Sources */,
 				F44E988E2B7DF621003F61EF /* SearchMovieInfoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
