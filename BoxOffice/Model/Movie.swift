@@ -20,7 +20,7 @@ struct Movie {
     private let staffs: [Staff]
 }
 
-struct Nation: Decodable {
+struct Nation: Decodable, Equatable {
     let name: String
     
     private enum CodingKeys: String, CodingKey {
@@ -28,7 +28,7 @@ struct Nation: Decodable {
     }
 }
 
-struct Genre: Decodable {
+struct Genre: Decodable, Equatable {
     let name: String
     
     private enum CodingKeys: String, CodingKey {
@@ -36,7 +36,7 @@ struct Genre: Decodable {
     }
 }
 
-struct Director: Decodable {
+struct Director: Decodable, Equatable {
     let name: String
     let englishName: String
     
@@ -46,7 +46,7 @@ struct Director: Decodable {
     }
 }
 
-struct Performer: Decodable {
+struct Performer: Decodable, Equatable {
     let name: String
     let englishName: String
     let role: String
@@ -60,7 +60,7 @@ struct Performer: Decodable {
     }
 }
 
-struct ShowType: Decodable {
+struct ShowType: Decodable, Equatable {
     let groupName: String
     let name: String
     
@@ -70,7 +70,7 @@ struct ShowType: Decodable {
     }
 }
 
-struct Company: Decodable {
+struct Company: Decodable, Equatable {
     let code: String
     let name: String
     let englishName: String
@@ -84,7 +84,7 @@ struct Company: Decodable {
     }
 }
 
-struct Audit: Decodable {
+struct Audit: Decodable, Equatable {
     let auditNumber: String
     let rating: String
     
@@ -94,7 +94,7 @@ struct Audit: Decodable {
     }
 }
 
-struct Staff: Decodable {
+struct Staff: Decodable, Equatable {
     let name: String
     let englishName: String
     let role: String
@@ -106,7 +106,7 @@ struct Staff: Decodable {
     }
 }
 
-enum ProductionStatus: String {
+enum ProductionStatus: String, Equatable {
     case released   = "개봉"
     case unreleased = "미개봉"
     

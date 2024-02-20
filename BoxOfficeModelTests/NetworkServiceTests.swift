@@ -63,4 +63,34 @@ final class NetworkServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 10)
     }
 
+    func test_네트워크에서_불러온_json을_MovieDetailResponseDTO로_파싱할_수_있다() throws {
+        // given
+        let baseUrl = "kobis.or.kr"
+        let path = "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
+        let queryParameters = [
+            "key": "f5eef3421c602c6cb7ea224104795888",
+            "movieCd": "20124079"
+        ]
+        let movieDetailAPI = APIConfig<MovieDetailResponseDTO>(baseURL: baseUrl,
+                                                           path: path,
+                                                           queryParameters: queryParameters)
+        let sessionManager = DefaultNetworkSessionManager()
+        let sut = DefaultDataTransferService(with: DefaultNetworkService(sessionManager: sessionManager))
+        let decoder = JSONDecoder()
+        let expectationData = try decoder.decode(MovieDetailResponseDTO.self,
+                                                 from: JsonLoader.loadjson(fileName: "movie_detail_sample")!)
+        let expectation = XCTestExpectation(description: "dataFectch")
+        // when
+        _ = sut.request(with: movieDetailAPI) { result in
+            // then
+            switch result {
+            case .success(let data):
+                XCTAssertEqual(data, expectationData)
+            case .failure(let error):
+                print(error)
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 10)
+    }
 }
