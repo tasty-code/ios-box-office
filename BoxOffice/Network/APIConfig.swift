@@ -80,7 +80,7 @@ extension APIConfig {
         }
         urlRequest.httpMethod = method.rawValue
         urlRequest.allHTTPHeaderFields = headerParameters.reduce(into: [:]) { partialResult, headerParameter in
-            partialResult?.updateValue(headerParameter.value, forKey: headerParameter.key)
+            partialResult[headerParameter.key] = headerParameter.value
         }
         return urlRequest
     }

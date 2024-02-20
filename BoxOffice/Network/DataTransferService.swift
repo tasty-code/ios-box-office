@@ -50,7 +50,7 @@ extension DefaultDataTransferService: DataTransferService {
     func request<E>(
         with endpoint: E,
         completion: @escaping CompletionHandler<Void>
-    ) -> URLSessionTask? where E : Requestable, E.Response == Void {
+    ) -> URLSessionTask? where E: Requestable, E.Response == Void {
         return networkService.request(apiConfig: endpoint) { result in
             switch result {
             case .success:
