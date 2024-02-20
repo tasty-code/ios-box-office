@@ -38,6 +38,7 @@
 		F44E98C12B849241003F61EF /* MovieRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98C02B849241003F61EF /* MovieRepositoryTests.swift */; };
 		F44E98C42B849DB0003F61EF /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98C32B849DB0003F61EF /* MockURLSession.swift */; };
 		F44E98C62B849DFB003F61EF /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98C52B849DFB003F61EF /* MockNetworkService.swift */; };
+		F44E98CB2B84DF56003F61EF /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98CA2B84DF56003F61EF /* MovieRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		F44E98C02B849241003F61EF /* MovieRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepositoryTests.swift; sourceTree = "<group>"; };
 		F44E98C32B849DB0003F61EF /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
 		F44E98C52B849DFB003F61EF /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
+		F44E98CA2B84DF56003F61EF /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				F44E98BF2B848D72003F61EF /* Repository */,
+				F44E98CC2B84DF77003F61EF /* Error */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -263,8 +266,8 @@
 		F44E98BF2B848D72003F61EF /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				F44E98CA2B84DF56003F61EF /* MovieRepository.swift */,
 				F44E989A2B826A99003F61EF /* MovieRepositoryImpl.swift */,
-				F44E98A32B82EF2E003F61EF /* MovieRepositoryError.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -285,6 +288,14 @@
 				F44E98C52B849DFB003F61EF /* MockNetworkService.swift */,
 			);
 			path = TestDouble;
+			sourceTree = "<group>";
+		};
+		F44E98CC2B84DF77003F61EF /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				F44E98A32B82EF2E003F61EF /* MovieRepositoryError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -422,6 +433,7 @@
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
 				F44E98672B7C7C41003F61EF /* BundleResourceManager.swift in Sources */,
+				F44E98CB2B84DF56003F61EF /* MovieRepository.swift in Sources */,
 				F44E98A22B82E67A003F61EF /* URLRequestConvertible.swift in Sources */,
 				F44E98A02B82E662003F61EF /* NetworkServiceError.swift in Sources */,
 				F44E98962B8266A3003F61EF /* DataRequestable.swift in Sources */,

@@ -1,10 +1,5 @@
 import Foundation
 
-protocol MovieRepository {
-  func getDailyBoxOffice(dateString: String) async -> Result<SearchDailyBoxOffice, MovieRepositoryError>
-  func getMovieDetail(movieCode: String) async -> Result<SearchMovieInfo, MovieRepositoryError>
-}
-
 struct MovieRepositoryImpl {
   private let requester: NetworkRequestable
   private let decoder: JSONDecoder
