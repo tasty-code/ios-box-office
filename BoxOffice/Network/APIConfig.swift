@@ -68,7 +68,6 @@ extension APIConfig {
         components.host = baseURL
         components.path = path
         components.queryItems = queryParameters.map { URLQueryItem(name: $0, value: $1 as? String) }
-        print(components)
         return components.url
     }
     
