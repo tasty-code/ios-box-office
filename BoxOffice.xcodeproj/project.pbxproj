@@ -94,7 +94,6 @@
 			children = (
 				952AD2C22B8487EE00598680 /* Network */,
 				95AC03D02B7B23A800173FB5 /* App */,
-				772025642B7C7D6300439CFD /* Model */,
 				772025652B7C7D6E00439CFD /* Presentation */,
 				772025632B7C7D4600439CFD /* Resources */,
 			);
@@ -128,12 +127,21 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		952AD2C22B8487EE00598680 /* Network */ = {
+		777338792B848BBD00143672 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
 				952AD2C32B84880A00598680 /* NetworkError.swift */,
 				952AD2C52B84898000598680 /* HTTPMethod.swift */,
 				952AD2C72B848A4800598680 /* NetworkResult.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		952AD2C22B8487EE00598680 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				772025642B7C7D6300439CFD /* Model */,
+				777338792B848BBD00143672 /* Foundation */,
 			);
 			path = Network;
 			sourceTree = "<group>";
