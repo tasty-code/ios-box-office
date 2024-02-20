@@ -1,0 +1,11 @@
+//
+//  Configuration.xcconfig
+//  BoxOffice
+//
+//  Created by nayeon  on 2/20/24.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+API_KEY = 2fa5866e3c329a53afad886b2f90601c
