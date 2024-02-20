@@ -1,9 +1,5 @@
 import Foundation
 
-protocol NetworkRequestable {
-  func requestData(request: URLRequestConvertible) async -> Result<Data, NetworkServiceError>
-}
-
 struct NetworkService {
   private let requester: DataRequestable
   
@@ -28,7 +24,9 @@ extension NetworkService: NetworkRequestable {
       return .failure(finalError)
     }
   }
-  
+}
+
+extension NetworkService {
   private func convertErrorToNetworkServiceError(_ error: Error) -> NetworkServiceError {
     if let networkError = error as? NetworkServiceError {
       return networkError

@@ -16,7 +16,9 @@ struct MovieRepositoryImpl {
 }
 
 extension MovieRepositoryImpl: MovieRepository {
-  func getDailyBoxOffice(dateString: String) async -> Result<SearchDailyBoxOffice, MovieRepositoryError> {
+  func getDailyBoxOffice(
+    dateString: String
+  ) async -> Result<SearchDailyBoxOffice, MovieRepositoryError> {
     do {
       let request = MovieRequest.dailyBoxOffice(dateString: dateString)
       let result = await self.requester.requestData(request: request)

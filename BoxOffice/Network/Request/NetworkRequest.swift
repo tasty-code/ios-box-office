@@ -1,3 +1,5 @@
+import Foundation
+
 struct NetworkRequest {
   enum HTTPMethod: String {
     case get = "GET"
@@ -28,8 +30,6 @@ struct NetworkRequest {
   }
 }
 
-import Foundation
-
 extension NetworkRequest: URLRequestConvertible {
   func toURLRequest() -> URLRequest {
     var url: URL?
@@ -43,7 +43,9 @@ extension NetworkRequest: URLRequestConvertible {
     request.httpMethod = self.method.stringExpression
     return request
   }
-  
+}
+
+extension NetworkRequest {
   @available(iOS 16.0, *)
   private func buildURLByURL() -> URL? {
     var url = URL(string: self.baseURLString)
