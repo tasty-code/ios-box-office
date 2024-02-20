@@ -77,3 +77,9 @@ extension BoxOfficeResponseDTO.BoxOfficeDTO.MovieBoxOfficeDTO {
         return .init(from: self)
     }
 }
+
+extension BoxOfficeResponseDTO.BoxOfficeDTO.MovieBoxOfficeDTO: Equatable {}
+
+extension BoxOfficeResponseDTO.BoxOfficeDTO: Equatable {}
+
+extension BoxOfficeResponseDTO: Equatable {}
