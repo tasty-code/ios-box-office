@@ -1,7 +1,13 @@
 import Foundation
 
+enum DataTransferError: Error {
+    case noResponse
+    case parsing(Error)
+    case networkFailure(NetworkError)
+}
+
 protocol DataTransferService {
-    typealias CompletionHandler<T> = (Result<T, Error>) -> Void
+    typealias CompletionHandler<T> = (Result<T, DataTransferError>) -> Void
     
     func request<T: Decodable, E: Requestable>(
         with endpoint: E,
@@ -33,10 +39,10 @@ extension DefaultDataTransferService: DataTransferService {
         return networkService.request(apiConfig: endpoint) { result in
             switch result {
             case .success(let data):
-                let result: Result<T, Error> = self.decode(data: data, decoder: endpoint.responseDecoder)
+                let result: Result<T, DataTransferError> = self.decode(data: data, decoder: endpoint.responseDecoder)
                 completion(result)
             case .failure(let error):
-                completion(.failure(error))
+                completion(.failure(.networkFailure(error)))
             }
         }
     }
@@ -50,7 +56,7 @@ extension DefaultDataTransferService: DataTransferService {
             case .success:
                 completion(.success(()))
             case .failure(let error):
-                completion(.failure(error))
+                completion(.failure(.networkFailure(error)))
             }
         }
     }
@@ -58,15 +64,15 @@ extension DefaultDataTransferService: DataTransferService {
     private func decode<T: Decodable>(
         data: Data?,
         decoder: ResponseDecoder
-    ) -> Result<T, Error> {
+    ) -> Result<T, DataTransferError> {
         do {
             guard let data = data else {
-                return .failure(NetworkError.dataError)
+                return .failure(.noResponse)
             }
             let result: T = try decoder.decode(data)
             return .success(result)
         } catch {
-            return .failure(error)
+            return .failure(.parsing(error))
         }
     }
 }
