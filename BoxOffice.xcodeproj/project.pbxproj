@@ -95,11 +95,11 @@
 		63DF20ED2970E1A0005DF7D1 /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
-				9B8ACB432B7F291000AF2527 /* Utility */,
+				63DF20FC2970E1A1005DF7D1 /* Info.plist */,
+				8A6E9F2B2B84BB6400778788 /* Secret.xcconfig */,
+				9B8ACB432B7F291000AF2527 /* Network */,
 				9B8ACB442B7F292200AF2527 /* Resource */,
 				8A8903852B7B756A00E0A48D /* Controller */,
-				8A8903832B7B755800E0A48D /* Model */,
-				8A6E9F2B2B84BB6400778788 /* Secret.xcconfig */,
 			);
 			path = BoxOffice;
 			sourceTree = "<group>";
@@ -120,13 +120,29 @@
 			path = Interface;
 			sourceTree = "<group>";
 		};
-		8A8903832B7B755800E0A48D /* Model */ = {
+		8A494C822B84D24800128F75 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				8A7E8B522B7E32CD00B73165 /* NetworkError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		8A494C832B84D25E00128F75 /* URL */ = {
+			isa = PBXGroup;
+			children = (
+				8A7E8B4C2B7DFA3600B73165 /* KoreanFilmCouncilURL.swift */,
+			);
+			path = URL;
+			sourceTree = "<group>";
+		};
+		8A494C842B84D2A900128F75 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
 				8A8903862B7B775400E0A48D /* BoxOfficeResult.swift */,
 				9BB8EB062B7DE94500B33116 /* MovieInformationResult.swift */,
 			);
-			path = Model;
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		8A8903852B7B756A00E0A48D /* Controller */ = {
@@ -139,15 +155,16 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		9B8ACB432B7F291000AF2527 /* Utility */ = {
+		9B8ACB432B7F291000AF2527 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				8A494C7E2B84D17C00128F75 /* Session */,
 				8A760EB42B7C4F9C00199C18 /* NetworkManager.swift */,
-				9B8ACB452B7F2AC200AF2527 /* Enumeration */,
-				63DF20FC2970E1A1005DF7D1 /* Info.plist */,
+				8A494C842B84D2A900128F75 /* DTO */,
+				8A494C832B84D25E00128F75 /* URL */,
+				8A494C822B84D24800128F75 /* Error */,
+				8A494C7E2B84D17C00128F75 /* Session */,
 			);
-			path = Utility;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		9B8ACB442B7F292200AF2527 /* Resource */ = {
@@ -157,15 +174,6 @@
 				63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */,
 			);
 			path = Resource;
-			sourceTree = "<group>";
-		};
-		9B8ACB452B7F2AC200AF2527 /* Enumeration */ = {
-			isa = PBXGroup;
-			children = (
-				8A7E8B4C2B7DFA3600B73165 /* KoreanFilmCouncilURL.swift */,
-				8A7E8B522B7E32CD00B73165 /* NetworkError.swift */,
-			);
-			path = Enumeration;
 			sourceTree = "<group>";
 		};
 		9B8ACB472B7F2B1B00AF2527 /* Resource */ = {
