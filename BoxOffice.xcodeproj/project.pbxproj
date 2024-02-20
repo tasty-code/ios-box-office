@@ -15,6 +15,7 @@
 		772025692B7C7E4E00439CFD /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772025682B7C7E4E00439CFD /* BaseTestCase.swift */; };
 		7773387B2B848C0200143672 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7773387A2B848C0200143672 /* Requestable.swift */; };
 		7773387D2B848C2400143672 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7773387C2B848C2400143672 /* NetworkResponse.swift */; };
+		777338812B848DCA00143672 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777338802B848DCA00143672 /* NetworkConstants.swift */; };
 		952AD2C12B8484B300598680 /* MovieData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952AD2C02B8484B300598680 /* MovieData.swift */; };
 		952AD2C42B84880A00598680 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952AD2C32B84880A00598680 /* NetworkError.swift */; };
 		952AD2C62B84898000598680 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952AD2C52B84898000598680 /* HTTPMethod.swift */; };
@@ -46,6 +47,7 @@
 		772025682B7C7E4E00439CFD /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		7773387A2B848C0200143672 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		7773387C2B848C2400143672 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
+		777338802B848DCA00143672 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		952AD2C02B8484B300598680 /* MovieData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieData.swift; sourceTree = "<group>"; };
 		952AD2C32B84880A00598680 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		952AD2C52B84898000598680 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				952AD2C72B848A4800598680 /* NetworkResult.swift */,
 				7773387A2B848C0200143672 /* Requestable.swift */,
 				7773387C2B848C2400143672 /* NetworkResponse.swift */,
+				777338802B848DCA00143672 /* NetworkConstants.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				777338812B848DCA00143672 /* NetworkConstants.swift in Sources */,
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
 				7773387D2B848C2400143672 /* NetworkResponse.swift in Sources */,
 				95AC03D42B7C4F0A00173FB5 /* BoxOfficeData.swift in Sources */,
