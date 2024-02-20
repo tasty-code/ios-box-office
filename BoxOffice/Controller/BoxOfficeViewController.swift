@@ -24,6 +24,12 @@ final class BoxOfficeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
+    }
+}
+
+extension BoxOfficeViewController {
+    private func loadData() {
         Task {
             let type: KoreanFilmCouncilURL = .dailyBoxOffice(queryValue: "20120419")
             guard let request = networkManager.makeRequest(type),
@@ -31,7 +37,6 @@ final class BoxOfficeViewController: UIViewController {
                 return
             }
             dataSource = data
-
         }
     }
 }
