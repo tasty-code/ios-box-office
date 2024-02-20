@@ -114,8 +114,8 @@
 		63DF20ED2970E1A0005DF7D1 /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
-				BDFD20172B835EC500E84042 /* Network */,
 				990300D12B7B4B47009569CA /* .swiftlint.yml */,
+				BDFD20172B835EC500E84042 /* Network */,
 				BD56989C2B7CCF3D00704CCA /* Enum */,
 				BDFE901D2B7CB2FE0091339F /* Extension */,
 				99FF17F42B7C8D7300736329 /* Dto */,

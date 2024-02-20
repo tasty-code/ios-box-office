@@ -5,6 +5,7 @@ enum NetworkError: Error {
     case notConnected
     case cancelled
     case generic(Error)
+    case dataError
 }
 
 protocol NetworkService {
@@ -15,10 +16,10 @@ protocol NetworkService {
 
 final class DefaultNetworkService {
     
-    private let config: NetworkConfigurable
+    private let config: any Requestable
     private let sessionManager: NetworkSessionManager
     
-    init(config: NetworkConfigurable,
+    init(config: any Requestable,
          sessionManager: NetworkSessionManager = DefaultNetworkSessionManager()
     ) {
         self.sessionManager = sessionManager
