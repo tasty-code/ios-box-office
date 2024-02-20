@@ -10,6 +10,8 @@ disabled_rules:
 opt_in_rules:
     - let_var_whitespace
     - closure_spacing
+    
+analyzer_rules:
     - unused_import
 
 excluded:
