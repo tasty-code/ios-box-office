@@ -19,7 +19,7 @@ final class NetworkManagerTests: XCTestCase {
         sut = nil
     }
 
-    func test_fetchDailyBoxOffice_success() {
+    func test_fetchData를통해불러온_일일박스오피스정보와_미리json형식을갖춘_일일박스오피스정보데이터와일치하는지() {
         let promise = expectation(description: "")
         
         guard let data = DailyBoxOfficeData.json.data(using: .utf8) else { return }
@@ -27,8 +27,9 @@ final class NetworkManagerTests: XCTestCase {
         let expectation: BoxOfficeDataResponse? = try? JSONDecoder().decode(BoxOfficeDataResponse.self, from: data)
         var result: BoxOfficeDataResponse?
         
-        sut.fetchDailyBoxOffice(date: "20240210") { response, error in
+        sut.fetchData(url: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=ab168a1eb56e21306b897acd3d4653ce&targetDt=20240210", type: BoxOfficeDataResponse.self) { response, error in
             result = response
+            
             XCTAssertEqual(result, expectation)
             
             promise.fulfill()
@@ -37,7 +38,7 @@ final class NetworkManagerTests: XCTestCase {
         wait(for: [promise], timeout: 10)
     }
     
-    func test_fetchDetail_success() {
+    func test_test_fetchData를통해불러온_영화개별상세정보와_미리json형식을갖춘_영화개별상세정보데이터와일치하는지() {
         let promise = expectation(description: "")
         
         guard let data = MovieDetailData.json.data(using: .utf8) else { return }
@@ -45,8 +46,9 @@ final class NetworkManagerTests: XCTestCase {
         let expectation: MovieDetail? = try? JSONDecoder().decode(MovieDetail.self, from: data)
         var result: MovieDetail?
         
-        sut.fetchDetail(code: "20236180") { response, error in
+        sut.fetchData(url: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=ab168a1eb56e21306b897acd3d4653ce&movieCd=20236180", type: MovieDetail.self) { response, error in
             result = response
+            
             XCTAssertEqual(result, expectation)
             
             promise.fulfill()

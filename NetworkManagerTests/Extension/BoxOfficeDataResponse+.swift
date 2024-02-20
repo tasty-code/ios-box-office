@@ -23,10 +23,16 @@ extension DailyBoxOfficeInfo: Equatable {
     }
 }
 
+extension BoxOfficeResult: Equatable {
+    static func == (lhs: BoxOfficeResult, rhs: BoxOfficeResult) -> Bool {
+        return lhs.boxofficeType == rhs.boxofficeType &&
+        lhs.showRange == rhs.showRange &&
+        lhs.dailyBoxOfficeList == rhs.dailyBoxOfficeList
+    }
+}
+
 extension BoxOfficeDataResponse: Equatable {
-     static func == (lhs: BoxOfficeDataResponse, rhs: BoxOfficeDataResponse) -> Bool {
-         return lhs.boxOfficeType == rhs.boxOfficeType &&
-         lhs.showRange == rhs.showRange &&
-         lhs.dailyBoxOfficeList == rhs.dailyBoxOfficeList
+    static func == (lhs: BoxOfficeDataResponse, rhs: BoxOfficeDataResponse) -> Bool {
+        return lhs.boxOfficeResult == rhs.boxOfficeResult
     }
 }
