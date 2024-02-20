@@ -1,15 +1,15 @@
 import Foundation
 
-struct DetailMovieDTO: Codable {
+struct DetailMovieDTO: Decodable {
     let movieInfoResult: MovieInfoResult
 }
 
-struct MovieInfoResult: Codable {
+struct MovieInfoResult: Decodable {
     let movieInfo: MovieInfo
     let source: String
 }
 
-struct MovieInfo: Codable {
+struct MovieInfo: Decodable {
     let movieCD, movieNm, movieNmEn, movieNmOg: String
     let showTm, prdtYear, openDt, prdtStatNm: String
     let typeNm: String
@@ -28,34 +28,34 @@ struct MovieInfo: Codable {
     }
 }
 
-struct Actors: Codable {
+struct Actors: Decodable {
     let peopleNm, peopleNmEn, cast, castEn: String
 }
 
-struct Director: Codable {
+struct Director: Decodable {
     let peopleNm, peopleNmEn: String
 }
 
-struct Genre: Codable {
+struct Genre: Decodable {
     let genreNm: String
 }
 
-struct Nation: Codable {
+struct Nation: Decodable {
     let nationNm: String
 }
 
-struct ShowTypes: Codable {
+struct ShowTypes: Decodable {
     let showTypeGroupNm, showTypeNm: String
 }
 
-struct Companys: Codable {
+struct Companys: Decodable {
     let companyCd, companyNm, companyNmEn, companyPartNm: String
 }
 
-struct Audits: Codable {
+struct Audits: Decodable {
     let auditNo, watchGradeNm: String
 }
 
-struct Staffs: Codable {
+struct Staffs: Decodable {
     let peopleNm, peopleNmEn, staffRoleNm: String
 }

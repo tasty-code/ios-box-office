@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct DailyBoxOfficeDTO: Codable {
+struct DailyBoxOfficeDTO: Decodable {
     let boxOfficeResult: BoxOfficeResult
 }
 
-struct BoxOfficeResult: Codable {
+struct BoxOfficeResult: Decodable {
     let boxofficeType, showRange: String
     let dailyBoxOfficeList: [DailyBoxOfficeList]
 }
 
-struct DailyBoxOfficeList: Codable {
+struct DailyBoxOfficeList: Decodable {
     let rnum, rank, rankInten: String
     let rankOldAndNew: RankOldAndNew
     let movieCD, movieNm, openDt, salesAmt: String
@@ -31,7 +31,7 @@ struct DailyBoxOfficeList: Codable {
     }
 }
 
-enum RankOldAndNew: String, Codable {
+enum RankOldAndNew: String, Decodable {
     case new = "NEW"
     case old = "OLD"
 }
