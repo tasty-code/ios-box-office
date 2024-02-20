@@ -14,29 +14,29 @@ struct NetworkManager {
         self.urlSession = urlSession
     }
     
-    func makeRequest<T: Decodable>(_ type: T.Type, for queryValue: String, with url: KoreanFilmCouncilURL) async -> T? {
-        guard let data = await requestData(to: KoreanFilmCouncilURL.dailyBoxOffice(key: apiKey, queryValue: queryValue).url, into: type.self) else {
+    func makeRequest(_ type: KoreanFilmCouncilURL, httpMethod: String = "GET") async -> URLRequest? {
+        guard let url = URL(string: type.url) else {
             return nil
         }
-        return data
+        var request = URLRequest(url: url)
+        request.httpMethod = httpMethod
+        return request
     }
     
-    func requestData<T>(to url: String, into type: T.Type) async -> T? where T : Decodable {
+    func request(_ request: URLRequest, into type: KoreanFilmCouncilURL) async -> NetworkDataProtocol? {
         do {
-            guard let URL = URL(string: url) else {
+            guard let (data, response) = try await urlSession?.data(for: request) else {
                 return nil
             }
-            guard let (data, response) = try await urlSession?.data(from: URL) else { return nil }
-            
             guard let httpResponse = response as? HTTPURLResponse else {
                 return nil
             }
             
             switch httpResponse.statusCode {
             case 200...299:
-                return try JSONDecoder().decode(type, from: data)
+                return try JSONDecoder().decode(type.dataType, from: data)
             case 400...599:
-                throw HTTPStatusError.invalidStatusCode(httpResponse.statusCode)
+                throw NetworkError.invalidStatusCode(httpResponse.statusCode)
             default:
                 return nil
             }

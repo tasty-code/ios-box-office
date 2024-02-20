@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BoxOfficeResult: Decodable {
+struct BoxOfficeResult: NetworkDataProtocol {
     let boxOfficeResult: BoxOfficeDetail
 }
 

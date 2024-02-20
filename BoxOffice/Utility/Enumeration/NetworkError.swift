@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum HTTPStatusError: LocalizedError {
+enum NetworkError: LocalizedError {
     case invalidStatusCode(Int)
 }
