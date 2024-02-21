@@ -101,6 +101,8 @@ iOSInjectionProject/
 ### DS_Store ###
 .DS_Store
 
+### Secret.xcconfig
+BoxOffice/Secret.xcconfig
 
 ## Gcc Patch
 /*.gcno
