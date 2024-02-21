@@ -9,9 +9,9 @@ import Foundation
 
 class BaseAPI {
     
-    let provider: NetworkProvider
+    let provider: Requestable
     
-    init(provider: NetworkProvider) {
+    init(provider: Requestable) {
         self.provider = provider
     }
     

@@ -11,7 +11,7 @@ final class MovieAPI: BaseAPI {
     
     static let shared = MovieAPI(provider: NetworkProvider())
     
-    private override init(provider: NetworkProvider) {
+    private override init(provider: Requestable) {
         super.init(provider: provider)
     }
     
