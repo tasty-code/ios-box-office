@@ -7,12 +7,13 @@
 
 import UIKit
 
-class BoxOfficeCollectionViewCell: UICollectionViewCell {
+class BoxOfficeCollectionViewCell: UICollectionViewListCell {
     let rankLabel: UILabel = {
         let label = UILabel()
         label.text = "1"
-        label.font  = .preferredFont(forTextStyle: .title1)
+        label.font  = .preferredFont(forTextStyle: .largeTitle)
         label.textAlignment = .center
+        label.textColor = .black
         return label
     }()
     
@@ -28,7 +29,7 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     let movieNameLabel: UILabel = {
         let label = UILabel()
         label.text = "경관의 피"
-        label.font = .preferredFont(forTextStyle: .largeTitle)
+        label.font = .preferredFont(forTextStyle: .title2)
         label.textAlignment = .left
         return label
     }()
@@ -36,7 +37,7 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     let audienceLabel: UILabel = {
         let label = UILabel()
         label.text = "ddd/ddd"
-        label.font = .preferredFont(forTextStyle: .footnote)
+        label.font = .preferredFont(forTextStyle: .body)
         label.textAlignment = .left
         return label
     }()
@@ -58,18 +59,41 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     let informationStackView: UIStackView = {
         let informationStackView = UIStackView()
         informationStackView.axis = .vertical
-        informationStackView.distribution = .fillProportionally
+        informationStackView.distribution = .fillEqually
         return informationStackView
     }()
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupSubView()
+        setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func setupSubView() {
-        stackView.addSubview(rankStackView)
-        stackView.addSubview(informationStackView)
+        contentView.addSubview(stackView)
         
-        rankStackView.addSubview(rankLabel)
-        rankStackView.addSubview(rankStatusLabel)
+        stackView.addArrangedSubview(rankStackView)
+        stackView.addArrangedSubview(informationStackView)
         
-        informationStackView.addSubview(movieNameLabel)
-        informationStackView.addSubview(audienceLabel)
+        rankStackView.addArrangedSubview(rankLabel)
+        rankStackView.addArrangedSubview(rankStatusLabel)
+        
+        informationStackView.addArrangedSubview(movieNameLabel)
+        informationStackView.addArrangedSubview(audienceLabel)
+    }
+    
+    private func setupConstraints() {
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ])
     }
 }
