@@ -9,6 +9,20 @@ import Foundation
 
 struct BoxOfficeResult: NetworkDataProtocol {
     let boxOfficeResult: BoxOfficeDetail
+    
+    func converted() -> [DailyBoxOffice.BoxOfficeMovie] {
+        boxOfficeResult.dailyBoxOfficeList.map { boxOfficeMovie in
+            let index: Int = Int(boxOfficeMovie.index) ?? 0
+            let rank: String = boxOfficeMovie.rank
+            let rankChangedAmount: Int = Int(boxOfficeMovie.rankChangedAmount) ?? 0
+            let rankStatus: String = boxOfficeMovie.rankStatus
+            let movieName: String = boxOfficeMovie.movieName
+            let audienceCount: Int = Int(boxOfficeMovie.audienceCount) ?? 0
+            let audienceAccumulated: Int = Int(boxOfficeMovie.audienceAccumulated) ?? 0
+            let movie = DailyBoxOffice.BoxOfficeMovie(index: index, rank: rank, rankChangedAmount: rankChangedAmount, rankStatus: rankStatus, movieName: movieName, audienceCount: audienceCount, audienceAccumulated: audienceAccumulated)
+            return movie
+        }
+    }
 }
 
 struct BoxOfficeDetail: Decodable {

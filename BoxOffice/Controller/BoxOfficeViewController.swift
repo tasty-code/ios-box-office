@@ -8,11 +8,21 @@
 import UIKit
 
 final class BoxOfficeViewController: UIViewController {
+    lazy var boxOfficeCollectionView: UICollectionView = {
+        let config = UICollectionLayoutListConfiguration(appearance: .plain)
+        let layout = UICollectionViewCompositionalLayout.list(using: config)
+        let boxOfficeCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+        return boxOfficeCollectionView
+    }()
     
-    private var dataSource: NetworkDataProtocol? = nil
+    private var dataSource: [DailyBoxOffice.BoxOfficeMovie] = [] {
+        didSet {
+            boxOfficeCollectionView.reloadData()
+        }
+    }
     private let networkManager: NetworkManager
     
-    init(dataSource: BoxOfficeResult? = nil, networkManager: NetworkManager) {
+    init(dataSource: [DailyBoxOffice.BoxOfficeMovie] = [], networkManager: NetworkManager) {
         self.dataSource = dataSource
         self.networkManager = networkManager
         super.init(nibName: nil, bundle: nil)
@@ -25,8 +35,14 @@ final class BoxOfficeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
+        view.addSubview(boxOfficeCollectionView)
+        boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: "BoxOfficeCollectionViewCell")
+        boxOfficeCollectionView.dataSource = self
+        boxOfficeCollectionView.delegate = self
     }
 }
+
+//func setupContraints()
 
 extension BoxOfficeViewController {
     private func loadData() {
@@ -37,10 +53,33 @@ extension BoxOfficeViewController {
             }
             let data = await self.networkManager.request(request, into: type) { networkError in
                 DispatchQueue.main.async {
-                    self.alert(with: networkError)                    
+                    self.alert(with: networkError)
                 }
             }
-            dataSource = data
+            guard let result = data as? BoxOfficeResult else {
+                return
+            }
+            dataSource = result.converted()
+            print(dataSource)
         }
+    }
+}
+
+extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BoxOfficeCollectionViewCell", for: indexPath) as? BoxOfficeCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        let (index, rank, rankChangedAmount, rankStatus, movieName, audienceCount, audienceAccumulated) = dataSource[indexPath.row].destructured()
+        
+        cell.rankLabel.text = rank
+        cell.rankStatusLabel.text = rankStatus == "NEW" ? "신작" : "\(rankChangedAmount)"
+        cell.movieNameLabel.text = movieName
+        cell.audienceLabel.text = "오늘 \(audienceCount) / 총 \(audienceAccumulated)"
+        return cell
     }
 }
