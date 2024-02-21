@@ -5,7 +5,9 @@ import Foundation
 
 final class MockNetworkSessionManager: NetworkSessionManager {
     func request(_ request: URLRequest, completion: @escaping CompletionHandler) -> URLSessionTask {
-        let fileName = request.url?.path() == "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json" ? "box_office_sample_2" : "movie_detail_sample"
+        let fileName = request.url?.path() ==  "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
+            ? "box_office_sample_2"
+            : "movie_detail_sample"
         let mockData = JsonLoader.loadjson(fileName: fileName)
         completion(mockData, nil, nil)
         let task = URLSessionTask()
@@ -16,7 +18,7 @@ final class MockNetworkSessionManager: NetworkSessionManager {
 final class NetworkServiceTests: XCTestCase {
 
     func test_네트워크_서비스를_통해_박스오피스_데이터를_불러올_수_있다() throws {
-        // given
+        // given∂
         let baseUrl = "kobis.or.kr"
         let path = "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
         let queryParameters = [
