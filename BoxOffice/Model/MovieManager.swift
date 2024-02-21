@@ -23,7 +23,7 @@ extension MovieManager: DateFormattable {
         else {
             return
         }
-        let urlString = MovieURL.makeDailyBoxOfficeURL(date: date ?? makeDataFormatToString(date: yesterday))
+        let urlString = MovieURL.makeDailyBoxOfficeURL(date: date ?? makeDataFormatToString(date: yesterday, format: "yyyyMMdd"))
         
         apiService.fetchData(urlString: urlString) { (result: Result<BoxOffice, NetworkError>) in
             switch result {

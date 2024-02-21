@@ -84,7 +84,7 @@ final class BoxOfficeTests: XCTestCase, DateFormattable {
         else {
             return
         }
-        let urlString = MovieURL.makeDailyBoxOfficeURL(date: makeDataFormatToString(date: yesterday))
+        let urlString = MovieURL.makeDailyBoxOfficeURL(date: makeDataFormatToString(date: yesterday, format: "yyyyMMdd"))
         let sut = setSUT(session: URLSession.shared)
         
         // when
@@ -133,7 +133,7 @@ final class BoxOfficeTests: XCTestCase, DateFormattable {
         else {
             return
         }
-        let urlString = MovieURL.makeDailyBoxOfficeURL(date: makeDataFormatToString(date: yesterday))
+        let urlString = MovieURL.makeDailyBoxOfficeURL(date: makeDataFormatToString(date: yesterday, format: "yyyyMMdd"))
         let mockURLSession = makeMockURLSession(fileName: JSONFileName.boxOffice, url: urlString, statusCode: 400)
         let sut = setSUT(session: mockURLSession)
         
