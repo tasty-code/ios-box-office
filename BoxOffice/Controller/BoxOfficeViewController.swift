@@ -47,7 +47,7 @@ final class BoxOfficeViewController: UIViewController {
 extension BoxOfficeViewController {
     private func loadData() {
         Task {
-            let type: KoreanFilmCouncilURL = .dailyBoxOffice(queryValue: "20120419")
+            let type: KoreanFilmCouncilURL = .dailyBoxOffice(queryValue: "20240220")
             guard let request = self.networkManager.makeRequest(type) else {
                 return
             }
@@ -74,12 +74,12 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BoxOfficeCollectionViewCell", for: indexPath) as? BoxOfficeCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let (index, rank, rankChangedAmount, rankStatus, movieName, audienceCount, audienceAccumulated) = dataSource[indexPath.row].destructured()
+        let (_, rank, rankChangedAmount, rankStatus, movieName, audienceCount, audienceAccumulated) = dataSource[indexPath.row].destructured()
         
         cell.rankLabel.text = rank
         cell.rankStatusLabel.text = rankStatus == "NEW" ? "신작" : "\(rankChangedAmount)"
         cell.movieNameLabel.text = movieName
-        cell.audienceLabel.text = "오늘 \(audienceCount) / 총 \(audienceAccumulated)"
+        cell.audienceLabel.text = "오늘 \(audienceCount.formatNumber()) / 총 \(audienceAccumulated.formatNumber())"
         return cell
     }
 }
