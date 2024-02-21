@@ -29,40 +29,45 @@ final class ViewController: UIViewController {
             switch networkResult {
                 
             case .success(let data):
-                if let data = data as? MovieInformation {
-                    print(data)
+                if let movieInfo = data as? MovieInformation {
+                    print(movieInfo)
                 }
-            case .pathError:
-                print("pathErr")
-            case .requestError(_):
-                print("requestErr")
-            case .networkFail:
-                print("networkFail")
-            case .serverError:
-                print("serverErr")
-                
+            default:
+                handleError(networkResult)
             }
         }
     }
     
     private func fetchBoxOfficeData(userKey: String, date: String) {
-        BoxOfficeAPI.shared.requestDailyBoxOfficeAPI(userKey: userKey, date: date) { networkResult in
+        BoxOfficeAPI.shared.requestDailyBoxOfficeAPI(userKey: userKey,
+                                                     date: date) { networkResult in
             switch networkResult {
                 
             case .success(let data):
-                if let data = data as? BoxOfficeData {
-                    print(data)
+                if let boxOfficeData = data as? BoxOfficeData {
+                    print(boxOfficeData)
                 }
-            case .pathError:
-                print("pathErr")
-            case .requestError(_):
-                print("requestErr")
-            case .networkFail:
-                print("networkFail")
-            case .serverError:
-                print("serverErr")
-                
+            default:
+                handleError(networkResult)
             }
         }
+        
+    }
+}
+
+private func handleError(_ networkResult: NetworkResult<Any>) {
+    switch networkResult {
+        
+    case .pathError:
+        print("pathErr")
+    case .requestError(_):
+        print("requestErr")
+    case .networkFail:
+        print("networkFail")
+    case .serverError:
+        print("serverErr")
+        
+    default:
+        break
     }
 }
