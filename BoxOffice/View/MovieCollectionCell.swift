@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieCollectionCell: UICollectionViewCell {
+final class MovieCollectionCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

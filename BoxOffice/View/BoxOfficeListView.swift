@@ -7,9 +7,9 @@
 
 import UIKit
 
-class BoxOfficeListView: UIView {
+final class BoxOfficeListView: UIView {
     
-    let collectionView: UICollectionView = UICollectionView()
+    private let collectionView: UICollectionView = UICollectionView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,7 +22,7 @@ class BoxOfficeListView: UIView {
     }
 }
 
-extension BoxOfficeListView {
+private extension BoxOfficeListView {
     func addSubview() {
         addSubview(collectionView)
     }

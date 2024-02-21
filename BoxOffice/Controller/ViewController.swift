@@ -9,16 +9,18 @@ import UIKit
 
 final class ViewController: UIViewController, DateFormattable {
 
-    let boxOfficeListView: UIView = BoxOfficeListView()
+    private let boxOfficeListView: UIView = BoxOfficeListView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view = boxOfficeListView
         configureNavigation()
     }
-    
+}
+
+private extension ViewController {
     func configureNavigation() {
-        guard 
+        guard
             let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
         else {
             return
