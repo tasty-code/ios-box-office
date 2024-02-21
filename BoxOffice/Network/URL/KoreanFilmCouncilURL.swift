@@ -41,4 +41,4 @@ enum KoreanFilmCouncilURL {
     }
 }
 
-protocol NetworkDataProtocol: Decodable { }
+
