@@ -13,3 +13,4 @@ protocol NetworkSessionProtocol {
         complection: @escaping (Result<Any, Error>) -> Void
     )
 }
+

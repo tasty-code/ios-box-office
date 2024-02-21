@@ -9,10 +9,6 @@ import Foundation
 
 final class NetworkSession: NetworkSessionProtocol {
     private var session: URLSession
-    let successRange: Range = (200..<300)
-    let redirectRange: Range = (300..<400)
-    let clientErrorRange: Range = (400..<500)
-    let serverErrorRange: Range = (500..<600)
     
     init (session: URLSession) {
         self.session = session
