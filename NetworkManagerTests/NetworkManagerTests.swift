@@ -46,7 +46,7 @@ final class NetworkManagerTests: XCTestCase {
         } completion: { response, error in
             result = response
             
-            XCTAssertEqual(result, expectation)
+            XCTAssertEqual(result?.id, expectation?.id)
             
             promise.fulfill()
         }

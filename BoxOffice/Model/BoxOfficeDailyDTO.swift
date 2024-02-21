@@ -7,25 +7,43 @@
 
 import Foundation
 
-struct BoxOfficeDataResponse: Codable {
+struct BoxOfficeDataResponse: Codable, Identifiable {
+    let id: String
     let boxOfficeResult: BoxOfficeResult
 }
 
 // MARK: - BoxOfficeResult
-struct BoxOfficeResult: Codable {
-    let boxofficeType, showRange: String
+struct BoxOfficeResult: Codable, Identifiable {
+    let id: String
+    let boxofficeType: String
+    let showRange: String
     let dailyBoxOfficeList: [DailyBoxOfficeInfo]
 }
 
 // MARK: - DailyBoxOfficeList
-struct DailyBoxOfficeInfo: Codable {
-    let number, rank, rankFluctuation, rankOldAndNew: String
-    let movieCode, movieName, openDate: String
-    let salesAmount, salesShare, salesFluctuation, salesChange, salesAccumulation: String
-    let audienceCount, audienceFluctuation, audienceChange, audienceAccumulation: String
-    let screenCount, showCount: String
+struct DailyBoxOfficeInfo: Codable, Identifiable {
+    let id: String
+    let number: String
+    let rank: String
+    let rankFluctuation: String
+    let rankOldAndNew: String
+    let movieCode: String
+    let movieName: String
+    let openDate: String
+    let salesAmount: String
+    let salesShare: String
+    let salesFluctuation: String
+    let salesChange: String
+    let salesAccumulation: String
+    let audienceCount: String
+    let audienceFluctuation: String
+    let audienceChange: String
+    let audienceAccumulation: String
+    let screenCount: String
+    let showCount: String
     
     enum CodingKeys: String, CodingKey {
+        case id
         case rank, rankOldAndNew, salesShare, salesChange
         case number = "rnum"
         case rankFluctuation = "rankInten"

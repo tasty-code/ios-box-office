@@ -1,16 +1,19 @@
 
 import Foundation
 
-struct MovieDetail: Codable {
+struct MovieDetail: Codable, Identifiable {
+    let id: String
     let movieInfoResult: MovieInfoResult
 }
 
-struct MovieInfoResult: Codable {
+struct MovieInfoResult: Codable,Identifiable {
+    let id: String
     let movieInfo: MovieInfo
     let source: String
 }
 
-struct MovieInfo: Codable {
+struct MovieInfo: Codable, Identifiable {
+    let id: String
     let movieCode: String
     let movieName: String
     let movieEnglishName: String
@@ -30,6 +33,7 @@ struct MovieInfo: Codable {
     let staffs: [Staff]
     
     private enum CodingKeys: String, CodingKey {
+        case id
         case movieCode = "movieCd"
         case movieName = "movieNm"
         case movieEnglishName = "movieNmEn"
