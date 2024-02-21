@@ -87,8 +87,7 @@
 		703BF0062B84AA7300F1DD40 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				703BEFFC2B84A92D00F1DD40 /* BoxOfficeResponse.swift */,
-				703BEFFE2B84A94200F1DD40 /* MovieInfoResponse.swift */,
+				703BF0122B85C0CE00F1DD40 /* DTO */,
 				703BF0002B84A95B00F1DD40 /* JSONLoader.swift */,
 				703BF0022B84AA4500F1DD40 /* EndPoint.swift */,
 				703BF0042B84AA5D00F1DD40 /* Fetcher.swift */,
@@ -118,6 +117,15 @@
 				703BF00C2B84AAAE00F1DD40 /* NetworkError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		703BF0122B85C0CE00F1DD40 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				703BEFFC2B84A92D00F1DD40 /* BoxOfficeResponse.swift */,
+				703BEFFE2B84A94200F1DD40 /* MovieInfoResponse.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
