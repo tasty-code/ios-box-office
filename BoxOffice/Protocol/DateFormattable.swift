@@ -8,13 +8,13 @@
 import Foundation
 
 protocol DateFormattable {
-    func makeDataFormatToString(date: Date) -> String
+    func makeDataFormatToString(date: Date, format: String) -> String
 }
 
 extension DateFormattable {
-    func makeDataFormatToString(date: Date) -> String {
+    func makeDataFormatToString(date: Date, format: String) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd"
+        dateFormatter.dateFormat = format
         return dateFormatter.string(from: date)
     }
 }
