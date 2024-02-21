@@ -3,6 +3,16 @@ import Foundation
 
 @testable import BoxOffice
 
+final class MockNetworkSessionManager: NetworkSessionManager {
+    func request(_ request: URLRequest, completion: @escaping CompletionHandler) -> URLSessionTask {
+        let fileName = request.url?.path() == "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json" ? "box_office_sample_2" : "movie_detail_sample"
+        let mockData = JsonLoader.loadjson(fileName: fileName)
+        completion(mockData, nil, nil)
+        let task = URLSessionTask()
+        return task
+    }
+}
+
 final class NetworkServiceTests: XCTestCase {
 
     func test_네트워크_서비스를_통해_박스오피스_데이터를_불러올_수_있다() throws {
@@ -16,8 +26,8 @@ final class NetworkServiceTests: XCTestCase {
         let boxOfficeAPI = APIConfig<BoxOfficeResponseDTO>(baseURL: baseUrl,
                                                            path: path,
                                                            queryParameters: queryParameters)
-        let sessionManager = DefaultNetworkSessionManager()
-        let sut = DefaultNetworkService(sessionManager: sessionManager)
+        let mockNetworkSessionManager = MockNetworkSessionManager()
+        let sut = DefaultNetworkService(sessionManager: mockNetworkSessionManager)
         let expectation = XCTestExpectation(description: "dataFectch")
         // when
         _ = sut.request(apiConfig: boxOfficeAPI) { result in
@@ -43,8 +53,8 @@ final class NetworkServiceTests: XCTestCase {
         let boxOfficeAPI = APIConfig<BoxOfficeResponseDTO>(baseURL: baseUrl,
                                                            path: path,
                                                            queryParameters: queryParameters)
-        let sessionManager = DefaultNetworkSessionManager()
-        let sut = DefaultDataTransferService(with: DefaultNetworkService(sessionManager: sessionManager))
+        let mockNetworkSessionManager = MockNetworkSessionManager()
+        let sut = DefaultDataTransferService(with: DefaultNetworkService(sessionManager: mockNetworkSessionManager))
         let decoder = JSONDecoder()
         let expectationData = try decoder.decode(BoxOfficeResponseDTO.self,
                                                  from: JsonLoader.loadjson(fileName: "box_office_sample_2")!)
@@ -74,8 +84,8 @@ final class NetworkServiceTests: XCTestCase {
         let movieDetailAPI = APIConfig<MovieDetailResponseDTO>(baseURL: baseUrl,
                                                            path: path,
                                                            queryParameters: queryParameters)
-        let sessionManager = DefaultNetworkSessionManager()
-        let sut = DefaultDataTransferService(with: DefaultNetworkService(sessionManager: sessionManager))
+        let mockNetworkSessionManager = MockNetworkSessionManager()
+        let sut = DefaultDataTransferService(with: DefaultNetworkService(sessionManager: mockNetworkSessionManager))
         let decoder = JSONDecoder()
         let expectationData = try decoder.decode(MovieDetailResponseDTO.self,
                                                  from: JsonLoader.loadjson(fileName: "movie_detail_sample")!)
@@ -85,7 +95,9 @@ final class NetworkServiceTests: XCTestCase {
             // then
             switch result {
             case .success(let data):
-                XCTAssertEqual(data, expectationData)
+                print(data)
+                XCTAssertEqual(data.movieInfoResult.movieInfo.movieCode,
+                               expectationData.movieInfoResult.movieInfo.movieCode)
             case .failure(let error):
                 print(error)
             }

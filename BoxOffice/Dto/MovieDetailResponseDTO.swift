@@ -60,9 +60,3 @@ extension MovieDetailResponseDTO.MovieInfoResultDTO.MovieDTO {
         return .init(from: self)
     }
 }
-
-extension MovieDetailResponseDTO.MovieInfoResultDTO.MovieDTO: Equatable {}
-
-extension MovieDetailResponseDTO.MovieInfoResultDTO: Equatable {}
-
-extension MovieDetailResponseDTO: Equatable {}
