@@ -8,16 +8,11 @@
 import UIKit
 
 final class BoxOfficeViewController: UIViewController {
-    lazy var boxOfficeCollectionView: UICollectionView = {
-        let config = UICollectionLayoutListConfiguration(appearance: .plain)
-        let layout = UICollectionViewCompositionalLayout.list(using: config)
-        let boxOfficeCollectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
-        return boxOfficeCollectionView
-    }()
+    lazy var boxOfficeView: BoxOfficeView = BoxOfficeView()
     
     private var dataSource: [DailyBoxOffice.BoxOfficeMovie] = [] {
         didSet {
-            boxOfficeCollectionView.reloadData()
+            boxOfficeView.boxOfficeCollectionView.reloadData()
         }
     }
     private let networkManager: NetworkManager
@@ -35,10 +30,10 @@ final class BoxOfficeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
-        view.addSubview(boxOfficeCollectionView)
-        boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: "BoxOfficeCollectionViewCell")
-        boxOfficeCollectionView.dataSource = self
-        boxOfficeCollectionView.delegate = self
+        view = boxOfficeView
+        boxOfficeView.boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: "BoxOfficeCollectionViewCell")
+        boxOfficeView.boxOfficeCollectionView.dataSource = self
+        boxOfficeView.boxOfficeCollectionView.delegate = self
     }
 }
 
