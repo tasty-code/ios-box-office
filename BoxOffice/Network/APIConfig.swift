@@ -1,6 +1,6 @@
 import Foundation
 
-enum URLSCheme: String {
+enum URLScheme: String {
     case http
     case https
 }
@@ -64,7 +64,7 @@ struct APIConfig<R>: Requestable {
 extension APIConfig {
     private func toURL() -> URL? {
         var components = URLComponents()
-        components.scheme = URLSCheme.https.rawValue
+        components.scheme = URLScheme.https.rawValue
         components.host = baseURL
         components.path = path
         components.queryItems = queryParameters.map { URLQueryItem(name: $0, value: $1 as? String) }
