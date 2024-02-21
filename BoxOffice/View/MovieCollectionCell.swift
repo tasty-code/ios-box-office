@@ -5,4 +5,15 @@
 //  Created by Matthew on 2/21/24.
 //
 
-import Foundation
+import UIKit
+
+class MovieCollectionCell: UICollectionViewCell {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
