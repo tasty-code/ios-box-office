@@ -9,12 +9,12 @@ enum DataTransferError: Error {
 protocol DataTransferService {
     typealias CompletionHandler<T> = (Result<T, DataTransferError>) -> Void
     
-    func request<T: Decodable, E: Requestable>(
+    func request<T: Decodable, E: HTTPInteractable>(
         with endpoint: E,
         completion: @escaping CompletionHandler<T>
     ) -> URLSessionTask? where E.Response == T
     
-    func request<E: Requestable>(
+    func request<E: HTTPInteractable>(
         with endpoint: E,
         completion: @escaping CompletionHandler<Void>
     ) -> URLSessionTask? where E.Response == Void
@@ -32,7 +32,7 @@ final class DefaultDataTransferService {
 
 extension DefaultDataTransferService: DataTransferService {
     
-    func request<T: Decodable, E: Requestable>(
+    func request<T: Decodable, E: HTTPInteractable>(
         with endpoint: E,
         completion: @escaping CompletionHandler<T>
     ) -> URLSessionTask? where E.Response == T {
@@ -47,10 +47,10 @@ extension DefaultDataTransferService: DataTransferService {
         }
     }
     
-    func request<E>(
+    func request<E: HTTPInteractable>(
         with endpoint: E,
         completion: @escaping CompletionHandler<Void>
-    ) -> URLSessionTask? where E: Requestable, E.Response == Void {
+    ) -> URLSessionTask? where E.Response == Void {
         return networkService.request(apiConfig: endpoint) { result in
             switch result {
             case .success:

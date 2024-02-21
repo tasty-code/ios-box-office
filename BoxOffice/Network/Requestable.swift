@@ -15,8 +15,6 @@ enum HTTPMethodType: String {
 }
 
 protocol Requestable {
-    associatedtype Response
-    
     var baseURL: String { get }
     var path: String { get }
     var headerParameters: [String: String] { get }
@@ -24,12 +22,11 @@ protocol Requestable {
     var method: HTTPMethodType { get }
     var bodyParameters: [String: Any] { get }
     var bodyEncoder: BodyEncoder { get }
-    var responseDecoder: ResponseDecoder { get }
     
     func toURLRequest() -> URLRequest?
 }
 
-struct APIConfig<R>: Requestable {
+struct APIConfig<R>: HTTPInteractable {
     typealias Response = R
     
     let baseURL: String
@@ -84,18 +81,6 @@ extension APIConfig {
             partialResult[headerParameter.key] = headerParameter.value
         }
         return urlRequest
-    }
-}
-
-protocol ResponseDecoder {
-    func decode<T: Decodable>(_ data: Data) throws -> T
-}
-
-class JSONResponseDecoder: ResponseDecoder {
-    private let jsonDecoder = JSONDecoder()
-    
-    func decode<T: Decodable>(_ data: Data) throws -> T {
-        return try jsonDecoder.decode(T.self, from: data)
     }
 }
 

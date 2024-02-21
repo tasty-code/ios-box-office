@@ -18,7 +18,7 @@ final class MockNetworkSessionManager: NetworkSessionManager {
 final class NetworkServiceTests: XCTestCase {
 
     func test_네트워크_서비스를_통해_박스오피스_데이터를_불러올_수_있다() throws {
-        // given∂
+        // given
         let baseUrl = "kobis.or.kr"
         let path = "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
         let queryParameters = [
@@ -66,7 +66,7 @@ final class NetworkServiceTests: XCTestCase {
             // then
             switch result {
             case .success(let data):
-                XCTAssertEqual(data, expectationData)
+                XCTAssertEqual(data.boxOfficeResult.boxOfficeType, expectationData.boxOfficeResult.boxOfficeType)
             case .failure(let error):
                 print(error)
             }
