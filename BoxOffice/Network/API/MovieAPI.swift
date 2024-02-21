@@ -32,8 +32,8 @@ final class MovieAPI: BaseAPI {
                                                      result.data,
                                                      MovieInformation.self)
                 completion(networkResult)
-            case .failure(let error):
-                print(error.localizedDescription)
+            case .failure(_):
+                completion(.networkFail)
             }
         }
     }

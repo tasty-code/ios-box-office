@@ -32,8 +32,8 @@ final class BoxOfficeAPI: BaseAPI {
                                                      result.data,
                                                      BoxOfficeData.self)
                 completion(networkResult)
-            case .failure(let error):
-                print(error.localizedDescription)
+            case .failure(_):
+                completion(.networkFail)
             }
         }
     }
