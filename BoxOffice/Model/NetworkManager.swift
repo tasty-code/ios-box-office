@@ -8,7 +8,7 @@ struct NetworkManager {
         self.urlSession = urlSession
     }
     
-    func fetchData<T: Codable>(url: String, type: T.Type, completion: @escaping (T?, Error?) -> Void) {
+    func fetchData<T: Codable>(url: String, parse: @escaping (Data) throws -> T, completion: @escaping (T?, Error?) -> Void) {
         guard let url = URL(string: url) else {
             completion(nil, FetchError.invalidURL)
             return
@@ -25,12 +25,13 @@ struct NetworkManager {
                 return
             }
             
-            
-            guard let  data = data, let movie = try? JSONDecoder().decode(T.self, from: data) else {
+            do {
+                guard let  data = data else { return }
+                let parseData = try parse(data)
+                completion(parseData, nil)
+            } catch {
                 completion(nil, FetchError.invalidData)
-                return
             }
-            completion(movie, nil)
             
         }.resume()
     }

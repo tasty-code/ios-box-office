@@ -39,7 +39,10 @@ final class NetworkManagerTests: XCTestCase {
         let expectation: BoxOfficeDataResponse? = try? JSONDecoder().decode(BoxOfficeDataResponse.self, from: data)
         var result: BoxOfficeDataResponse?
         
-        sut.fetchData(url: "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=ab168a1eb56e21306b897acd3d4653ce&targetDt=20240210", type: BoxOfficeDataResponse.self) { response, error in
+        sut.fetchData(url: "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=ab168a1eb56e21306b897acd3d4653ce&targetDt=20240210") { (data) -> BoxOfficeDataResponse in
+            let decode = try JSONDecoder().decode(BoxOfficeDataResponse.self, from: data)
+            return decode
+        } completion: { response, error in
             result = response
             
             XCTAssertEqual(result, expectation)
