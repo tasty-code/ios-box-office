@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol DateFormatable {
+protocol DateFormattable {
     func makeDataFormatToString(date: Date) -> String
 }
 
-extension DateFormatable {
+extension DateFormattable {
     func makeDataFormatToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"

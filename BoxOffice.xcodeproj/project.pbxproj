@@ -39,7 +39,7 @@
 		C14DF4B52B7DAE49009E3258 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14DF4B42B7DAE49009E3258 /* Bundle+Extension.swift */; };
 		C14DF4B72B7DAF3A009E3258 /* Private.plist in Resources */ = {isa = PBXBuildFile; fileRef = C14DF4B62B7DAF3A009E3258 /* Private.plist */; };
 		C14DF4B92B7DAF97009E3258 /* MovieURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14DF4B82B7DAF97009E3258 /* MovieURL.swift */; };
-		C1FC46AD2B8494A400C6E49E /* DateFormatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC46AC2B8494A400C6E49E /* DateFormatable.swift */; };
+		C1FC46AD2B8494A400C6E49E /* DateFormattable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC46AC2B8494A400C6E49E /* DateFormattable.swift */; };
 		C1FC46B02B84962000C6E49E /* JSONFileName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC46AF2B84962000C6E49E /* JSONFileName.swift */; };
 		C1FC46B22B8496B300C6E49E /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC46B12B8496B300C6E49E /* URLSessionProtocol.swift */; };
 		C1FC46B42B84AFFC00C6E49E /* URLSessionDataTaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC46B32B84AFFC00C6E49E /* URLSessionDataTaskProtocol.swift */; };
@@ -91,7 +91,7 @@
 		C14DF4B42B7DAE49009E3258 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		C14DF4B62B7DAF3A009E3258 /* Private.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Private.plist; sourceTree = "<group>"; };
 		C14DF4B82B7DAF97009E3258 /* MovieURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieURL.swift; sourceTree = "<group>"; };
-		C1FC46AC2B8494A400C6E49E /* DateFormatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatable.swift; sourceTree = "<group>"; };
+		C1FC46AC2B8494A400C6E49E /* DateFormattable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormattable.swift; sourceTree = "<group>"; };
 		C1FC46AF2B84962000C6E49E /* JSONFileName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFileName.swift; sourceTree = "<group>"; };
 		C1FC46B12B8496B300C6E49E /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		C1FC46B32B84AFFC00C6E49E /* URLSessionDataTaskProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskProtocol.swift; sourceTree = "<group>"; };
@@ -265,7 +265,7 @@
 		C1FC46AA2B84947300C6E49E /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				C1FC46AC2B8494A400C6E49E /* DateFormatable.swift */,
+				C1FC46AC2B8494A400C6E49E /* DateFormattable.swift */,
 				C1FC46B12B8496B300C6E49E /* URLSessionProtocol.swift */,
 				C1FC46B32B84AFFC00C6E49E /* URLSessionDataTaskProtocol.swift */,
 			);
@@ -411,7 +411,7 @@
 				2757938C2B7F52B500C08906 /* JSONLoader.swift in Sources */,
 				C1FC46B02B84962000C6E49E /* JSONFileName.swift in Sources */,
 				C1FC46B42B84AFFC00C6E49E /* URLSessionDataTaskProtocol.swift in Sources */,
-				C1FC46AD2B8494A400C6E49E /* DateFormatable.swift in Sources */,
+				C1FC46AD2B8494A400C6E49E /* DateFormattable.swift in Sources */,
 				2757938A2B7F51BF00C08906 /* URLSession+Extension.swift in Sources */,
 				C14DF4B52B7DAE49009E3258 /* Bundle+Extension.swift in Sources */,
 				275793772B7F1E0800C08906 /* Company.swift in Sources */,
