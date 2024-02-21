@@ -29,7 +29,7 @@ class BoxOfficeCollectionViewCell: UICollectionViewListCell {
     let movieNameLabel: UILabel = {
         let label = UILabel()
         label.text = "경관의 피"
-        label.font = .preferredFont(forTextStyle: .title2)
+        label.font = .preferredFont(forTextStyle: .title3)
         label.textAlignment = .left
         return label
     }()
@@ -45,7 +45,7 @@ class BoxOfficeCollectionViewCell: UICollectionViewListCell {
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
         return stackView
     }()
     
@@ -87,13 +87,19 @@ class BoxOfficeCollectionViewCell: UICollectionViewListCell {
     }
     
     private func setupConstraints() {
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        rankStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            rankStackView.topAnchor.constraint(equalTo: stackView.topAnchor),
+            rankStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            rankStackView.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.2),
+            rankStackView.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
 }
