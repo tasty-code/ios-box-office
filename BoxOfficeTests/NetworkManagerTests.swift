@@ -37,7 +37,9 @@ final class NetworkManagerTests: XCTestCase {
         
         // when
         Task {
-            let result = await sut?.request(request, into: input)
+            let result = await sut?.request(request, into: input, errorHandler: { networkError in
+                print(networkError)
+            })
             
             // then
             XCTAssertNotNil(result)

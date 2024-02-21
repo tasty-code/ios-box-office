@@ -32,9 +32,13 @@ extension BoxOfficeViewController {
     private func loadData() {
         Task {
             let type: KoreanFilmCouncilURL = .dailyBoxOffice(queryValue: "20120419")
-            guard let request = networkManager.makeRequest(type),
-                  let data = await networkManager.request(request, into: type) else {
+            guard let request = self.networkManager.makeRequest(type) else {
                 return
+            }
+            let data = await self.networkManager.request(request, into: type) { networkError in
+                DispatchQueue.main.async {
+                    self.alert(with: networkError)                    
+                }
             }
             dataSource = data
         }

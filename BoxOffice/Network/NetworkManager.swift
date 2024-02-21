@@ -23,7 +23,7 @@ struct NetworkManager {
         return request
     }
     
-    func request(_ request: URLRequest, into type: KoreanFilmCouncilURL) async -> NetworkDataProtocol? {
+    func request(_ request: URLRequest, into type: KoreanFilmCouncilURL, errorHandler: (NetworkError) -> Void) async -> NetworkDataProtocol? {
         do {
             guard let (data, response) = try await urlSession?.data(for: request, delegate: nil) else {
                 return nil
@@ -42,7 +42,10 @@ struct NetworkManager {
             }
             
         } catch {
-            print(error)
+            guard let networkError = error as? NetworkError else {
+                return nil
+            }
+            errorHandler(networkError)
             return nil
         }
     }
