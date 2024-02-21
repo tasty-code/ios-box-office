@@ -19,7 +19,7 @@
 		777338812B848DCA00143672 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777338802B848DCA00143672 /* NetworkConstants.swift */; };
 		777338832B848DE600143672 /* NetworkEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777338822B848DE600143672 /* NetworkEnvironment.swift */; };
 		777338852B848E0800143672 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777338842B848E0800143672 /* TargetType.swift */; };
-		777338882B84961800143672 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777338872B84961800143672 /* String+.swift */; };
+		777338882B84961800143672 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777338872B84961800143672 /* Date+.swift */; };
 		7773388B2B849B0E00143672 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7773388A2B849B0E00143672 /* BaseAPI.swift */; };
 		7773388D2B849BBD00143672 /* MovieAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7773388C2B849BBD00143672 /* MovieAPI.swift */; };
 		777338902B849BFB00143672 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7773388F2B849BFB00143672 /* MovieService.swift */; };
@@ -60,7 +60,7 @@
 		777338802B848DCA00143672 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		777338822B848DE600143672 /* NetworkEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEnvironment.swift; sourceTree = "<group>"; };
 		777338842B848E0800143672 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
-		777338872B84961800143672 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		777338872B84961800143672 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		7773388A2B849B0E00143672 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		7773388C2B849BBD00143672 /* MovieAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPI.swift; sourceTree = "<group>"; };
 		7773388F2B849BFB00143672 /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 		777338862B84960A00143672 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				777338872B84961800143672 /* String+.swift */,
+				777338872B84961800143672 /* Date+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -360,7 +360,7 @@
 				7773387B2B848C0200143672 /* Requestable.swift in Sources */,
 				777338852B848E0800143672 /* TargetType.swift in Sources */,
 				952AD2CD2B84A01300598680 /* BoxOfficeService.swift in Sources */,
-				777338882B84961800143672 /* String+.swift in Sources */,
+				777338882B84961800143672 /* Date+.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
 				952AD2C42B84880A00598680 /* NetworkError.swift in Sources */,
 				952AD2CF2B84A31500598680 /* BoxOfficeAPI.swift in Sources */,

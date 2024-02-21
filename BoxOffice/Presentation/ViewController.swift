@@ -16,7 +16,7 @@ final class ViewController: UIViewController {
     
     private func checkResponseData() {
         guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String else { return }
-        let yesterday = String.convertYesterdayDateToString()
+        let yesterday = Date.convertYesterdayDateToString()
         let movieCode = "20236180"
         
         fetchBoxOfficeData(userKey: apiKey, date: yesterday)
