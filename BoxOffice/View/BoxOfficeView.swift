@@ -10,7 +10,7 @@ import UIKit
 class BoxOfficeView: UIView {
     lazy var navigationBar: UINavigationBar = {
         let navigationBar = UINavigationBar()
-        let navigationItem = UINavigationItem(title: "20240220")
+        let navigationItem = UINavigationItem(title: Date().getYesterday("yyyy-MM-dd"))
         navigationBar.pushItem(navigationItem, animated: true)
         return navigationBar
     }()

@@ -41,7 +41,7 @@ final class BoxOfficeViewController: UIViewController {
 extension BoxOfficeViewController {
     private func loadDailyBoxOfficeData() {
         Task {
-            let type: KoreanFilmCouncilURL = .dailyBoxOffice(queryValue: "20240220")
+            let type: KoreanFilmCouncilURL = .dailyBoxOffice(queryValue: Date().getYesterday("yyyyMMdd"))
             guard let request = self.networkManager.makeRequest(type) else {
                 return
             }

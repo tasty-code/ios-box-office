@@ -28,6 +28,7 @@
 		9BCD1AEC2B85CF2E007CE7FC /* BoxOfficeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCD1AEB2B85CF2E007CE7FC /* BoxOfficeCollectionViewCell.swift */; };
 		9BEE61C32B8606DE00CA364A /* DailyBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEE61C22B8606DE00CA364A /* DailyBoxOffice.swift */; };
 		9BEE61C52B860B3F00CA364A /* NetworkDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEE61C42B860B3F00CA364A /* NetworkDataProtocol.swift */; };
+		9BEE61C72B86EB8700CA364A /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEE61C62B86EB8700CA364A /* DateFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		9BCD1AEB2B85CF2E007CE7FC /* BoxOfficeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeCollectionViewCell.swift; sourceTree = "<group>"; };
 		9BEE61C22B8606DE00CA364A /* DailyBoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOffice.swift; sourceTree = "<group>"; };
 		9BEE61C42B860B3F00CA364A /* NetworkDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataProtocol.swift; sourceTree = "<group>"; };
+		9BEE61C62B86EB8700CA364A /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				8A65CC832B8617FD00414589 /* IntFormatter.swift */,
+				9BEE61C62B86EB8700CA364A /* DateFormatter.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BEE61C72B86EB8700CA364A /* DateFormatter.swift in Sources */,
 				8A494C812B84D19800128F75 /* URLSessionProtocol.swift in Sources */,
 				63DF20F32970E1A0005DF7D1 /* BoxOfficeViewController.swift in Sources */,
 				9BCD1AEC2B85CF2E007CE7FC /* BoxOfficeCollectionViewCell.swift in Sources */,
