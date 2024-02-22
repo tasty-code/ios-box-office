@@ -11,6 +11,8 @@ class BoxOfficeView: UIView {
     lazy var navigationBar: UINavigationBar = {
         let navigationBar = UINavigationBar()
         let navigationItem = UINavigationItem(title: Date().getYesterday("yyyy-MM-dd"))
+        navigationBar.isTranslucent = false
+        navigationBar.shadowImage = nil
         navigationBar.pushItem(navigationItem, animated: true)
         return navigationBar
     }()
