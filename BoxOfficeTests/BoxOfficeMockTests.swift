@@ -6,30 +6,78 @@
 //
 
 import XCTest
+@testable import BoxOffice
 
-final class BoxOfficeMockTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+final class BoxOfficeMockTests: XCTestCase {    
+    func test_MockURLSession의_응답코드가_400이면_clientError가_발생한다() {
+        // given
+        guard
+            let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
+        else {
+            return
         }
+        let urlString = MovieURL.makeDailyBoxOfficeURL(date: yesterday.makeDataToString())
+        let mockURLSession = makeMockURLSession(fileName: JSONFileName.boxOffice, url: urlString, statusCode: 400)
+        let sut = setSUT(session: mockURLSession)
+        
+        // when
+        let expectation = XCTestExpectation(description: "데이터 패치 중...")
+        
+        sut.fetchData(urlString: urlString) { (result: Result<BoxOffice, NetworkError>) in
+            switch result {
+            case .success(_):
+                // then
+                XCTFail()
+            case .failure(let error):
+                // then
+                XCTAssertEqual(error, NetworkError.clientError)
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
     }
+    
+    func test_MockURLSession의_응답코드가_200이면_boxOfficeResult는_nil이_아니다() {
+        // given
+        let date = "20240210"
+        let urlString = MovieURL.makeDailyBoxOfficeURL(date: date)
+        let mockURLSession = makeMockURLSession(fileName: JSONFileName.boxOffice, url: urlString, statusCode: 200)
+        let sut = setSUT(session: mockURLSession)
+        
+        // when
+        let expectation = XCTestExpectation(description: "데이터 패치 중...")
+        
+        sut.fetchData(urlString: urlString) { (result: Result<BoxOffice, NetworkError>) in
+            switch result {
+            case .success(let movies):
+                // then
+                XCTAssertNotNil(movies)
+            case .failure(let error):
+                // then
+                XCTFail("데이터 파싱 에러 발생: \(error))")
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+}
 
+private extension BoxOfficeMockTests {
+    func setSUT(session: URLSessionProtocol) -> APIService {
+        return APIService(session: session)
+    }
+    
+    func makeMockURLSession(fileName: String, url: String, statusCode: Int) -> MockURLSession {
+        var response: MockURLSession.Response {
+            let data: Data? = JSONLoader.load(fileName: fileName)
+            let response = HTTPURLResponse(
+                url: URL(string: url)!,
+                statusCode: statusCode,
+                httpVersion: nil,
+                headerFields: nil
+            )
+            return (data, response, nil)
+        }
+        return MockURLSession(response: response)
+    }
 }
