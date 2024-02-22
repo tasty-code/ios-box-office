@@ -40,6 +40,8 @@
 		F44E98C62B849DFB003F61EF /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98C52B849DFB003F61EF /* MockNetworkService.swift */; };
 		F44E98CB2B84DF56003F61EF /* MovieProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98CA2B84DF56003F61EF /* MovieProtocol.swift */; };
 		F4CC09832B86E69A00922A35 /* NetworkRequestBuilderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09822B86E69A00922A35 /* NetworkRequestBuilderProtocol.swift */; };
+		F4CC09A32B87C2D700922A35 /* DailyBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09A22B87C2D700922A35 /* DailyBoxOffice.swift */; };
+		F4CC09A72B87C7E300922A35 /* DomainConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09A62B87C7E300922A35 /* DomainConvertible.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,8 @@
 		F44E98C52B849DFB003F61EF /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
 		F44E98CA2B84DF56003F61EF /* MovieProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieProtocol.swift; sourceTree = "<group>"; };
 		F4CC09822B86E69A00922A35 /* NetworkRequestBuilderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestBuilderProtocol.swift; sourceTree = "<group>"; };
+		F4CC09A22B87C2D700922A35 /* DailyBoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOffice.swift; sourceTree = "<group>"; };
+		F4CC09A62B87C7E300922A35 /* DomainConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainConvertible.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,7 @@
 				F44E98682B7C7C6C003F61EF /* FileProvider */,
 				F44E98972B8267B3003F61EF /* Network */,
 				F44E989C2B8271B8003F61EF /* Data */,
+				F4CC09A52B87C79E00922A35 /* Domain */,
 			);
 			path = BoxOffice;
 			sourceTree = "<group>";
@@ -162,6 +167,7 @@
 		F44E984B2B7B971C003F61EF /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				F4CC09A62B87C7E300922A35 /* DomainConvertible.swift */,
 				894DE28A2B7B7CE800ED865A /* SearchDailyBoxOfficeDTO.swift */,
 				894DE2AC2B7DE8F500ED865A /* SearchMovieInfoDTO.swift */,
 			);
@@ -211,7 +217,6 @@
 		F44E98972B8267B3003F61EF /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				F44E984B2B7B971C003F61EF /* DTO */,
 				F44E98BE2B848D14003F61EF /* NetworkService */,
 				F44E98BD2B848D09003F61EF /* Session */,
 				F44E98BC2B848CCA003F61EF /* Request */,
@@ -223,6 +228,7 @@
 		F44E989C2B8271B8003F61EF /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				F44E984B2B7B971C003F61EF /* DTO */,
 				F44E98BF2B848D72003F61EF /* Repository */,
 				F44E98CC2B84DF77003F61EF /* Error */,
 			);
@@ -299,6 +305,22 @@
 				F44E98A32B82EF2E003F61EF /* MovieRepositoryError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		F4CC09A42B87C79400922A35 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F4CC09A22B87C2D700922A35 /* DailyBoxOffice.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F4CC09A52B87C79E00922A35 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				F4CC09A42B87C79400922A35 /* Model */,
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -428,6 +450,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4CC09A72B87C7E300922A35 /* DomainConvertible.swift in Sources */,
 				F44E989E2B82E641003F61EF /* NetworkRequest.swift in Sources */,
 				F44E98942B825E13003F61EF /* NetworkService.swift in Sources */,
 				F44E98652B7C7C23003F61EF /* BundleResourceError.swift in Sources */,
@@ -439,6 +462,7 @@
 				F4CC09832B86E69A00922A35 /* NetworkRequestBuilderProtocol.swift in Sources */,
 				F44E98CB2B84DF56003F61EF /* MovieProtocol.swift in Sources */,
 				F44E98A22B82E67A003F61EF /* URLRequestConvertible.swift in Sources */,
+				F4CC09A32B87C2D700922A35 /* DailyBoxOffice.swift in Sources */,
 				F44E98A02B82E662003F61EF /* NetworkServiceError.swift in Sources */,
 				F44E98962B8266A3003F61EF /* DataRequestable.swift in Sources */,
 				F44E98BA2B848C07003F61EF /* URLSession+NetworkRequestable.swift in Sources */,

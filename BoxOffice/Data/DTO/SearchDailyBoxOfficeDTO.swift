@@ -62,3 +62,52 @@ struct SearchDailyBoxOfficeDTO: Decodable {
   let boxOfficeResult: BoxOfficeResult
 }
 // swiftlint:enable nesting
+
+extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOfficeList: DomainConvertible {
+  typealias Domain = DailyBoxOfficeResponse.DailyBoxOfficeItem
+  
+  func toDomain() throws -> DailyBoxOfficeResponse.DailyBoxOfficeItem {
+    guard
+      let rank = Int(self.rank),
+      let rankChange = Int(self.rankChange),
+      let today = Int(self.showCount),
+      let total = Int(self.salesTotal)
+    else {
+      // TODO: 이게 맞아?
+      throw MovieRepositoryError.cannotConvertToDomain
+    }
+    return .init(
+      rank: rank,
+      rankChange: .init(value: rankChange),
+      title: self.movieName,
+      todayAudienceCount: today,
+      totalAudienceCount: total
+    )
+  }
+}
+
+import Foundation
+
+extension SearchDailyBoxOfficeDTO.BoxOfficeResult: DomainConvertible {
+  typealias Domain = DailyBoxOfficeResponse
+  
+  func toDomain() throws -> DailyBoxOfficeResponse {
+    return .init(
+      date: try parseDate(self.showRange),
+      list: self.list.compactMap { item in try? item.toDomain() }
+    )
+  }
+  
+  private func parseDate(_ dateRange: String) throws -> Date {
+    let rangeString = self.showRange
+    let tildeCharacter: Character = "~"
+    let dateString = String(rangeString.prefix(while: { $0 == tildeCharacter }))
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyyMMdd"
+    if let date = dateFormatter.date(from: dateString) {
+      return date
+    } else {
+      throw MovieRepositoryError.cannotConvertToDomain
+    }
+  }
+}
