@@ -1,5 +1,5 @@
 // swiftlint:disable nesting
-struct SearchMovieInfo: Decodable {
+struct SearchMovieInfoDTO: Decodable {
   struct MovieInfoResult: Decodable {
     struct MovieInfo: Decodable {
       struct Nation: Decodable {
