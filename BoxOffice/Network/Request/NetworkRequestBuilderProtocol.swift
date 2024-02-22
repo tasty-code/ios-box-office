@@ -1,6 +1,6 @@
 import Foundation
 
-protocol NetworkRequestBuilerProtocol {
+protocol NetworkRequestBuilderProtocol {
   var baseURL: String { get }
   var path: String { get }
   var method: HTTPMethod { get }
@@ -15,13 +15,13 @@ enum HTTPMethod: String {
   }
 }
 
-extension NetworkRequestBuilerProtocol {
+extension NetworkRequestBuilderProtocol {
   var baseURL: String {
     return "https://www.kobis.or.kr"
   }
 }
 
-struct DailyBoxOffice: NetworkRequestBuilerProtocol {
+struct DailyBoxOffice: NetworkRequestBuilderProtocol {
   var path: String {
     return "kobisopenapi/webservice/rest" + "boxoffice/searchDailyBoxOfficeList.json"
   }
@@ -38,6 +38,27 @@ struct DailyBoxOffice: NetworkRequestBuilerProtocol {
     self.queries = [
       .init(name: "key", value: "14620738f18fee816bea6b4def4fa578"),
       .init(name: "targetDt", value: targetDt)
+    ]
+  }
+}
+
+struct MovieInfo: NetworkRequestBuilderProtocol {
+  var path: String {
+    return "kobisopenapi/webservice/rest" + "movie/searchMovieInfo.json"
+  }
+  
+  var method: HTTPMethod {
+    return .get
+  }
+  
+  var queries: [URLQueryItem]
+  
+  init(
+    movieCode: String
+  ) {
+    self.queries = [
+      .init(name: "key", value: "14620738f18fee816bea6b4def4fa578"),
+      .init(name: "movieCd", value: movieCode)
     ]
   }
 }
