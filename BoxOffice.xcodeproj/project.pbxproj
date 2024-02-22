@@ -39,6 +39,7 @@
 		F44E98C42B849DB0003F61EF /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98C32B849DB0003F61EF /* MockURLSession.swift */; };
 		F44E98C62B849DFB003F61EF /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98C52B849DFB003F61EF /* MockNetworkService.swift */; };
 		F44E98CB2B84DF56003F61EF /* MovieProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44E98CA2B84DF56003F61EF /* MovieProtocol.swift */; };
+		F4CC09832B86E69A00922A35 /* NetworkRequestBuilerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09822B86E69A00922A35 /* NetworkRequestBuilerProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		F44E98C32B849DB0003F61EF /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
 		F44E98C52B849DFB003F61EF /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
 		F44E98CA2B84DF56003F61EF /* MovieProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieProtocol.swift; sourceTree = "<group>"; };
+		F4CC09822B86E69A00922A35 /* NetworkRequestBuilerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestBuilerProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +243,7 @@
 				F44E98A12B82E67A003F61EF /* URLRequestConvertible.swift */,
 				F44E989D2B82E641003F61EF /* NetworkRequest.swift */,
 				F44E98AA2B83810A003F61EF /* MovieRequest.swift */,
+				F4CC09822B86E69A00922A35 /* NetworkRequestBuilerProtocol.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
 				F44E98672B7C7C41003F61EF /* BundleResourceManager.swift in Sources */,
+				F4CC09832B86E69A00922A35 /* NetworkRequestBuilerProtocol.swift in Sources */,
 				F44E98CB2B84DF56003F61EF /* MovieProtocol.swift in Sources */,
 				F44E98A22B82E67A003F61EF /* URLRequestConvertible.swift in Sources */,
 				F44E98A02B82E662003F61EF /* NetworkServiceError.swift in Sources */,
