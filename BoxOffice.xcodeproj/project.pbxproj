@@ -42,6 +42,9 @@
 		F4CC09832B86E69A00922A35 /* NetworkRequestBuilderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09822B86E69A00922A35 /* NetworkRequestBuilderProtocol.swift */; };
 		F4CC09A32B87C2D700922A35 /* DailyBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09A22B87C2D700922A35 /* DailyBoxOffice.swift */; };
 		F4CC09A72B87C7E300922A35 /* DomainConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09A62B87C7E300922A35 /* DomainConvertible.swift */; };
+		F4CC09A92B87D68A00922A35 /* MovieUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09A82B87D68A00922A35 /* MovieUseCaseProtocol.swift */; };
+		F4CC09AB2B87DBEC00922A35 /* MovieUseCaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09AA2B87DBEC00922A35 /* MovieUseCaseError.swift */; };
+		F4CC09AE2B87DC0600922A35 /* MovieUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09AD2B87DC0600922A35 /* MovieUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +95,9 @@
 		F4CC09822B86E69A00922A35 /* NetworkRequestBuilderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestBuilderProtocol.swift; sourceTree = "<group>"; };
 		F4CC09A22B87C2D700922A35 /* DailyBoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOffice.swift; sourceTree = "<group>"; };
 		F4CC09A62B87C7E300922A35 /* DomainConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainConvertible.swift; sourceTree = "<group>"; };
+		F4CC09A82B87D68A00922A35 /* MovieUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieUseCaseProtocol.swift; sourceTree = "<group>"; };
+		F4CC09AA2B87DBEC00922A35 /* MovieUseCaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieUseCaseError.swift; sourceTree = "<group>"; };
+		F4CC09AD2B87DC0600922A35 /* MovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,8 +325,27 @@
 			isa = PBXGroup;
 			children = (
 				F4CC09A42B87C79400922A35 /* Model */,
+				F4CC09AF2B87DC3500922A35 /* UseCase */,
+				F4CC09AC2B87DBF000922A35 /* Error */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		F4CC09AC2B87DBF000922A35 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				F4CC09AA2B87DBEC00922A35 /* MovieUseCaseError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		F4CC09AF2B87DC3500922A35 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				F4CC09A82B87D68A00922A35 /* MovieUseCaseProtocol.swift */,
+				F4CC09AD2B87DC0600922A35 /* MovieUseCase.swift */,
+			);
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -450,6 +475,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4CC09AB2B87DBEC00922A35 /* MovieUseCaseError.swift in Sources */,
+				F4CC09A92B87D68A00922A35 /* MovieUseCaseProtocol.swift in Sources */,
 				F4CC09A72B87C7E300922A35 /* DomainConvertible.swift in Sources */,
 				F44E989E2B82E641003F61EF /* NetworkRequest.swift in Sources */,
 				F44E98942B825E13003F61EF /* NetworkService.swift in Sources */,
@@ -462,6 +489,7 @@
 				F4CC09832B86E69A00922A35 /* NetworkRequestBuilderProtocol.swift in Sources */,
 				F44E98CB2B84DF56003F61EF /* MovieRepositoryProtocol.swift in Sources */,
 				F44E98A22B82E67A003F61EF /* URLRequestConvertible.swift in Sources */,
+				F4CC09AE2B87DC0600922A35 /* MovieUseCase.swift in Sources */,
 				F4CC09A32B87C2D700922A35 /* DailyBoxOffice.swift in Sources */,
 				F44E98A02B82E662003F61EF /* NetworkServiceError.swift in Sources */,
 				F44E98962B8266A3003F61EF /* DataRequestable.swift in Sources */,

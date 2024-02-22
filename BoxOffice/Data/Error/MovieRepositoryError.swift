@@ -10,5 +10,4 @@ enum MovieRepositoryError: Error {
   case decodingError
   case networkServiceError(NetworkServiceError)
   case unknownError
-  case cannotConvertToDomain
 }

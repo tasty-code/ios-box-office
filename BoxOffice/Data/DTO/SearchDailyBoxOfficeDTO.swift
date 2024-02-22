@@ -74,7 +74,7 @@ extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOfficeList: DomainConv
       let total = Int(self.salesTotal)
     else {
       // TODO: 이게 맞아?
-      throw MovieRepositoryError.cannotConvertToDomain
+      throw DTOError.cannotConvertToDomain
     }
     return .init(
       rank: rank,
@@ -107,7 +107,11 @@ extension SearchDailyBoxOfficeDTO.BoxOfficeResult: DomainConvertible {
     if let date = dateFormatter.date(from: dateString) {
       return date
     } else {
-      throw MovieRepositoryError.cannotConvertToDomain
+      throw DTOError.cannotConvertToDomain
     }
   }
+}
+
+enum DTOError: Error {
+  case cannotConvertToDomain
 }

@@ -1,5 +1,6 @@
 import Foundation
 
+// TODO: 네이밍 재고
 struct DailyBoxOfficeResponse {
   let date: Date
   let list: [DailyBoxOfficeItem]
