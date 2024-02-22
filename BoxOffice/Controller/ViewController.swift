@@ -8,8 +8,7 @@
 import UIKit
 
 final class ViewController: UIViewController {
-
-    private let boxOfficeListView: UIView = BoxOfficeListView()
+    private let boxOfficeListView: BoxOfficeListView = BoxOfficeListView()
     private let movieManager: MovieManager
     
     init(movieManager: MovieManager) {
@@ -24,6 +23,8 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = boxOfficeListView
+        boxOfficeListView.collectionView.dataSource = self
+        setupBoxOfficeData()
         configureNavigation()
     }
 }
@@ -47,7 +48,7 @@ private extension ViewController {
         self.movieManager.fetchBoxOfficeResultData(date: yesterday.toString(format: "yyyyMMdd")) { result in
             switch result {
             case .success(let success):
-                print(success)
+                self.reloadCollectionListData()
             case .failure(let failure):
                 print("fetchBoxOfficeResultData 실패: \(failure)")
             }
@@ -61,8 +62,25 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = MovieCollectionCell()
+        guard 
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionCell.identifier, for: indexPath) as? MovieCollectionCell
+        else {
+            return UICollectionViewListCell()
+        }
+        guard
+            let MovieList = movieManager.dailyBoxOfficeData?.boxOfficeResult.dailyBoxOfficeList
+        else {
+            return UICollectionViewListCell()
+        }
+        let movieResult = MovieList[indexPath.row]
+        cell.configure(result: movieResult)
+        cell.accessories = [.disclosureIndicator()]
         return cell
     }
     
+    func reloadCollectionListData() {
+        DispatchQueue.main.async {
+            self.boxOfficeListView.collectionView.reloadData()
+        }
+    }
 }
