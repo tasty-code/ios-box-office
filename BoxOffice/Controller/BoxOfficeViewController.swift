@@ -86,7 +86,6 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
         cell.rankStatusLabel.text = rankStatus == "NEW" ? "신작" : "\(rankChangedAmount)"
         cell.movieNameLabel.text = movieName
         cell.audienceLabel.text = "오늘 \(audienceCount.formatNumber()) / 총 \(audienceAccumulated.formatNumber())"
-        cell.accessories.append(.disclosureIndicator())
         return cell
     }
 }
