@@ -10,7 +10,7 @@ import UIKit
 final class RankStackView: UIStackView {
     private let rankLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.preferredFont(for: .title3, weight: .bold)
+        label.font = UIFont.preferredFont(for: .title1, weight: .bold)
         label.textAlignment = .center
         return label
     }()
@@ -34,11 +34,6 @@ final class RankStackView: UIStackView {
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func configure(rank: String, rankState: String, rankChanged: String) {
-        rankLabel.text = rank
-        rankState == "NEW" ? configureNewMovieLabel() : configureRankChangedMovieLabel(rankChanged: rankChanged)
-    }
 }
 
 private extension RankStackView {
@@ -58,5 +53,12 @@ private extension RankStackView {
         rankStateView.configureRankStateView(rankState: rankChanged)
         self.addArrangedSubview(rankLabel)
         self.addArrangedSubview(rankStateView)
+    }
+}
+
+extension RankStackView {
+    func configure(rank: String, rankState: String, rankChanged: String) {
+        rankLabel.text = rank
+        rankState == "NEW" ? configureNewMovieLabel() : configureRankChangedMovieLabel(rankChanged: rankChanged)
     }
 }

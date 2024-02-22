@@ -17,6 +17,7 @@ final class MovieStackView: UIStackView {
     private let movieAudienceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
+        label.textColor = .systemGray
         return label
     }()
     
@@ -28,21 +29,28 @@ final class MovieStackView: UIStackView {
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // TODO: - 숫자가 세 자리 이상 넘어가면 ,를 활용
-    func configureStackView(movieName: String, totalAudience: String, todayAudience: String) {
-        movieNameLabel.text = movieName
-        movieAudienceLabel.text = "오늘 \(todayAudience) / 총 \(todayAudience)"
-        self.addArrangedSubview(movieNameLabel)
-        self.addArrangedSubview(movieAudienceLabel)
-    }
 }
 
 private extension MovieStackView {
     func setupStackView() {
         self.axis = .vertical
         self.spacing = 0
-        self.distribution = .fill
+        self.distribution = .fillEqually
         self.alignment = .leading
+    }
+}
+
+extension MovieStackView {
+    func configureStackView(movieName: String, totalAudience: String, todayAudience: String) {
+        movieNameLabel.text = movieName
+        guard
+            let todayAudienceCount = Int(todayAudience),
+            let totalAudienceCount = Int(totalAudience)
+        else {
+            return
+        }
+        movieAudienceLabel.text = "오늘 \(todayAudienceCount.numberFormatter()) / 총 \(totalAudienceCount.numberFormatter())"
+        self.addArrangedSubview(movieNameLabel)
+        self.addArrangedSubview(movieAudienceLabel)
     }
 }
