@@ -50,7 +50,7 @@
 		C1FC46B42B84AFFC00C6E49E /* URLSessionDataTaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC46B32B84AFFC00C6E49E /* URLSessionDataTaskProtocol.swift */; };
 		C1FC46BC2B85CD5A00C6E49E /* MovieCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC46BB2B85CD5A00C6E49E /* MovieCollectionCell.swift */; };
 		C1FC46BE2B85D1A000C6E49E /* BoxOfficeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC46BD2B85D1A000C6E49E /* BoxOfficeListView.swift */; };
-		C1FC46C02B875A5300C6E49E /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC46BF2B875A5300C6E49E /* Int+Extension.swift */; };
+		C1FC46C22B8772BF00C6E49E /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC46C12B8772BF00C6E49E /* Int+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,7 +110,7 @@
 		C1FC46B32B84AFFC00C6E49E /* URLSessionDataTaskProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskProtocol.swift; sourceTree = "<group>"; };
 		C1FC46BB2B85CD5A00C6E49E /* MovieCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionCell.swift; sourceTree = "<group>"; };
 		C1FC46BD2B85D1A000C6E49E /* BoxOfficeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeListView.swift; sourceTree = "<group>"; };
-		C1FC46BF2B875A5300C6E49E /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Int+Extension.swift"; path = "../../../../../Matthew/.Trash/ios-box-office 오전 11.49.57/BoxOffice/Extension/Int+Extension.swift"; sourceTree = "<group>"; };
+		C1FC46C12B8772BF00C6E49E /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,7 +287,7 @@
 				275793892B7F51BF00C08906 /* URLSession+Extension.swift */,
 				27AE2ED52B86D99C009B43E2 /* Date+Extension.swift */,
 				27AE2EDF2B86E9AD009B43E2 /* UIFont+Extension.swift */,
-				C1FC46BF2B875A5300C6E49E /* Int+Extension.swift */,
+				C1FC46C12B8772BF00C6E49E /* Int+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -442,10 +442,10 @@
 				276ED76A2B7B006400D37EBF /* BoxOffice.swift in Sources */,
 				276ED7982B7B638C00D37EBF /* APIService.swift in Sources */,
 				275793732B7F1DE200C08906 /* Actor.swift in Sources */,
+				C1FC46C22B8772BF00C6E49E /* Int+Extension.swift in Sources */,
 				C1FC46BE2B85D1A000C6E49E /* BoxOfficeListView.swift in Sources */,
 				2757937D2B7F1E3200C08906 /* Nation.swift in Sources */,
 				276ED7762B7B08E100D37EBF /* NetworkError.swift in Sources */,
-				C1FC46C02B875A5300C6E49E /* Int+Extension.swift in Sources */,
 				2757938C2B7F52B500C08906 /* JSONLoader.swift in Sources */,
 				C1FC46B02B84962000C6E49E /* JSONFileName.swift in Sources */,
 				C1FC46B42B84AFFC00C6E49E /* URLSessionDataTaskProtocol.swift in Sources */,
