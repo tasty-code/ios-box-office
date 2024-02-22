@@ -99,7 +99,6 @@ class BoxOfficeCollectionViewCell: UICollectionViewListCell {
             rankStackView.topAnchor.constraint(equalTo: stackView.topAnchor),
             rankStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             rankStackView.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.2),
-            rankStackView.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
 }
