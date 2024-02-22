@@ -1,17 +1,24 @@
 
-enum JsonParsingError: Error {
-    case pathError
-    case dataLoadError
+import Foundation
+
+enum NetworkError: LocalizedError {
+    case connectivity
+    case timeout
+    case serverError(statusCode: Int)
+    case notFound
     case decodingError
-    
-    var errorMessage: String {
-        switch self {
-        case .pathError:
-            "파일의 경로를 읽어오지 못했습니다."
-        case .dataLoadError:
-            "데이터를 불러오지 못했습니다."
-        case .decodingError:
-            "파일 디코딩에 실패했습니다."
-        }
-    }
+//    var errorDescription: String? {
+//        switch self {
+//        case .connectivity:
+//            return NSLocalizedString("No internet connection.", comment: "")
+//        case .timeout:
+//            return NSLocalizedString("Request timed out.", comment: "")
+//        case .serverError(let statusCode):
+//            return NSLocalizedString("Server error with status code \(statusCode).", comment: "")
+//        case .notFound:
+//            return NSLocalizedString("Resource not found.", comment: "")
+//        case .decodingError:
+//            return NSLocalizedString("Failed to decode response data.", comment: "")
+//        }
+//    }
 }

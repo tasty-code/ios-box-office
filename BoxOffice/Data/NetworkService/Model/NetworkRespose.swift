@@ -1,8 +1,7 @@
-//
-//  File.swift
-//  BoxOffice
-//
-//  Created by Harry Ho on 2/22/24.
-//
 
 import Foundation
+
+struct NetworkRespose {
+    let response: HTTPURLResponse
+    let data: Data?
+}
