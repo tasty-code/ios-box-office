@@ -20,6 +20,9 @@
 		C76965E82B86E83800EF8F87 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76965E72B86E83800EF8F87 /* File.swift */; };
 		C76965EA2B86E83D00EF8F87 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76965E92B86E83D00EF8F87 /* File.swift */; };
 		C76965EF2B86E89B00EF8F87 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76965EE2B86E89B00EF8F87 /* File.swift */; };
+		C76965F12B86ECB800EF8F87 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76965F02B86ECB800EF8F87 /* File.swift */; };
+		C76965F32B86ECBD00EF8F87 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76965F22B86ECBD00EF8F87 /* File.swift */; };
+		C76965F52B86ECC500EF8F87 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76965F42B86ECC500EF8F87 /* File.swift */; };
 		C77ADAB82B7C766A0069AE0F /* JsonParsingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ADAB72B7C766A0069AE0F /* JsonParsingError.swift */; };
 		C77ADABA2B7C76B40069AE0F /* JsonDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ADAB92B7C76B40069AE0F /* JsonDecoder.swift */; };
 		C7C8D3332B7C5EA9009DE42F /* BoxOfficeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C8D3322B7C5EA9009DE42F /* BoxOfficeData.swift */; };
@@ -52,6 +55,9 @@
 		C76965E72B86E83800EF8F87 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		C76965E92B86E83D00EF8F87 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		C76965EE2B86E89B00EF8F87 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		C76965F02B86ECB800EF8F87 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		C76965F22B86ECBD00EF8F87 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		C76965F42B86ECC500EF8F87 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		C77ADAB72B7C766A0069AE0F /* JsonParsingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonParsingError.swift; sourceTree = "<group>"; };
 		C77ADAB92B7C76B40069AE0F /* JsonDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecoder.swift; sourceTree = "<group>"; };
 		C7C8D3322B7C5EA9009DE42F /* BoxOfficeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeData.swift; sourceTree = "<group>"; };
@@ -109,6 +115,7 @@
 		08AB8E7A2B7F24B700564AC5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C76965F42B86ECC500EF8F87 /* File.swift */,
 			);
 			name = View;
 			path = ../View;
@@ -258,6 +265,7 @@
 		C76965EB2B86E85200EF8F87 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				C76965F22B86ECBD00EF8F87 /* File.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -265,6 +273,7 @@
 		C76965EC2B86E86100EF8F87 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				C76965F02B86ECB800EF8F87 /* File.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -388,6 +397,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08AB8E8F2B7F479D00564AC5 /* KeyEnvironmentHandler.swift in Sources */,
+				C76965F12B86ECB800EF8F87 /* File.swift in Sources */,
 				C77ADAB82B7C766A0069AE0F /* JsonParsingError.swift in Sources */,
 				63DF20F32970E1A0005DF7D1 /* BoxOfficeCollectionViewController.swift in Sources */,
 				C77ADABA2B7C76B40069AE0F /* JsonDecoder.swift in Sources */,
@@ -395,7 +405,9 @@
 				C76965EA2B86E83D00EF8F87 /* File.swift in Sources */,
 				C76965E62B86E83100EF8F87 /* NetworkRespose.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
+				C76965F52B86ECC500EF8F87 /* File.swift in Sources */,
 				C76965E82B86E83800EF8F87 /* File.swift in Sources */,
+				C76965F32B86ECBD00EF8F87 /* File.swift in Sources */,
 				C76965EF2B86E89B00EF8F87 /* File.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
 			);
