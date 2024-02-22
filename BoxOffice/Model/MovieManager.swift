@@ -10,10 +10,14 @@ import Foundation
 final class MovieManager {
     private var dailyBoxOfficeData: BoxOffice?
     private var movieDetailData: MovieInfomationDetail?
+    
+    var movieCount: Int {
+        self.dailyBoxOfficeData?.boxOfficeResult.dailyBoxOfficeList.count ?? 0
+    }
 }
 
 extension MovieManager {
-    private func fetchBoxOfficeResultData(
+    func fetchBoxOfficeResultData(
         date: String,
         completion: @escaping (Result<BoxOffice, NetworkError>) -> Void
     ) {
@@ -31,7 +35,7 @@ extension MovieManager {
         }
     }
     
-    private func fetchMovieInfoResultData(
+    func fetchMovieInfoResultData(
         code: String,
         completion: @escaping (Result<MovieInfomationDetail, NetworkError>) -> Void
     ) {
