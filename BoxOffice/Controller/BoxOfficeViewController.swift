@@ -9,6 +9,7 @@ import UIKit
 
 final class BoxOfficeViewController: UIViewController {
     lazy var boxOfficeView: BoxOfficeView = BoxOfficeView()
+    private let loadingIndicatorView: UIActivityIndicatorView
     
     private var dataSource: [DailyBoxOffice.BoxOfficeMovie] = [] {
         didSet {
@@ -17,9 +18,10 @@ final class BoxOfficeViewController: UIViewController {
     }
     private let networkManager: NetworkManager
     
-    init(dataSource: [DailyBoxOffice.BoxOfficeMovie] = [], networkManager: NetworkManager) {
+    init(dataSource: [DailyBoxOffice.BoxOfficeMovie] = [], networkManager: NetworkManager, loadingIndicatorView: UIActivityIndicatorView) {
         self.dataSource = dataSource
         self.networkManager = networkManager
+        self.loadingIndicatorView = loadingIndicatorView
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,6 +32,8 @@ final class BoxOfficeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadDailyBoxOfficeData()
+        boxOfficeView.boxOfficeCollectionView.backgroundView = loadingIndicatorView
+        loadingIndicatorView.startAnimating()
         view = boxOfficeView
         view.backgroundColor = .white
         boxOfficeView.boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: "BoxOfficeCollectionViewCell")
@@ -54,9 +58,9 @@ extension BoxOfficeViewController {
             guard let result = data as? BoxOfficeResult else {
                 return
             }
+            self.loadingIndicatorView.stopAnimating()
             dataSource = result.converted()
             self.boxOfficeView.boxOfficeCollectionView.refreshControl?.endRefreshing()
-            
         }
     }
     
@@ -84,5 +88,21 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
         cell.configure(data: dataSource[indexPath.row].destructed())
         
         return cell
+    }
+}
+
+class LoadingIndicator {
+    let loadingIndicatorView = UIActivityIndicatorView()
+    
+    func showLoading() {
+        DispatchQueue.main.async {
+            self.loadingIndicatorView.startAnimating()
+        }
+    }
+
+    func hideLoading() {
+        DispatchQueue.main.async {
+            self.loadingIndicatorView.removeFromSuperview()
+        }
     }
 }

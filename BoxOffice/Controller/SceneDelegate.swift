@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         let urlSession: URLSession = URLSession.shared
         let networkManager: NetworkManager = NetworkManager(urlSession: urlSession)
-        let viewController = BoxOfficeViewController(networkManager: networkManager)
+        let viewController = BoxOfficeViewController(networkManager: networkManager, loadingIndicatorView: UIActivityIndicatorView())
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
     }
