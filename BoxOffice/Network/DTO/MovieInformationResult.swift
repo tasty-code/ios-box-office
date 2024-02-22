@@ -10,7 +10,7 @@ import Foundation
 struct MovieInformationResult: NetworkDataProtocol {
     let movieInformationResult: MovieInformationDetail
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case movieInformationResult = "movieInfoResult"
     }
 }

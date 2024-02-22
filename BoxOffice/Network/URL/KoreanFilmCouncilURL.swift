@@ -18,16 +18,14 @@ enum KoreanFilmCouncilURL {
             }
             return apiKey
         }()
-        let path: String = "https://kobis.or.kr/kobisopenapi/webservice/rest/"
+        let baseURL: String = "https://kobis.or.kr/kobisopenapi/webservice/rest/"
         
         switch self {
         case .dailyBoxOffice(let targetDate):
-            let url = path + "boxoffice/searchDailyBoxOfficeList.json?key=\(apiKey)&targetDt=\(targetDate)"
-            return url
+            return baseURL + "boxoffice/searchDailyBoxOfficeList.json?key=\(apiKey)&targetDt=\(targetDate)"
             
         case .movieDetailInformation(let movieCode):
-            let url = path + "movie/searchMovieInfo.json?key=\(apiKey)&movieCd=\(movieCode)"
-            return url
+            return baseURL + "movie/searchMovieInfo.json?key=\(apiKey)&movieCd=\(movieCode)"
         }
     }
     

@@ -29,7 +29,7 @@ final class BoxOfficeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadData()
+        loadDailyBoxOfficeData()
         view = boxOfficeView
         boxOfficeView.boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: "BoxOfficeCollectionViewCell")
         boxOfficeView.boxOfficeCollectionView.dataSource = self
@@ -40,7 +40,7 @@ final class BoxOfficeViewController: UIViewController {
 //func setupContraints()
 
 extension BoxOfficeViewController {
-    private func loadData() {
+    private func loadDailyBoxOfficeData() {
         Task {
             let type: KoreanFilmCouncilURL = .dailyBoxOffice(queryValue: "20240220")
             guard let request = self.networkManager.makeRequest(type) else {
