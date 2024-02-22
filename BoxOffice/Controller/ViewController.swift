@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController, DateFormattable {
+final class ViewController: UIViewController {
 
     private let boxOfficeListView: UIView = BoxOfficeListView()
     private let movieManager: MovieManager
@@ -35,11 +35,16 @@ private extension ViewController {
         else {
             return
         }
-        title = makeDataFormatToString(date: yesterday, format: "yyyy-MM-dd")
+        title = yesterday.toString(format: "yyyy-MM-dd")
     }
     
     func setupBoxOfficeData() {
-        self.movieManager.fetchBoxOfficeResultData { result in
+        guard
+            let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
+        else {
+            return
+        }
+        self.movieManager.fetchBoxOfficeResultData(date: yesterday.toString(format: "yyyyMMdd")) { result in
             switch result {
             case .success(let success):
                 print(success)
