@@ -1,5 +1,5 @@
 // swiftlint:disable nesting
-struct SearchDailyBoxOffice: Decodable {
+struct SearchDailyBoxOfficeDTO: Decodable {
   struct BoxOfficeResult: Decodable {
     struct DailyBoxOfficeList: Decodable {
       enum EntryStatus: String, Codable {

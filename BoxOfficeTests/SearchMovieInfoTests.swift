@@ -2,7 +2,7 @@ import XCTest
 @testable import BoxOffice
 
 final class SearchMovieInfoTests: XCTestCase {
-  private let sut: SearchMovieInfo.Type = SearchMovieInfo.self
+  private let sut: SearchMovieInfoDTO.Type = SearchMovieInfoDTO.self
   
   private var fileProvider: FileProvidable?
   

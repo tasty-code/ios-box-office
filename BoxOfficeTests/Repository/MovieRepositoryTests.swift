@@ -4,7 +4,7 @@ import XCTest
 final class MovieRepositoryImplTests: XCTestCase {
   typealias Session = MockURLSession
   
-  private var sut: MovieRepositoryImpl! = nil
+  private var sut: MovieRepository! = nil
   
   override func tearDownWithError() throws {
     self.sut = nil
@@ -16,7 +16,7 @@ final class MovieRepositoryImplTests: XCTestCase {
     let session = Session(apiType: .searchDailyBoxOffice(dateString: dateString))
     let requester = MockNetworkService(requester: session)
     let decoder = JSONDecoder()
-    self.sut = MovieRepositoryImpl(requester: requester, decoder: decoder)
+    self.sut = MovieRepository(requester: requester, decoder: decoder)
     
     // when
     let result = await self.sut.getDailyBoxOffice(dateString: dateString)
@@ -36,7 +36,7 @@ final class MovieRepositoryImplTests: XCTestCase {
     let session = Session(apiType: .searchDailyBoxOffice(dateString: dateString))
     let requester = MockNetworkService(requester: session)
     let decoder = JSONDecoder()
-    self.sut = MovieRepositoryImpl(requester: requester, decoder: decoder)
+    self.sut = MovieRepository(requester: requester, decoder: decoder)
     
     // when
     let result = await self.sut.getDailyBoxOffice(dateString: dateString)
@@ -56,7 +56,7 @@ final class MovieRepositoryImplTests: XCTestCase {
     let session = Session(apiType: .searchMovieInfo(code: codeString))
     let requester = MockNetworkService(requester: session)
     let decoder = JSONDecoder()
-    self.sut = MovieRepositoryImpl(requester: requester, decoder: decoder)
+    self.sut = MovieRepository(requester: requester, decoder: decoder)
     
     // when
     let result = await self.sut.getMovieDetail(movieCode: codeString)
@@ -76,7 +76,7 @@ final class MovieRepositoryImplTests: XCTestCase {
     let session = Session(apiType: .searchMovieInfo(code: codeString))
     let requester = MockNetworkService(requester: session)
     let decoder = JSONDecoder()
-    self.sut = MovieRepositoryImpl(requester: requester, decoder: decoder)
+    self.sut = MovieRepository(requester: requester, decoder: decoder)
     
     // when
     let result = await self.sut.getMovieDetail(movieCode: codeString)
