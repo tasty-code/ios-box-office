@@ -15,50 +15,62 @@ enum HTTPMethod: String {
   }
 }
 
-extension NetworkRequestBuilderProtocol {
-  var baseURL: String {
-    return "https://www.kobis.or.kr"
+enum MovieAPI {
+  enum Constant {
+    static let baseURL = "https://www.kobis.or.kr"
+    static let key = "14620738f18fee816bea6b4def4fa578"
+    static let movieAPIRESTCommonPath = "kobisopenapi/webservice/rest"
   }
-}
+  
+  struct DailyBoxOfficeBuilder: NetworkRequestBuilderProtocol {
+    var baseURL: String {
+      return Constant.baseURL
+    }
+    
+    var path: String {
+      let additionalPath = "/boxoffice/searchDailyBoxOfficeList.json"
+      return Constant.movieAPIRESTCommonPath + additionalPath
+    }
+    
+    var method: HTTPMethod {
+      return .get
+    }
+    
+    var queries: [URLQueryItem]
+    
+    init(
+      targetDt: String
+    ) {
+      self.queries = [
+        .init(name: "key", value: Constant.key),
+        .init(name: "targetDt", value: targetDt)
+      ]
+    }
+  }
 
-struct DailyBoxOffice: NetworkRequestBuilderProtocol {
-  var path: String {
-    return "kobisopenapi/webservice/rest" + "boxoffice/searchDailyBoxOfficeList.json"
-  }
-  
-  var method: HTTPMethod {
-    return .get
-  }
-  
-  var queries: [URLQueryItem]
-  
-  init(
-    targetDt: String
-  ) {
-    self.queries = [
-      .init(name: "key", value: "14620738f18fee816bea6b4def4fa578"),
-      .init(name: "targetDt", value: targetDt)
-    ]
-  }
-}
-
-struct MovieInfo: NetworkRequestBuilderProtocol {
-  var path: String {
-    return "kobisopenapi/webservice/rest" + "movie/searchMovieInfo.json"
-  }
-  
-  var method: HTTPMethod {
-    return .get
-  }
-  
-  var queries: [URLQueryItem]
-  
-  init(
-    movieCode: String
-  ) {
-    self.queries = [
-      .init(name: "key", value: "14620738f18fee816bea6b4def4fa578"),
-      .init(name: "movieCd", value: movieCode)
-    ]
+  struct MovieInfoBuilder: NetworkRequestBuilderProtocol {
+    var baseURL: String {
+      return Constant.baseURL
+    }
+    
+    var path: String {
+      let additionalPath = "/movie/searchMovieInfo.json"
+      return Constant.movieAPIRESTCommonPath + additionalPath
+    }
+    
+    var method: HTTPMethod {
+      return .get
+    }
+    
+    var queries: [URLQueryItem]
+    
+    init(
+      movieCode: String
+    ) {
+      self.queries = [
+        .init(name: "key", value: Constant.key),
+        .init(name: "movieCd", value: movieCode)
+      ]
+    }
   }
 }
