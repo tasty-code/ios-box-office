@@ -93,8 +93,43 @@ class BoxOfficeCollectionViewCell: UICollectionViewListCell {
 }
 
 extension BoxOfficeCollectionViewCell {
-    func addRankChangedAmountStackView(image: UIImage?, tintColor: UIColor, text: String) {
-        remove()
+    func configure(data: (_: Int, 
+                          rank: String,
+                          rankChangedAmount: Int,
+                          rankStatus: DailyBoxOffice.BoxOfficeMovie.RankStatus,
+                          movieName: String,
+                          audienceCount: Int,
+                          audienceAccumulated: Int)) {
+        let (_, rank, rankChangedAmount, rankStatus, movieName, audienceCount, audienceAccumulated) = data
+        rankLabel.text = String(rank)
+        
+        switch rankStatus {
+        case .new:
+            addRankStatusLabel(text: "신작")
+        case .old:
+            applyRankChangedAmountIntoRankStackView(rankChangedAmount: rankChangedAmount)
+        }
+    
+        movieNameLabel.text = movieName
+        audienceLabel.text = "오늘 \(audienceCount.formatNumber()) / 총 \(audienceAccumulated.formatNumber())"
+    }
+    
+    private func applyRankChangedAmountIntoRankStackView(rankChangedAmount: Int) {
+        let text = String(abs(rankChangedAmount))
+        switch rankChangedAmount {
+        case 0:
+            addRankStatusLabel(text: "-")
+        case ..<0:
+            addRankChangedAmountStackView(image: UIImage(systemName: "arrowtriangle.down.fill"), tintColor: .systemBlue, text: text)
+        case 1...:
+            addRankChangedAmountStackView(image: UIImage(systemName: "arrowtriangle.up.fill"), tintColor: .systemRed, text: text)
+        default:
+            return
+        }
+    }
+    
+    private func addRankChangedAmountStackView(image: UIImage?, tintColor: UIColor, text: String) {
+        removeRankStackViewArrangedSubviews()
         
         rankChangedIndicatorImageView.image = image
         rankChangedIndicatorImageView.tintColor = tintColor
@@ -107,8 +142,8 @@ extension BoxOfficeCollectionViewCell {
         rankStackView.addArrangedSubview(rankChangedAmountStackView)
     }
     
-    func addRankStatusLabel(text: String) {
-        remove()
+    private func addRankStatusLabel(text: String) {
+        removeRankStackViewArrangedSubviews()
         
         rankStatusLabel.text = text
         
@@ -116,7 +151,7 @@ extension BoxOfficeCollectionViewCell {
         rankStackView.addArrangedSubview(rankStatusLabel)
     }
     
-    func remove() {
+    private func removeRankStackViewArrangedSubviews() {
         rankStackView.arrangedSubviews.forEach { view in
             rankStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
@@ -145,6 +180,10 @@ extension BoxOfficeCollectionViewCell {
         rankStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: self.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
             stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),

@@ -14,12 +14,17 @@ struct DailyBoxOffice {
         let index: Int
         let rank: String
         let rankChangedAmount: Int
-        let rankStatus: String
+        let rankStatus: RankStatus
         let movieName: String
         let audienceCount: Int
         let audienceAccumulated: Int
         
-        func destructured() -> (Int, String, Int, String, String, Int, Int) {
+        enum RankStatus: String {
+            case new = "NEW"
+            case old = "OLD"
+        }
+        
+        func destructed() -> (_: Int, rank: String, rankChangedAmount: Int, rankStatus: RankStatus, movieName: String, audienceCount: Int, audienceAccumulated: Int) {
             return (index, rank, rankChangedAmount, rankStatus, movieName, audienceCount, audienceAccumulated)
         }
     }

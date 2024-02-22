@@ -15,7 +15,7 @@ struct BoxOfficeResult: NetworkDataProtocol {
             let index: Int = Int(boxOfficeMovie.index) ?? 0
             let rank: String = boxOfficeMovie.rank
             let rankChangedAmount: Int = Int(boxOfficeMovie.rankChangedAmount) ?? 0
-            let rankStatus: String = boxOfficeMovie.rankStatus
+            let rankStatus: DailyBoxOffice.BoxOfficeMovie.RankStatus = boxOfficeMovie.rankStatus == "NEW" ? .new : .old
             let movieName: String = boxOfficeMovie.movieName
             let audienceCount: Int = Int(boxOfficeMovie.audienceCount) ?? 0
             let audienceAccumulated: Int = Int(boxOfficeMovie.audienceAccumulated) ?? 0

@@ -81,27 +81,8 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
             return UICollectionViewCell()
         }
         
-        let (_, rank, rankChangedAmount, rankStatus, movieName, audienceCount, audienceAccumulated) = dataSource[indexPath.row].destructured()
+        cell.configure(data: dataSource[indexPath.row].destructed())
         
-        cell.rankLabel.text = rank
-        
-        if rankStatus == "NEW" {
-            cell.addRankStatusLabel(text: "신작")
-        } else {
-            if rankChangedAmount == 0 {
-                cell.addRankStatusLabel(text: "-")
-            } else {
-                if rankChangedAmount < 0 {
-                    cell.addRankChangedAmountStackView(image: UIImage(systemName: "arrowtriangle.down.fill"), tintColor: .systemBlue, text: String(rankChangedAmount))
-                }
-                if rankChangedAmount > 0 {
-                    cell.addRankChangedAmountStackView(image: UIImage(systemName: "arrowtriangle.up.fill"), tintColor: .systemRed, text: String(rankChangedAmount))
-                }
-            }
-        }
-    
-        cell.movieNameLabel.text = movieName
-        cell.audienceLabel.text = "오늘 \(audienceCount.formatNumber()) / 총 \(audienceAccumulated.formatNumber())"
         return cell
     }
 }
