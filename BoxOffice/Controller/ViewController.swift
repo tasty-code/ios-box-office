@@ -10,6 +10,16 @@ import UIKit
 final class ViewController: UIViewController, DateFormattable {
 
     private let boxOfficeListView: UIView = BoxOfficeListView()
+    private let movieManager: MovieManager
+    
+    init(movieManager: MovieManager) {
+        self.movieManager = movieManager
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,15 +37,27 @@ private extension ViewController {
         }
         title = makeDataFormatToString(date: yesterday, format: "yyyy-MM-dd")
     }
+    
+    func setupBoxOfficeData() {
+        self.movieManager.fetchBoxOfficeResultData { result in
+            switch result {
+            case .success(let success):
+                print(success)
+            case .failure(let failure):
+                print("fetchBoxOfficeResultData 실패: \(failure)")
+            }
+        }
+    }
 }
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return movieManager.movieCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = MovieCollectionCell()
         return cell
     }
+    
 }
