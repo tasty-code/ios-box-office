@@ -101,7 +101,7 @@ extension SearchDailyBoxOfficeDTO.BoxOfficeResult: DomainConvertible {
   private func parseDate(_ dateRange: String) throws -> Date {
     let rangeString = self.showRange
     let tildeCharacter: Character = "~"
-    let dateString = String(rangeString.prefix(while: { $0 == tildeCharacter }))
+    let dateString = String(rangeString.prefix(while: { $0 != tildeCharacter }))
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyyMMdd"
     if let date = dateFormatter.date(from: dateString) {
