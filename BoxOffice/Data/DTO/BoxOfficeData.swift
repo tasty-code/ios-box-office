@@ -1,11 +1,11 @@
 
 // MARK: - BoxOfficeData
-struct BoxOfficeData: Decodable {
-    let boxOfficeResult: BoxOfficeResult
+struct BoxOfficeDataDTO: Decodable {
+    let boxOfficeResult: BoxOfficeResultDTO
 }
 
 // MARK: - BoxOfficeResult
-struct BoxOfficeResult: Decodable {
+struct BoxOfficeResultDTO: Decodable {
     let boxofficeType, showRange: String
     let dailyBoxOfficeList: [DailyBoxOfficeList]
 }
@@ -13,7 +13,7 @@ struct BoxOfficeResult: Decodable {
 // MARK: - DailyBoxOfficeList
 struct DailyBoxOfficeList: Decodable {
     let rankNumber, rank, rankIntensity: String
-    let rankOldAndNew: RankOldAndNew
+    let rankOldAndNew: RankOldAndNewDTO
     let movieCode, movieName, openDate, salesAmount: String
     let salesShare, salesIntensty, salesChange, salesAccount: String
     let audienceCount, audienceIntenstity, audienceChange, audienceAccount: String
@@ -41,7 +41,7 @@ struct DailyBoxOfficeList: Decodable {
     }
 }
 
-enum RankOldAndNew: String, Decodable {
+enum RankOldAndNewDTO: String, Decodable {
     case new = "NEW"
     case old = "OLD"
 }
