@@ -12,18 +12,13 @@ final class MovieManager {
     private var movieDetailData: MovieInfomationDetail?
 }
 
-extension MovieManager: DateFormattable {
+extension MovieManager {
     private func fetchBoxOfficeResultData(
-        date: String? = nil,
+        date: String,
         completion: @escaping (Result<BoxOffice, NetworkError>) -> Void
     ) {
         let apiService = APIService()
-        guard 
-            let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
-        else {
-            return
-        }
-        let urlString = MovieURL.makeDailyBoxOfficeURL(date: date ?? makeDataFormatToString(date: yesterday))
+        let urlString = MovieURL.makeDailyBoxOfficeURL(date: date)
         
         apiService.fetchData(urlString: urlString) { (result: Result<BoxOffice, NetworkError>) in
             switch result {
