@@ -8,9 +8,8 @@
 import Foundation
 
 final class MovieManager {
-    private var dailyBoxOfficeData: BoxOffice?
-    private var movieDetailData: MovieInfomationDetail?
-    
+    var dailyBoxOfficeData: BoxOffice?
+    var movieDetailData: MovieInfomationDetail?
     var movieCount: Int {
         self.dailyBoxOfficeData?.boxOfficeResult.dailyBoxOfficeList.count ?? 0
     }
