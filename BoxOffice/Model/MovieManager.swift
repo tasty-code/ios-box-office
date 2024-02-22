@@ -8,19 +8,41 @@
 import Foundation
 
 final class MovieManager {
-    private var movieData: Movie?
+    private var dailyBoxOfficeData: BoxOffice?
+    private var movieDetailData: MovieInfomationDetail?
 }
 
 extension MovieManager {
-    private func fetchMovies(date: String, completion: @escaping (Result<Movie, NetworkError>) -> Void) {
+    private func fetchBoxOfficeResultData(
+        date: String,
+        completion: @escaping (Result<BoxOffice, NetworkError>) -> Void
+    ) {
+        let apiService = APIService()
+        let urlString = MovieURL.makeDailyBoxOfficeURL(date: date)
         
-        let urlString = MovieURL.makeURL(date: date)
-        
-        APIService.fetchData(urlString: urlString) { (result: Result<Movie, NetworkError>) in
+        apiService.fetchData(urlString: urlString) { (result: Result<BoxOffice, NetworkError>) in
             switch result {
             case .success(let movies):
                 completion(.success(movies))
-                self.movieData = movies
+                self.dailyBoxOfficeData = movies
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    private func fetchMovieInfoResultData(
+        code: String,
+        completion: @escaping (Result<MovieInfomationDetail, NetworkError>) -> Void
+    ) {
+        let apiService = APIService()
+        let urlString = MovieURL.makeMovieInfomationDetailURL(code: code)
+        
+        apiService.fetchData(urlString: urlString) { (result: Result<MovieInfomationDetail, NetworkError>) in
+            switch result {
+            case .success(let movies):
+                completion(.success(movies))
+                self.movieDetailData = movies
             case .failure(let error):
                 completion(.failure(error))
             }

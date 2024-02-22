@@ -5,8 +5,6 @@
 //  Created by 강창현 on 2/13/24.
 //
 
-import Foundation
-
 struct DailyBoxOfficeList: Codable {
     let number: String
     let rank: String
