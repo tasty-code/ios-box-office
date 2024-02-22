@@ -10,7 +10,7 @@ struct MovieRepository {
   }
 }
 
-extension MovieRepository: MovieProtocol {
+extension MovieRepository: MovieRepositoryProtocol {
   func getDailyBoxOffice(
     dateString: String
   ) async -> Result<SearchDailyBoxOfficeDTO, MovieRepositoryError> {
