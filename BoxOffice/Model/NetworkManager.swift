@@ -3,6 +3,7 @@ import Foundation
 
 struct NetworkManager {
     private let urlSession: URLSession
+    private var urlComponents = URLComponents()
     
     init(urlSession: URLSession = URLSession.shared) {
         self.urlSession = urlSession
@@ -34,6 +35,17 @@ struct NetworkManager {
             }
             
         }.resume()
+    }
+    
+    mutating func modifyUrlComponent(path: String) -> URL? {
+        urlComponents.scheme = "https"
+        urlComponents.host = "www.kobis.or.kr"
+        urlComponents.path = "/kobisopenapi/webservice/rest\(path)"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "key", value: "ab168a1eb56e21306b897acd3d4653ce")
+        ]
+        
+        return urlComponents.url
     }
 }
 
