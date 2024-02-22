@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct NetworkRespose {
+struct NetworkResponse {
     let response: HTTPURLResponse
     let data: Data?
 }
