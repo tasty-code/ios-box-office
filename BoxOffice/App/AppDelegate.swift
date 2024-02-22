@@ -9,7 +9,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        
+        configureURL()
+        
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    }
+    
+    private func configureURL() {
+        let url = URL(string: "https://www.kobis.or.kr/kobisopenapi/webservice/rest")!
+        BaseURLManager.shared.configure(url, for: .kobis)
     }
 }
 

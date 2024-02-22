@@ -15,7 +15,6 @@
 		082798262B87771800ACC723 /* URLProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082798252B87771700ACC723 /* URLProvidable.swift */; };
 		082798282B87778200ACC723 /* URLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082798272B87778200ACC723 /* URLProvider.swift */; };
 		0827982B2B87795100ACC723 /* DEBUG-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0827982A2B87795100ACC723 /* DEBUG-Keys.plist */; };
-		0827982D2B877A9B00ACC723 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0827982C2B877A9B00ACC723 /* NetworkResponse.swift */; };
 		08AB8E8F2B7F479D00564AC5 /* KeyEnvironmentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB8E8E2B7F479D00564AC5 /* KeyEnvironmentHandler.swift */; };
 		08DCFED72B7C5722002E22EA /* BoxOfficeSample.json in Resources */ = {isa = PBXBuildFile; fileRef = 08DCFED62B7C5722002E22EA /* BoxOfficeSample.json */; };
 		08DCFEDF2B7C59D7002E22EA /* BoxOfficeUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DCFEDE2B7C59D7002E22EA /* BoxOfficeUnitTests.swift */; };
@@ -56,7 +55,6 @@
 		082798252B87771700ACC723 /* URLProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProvidable.swift; sourceTree = "<group>"; };
 		082798272B87778200ACC723 /* URLProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProvider.swift; sourceTree = "<group>"; };
 		0827982A2B87795100ACC723 /* DEBUG-Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DEBUG-Keys.plist"; sourceTree = "<group>"; };
-		0827982C2B877A9B00ACC723 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 		08AB8E8E2B7F479D00564AC5 /* KeyEnvironmentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEnvironmentHandler.swift; sourceTree = "<group>"; };
 		08DCFED62B7C5722002E22EA /* BoxOfficeSample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BoxOfficeSample.json; sourceTree = "<group>"; };
 		08DCFEDC2B7C59D7002E22EA /* BoxOfficeUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,7 +203,6 @@
 			children = (
 				08AB8E8E2B7F479D00564AC5 /* KeyEnvironmentHandler.swift */,
 				082798162B87747300ACC723 /* BaseURLType.swift */,
-				0827982C2B877A9B00ACC723 /* NetworkResponse.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -489,7 +486,6 @@
 				C76965F92B86EE7200EF8F87 /* SessionProvidable.swift in Sources */,
 				C7C8D3332B7C5EA9009DE42F /* BoxOfficeData.swift in Sources */,
 				C76965EA2B86E83D00EF8F87 /* SessionProvider.swift in Sources */,
-				0827982D2B877A9B00ACC723 /* NetworkResponse.swift in Sources */,
 				C76965E62B86E83100EF8F87 /* NetworkResponse.swift in Sources */,
 				082798042B86ED8400ACC723 /* RequestProvidable.swift in Sources */,
 				082798282B87778200ACC723 /* URLProvider.swift in Sources */,
