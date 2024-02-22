@@ -34,10 +34,9 @@ final class BoxOfficeViewController: UIViewController {
         boxOfficeView.boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: "BoxOfficeCollectionViewCell")
         boxOfficeView.boxOfficeCollectionView.dataSource = self
         boxOfficeView.boxOfficeCollectionView.delegate = self
+        configureRefreshControl()
     }
 }
-
-//func setupContraints()
 
 extension BoxOfficeViewController {
     private func loadDailyBoxOfficeData() {
@@ -55,10 +54,21 @@ extension BoxOfficeViewController {
                 return
             }
             dataSource = result.converted()
-            print(dataSource)
+            self.boxOfficeView.boxOfficeCollectionView.refreshControl?.endRefreshing()
+            
         }
     }
+    
+    private func configureRefreshControl() {
+        boxOfficeView.boxOfficeCollectionView.refreshControl = UIRefreshControl()
+        boxOfficeView.boxOfficeCollectionView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+    }
+    
+    @objc func handleRefreshControl() {
+        loadDailyBoxOfficeData()
+    }
 }
+
 
 extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
