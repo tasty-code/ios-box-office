@@ -46,21 +46,24 @@ final class BoxOfficeViewController: UIViewController {
 extension BoxOfficeViewController {
     private func loadDailyBoxOfficeData() {
         Task {
-            let type: KoreanFilmCouncilURL = .dailyBoxOffice(queryValue: Date().getYesterday("yyyyMMdd"))
-            guard let request = self.networkManager.makeRequest(type) else {
-                return
-            }
-            let data = await self.networkManager.request(request, into: type) { networkError in
+            do {
+                let url: String = KoreanFilmCouncilURL.dailyBoxOffice(targetDate: Date().getYesterday("yyyyMMdd")).url
+                guard let request = try self.networkManager.makeRequest(url) else {
+                    return
+                }
+                let data: BoxOfficeResult? = try await self.networkManager.request(request)
+                guard let result = data else {
+                    return
+                }
+                self.loadingIndicatorView.stopAnimating()
+                dataSource = result.converted()
+                self.boxOfficeView.boxOfficeCollectionView.refreshControl?.endRefreshing()
+            } catch {
                 DispatchQueue.main.async {
-                    self.alert(with: networkError)
+                    self.alert(with: error)
                 }
             }
-            guard let result = data as? BoxOfficeResult else {
-                return
-            }
-            self.loadingIndicatorView.stopAnimating()
-            dataSource = result.converted()
-            self.boxOfficeView.boxOfficeCollectionView.refreshControl?.endRefreshing()
+            
         }
     }
     

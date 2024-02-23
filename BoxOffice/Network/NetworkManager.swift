@@ -14,37 +14,26 @@ struct NetworkManager {
         self.urlSession = urlSession
     }
     
-    func makeRequest(_ type: KoreanFilmCouncilURL, httpMethod: String = "GET") -> URLRequest? {
-        guard let url = URL(string: type.url) else {
-            return nil
+    func makeRequest(_ url: String, httpMethod: String = "GET") throws -> URLRequest? {
+        guard let URL = URL(string: url) else {
+            throw NetworkError.invalidURL
         }
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: URL)
         request.httpMethod = httpMethod
         return request
     }
     
-    func request(_ request: URLRequest, into type: KoreanFilmCouncilURL, errorHandler: (NetworkError) -> Void) async -> NetworkDataProtocol? {
-        do {
-            let (data, response) = try await urlSession.data(for: request, delegate: nil)
-            guard let httpResponse = response as? HTTPURLResponse else {
-                return nil
-            }
-            
-            switch httpResponse.statusCode {
-            case 200...299:
-                return try JSONDecoder().decode(type.dataType, from: data)
-            case 400...599:
-                throw NetworkError.invalidStatusCode(httpResponse.statusCode)
-            default:
-                return nil
-            }
-            
-        } catch {
-            guard let networkError = error as? NetworkError else {
-                return nil
-            }
-            errorHandler(networkError)
-            return nil
+    func request<T: Decodable>(_ request: URLRequest) async throws -> T? {
+        let (data, response) = try await urlSession.data(for: request, delegate: nil)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw NetworkError.invalidURLResponse
+        }
+        
+        switch httpResponse.statusCode {
+        case 200...299:
+            return try JSONDecoder().decode(T.self, from: data)
+        default:
+            throw NetworkError.invalidStatusCode(httpResponse.statusCode)
         }
     }
 }
