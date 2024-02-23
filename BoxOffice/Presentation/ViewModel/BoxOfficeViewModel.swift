@@ -3,7 +3,7 @@ final class BoxOfficeViewModel {
   
   private weak var delegate: BoxOfficeOutput?
   
-  private var yesterDayBoxOfficeList: [DailyBoxOfficeResponse.DailyBoxOfficeItem] {
+  private var yesterDayBoxOfficeList: [DailyBoxOffice.ListItem] {
     didSet {
       self.delegate?.updateBoxOffice()
     }

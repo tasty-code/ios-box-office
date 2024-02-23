@@ -1,14 +1,14 @@
 import Foundation
 
 // TODO: 네이밍 재고
-struct DailyBoxOfficeResponse {
+struct DailyBoxOffice {
   let date: Date
-  let list: [DailyBoxOfficeItem]
+  let list: [ListItem]
   
-  struct DailyBoxOfficeItem: Hashable {
+  struct ListItem: Hashable {
     static func == (
-      lhs: DailyBoxOfficeResponse.DailyBoxOfficeItem,
-      rhs: DailyBoxOfficeResponse.DailyBoxOfficeItem
+      lhs: DailyBoxOffice.ListItem,
+      rhs: DailyBoxOffice.ListItem
     ) -> Bool {
       return lhs.index == rhs.index && lhs.rank == rhs.rank
     }
@@ -45,39 +45,6 @@ struct DailyBoxOfficeResponse {
           self = .maintained
         }
       }
-    }
-  }
-}
-
-enum MovieStatus {
-  case newMovie
-  case oldMovie(RiseOrFall)
-  
-  enum RiseOrFall {
-    case risen(Int)
-    case fallen(Int)
-    case maintained
-  }
-
-  init(
-    entryStatus: DailyBoxOfficeResponse.DailyBoxOfficeItem.EntryStatus,
-    rankChange: DailyBoxOfficeResponse.DailyBoxOfficeItem.RankChange
-  ) {
-    let riseOrFall: RiseOrFall
-    switch rankChange {
-    case .risen(let number):
-      riseOrFall = .risen(number)
-    case .fallen(let number):
-      riseOrFall = .fallen(number)
-    case .maintained:
-      riseOrFall = .maintained
-    }
-    
-    switch entryStatus {
-    case .new:
-      self = .newMovie
-    case .old:
-      self = .oldMovie(riseOrFall)
     }
   }
 }

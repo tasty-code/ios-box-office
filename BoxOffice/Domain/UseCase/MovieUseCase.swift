@@ -7,7 +7,7 @@ struct MovieUseCase {
 }
 
 extension MovieUseCase: MovieUseCaseProtocol {
-  func getDailyBoxOffice() async -> Result<DailyBoxOfficeResponse, MovieUseCaseError> {
+  func getDailyBoxOffice() async -> Result<DailyBoxOffice, MovieUseCaseError> {
     do {
       // TODO: Date를 전달받을 것인지,,?
       let result = await self.repository.getDailyBoxOffice(dateString: "")

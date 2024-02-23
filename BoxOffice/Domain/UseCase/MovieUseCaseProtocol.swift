@@ -1,3 +1,3 @@
 protocol MovieUseCaseProtocol {
-  func getDailyBoxOffice() async -> Result<DailyBoxOfficeResponse, MovieUseCaseError>
+  func getDailyBoxOffice() async -> Result<DailyBoxOffice, MovieUseCaseError>
 }

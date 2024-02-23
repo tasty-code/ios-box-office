@@ -1,7 +1,7 @@
 import UIKit
 
 final class BoxOfficeCollectionViewCell: UICollectionViewCell {
-  private var boxOfficeListItem: DailyBoxOfficeResponse.DailyBoxOfficeItem?
+  private var boxOfficeListItem: DailyBoxOffice.ListItem?
   
   private var rankLabel: UILabel = {
     let label = UILabel()
@@ -68,7 +68,7 @@ final class BoxOfficeCollectionViewCell: UICollectionViewCell {
     ])
   }
   
-  func configure(with item: DailyBoxOfficeResponse.DailyBoxOfficeItem) {
+  func configure(with item: DailyBoxOffice.ListItem) {
     self.rankLabel.text = String(item.rank)
     
     let movieStatus = MovieStatus.init(

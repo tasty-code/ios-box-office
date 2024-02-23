@@ -64,9 +64,9 @@ struct SearchDailyBoxOfficeDTO: Decodable {
 // swiftlint:enable nesting
 
 extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOfficeList.EntryStatus: DomainConvertible {
-  typealias Domain = DailyBoxOfficeResponse.DailyBoxOfficeItem.EntryStatus
+  typealias Domain = DailyBoxOffice.ListItem.EntryStatus
   
-  func toDomain() throws -> DailyBoxOfficeResponse.DailyBoxOfficeItem.EntryStatus {
+  func toDomain() throws -> DailyBoxOffice.ListItem.EntryStatus {
     switch self {
     case .new: return .new
     case .old: return .old
@@ -75,9 +75,9 @@ extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOfficeList.EntryStatus
 }
 
 extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOfficeList: DomainConvertible {
-  typealias Domain = DailyBoxOfficeResponse.DailyBoxOfficeItem
+  typealias Domain = DailyBoxOffice.ListItem
   
-  func toDomain() throws -> DailyBoxOfficeResponse.DailyBoxOfficeItem {
+  func toDomain() throws -> DailyBoxOffice.ListItem {
     guard
       let rank = Int(self.rank),
       let rankChange = Int(self.rankChange),
@@ -101,9 +101,9 @@ extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOfficeList: DomainConv
 import Foundation
 
 extension SearchDailyBoxOfficeDTO.BoxOfficeResult: DomainConvertible {
-  typealias Domain = DailyBoxOfficeResponse
+  typealias Domain = DailyBoxOffice
   
-  func toDomain() throws -> DailyBoxOfficeResponse {
+  func toDomain() throws -> DailyBoxOffice {
     return .init(
       date: try parseDate(self.showRange),
       list: self.list.compactMap { item in try? item.toDomain() }

@@ -5,7 +5,7 @@ enum BoxOfficeListSection {
 }
 
 enum BoxOfficeListItem: Hashable {
-  case movie(DailyBoxOfficeResponse.DailyBoxOfficeItem)
+  case movie(DailyBoxOffice.ListItem)
 }
 
 typealias BoxOfficeListSnapShot = NSDiffableDataSourceSnapshot<BoxOfficeListSection, BoxOfficeListItem>
