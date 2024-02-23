@@ -47,7 +47,7 @@ struct MovieInfo: Decodable {
     }
 }
 
-// MARK: - Actor
+// MARK: - Actors
 struct Actors: Decodable {
     let peopleName, peopleNameEnglish, cast, castEnglish: String
     

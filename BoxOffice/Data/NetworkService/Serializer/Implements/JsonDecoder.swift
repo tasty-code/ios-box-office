@@ -9,5 +9,4 @@ struct URLDecoder: URLDecodeProtocol {
         else { return .failure(.decodingError) }
         return .success(decodedData)
     }
-    
 }

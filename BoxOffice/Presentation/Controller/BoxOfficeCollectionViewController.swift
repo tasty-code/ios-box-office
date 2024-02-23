@@ -16,12 +16,10 @@ final class BoxOfficeCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         Task {
             await fetchBoxOfficeData()
             await fetchDetailMovieData()
         }
-
     }
 }
 
@@ -53,11 +51,11 @@ extension BoxOfficeCollectionViewController {
         let message: String
         switch error {
         case .networkIssue:
-            message = "Please check your internet connection and try again."
+            message = error.localizedDescription 
         case .dataUnavailable:
-            message = "Requested data is currently unavailable. Please try again later."
+            message = error.localizedDescription
         case .unknown:
-            message = "An unexpected error occurred. Please try again."
+            message = error.localizedDescription
         }
         
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
@@ -66,6 +64,4 @@ extension BoxOfficeCollectionViewController {
             self.present(alert, animated: true)
         }
     }
-
-
 }

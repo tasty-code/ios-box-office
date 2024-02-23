@@ -69,5 +69,4 @@ class NetworkSessionTests: XCTestCase {
             XCTFail("error")
         }
     }
-    
 }

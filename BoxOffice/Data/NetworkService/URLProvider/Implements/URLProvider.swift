@@ -2,6 +2,7 @@
 import Foundation
 
 enum URLProvider: URLProvidable {
+    
     case dailyBoxOffice(date: String)
     case detailMovieInformation(code: String)
     
@@ -14,7 +15,7 @@ enum URLProvider: URLProvidable {
         }
     }
 
-    func makeComponents(with path: String, byTarget target: String, andValue targetValue: String) -> URLComponents? {
+    private func makeComponents(with path: String, byTarget target: String, andValue targetValue: String) -> URLComponents? {
         guard let baseURL = BaseURLManager.shared.get(for: .kobis) else { return nil }
         var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
         let path = path

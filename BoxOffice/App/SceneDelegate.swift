@@ -20,7 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func configureURL() {
-        let url = URL(string: "https://www.kobis.or.kr/kobisopenapi/webservice/rest")!
+        guard let url = URL(string: "https://www.kobis.or.kr/kobisopenapi/webservice/rest") else {
+            fatalError("URL Not Found") }
         BaseURLManager.shared.configure(url, for: .kobis)
     }
 }

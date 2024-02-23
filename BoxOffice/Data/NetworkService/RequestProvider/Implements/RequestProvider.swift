@@ -1,7 +1,7 @@
 
 import Foundation
 
-class RequestProvider: RequestProvidable {
+final class RequestProvider: RequestProvidable {
     
     var httpMethod: String
 
