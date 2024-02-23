@@ -63,6 +63,17 @@ struct SearchDailyBoxOfficeDTO: Decodable {
 }
 // swiftlint:enable nesting
 
+extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOfficeList.EntryStatus: DomainConvertible {
+  typealias Domain = DailyBoxOfficeResponse.DailyBoxOfficeItem.EntryStatus
+  
+  func toDomain() throws -> DailyBoxOfficeResponse.DailyBoxOfficeItem.EntryStatus {
+    switch self {
+    case .new: return .new
+    case .old: return .old
+    }
+  }
+}
+
 extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOfficeList: DomainConvertible {
   typealias Domain = DailyBoxOfficeResponse.DailyBoxOfficeItem
   
@@ -73,7 +84,6 @@ extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOfficeList: DomainConv
       let today = Int(self.showCount),
       let total = Int(self.salesTotal)
     else {
-      // TODO: 이게 맞아?
       throw DTOError.cannotConvertToDomain
     }
     return .init(
@@ -81,7 +91,8 @@ extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOfficeList: DomainConv
       rankChange: .init(value: rankChange),
       title: self.movieName,
       todayAudienceCount: today,
-      totalAudienceCount: total
+      totalAudienceCount: total,
+      entryStatus: try self.entryStatus.toDomain()
     )
   }
 }

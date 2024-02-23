@@ -11,6 +11,7 @@ struct DailyBoxOfficeResponse {
     let title: String
     let todayAudienceCount: Int
     let totalAudienceCount: Int
+    let entryStatus: EntryStatus
     
     struct EntryStatus: RawRepresentable {
       static let new = Self(rawValue: "NEW")
