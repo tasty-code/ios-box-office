@@ -16,7 +16,7 @@ final class BoxOfficeMockTests: XCTestCase {
         else {
             return
         }
-        let urlString = MovieURL.makeDailyBoxOfficeURL(date: yesterday.toString())
+        let urlString = MovieURL.makeDailyBoxOfficeURL(date: yesterday.toString(format: "yyyyMMdd"))
         let mockURLSession = makeMockURLSession(fileName: JSONFileName.boxOffice, url: urlString, statusCode: 400)
         let sut = setSUT(session: mockURLSession)
         
