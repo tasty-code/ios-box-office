@@ -14,12 +14,13 @@
 		082798222B87757100ACC723 /* BaseURLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082798212B87757100ACC723 /* BaseURLManager.swift */; };
 		082798262B87771800ACC723 /* URLProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082798252B87771700ACC723 /* URLProvidable.swift */; };
 		082798282B87778200ACC723 /* URLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082798272B87778200ACC723 /* URLProvider.swift */; };
-		082798322B882B1D00ACC723 /* DEBUG-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 082798312B882B1C00ACC723 /* DEBUG-Keys.plist */; };
 		082798362B882B8400ACC723 /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082798352B882B8400ACC723 /* Decodable.swift */; };
 		082798382B88311400ACC723 /* MappableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082798372B88311400ACC723 /* MappableProtocol.swift */; };
 		0827983C2B88328B00ACC723 /* BoxOfficeUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0827983B2B88328B00ACC723 /* BoxOfficeUseCaseProtocol.swift */; };
 		0827983E2B88339900ACC723 /* DependencyEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0827983D2B88339900ACC723 /* DependencyEnvironment.swift */; };
 		082798402B8833F000ACC723 /* HTTPMethodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0827983F2B8833F000ACC723 /* HTTPMethodType.swift */; };
+		082798472B884F7E00ACC723 /* DEBUG-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 082798462B884F7E00ACC723 /* DEBUG-Keys.plist */; };
+		0827984A2B884F9500ACC723 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082798492B884F9500ACC723 /* DateExtension.swift */; };
 		08AB8E8F2B7F479D00564AC5 /* KeyEnvironmentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB8E8E2B7F479D00564AC5 /* KeyEnvironmentHandler.swift */; };
 		08DCFED72B7C5722002E22EA /* BoxOfficeSample.json in Resources */ = {isa = PBXBuildFile; fileRef = 08DCFED62B7C5722002E22EA /* BoxOfficeSample.json */; };
 		08DCFEDF2B7C59D7002E22EA /* BoxOfficeUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DCFEDE2B7C59D7002E22EA /* BoxOfficeUnitTests.swift */; };
@@ -64,12 +65,13 @@
 		082798212B87757100ACC723 /* BaseURLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURLManager.swift; sourceTree = "<group>"; };
 		082798252B87771700ACC723 /* URLProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProvidable.swift; sourceTree = "<group>"; };
 		082798272B87778200ACC723 /* URLProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProvider.swift; sourceTree = "<group>"; };
-		082798312B882B1C00ACC723 /* DEBUG-Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DEBUG-Keys.plist"; sourceTree = "<group>"; };
 		082798352B882B8400ACC723 /* Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
 		082798372B88311400ACC723 /* MappableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappableProtocol.swift; sourceTree = "<group>"; };
 		0827983B2B88328B00ACC723 /* BoxOfficeUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeUseCaseProtocol.swift; sourceTree = "<group>"; };
 		0827983D2B88339900ACC723 /* DependencyEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyEnvironment.swift; sourceTree = "<group>"; };
 		0827983F2B8833F000ACC723 /* HTTPMethodType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethodType.swift; sourceTree = "<group>"; };
+		082798462B884F7E00ACC723 /* DEBUG-Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DEBUG-Keys.plist"; sourceTree = "<group>"; };
+		082798492B884F9500ACC723 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		08AB8E8E2B7F479D00564AC5 /* KeyEnvironmentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyEnvironmentHandler.swift; sourceTree = "<group>"; };
 		08DCFED62B7C5722002E22EA /* BoxOfficeSample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BoxOfficeSample.json; sourceTree = "<group>"; };
 		08DCFEDC2B7C59D7002E22EA /* BoxOfficeUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,14 +163,6 @@
 			path = Interfaces;
 			sourceTree = "<group>";
 		};
-		082798302B882B1C00ACC723 /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				082798312B882B1C00ACC723 /* DEBUG-Keys.plist */,
-			);
-			path = Private;
-			sourceTree = "<group>";
-		};
 		082798332B882B3600ACC723 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +193,22 @@
 				C76965F22B86ECBD00EF8F87 /* UseCase.swift */,
 			);
 			path = Implements;
+			sourceTree = "<group>";
+		};
+		082798452B884F7E00ACC723 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				082798462B884F7E00ACC723 /* DEBUG-Keys.plist */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		082798482B884F8B00ACC723 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				082798492B884F9500ACC723 /* DateExtension.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		08AB8E772B7F249600564AC5 /* App */ = {
@@ -302,12 +312,13 @@
 		63DF20ED2970E1A0005DF7D1 /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
+				082798482B884F8B00ACC723 /* Common */,
 				08AB8E772B7F249600564AC5 /* App */,
 				C76965DC2B86E66500EF8F87 /* Presentation */,
 				C76965DD2B86E68B00EF8F87 /* Domain */,
 				C76965DE2B86E69900EF8F87 /* Data */,
 				08AB8E7D2B7F288500564AC5 /* Resource */,
-				082798302B882B1C00ACC723 /* Private */,
+				082798452B884F7E00ACC723 /* Private */,
 			);
 			path = BoxOffice;
 			sourceTree = "<group>";
@@ -558,7 +569,7 @@
 			files = (
 				63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */,
 				63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */,
-				082798322B882B1D00ACC723 /* DEBUG-Keys.plist in Resources */,
+				082798472B884F7E00ACC723 /* DEBUG-Keys.plist in Resources */,
 				08DCFED72B7C5722002E22EA /* BoxOfficeSample.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -584,6 +595,7 @@
 				08AB8E8F2B7F479D00564AC5 /* KeyEnvironmentHandler.swift in Sources */,
 				082798222B87757100ACC723 /* BaseURLManager.swift in Sources */,
 				0827983E2B88339900ACC723 /* DependencyEnvironment.swift in Sources */,
+				0827984A2B884F9500ACC723 /* DateExtension.swift in Sources */,
 				C7A1E76A2B8831AA00F9AB6B /* DomainError.swift in Sources */,
 				C76965F12B86ECB800EF8F87 /* Entity.swift in Sources */,
 				082798172B87747300ACC723 /* BaseURLType.swift in Sources */,
