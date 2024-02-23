@@ -19,5 +19,16 @@ final class BoxOfficeUseCase: BoxOfficeUseCaseProtocol {
             return .failure(DomainError(from: networkError))
         }
     }
+
+    func fetchDetailMovieData() async -> Result<MovieDetailInfo, DomainError> {
+        let result = await moviesRepository.requestDetailMovieData()
+        switch result {
+        case .success(let data):
+            let movies = data.movieInfoResult.movieInfo.toEntity()
+            return .success(movies)
+        case .failure(let networkError):
+            return .failure(DomainError(from: networkError))
+        }
+    }
 }
 

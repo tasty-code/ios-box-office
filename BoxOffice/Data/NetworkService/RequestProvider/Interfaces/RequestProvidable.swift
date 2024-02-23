@@ -3,7 +3,7 @@ import Foundation
 
 protocol RequestProvidable {
     var baseURL: BaseURLType { get }
-    func makeURLRequest() -> URLRequest?
+    func makeURLRequest(for boxOfficeType: URLProvider) -> URLRequest?
 }
 
 extension RequestProvidable {

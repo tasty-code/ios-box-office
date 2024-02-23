@@ -19,6 +19,7 @@ final class BoxOfficeCollectionViewController: UIViewController {
         
         Task {
             await fetchBoxOfficeData()
+            await fetchDetailMovieData()
         }
 
     }
@@ -30,6 +31,18 @@ extension BoxOfficeCollectionViewController {
         let result = await usecase.fetchBoxOfficeData()
         switch result {
         case .success(let data):
+            print("일일 박스오피스 조회")
+            print(data)
+        case .failure(let error):
+            presentError(error)
+        }
+    }
+    
+    func fetchDetailMovieData() async {
+        let result = await usecase.fetchDetailMovieData()
+        switch result {
+        case .success(let data):
+            print("영화 개별 상세 조회")
             print(data)
         case .failure(let error):
             presentError(error)
