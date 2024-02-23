@@ -129,7 +129,7 @@ extension BoxOfficeCollectionViewCell {
     }
     
     private func addRankChangedAmountStackView(image: UIImage?, tintColor: UIColor, text: String) {
-        removeRankStackViewArrangedSubviews()
+        rankStatusLabel.removeFromSuperview()
         
         rankChangedIndicatorImageView.image = image
         rankChangedIndicatorImageView.tintColor = tintColor
@@ -138,26 +138,14 @@ extension BoxOfficeCollectionViewCell {
         rankChangedAmountStackView.addArrangedSubview(rankChangedIndicatorImageView)
         rankChangedAmountStackView.addArrangedSubview(rankChangedAmountLabel)
         
-        rankStackView.addArrangedSubview(rankLabel)
         rankStackView.addArrangedSubview(rankChangedAmountStackView)
     }
     
     private func addRankStatusLabel(text: String) {
-        removeRankStackViewArrangedSubviews()
-        
+        rankChangedAmountStackView.removeFromSuperview()
         rankStatusLabel.text = text
-        
-        rankStackView.addArrangedSubview(rankLabel)
         rankStackView.addArrangedSubview(rankStatusLabel)
     }
-    
-    private func removeRankStackViewArrangedSubviews() {
-        rankStackView.arrangedSubviews.forEach { view in
-            rankStackView.removeArrangedSubview(view)
-            view.removeFromSuperview()
-        }
-    }
-    
 }
 
 extension BoxOfficeCollectionViewCell {
