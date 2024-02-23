@@ -87,6 +87,7 @@ extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOfficeList: DomainConv
       throw DTOError.cannotConvertToDomain
     }
     return .init(
+      index: self.index,
       rank: rank,
       rankChange: .init(value: rankChange),
       title: self.movieName,

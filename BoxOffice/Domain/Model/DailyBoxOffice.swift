@@ -5,7 +5,20 @@ struct DailyBoxOfficeResponse {
   let date: Date
   let list: [DailyBoxOfficeItem]
   
-  struct DailyBoxOfficeItem {
+  struct DailyBoxOfficeItem: Hashable {
+    static func == (
+      lhs: DailyBoxOfficeResponse.DailyBoxOfficeItem,
+      rhs: DailyBoxOfficeResponse.DailyBoxOfficeItem
+    ) -> Bool {
+      return lhs.index == rhs.index && lhs.rank == rhs.rank
+    }
+    
+    func hash(into hasher: inout Hasher) {
+      hasher.combine(index)
+      hasher.combine(rank)
+    }
+    
+    let index: String
     let rank: Int
     let rankChange: RankChange
     let title: String
