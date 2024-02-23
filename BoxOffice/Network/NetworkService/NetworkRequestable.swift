@@ -1,5 +1,5 @@
 import Foundation
 
 protocol NetworkRequestable {
-  func requestData(request: URLRequestConvertible) async -> Result<Data, NetworkServiceError>
+  func requestData(builder: NetworkRequestBuilderProtocol) async -> Result<Data, NetworkServiceError>
 }
