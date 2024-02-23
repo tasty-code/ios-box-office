@@ -10,7 +10,8 @@ import UIKit
 
 extension UIViewController {
     func alert(with error: Error) {
-        let message = error.localizedDescription
+        let networkError = error as? NetworkError
+        let message = networkError != nil ? networkError?.errorDescription : error.localizedDescription
         let alertViewController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "확인", style: .default)
         alertViewController.addAction(action)
