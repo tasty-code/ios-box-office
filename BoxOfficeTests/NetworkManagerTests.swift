@@ -17,32 +17,44 @@ final class NetworkManagerTests: XCTestCase {
         sut = NetworkManager(urlSession: mockSession)
     }
     
-    func test_makeRequest메서드는_URLRequest를_반환한다() {
-        // given
-        let input = "20120419"
-        
-        // when
-        let request = sut?.makeRequest(.dailyBoxOffice(queryValue: input))
-        
-        // then
-        XCTAssertNotNil(request)
-    }
-    
-    func test_request메서드는_parsing된데이터를_반환한다() {
+    func test_makeRequest메서드는_기본적으로GET메서드를_반환한다() {
         // given
         let input: KoreanFilmCouncilURL = .dailyBoxOffice(queryValue: "20120419")
+        let expectation = "GET"
+        
+        // when
+        let request = sut?.makeRequest(input)
+        
+        // then
+        XCTAssertEqual(request?.httpMethod, expectation)
+    }
+    
+    func test_makeRequest메서드는_알맞은URL을_반환한다() {
+        // given
+        let input: KoreanFilmCouncilURL = .dailyBoxOffice(queryValue: "20120419")
+        let expectation = "searchDailyBoxOfficeList.json"
+        
+        // when
+        let request = sut?.makeRequest(input)
+        
+        // then
+        XCTAssertEqual(request?.url?.lastPathComponent, expectation)
+    }
+    
+    func test_request메서드는_parsing된데이터를_반환한다() async {
+        // given
+        let input: KoreanFilmCouncilURL = .dailyBoxOffice(queryValue: "20220105")
         guard let request = sut?.makeRequest(input) else {
-            return
+            return XCTFail()
         }
         
         // when
-        Task {
-            let result = await sut?.request(request, into: input, errorHandler: { networkError in
-                print(networkError)
-            })
-            
-            // then
-            XCTAssertNotNil(result)
-        }
+        let result = await sut?.request(request, into: input, errorHandler: { networkError in
+            XCTFail()
+        })
+        
+        // then
+        XCTAssertNotNil(result)
+        
     }
 }
