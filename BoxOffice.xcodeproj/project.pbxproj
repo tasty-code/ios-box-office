@@ -145,15 +145,21 @@
 				F44E98492B7B96F6003F61EF /* App */,
 				F44E984C2B7B973A003F61EF /* Supportings */,
 				F44E985F2B7C7A70003F61EF /* Resource */,
-				F44E984A2B7B970F003F61EF /* ViewController */,
 				F44E98682B7C7C6C003F61EF /* FileProvider */,
 				F44E98972B8267B3003F61EF /* Network */,
 				F44E989C2B8271B8003F61EF /* Data */,
 				F4CC09A52B87C79E00922A35 /* Domain */,
 				F4CC09B32B87E3AA00922A35 /* Presentation */,
-				894DE2F22B88343E00ED865A /* BoxOfficeCollectionViewCell.swift */,
 			);
 			path = BoxOffice;
+			sourceTree = "<group>";
+		};
+		894DE2F42B88876F00ED865A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				894DE2F22B88343E00ED865A /* BoxOfficeCollectionViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		F44E98492B7B96F6003F61EF /* App */ = {
@@ -363,6 +369,8 @@
 			isa = PBXGroup;
 			children = (
 				F4CC09B22B87E3A200922A35 /* ViewModel */,
+				F44E984A2B7B970F003F61EF /* ViewController */,
+				894DE2F42B88876F00ED865A /* View */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";

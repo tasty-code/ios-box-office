@@ -1,14 +1,7 @@
-//
-//  BoxOfficeCollectionViewCell.swift
-//  BoxOffice
-//
-//  Created by 이보한 on 2024/2/22.
-//
-
 import UIKit
 
-final class BoxOfficeCollectionViewCell: UICollectionViewListCell {
-  private var boxOfficeListItem: DailyBoxOfficeResponse.DailyBoxOfficeItem? = nil
+final class BoxOfficeCollectionViewCell: UICollectionViewCell {
+  private var boxOfficeListItem: DailyBoxOfficeResponse.DailyBoxOfficeItem?
   
   private var rankLabel: UILabel = {
     let label = UILabel()
