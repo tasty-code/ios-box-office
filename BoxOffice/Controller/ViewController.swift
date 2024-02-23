@@ -8,9 +8,14 @@
 import UIKit
 
 final class ViewController: UIViewController {
-    private let boxOfficeListView: BoxOfficeListView = BoxOfficeListView()
     private let movieManager: MovieManager
-    
+    private let boxOfficeListView: BoxOfficeListView = {
+        let config = UICollectionLayoutListConfiguration(appearance: .plain)
+        let layout = UICollectionViewCompositionalLayout.list(using: config)
+        let view = BoxOfficeListView(frame: .zero, collectionViewLayout: layout)
+        return view
+    }()
+
     init(movieManager: MovieManager) {
         self.movieManager = movieManager
         super.init(nibName: nil, bundle: nil)
@@ -23,7 +28,7 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = boxOfficeListView
-        boxOfficeListView.collectionView.dataSource = self
+        boxOfficeListView.dataSource = self
         setupBoxOfficeData()
         configureNavigation()
     }
@@ -63,16 +68,19 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard 
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionCell.identifier, for: indexPath) as? MovieCollectionCell
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: MovieCollectionCell.identifier,
+                for: indexPath
+            ) as? MovieCollectionCell
         else {
             return UICollectionViewListCell()
         }
         guard
-            let MovieList = movieManager.dailyBoxOfficeData?.boxOfficeResult.dailyBoxOfficeList
+            let movieList = movieManager.dailyBoxOfficeData
         else {
             return UICollectionViewListCell()
         }
-        let movieResult = MovieList[indexPath.row]
+        let movieResult = movieList[indexPath.row]
         cell.configure(result: movieResult)
         cell.accessories = [.disclosureIndicator()]
         return cell
@@ -80,7 +88,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func reloadCollectionListData() {
         DispatchQueue.main.async {
-            self.boxOfficeListView.collectionView.reloadData()
+            self.boxOfficeListView.indicatorView.stopAnimating()
+            self.boxOfficeListView.reloadData()
         }
     }
 }
