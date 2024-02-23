@@ -34,7 +34,7 @@ class BoxOfficeCollectionViewCell: UICollectionViewListCell {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
         label.textAlignment = .center
-        label.textColor = .red
+        label.textColor = .gray
         return label
     }()
     
@@ -106,6 +106,7 @@ extension BoxOfficeCollectionViewCell {
         switch rankStatus {
         case .new:
             addRankStatusLabel(text: "신작")
+            rankStatusLabel.textColor = .systemRed
         case .old:
             applyRankChangedAmountIntoRankStackView(rankChangedAmount: rankChangedAmount)
         }
