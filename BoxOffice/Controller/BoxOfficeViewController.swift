@@ -13,7 +13,7 @@ final class BoxOfficeViewController: UIViewController {
     
     private var dataSource: [DailyBoxOffice.BoxOfficeMovie] = [] {
         didSet {
-            boxOfficeView.boxOfficeCollectionView.reloadData()
+            boxOfficeView.reloadData()
         }
     }
     private let networkManager: NetworkManager
@@ -36,8 +36,8 @@ final class BoxOfficeViewController: UIViewController {
         }
         view = boxOfficeView
         view.backgroundColor = .white
-        configureBoxOfficeCollectionView()
-       
+        boxOfficeView.setBoxOfficeCollectionViewProperties(self, loadingIndicatorView: loadingIndicatorView)
+        boxOfficeView.configureRefreshControl(self)
     }
     
     @objc func handleRefreshControl() {
@@ -54,25 +54,10 @@ extension BoxOfficeViewController {
             let data: BoxOfficeResult = try await self.networkManager.request(url)
             self.loadingIndicatorView.stopAnimating()
             dataSource = data.converted()
-            self.boxOfficeView.boxOfficeCollectionView.refreshControl?.endRefreshing()
+            self.boxOfficeView.endRefreshControl()
         } catch {
             self.alert(with: error)
         }
-    }
-    
-    private func configureRefreshControl() {
-        boxOfficeView.boxOfficeCollectionView.refreshControl = UIRefreshControl()
-        boxOfficeView.boxOfficeCollectionView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
-    }
-    
-    private func configureBoxOfficeCollectionView() {
-        let boxOfficeCollectionView = boxOfficeView.boxOfficeCollectionView
-        boxOfficeCollectionView.backgroundView = loadingIndicatorView
-        loadingIndicatorView.startAnimating()
-        boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: "BoxOfficeCollectionViewCell")
-        boxOfficeCollectionView.dataSource = self
-        boxOfficeCollectionView.delegate = self
-        configureRefreshControl()
     }
 }
 

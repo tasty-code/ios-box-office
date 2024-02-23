@@ -35,6 +35,29 @@ class BoxOfficeView: UIView {
 }
 
 extension BoxOfficeView {
+    func setBoxOfficeCollectionViewProperties(_ viewController: BoxOfficeViewController, loadingIndicatorView: UIActivityIndicatorView) {
+        boxOfficeCollectionView.backgroundView = loadingIndicatorView
+        loadingIndicatorView.startAnimating()
+        boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: "BoxOfficeCollectionViewCell")
+        boxOfficeCollectionView.dataSource = viewController
+        boxOfficeCollectionView.delegate = viewController
+    }
+    
+    func configureRefreshControl(_ viewController: BoxOfficeViewController) {
+        boxOfficeCollectionView.refreshControl = UIRefreshControl()
+        boxOfficeCollectionView.refreshControl?.addTarget(viewController, action: #selector(viewController.handleRefreshControl), for: .valueChanged)
+    }
+    
+    func reloadData() {
+        boxOfficeCollectionView.reloadData()
+    }
+    
+    func endRefreshControl() {
+        boxOfficeCollectionView.refreshControl?.endRefreshing()
+    }
+}
+
+extension BoxOfficeView {
     private func setupSubview() {
         addSubview(navigationBar)
         addSubview(boxOfficeCollectionView)
