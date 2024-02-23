@@ -8,8 +8,8 @@
 import Foundation
 
 enum KoreanFilmCouncilURL {
-    case dailyBoxOffice(queryValue: String)
-    case movieDetailInformation(queryValue: String)
+    case dailyBoxOffice(targetDate: String)
+    case movieDetailInformation(movieCode: String)
     
     var url: String {
         let apiKey: String = {
