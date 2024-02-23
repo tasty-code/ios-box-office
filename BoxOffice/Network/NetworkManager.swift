@@ -14,16 +14,10 @@ struct NetworkManager {
         self.urlSession = urlSession
     }
     
-    func makeRequest(_ url: String, httpMethod: String = "GET") throws -> URLRequest? {
-        guard let URL = URL(string: url) else {
+    func request<T: Decodable>(_ url: String, httpMethod: HTTPMethod = .get) async throws -> T {
+        guard let request = makeRequest(url, httpMethod: httpMethod) else {
             throw NetworkError.invalidURL
         }
-        var request = URLRequest(url: URL)
-        request.httpMethod = httpMethod
-        return request
-    }
-    
-    func request<T: Decodable>(_ request: URLRequest) async throws -> T? {
         let (data, response) = try await urlSession.data(for: request, delegate: nil)
         guard let httpResponse = response as? HTTPURLResponse else {
             throw NetworkError.invalidURLResponse
@@ -35,5 +29,14 @@ struct NetworkManager {
         default:
             throw NetworkError.invalidStatusCode(httpResponse.statusCode)
         }
+    }
+
+    private func makeRequest(_ url: String, httpMethod: HTTPMethod = .get) -> URLRequest? {
+        guard let URL = URL(string: url) else {
+            return nil
+        }
+        var request = URLRequest(url: URL)
+        request.httpMethod = httpMethod.rawValue
+        return request
     }
 }

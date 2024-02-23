@@ -31,7 +31,9 @@ final class BoxOfficeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadDailyBoxOfficeData()
+        Task {
+            await loadDailyBoxOfficeData()
+        }
         boxOfficeView.boxOfficeCollectionView.backgroundView = loadingIndicatorView
         loadingIndicatorView.startAnimating()
         view = boxOfficeView
@@ -44,26 +46,15 @@ final class BoxOfficeViewController: UIViewController {
 }
 
 extension BoxOfficeViewController {
-    private func loadDailyBoxOfficeData() {
-        Task {
-            do {
-                let url: String = KoreanFilmCouncilURL.dailyBoxOffice(targetDate: Date().getYesterday("yyyyMMdd")).url
-                guard let request = try self.networkManager.makeRequest(url) else {
-                    return
-                }
-                let data: BoxOfficeResult? = try await self.networkManager.request(request)
-                guard let result = data else {
-                    return
-                }
-                self.loadingIndicatorView.stopAnimating()
-                dataSource = result.converted()
-                self.boxOfficeView.boxOfficeCollectionView.refreshControl?.endRefreshing()
-            } catch {
-                DispatchQueue.main.async {
-                    self.alert(with: error)
-                }
-            }
-            
+    private func loadDailyBoxOfficeData() async {
+        do {
+            let url: String = KoreanFilmCouncilURL.dailyBoxOffice(targetDate: Date().getYesterday("yyyyMMdd")).url
+            let data: BoxOfficeResult = try await self.networkManager.request(url)
+            self.loadingIndicatorView.stopAnimating()
+            dataSource = data.converted()
+            self.boxOfficeView.boxOfficeCollectionView.refreshControl?.endRefreshing()
+        } catch {
+            self.alert(with: error)
         }
     }
     
@@ -73,7 +64,9 @@ extension BoxOfficeViewController {
     }
     
     @objc func handleRefreshControl() {
-        loadDailyBoxOfficeData()
+        Task {
+            await loadDailyBoxOfficeData()
+        }
     }
 }
 
