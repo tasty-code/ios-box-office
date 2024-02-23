@@ -1,6 +1,7 @@
 
 import UIKit
 
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
@@ -9,11 +10,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let boxOfficeCollectionViewController = BoxOfficeCollectionViewController()
+        configureURL()
+        
+        let mainViewController = DependencyEnvironment.shared.makeBoxOfficeCollectionViewController()
         
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
-        window?.rootViewController = boxOfficeCollectionViewController
+        window?.rootViewController = mainViewController
+    }
+    
+    private func configureURL() {
+        let url = URL(string: "https://www.kobis.or.kr/kobisopenapi/webservice/rest")!
+        BaseURLManager.shared.configure(url, for: .kobis)
     }
 }
-

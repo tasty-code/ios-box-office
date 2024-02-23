@@ -14,11 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-    
-    private func configureURL() {
-        let url = URL(string: "https://www.kobis.or.kr/kobisopenapi/webservice/rest")!
-        BaseURLManager.shared.configure(url, for: .kobis)
-    }
 }
 
 /// 배포/디버깅 환경에 따라 키값 글로벌 선언
