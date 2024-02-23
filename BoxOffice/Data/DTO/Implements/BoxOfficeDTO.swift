@@ -1,6 +1,6 @@
 
 // MARK: - BoxOfficeData
-struct BoxOfficeDataDTO: Decodable {
+struct BoxOfficeDTO: Decodable {
     let boxOfficeResult: BoxOfficeResultDTO
 }
 
@@ -45,7 +45,6 @@ enum RankOldAndNewDTO: String, Decodable {
     case new = "NEW"
     case old = "OLD"
 }
-
 
 extension DailyBoxOfficeDTO: Mappable {
     func toEntity() -> BoxOfficeMovie {

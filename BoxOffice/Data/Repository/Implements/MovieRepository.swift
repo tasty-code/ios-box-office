@@ -13,14 +13,14 @@ final class MovieRepository: MovieRepositoryProtocol {
         self.decoder = decoder
     }
 
-    func getBoxofficeData() async -> Result<BoxOfficeDataDTO, NetworkError> {
+    func getBoxofficeData() async -> Result<BoxOfficeDTO, NetworkError> {
         guard let request = requestProvider.makeURLRequest() else { return .failure(.urlError) }
         let result = await sessionProvider.loadAPIRequest(using: request)
     
         switch result {
         case .success(let networkResponse):
             guard let data = networkResponse.data else { return .failure(.notFound)}
-            let decodeResult: Result<BoxOfficeDataDTO, NetworkError> = decoder.decode(data)
+            let decodeResult: Result<BoxOfficeDTO, NetworkError> = decoder.decode(data)
             return decodeResult
         case .failure(let networkError):
             return .failure(networkError)

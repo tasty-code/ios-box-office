@@ -42,7 +42,8 @@
 		C7A1E76A2B8831AA00F9AB6B /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A1E7692B8831AA00F9AB6B /* DomainError.swift */; };
 		C7A1E76D2B883AAC00F9AB6B /* StubJSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A1E76C2B883AAC00F9AB6B /* StubJSONData.swift */; };
 		C7A1E76F2B883B1200F9AB6B /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A1E76E2B883B1200F9AB6B /* MockURLProtocol.swift */; };
-		C7C8D3332B7C5EA9009DE42F /* BoxOfficeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C8D3322B7C5EA9009DE42F /* BoxOfficeData.swift */; };
+		C7A1E7732B883CE300F9AB6B /* DetailMovieInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A1E7722B883CE300F9AB6B /* DetailMovieInfoDTO.swift */; };
+		C7C8D3332B7C5EA9009DE42F /* BoxOfficeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C8D3322B7C5EA9009DE42F /* BoxOfficeDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,7 +95,8 @@
 		C7A1E7692B8831AA00F9AB6B /* DomainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
 		C7A1E76C2B883AAC00F9AB6B /* StubJSONData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubJSONData.swift; sourceTree = "<group>"; };
 		C7A1E76E2B883B1200F9AB6B /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
-		C7C8D3322B7C5EA9009DE42F /* BoxOfficeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeData.swift; sourceTree = "<group>"; };
+		C7A1E7722B883CE300F9AB6B /* DetailMovieInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieInfoDTO.swift; sourceTree = "<group>"; };
+		C7C8D3322B7C5EA9009DE42F /* BoxOfficeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,8 +215,8 @@
 		08AB8E782B7F24AB00564AC5 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				C7C8D3322B7C5EA9009DE42F /* BoxOfficeData.swift */,
-				082798372B88311400ACC723 /* MappableProtocol.swift */,
+				C7A1E7702B883C0400F9AB6B /* Interfaces */,
+				C7A1E7712B883C0B00F9AB6B /* Implements */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -449,6 +451,23 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
+		C7A1E7702B883C0400F9AB6B /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				082798372B88311400ACC723 /* MappableProtocol.swift */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		C7A1E7712B883C0B00F9AB6B /* Implements */ = {
+			isa = PBXGroup;
+			children = (
+				C7C8D3322B7C5EA9009DE42F /* BoxOfficeDTO.swift */,
+				C7A1E7722B883CE300F9AB6B /* DetailMovieInfoDTO.swift */,
+			);
+			path = Implements;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -561,6 +580,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7A1E7732B883CE300F9AB6B /* DetailMovieInfoDTO.swift in Sources */,
 				08AB8E8F2B7F479D00564AC5 /* KeyEnvironmentHandler.swift in Sources */,
 				082798222B87757100ACC723 /* BaseURLManager.swift in Sources */,
 				0827983E2B88339900ACC723 /* DependencyEnvironment.swift in Sources */,
@@ -572,7 +592,7 @@
 				C77ADABA2B7C76B40069AE0F /* JsonDecoder.swift in Sources */,
 				082798382B88311400ACC723 /* MappableProtocol.swift in Sources */,
 				C76965F92B86EE7200EF8F87 /* SessionProvidable.swift in Sources */,
-				C7C8D3332B7C5EA9009DE42F /* BoxOfficeData.swift in Sources */,
+				C7C8D3332B7C5EA9009DE42F /* BoxOfficeDTO.swift in Sources */,
 				C76965EA2B86E83D00EF8F87 /* SessionProvider.swift in Sources */,
 				C76965E62B86E83100EF8F87 /* NetworkResponse.swift in Sources */,
 				082798042B86ED8400ACC723 /* RequestProvidable.swift in Sources */,
