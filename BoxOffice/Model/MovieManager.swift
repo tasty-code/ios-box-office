@@ -8,10 +8,11 @@
 import Foundation
 
 final class MovieManager {
-    var dailyBoxOfficeData: BoxOffice?
+    var boxOfficeData: BoxOffice?
     var movieDetailData: MovieInfomationDetail?
+    var dailyBoxOfficeData: [DailyBoxOfficeList]?
     var movieCount: Int {
-        self.dailyBoxOfficeData?.boxOfficeResult.dailyBoxOfficeList.count ?? 0
+        self.dailyBoxOfficeData?.count ?? 0
     }
 }
 
@@ -27,7 +28,7 @@ extension MovieManager {
             switch result {
             case .success(let movies):
                 completion(.success(movies))
-                self.dailyBoxOfficeData = movies
+                self.dailyBoxOfficeData = movies.boxOfficeResult.dailyBoxOfficeList
             case .failure(let error):
                 completion(.failure(error))
             }
