@@ -29,6 +29,7 @@
 		9BEE61C32B8606DE00CA364A /* DailyBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEE61C22B8606DE00CA364A /* DailyBoxOffice.swift */; };
 		9BEE61C52B860B3F00CA364A /* NetworkDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEE61C42B860B3F00CA364A /* NetworkDataProtocol.swift */; };
 		9BEE61C72B86EB8700CA364A /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEE61C62B86EB8700CA364A /* DateFormatter.swift */; };
+		9BF6D9B92B88754200A35DB8 /* sample_searchMovieInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A67B2B82B7F38DD002C5897 /* sample_searchMovieInfo.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -331,6 +332,7 @@
 			files = (
 				63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */,
 				63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */,
+				9BF6D9B92B88754200A35DB8 /* sample_searchMovieInfo.json in Resources */,
 				9BB8EAB42B7B0D5D00B33116 /* sample_searchDailyBoxOfficeList.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
