@@ -7,18 +7,19 @@
 
 import UIKit
 
-final class BoxOfficeListView: UIView {
-    let collectionView: UICollectionView = {
-        let config = UICollectionLayoutListConfiguration(appearance: .plain)
-        let layout = UICollectionViewCompositionalLayout.list(using: config)
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        return view
+final class BoxOfficeListView: UICollectionView {
+    let indicatorView = UIActivityIndicatorView()
+    private lazy var refresh: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        let action = UIAction { _ in
+            self.refreshCollectionView()
+        }
+        refreshControl.addAction(action, for: .valueChanged)
+        return refreshControl
     }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSubview()
-        setupConstraints()
+    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+        super.init(frame: frame, collectionViewLayout: layout)
+        setupIndicatorView()
         collectionViewRegister()
     }
     
@@ -29,18 +30,19 @@ final class BoxOfficeListView: UIView {
 
 private extension BoxOfficeListView {
     func collectionViewRegister() {
-        collectionView.register(MovieCollectionCell.self, forCellWithReuseIdentifier: MovieCollectionCell.identifier)
+        self.register(MovieCollectionCell.self, forCellWithReuseIdentifier: MovieCollectionCell.identifier)
+        self.refreshControl = refresh
     }
     
-    func addSubview() {
-        addSubview(collectionView)
+    func setupIndicatorView() {
+        self.backgroundView = indicatorView
+        indicatorView.startAnimating()
     }
     
-    func setupConstraints() {
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    func refreshCollectionView() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.reloadData()
+            self.refreshControl?.endRefreshing()
+        }
     }
 }
