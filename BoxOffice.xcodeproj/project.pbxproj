@@ -41,6 +41,7 @@
 		C7A1E7682B882C3A00F9AB6B /* MovieRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A1E7672B882C3A00F9AB6B /* MovieRepositoryProtocol.swift */; };
 		C7A1E76A2B8831AA00F9AB6B /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A1E7692B8831AA00F9AB6B /* DomainError.swift */; };
 		C7A1E76D2B883AAC00F9AB6B /* StubJSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A1E76C2B883AAC00F9AB6B /* StubJSONData.swift */; };
+		C7A1E76F2B883B1200F9AB6B /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A1E76E2B883B1200F9AB6B /* MockURLProtocol.swift */; };
 		C7C8D3332B7C5EA9009DE42F /* BoxOfficeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C8D3322B7C5EA9009DE42F /* BoxOfficeData.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,7 @@
 		C7A1E7672B882C3A00F9AB6B /* MovieRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepositoryProtocol.swift; sourceTree = "<group>"; };
 		C7A1E7692B8831AA00F9AB6B /* DomainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
 		C7A1E76C2B883AAC00F9AB6B /* StubJSONData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubJSONData.swift; sourceTree = "<group>"; };
+		C7A1E76E2B883B1200F9AB6B /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		C7C8D3322B7C5EA9009DE42F /* BoxOfficeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -272,6 +274,7 @@
 			children = (
 				08DCFEDE2B7C59D7002E22EA /* BoxOfficeUnitTests.swift */,
 				C7A1E76C2B883AAC00F9AB6B /* StubJSONData.swift */,
+				C7A1E76E2B883B1200F9AB6B /* MockURLProtocol.swift */,
 			);
 			path = BoxOfficeUnitTests;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7A1E76F2B883B1200F9AB6B /* MockURLProtocol.swift in Sources */,
 				08DCFEDF2B7C59D7002E22EA /* BoxOfficeUnitTests.swift in Sources */,
 				C7A1E76D2B883AAC00F9AB6B /* StubJSONData.swift in Sources */,
 			);
