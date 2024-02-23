@@ -1,7 +1,7 @@
 
 import Foundation
 
-final class sessionProvider: SessionProvidable {
+final class SessionProvider: SessionProvidable {
     
     private let session: URLSession
     

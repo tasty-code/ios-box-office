@@ -3,13 +3,13 @@ import Foundation
 
 final class MovieRepository: MovieRepositoryProtocol {
     
-    private let requestProvider: RequestProvider
+    private let requestProvider: RequestProvidable
     private let sessionProvider: SessionProvidable
     private let decoder: URLDecodeProtocol
     
-    init(request: RequestProvider, service: SessionProvidable, decoder: URLDecodeProtocol) {
+    init(request: RequestProvidable, session: SessionProvidable, decoder: URLDecodeProtocol) {
         self.requestProvider = request
-        self.sessionProvider = service
+        self.sessionProvider = session
         self.decoder = decoder
     }
 
