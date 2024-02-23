@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieInformationResult: NetworkDataProtocol {
+struct MovieInformationResult: Decodable {
     let movieInformationResult: MovieInformationDetail
     
     private enum CodingKeys: String, CodingKey {

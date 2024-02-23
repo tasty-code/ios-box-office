@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BoxOfficeResult: NetworkDataProtocol {
+struct BoxOfficeResult: Decodable {
     let boxOfficeResult: BoxOfficeDetail
     
     func converted() -> [DailyBoxOffice.BoxOfficeMovie] {
