@@ -71,6 +71,8 @@
 		952AD2C92B84966200598680 /* Configuration.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Configuration.xcconfig; sourceTree = "<group>"; };
 		952AD2CC2B84A01300598680 /* BoxOfficeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeService.swift; sourceTree = "<group>"; };
 		952AD2CE2B84A31500598680 /* BoxOfficeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeAPI.swift; sourceTree = "<group>"; };
+		952AD2F12B88D9E900598680 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		952AD2F32B88D9FF00598680 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		95AC03C02B7B0E4700173FB5 /* BoxOfficeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95AC03C22B7B0E4700173FB5 /* BoxOfficeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeTests.swift; sourceTree = "<group>"; };
 		95AC03CE2B7B21F200173FB5 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -98,7 +100,6 @@
 		63DF20E22970E1A0005DF7D1 = {
 			isa = PBXGroup;
 			children = (
-				952AD2C92B84966200598680 /* Configuration.xcconfig */,
 				95AC03CE2B7B21F200173FB5 /* .swiftlint.yml */,
 				63DF20ED2970E1A0005DF7D1 /* BoxOffice */,
 				95AC03C12B7B0E4700173FB5 /* BoxOfficeTests */,
@@ -118,10 +119,12 @@
 		63DF20ED2970E1A0005DF7D1 /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
-				777338862B84960A00143672 /* Extension */,
-				952AD2C22B8487EE00598680 /* Network */,
 				95AC03D02B7B23A800173FB5 /* App */,
+				952AD2EB2B88D36D00598680 /* Util */,
+				952AD2EF2B88D43500598680 /* Data */,
+				952AD2EE2B88D42F00598680 /* Domain */,
 				772025652B7C7D6E00439CFD /* Presentation */,
+				952AD2F02B88D45700598680 /* Infrastructure */,
 				772025632B7C7D4600439CFD /* Resources */,
 			);
 			path = BoxOffice;
@@ -130,6 +133,7 @@
 		772025632B7C7D4600439CFD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				952AD2C92B84966200598680 /* Configuration.xcconfig */,
 				63DF20F72970E1A1005DF7D1 /* Assets.xcassets */,
 				63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */,
 				63DF20FC2970E1A1005DF7D1 /* Info.plist */,
@@ -206,6 +210,38 @@
 				777338792B848BBD00143672 /* Foundation */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		952AD2EB2B88D36D00598680 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				777338862B84960A00143672 /* Extension */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		952AD2EE2B88D42F00598680 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				952AD2F32B88D9FF00598680 /* .gitkeep */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		952AD2EF2B88D43500598680 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				952AD2F12B88D9E900598680 /* .gitkeep */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		952AD2F02B88D45700598680 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				952AD2C22B8487EE00598680 /* Network */,
+			);
+			path = Infrastructure;
 			sourceTree = "<group>";
 		};
 		95AC03C12B7B0E4700173FB5 /* BoxOfficeTests */ = {
