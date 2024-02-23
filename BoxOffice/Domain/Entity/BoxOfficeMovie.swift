@@ -8,3 +8,4 @@ struct BoxOfficeMovie {
     let rank: String
     let salesAmount: String
 }
+

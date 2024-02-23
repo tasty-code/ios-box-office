@@ -130,3 +130,10 @@ struct Staff: Decodable {
     }
 }
 
+// MARK: - Mapping
+extension MovieInfo: Mappable {
+    func toEntity() -> MovieDetailInfo {
+        return MovieDetailInfo(movieName: movieName,
+                               openDate: openDate)
+    }
+}
