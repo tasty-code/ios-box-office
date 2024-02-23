@@ -22,10 +22,7 @@ final class BoxOfficeCollectionViewController: UIViewController {
         }
 
     }
-    
 }
-
-
 
 extension BoxOfficeCollectionViewController {
     

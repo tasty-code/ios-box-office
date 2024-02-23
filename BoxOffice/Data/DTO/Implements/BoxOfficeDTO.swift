@@ -51,7 +51,8 @@ extension DailyBoxOfficeDTO: Mappable {
         return BoxOfficeMovie(name: movieName,
                      releaseDate: openDate,
                      rank: rank,
-                     salesAmount: salesAmount)
+                     salesAmount: salesAmount,
+                     movieCode: movieCode)
     }
 }
 

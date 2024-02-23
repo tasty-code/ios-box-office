@@ -7,5 +7,6 @@ struct BoxOfficeMovie {
     let releaseDate: String
     let rank: String
     let salesAmount: String
+    let movieCode: String
 }
 
