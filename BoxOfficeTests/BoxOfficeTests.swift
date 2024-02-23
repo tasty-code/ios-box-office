@@ -94,7 +94,7 @@ final class BoxOfficeTests: XCTestCase {
         else {
             return
         }
-        let urlString = MovieURL.makeDailyBoxOfficeURL(date: yesterday.toString())
+        let urlString = MovieURL.makeDailyBoxOfficeURL(date: yesterday.toString(format: "yyyyMMdd"))
         
         // when
         let expectation = XCTestExpectation(description: "데이터 패치 중...")
