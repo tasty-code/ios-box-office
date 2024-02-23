@@ -34,7 +34,12 @@ struct MockURLSession: URLSessionProtocol {
         do {
             let sampleUrl = Bundle.main.url(forResource: fileURL, withExtension: "json")
             let data = try Data(contentsOf: sampleUrl!)
-            let url: String = KoreanFilmCouncilURL.movieDetailInformation(queryValue: queryValue).url
+            let url: String
+            if fileURL == "searchDailyBoxOfficeList" {
+                url = KoreanFilmCouncilURL.dailyBoxOffice(targetDate: "20220105").url
+            } else {
+                url = KoreanFilmCouncilURL.movieDetailInformation(movieCode: queryValue).url
+            }
             let response = HTTPURLResponse(url: URL(string: url)!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             return (data, response)
         } catch {
