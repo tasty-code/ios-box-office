@@ -1,7 +1,7 @@
 
 import Foundation
 
-final class MovieRepository: MoviesRepositoryProtocol {
+final class MovieRepository: MovieRepositoryProtocol {
     
     private let requestProvider: RequestProvider
     private let sessionProvider: SessionProvidable
