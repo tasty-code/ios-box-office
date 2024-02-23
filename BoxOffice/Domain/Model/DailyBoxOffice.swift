@@ -13,11 +13,9 @@ struct DailyBoxOfficeResponse {
     let totalAudienceCount: Int
     let entryStatus: EntryStatus
     
-    struct EntryStatus: RawRepresentable {
-      static let new = Self(rawValue: "NEW")
-      static let old = Self(rawValue: "OLD")
-      
-      let rawValue: String
+    enum EntryStatus: String {
+      case new = "NEW"
+      case old = "OLD"
     }
     
     enum RankChange {
@@ -34,6 +32,39 @@ struct DailyBoxOfficeResponse {
           self = .maintained
         }
       }
+    }
+  }
+}
+
+enum MovieStatus {
+  case newMovie
+  case oldMovie(RiseOrFall)
+  
+  enum RiseOrFall {
+    case risen(Int)
+    case fallen(Int)
+    case maintained
+  }
+
+  init(
+    entryStatus: DailyBoxOfficeResponse.DailyBoxOfficeItem.EntryStatus,
+    rankChange: DailyBoxOfficeResponse.DailyBoxOfficeItem.RankChange
+  ) {
+    let riseOrFall: RiseOrFall
+    switch rankChange {
+    case .risen(let number):
+      riseOrFall = .risen(number)
+    case .fallen(let number):
+      riseOrFall = .fallen(number)
+    case .maintained:
+      riseOrFall = .maintained
+    }
+    
+    switch entryStatus {
+    case .new:
+      self = .newMovie
+    case .old:
+      self = .oldMovie(riseOrFall)
     }
   }
 }
