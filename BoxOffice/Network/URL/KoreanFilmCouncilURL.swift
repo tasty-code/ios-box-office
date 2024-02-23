@@ -28,15 +28,6 @@ enum KoreanFilmCouncilURL {
             return baseURL + "movie/searchMovieInfo.json?key=\(apiKey)&movieCd=\(movieCode)"
         }
     }
-    
-    var dataType: NetworkDataProtocol.Type {
-        switch self {
-        case .dailyBoxOffice:
-            return BoxOfficeResult.self
-        case .movieDetailInformation:
-            return MovieInformationResult.self
-        }
-    }
 }
 
 
