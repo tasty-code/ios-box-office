@@ -19,7 +19,13 @@ struct BoxOfficeResult: Decodable {
             let movieName: String = boxOfficeMovie.movieName
             let audienceCount: Int = Int(boxOfficeMovie.audienceCount) ?? 0
             let audienceAccumulated: Int = Int(boxOfficeMovie.audienceAccumulated) ?? 0
-            let movie = DailyBoxOffice.BoxOfficeMovie(index: index, rank: rank, rankChangedAmount: rankChangedAmount, rankStatus: rankStatus, movieName: movieName, audienceCount: audienceCount, audienceAccumulated: audienceAccumulated)
+            let movie = DailyBoxOffice.BoxOfficeMovie(index: index, 
+                                                      rank: rank,
+                                                      rankChangedAmount: rankChangedAmount,
+                                                      rankStatus: rankStatus, 
+                                                      movieName: movieName,
+                                                      audienceCount: audienceCount, 
+                                                      audienceAccumulated: audienceAccumulated)
             return movie
         }
     }

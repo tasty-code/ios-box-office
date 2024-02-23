@@ -34,14 +34,16 @@ final class BoxOfficeViewController: UIViewController {
         Task {
             await loadDailyBoxOfficeData()
         }
-        boxOfficeView.boxOfficeCollectionView.backgroundView = loadingIndicatorView
-        loadingIndicatorView.startAnimating()
         view = boxOfficeView
         view.backgroundColor = .white
-        boxOfficeView.boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: "BoxOfficeCollectionViewCell")
-        boxOfficeView.boxOfficeCollectionView.dataSource = self
-        boxOfficeView.boxOfficeCollectionView.delegate = self
-        configureRefreshControl()
+        configureBoxOfficeCollectionView()
+       
+    }
+    
+    @objc func handleRefreshControl() {
+        Task {
+            await loadDailyBoxOfficeData()
+        }
     }
 }
 
@@ -63,13 +65,16 @@ extension BoxOfficeViewController {
         boxOfficeView.boxOfficeCollectionView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
     }
     
-    @objc func handleRefreshControl() {
-        Task {
-            await loadDailyBoxOfficeData()
-        }
+    private func configureBoxOfficeCollectionView() {
+        let boxOfficeCollectionView = boxOfficeView.boxOfficeCollectionView
+        boxOfficeCollectionView.backgroundView = loadingIndicatorView
+        loadingIndicatorView.startAnimating()
+        boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: "BoxOfficeCollectionViewCell")
+        boxOfficeCollectionView.dataSource = self
+        boxOfficeCollectionView.delegate = self
+        configureRefreshControl()
     }
 }
-
 
 extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -84,21 +89,5 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
         cell.configure(data: dataSource[indexPath.row].destructed())
         
         return cell
-    }
-}
-
-class LoadingIndicator {
-    let loadingIndicatorView = UIActivityIndicatorView()
-    
-    func showLoading() {
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.startAnimating()
-        }
-    }
-
-    func hideLoading() {
-        DispatchQueue.main.async {
-            self.loadingIndicatorView.removeFromSuperview()
-        }
     }
 }

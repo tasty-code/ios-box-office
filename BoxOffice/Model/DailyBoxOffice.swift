@@ -24,7 +24,13 @@ struct DailyBoxOffice {
             case old = "OLD"
         }
         
-        func destructed() -> (_: Int, rank: String, rankChangedAmount: Int, rankStatus: RankStatus, movieName: String, audienceCount: Int, audienceAccumulated: Int) {
+        func destructed() -> (_: Int, 
+                              rank: String,
+                              rankChangedAmount: Int, 
+                              rankStatus: RankStatus,
+                              movieName: String,
+                              audienceCount: Int,
+                              audienceAccumulated: Int) {
             return (index, rank, rankChangedAmount, rankStatus, movieName, audienceCount, audienceAccumulated)
         }
     }
