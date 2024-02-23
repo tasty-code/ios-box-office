@@ -41,14 +41,11 @@ private extension MovieCollectionCell {
     }
     
     func setupConstraints() {
-        rankStackView.translatesAutoresizingMaskIntoConstraints = false
-        movieStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        rankStackView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        rankStackView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 5).isActive = true
         boxOfficeStackView.translatesAutoresizingMaskIntoConstraints = false
         boxOfficeStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
-        boxOfficeStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-        boxOfficeStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40).isActive = true
+        boxOfficeStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        boxOfficeStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
         boxOfficeStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
         separatorLayoutGuide.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     }
