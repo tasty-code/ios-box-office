@@ -47,7 +47,7 @@ private extension ViewController {
         }
         self.movieManager.fetchBoxOfficeResultData(date: yesterday.toString(format: "yyyyMMdd")) { result in
             switch result {
-            case .success(let success):
+            case .success(_):
                 self.reloadCollectionListData()
             case .failure(let failure):
                 print("fetchBoxOfficeResultData 실패: \(failure)")
