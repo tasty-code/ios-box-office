@@ -10,7 +10,7 @@ final class BoxOfficeUseCase: BoxOfficeUseCaseProtocol {
     }
     
     func fetchBoxOfficeData() async -> Result<[BoxOfficeMovie], DomainError> {
-        let result = await moviesRepository.getBoxofficeData()
+        let result = await moviesRepository.requestBoxofficeData()
         switch result {
         case .success(let data):
             let movies = data.boxOfficeResult.dailyBoxOfficeList.map { $0.toEntity() }
