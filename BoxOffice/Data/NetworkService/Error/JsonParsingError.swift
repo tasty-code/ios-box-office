@@ -2,6 +2,7 @@
 import Foundation
 
 enum NetworkError: LocalizedError {
+    case urlError
     case connectivity
     case timeout
     case serverError(statusCode: Int)
