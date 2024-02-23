@@ -82,7 +82,7 @@ extension RankStateView {
         case let state where 0 < state :
             return configureRankUp(rankState: rankState)
         case let state where state < 0 :
-            return configureRankDown(rankState: String(rankState.dropFirst()))
+            return configureRankDown(rankState: String(abs(intRankState)))
         default:
             return configureRankNone()
         }
