@@ -9,12 +9,6 @@ final class BoxOfficeViewModel {
     }
   }
   
-  private var isFetching: Bool {
-    didSet {
-      self.delegate?.updateLoadingStatus()
-    }
-  }
-  
   private var errorState: String? {
     didSet {
       guard let errorState else { return }
@@ -27,7 +21,6 @@ final class BoxOfficeViewModel {
   ) {
     self.useCase = useCase
     self.yesterDayBoxOfficeList = []
-    self.isFetching = false
     self.errorState = nil
   }
 }
@@ -45,7 +38,6 @@ extension BoxOfficeViewModel: BoxOfficeInput {
 extension BoxOfficeViewModel {
   private func fetchYesterdayBoxOffice() {
     Task {
-      self.isFetching = true
       let result = await self.useCase.getDailyBoxOffice()
       switch result {
       case .success(let response):
@@ -53,7 +45,6 @@ extension BoxOfficeViewModel {
       case .failure(let error):
         self.errorState = error.localizedDescription
       }
-      self.isFetching = false
     }
   }
 }

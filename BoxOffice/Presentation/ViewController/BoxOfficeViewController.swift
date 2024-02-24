@@ -22,6 +22,7 @@ final class BoxOfficeViewController: UIViewController {
     self.view.backgroundColor = .systemBackground
     self.title = "2021-02-24"
     setLayout()
+    setRefreshControl()
     viewModel.viewDidLoad()
   }
   
@@ -35,8 +36,16 @@ final class BoxOfficeViewController: UIViewController {
         self.boxOfficeCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         self.boxOfficeCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
         self.boxOfficeCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-    ]
+      ]
     )
+  }
+  
+  private func setRefreshControl() {
+    self.boxOfficeCollectionView.refreshControl = .init()
+    let action = UIAction { _ in
+      self.viewModel.pullToRefresh()
+    }
+    self.boxOfficeCollectionView.refreshControl?.addAction(action, for: .valueChanged)
   }
 }
 
@@ -49,15 +58,22 @@ extension BoxOfficeViewController: BoxOfficeOutput {
     Task {
       await MainActor.run {
         self.boxOfficeListDataSource.apply(snapshot)
+        self.boxOfficeCollectionView.refreshControl?.endRefreshing()
       }
     }
   }
   
-  func updateLoadingStatus() {
-    
-  }
-  
   func showError(message: String) {
-    
+    let alert = UIAlertController(
+      title: "💩오류!💩",
+      message: message,
+      preferredStyle: .alert
+    )
+    alert.addAction(UIAlertAction(title: "확인", style: .default))
+    Task {
+      await MainActor.run {
+        self.present(alert, animated: true, completion: nil)
+      }
+    }
   }
 }
