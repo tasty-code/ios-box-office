@@ -1,7 +1,7 @@
 final class BoxOfficeViewModel {
   private let useCase: MovieUseCaseProtocol
   
-  private weak var delegate: BoxOfficeOutput?
+  weak var delegate: BoxOfficeOutput?
   
   private var yesterDayBoxOfficeList: [DailyBoxOffice.ListItem] {
     didSet {
@@ -23,11 +23,9 @@ final class BoxOfficeViewModel {
   }
   
   init(
-    useCase: MovieUseCaseProtocol,
-    delegate: BoxOfficeOutput?
+    useCase: MovieUseCaseProtocol
   ) {
     self.useCase = useCase
-    self.delegate = delegate
     self.yesterDayBoxOfficeList = []
     self.isFetching = false
     self.errorState = nil

@@ -18,8 +18,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     
     self.window = .init(windowScene: windowScene)
-    let navigationController = UINavigationController(rootViewController: BoxOfficeViewController())
-    self.window?.rootViewController = navigationController
+    self.window?.rootViewController = makeRootViewController()
     self.window?.makeKeyAndVisible()
+  }
+  
+  private func makeRootViewController() -> UIViewController {
+    let session = URLSession.shared
+    let networkService = NetworkService(requester: session)
+    let decoder = JSONDecoder()
+    let repo = MovieRepository(requester: networkService, decoder: decoder)
+    let useCase = MovieUseCase(repository: repo)
+    let viewModel = BoxOfficeViewModel(useCase: useCase)
+    let viewController = BoxOfficeViewController(viewModel: viewModel)
+    viewModel.delegate = viewController
+    let navigationController = UINavigationController(rootViewController: viewController)
+    return navigationController
   }
 }

@@ -1,9 +1,21 @@
 import UIKit
 
 final class BoxOfficeViewController: UIViewController {
+  private let viewModel: BoxOfficeInput
+  
   private let boxOfficeCollectionView: BoxOfficeCollectionView = BoxOfficeCollectionView()
   
   private lazy var boxOfficeListDataSource: BoxOfficeListDataSource = BoxOfficeListDataSource(self.boxOfficeCollectionView)
+  
+  init(viewModel: BoxOfficeInput) {
+    self.viewModel = viewModel
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  @available(*, unavailable)
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -38,4 +50,18 @@ final class BoxOfficeViewController: UIViewController {
     self.boxOfficeListDataSource.apply(snapshot)
   }
   
+}
+
+extension BoxOfficeViewController: BoxOfficeOutput {
+  func updateBoxOffice() {
+    
+  }
+  
+  func updateLoadingStatus() {
+    
+  }
+  
+  func showError(message: String) {
+    
+  }
 }
