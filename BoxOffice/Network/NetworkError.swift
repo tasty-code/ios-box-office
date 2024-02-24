@@ -11,4 +11,7 @@ enum NetworkError: Error {
     case badURL
     case requestFiled
     case unknown
+    case invalidURL
+    case unsuccessfulResponse
+    case APIInvalidResponse
 }

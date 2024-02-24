@@ -16,17 +16,37 @@ class NetworkManager {
     
     private func performRequest<T: Decodable>(with url: URL, completion: @escaping (Result<T, NetworkError>) -> Void) {
         let task = session.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else {
-                completion(.failure(.requestFiled))
+            
+            
+            guard let response = response as? HTTPURLResponse else {
+                completion(.failure(.unknown))
                 return
             }
             
-            do {
-                let decoder = JSONDecoder()
-                let result = try decoder.decode(T.self, from: data)
-                completion(.success(result))
-            } catch {
-                print("Decoding error: \(error.localizedDescription)")
+            switch response.statusCode {
+            case 200..<300:
+                guard let data = data, error == nil else {
+                    completion(.failure(.requestFiled))
+                    return
+                }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let result = try decoder.decode(T.self, from: data)
+                    completion(.success(result))
+                } catch {
+                    print("Decoding error: \(error.localizedDescription)")
+                    completion(.failure(.unknown))
+                }
+            case 100..<200:
+                completion(.failure(.APIInvalidResponse))
+            case 300..<400:
+                completion(.failure(.unsuccessfulResponse))
+            case 400..<500:
+                completion(.failure(.requestFiled))
+            case 500..<600:
+                completion(.failure(.requestFiled))
+            default:
                 completion(.failure(.unknown))
             }
         }
