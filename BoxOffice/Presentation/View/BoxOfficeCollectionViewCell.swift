@@ -75,16 +75,15 @@ final class BoxOfficeCollectionViewCell: UICollectionViewCell {
     
     NSLayoutConstraint.activate(
       [
-        self.rankInfoStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-//        self.rankInfoStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+        self.movieInfoStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 70),
+        self.movieInfoStackView.centerYAnchor.constraint(equalTo: rankInfoStackView.centerYAnchor),
         self.rankInfoStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
         self.rankInfoStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
-        self.rankInfoStackView.heightAnchor.constraint(equalToConstant: 60),
-        self.movieInfoStackView.leadingAnchor.constraint(equalTo: rankInfoStackView.trailingAnchor, constant: 15),
-        self.movieInfoStackView.centerYAnchor.constraint(equalTo: rankInfoStackView.centerYAnchor),
-        self.chevron.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+        self.rankInfoStackView.heightAnchor.constraint(equalToConstant: 55),
+        self.rankInfoStackView.centerXAnchor.constraint(equalTo: self.movieInfoStackView.leadingAnchor, constant: -32),
+        self.chevron.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
         self.chevron.centerYAnchor.constraint(equalTo: rankInfoStackView.centerYAnchor),
-        self.chevron.leadingAnchor.constraint(greaterThanOrEqualTo: movieInfoStackView.trailingAnchor, constant: 0),
+        self.chevron.leadingAnchor.constraint(greaterThanOrEqualTo: movieInfoStackView.trailingAnchor, constant: 10),
       ]
     )
   }

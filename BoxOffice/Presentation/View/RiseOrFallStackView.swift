@@ -9,6 +9,7 @@ final class RiseOrFallStackView: UIStackView {
   private let riseOrFallLabel: UILabel = {
     let label = UILabel()
     label.font = .preferredFont(forTextStyle: .footnote)
+    label.textAlignment = .center
     return label
   }()
   
@@ -34,23 +35,26 @@ final class RiseOrFallStackView: UIStackView {
         self.riseOrFallImageView.heightAnchor.constraint(equalTo: self.riseOrFallLabel.heightAnchor)
       ]
     )
+    self.alignment = .center
   }
   
   func configure(with movieStatus: MovieStatus) {
     switch movieStatus {
     case .newMovie:
-      riseOrFallImageView.image = nil
+      riseOrFallImageView.isHidden = true
       riseOrFallLabel.text = "신작"
       riseOrFallLabel.textColor = .systemPink
     case let .oldMovie(.risen(number)):
+      riseOrFallImageView.isHidden = false
       riseOrFallImageView.image = riseImage
       riseOrFallLabel.text = String(number)
     case let .oldMovie(.fallen(number)):
+      riseOrFallImageView.isHidden = false
       riseOrFallImageView.image = fallImage
       riseOrFallLabel.text = String(number)
     case .oldMovie(.maintained):
-      riseOrFallImageView.image = minusImage
-      riseOrFallLabel.text = ""
+      riseOrFallImageView.isHidden = true
+      riseOrFallLabel.text = "-"
     }
   }
 }
