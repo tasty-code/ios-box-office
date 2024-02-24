@@ -5,7 +5,7 @@ final class BoxOfficeViewModel {
   
   private var yesterDayBoxOfficeList: [DailyBoxOffice.ListItem] {
     didSet {
-      self.delegate?.updateBoxOffice()
+      self.delegate?.updateBoxOffice(items: yesterDayBoxOfficeList)
     }
   }
   

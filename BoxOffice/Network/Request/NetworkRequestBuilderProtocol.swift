@@ -19,7 +19,7 @@ enum MovieAPI {
   enum Constant {
     static let baseURL = "https://www.kobis.or.kr"
     static let key = "14620738f18fee816bea6b4def4fa578"
-    static let movieAPIRESTCommonPath = "kobisopenapi/webservice/rest"
+    static let movieAPIRESTCommonPath = "/kobisopenapi/webservice/rest"
   }
   
   struct DailyBoxOfficeBuilder: NetworkRequestBuilderProtocol {

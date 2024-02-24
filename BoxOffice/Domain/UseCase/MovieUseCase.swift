@@ -9,8 +9,8 @@ struct MovieUseCase {
 extension MovieUseCase: MovieUseCaseProtocol {
   func getDailyBoxOffice() async -> Result<DailyBoxOffice, MovieUseCaseError> {
     do {
-      // TODO: Date를 전달받을 것인지,,?
-      let result = await self.repository.getDailyBoxOffice(dateString: "")
+      let dateString = makeTodayString()
+      let result = await self.repository.getDailyBoxOffice(dateString: dateString)
       switch result {
       case .success(let dto):
         let boxOffice = try dto.boxOfficeResult.toDomain()
@@ -30,5 +30,17 @@ extension MovieUseCase: MovieUseCaseProtocol {
     } else {
       return .otherLayerError(error)
     }
+  }
+}
+
+import Foundation
+
+extension MovieUseCase {
+  private func makeTodayString() -> String {
+    let oneDayTimeInterval: TimeInterval = (60 * 60 * 24) * (-1)
+    let date = Date(timeIntervalSinceNow: oneDayTimeInterval)
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyyMMdd"
+    return dateFormatter.string(from: date)
   }
 }
