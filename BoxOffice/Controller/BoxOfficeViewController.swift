@@ -33,6 +33,7 @@ final class BoxOfficeViewController: UIViewController {
         super.viewDidLoad()
         Task {
             await loadDailyBoxOfficeData()
+            boxOfficeView.boxOfficeCollectionView.isScrollEnabled = true
         }
         view = boxOfficeView
         view.backgroundColor = .white
