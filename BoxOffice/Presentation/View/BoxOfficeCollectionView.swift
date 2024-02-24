@@ -11,6 +11,7 @@ final class BoxOfficeCollectionView: UICollectionView {
     }
     let layout = UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
     self.init(frame: .zero, collectionViewLayout: layout)
+    setCollectionViewCell()
   }
   
   private func setCollectionViewCell() {

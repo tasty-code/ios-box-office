@@ -17,9 +17,11 @@ final class BoxOfficeListDataSource: UICollectionViewDiffableDataSource<BoxOffic
   static let cellProvider: CellProvider = { collectionView, indexPath, itemIdentifier in
     switch itemIdentifier {
     case .movie(let item):
-      guard let cell = collectionView.dequeueReusableCell(
-        withReuseIdentifier: "\(MovieCell.self)", for: indexPath
-      ) as? MovieCell else { return MovieCell() }
+      guard
+        let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: "\(MovieCell.self)", for: indexPath
+        ) as? MovieCell
+      else { return MovieCell() }
       cell.configure(with: item)
       return cell
     }
