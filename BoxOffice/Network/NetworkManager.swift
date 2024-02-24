@@ -83,7 +83,7 @@ class NetworkManager {
     }
     
     func fetchMovieDetail(for movieCd: String, completion: @escaping (Result<MovieDatailDTO, NetworkError>) -> Void) {
-        var components = URLComponents(string: "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json")
+        var components = URLComponents(string: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json")
         components?.queryItems = [
             URLQueryItem(name: "key", value: apiKey),
             URLQueryItem(name: "movieCd", value: movieCd)
