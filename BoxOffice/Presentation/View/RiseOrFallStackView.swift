@@ -1,12 +1,16 @@
 import UIKit
 
 final class RiseOrFallStackView: UIStackView {
-  private let riseImage = UIImage(systemName: "arrowtriangle.down.fill")
-  private let fallImage = UIImage(systemName: "arrowtriangle.up.fill")
+  private let riseImage = UIImage(systemName: "arrowtriangle.up.fill")
+  private let fallImage = UIImage(systemName: "arrowtriangle.down.fill")
   private let minusImage = UIImage(systemName: "minus")
   
   private let riseOrFallImageView = UIImageView()
-  private let riseOrFallLabel = UILabel()
+  private let riseOrFallLabel: UILabel = {
+    let label = UILabel()
+    label.font = .preferredFont(forTextStyle: .footnote)
+    return label
+  }()
   
   init() {
     super.init(frame: .zero)
@@ -27,8 +31,7 @@ final class RiseOrFallStackView: UIStackView {
     
     NSLayoutConstraint.activate(
       [
-        self.riseOrFallImageView.heightAnchor.constraint(equalToConstant: 10),
-        self.riseOrFallLabel.heightAnchor.constraint(equalTo: riseOrFallImageView.heightAnchor),
+        self.riseOrFallImageView.heightAnchor.constraint(equalTo: self.riseOrFallLabel.heightAnchor)
       ]
     )
   }

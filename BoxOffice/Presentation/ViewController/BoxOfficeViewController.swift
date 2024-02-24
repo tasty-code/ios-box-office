@@ -10,6 +10,7 @@ final class BoxOfficeViewController: UIViewController {
     self.view.backgroundColor = .systemBackground
     self.title = "2021-02-24"
     setLayout()
+    sendSnapshotToDiffable()
   }
   
   private func setLayout() {
@@ -26,6 +27,15 @@ final class BoxOfficeViewController: UIViewController {
     )
   }
   
-  
+  func sendSnapshotToDiffable() {
+    var snapshot = BoxOfficeListSnapShot()
+    snapshot.appendSections([.movie])
+    let items: [DailyBoxOffice.ListItem] = [
+      .init(index: "1", rank: 1, rankChange: .fallen(3), title: "경관의 피", todayAudienceCount: 10000, totalAudienceCount: 20000, entryStatus: .old)
+    ]
+    let list = items.map(BoxOfficeListItem.movie)
+    snapshot.appendItems(list, toSection: .movie)
+    self.boxOfficeListDataSource.apply(snapshot)
+  }
   
 }
