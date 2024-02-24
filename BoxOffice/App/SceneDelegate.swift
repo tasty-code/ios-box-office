@@ -18,7 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     
     self.window = .init(windowScene: windowScene)
-    self.window?.rootViewController = ViewController()
+    let navigationController = UINavigationController(rootViewController: BoxOfficeViewController())
+    self.window?.rootViewController = navigationController
     self.window?.makeKeyAndVisible()
   }
 }
