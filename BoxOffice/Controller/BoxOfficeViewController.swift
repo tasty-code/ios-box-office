@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  BoxOfficeViewController.swift
 //  BoxOffice
 //
 //  Created by kjs on 13/01/23.
@@ -30,80 +30,70 @@ final class BoxOfficeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         boxOfficeListView.boxOfficeListDelegate = self
+        boxOfficeListView.dataSource = dataSource
         view = boxOfficeListView
         setupBoxOfficeData()
-        configureNavigation()
     }
 }
 
 private extension BoxOfficeViewController {
-    func configureNavigation() {
-        guard
-            let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
-        else {
-            return
-        }
-        title = yesterday.toString(format: "yyyy-MM-dd")
+    func configureNavigation(date: Date) {
+        self.title = date.toString(format: "yyyy-MM-dd")
     }
     
     func setupBoxOfficeData() {
-        guard
-            let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
-        else {
-            return
-        }
-        self.movieManager.fetchBoxOfficeResultData(date: yesterday.toString(format: "yyyyMMdd")) { result in
+        self.movieManager.fetchBoxOfficeResultData(date: yesterday.toString(format: "yyyyMMdd")) { [weak self] result in
             switch result {
             case .success(let success):
-                self.reloadCollectionListData(result: success)
+                self?.reloadCollectionListData(result: success)
             case .failure(let failure):
                 print("fetchBoxOfficeResultData 실패: \(failure)")
             }
         }
     }
     
-    func applyBoxOfficeList() {
+    func applyBoxOfficeList(result: BoxOfficeResult) {
         var boxOfficeListSnapShot = BoxOfficeListSnapShot()
         boxOfficeListSnapShot.appendSections([.movie])
-        movieManager.fetchBoxOfficeResultData(date: "20200101") { result in
-            switch result {
-            case .success(let success):
-                let items = success.dailyBoxOfficeList.map(Item.movie)
-                boxOfficeListSnapShot.appendItems(items, toSection: .movie)
-                self.dataSource.apply(boxOfficeListSnapShot)
-            case .failure(let failure):
-                print(failure.localizedDescription)
-            }
-        }
-        
+        let movies = result.dailyBoxOfficeList
+        boxOfficeListSnapShot.appendItems(movies, toSection: .movie)
+        dataSource.apply(boxOfficeListSnapShot)
     }
     
-    func test() {
-        var boxOfficeListSnapShot = BoxOfficeListSnapShot()
-        boxOfficeListSnapShot.appendSections([.movie])
-        movieManager.fetchBoxOfficeResultData(date: "20200101") { result in
+    func updateBoxOfficeList() {
+        movieManager.fetchBoxOfficeResultData(date: yesterday.toString(format: "yyyyMMdd")) { [weak self] result in
             switch result {
             case .success(let success):
-                let items = success.dailyBoxOfficeList.map(Item.movie)
-                boxOfficeListSnapShot.appendItems(items, toSection: .movie)
-                self.dataSource.apply(boxOfficeListSnapShot)
+                DispatchQueue.main.async {
+                    self?.applyBoxOfficeList(result: success)
+                    guard
+                        let date = success.showRange.toDate()
+                    else {
+                        return
+                    }
+                    self?.configureNavigation(date: date)
+                }
             case .failure(let failure):
                 print(failure.localizedDescription)
             }
         }
-        
     }
 }
 
-extension BoxOfficeViewController: BoxOfficeListViewDelegate {
+extension BoxOfficeViewController: BoxOfficeListViewDelegate, DateHandlerable {
     func applyBoxOfficeListView() {
-        self.applyBoxOfficeList()
+        DispatchQueue.main.async {
+            self.updateBoxOfficeList()
+        }
     }
     
-    func reloadCollectionListData(result: [DailyBoxOfficeList]) {
+    func reloadCollectionListData(result: BoxOfficeResult) {
         DispatchQueue.main.async {
             self.boxOfficeListView.indicatorView.stopAnimating()
-            self.applyBoxOfficeList()
+            self.configureNavigation(date: self.yesterday)
+            self.applyBoxOfficeList(result: result)
+            self.boxOfficeListView.isScrollEnabled = true
         }
     }
 }
+
