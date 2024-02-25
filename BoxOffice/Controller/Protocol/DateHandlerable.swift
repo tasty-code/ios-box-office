@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+protocol DateHandlerable {
+    var yesterday: Date { get }
+}
+
+extension DateHandlerable {
+    var yesterday: Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date() - 86400
+    }
+}
