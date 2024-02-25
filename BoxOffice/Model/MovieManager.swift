@@ -8,27 +8,27 @@
 import Foundation
 
 final class MovieManager {
-    var boxOfficeData: BoxOffice?
     var movieDetailData: MovieInfomationDetail?
-    var dailyBoxOfficeData: [DailyBoxOfficeList]?
+    var dailyBoxOfficeData: BoxOfficeResult?
     var movieCount: Int {
-        self.dailyBoxOfficeData?.count ?? 0
+        self.dailyBoxOfficeData?.dailyBoxOfficeList.count ?? 0
     }
 }
 
 extension MovieManager {
     func fetchBoxOfficeResultData(
         date: String,
-        completion: @escaping (Result<BoxOffice, NetworkError>) -> Void
+        completion: @escaping (Result<BoxOfficeResult, NetworkError>) -> Void
     ) {
         let apiService = APIService()
         let urlString = MovieURL.makeDailyBoxOfficeURL(date: date)
         
-        apiService.fetchData(urlString: urlString) { (result: Result<BoxOffice, NetworkError>) in
+        apiService.fetchData(urlString: urlString) { [weak self] (result: Result<BoxOffice, NetworkError>) in
             switch result {
             case .success(let movies):
-                completion(.success(movies))
-                self.dailyBoxOfficeData = movies.boxOfficeResult.dailyBoxOfficeList
+                self?.dailyBoxOfficeData = movies.boxOfficeResult
+                guard let result = self?.dailyBoxOfficeData else { return }
+                completion(.success(result))
             case .failure(let error):
                 completion(.failure(error))
             }
