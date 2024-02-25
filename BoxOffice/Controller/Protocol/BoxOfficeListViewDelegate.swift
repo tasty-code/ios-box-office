@@ -5,4 +5,6 @@
 //  Created by 강창현 on 2/25/24.
 //
 
-import Foundation
+protocol BoxOfficeListViewDelegate: AnyObject {
+    func applyBoxOfficeListView()
+}
