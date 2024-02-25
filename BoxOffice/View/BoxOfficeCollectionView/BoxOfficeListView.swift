@@ -7,7 +7,12 @@
 
 import UIKit
 
+protocol BoxOfficeListViewDelegate: AnyObject {
+    func applyBoxOfficeListView()
+}
+
 final class BoxOfficeListView: UICollectionView {
+    weak var boxOfficeListDelegate: BoxOfficeListViewDelegate?
     let indicatorView = UIActivityIndicatorView()
     private lazy var refresh: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -17,7 +22,11 @@ final class BoxOfficeListView: UICollectionView {
         refreshControl.addAction(action, for: .valueChanged)
         return refreshControl
     }()
-    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+    
+    override init(
+        frame: CGRect,
+        collectionViewLayout layout: UICollectionViewLayout
+    ) {
         super.init(frame: frame, collectionViewLayout: layout)
         setupIndicatorView()
         collectionViewRegister()
@@ -30,7 +39,10 @@ final class BoxOfficeListView: UICollectionView {
 
 private extension BoxOfficeListView {
     func collectionViewRegister() {
-        self.register(MovieCollectionCell.self, forCellWithReuseIdentifier: MovieCollectionCell.identifier)
+        self.register(
+            MovieCollectionCell.self,
+            forCellWithReuseIdentifier: MovieCollectionCell.identifier
+        )
         self.refreshControl = refresh
     }
     
@@ -41,7 +53,7 @@ private extension BoxOfficeListView {
     
     func refreshCollectionView() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.reloadData()
+            self.boxOfficeListDelegate?.applyBoxOfficeListView()
             self.refreshControl?.endRefreshing()
         }
     }
