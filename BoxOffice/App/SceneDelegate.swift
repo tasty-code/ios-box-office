@@ -19,7 +19,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         window = UIWindow(windowScene: windowScene)
-        let navigationViewController = UINavigationController(rootViewController: ViewController(movieManager: movieManager))
+        let navigationViewController = UINavigationController(rootViewController: BoxOfficeViewController(movieManager: movieManager))
         let mainViewController = navigationViewController
         window?.rootViewController = mainViewController
         window?.makeKeyAndVisible()
