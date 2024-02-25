@@ -11,28 +11,21 @@ enum MovieSection {
     case movie
 }
 
-enum Item: Hashable {
-    case movie(DailyBoxOfficeList)
-}
+typealias BoxOfficeListSnapShot = NSDiffableDataSourceSnapshot<MovieSection, DailyBoxOfficeList>
 
-typealias BoxOfficeListSnapShot = NSDiffableDataSourceSnapshot<MovieSection, Item>
-
-final class BoxOfficeListDataSource: UICollectionViewDiffableDataSource<MovieSection, Item> {
-    static let cellProvider: CellProvider = { collectionView, indexPath, itemIdentifier in
-        switch itemIdentifier {
-        case .movie(let movie):
-            guard
-                let cell = collectionView.dequeueReusableCell(
+final class BoxOfficeListDataSource: UICollectionViewDiffableDataSource<MovieSection, DailyBoxOfficeList> {
+    static let cellProvider: CellProvider = { collectionView, indexPath, movie in
+        guard
+            let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: MovieCollectionCell.identifier,
                 for: indexPath
             ) as? MovieCollectionCell
-            else {
-                return MovieCollectionCell()
-            }
-            cell.configure(result: movie)
-            cell.accessories = [.disclosureIndicator()]
-            return cell
+        else {
+            return MovieCollectionCell()
         }
+        cell.configure(result: movie)
+        cell.accessories = [.disclosureIndicator()]
+        return cell
     }
     
     convenience init(_ collectionView: BoxOfficeListView) {
