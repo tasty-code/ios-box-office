@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+extension String {
+    func toDate() -> Date? {
+        guard let result = self.split(separator: "~").last else { return nil }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        return dateFormatter.date(from: Self(result))
+    }
+}

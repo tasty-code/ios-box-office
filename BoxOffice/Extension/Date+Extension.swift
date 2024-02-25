@@ -8,6 +8,10 @@
 import Foundation
 
 extension Date {
+    var yesterday: Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date() - 86400
+    }
+    
     func toString(format: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
