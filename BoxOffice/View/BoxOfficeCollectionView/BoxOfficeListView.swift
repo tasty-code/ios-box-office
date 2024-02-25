@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol BoxOfficeListViewDelegate: AnyObject {
-    func applyBoxOfficeListView()
-}
-
 final class BoxOfficeListView: UICollectionView {
     weak var boxOfficeListDelegate: BoxOfficeListViewDelegate?
     let indicatorView = UIActivityIndicatorView()
@@ -48,6 +44,7 @@ private extension BoxOfficeListView {
     
     func setupIndicatorView() {
         self.backgroundView = indicatorView
+        self.isScrollEnabled = false
         indicatorView.startAnimating()
     }
     
