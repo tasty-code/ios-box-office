@@ -10,6 +10,8 @@ import UIKit
 class BoxOfficeViewController: UIViewController {
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 0
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -18,7 +20,7 @@ class BoxOfficeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupCollectionView()
         configureUI()
         setupConstraint()
         setupNavigationBar()
@@ -44,5 +46,36 @@ extension BoxOfficeViewController {
 
     func setupNavigationBar() {
 
+    }
+    
+    func setupCollectionView() {
+        collectionView.backgroundColor = .white
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: "BoxOfficeCollectionViewCell")
+
+    }
+}
+
+// MARK: - Extension
+
+extension BoxOfficeViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeCollectionViewCell.identifier, for: indexPath) as? BoxOfficeCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+       
+        return cell
+    }
+}
+
+extension BoxOfficeViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.bounds.width, height: 100)
     }
 }
