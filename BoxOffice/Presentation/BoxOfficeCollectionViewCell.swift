@@ -69,6 +69,8 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
+        configureUI()
+        setupConstraint()
     }
     
     required init?(coder: NSCoder) {
@@ -118,5 +120,28 @@ extension BoxOfficeCollectionViewCell {
             accessoryButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             accessoryButton.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
+    }
+    
+    func configure(with boxOffice: BoxOfficeEntity) {
+        rankLabel.text = boxOffice.rank
+        titleLabel.text = boxOffice.movieName
+        detailLabel.text = "오늘: \(boxOffice.salesAmount) / 총: \(boxOffice.audienceCount)"
+        
+        if boxOffice.isNewMovie {
+            rankChangeLabel.text = "신작"
+        }
+        
+        if let rankChangeValue = Int(boxOffice.rankChangeValue) {
+            if rankChangeValue > 0 {
+                rankChangeLabel.text = "🔺 \(String(rankChangeValue))"
+                rankChangeLabel.textColor = .red
+            } else if rankChangeValue < 0 {
+                rankChangeLabel.text = "🔻 \(String(-rankChangeValue))"
+                rankChangeLabel.textColor = .blue
+            } else {
+                rankChangeLabel.text = "-"
+                rankChangeLabel.textColor = .black
+            }
+        }
     }
 }
