@@ -14,40 +14,58 @@ final class NetworkRequestBuilder: NetworkRequestBuilderProtocol {
     var query: [String : Any]
     var body: [String : Any]
     var method: HTTPMethodType
-    var bodyEncoder: BodyEncoder
+    var urlScheme: URLScheme
+    
+    init(baseUrl: String,
+         path: String,
+         header: [String : String] = [:],
+         query: [String : Any] = [:],
+         body: [String : Any] = [:],
+         method: HTTPMethodType,
+         urlScheme: URLScheme
+    ) {
+        self.baseUrl = baseUrl
+        self.path = path
+        self.header = header
+        self.query = query
+        self.body = body
+        self.method = method
+        self.urlScheme = urlScheme
+    }
+    
     func setURLRequest() -> URLRequest? {
-        <#code#>
+        guard let url = setURL() else {
+            return nil
+        }
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = method.rawValue
+        
+        urlRequest.allHTTPHeaderFields = header.reduce(into: [:]) { partialResult, header in
+            partialResult[header.key] = header.value
+        }
+        
+        if !body.isEmpty {
+            urlRequest.httpBody = bodyEncoder.encode(body)
+        }
+
+        return urlRequest
     }
     
-    
-    
+    private func setURL() -> URL? {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = urlScheme.rawValue
+        urlComponents.host = baseUrl
+        urlComponents.path = path
+        urlComponents.queryItems = query.map {
+            URLQueryItem(name: $0, value: $1 as? String)
+        }
+        
+        guard let url = urlComponents.url else {
+            return nil
+        }
+        
+        return url
+    }
 }
 
-func request() -> URLRequest? {
-    guard let url = setURL() else {
-        return nil
-    }
-    var urlRequest = URLRequest(url: url)
-    urlRequest.httpMethod = "GET"
-    urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-    return urlRequest
-}
-
-func setURL() -> URL? {
-    guard var urlComponents: URLComponents = URLComponents(string: urlString) else {
-        return nil
-    }
-    
-    urlComponents.queryItems = [
-        URLQueryItem(name: "key", value: keyValue),
-        URLQueryItem(name: "targetDt", value: targetDtValue)
-        URLQueryItem(name: "targetDt", value: targetDtValue)
-        URLQueryItem(name: "targetDt", value: targetDtValue)
-        URLQueryItem(name: "targetDt", value: targetDtValue)
-    ]
-    
-    guard let url = urlComponents.url else {
-        return nil
-    }
-    return url
-}

@@ -14,14 +14,13 @@ protocol NetworkRequestBuilderProtocol {
     var query: [String: Any] { get }
     var body: [String: Any] { get }
     var method: HTTPMethodType { get }
-    var bodyEncoder: Encoder { get }
+    var bodyEncoder: Encoderable { get }
+    var urlScheme: URLScheme { get }
     func setURLRequest() -> URLRequest?
 }
 
 extension NetworkRequestBuilder {
-    var bodyEncoder: Encoder {
-        JSONEncoder()
+    var bodyEncoder: Encoderable {
+        JsonEncoder()
     }
 }
-
-
