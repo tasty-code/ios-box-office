@@ -8,7 +8,19 @@
 import UIKit
 
 class BoxOfficeViewController: UIViewController {
-    let collectionView: UICollectionView = {
+    
+    private let viewModel: BoxOfficeViewModel
+    
+    init(viewModel: BoxOfficeViewModel = BoxOfficeViewModel()) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 0
@@ -25,30 +37,30 @@ class BoxOfficeViewController: UIViewController {
         setupConstraint()
         setupNavigationBar()
     }
-}
+        fetchData()
 
 extension BoxOfficeViewController {
-    func configureUI() {
+    private func configureUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
     }
 
-    func setupConstraint() {
-        let safaArea = view.safeAreaLayoutGuide
+    private func setupConstraint() {
+        let safeArea = view.safeAreaLayoutGuide
 
         NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: safaArea.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: safaArea.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: safaArea.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: safaArea.bottomAnchor)
+            collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
         ])
     }
 
-    func setupNavigationBar() {
-
+    private func setupNavigationBar() {
+        self.navigationItem.title = Date.convertYesterdayDateToString()
     }
     
-    func setupCollectionView() {
+    private func setupCollectionView() {
         collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -58,17 +70,29 @@ extension BoxOfficeViewController {
 }
 
 // MARK: - Extension
+    private func fetchData() {
+        viewModel.fetchBoxOfficeData(completion: { [weak self] result in
+            switch result {
+            case .success:
+                self?.collectionView.reloadData()
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        })
+    }
 
 extension BoxOfficeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return viewModel.boxOfficeCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeCollectionViewCell.identifier, for: indexPath) as? BoxOfficeCollectionViewCell else {
             return UICollectionViewCell()
         }
-       
+        let boxOffice = viewModel.boxOffice(at: indexPath.row)
+        cell.configure(with: boxOffice)
+        
         return cell
     }
 }
