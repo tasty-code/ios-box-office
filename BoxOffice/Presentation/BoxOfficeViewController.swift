@@ -29,20 +29,27 @@ class BoxOfficeViewController: UIViewController {
 
         return collectionView
     }()
-
+    
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
         configureUI()
         setupConstraint()
         setupNavigationBar()
-    }
+        setupRefreshControl()
         fetchData()
-
-extension BoxOfficeViewController {
+    }
+    
     private func configureUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
+        view.addSubview(activityIndicator)
     }
 
     private func setupConstraint() {
@@ -65,11 +72,14 @@ extension BoxOfficeViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: "BoxOfficeCollectionViewCell")
-
     }
-}
-
-// MARK: - Extension
+    
+    private func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshBoxOfficeData(_:)), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+    }
+    
     private func fetchData() {
         viewModel.fetchBoxOfficeData(completion: { [weak self] result in
             switch result {
@@ -80,6 +90,12 @@ extension BoxOfficeViewController {
             }
         })
     }
+    
+    @objc private func refreshBoxOfficeData(_ sender: UIRefreshControl) {
+        fetchData()
+        sender.endRefreshing()
+    }
+}
 
 extension BoxOfficeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
