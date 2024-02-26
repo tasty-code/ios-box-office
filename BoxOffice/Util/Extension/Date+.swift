@@ -18,4 +18,3 @@ extension Date {
         return format.string(from: yesterday)
     }
 }
-
