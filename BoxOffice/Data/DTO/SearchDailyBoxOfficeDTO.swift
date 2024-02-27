@@ -1,7 +1,7 @@
 // swiftlint:disable nesting
 struct SearchDailyBoxOfficeDTO: Decodable {
   struct BoxOfficeResult: Decodable {
-    struct DailyBoxOfficeList: Decodable {
+    struct DailyBoxOffice: Decodable {
       enum EntryStatus: String, Codable {
         case new = "NEW"
         case old = "OLD"
@@ -50,7 +50,7 @@ struct SearchDailyBoxOfficeDTO: Decodable {
     
     let boxOfficeType: String
     let showRange: String
-    let list: [DailyBoxOfficeList]
+    let list: [DailyBoxOffice]
     
     enum CodingKeys: String, CodingKey {
       case boxOfficeType = "boxofficeType"
@@ -63,7 +63,7 @@ struct SearchDailyBoxOfficeDTO: Decodable {
 }
 // swiftlint:enable nesting
 
-extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOfficeList.EntryStatus: DomainConvertible {
+extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOffice.EntryStatus: DomainConvertible {
   typealias Domain = DailyBoxOffice.ListItem.EntryStatus
   
   func toDomain() throws -> DailyBoxOffice.ListItem.EntryStatus {
@@ -74,7 +74,7 @@ extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOfficeList.EntryStatus
   }
 }
 
-extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOfficeList: DomainConvertible {
+extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOffice: DomainConvertible {
   typealias Domain = DailyBoxOffice.ListItem
   
   func toDomain() throws -> DailyBoxOffice.ListItem {

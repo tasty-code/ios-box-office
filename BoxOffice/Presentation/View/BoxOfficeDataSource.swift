@@ -1,16 +1,16 @@
 import UIKit
 
-enum BoxOfficeListSection {
+enum BoxOfficeSection {
   case movie
 }
 
-enum BoxOfficeListItem: Hashable {
+enum BoxOfficeItem: Hashable {
   case movie(DailyBoxOffice.ListItem)
 }
 
-typealias BoxOfficeListSnapShot = NSDiffableDataSourceSnapshot<BoxOfficeListSection, BoxOfficeListItem>
+typealias BoxOfficeSnapShot = NSDiffableDataSourceSnapshot<BoxOfficeSection, BoxOfficeItem>
 
-final class BoxOfficeListDataSource: UICollectionViewDiffableDataSource<BoxOfficeListSection, BoxOfficeListItem> {
+final class BoxOfficeDataSource: UICollectionViewDiffableDataSource<BoxOfficeSection, BoxOfficeItem> {
   typealias CollectionView = BoxOfficeCollectionView
   typealias MovieCell = BoxOfficeCollectionViewCell
   

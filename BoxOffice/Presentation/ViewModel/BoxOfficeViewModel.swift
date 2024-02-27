@@ -9,9 +9,9 @@ final class BoxOfficeViewModel {
     }
   }
   
-  private var yesterDayBoxOfficeList: [DailyBoxOffice.ListItem] {
+  private var yesterDayBoxOffice: [DailyBoxOffice.ListItem] {
     didSet {
-      self.delegate?.updateBoxOffice(items: yesterDayBoxOfficeList)
+      self.delegate?.updateBoxOffice(items: yesterDayBoxOffice)
     }
   }
   
@@ -26,7 +26,7 @@ final class BoxOfficeViewModel {
     useCase: MovieUseCaseProtocol
   ) {
     self.useCase = useCase
-    self.yesterDayBoxOfficeList = []
+    self.yesterDayBoxOffice = []
     self.errorState = nil
   }
 }
@@ -55,7 +55,7 @@ extension BoxOfficeViewModel {
       let result = await self.useCase.getDailyBoxOffice()
       switch result {
       case .success(let response):
-        self.yesterDayBoxOfficeList = response.list
+        self.yesterDayBoxOffice = response.list
       case .failure(let error):
         self.errorState = error.localizedDescription
       }

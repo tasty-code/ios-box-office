@@ -5,7 +5,7 @@ final class BoxOfficeViewController: UIViewController {
   
   private let boxOfficeCollectionView: BoxOfficeCollectionView = BoxOfficeCollectionView()
   
-  private lazy var boxOfficeListDataSource: BoxOfficeListDataSource = BoxOfficeListDataSource(self.boxOfficeCollectionView)
+  private lazy var boxOfficeDataSource: BoxOfficeDataSource = BoxOfficeDataSource(self.boxOfficeCollectionView)
   
   init(viewModel: BoxOfficeInput) {
     self.viewModel = viewModel
@@ -54,13 +54,13 @@ extension BoxOfficeViewController: BoxOfficeOutput {
   }
   
   func updateBoxOffice(items: [DailyBoxOffice.ListItem]) {
-    var snapshot = BoxOfficeListSnapShot()
+    var snapshot = BoxOfficeSnapShot()
     snapshot.appendSections([.movie])
-    let list = items.map(BoxOfficeListItem.movie)
+    let list = items.map(BoxOfficeItem.movie)
     snapshot.appendItems(list, toSection: .movie)
     Task {
       await MainActor.run {
-        self.boxOfficeListDataSource.apply(snapshot)
+        self.boxOfficeDataSource.apply(snapshot)
         self.boxOfficeCollectionView.refreshControl?.endRefreshing()
       }
     }

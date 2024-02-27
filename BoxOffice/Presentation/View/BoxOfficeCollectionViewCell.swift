@@ -1,8 +1,6 @@
 import UIKit
 
 final class BoxOfficeCollectionViewCell: UICollectionViewCell {
-  //  private var boxOfficeListItem: DailyBoxOffice.ListItem?
-  
   private var rankLabel: UILabel = {
     let label = UILabel()
     label.font = .preferredFont(forTextStyle: .title1)
