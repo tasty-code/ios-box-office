@@ -5,7 +5,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         MovieAPIFetcher().fetchBoxOffice(targetDate: "20240219")
-        MovieAPIFetcher().fetchdetailMovieInfo(movieCode: "20231415")
+        MovieAPIFetcher().fetchDetailMovieInfo(movieCode: "20231415")
         checkJSONLoader()
     }
     

@@ -1,10 +1,14 @@
 import Foundation
 
 struct BoxOfficeResponse: Codable {
-    let boxOfficeResult: BoxOfficeResult
+    let dailyBoxOffice: DailyBoxOffice
+    
+    private enum CodingKeys: String, CodingKey {
+        case dailyBoxOffice = "boxOfficeResult"
+    }
 }
 
-struct BoxOfficeResult: Codable {
+struct DailyBoxOffice: Codable {
     private let boxofficeType, showRange: String
     let dailyBoxOfficeLists: [DailyBoxOfficeList]
     

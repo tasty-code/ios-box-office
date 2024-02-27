@@ -7,7 +7,7 @@ struct MovieAPIFetcher {
         self.networkManager = networkManager
     }
     
-    func fetchdetailMovieInfo(movieCode: String) {
+    func fetchDetailMovieInfo(movieCode: String) {
         var movieInfoRequestURL = EndPoint.moviInfoPath
         movieInfoRequestURL.addDetailMovieInfoQueryItems(movieCode: movieCode)
         networkManager.fetchDetails(from: movieInfoRequestURL.url.absoluteString) { (result: Result<MovieInfoResponse, Error>) in
