@@ -9,7 +9,7 @@ struct MovieAPIFetcher {
     
     func fetchdetailMovieInfo(movieCode: String) {
         var movieInfoRequestURL = EndPoint.moviInfoPath
-        movieInfoRequestURL.getDetailMovieInfoQueryItems(movieCode: movieCode)
+        movieInfoRequestURL.addDetailMovieInfoQueryItems(movieCode: movieCode)
         networkManager.fetchDetails(from: movieInfoRequestURL.url.absoluteString) { (result: Result<MovieInfoResponse, Error>) in
             switch result {
             case .success(let response):
@@ -22,7 +22,7 @@ struct MovieAPIFetcher {
     
     func fetchBoxOffice(targetDate: String) {
         var boxOfficeRequestURL = EndPoint.boxOfficePath
-        boxOfficeRequestURL.getBoxOfficeQueryItems(targetDate: targetDate)
+        boxOfficeRequestURL.addBoxOfficeQueryItems(targetDate: targetDate)
         networkManager.fetchDetails(from: boxOfficeRequestURL.url.absoluteString) { (result: Result<BoxOfficeResponse, Error>) in
             switch result {
             case .success(let boxOfficeResponse):
