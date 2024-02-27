@@ -98,6 +98,14 @@ final class BoxOfficeCollectionViewCell: UICollectionViewCell {
     self.riseOrFallView.configure(with: movieStatus)
     
     self.movieNameLabel.text = item.title
-    self.audienceLabel.text = "오늘 \(item.todayAudienceCount) / 총 \(item.totalAudienceCount)"
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    guard
+      let today = formatter.string(from: NSNumber(value: item.todayAudienceCount)),
+      let total = formatter.string(from: NSNumber(value: item.totalAudienceCount))
+    else {
+      return
+    }
+    self.audienceLabel.text = "오늘 \(today) / 총 \(total)"
   }
 }

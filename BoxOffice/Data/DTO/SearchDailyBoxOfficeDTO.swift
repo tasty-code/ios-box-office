@@ -81,8 +81,8 @@ extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOfficeList: DomainConv
     guard
       let rank = Int(self.rank),
       let rankChange = Int(self.rankChange),
-      let today = Int(self.showCount),
-      let total = Int(self.salesTotal)
+      let today = Int(self.audienceCount),
+      let total = Int(self.audienceTotal)
     else {
       throw DTOError.cannotConvertToDomain
     }
