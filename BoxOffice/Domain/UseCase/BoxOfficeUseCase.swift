@@ -1,4 +1,4 @@
-struct MovieUseCase {
+struct BoxOfficeUseCase {
   private let repository: MovieRepositoryProtocol
   
   init(repository: MovieRepositoryProtocol) {
@@ -6,7 +6,7 @@ struct MovieUseCase {
   }
 }
 
-extension MovieUseCase: MovieUseCaseProtocol {
+extension BoxOfficeUseCase: BoxOfficeUseCaseProtocol {
   func getTitle() -> String {
     let oneDayTimeInterval: TimeInterval = (60 * 60 * 24) * (-1)
     let date = Date(timeIntervalSinceNow: oneDayTimeInterval)
@@ -43,7 +43,7 @@ extension MovieUseCase: MovieUseCaseProtocol {
 
 import Foundation
 
-extension MovieUseCase {
+extension BoxOfficeUseCase {
   private func makeTodayString() -> String {
     let oneDayTimeInterval: TimeInterval = (60 * 60 * 24) * (-1)
     let date = Date(timeIntervalSinceNow: oneDayTimeInterval)

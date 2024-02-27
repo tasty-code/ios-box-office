@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let networkService = NetworkService(requester: session)
     let decoder = JSONDecoder()
     let repo = MovieRepository(requester: networkService, decoder: decoder)
-    let useCase = MovieUseCase(repository: repo)
+    let useCase = BoxOfficeUseCase(repository: repo)
     let viewModel = BoxOfficeViewModel(useCase: useCase)
     let viewController = BoxOfficeViewController(viewModel: viewModel)
     viewModel.delegate = viewController

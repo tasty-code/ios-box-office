@@ -1,7 +1,7 @@
 // swiftlint:disable nesting
 struct SearchDailyBoxOfficeDTO: Decodable {
-  struct BoxOfficeResult: Decodable {
-    struct DailyBoxOffice: Decodable {
+  struct Result: Decodable {
+    struct BoxOfficeItem: Decodable {
       enum EntryStatus: String, Codable {
         case new = "NEW"
         case old = "OLD"
@@ -50,7 +50,7 @@ struct SearchDailyBoxOfficeDTO: Decodable {
     
     let boxOfficeType: String
     let showRange: String
-    let list: [DailyBoxOffice]
+    let list: [BoxOfficeItem]
     
     enum CodingKeys: String, CodingKey {
       case boxOfficeType = "boxofficeType"
@@ -59,11 +59,11 @@ struct SearchDailyBoxOfficeDTO: Decodable {
     }
   }
   
-  let boxOfficeResult: BoxOfficeResult
+  let boxOfficeResult: Result
 }
 // swiftlint:enable nesting
 
-extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOffice.EntryStatus: DomainConvertible {
+extension SearchDailyBoxOfficeDTO.Result.BoxOfficeItem.EntryStatus: DomainConvertible {
   typealias Domain = DailyBoxOffice.ListItem.EntryStatus
   
   func toDomain() throws -> DailyBoxOffice.ListItem.EntryStatus {
@@ -74,7 +74,7 @@ extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOffice.EntryStatus: Do
   }
 }
 
-extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOffice: DomainConvertible {
+extension SearchDailyBoxOfficeDTO.Result.BoxOfficeItem: DomainConvertible {
   typealias Domain = DailyBoxOffice.ListItem
   
   func toDomain() throws -> DailyBoxOffice.ListItem {
@@ -100,7 +100,7 @@ extension SearchDailyBoxOfficeDTO.BoxOfficeResult.DailyBoxOffice: DomainConverti
 
 import Foundation
 
-extension SearchDailyBoxOfficeDTO.BoxOfficeResult: DomainConvertible {
+extension SearchDailyBoxOfficeDTO.Result: DomainConvertible {
   typealias Domain = DailyBoxOffice
   
   func toDomain() throws -> DailyBoxOffice {

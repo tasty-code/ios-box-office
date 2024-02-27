@@ -43,9 +43,9 @@
 		F4CC09832B86E69A00922A35 /* NetworkRequestBuilderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09822B86E69A00922A35 /* NetworkRequestBuilderProtocol.swift */; };
 		F4CC09A32B87C2D700922A35 /* DailyBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09A22B87C2D700922A35 /* DailyBoxOffice.swift */; };
 		F4CC09A72B87C7E300922A35 /* DomainConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09A62B87C7E300922A35 /* DomainConvertible.swift */; };
-		F4CC09A92B87D68A00922A35 /* MovieUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09A82B87D68A00922A35 /* MovieUseCaseProtocol.swift */; };
+		F4CC09A92B87D68A00922A35 /* BoxOfficeUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09A82B87D68A00922A35 /* BoxOfficeUseCaseProtocol.swift */; };
 		F4CC09AB2B87DBEC00922A35 /* MovieUseCaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09AA2B87DBEC00922A35 /* MovieUseCaseError.swift */; };
-		F4CC09AE2B87DC0600922A35 /* MovieUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09AD2B87DC0600922A35 /* MovieUseCase.swift */; };
+		F4CC09AE2B87DC0600922A35 /* BoxOfficeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09AD2B87DC0600922A35 /* BoxOfficeUseCase.swift */; };
 		F4CC09B12B87DC7D00922A35 /* BoxOfficeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09B02B87DC7D00922A35 /* BoxOfficeViewModel.swift */; };
 		F4CC09B52B87E3BA00922A35 /* BoxOfficeInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09B42B87E3BA00922A35 /* BoxOfficeInput.swift */; };
 		F4CC09B72B87E46600922A35 /* BoxOfficeOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC09B62B87E46600922A35 /* BoxOfficeOutput.swift */; };
@@ -100,9 +100,9 @@
 		F4CC09822B86E69A00922A35 /* NetworkRequestBuilderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestBuilderProtocol.swift; sourceTree = "<group>"; };
 		F4CC09A22B87C2D700922A35 /* DailyBoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBoxOffice.swift; sourceTree = "<group>"; };
 		F4CC09A62B87C7E300922A35 /* DomainConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainConvertible.swift; sourceTree = "<group>"; };
-		F4CC09A82B87D68A00922A35 /* MovieUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieUseCaseProtocol.swift; sourceTree = "<group>"; };
+		F4CC09A82B87D68A00922A35 /* BoxOfficeUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeUseCaseProtocol.swift; sourceTree = "<group>"; };
 		F4CC09AA2B87DBEC00922A35 /* MovieUseCaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieUseCaseError.swift; sourceTree = "<group>"; };
-		F4CC09AD2B87DC0600922A35 /* MovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieUseCase.swift; sourceTree = "<group>"; };
+		F4CC09AD2B87DC0600922A35 /* BoxOfficeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeUseCase.swift; sourceTree = "<group>"; };
 		F4CC09B02B87DC7D00922A35 /* BoxOfficeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeViewModel.swift; sourceTree = "<group>"; };
 		F4CC09B42B87E3BA00922A35 /* BoxOfficeInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeInput.swift; sourceTree = "<group>"; };
 		F4CC09B62B87E46600922A35 /* BoxOfficeOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeOutput.swift; sourceTree = "<group>"; };
@@ -358,8 +358,8 @@
 		F4CC09AF2B87DC3500922A35 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				F4CC09A82B87D68A00922A35 /* MovieUseCaseProtocol.swift */,
-				F4CC09AD2B87DC0600922A35 /* MovieUseCase.swift */,
+				F4CC09A82B87D68A00922A35 /* BoxOfficeUseCaseProtocol.swift */,
+				F4CC09AD2B87DC0600922A35 /* BoxOfficeUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -512,7 +512,7 @@
 			files = (
 				F416AFDA2B88A464004D8234 /* BoxOfficeDataSource.swift in Sources */,
 				F4CC09AB2B87DBEC00922A35 /* MovieUseCaseError.swift in Sources */,
-				F4CC09A92B87D68A00922A35 /* MovieUseCaseProtocol.swift in Sources */,
+				F4CC09A92B87D68A00922A35 /* BoxOfficeUseCaseProtocol.swift in Sources */,
 				F4CC09A72B87C7E300922A35 /* DomainConvertible.swift in Sources */,
 				F44E98942B825E13003F61EF /* NetworkService.swift in Sources */,
 				F44E98652B7C7C23003F61EF /* BundleResourceError.swift in Sources */,
@@ -524,7 +524,7 @@
 				F44E98672B7C7C41003F61EF /* BundleResourceManager.swift in Sources */,
 				F4CC09832B86E69A00922A35 /* NetworkRequestBuilderProtocol.swift in Sources */,
 				F44E98CB2B84DF56003F61EF /* MovieRepositoryProtocol.swift in Sources */,
-				F4CC09AE2B87DC0600922A35 /* MovieUseCase.swift in Sources */,
+				F4CC09AE2B87DC0600922A35 /* BoxOfficeUseCase.swift in Sources */,
 				F4CC09A32B87C2D700922A35 /* DailyBoxOffice.swift in Sources */,
 				F416AFDE2B88C72D004D8234 /* MovieStatus.swift in Sources */,
 				F44E98A02B82E662003F61EF /* NetworkServiceError.swift in Sources */,

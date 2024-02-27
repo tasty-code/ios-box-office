@@ -1,5 +1,5 @@
 final class BoxOfficeViewModel {
-  private let useCase: MovieUseCaseProtocol
+  private let useCase: BoxOfficeUseCaseProtocol
   
   weak var delegate: BoxOfficeOutput?
   
@@ -23,7 +23,7 @@ final class BoxOfficeViewModel {
   }
   
   init(
-    useCase: MovieUseCaseProtocol
+    useCase: BoxOfficeUseCaseProtocol
   ) {
     self.useCase = useCase
     self.yesterDayBoxOffice = []
