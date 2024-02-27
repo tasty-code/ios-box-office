@@ -20,7 +20,6 @@ final class BoxOfficeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = .systemBackground
-    self.title = "2021-02-24"
     setLayout()
     setRefreshControl()
     viewModel.viewDidLoad()
@@ -50,6 +49,10 @@ final class BoxOfficeViewController: UIViewController {
 }
 
 extension BoxOfficeViewController: BoxOfficeOutput {
+  func updateTitle(with title: String?) {
+    self.title = title
+  }
+  
   func updateBoxOffice(items: [DailyBoxOffice.ListItem]) {
     var snapshot = BoxOfficeListSnapShot()
     snapshot.appendSections([.movie])

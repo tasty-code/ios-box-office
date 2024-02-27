@@ -3,6 +3,12 @@ final class BoxOfficeViewModel {
   
   weak var delegate: BoxOfficeOutput?
   
+  private var title: String? {
+    didSet {
+      self.delegate?.updateTitle(with: title)
+    }
+  }
+  
   private var yesterDayBoxOfficeList: [DailyBoxOffice.ListItem] {
     didSet {
       self.delegate?.updateBoxOffice(items: yesterDayBoxOfficeList)
@@ -27,6 +33,7 @@ final class BoxOfficeViewModel {
 
 extension BoxOfficeViewModel: BoxOfficeInput {
   func viewDidLoad() {
+    getTitle()
     fetchYesterdayBoxOffice()
   }
   
@@ -35,7 +42,14 @@ extension BoxOfficeViewModel: BoxOfficeInput {
   }
 }
 
+import Foundation
+
 extension BoxOfficeViewModel {
+  private func getTitle() {
+    let title = self.useCase.getTitle()
+    self.title = title
+  }
+  
   private func fetchYesterdayBoxOffice() {
     Task {
       let result = await self.useCase.getDailyBoxOffice()

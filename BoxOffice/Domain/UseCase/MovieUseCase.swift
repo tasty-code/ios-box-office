@@ -7,6 +7,14 @@ struct MovieUseCase {
 }
 
 extension MovieUseCase: MovieUseCaseProtocol {
+  func getTitle() -> String {
+    let oneDayTimeInterval: TimeInterval = (60 * 60 * 24) * (-1)
+    let date = Date(timeIntervalSinceNow: oneDayTimeInterval)
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    return dateFormatter.string(from: date)
+  }
+  
   func getDailyBoxOffice() async -> Result<DailyBoxOffice, MovieUseCaseError> {
     do {
       let dateString = makeTodayString()
