@@ -10,13 +10,13 @@ struct MovieRepository {
   }
 }
 
-extension MovieRepository: MovieProtocol {
+extension MovieRepository: MovieRepositoryProtocol {
   func getDailyBoxOffice(
     dateString: String
   ) async -> Result<SearchDailyBoxOfficeDTO, MovieRepositoryError> {
     do {
-      let request = MovieRequest.dailyBoxOffice(dateString: dateString)
-      let result = await self.requester.requestData(request: request)
+      let builder = MovieAPI.DailyBoxOfficeBuilder(targetDt: dateString)
+      let result = await self.requester.requestData(builder: builder)
       switch result {
       case .success(let data):
         let resultData = try self.decoder.decode(SearchDailyBoxOfficeDTO.self, from: data)
@@ -34,8 +34,8 @@ extension MovieRepository: MovieProtocol {
     movieCode: String
   ) async -> Result<SearchMovieInfoDTO, MovieRepositoryError> {
     do {
-      let request = MovieRequest.movieInfo(code: movieCode)
-      let result = await self.requester.requestData(request: request)
+      let builder = MovieAPI.MovieInfoBuilder(movieCode: movieCode)
+      let result = await self.requester.requestData(builder: builder)
       switch result {
       case .success(let data):
         let resultData = try self.decoder.decode(SearchMovieInfoDTO.self, from: data)
