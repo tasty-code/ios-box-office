@@ -1,45 +1,52 @@
 import Foundation
-struct MovieInfoResponse: Codable {
-    let movieInfoResult: MovieInfoResult
-}
 
-struct MovieInfoResult: Codable {
-    let movieInfo: MovieInfo
+struct MovieInfoResponse: Codable {
+    private let movieInfo: MovieInfo
 }
 
 struct MovieInfo: Codable {
-    let movieCode, movieName, movieNameEnglish, movieNmOg: String
-    let showTm, prdtYear, openDt, prdtStatNm: String
-    let typeName: String
-    let nations: [Nation]
-    let genres: [Genre]
-    let directors: [Director]
-    let actors: [Actor]
-    let showTypes: [ShowType]
-    let companys: [Company]
-    let audits: [Audit]
-    let staffs: [Staff]
-
+    private let movieCode, movieName, movieNameEnglish, movieNmOg: String
+    private let showTime, prdtYear, openDate, prdtStatName: String
+    private let typeName: String
+    private let nations: [Nation]
+    private let genres: [Genre]
+    private let directors: [Director]
+    private let actors: [Actor]
+    private let showTypes: [ShowType]
+    private let companys: [Company]
+    private let audits: [Audit]
+    private let staffs: [Staff]
+    
     enum CodingKeys: String, CodingKey {
         case movieCode = "movieCd"
         case movieName = "movieNm"
         case movieNameEnglish = "movieNmEn"
         case typeName = "typeNm"
-        case movieNmOg, showTm, prdtYear, openDt, prdtStatNm, nations, genres, directors, actors, showTypes, companys, audits, staffs
+        case openDate = "openDt"
+        case prdtStatName = "prdtStatNm"
+        case showTime = "showTm"
+        case movieNmOg, prdtYear, nations, genres, directors, actors, showTypes, companys, audits, staffs
     }
 }
 
 struct Actor: Codable {
-    let peopleNm, peopleNmEn, cast, castEn: String
+    private let peopleName, peopleNameEnglish, cast, castEnglish: String
+    
+    enum CodingKeys: String, CodingKey {
+        case cast
+        case peopleName = "peopleNm"
+        case peopleNameEnglish = "peopleNmEn"
+        case castEnglish = "castEn"
+    }
 }
 
 struct Audit: Codable {
-    let auditNo, watchGradeNm: String
+    private let auditNo, watchGradeNm: String
 }
 
 struct Company: Codable {
-    let companyCode, companyName, companyNameEnglish, companyPartName: String
-
+    private let companyCode, companyName, companyNameEnglish, companyPartName: String
+    
     enum CodingKeys: String, CodingKey {
         case companyCode = "companyCd"
         case companyName = "companyNm"
@@ -50,7 +57,7 @@ struct Company: Codable {
 }
 
 struct Director: Codable {
-    let peopleName, personNameEnglish: String
+    private let peopleName, personNameEnglish: String
     
     enum CodingKeys: String, CodingKey {
         case peopleName = "peopleNm"
@@ -59,7 +66,7 @@ struct Director: Codable {
 }
 
 struct Genre: Codable {
-    let genreName: String
+    private let genreName: String
     
     enum CodingKeys: String, CodingKey {
         case genreName = "genreNm"
@@ -67,7 +74,7 @@ struct Genre: Codable {
 }
 
 struct Nation: Codable {
-    let nationName: String
+    private let nationName: String
     
     enum CodingKeys: String, CodingKey {
         case nationName = "nationNm"
@@ -75,9 +82,20 @@ struct Nation: Codable {
 }
 
 struct ShowType: Codable {
-    let showTypeGroupNm, showTypeNm: String
+    private let showTypeGroupName, showTypeName: String
+    
+    enum CodingKeys: String, CodingKey {
+        case showTypeGroupName = "showTypeGroupNm"
+        case showTypeName = "showTypeNm"
+    }
 }
 
 struct Staff: Codable {
-    let peopleNm, peopleNmEn, staffRoleNm: String
+    private let peopleName, personNameEnglish, staffRoleName: String
+    
+    enum CodingKeys: String, CodingKey {
+        case peopleName = "peopleNm"
+        case personNameEnglish = "peopleNmEn"
+        case staffRoleName = "staffRoleNm"
+    }
 }
