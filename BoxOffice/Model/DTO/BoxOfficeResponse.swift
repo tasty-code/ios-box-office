@@ -10,15 +10,15 @@ struct BoxOfficeResponse: Codable {
 
 struct DailyBoxOffice: Codable {
     private let boxofficeType, showRange: String
-    let dailyBoxOfficeLists: [DailyBoxOfficeList]
+    let dailyBoxOfficeInfo: [DailyBoxOfficeInfo]
     
     private enum CodingKeys: String, CodingKey {
         case boxofficeType, showRange
-        case dailyBoxOfficeLists = "dailyBoxOfficeList"
+        case dailyBoxOfficeInfo = "dailyBoxOfficeList"
     }
 }
 
-struct DailyBoxOfficeList: Codable {
+struct DailyBoxOfficeInfo: Codable {
     private let rnum, rank, rankInten: String
     private let rankOldAndNew: RankOldAndNew
     private let movieCode, movieName, openDate, salesAmt: String
