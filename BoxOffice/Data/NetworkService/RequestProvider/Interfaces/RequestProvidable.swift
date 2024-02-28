@@ -2,5 +2,5 @@
 import Foundation
 
 protocol RequestProvidable {
-    func makeURLRequest(for boxOfficeType: URLProvider) -> URLRequest?
+    func makeURLRequest(for boxOfficeType: URLProvidable) -> URLRequest?
 }

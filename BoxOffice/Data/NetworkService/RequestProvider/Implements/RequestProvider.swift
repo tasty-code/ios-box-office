@@ -9,7 +9,7 @@ final class RequestProvider: RequestProvidable {
         self.httpMethod = httpMethod
     }
 
-    func makeURLRequest(for boxOfficeType: URLProvider) -> URLRequest? {
+    func makeURLRequest(for boxOfficeType: URLProvidable) -> URLRequest? {
         guard let url = boxOfficeType.makeURL() else { return nil }
         var request = URLRequest(url: url)
         request.httpMethod = httpMethod
