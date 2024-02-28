@@ -8,20 +8,20 @@
 import XCTest
 @testable import BoxOffice
 
-final class BoxOfficeTests: XCTestCase {
+final class BoxOfficeTests: XCTestCase, DailyFormatter {
     var sutJsonParser: JsonParser!
-    var sutBoxOffice: BoxOfficeManager!
+    var networkSession: NetworkSession!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         sutJsonParser = JsonParser()
-        sutBoxOffice = BoxOfficeManager()
+        networkSession = NetworkSession(session: URLSession.shared)
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sutJsonParser = nil
-        sutBoxOffice = nil
+        networkSession = nil
     }
     
     func test_박스오피스샘플데이터를_파싱후_반환되는_boxOfficeType이_일별_박스오피스가_맞는지() {
@@ -59,20 +59,30 @@ final class BoxOfficeTests: XCTestCase {
         let expectation = XCTestExpectation(description: "데이터 응답 요청 중")
         
         //when
-        let date = sutBoxOffice.dailyFormatter()
-        let dailyBoxOffice = KobisAPI.dailyBoxOffice(
-            url: "https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json",
-            key: "2c7b3f6025093cbb1df0f1e819bf8c65",
-            date: date
+        let dailyBoxOfficeAPI = DailyBoxOffice(
+            path: "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json",
+            date: dailyFormatter(format: "yyyyMMdd")
         )
-        sutBoxOffice.requestDailyBoxOffice(kobisAPI: dailyBoxOffice, responseHandler: { result in
-            switch result {
-            case .success(let response):
-                let dailyBoxOfficeResponse = response as! DailyBoxOfficeDTO
-                boxOfficeType = dailyBoxOfficeResponse.boxOfficeResult.boxofficeType
-            case .failure(_):
-                boxOfficeType = nil
-            }
+        
+        let networkRequestBuilder = NetworkRequestBuilder(
+            baseUrl: dailyBoxOfficeAPI.url,
+            path: dailyBoxOfficeAPI.path,
+            header: ["Content-Type" : "application/json"],
+            query: [
+                "key" : dailyBoxOfficeAPI.key,
+                "targetDt" : dailyBoxOfficeAPI.date
+            ],
+            method: HTTPMethodType.get,
+            urlScheme: URLScheme.https
+        )
+        
+        var networkManger = NetworkManager<DailyBoxOfficeDTO>(
+            networkSession: networkSession,
+            networkRequestBuilder: networkRequestBuilder
+        )
+        
+        networkManger.request(complection: { result in
+            boxOfficeType = result.boxOfficeResult.boxofficeType
             expectation.fulfill()
         })
         wait(for: [expectation])
@@ -87,20 +97,30 @@ final class BoxOfficeTests: XCTestCase {
         let expectation = XCTestExpectation(description: "데이터 응답 요청 중")
         
         //when
-        let date = sutBoxOffice.dailyFormatter()
-        let dailyBoxOffice = KobisAPI.dailyBoxOffice(
-            url: "https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json",
-            key: "--------",
-            date: date
+        let dailyBoxOfficeAPI = DailyBoxOffice(
+            path: "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json",
+            date: dailyFormatter(format: "yyyyMMdd")
         )
-        sutBoxOffice.requestDailyBoxOffice(kobisAPI: dailyBoxOffice, responseHandler: { result in
-            switch result {
-            case .success(let response):
-                let dailyBoxOfficeResponse = response as! DailyBoxOfficeDTO
-                boxOfficeType = dailyBoxOfficeResponse.boxOfficeResult.boxofficeType
-            case .failure(_):
-                boxOfficeType = nil
-            }
+        
+        let networkRequestBuilder = NetworkRequestBuilder(
+            baseUrl: dailyBoxOfficeAPI.url,
+            path: dailyBoxOfficeAPI.path,
+            header: ["Content-Type" : "application/json"],
+            query: [
+                "key" : "unknown-key",
+                "targetDt" : dailyBoxOfficeAPI.date
+            ],
+            method: HTTPMethodType.get,
+            urlScheme: URLScheme.https
+        )
+        
+        var networkManger = NetworkManager<DailyBoxOfficeDTO>(
+            networkSession: networkSession,
+            networkRequestBuilder: networkRequestBuilder
+        )
+        
+        networkManger.request(complection: { result in
+            boxOfficeType = result.boxOfficeResult.boxofficeType
             expectation.fulfill()
         })
         wait(for: [expectation])
@@ -116,26 +136,36 @@ final class BoxOfficeTests: XCTestCase {
         let expectation = XCTestExpectation(description: "데이터 응답 요청 중")
         
         //when
-        let detailMovie = KobisAPI.detailMovie(
-            url: "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json",
-            key: "2c7b3f6025093cbb1df0f1e819bf8c65",
+        let detailMovieAPI = DetailMovie(
+            path: "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json",
             code: "20124079"
         )
-        sutBoxOffice.requestDetailMovie(kobisAPI: detailMovie, responseHandler: { result in
-            switch result {
-            case .success(let response):
-                let detailBoxOfficeResponse = response as! DetailMovieDTO
-                director = detailBoxOfficeResponse.movieInfoResult.movieInfo.directors[0].peopleNm
-            case .failure(_):
-                director = nil
-            }
+        
+        let networkRequestBuilder = NetworkRequestBuilder(
+            baseUrl: detailMovieAPI.url,
+            path: detailMovieAPI.path,
+            header: ["Content-Type" : "application/json"],
+            query: [
+                "key" : detailMovieAPI.key,
+                "movieCd" : detailMovieAPI.code
+            ],
+            method: HTTPMethodType.get,
+            urlScheme: URLScheme.https
+        )
+        
+        var networkManger = NetworkManager<DetailMovieDTO>(
+            networkSession: networkSession,
+            networkRequestBuilder: networkRequestBuilder
+        )
+        
+        networkManger.request(complection: { result in
+            director = result.movieInfoResult.movieInfo.directors[0].peopleNm
             expectation.fulfill()
         })
         wait(for: [expectation])
         
         //then
         XCTAssertEqual(result, director!)
-
     }
 }
  
