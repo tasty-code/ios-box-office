@@ -30,6 +30,8 @@
 		BD5698A52B7D9CBA00704CCA /* BoxOfficeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5698A22B7D9BE800704CCA /* BoxOfficeResponseDTO.swift */; };
 		BDA93E6D2B8F089C000A43C6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA93E6C2B8F089C000A43C6 /* API.swift */; };
 		BDA93E6F2B8F08C5000A43C6 /* BoxOfficeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA93E6E2B8F08C5000A43C6 /* BoxOfficeAPI.swift */; };
+		BDA93E722B8F0A4E000A43C6 /* BoxOfficeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA93E712B8F0A4E000A43C6 /* BoxOfficeRepository.swift */; };
+		BDA93E752B8F0A9D000A43C6 /* BoxOfficeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA93E742B8F0A9D000A43C6 /* BoxOfficeUseCase.swift */; };
 		BDFD201B2B836A1300E84042 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFD201A2B836A1300E84042 /* NetworkService.swift */; };
 		BDFD201D2B836C9900E84042 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFD201C2B836C9900E84042 /* Requestable.swift */; };
 		BDFD20202B837BDA00E84042 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFD201A2B836A1300E84042 /* NetworkService.swift */; };
@@ -91,6 +93,8 @@
 		BD5698A22B7D9BE800704CCA /* BoxOfficeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeResponseDTO.swift; sourceTree = "<group>"; };
 		BDA93E6C2B8F089C000A43C6 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BDA93E6E2B8F08C5000A43C6 /* BoxOfficeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeAPI.swift; sourceTree = "<group>"; };
+		BDA93E712B8F0A4E000A43C6 /* BoxOfficeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeRepository.swift; sourceTree = "<group>"; };
+		BDA93E742B8F0A9D000A43C6 /* BoxOfficeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeUseCase.swift; sourceTree = "<group>"; };
 		BDFD201A2B836A1300E84042 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BDFD201C2B836C9900E84042 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		BDFD20242B83AB5600E84042 /* DataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferService.swift; sourceTree = "<group>"; };
@@ -159,7 +163,7 @@
 			path = BoxOffice;
 			sourceTree = "<group>";
 		};
-		99C28D762B88A078004A43E3 /* Entities */ = {
+		99C28D762B88A078004A43E3 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
 				BDFE8FE42B7C7F650091339F /* BoxOffice.swift */,
@@ -168,7 +172,7 @@
 				BDFE901D2B7CB2FE0091339F /* Extension */,
 				BD56989C2B7CCF3D00704CCA /* Enum */,
 			);
-			path = Entities;
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		99C28D772B88A0C2004A43E3 /* Application */ = {
@@ -271,6 +275,22 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		BDA93E702B8F0A06000A43C6 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				BDA93E712B8F0A4E000A43C6 /* BoxOfficeRepository.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		BDA93E732B8F0A65000A43C6 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				BDA93E742B8F0A9D000A43C6 /* BoxOfficeUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
 		BDFD20172B835EC500E84042 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,7 +307,9 @@
 		BDFE8FE22B7C4F960091339F /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				99C28D762B88A078004A43E3 /* Entities */,
+				BDA93E732B8F0A65000A43C6 /* UseCase */,
+				BDA93E702B8F0A06000A43C6 /* Interface */,
+				99C28D762B88A078004A43E3 /* Entity */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -468,11 +490,13 @@
 				99C28D902B8EEA18004A43E3 /* MoviesListViewModel.swift in Sources */,
 				99C28D852B88A7F7004A43E3 /* MoviesListViewModel.swift in Sources */,
 				99C28D8A2B88EACE004A43E3 /* Bundle+.swift in Sources */,
+				BDA93E752B8F0A9D000A43C6 /* BoxOfficeUseCase.swift in Sources */,
 				99C28D3C2B82E340004A43E3 /* MovieDetailResponseDTO.swift in Sources */,
 				BDA93E6D2B8F089C000A43C6 /* API.swift in Sources */,
 				BDFD201B2B836A1300E84042 /* NetworkService.swift in Sources */,
 				99C28D832B88A7BE004A43E3 /* MoviewListCollectionViewController.swift in Sources */,
 				99C28D8C2B8E656B004A43E3 /* MovieDetailView.swift in Sources */,
+				BDA93E722B8F0A4E000A43C6 /* BoxOfficeRepository.swift in Sources */,
 				BDFE8FE52B7C7F650091339F /* BoxOffice.swift in Sources */,
 				99C28D8E2B8EE855004A43E3 /* Observable.swift in Sources */,
 			);
