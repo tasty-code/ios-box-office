@@ -1,4 +1,4 @@
 
-enum BaseURLType: Hashable {
+enum BaseURLType {
     case kobis
 }
