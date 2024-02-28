@@ -8,7 +8,7 @@
 import Foundation
 
 final class JsonFileManager {
-    func decodeJsonFile<T: Decodable>(resourse: String) -> T? {
+    func decode<T: Decodable>(resourse: String) -> T? {
         guard let path = Bundle.main.path(forResource: resourse, ofType: "json"),
               let jsonString = try? String(contentsOfFile: path)
         else {
