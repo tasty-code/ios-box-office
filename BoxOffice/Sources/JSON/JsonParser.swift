@@ -7,7 +7,7 @@
 
 import Foundation
 
-class JsonParser {
+final class JsonParser {
     func parseBoxOfficeSample<T: Decodable>(resourse: String) -> T? {
         guard let path = Bundle.main.path(forResource: resourse, ofType: "json"),
               let jsonString = try? String(contentsOfFile: path)

@@ -10,7 +10,7 @@ protocol Encoderable {
     func encode(_ parameters: [String: Any]) -> Data?
 }
 
-class JsonEncoder: Encoderable {
+final class JsonEncoder: Encoderable {
     func encode(_ parameters: [String : Any]) -> Data? {
         try? JSONSerialization.data(withJSONObject: parameters)
     }
