@@ -1,7 +1,7 @@
 
 import Foundation
 
-protocol APIKeyable {
+protocol APIKey {
     var API_KEY: String { get }
 }
 
@@ -18,7 +18,7 @@ class BaseEnvironment {
     }
 }
 
-final class DebugEnvironment: BaseEnvironment, APIKeyable {
+final class DebugEnvironment: BaseEnvironment, APIKey {
     
     var API_KEY: String {
         dict.object(forKey: "API_KEY") as? String ?? ""
