@@ -17,9 +17,9 @@ class MoviesCellViewModel {
     
     var rankChangeText: String {
         if movie.rankChangesWithPreviousDay > 0 {
-            return "↑ \(movie.rankChangesWithPreviousDay)"
+            return "▲ \(movie.rankChangesWithPreviousDay)"
         } else if movie.rankChangesWithPreviousDay < 0 {
-            return "↓ \(abs(movie.rankChangesWithPreviousDay))"
+            return "▼ \(abs(movie.rankChangesWithPreviousDay))"
         } else {
             return "-"
         }

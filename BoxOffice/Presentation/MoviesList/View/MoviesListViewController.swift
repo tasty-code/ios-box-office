@@ -68,6 +68,7 @@ class MoviesCollectionView: UIViewController {
         viewModel.fetchData { [weak self] result in
             switch result {
             case .success(let movies):
+                print("fetchData: \(movies)")
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
                     self?.refreshControl.endRefreshing()
