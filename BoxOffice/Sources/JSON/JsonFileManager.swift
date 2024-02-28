@@ -7,18 +7,18 @@
 
 import Foundation
 
-final class JsonParser {
-    func parseBoxOfficeSample<T: Decodable>(resourse: String) -> T? {
+final class JsonFileManager {
+    func decodeJsonFile<T: Decodable>(resourse: String) -> T? {
         guard let path = Bundle.main.path(forResource: resourse, ofType: "json"),
               let jsonString = try? String(contentsOfFile: path)
         else {
             return nil
         }
         
-        let decoder = JSONDecoder()
+        let decoder = JsonDecoder.shared
         let data = jsonString.data(using: .utf8)
         guard let data = data,
-              let result = try? decoder.decode(T.self, from: data)
+              let result = try? decoder.decode(T.self, data)
         else {
             return nil
         }

@@ -9,18 +9,18 @@ import XCTest
 @testable import BoxOffice
 
 final class BoxOfficeTests: XCTestCase, DailyFormatter {
-    var sutJsonParser: JsonParser!
+    var fileManager: JsonFileManager!
     var networkSession: NetworkSession!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sutJsonParser = JsonParser()
+        fileManager = JsonFileManager()
         networkSession = NetworkSession(session: URLSession.shared)
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        sutJsonParser = nil
+        fileManager = nil
         networkSession = nil
     }
     
@@ -29,7 +29,7 @@ final class BoxOfficeTests: XCTestCase, DailyFormatter {
         let result = "일별 박스오피스"
         
         //when
-        guard let parseResult: DailyBoxOfficeDTO = sutJsonParser.parseBoxOfficeSample(resourse: "box_office_sample") else {
+        guard let parseResult: DailyBoxOfficeDTO = fileManager.decodeJsonFile(resourse: "box_office_sample") else {
             return
         }
         let boxOfficeType = parseResult.boxOfficeResult.boxofficeType
@@ -43,7 +43,7 @@ final class BoxOfficeTests: XCTestCase, DailyFormatter {
         let result = "씽2게더"
         
         //when
-        guard let parseResult: DailyBoxOfficeDTO = sutJsonParser.parseBoxOfficeSample(resourse: "box_office_sample") else {
+        guard let parseResult: DailyBoxOfficeDTO = fileManager.decodeJsonFile(resourse: "box_office_sample") else {
             return
         }
         let movieName = parseResult.boxOfficeResult.dailyBoxOfficeList[2].movieNm
