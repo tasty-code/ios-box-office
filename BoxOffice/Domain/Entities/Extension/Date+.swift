@@ -1,8 +1,12 @@
 import Foundation
 
 extension Date {
-    func yesterday() -> Date {
+    var yesterday: Date {
         return Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? self
+    }
+    
+    var yesterdayString: String {
+        return DateFormatter.jsonDateFormatter.string(from: yesterday)
     }
 }
 
