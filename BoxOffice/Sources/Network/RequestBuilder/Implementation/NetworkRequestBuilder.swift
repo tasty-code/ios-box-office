@@ -38,7 +38,7 @@ final class NetworkRequestBuilder: NetworkRequestBuilderProtocol {
             return nil
         }
         
-        var urlRequest = URLRequest(url: url)
+        var urlRequest = URLRequest(url: url, timeoutInterval: 30.0)
         urlRequest.httpMethod = method.rawValue
         urlRequest.allHTTPHeaderFields = header.reduce(into: [:]) { partialResult, header in
             partialResult[header.key] = header.value

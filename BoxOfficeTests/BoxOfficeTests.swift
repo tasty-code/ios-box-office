@@ -82,7 +82,12 @@ final class BoxOfficeTests: XCTestCase, DailyFormatter {
         )
         
         networkManger.request(complection: { result in
-            boxOfficeType = result.boxOfficeResult.boxofficeType
+            guard let networkResult = result else {
+                boxOfficeType = nil
+                expectation.fulfill()
+                return
+            }
+            boxOfficeType = networkResult.boxOfficeResult.boxofficeType
             expectation.fulfill()
         })
         wait(for: [expectation])
@@ -120,7 +125,12 @@ final class BoxOfficeTests: XCTestCase, DailyFormatter {
         )
         
         networkManger.request(complection: { result in
-            boxOfficeType = result.boxOfficeResult.boxofficeType
+            guard let networkResult = result else {
+                boxOfficeType = nil
+                expectation.fulfill()
+                return
+            }
+            boxOfficeType = networkResult.boxOfficeResult.boxofficeType
             expectation.fulfill()
         })
         wait(for: [expectation])
@@ -159,7 +169,13 @@ final class BoxOfficeTests: XCTestCase, DailyFormatter {
         )
         
         networkManger.request(complection: { result in
-            director = result.movieInfoResult.movieInfo.directors[0].peopleNm
+            
+            guard let networkResult = result else {
+                director = nil
+                expectation.fulfill()
+                return
+            }
+            director = networkResult.movieInfoResult.movieInfo.directors[0].peopleNm
             expectation.fulfill()
         })
         wait(for: [expectation])

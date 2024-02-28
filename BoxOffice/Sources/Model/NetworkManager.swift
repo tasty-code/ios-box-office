@@ -20,7 +20,7 @@ struct NetworkManager<T: Decodable>: StatusCodeProtocol {
         self.networkRequestBuilder = networkRequestBuilder
     }
     
-    mutating func request(complection: @escaping (T) -> Void) {
+    mutating func request(complection: @escaping (T?) -> Void) {
         let builder = networkRequestBuilder
         
         guard let request = builder.setURLRequest() else {
@@ -35,10 +35,12 @@ struct NetworkManager<T: Decodable>: StatusCodeProtocol {
                       let data = networkResponse.data,
                       let decodeData: T = try? decoder.decode(T.self, data)
                 else {
+                    complection(nil)
                     return
                 }
                 
                 if !success.contains(networkResponse.response.statusCode) {
+                    complection(nil)
                     return
                 }
                 
