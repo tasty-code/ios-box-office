@@ -29,7 +29,7 @@ final class BoxOfficeTests: XCTestCase, DailyFormatter {
         let result = "일별 박스오피스"
         
         //when
-        guard let parseResult: DailyBoxOfficeDTO = fileManager.decodeJsonFile(resourse: "box_office_sample") else {
+        guard let parseResult: DailyBoxOfficeDTO = fileManager.decode(resourse: "box_office_sample") else {
             return
         }
         let boxOfficeType = parseResult.boxOfficeResult.boxofficeType
@@ -43,7 +43,7 @@ final class BoxOfficeTests: XCTestCase, DailyFormatter {
         let result = "씽2게더"
         
         //when
-        guard let parseResult: DailyBoxOfficeDTO = fileManager.decodeJsonFile(resourse: "box_office_sample") else {
+        guard let parseResult: DailyBoxOfficeDTO = fileManager.decode(resourse: "box_office_sample") else {
             return
         }
         let movieName = parseResult.boxOfficeResult.dailyBoxOfficeList[2].movieNm
