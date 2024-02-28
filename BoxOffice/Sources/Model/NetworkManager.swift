@@ -46,24 +46,9 @@ struct NetworkManager<T: Decodable>: StatusCodeProtocol {
                 
                 complection(decodeData)
             case .failure(let error):
-                print(error.localizedDescription)
+                print(error.errorDescription)
             }
         })
-    }
-    
-    private mutating func resultHandler(with result: Result<Any, Error>) -> Data? {
-        switch result {
-        case .success(let networkResponse):
-            guard let networkResponse = networkResponse as? NetworkResponse,
-                  let data = networkResponse.data
-            else {
-                return nil
-            }
-            return data
-        case .failure(let error):
-            print(error.localizedDescription)
-            return nil
-        }
     }
 }
 

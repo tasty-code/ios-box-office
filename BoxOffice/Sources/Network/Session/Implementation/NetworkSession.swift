@@ -14,10 +14,10 @@ final class NetworkSession: NetworkSessionProtocol {
         self.session = session
     }
     
-    func dataTask(with request: URLRequest, complection: @escaping (Result<Any, Error>) -> Void) {
+    func dataTask(with request: URLRequest, complection: @escaping (Result<Any, NetworkError>) -> Void) {
         session.dataTask(with: request) { (data, response, error) in
             if let error = error {
-                complection(.failure(error))
+                complection(.failure(NetworkError.invalidURL))
                 return
             }
             

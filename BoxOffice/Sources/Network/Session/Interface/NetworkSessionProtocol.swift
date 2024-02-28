@@ -10,7 +10,7 @@ import Foundation
 protocol NetworkSessionProtocol {
     func dataTask(
         with request: URLRequest,
-        complection: @escaping (Result<Any, Error>) -> Void
+        complection: @escaping (Result<Any, NetworkError>) -> Void
     )
 }
 
