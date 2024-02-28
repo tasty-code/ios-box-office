@@ -3,9 +3,9 @@ struct BoxOffice {
     let showRange: String
     let movieBoxOfficeList: Array<MovieBoxOffice>
     
-    init(boxofficeType: BoxOfficeType, showRange: String, movieBoxOfficeList: Array<MovieBoxOffice>) {
-        self.boxofficeType = boxofficeType
-        self.showRange = showRange
-        self.movieBoxOfficeList = movieBoxOfficeList
-    }
+//    init(boxofficeType: BoxOfficeType, showRange: String, movieBoxOfficeList: Array<MovieBoxOffice>) {
+//        self.boxofficeType = boxofficeType
+//        self.showRange = showRange
+//        self.movieBoxOfficeList = movieBoxOfficeList
+//    }
 }

@@ -51,45 +51,15 @@ class MoviesListCell: UICollectionViewCell {
         ])
     }
     
-    func configure(with movie: MovieBoxOffice) {
-        titleLabel.text = movie.movieName
-        rankLabel.text = "\(movie.rank)"
-        changeLabel.text = "\(movie.rankChangesWithPreviousDay)"
-        audienceLabel.text = formatAudienceLabel(with: movie)
-        formatChangeLabel(with: movie)
+    func configure(with viewModel: MoviesCellViewModel) {
+        titleLabel.text = viewModel.movieName
+        rankLabel.text = viewModel.rank
+        changeLabel.text = viewModel.rankChangeText
+        changeLabel.textColor = viewModel.rankChangeColor
+        audienceLabel.text = viewModel.audienceText
     }
-    
-    private func formatAudienceLabel(with movie: MovieBoxOffice) -> String {
-        if let formattedAudienceCount = numberFormatter.string(from: NSNumber(value: movie.audienceCount)),
-           let formattedAccumulation = numberFormatter.string(from: NSNumber(value: movie.audienceAccumulation)) {
-            return "오늘 \(formattedAudienceCount) / 총 \(formattedAccumulation)"
-        }
-        return "오늘 \(movie.audienceCount) / 총 \(movie.audienceAccumulation)"
-    }
-    
-    private func formatChangeLabel(with movie: MovieBoxOffice) {
-        if movie.rankChangesWithPreviousDay > 0 {
-            changeLabel.text = "↑ \(movie.rankChangesWithPreviousDay)"
-            changeLabel.textColor = .red
-        } else if movie.rankChangesWithPreviousDay < 0 {
-            changeLabel.text = "↓ \(abs(movie.rankChangesWithPreviousDay))"
-            changeLabel.textColor = .blue
-        } else {
-            changeLabel.text = "-"
-            changeLabel.textColor = .black
-        }
-        if movie.rankOldAndNew == .new {
-            changeLabel.text = "신작"
-            changeLabel.textColor = .red
-        }
-    }
-    
-    private lazy var numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter
-    }()
 }
+
 
 /*
  extension UILabel {
@@ -143,13 +113,43 @@ class MoviesListCell: UICollectionViewCell {
          ])
      }
      
-     func configure(with viewModel: MoviesCellViewModel) {
-         titleLabel.text = viewModel.movieName
-         rankLabel.text = viewModel.rank
-         changeLabel.text = viewModel.rankChangeText
-         changeLabel.textColor = viewModel.rankChangeColor
-         audienceLabel.text = viewModel.audienceText
+     func configure(with movie: MovieBoxOffice) {
+         titleLabel.text = movie.movieName
+         rankLabel.text = "\(movie.rank)"
+         changeLabel.text = "\(movie.rankChangesWithPreviousDay)"
+         audienceLabel.text = formatAudienceLabel(with: movie)
+         formatChangeLabel(with: movie)
      }
+     
+     private func formatAudienceLabel(with movie: MovieBoxOffice) -> String {
+         if let formattedAudienceCount = numberFormatter.string(from: NSNumber(value: movie.audienceCount)),
+            let formattedAccumulation = numberFormatter.string(from: NSNumber(value: movie.audienceAccumulation)) {
+             return "오늘 \(formattedAudienceCount) / 총 \(formattedAccumulation)"
+         }
+         return "오늘 \(movie.audienceCount) / 총 \(movie.audienceAccumulation)"
+     }
+     
+     private func formatChangeLabel(with movie: MovieBoxOffice) {
+         if movie.rankChangesWithPreviousDay > 0 {
+             changeLabel.text = "↑ \(movie.rankChangesWithPreviousDay)"
+             changeLabel.textColor = .red
+         } else if movie.rankChangesWithPreviousDay < 0 {
+             changeLabel.text = "↓ \(abs(movie.rankChangesWithPreviousDay))"
+             changeLabel.textColor = .blue
+         } else {
+             changeLabel.text = "-"
+             changeLabel.textColor = .black
+         }
+         if movie.rankOldAndNew == .new {
+             changeLabel.text = "신작"
+             changeLabel.textColor = .red
+         }
+     }
+     
+     private lazy var numberFormatter: NumberFormatter = {
+         let formatter = NumberFormatter()
+         formatter.numberStyle = .decimal
+         return formatter
+     }()
  }
-
  */

@@ -1,6 +1,7 @@
 import Foundation
 
 protocol BoxOfficeUseCase {
+    @discardableResult
     func fetch(completion: @escaping (Result<BoxOffice, Error>) -> Void) -> URLSessionTask?
 }
 

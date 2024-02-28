@@ -1,10 +1,3 @@
-//
-//  MovieDetailViewController.swift
-//  BoxOffice
-//
-//  Created by 윤진영 on 2/28/24.
-//
-
 import UIKit
 
 class MovieDetailView: UIViewController {

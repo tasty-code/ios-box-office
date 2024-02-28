@@ -2,7 +2,7 @@ import UIKit
 
 class MoviesCollectionView: UIViewController {
     
-    var viewModel = MoviesListViewModel()
+    let viewModel: MoviesListViewModel
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -18,8 +18,20 @@ class MoviesCollectionView: UIViewController {
     let refreshControl = UIRefreshControl()
     var isRefreshing = false
     
+    init(viewModel: MoviesListViewModel, isRefreshing: Bool = false) {
+        self.viewModel = viewModel
+        self.isRefreshing = isRefreshing
+        print("생성자")
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewDidLoad")
         setupCollectionView()
         setupRefreshControl()
         setupNavigationBar()
@@ -27,7 +39,7 @@ class MoviesCollectionView: UIViewController {
     }
     
     func setupNavigationBar() {
-        navigationItem.title = "\(DateFormatter.titleDateFormatter.string(from: Date().yesterday()))"
+        navigationItem.title = "\(DateFormatter.titleDateFormatter.string(from: Date().yesterday))"
     }
     
     func setupCollectionView() {
@@ -56,12 +68,10 @@ class MoviesCollectionView: UIViewController {
         viewModel.fetchData { [weak self] result in
             switch result {
             case .success(let movies):
-                print("\(movies)")
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
                     self?.refreshControl.endRefreshing()
                     self?.isRefreshing = false
-                    print("다시 갖고왔니?")
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -88,10 +98,10 @@ extension MoviesCollectionView: UICollectionViewDataSource {
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedMovie = viewModel.movies.value[indexPath.item]
-        showMovieDetailScreen(for: selectedMovie)
-    }
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let selectedMovie = viewModel.movies.value[indexPath.item]
+//        showMovieDetailScreen(for: selectedMovie)
+//    }
     func showMovieDetailScreen(for movie: MovieBoxOffice) {
         let movieDetailViewController = MovieDetailView(movie: movie)
         navigationController?.pushViewController(movieDetailViewController, animated: true)
