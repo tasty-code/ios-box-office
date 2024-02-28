@@ -8,13 +8,13 @@
 import Foundation
 
 protocol Decoderable {
-    func decode<T: Decodable>(_ data: Data) throws -> T
+    func decode<T: Decodable>(_ type: T.Type, _ data: Data) throws -> T
 }
 
 final class JsonDecoder: Decoderable {
-    private let jsonDecoder = JSONDecoder()
+    static let shared = JsonDecoder()
     
-    func decode<T: Decodable>(_ data: Data) throws -> T {
-        try jsonDecoder.decode(T.self, from: data)
+    func decode<T: Decodable>(_ type: T.Type, _ data: Data) throws -> T  {
+        try JSONDecoder().decode(T.self, from: data)
     }
 }
