@@ -19,15 +19,7 @@ final class NetworkServiceTests: XCTestCase {
 
     func test_네트워크_서비스를_통해_박스오피스_데이터를_불러올_수_있다() throws {
         // given
-        let baseUrl = "kobis.or.kr"
-        let path = "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
-        let queryParameters = [
-            "key": "f5eef3421c602c6cb7ea224104795888",
-            "targetDt": "20120101"
-        ]
-        let boxOfficeAPI = APIConfig<BoxOfficeResponseDTO>(baseURL: baseUrl,
-                                                           path: path,
-                                                           queryParameters: queryParameters)
+        let boxOfficeAPI = APIConfig<BoxOfficeResponseDTO>.boxOfficeAPI()
         let mockNetworkSessionManager = MockNetworkSessionManager()
         let sut = DefaultNetworkService(sessionManager: mockNetworkSessionManager)
         let expectation = XCTestExpectation(description: "dataFectch")
@@ -46,15 +38,7 @@ final class NetworkServiceTests: XCTestCase {
     }
     func test_네트워크에서_불러온_json을_BoxOfficeResponseDTO로_파싱할_수_있다() throws {
         // given
-        let baseUrl = "kobis.or.kr"
-        let path = "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
-        let queryParameters = [
-            "key": "f5eef3421c602c6cb7ea224104795888",
-            "targetDt": "20120101"
-        ]
-        let boxOfficeAPI = APIConfig<BoxOfficeResponseDTO>(baseURL: baseUrl,
-                                                           path: path,
-                                                           queryParameters: queryParameters)
+        let boxOfficeAPI = APIConfig<BoxOfficeResponseDTO>.boxOfficeAPI()
         let mockNetworkSessionManager = MockNetworkSessionManager()
         let sut = DefaultDataTransferService(with: DefaultNetworkService(sessionManager: mockNetworkSessionManager))
         let decoder = JSONDecoder()
@@ -77,15 +61,7 @@ final class NetworkServiceTests: XCTestCase {
 
     func test_네트워크에서_불러온_json을_MovieDetailResponseDTO로_파싱할_수_있다() throws {
         // given
-        let baseUrl = "kobis.or.kr"
-        let path = "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
-        let queryParameters = [
-            "key": "f5eef3421c602c6cb7ea224104795888",
-            "movieCd": "20124079"
-        ]
-        let movieDetailAPI = APIConfig<MovieDetailResponseDTO>(baseURL: baseUrl,
-                                                           path: path,
-                                                           queryParameters: queryParameters)
+        let movieDetailAPI = APIConfig<MovieDetailResponseDTO>.movieDetailAPI(movieCode: "20124079")
         let mockNetworkSessionManager = MockNetworkSessionManager()
         let sut = DefaultDataTransferService(with: DefaultNetworkService(sessionManager: mockNetworkSessionManager))
         let decoder = JSONDecoder()

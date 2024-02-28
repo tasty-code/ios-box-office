@@ -84,6 +84,32 @@ extension APIConfig {
     }
 }
 
+extension APIConfig {
+    static func boxOfficeAPI() -> Self {
+        let baseURL = "kobis.or.kr"
+        let boxOfficePath = "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
+        let queryParameters = [
+            "key": Bundle.main.apiKey,
+            "targetDt": DateFormatter.jsonDateFormatter.string(from: Date().yesterday())
+        ]
+        return APIConfig(baseURL: baseURL,
+                         path: boxOfficePath,
+                         queryParameters: queryParameters)
+    }
+    
+    static func movieDetailAPI(movieCode: String) -> Self {
+        let baseURL = "kobis.or.kr"
+        let movieDetailPath = "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
+        let queryParameters = [
+            "key": Bundle.main.apiKey,
+            "movieCd": movieCode
+        ]
+        return APIConfig(baseURL: baseURL,
+                         path: movieDetailPath,
+                         queryParameters: queryParameters)
+    }
+}
+
 protocol BodyEncoder {
     func encode(_ parameters: [String: Any]) -> Data?
 }
