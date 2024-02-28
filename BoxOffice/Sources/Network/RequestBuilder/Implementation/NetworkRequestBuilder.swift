@@ -40,7 +40,6 @@ final class NetworkRequestBuilder: NetworkRequestBuilderProtocol {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.rawValue
-        
         urlRequest.allHTTPHeaderFields = header.reduce(into: [:]) { partialResult, header in
             partialResult[header.key] = header.value
         }

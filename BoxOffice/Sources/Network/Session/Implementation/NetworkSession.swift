@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class NetworkSession: NetworkSessionProtocol, StatusCodeProtocol {
+final class NetworkSession: NetworkSessionProtocol {
     private var session: URLSession
     
     init (session: URLSession) {
