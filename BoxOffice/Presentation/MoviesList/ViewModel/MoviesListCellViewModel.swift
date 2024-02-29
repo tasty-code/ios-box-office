@@ -1,6 +1,6 @@
 import UIKit
 
-class MoviesCellViewModel {
+final class MoviesCellViewModel {
     private var movie: MovieBoxOffice
     
     init(movie: MovieBoxOffice) {
@@ -18,23 +18,27 @@ class MoviesCellViewModel {
     var rankChangeText: String {
         if movie.rankChangesWithPreviousDay > 0 {
             return "▲ \(movie.rankChangesWithPreviousDay)"
-        } else if movie.rankChangesWithPreviousDay < 0 {
-            return "▼ \(abs(movie.rankChangesWithPreviousDay))"
-        } else {
-            return "-"
         }
+        if movie.rankChangesWithPreviousDay < 0 {
+            return "▼ \(abs(movie.rankChangesWithPreviousDay))"
+        }
+        if movie.rankOldAndNew == .new {
+            return "신작"
+        }
+        return "-"
     }
     
     var rankChangeColor: UIColor {
         if movie.rankOldAndNew == .new {
             return .red
-        } else if movie.rankChangesWithPreviousDay > 0 {
-            return .red
-        } else if movie.rankChangesWithPreviousDay < 0 {
-            return .blue
-        } else {
-            return .black
         }
+        if movie.rankChangesWithPreviousDay > 0 {
+            return .red
+        }
+        if movie.rankChangesWithPreviousDay < 0 {
+            return .blue
+        }
+        return .gray
     }
     
     var audienceText: String {

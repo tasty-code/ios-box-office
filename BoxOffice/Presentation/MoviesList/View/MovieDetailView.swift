@@ -1,6 +1,6 @@
 import UIKit
 
-class MovieDetailView: UIViewController {
+final class MovieDetailView: UIViewController {
 
     private let movie: MovieBoxOffice
     

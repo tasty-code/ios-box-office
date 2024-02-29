@@ -8,7 +8,7 @@ extension UILabel {
     }
 }
 
-class MoviesListCell: UICollectionViewCell {
+final class MoviesListCell: UICollectionViewCell {
     private let titleLabel = UILabel(font: .systemFont(ofSize: 15), textColor: .black)
     private let rankLabel = UILabel(font: .boldSystemFont(ofSize: 25), textColor: .black)
     private let changeLabel = UILabel(font: .systemFont(ofSize: 13), textColor: .red)

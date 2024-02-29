@@ -14,7 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let boxOfficeUseCase = DefaulBoxOfficeUseCase(boxOfficeRepository: boxOfficeRepository)
         let movieListViewModel = MoviesListViewModel(useCase: boxOfficeUseCase)
         
-        let navigationController = UINavigationController(rootViewController: MoviesCollectionView(viewModel: movieListViewModel))
+        let navigationController = UINavigationController(rootViewController: MoviesListViewController(viewModel: movieListViewModel))
         
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
