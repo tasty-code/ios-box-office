@@ -8,7 +8,13 @@ final class MoviesCellViewModel {
     }
     
     var movieName: String {
-        return movie.movieName
+        var text = movie.movieName
+        if text.count > 20 {
+            let index = text.index(text.startIndex, offsetBy: 20)
+            text = String(text[..<index]) + "..."
+            return text
+        }
+        return text
     }
     
     var rank: String {
@@ -17,10 +23,10 @@ final class MoviesCellViewModel {
     
     var rankChangeText: String {
         if movie.rankChangesWithPreviousDay > 0 {
-            return "▲ \(movie.rankChangesWithPreviousDay)"
+            return "▲\(movie.rankChangesWithPreviousDay)"
         }
         if movie.rankChangesWithPreviousDay < 0 {
-            return "▼ \(abs(movie.rankChangesWithPreviousDay))"
+            return "▼\(abs(movie.rankChangesWithPreviousDay))"
         }
         if movie.rankOldAndNew == .new {
             return "신작"
