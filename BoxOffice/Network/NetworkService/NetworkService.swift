@@ -32,23 +32,11 @@ extension NetworkService {
     let urlString = builder.baseURL
       .appending(builder.path)
       
-    let url: URL?
-//    if #available(iOS 16.0, *) {
-//      url = buildURLByURL(urlString: urlString, queries: builder.queries)
-//    } else {
-      url = buildURLByURLString(urlString: urlString, queries: builder.queries)
-//    }
+    let url = buildURLByURLString(urlString: urlString, queries: builder.queries)
     guard let url else { throw NetworkServiceError.cannotMakeRequest }
     var request = URLRequest(url: url)
     request.httpMethod = builder.method.stringExpression
     return request
-  }
-  
-  @available(iOS 16.0, *)
-  private func buildURLByURL(urlString: String, queries: [URLQueryItem]) -> URL? {
-    var url = URL(string: urlString)
-    url?.append(queryItems: queries)
-    return url
   }
   
   private func buildURLByURLString(urlString: String, queries: [URLQueryItem]) -> URL? {
