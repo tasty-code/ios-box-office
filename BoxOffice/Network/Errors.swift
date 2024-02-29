@@ -6,6 +6,7 @@
 //
 
 enum NetworkError: Error {
+    
     case netWorkingError
     case parseError
     case dataError

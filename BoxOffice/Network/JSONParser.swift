@@ -8,7 +8,7 @@
 import Foundation
 
 struct JSONParser{
-
+    
     func parseJSON<T: Decodable>(_ movieData: Data, DTO: T.Type) -> T? {
         do {
             let decodedData = try JSONDecoder().decode(T.self, from: movieData)
@@ -19,4 +19,3 @@ struct JSONParser{
         }
     }
 }
-

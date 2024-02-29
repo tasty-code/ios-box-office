@@ -24,7 +24,7 @@ struct NetworkAPI {
         components.path = apiType.makePath()
         
         components.queryItems = [
-            URLQueryItem(name: "key", value: APIURLCompnents.QueryValues.key.rawValue),
+            URLQueryItem(name: "key", value: APIURLCompnents.QueryValues.APIKey.rawValue),
             URLQueryItem(name: apiType.rawValue , value: query.rawValue)
         ]
         return components
@@ -39,13 +39,6 @@ extension NetworkAPI {
         return buildUrl(apiType: .dailyBoxOffice, requiredQuery: targetDate, queries: dict).url
     }
     
-    func buildMovieDetailAPI(movieCode: APIURLCompnents.QueryValues, keys: APIURLCompnents.QueryKeys..., values: Any...) -> URL? {
-        let dict: [APIURLCompnents.QueryKeys: Any] = zip(keys, values).reduce(into: [:]) { partialResult, now in
-            partialResult[now.0] = now.1 as! Dictionary<APIURLCompnents.QueryKeys, Any>.SubSequence
-        }
-        return buildUrl(apiType: .movieDetail,requiredQuery: movieCode, queries: dict).url
-    }
-    
     private func buildUrl(apiType: APIType, requiredQuery: APIURLCompnents.QueryValues, queries: [APIURLCompnents.QueryKeys: Any]) -> URLComponents {
         var components = URLComponents()
         components.scheme = APIURLCompnents.schema
@@ -53,7 +46,7 @@ extension NetworkAPI {
         components.path = apiType.makePath()
 
         components.queryItems = [
-            URLQueryItem(name: "key", value: APIURLCompnents.QueryValues.key.rawValue),
+            URLQueryItem(name: "key", value: APIURLCompnents.QueryValues.APIKey.rawValue),
             URLQueryItem(name: apiType.rawValue , value: requiredQuery.rawValue)
         ]
         queries.forEach { (key: APIURLCompnents.QueryKeys, value: Any) in
