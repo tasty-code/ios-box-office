@@ -29,4 +29,36 @@ enum MovieStatus {
       self = .oldMovie(riseOrFall)
     }
   }
+  
+  var text: String? {
+    switch self {
+    case .newMovie:
+      return "신작"
+    case .oldMovie(let riseOrFall):
+      switch riseOrFall {
+      case .risen(let number):
+        return String(number)
+      case .fallen(let number):
+        return String(number)
+      case .maintained:
+        return "-"
+      }
+    }
+  }
+  
+  var imageName: String? {
+    switch self {
+    case .newMovie:
+      return nil
+    case .oldMovie(let riseOrFall):
+      switch riseOrFall {
+      case .risen:
+        return "arrowtriangle.up.fill"
+      case .fallen:
+        return "arrowtriangle.down.fill"
+      case .maintained:
+        return nil
+      }
+    }
+  }
 }

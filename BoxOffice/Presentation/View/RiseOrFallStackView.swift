@@ -1,10 +1,6 @@
 import UIKit
 
 final class RiseOrFallStackView: UIStackView {
-  private let riseImage = UIImage(systemName: "arrowtriangle.up.fill")
-  private let fallImage = UIImage(systemName: "arrowtriangle.down.fill")
-  private let minusImage = UIImage(systemName: "minus")
-  
   private let riseOrFallImageView = UIImageView()
   private let riseOrFallLabel: UILabel = {
     let label = UILabel()
@@ -39,22 +35,12 @@ final class RiseOrFallStackView: UIStackView {
   }
   
   func configure(with movieStatus: MovieStatus) {
-    switch movieStatus {
-    case .newMovie:
-      riseOrFallImageView.isHidden = true
-      riseOrFallLabel.text = "신작"
-      riseOrFallLabel.textColor = .systemPink
-    case let .oldMovie(.risen(number)):
-      riseOrFallImageView.isHidden = false
-      riseOrFallImageView.image = riseImage
-      riseOrFallLabel.text = String(number)
-    case let .oldMovie(.fallen(number)):
-      riseOrFallImageView.isHidden = false
-      riseOrFallImageView.image = fallImage
-      riseOrFallLabel.text = String(number)
-    case .oldMovie(.maintained):
-      riseOrFallImageView.isHidden = true
-      riseOrFallLabel.text = "-"
+    if let imageName = movieStatus.imageName {
+      self.riseOrFallImageView.isHidden = false
+      self.riseOrFallImageView.image = UIImage(systemName: imageName)
+    } else {
+      self.riseOrFallImageView.isHidden = true
     }
+    self.riseOrFallLabel.text = movieStatus.text
   }
 }
