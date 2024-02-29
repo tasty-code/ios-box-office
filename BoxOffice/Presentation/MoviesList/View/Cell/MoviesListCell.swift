@@ -1,18 +1,48 @@
 import UIKit
 
-extension UILabel {
-    convenience init(font: UIFont, textColor: UIColor) {
-        self.init()
-        self.font = font
-        self.textColor = textColor
-    }
-}
-
-final class MoviesListCell: UICollectionViewCell {
-    private let titleLabel = UILabel(font: .systemFont(ofSize: 15), textColor: .black)
-    private let rankLabel = UILabel(font: .boldSystemFont(ofSize: 25), textColor: .black)
-    private let changeLabel = UILabel(font: .systemFont(ofSize: 13), textColor: .red)
-    private let audienceLabel = UILabel(font: .systemFont(ofSize: 14), textColor: .gray)
+final class MoviesListCell: UICollectionViewListCell {
+    private let rankStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .equalCentering
+        stackView.spacing = 4
+        return stackView
+    }()
+    private let titleAndAudienceStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .equalCentering
+        stackView.spacing = 4
+        return stackView
+    }()
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 15)
+        label.textColor = .black
+        return label
+    }()
+    private let rankLabel: UILabel = {
+        let label = UILabel()
+        label.font = .boldSystemFont(ofSize: 25)
+        label.textColor = .black
+        return label
+    }()
+    private let changeLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 13)
+        label.textColor = .red
+        return label
+    }()
+    private let audienceLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14)
+        label.textColor = .gray
+        return label
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,32 +52,28 @@ final class MoviesListCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+}
+
+extension MoviesListCell {
     private func setupViews() {
-        addSubview(titleLabel)
-        addSubview(rankLabel)
-        addSubview(changeLabel)
-        addSubview(audienceLabel)
+        addSubview(rankStackView)
+        rankStackView.addArrangedSubview(rankLabel)
+        rankStackView.addArrangedSubview(changeLabel)
         
-        rankLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(titleAndAudienceStackView)
+        titleAndAudienceStackView.addArrangedSubview(titleLabel)
+        titleAndAudienceStackView.addArrangedSubview(audienceLabel)
+        
+        rankStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            rankLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            rankLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30)
+            rankStackView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            rankStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 35)
         ])
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        titleAndAudienceStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            titleLabel.leadingAnchor.constraint(equalTo: rankLabel.leadingAnchor, constant: 40)
-        ])
-        changeLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            changeLabel.topAnchor.constraint(equalTo: rankLabel.bottomAnchor, constant: 3),
-            changeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30)
-        ])
-        audienceLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            audienceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 3),
-            audienceLabel.leadingAnchor.constraint(equalTo: changeLabel.trailingAnchor, constant: 30)
+            titleAndAudienceStackView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            titleAndAudienceStackView.leadingAnchor.constraint(equalTo: rankStackView.leadingAnchor, constant: 50)
         ])
     }
     

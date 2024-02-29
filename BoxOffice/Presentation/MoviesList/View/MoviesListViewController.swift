@@ -36,7 +36,6 @@ final class MoviesListViewController: UIViewController {
         bind()
         fetchData()
     }
-    
 }
 
 extension MoviesListViewController {
@@ -82,10 +81,16 @@ extension MoviesListViewController: UICollectionViewDataSource {
         }
         let movie = viewModel.movies.value[indexPath.item]
         cell.configure(with: movie)
+        cell.accessories = [.disclosureIndicator()]
         return cell
     }
     
-    func showMovieDetailScreen(for movie: MovieBoxOffice) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedMovie = viewModel.movies.value[indexPath.item]
+        showMovieDetailScreen(for: selectedMovie)
+    }
+    
+    func showMovieDetailScreen(for movie: MoviesCellViewModel) {
         let movieDetailViewController = MovieDetailView(movie: movie)
         navigationController?.pushViewController(movieDetailViewController, animated: true)
     }
@@ -102,7 +107,7 @@ extension MoviesListViewController: UICollectionViewDataSource {
 extension MoviesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width
-        return CGSize(width: width, height: 100)
+        return CGSize(width: width, height: 80)
     }
 }
 
