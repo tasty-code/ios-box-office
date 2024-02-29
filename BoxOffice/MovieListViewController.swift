@@ -18,15 +18,9 @@ final class MovieListViewController: UIViewController {
         callMovieDetailAPI()
     }
     
-    private func callAPI(with url: URL?, completion: @escaping (Result<Decodable?, NetworkError>) -> Void) {
-        networking.performRequest(with: url) { result in
-            completion(result)
-        }
-    }
-    
     private func callMovieDetailAPI() {
         let url = networkAPI.buildMovieDetailAPI(movieCode: .movieCode)
-        callAPI(with: url) { result in
+        networking.performRequest(with: url) { result in
             switch result {
             case .success(let data):
                 guard let data = data,
@@ -34,8 +28,7 @@ final class MovieListViewController: UIViewController {
                 else {
                     return
                 }
-                print(decodedData.movieInfoResult.movieInfo.movieName)
-                print("-------------------------")
+                print(decodedData.movieInfoResult.movieInfo.companys)
             case .failure(let error):
                 print(error)
             }
@@ -43,16 +36,16 @@ final class MovieListViewController: UIViewController {
     }
     
     private func callDailyBoxOfficeAPI() {
-        let url = networkAPI.buildDailyBoxOfficeAPI(targetDate: .targetDate, keys: .itemPerPage,.repNationCd, values: "2","F")
-        callAPI(with: url) { result in
+        let url = networkAPI.buildDailyBoxOfficeAPI(targetDate: .targetDate, keys: .itemPerPage, values: "2")
+        networking.performRequest(with: url) { result in
             switch result {
             case .success(let data):
                 guard let data = data,
-                      let decodedData = JSONParser().parseJSON(data as! Data,DTO: DailyBoxOfficeResultDTO.self)
+                      let decodedData = JSONParser().parseJSON(data as! Data, DTO: DailyBoxOfficeResultDTO.self)
                 else {
                     return
                 }
-                print(decodedData)
+                print(decodedData,"\n -------------------------")
             case .failure(let error):
                 print(error)
             }
