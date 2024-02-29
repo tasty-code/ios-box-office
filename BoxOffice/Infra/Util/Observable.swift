@@ -1,27 +1,18 @@
-import Foundation
+class Observable<T> {
 
-protocol Observable {
-    associatedtype ValueType
-    var valueChanged: ((ValueType) -> Void)? { get set }
-    func notifyObserver()
-}
-
-class ObservableValue<T>: Observable {
-    typealias ValueType = T
-    
     var value: T {
         didSet {
-            notifyObserver()
+            listener?(value)
         }
     }
-    
-    var valueChanged: ((T) -> Void)?
-    
+
+    private var listener: ((T) -> Void)?
+
     init(_ value: T) {
         self.value = value
     }
-    
-    func notifyObserver() {
-        valueChanged?(value)
+
+    func bind(_ closure: @escaping (T) -> Void) {
+        listener = closure
     }
 }

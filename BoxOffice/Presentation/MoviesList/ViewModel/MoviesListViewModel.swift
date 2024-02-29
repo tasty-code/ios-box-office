@@ -1,21 +1,21 @@
 import Foundation
 
-class MoviesListViewModel {
-    let useCase: BoxOfficeUseCase
-    var movies: ObservableValue<[MoviesCellViewModel]> = ObservableValue([])
+final class MoviesListViewModel {
+    private let useCase: BoxOfficeUseCase
+    var movies: Observable<[MoviesCellViewModel]> = Observable([])
+    var errorMessage: Observable<String> = Observable("")
     
     init(useCase: BoxOfficeUseCase) {
         self.useCase = useCase
     }
     
-    func fetchData(completion: @escaping (Result<[MovieBoxOffice], Error>) -> Void) {
+    func fetchData() {
         useCase.fetch { result in
             switch result {
             case .success(let boxOffice):
-                print(boxOffice.movieBoxOfficeList)
-                completion(.success(boxOffice.movieBoxOfficeList))
+                self.movies.value = boxOffice.movieBoxOfficeList.map { .init(movie: $0) }
             case .failure(let error):
-                completion(.failure(error))
+                self.errorMessage.value = error.localizedDescription
             }
         }
     }
