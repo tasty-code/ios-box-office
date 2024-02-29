@@ -19,7 +19,6 @@ struct MockURLSession: DataRequestable {
     self.apiType = apiType
   }
   
-  // swiftlint:disable function_body_length
   func requestData(with request: URLRequest) async throws -> (Data, URLResponse) {
     let fileName: String
     switch self.apiType {
@@ -39,5 +38,4 @@ struct MockURLSession: DataRequestable {
     let data: Data = try self.fileProvider.getData(from: fileName, extension: .json)
     return (data, .init())
   }
-  // swiftlint:enable function_body_length
 }
