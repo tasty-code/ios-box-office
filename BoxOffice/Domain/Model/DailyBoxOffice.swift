@@ -1,23 +1,10 @@
 import Foundation
 
-// TODO: 네이밍 재고
 struct DailyBoxOffice {
   let date: Date
   let list: [ListItem]
   
   struct ListItem: Hashable {
-    static func == (
-      lhs: DailyBoxOffice.ListItem,
-      rhs: DailyBoxOffice.ListItem
-    ) -> Bool {
-      return lhs.index == rhs.index && lhs.rank == rhs.rank
-    }
-    
-    func hash(into hasher: inout Hasher) {
-      hasher.combine(index)
-      hasher.combine(rank)
-    }
-    
     let index: String
     let rank: Int
     let rankChange: RankChange
@@ -26,12 +13,12 @@ struct DailyBoxOffice {
     let totalAudienceCount: Int
     let entryStatus: EntryStatus
     
-    enum EntryStatus: String {
+    enum EntryStatus: String, Hashable {
       case new = "NEW"
       case old = "OLD"
     }
     
-    enum RankChange {
+    enum RankChange: Hashable {
       case risen(Int)
       case fallen(Int)
       case maintained
