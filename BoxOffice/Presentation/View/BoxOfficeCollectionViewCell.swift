@@ -71,19 +71,17 @@ final class BoxOfficeCollectionViewCell: UICollectionViewCell {
     self.contentView.addSubview(self.movieInfoStackView)
     self.contentView.addSubview(self.chevron)
     
-    NSLayoutConstraint.activate(
-      [
-        self.movieInfoStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 70),
-        self.movieInfoStackView.centerYAnchor.constraint(equalTo: rankInfoStackView.centerYAnchor),
-        self.rankInfoStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
-        self.rankInfoStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
-        self.rankInfoStackView.heightAnchor.constraint(equalToConstant: 55),
-        self.rankInfoStackView.centerXAnchor.constraint(equalTo: self.movieInfoStackView.leadingAnchor, constant: -32),
-        self.chevron.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-        self.chevron.centerYAnchor.constraint(equalTo: rankInfoStackView.centerYAnchor),
-        self.chevron.leadingAnchor.constraint(greaterThanOrEqualTo: movieInfoStackView.trailingAnchor, constant: 10),
-      ]
-    )
+    NSLayoutConstraint.activate([
+      self.movieInfoStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 70),
+      self.movieInfoStackView.centerYAnchor.constraint(equalTo: rankInfoStackView.centerYAnchor),
+      self.rankInfoStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+      self.rankInfoStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
+      self.rankInfoStackView.heightAnchor.constraint(equalToConstant: 55),
+      self.rankInfoStackView.centerXAnchor.constraint(equalTo: self.movieInfoStackView.leadingAnchor, constant: -32),
+      self.chevron.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+      self.chevron.centerYAnchor.constraint(equalTo: rankInfoStackView.centerYAnchor),
+      self.chevron.leadingAnchor.constraint(greaterThanOrEqualTo: movieInfoStackView.trailingAnchor, constant: 10),
+    ])
   }
   
   func configure(with item: DailyBoxOffice.ListItem) {

@@ -22,19 +22,19 @@ final class BoxOfficeViewController: UIViewController {
     self.view.backgroundColor = .systemBackground
     setLayout()
     setRefreshControl()
-    viewModel.viewDidLoad()
+    self.viewModel.viewDidLoad()
   }
   
   private func setLayout() {
     self.boxOfficeCollectionView.translatesAutoresizingMaskIntoConstraints = false
-    self.view.addSubview(boxOfficeCollectionView)
+    self.view.addSubview(self.boxOfficeCollectionView)
     
     NSLayoutConstraint.activate(
       [
-        self.boxOfficeCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-        self.boxOfficeCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-        self.boxOfficeCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-        self.boxOfficeCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        self.boxOfficeCollectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+        self.boxOfficeCollectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+        self.boxOfficeCollectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+        self.boxOfficeCollectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
       ]
     )
   }
@@ -75,7 +75,7 @@ extension BoxOfficeViewController: BoxOfficeOutput {
     alert.addAction(UIAlertAction(title: "확인", style: .default))
     Task {
       await MainActor.run {
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
       }
     }
   }

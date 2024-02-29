@@ -46,8 +46,7 @@ import Foundation
 
 extension BoxOfficeViewModel {
   private func getTitle() {
-    let title = self.useCase.getTitle()
-    self.title = title
+    self.title = self.useCase.getTitle()
   }
   
   private func fetchYesterdayBoxOffice() {
