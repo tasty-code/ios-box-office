@@ -1,19 +1,19 @@
 
 // MARK: - BoxOfficeData
-struct BoxOfficeData: Decodable {
-    let boxOfficeResult: BoxOfficeResult
+struct BoxOfficeDTO: Decodable {
+    let boxOfficeResult: BoxOfficeResultDTO
 }
 
 // MARK: - BoxOfficeResult
-struct BoxOfficeResult: Decodable {
+struct BoxOfficeResultDTO: Decodable {
     let boxofficeType, showRange: String
-    let dailyBoxOfficeList: [DailyBoxOfficeList]
+    let dailyBoxOfficeList: [DailyBoxOfficeDTO]
 }
 
 // MARK: - DailyBoxOfficeList
-struct DailyBoxOfficeList: Decodable {
+struct DailyBoxOfficeDTO: Decodable {
     let rankNumber, rank, rankIntensity: String
-    let rankOldAndNew: RankOldAndNew
+    let rankOldAndNew: RankOldAndNewDTO
     let movieCode, movieName, openDate, salesAmount: String
     let salesShare, salesIntensty, salesChange, salesAccount: String
     let audienceCount, audienceIntenstity, audienceChange, audienceAccount: String
@@ -41,7 +41,18 @@ struct DailyBoxOfficeList: Decodable {
     }
 }
 
-enum RankOldAndNew: String, Decodable {
+enum RankOldAndNewDTO: String, Decodable {
     case new = "NEW"
     case old = "OLD"
 }
+
+extension DailyBoxOfficeDTO: Mappable {
+    func toEntity() -> BoxOfficeMovie {
+        return BoxOfficeMovie(name: movieName,
+                     releaseDate: openDate,
+                     rank: rank,
+                     salesAmount: salesAmount,
+                     movieCode: movieCode)
+    }
+}
+
