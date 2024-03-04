@@ -1,11 +1,11 @@
 //
-//  MovieData.swift
+//  MovieDTO.swift
 //  BoxOffice
 //
 //  Created by nayeon  on 2/20/24.
 //
 
-struct MovieInformation: Decodable {
+struct MovieDTO: Decodable {
     let movieInformationResult: MovieInformationResult
 }
 
@@ -78,7 +78,7 @@ struct Staff: Decodable {
 }
 
 // MARK: - Codingkeys
-extension MovieInformation {
+extension MovieDTO {
     enum CodingKeys: String, CodingKey {
         case movieInformationResult = "movieInfoResult"
     }

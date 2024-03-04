@@ -9,14 +9,14 @@ import Foundation
 
 class BoxOfficeViewModel {
     
-    private let boxOfficeAPI: BoxOfficeAPI
+    private let boxOfficeAPI: BoxOfficeAPIService
     private var boxOfficeData: [BoxOfficeEntity] = []
     
     var boxOfficeCount: Int {
         return boxOfficeData.count
     }
     
-    init(boxOfficeAPI: BoxOfficeAPI = BoxOfficeAPI.shared) {
+    init(boxOfficeAPI: BoxOfficeAPIService = BoxOfficeAPIService.shared) {
         self.boxOfficeAPI = boxOfficeAPI
     }
     
@@ -24,10 +24,10 @@ class BoxOfficeViewModel {
         guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String else { return }
         let yesterday = Date.convertYesterdayDateToString()
         
-        BoxOfficeAPI.shared.requestDailyBoxOfficeAPI(userKey: apiKey, date: yesterday) { networkResult in
+        BoxOfficeAPIService.shared.requestDailyBoxOfficeAPI(userKey: apiKey, date: yesterday) { networkResult in
             switch networkResult {
             case .success(let data):
-                if let boxOfficeData = data as? BoxOfficeData {
+                if let boxOfficeData = data as? BoxOfficeDTO {
                     DispatchQueue.main.async {
                         self.handleBoxOfficeData(boxOfficeData)
                         completion(.success(self.boxOfficeData))
@@ -39,7 +39,7 @@ class BoxOfficeViewModel {
         }
     }
     
-    private func handleBoxOfficeData(_ data: BoxOfficeData) {
+    private func handleBoxOfficeData(_ data: BoxOfficeDTO) {
         let boxOfficeResult = data.boxOfficeResult
         let dailyBoxOfficeList = boxOfficeResult.dailyBoxOfficeList
         var entities: [BoxOfficeEntity] = []

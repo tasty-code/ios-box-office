@@ -1,5 +1,5 @@
 //
-//  BaseAPI.swift
+//  BaseAPIService.swift
 //  BoxOffice
 //
 //  Created by EUNJU on 2/20/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BaseAPI {
+class BaseAPIService {
     
     let provider: Requestable
     

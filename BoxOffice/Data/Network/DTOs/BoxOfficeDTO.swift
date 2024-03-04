@@ -1,11 +1,11 @@
 //
-//  BoxOfficeData.swift
+//  BoxOfficeDTO.swift
 //  BoxOffice
 //
 //  Created by nayeon  on 2/14/24.
 //
 
-struct BoxOfficeData: Decodable {
+struct BoxOfficeDTO: Decodable {
     let boxOfficeResult: BoxOfficeResult
 }
 

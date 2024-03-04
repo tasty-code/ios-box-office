@@ -1,38 +1,38 @@
 //
-//  BoxOfficeService.swift
+//  MovieAPI.swift
 //  BoxOffice
 //
-//  Created by nayeon  on 2/20/24.
+//  Created by EUNJU on 2/20/24.
 //
 
 import Foundation
 
-enum BoxOfficeService {
-    case requestDailyBoxOfficeInfo(userkey: String, date: String)
+enum MovieAPI {
+    case requestMovieDetailInfo(userKey: String, movieCode: String)
 }
 
-extension BoxOfficeService: TargetType {
+extension MovieAPI: TargetType {
     
     var method: HTTPMethod {
         switch self {
-        case .requestDailyBoxOfficeInfo(_, _):
+        case .requestMovieDetailInfo(_, _):
             return .get
         }
     }
     
     var path: String {
         switch self {
-        case .requestDailyBoxOfficeInfo(_, _):
-            return "/boxoffice/searchDailyBoxOfficeList.json"
+        case .requestMovieDetailInfo(_, _):
+            return "/movie/searchMovieInfo.json"
         }
     }
     
     var parameters: RequestParameters {
         switch self {
-        case .requestDailyBoxOfficeInfo(let userKey, let date):
+        case .requestMovieDetailInfo(let userKey, let movieCode):
             let requestQuery: [String: Any] = [
                 "key": userKey,
-                "targetDt": date
+                "movieCd": movieCode
             ]
             return .query(requestQuery)
         }
@@ -40,7 +40,7 @@ extension BoxOfficeService: TargetType {
     
     var header: HeaderType {
         switch self {
-        case .requestDailyBoxOfficeInfo(_, _):
+        case .requestMovieDetailInfo(_, _):
             return .basic
         }
     }
