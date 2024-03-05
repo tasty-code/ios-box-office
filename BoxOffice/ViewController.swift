@@ -27,7 +27,7 @@ class ViewController: UIViewController {
                         print("영화 이름: \(movie.movieName)")
                         print("개봉일: \(movie.openDate)")
                         print("관객 수: \(movie.audienceCount)명")
-                        print("무비 코드: \(movie.movicode)")
+                        print("무비 코드: \(movie.movieCode)")
                         print("-----------------------------")
                     }
                 case .failure(let error):

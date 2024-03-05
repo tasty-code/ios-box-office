@@ -12,8 +12,8 @@ extension Date {
         let yesterDayDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())
         let myDateFormatter = DateFormatter()
         myDateFormatter.dateFormat = "yyyyMMdd"
-        let convertNowStr = myDateFormatter.string(from: yesterDayDate ?? Date())
+        let convertNowString = myDateFormatter.string(from: yesterDayDate ?? Date())
         
-        return convertNowStr
+        return convertNowString
     }
 }

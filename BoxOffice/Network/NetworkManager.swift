@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkManager {
+final class NetworkManager {
     static let shared = NetworkManager()
     private let apiKey = "f5eef3421c602c6cb7ea224104795888"
     private let session = URLSession(configuration: .default)
@@ -16,8 +16,6 @@ class NetworkManager {
     
     private func performRequest<T: Decodable>(with url: URL, completion: @escaping (Result<T, NetworkError>) -> Void) {
         let task = session.dataTask(with: url) { data, response, error in
-            
-            
             guard let response = response as? HTTPURLResponse else {
                 completion(.failure(.unknown))
                 return
@@ -73,7 +71,7 @@ class NetworkManager {
                                       movieName: boxOffice.movieName,
                                       openDate: boxOffice.openDate,
                                       audienceCount: boxOffice.audienceCount,
-                                      movicode: boxOffice.movieCd)
+                                      movieCode: boxOffice.movieCd)
                 }
                 completion(.success(boxOfficeMovies))
             case .failure(let error):
@@ -100,7 +98,7 @@ class NetworkManager {
                 let movie = data.movieInfoResult.movieInfo
                 let movieDetail = MovieDatailDTO(movieCode: movie.movieCode,
                                                  movieName: movie.movieName,
-                                                 movieNameEnglish: movie.movieNameEn,
+                                                 movieNameEnglish: movie.movieNameEnglish,
                                                  runningTime: movie.runningTime,
                                                  productionYear: movie.productionYear,
                                                  openDate: movie.openDate,

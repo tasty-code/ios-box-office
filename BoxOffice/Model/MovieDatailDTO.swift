@@ -5,8 +5,6 @@
 //  Created by 박찬호 on 2/20/24.
 //
 
-import Foundation
-
 struct MovieDatailDTO {
     let movieCode: String
     let movieName: String

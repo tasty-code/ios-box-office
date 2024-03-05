@@ -18,7 +18,7 @@ struct MovieInfoResult: Codable {
 struct MovieInfo: Codable {
     let movieCode: String
     let movieName: String
-    let movieNameEn: String
+    let movieNameEnglish: String
     let movieNameOrigin: String
     let productionYear: String
     let runningTime: String
@@ -31,13 +31,13 @@ struct MovieInfo: Codable {
     let actors: [Actor]
     let showTypes: [ShowType]
     let companys: [Company]
-    let audits: [audit]
-    let staffs: [staff]
+    let audits: [Audit]
+    let staffs: [Staff]
     
     enum CodingKeys: String, CodingKey {
         case movieCode = "movieCd"
         case movieName = "movieNm"
-        case movieNameEn = "movieNmEn"
+        case movieNameEnglish = "movieNmEn"
         case movieNameOrigin = "movieNmOg"
         case productionYear = "prdtYear"
         case runningTime = "showTm"
@@ -119,18 +119,17 @@ struct Company: Codable {
     }
 }
 
-struct audit: Codable {
+struct Audit: Codable {
     let auditNumber: String
     let watchGradeName: String
     
     enum CodingKeys: String, CodingKey {
         case auditNumber = "auditNo"
         case watchGradeName = "watchGradeNm"
-    }
-        
+    } 
 }
 
-struct staff: Codable {
+struct Staff: Codable {
     let peopleName: String
     let peopleNameEn: String
     let staffRoleName: String
