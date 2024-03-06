@@ -1,4 +1,3 @@
-import Foundation
 import UIKit
 
 typealias MoviesListViewModel = MoviesListInput & MoviesListOutput
@@ -13,7 +12,7 @@ protocol MoviesListOutput {
     var movies: Observable<[MovieBoxOffice]> { get }
     var errorMessage: Observable<String> { get }
     var isRefreshing: Observable<Bool> { get }
-    var nowCell: Observable<(String, String, String, UIColor, String)> { get }
+    var nowCellInformation: Observable<(String, String, String, UIColor, String)> { get }
 }
 
 final class DefaultMoviesListViewModel: MoviesListViewModel {
@@ -21,7 +20,7 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
     var movies: Observable<[MovieBoxOffice]> = Observable([])
     var errorMessage: Observable<String> = Observable("")
     var isRefreshing: Observable<Bool> = Observable(false)
-    var nowCell: Observable<(String, String, String, UIColor, String)> = Observable(("", "", "", .white, ""))
+    var nowCellInformation: Observable<(String, String, String, UIColor, String)> = Observable(("", "", "", .white, ""))
     
     init(useCase: BoxOfficeUseCase) {
         self.useCase = useCase
@@ -97,7 +96,7 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
             return "오늘 \(formattedAudienceCount) / 총 \(formattedAccumulation)"
         }
         let cellInformation = (movieName, rank, rankChangeText, rankChangeColor, audienceText)
-        nowCell.value = cellInformation
+        nowCellInformation.value = cellInformation
     }
     
 }

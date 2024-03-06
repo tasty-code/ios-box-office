@@ -75,7 +75,7 @@ extension MoviesListViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MoviesListCell.self), for: indexPath) as? MoviesListCell else {
             fatalError("MoviesListCell 에러")
         }
-        viewModel.nowCell.bind { cellInformation in
+        viewModel.nowCellInformation.bind { cellInformation in
             cell.configure(with: cellInformation)
         }
         viewModel.loadCell(indexPath.row)
