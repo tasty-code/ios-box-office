@@ -31,14 +31,17 @@ final class BoxOfficeViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func loadView() {
+        view = boxOfficeView
+        view.backgroundColor = .white
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Task {
             await loadDailyBoxOfficeData()
             boxOfficeView.boxOfficeCollectionView.isScrollEnabled = true
         }
-        view = boxOfficeView
-        view.backgroundColor = .white
         boxOfficeView.setBoxOfficeCollectionViewProperties(self, loadingIndicatorView: loadingIndicatorView)
         boxOfficeView.configureRefreshControl(self)
     }
