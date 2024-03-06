@@ -15,12 +15,10 @@ final class MoviesListViewController: UIViewController {
         return collectionView
     }()
     
-    let refreshControl = UIRefreshControl()
-    private var isRefreshing = false
+    private let refreshControl = UIRefreshControl()
     
     init(viewModel: MoviesListViewModel, isRefreshing: Bool = false) {
         self.viewModel = viewModel
-        self.isRefreshing = isRefreshing
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -34,23 +32,28 @@ final class MoviesListViewController: UIViewController {
         setupRefreshControl()
         setupNavigationBar()
         bind()
-        fetchData()
+        viewModel.viewDidLoad()
     }
 }
 
 extension MoviesListViewController {
     
     private func bind() {
-        viewModel.movies.bind { _ in
-            self.reload()
+        viewModel.movies.bind { [weak self] _ in
+            self?.reload()
         }
-        viewModel.errorMessage.bind { errorMessage in
-            self.makeAlert(message: errorMessage, confirmAction: nil)
+        viewModel.errorMessage.bind { [weak self] errorMessage in
+            self?.makeAlert(message: errorMessage, confirmAction: nil)
+        }
+        viewModel.isRefreshing.bind { [weak self] isRefreshing in
+            if !isRefreshing {
+                self?.refreshControl.endRefreshing()
+            }
         }
     }
     
     private func setupNavigationBar() {
-        navigationItem.title = "\(DateFormatter.titleDateFormatter.string(from: Date().yesterday))"
+        navigationItem.title = Date().yesterdayString(with: DateFormatter.yyMMddDashed)
     }
     
     private func setupRefreshControl() {
@@ -59,14 +62,7 @@ extension MoviesListViewController {
     }
     
     @objc private func refreshData() {
-        if !isRefreshing {
-            isRefreshing = true
-            fetchData()
-        }
-    }
-    
-    private func fetchData() {
-        viewModel.fetchData()
+        viewModel.refresh()
     }
 }
 
@@ -79,8 +75,11 @@ extension MoviesListViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MoviesListCell.self), for: indexPath) as? MoviesListCell else {
             fatalError("MoviesListCell 에러")
         }
-        let movie = viewModel.movies.value[indexPath.item]
-        cell.configure(with: movie)
+        viewModel.nowCellInformation.bind { cellInformation in
+            cell.configure(with: cellInformation)
+        }
+        viewModel.loadCell(indexPath.row)
+        
         cell.accessories = [.disclosureIndicator()]
         return cell
     }
@@ -90,17 +89,13 @@ extension MoviesListViewController: UICollectionViewDataSource {
         showMovieDetailScreen(for: selectedMovie)
     }
     
-    func showMovieDetailScreen(for movie: MoviesCellViewModel) {
+    private func showMovieDetailScreen(for movie: MovieBoxOffice) {
         let movieDetailViewController = MovieDetailView(movie: movie)
         navigationController?.pushViewController(movieDetailViewController, animated: true)
     }
     
-    func reload() {
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-            self.isRefreshing = false
-            self.refreshControl.endRefreshing()
-        }
+    private func reload() {
+        self.collectionView.reloadData()
     }
 }
 
