@@ -18,10 +18,10 @@ final class BoxOfficeViewController: UIViewController {
     }
     private let networkManager: NetworkManager
     
-    init(dataSource: [DailyBoxOffice.BoxOfficeMovie] = [], networkManager: NetworkManager, loadingIndicatorView: UIActivityIndicatorView) {
+    init(dataSource: [DailyBoxOffice.BoxOfficeMovie] = [], networkManager: NetworkManager) {
         self.dataSource = dataSource
         self.networkManager = networkManager
-        self.loadingIndicatorView = loadingIndicatorView
+        self.loadingIndicatorView = UIActivityIndicatorView()
         super.init(nibName: nil, bundle: nil)
     }
     
