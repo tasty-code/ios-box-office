@@ -53,7 +53,7 @@ extension MoviesListViewController {
     }
     
     private func setupNavigationBar() {
-        navigationItem.title = "\(DateFormatter.titleDateFormatter.string(from: Date().yesterday))"
+        navigationItem.title = Date().yesterdayString(with: DateFormatter.yyMMddDashed)
     }
     
     private func setupRefreshControl() {
@@ -89,12 +89,12 @@ extension MoviesListViewController: UICollectionViewDataSource {
         showMovieDetailScreen(for: selectedMovie)
     }
     
-    func showMovieDetailScreen(for movie: MovieBoxOffice) {
+    private func showMovieDetailScreen(for movie: MovieBoxOffice) {
         let movieDetailViewController = MovieDetailView(movie: movie)
         navigationController?.pushViewController(movieDetailViewController, animated: true)
     }
     
-    func reload() {
+    private func reload() {
         self.collectionView.reloadData()
     }
 }

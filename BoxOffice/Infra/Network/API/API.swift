@@ -6,7 +6,7 @@ struct API {
                      path: BoxOfficeAPI.boxOffice.path,
                      queryParameters: [
                         "key": Bundle.main.apiKey,
-                        "targetDt": Date().yesterdayString])
+                        "targetDt": Date().yesterdayString(with: DateFormatter.yyyyMMdd)])
     }
     
     static func movieAPI(with movieCode: String) -> APIConfig<MovieDetailResponseDTO> {

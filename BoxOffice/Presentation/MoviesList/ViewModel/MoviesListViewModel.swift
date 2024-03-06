@@ -98,5 +98,4 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
         let cellInformation = (movieName, rank, rankChangeText, rankChangeColor, audienceText)
         nowCellInformation.value = cellInformation
     }
-    
 }
