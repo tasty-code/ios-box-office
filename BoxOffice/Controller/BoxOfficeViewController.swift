@@ -9,20 +9,22 @@ import UIKit
 
 final class BoxOfficeViewController: UIViewController {
     lazy var boxOfficeView: BoxOfficeView = BoxOfficeView()
-    private let loadingIndicatorView: UIActivityIndicatorView
+    private let loadingIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
     
-    private var dataSource: [DailyBoxOffice.BoxOfficeMovie] = [] {
-        didSet {
-            boxOfficeView.reloadData()
-        }
-    }
-    private let networkManager: NetworkManager
+    @objc private var dataSource: DailyBoxOffice = DailyBoxOffice()
+    private var observation: NSKeyValueObservation?
     
-    init(dataSource: [DailyBoxOffice.BoxOfficeMovie] = [], networkManager: NetworkManager) {
-        self.dataSource = dataSource
-        self.networkManager = networkManager
-        self.loadingIndicatorView = UIActivityIndicatorView()
+    init() {
         super.init(nibName: nil, bundle: nil)
+        
+        observation = observe(
+            \.dataSource.dailyBoxOfficeMovies,
+            options: []
+        ) { object, change in
+            DispatchQueue.main.async {
+                self.boxOfficeView.reloadData()
+            }
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -51,10 +53,8 @@ final class BoxOfficeViewController: UIViewController {
 extension BoxOfficeViewController {
     private func loadDailyBoxOfficeData() async {
         do {
-            let url: String = KoreanFilmCouncilURL.dailyBoxOffice(targetDate: Date().getYesterday("yyyyMMdd")).url
-            let data: BoxOfficeResult = try await self.networkManager.request(url)
+            try await dataSource.loadDailyBoxOfficeData()
             self.loadingIndicatorView.stopAnimating()
-            dataSource = data.converted()
             self.boxOfficeView.endRefreshControl()
         } catch {
             self.alert(with: error)
@@ -64,7 +64,7 @@ extension BoxOfficeViewController {
 
 extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
+        return dataSource.dailyBoxOfficeMovies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -72,7 +72,7 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
             return UICollectionViewCell()
         }
         
-        cell.configure(data: dataSource[indexPath.row].destructed())
+        cell.configure(data: dataSource.dailyBoxOfficeMovies[indexPath.row])
         
         return cell
     }

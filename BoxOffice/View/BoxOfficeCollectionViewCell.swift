@@ -93,26 +93,19 @@ class BoxOfficeCollectionViewCell: UICollectionViewListCell {
 }
 
 extension BoxOfficeCollectionViewCell {
-    func configure(data: (_: Int, 
-                          rank: String,
-                          rankChangedAmount: Int,
-                          rankStatus: DailyBoxOffice.BoxOfficeMovie.RankStatus,
-                          movieName: String,
-                          audienceCount: Int,
-                          audienceAccumulated: Int)) {
-        let (_, rank, rankChangedAmount, rankStatus, movieName, audienceCount, audienceAccumulated) = data
-        rankLabel.text = String(rank)
+    func configure(data: DailyBoxOffice.DailyBoxOfficeMovie) {
+        rankLabel.text = String(data.rank)
         
-        switch rankStatus {
+        switch data.rankStatus {
         case .new:
             addRankStatusLabel(text: "신작")
             rankStatusLabel.textColor = .systemRed
         case .old:
-            applyRankChangedAmountIntoRankStackView(rankChangedAmount: rankChangedAmount)
+            applyRankChangedAmountIntoRankStackView(rankChangedAmount: data.rankChangedAmount)
         }
     
-        movieNameLabel.text = movieName
-        audienceLabel.text = "오늘 \(audienceCount.formatNumber()) / 총 \(audienceAccumulated.formatNumber())"
+        movieNameLabel.text = data.movieName
+        audienceLabel.text = "오늘 \(data.audienceCount.formatNumber()) / 총 \(data.audienceAccumulated.formatNumber())"
     }
     
     private func applyRankChangedAmountIntoRankStackView(rankChangedAmount: Int) {
