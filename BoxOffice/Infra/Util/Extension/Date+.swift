@@ -4,22 +4,18 @@ extension Date {
     var yesterday: Date {
         return Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? self
     }
-    
-    var yesterdayString: String {
-        return DateFormatter.jsonDateFormatter.string(from: yesterday)
+    func yesterdayString(with format: String) -> String {
+        return DateFormatter.formatter(with: format).string(from: yesterday)
     }
 }
 
 extension DateFormatter {
-    static var jsonDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
-        return formatter
-    }()
+    static let yyyyMMdd: String = "yyyyMMdd"
+    static let yyMMddDashed: String = "yyyy-MM-dd"
     
-    static var titleDateFormatter: DateFormatter = {
+    static func formatter(with format: String) -> DateFormatter {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = format
         return formatter
-    }()
+    }
 }
