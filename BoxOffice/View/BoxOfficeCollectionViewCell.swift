@@ -93,7 +93,7 @@ class BoxOfficeCollectionViewCell: UICollectionViewListCell {
 }
 
 extension BoxOfficeCollectionViewCell {
-    func configure(data: DailyBoxOffice.DailyBoxOfficeMovie) {
+    func configure(data: DailyBoxOffice.Movie) {
         rankLabel.text = String(data.rank)
         
         switch data.rankStatus {

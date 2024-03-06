@@ -8,29 +8,16 @@
 import UIKit
 
 final class BoxOfficeViewController: UIViewController {
-    lazy var boxOfficeView: BoxOfficeView = BoxOfficeView()
+ 
+    private let boxOfficeView: BoxOfficeView = BoxOfficeView()
     private let loadingIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
     
-    @objc private var dataSource: DailyBoxOffice = DailyBoxOffice()
-    private var observation: NSKeyValueObservation?
-    
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        
-        observation = observe(
-            \.dataSource.dailyBoxOfficeMovies,
-            options: []
-        ) { object, change in
-            DispatchQueue.main.async {
-                self.boxOfficeView.reloadData()
-            }
-        }
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+    private lazy var dataSource: any LoadDataProtocol = {
+        let dataSource = DailyBoxOffice()
+        dataSource.delegate = self
+        return dataSource
+    }()
+
     override func loadView() {
         view = boxOfficeView
         view.backgroundColor = .white
@@ -56,7 +43,7 @@ final class BoxOfficeViewController: UIViewController {
 extension BoxOfficeViewController {
     private func loadDailyBoxOfficeData() async {
         do {
-            try await dataSource.loadDailyBoxOfficeData()
+            try await dataSource.loadData()
             self.loadingIndicatorView.stopAnimating()
             self.boxOfficeView.endRefreshControl()
         } catch {
@@ -67,16 +54,26 @@ extension BoxOfficeViewController {
 
 extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.dailyBoxOfficeMovies.count
+        return dataSource.loadedData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BoxOfficeCollectionViewCell", for: indexPath) as? BoxOfficeCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BoxOfficeCollectionViewCell", for: indexPath) as? BoxOfficeCollectionViewCell,
+              let data = dataSource.loadedData as? [DailyBoxOffice.Movie] else {
             return UICollectionViewCell()
         }
         
-        cell.configure(data: dataSource.dailyBoxOfficeMovies[indexPath.row])
+        cell.configure(data: data[indexPath.row])
         
         return cell
     }
+}
+
+extension BoxOfficeViewController: DataDelegate {
+    func reloadView() {
+        DispatchQueue.main.async {
+            self.boxOfficeView.reloadData()
+        }
+    }
+    
 }

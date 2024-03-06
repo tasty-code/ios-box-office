@@ -7,27 +7,36 @@
 
 import Foundation
 
-final class DailyBoxOffice: NSObject {
-    @objc dynamic var dailyBoxOfficeMovies: [DailyBoxOfficeMovie] = []
+final class DailyBoxOffice: LoadDataProtocol {
+    
+    typealias LoadedData = Movie
+    
+    weak var delegate: DataDelegate?
     let networkManager: NetworkManager = NetworkManager(urlSession: URLSession.shared)
     
-    func loadDailyBoxOfficeData() async throws {
+    var loadedData: [Movie] = [] {
+        didSet {
+            delegate?.reloadView()
+        }
+    }
+    
+    func loadData() async throws {
         let url: String = KoreanFilmCouncilURL.dailyBoxOffice(targetDate: Date().getYesterday("yyyyMMdd")).url
         let data: BoxOfficeResult = try await self.networkManager.request(url)
         let movies = data.boxOfficeResult.dailyBoxOfficeList
-        dailyBoxOfficeMovies = converted(movies)
+        loadedData = converted(movies)
     }
     
-    private func converted(_ boxOfficeMovies: [BoxOfficeMovie]) -> [DailyBoxOfficeMovie] {
+    private func converted(_ boxOfficeMovies: [BoxOfficeMovie]) -> [Movie] {
         boxOfficeMovies.map { boxOfficeMovie in
             let index: Int = Int(boxOfficeMovie.index) ?? 0
             let rank: String = boxOfficeMovie.rank
             let rankChangedAmount: Int = Int(boxOfficeMovie.rankChangedAmount) ?? 0
-            let rankStatus: DailyBoxOffice.DailyBoxOfficeMovie.RankStatus = boxOfficeMovie.rankStatus == "NEW" ? .new : .old
+            let rankStatus: DailyBoxOffice.Movie.RankStatus = boxOfficeMovie.rankStatus == "NEW" ? .new : .old
             let movieName: String = boxOfficeMovie.movieName
             let audienceCount: Int = Int(boxOfficeMovie.audienceCount) ?? 0
             let audienceAccumulated: Int = Int(boxOfficeMovie.audienceAccumulated) ?? 0
-            let movie = DailyBoxOffice.DailyBoxOfficeMovie(index: index,
+            let movie = DailyBoxOffice.Movie(index: index,
                                                       rank: rank,
                                                       rankChangedAmount: rankChangedAmount,
                                                       rankStatus: rankStatus,
@@ -38,7 +47,7 @@ final class DailyBoxOffice: NSObject {
         }
     }
     
-    final class DailyBoxOfficeMovie: NSObject {
+    final class Movie {
         let index: Int
         let rank: String
         let rankChangedAmount: Int
