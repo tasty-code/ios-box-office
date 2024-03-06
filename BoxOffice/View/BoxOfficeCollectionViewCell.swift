@@ -138,6 +138,7 @@ extension BoxOfficeCollectionViewCell {
     private func addRankStatusLabel(text: String) {
         rankChangedAmountStackView.removeFromSuperview()
         rankStatusLabel.text = text
+        rankStatusLabel.textColor = .gray
         rankStackView.addArrangedSubview(rankStatusLabel)
     }
 }
