@@ -2,10 +2,10 @@ import UIKit
 
 final class MovieDetailView: UIViewController {
 
-    private let movie: MoviesCellViewModel
+    private let movieName: String
     
-    init(movie: MoviesCellViewModel) {
-        self.movie = movie
+    init(movie: MovieBoxOffice) {
+        self.movieName = movie.movieName
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -19,7 +19,7 @@ final class MovieDetailView: UIViewController {
         setupNavigationBar()
     }
     
-    func setupNavigationBar() {
-        navigationItem.title = "\(movie.movieName)"
+    private func setupNavigationBar() {
+        navigationItem.title = movieName
     }
 }

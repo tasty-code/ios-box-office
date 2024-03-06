@@ -12,7 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let dataTransferService = DefaultDataTransferService(with: networkService)
         let boxOfficeRepository = DefaultBoxOfficeRepository(dataTransferService: dataTransferService)
         let boxOfficeUseCase = DefaulBoxOfficeUseCase(boxOfficeRepository: boxOfficeRepository)
-        let movieListViewModel = MoviesListViewModel(useCase: boxOfficeUseCase)
+        let movieListViewModel = DefaultMoviesListViewModel(useCase: boxOfficeUseCase)
         
         let navigationController = UINavigationController(rootViewController: MoviesListViewController(viewModel: movieListViewModel))
         

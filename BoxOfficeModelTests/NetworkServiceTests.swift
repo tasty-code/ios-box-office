@@ -19,7 +19,7 @@ final class NetworkServiceTests: XCTestCase {
 
     func test_네트워크_서비스를_통해_박스오피스_데이터를_불러올_수_있다() throws {
         // given
-        let boxOfficeAPI = APIConfig<BoxOfficeResponseDTO>.boxOfficeAPI()
+        let boxOfficeAPI = API.boxOfficeAPI()
         let mockNetworkSessionManager = MockNetworkSessionManager()
         let sut = DefaultNetworkService(sessionManager: mockNetworkSessionManager)
         let expectation = XCTestExpectation(description: "dataFectch")
@@ -38,7 +38,7 @@ final class NetworkServiceTests: XCTestCase {
     }
     func test_네트워크에서_불러온_json을_BoxOfficeResponseDTO로_파싱할_수_있다() throws {
         // given
-        let boxOfficeAPI = APIConfig<BoxOfficeResponseDTO>.boxOfficeAPI()
+        let boxOfficeAPI = API.boxOfficeAPI()
         let mockNetworkSessionManager = MockNetworkSessionManager()
         let sut = DefaultDataTransferService(with: DefaultNetworkService(sessionManager: mockNetworkSessionManager))
         let decoder = JSONDecoder()
@@ -61,7 +61,7 @@ final class NetworkServiceTests: XCTestCase {
 
     func test_네트워크에서_불러온_json을_MovieDetailResponseDTO로_파싱할_수_있다() throws {
         // given
-        let movieDetailAPI = APIConfig<MovieDetailResponseDTO>.movieDetailAPI(movieCode: "20124079")
+        let movieDetailAPI = API.movieAPI(with: "20124079")
         let mockNetworkSessionManager = MockNetworkSessionManager()
         let sut = DefaultDataTransferService(with: DefaultNetworkService(sessionManager: mockNetworkSessionManager))
         let decoder = JSONDecoder()
