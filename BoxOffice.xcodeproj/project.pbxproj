@@ -112,7 +112,7 @@
 			children = (
 				63DF20FC2970E1A1005DF7D1 /* Info.plist */,
 				8A6E9F2B2B84BB6400778788 /* Secret.xcconfig */,
-				8A65CC822B8617E800414589 /* Extension */,
+				8A65CC822B8617E800414589 /* Foundation */,
 				9B8ACB442B7F292200AF2527 /* Resource */,
 				9B8ACB432B7F291000AF2527 /* Network */,
 				9BEE61C12B86069100CA364A /* Model */,
@@ -164,13 +164,13 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
-		8A65CC822B8617E800414589 /* Extension */ = {
+		8A65CC822B8617E800414589 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
 				8A65CC832B8617FD00414589 /* IntFormatter.swift */,
 				9BEE61C62B86EB8700CA364A /* DateFormatter.swift */,
 			);
-			path = Extension;
+			path = Foundation;
 			sourceTree = "<group>";
 		};
 		8A8903852B7B756A00E0A48D /* Controller */ = {
