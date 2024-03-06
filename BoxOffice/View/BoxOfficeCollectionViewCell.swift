@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BoxOfficeCollectionViewCell: UICollectionViewListCell {
+final class BoxOfficeCollectionViewCell: UICollectionViewListCell {
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
