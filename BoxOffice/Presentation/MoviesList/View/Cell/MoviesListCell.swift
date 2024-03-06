@@ -77,11 +77,11 @@ extension MoviesListCell {
         ])
     }
     
-    func configure(with viewModel: MoviesCellViewModel) {
-        titleLabel.text = viewModel.movieName
-        rankLabel.text = viewModel.rank
-        changeLabel.text = viewModel.rankChangeText
-        changeLabel.textColor = viewModel.rankChangeColor
-        audienceLabel.text = viewModel.audienceText
+    func configure(with cellInformaition: (String, String, String, UIColor, String)) {
+        titleLabel.text = cellInformaition.0
+        rankLabel.text = cellInformaition.1
+        changeLabel.text = cellInformaition.2
+        changeLabel.textColor = cellInformaition.3
+        audienceLabel.text = cellInformaition.4
     }
 }

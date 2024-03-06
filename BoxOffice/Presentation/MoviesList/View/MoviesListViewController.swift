@@ -75,8 +75,11 @@ extension MoviesListViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MoviesListCell.self), for: indexPath) as? MoviesListCell else {
             fatalError("MoviesListCell 에러")
         }
-        let movie = viewModel.movies.value[indexPath.item]
-        cell.configure(with: movie)
+        viewModel.nowCell.bind { cellInformation in
+            cell.configure(with: cellInformation)
+        }
+        viewModel.loadCell(indexPath.row)
+        
         cell.accessories = [.disclosureIndicator()]
         return cell
     }
@@ -86,7 +89,7 @@ extension MoviesListViewController: UICollectionViewDataSource {
         showMovieDetailScreen(for: selectedMovie)
     }
     
-    func showMovieDetailScreen(for movie: MoviesCellViewModel) {
+    func showMovieDetailScreen(for movie: MovieBoxOffice) {
         let movieDetailViewController = MovieDetailView(movie: movie)
         navigationController?.pushViewController(movieDetailViewController, animated: true)
     }

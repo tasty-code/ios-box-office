@@ -2,9 +2,9 @@ import UIKit
 
 final class MovieDetailView: UIViewController {
 
-    private let movie: MoviesCellViewModel
+    private let movie: MovieBoxOffice
     
-    init(movie: MoviesCellViewModel) {
+    init(movie: MovieBoxOffice) {
         self.movie = movie
         super.init(nibName: nil, bundle: nil)
     }
