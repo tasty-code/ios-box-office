@@ -33,3 +33,37 @@ class OldAndNewStackView: UIStackView {
     }
 }
 
+private extension OldAndNewStackView {
+    func setupStackView() {
+        self.axis = .vertical
+        self.spacing = 0
+        self.distribution = .fill
+        self.alignment = .center
+    }
+    
+    private func configureNewMovieLabel() {
+        self.addArrangedSubview(rankLabel)
+        self.addArrangedSubview(newMovieLabel)
+    }
+    private func configureRankChangedMovieLabel(rank: String) {
+        rankStackView.configurePresentRank(rankChange: rank)
+        self.addArrangedSubview(rankLabel)
+        self.addArrangedSubview(rankStackView)
+    }
+}
+
+extension OldAndNewStackView {
+    func configure(rank: String, rankOldAndNew: String, rankChanged: String) {
+        rankLabel.text = rank
+        arrangedSubviews.forEach { $0.removeFromSuperview() }
+        addArrangedSubview(rankLabel)
+        if rankOldAndNew == "NEW" {
+            addArrangedSubview(newMovieLabel)
+        } else {
+            rankStackView.configurePresentRank(rankChange: rankChanged)
+            addArrangedSubview(rankStackView)
+        }
+    }
+}
+
+
