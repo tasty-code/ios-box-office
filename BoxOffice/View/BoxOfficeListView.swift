@@ -30,7 +30,7 @@ class BoxOfficeListView: UICollectionView {
     }
     
     private func registerCells() {
-        self.register(MovieListCollectionViewCell.self, forCellWithReuseIdentifier: MovieListCollectionViewCell.reuseIdentifier)
+        self.register(BoxOfficeListViewCell.self, forCellWithReuseIdentifier: BoxOfficeListViewCell.reuseIdentifier)
     }
     
     private func configureLoadingIndicator() {

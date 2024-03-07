@@ -1,7 +1,7 @@
 import UIKit
 
-class MovieListCollectionViewCell: UICollectionViewListCell {
-    static let reuseIdentifier = String(describing: MovieListCollectionViewCell.self)
+class BoxOfficeListViewCell: UICollectionViewListCell {
+    static let reuseIdentifier = String(describing: BoxOfficeListViewCell.self)
     private let oldAndNewStackView = OldAndNewStackView()
     private let movieStackView = MovieStackView()
     private lazy var mainStackOfMovieListCollectionViewCell: UIStackView = {
@@ -32,7 +32,7 @@ class MovieListCollectionViewCell: UICollectionViewListCell {
     }
 }
 
-extension MovieListCollectionViewCell {
+extension BoxOfficeListViewCell {
    private func configureViews() {
         contentView.addSubview(mainStackOfMovieListCollectionViewCell)
     }
@@ -59,7 +59,7 @@ extension MovieListCollectionViewCell {
     }
 }
 
-extension MovieListCollectionViewCell {
+extension BoxOfficeListViewCell {
     func configure(with result: CustomDailyBoxOffice) {
         oldAndNewStackView.configure(rank: result.rank,
                                      rankOldAndNew: result.rankOldAndNew.rawValue,
