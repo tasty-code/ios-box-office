@@ -54,3 +54,18 @@ extension BoxOfficeListViewController {
         }
     }
 }
+
+extension BoxOfficeListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dailyBoxOfficeList.count
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeListViewCell.reuseIdentifier, for: indexPath) as? BoxOfficeListViewCell else {
+            fatalError("BoxOfficeListViewCell dequeueReusableCell Error ")
+        }
+        let boxOffice = dailyBoxOfficeList[indexPath.row]
+        cell.configure(with: boxOffice)
+        cell.accessories = [.disclosureIndicator()]
+        return cell
+    }
+}
