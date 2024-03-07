@@ -5,7 +5,7 @@ protocol BoxOfficeUseCase {
     func fetch(completion: @escaping (Result<BoxOffice, Error>) -> Void) -> URLSessionTask?
 }
 
-final class DefaulBoxOfficeUseCase {
+final class DefaulBoxOfficeUseCase: BoxOfficeUseCase {
     private let boxOfficeRepository: BoxOfficeRepository
     
     init(boxOfficeRepository: BoxOfficeRepository) {

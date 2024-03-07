@@ -79,7 +79,8 @@ extension MoviesListViewController: UICollectionViewDataSource {
             cell.configure(with: cellInformation)
         }
         viewModel.loadCell(indexPath.row)
-        
+        cell.selectedBackgroundView = UIView()
+        cell.selectedBackgroundView?.backgroundColor = .clear
         cell.accessories = [.disclosureIndicator()]
         return cell
     }
