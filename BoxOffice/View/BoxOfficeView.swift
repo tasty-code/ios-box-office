@@ -35,13 +35,16 @@ class BoxOfficeView: UIView {
 }
 
 extension BoxOfficeView {
-    func setBoxOfficeCollectionViewProperties(_ viewController: BoxOfficeViewController, loadingIndicatorView: UIActivityIndicatorView) {
-        boxOfficeCollectionView.backgroundView = loadingIndicatorView
-        loadingIndicatorView.startAnimating()
-        boxOfficeCollectionView.isScrollEnabled = false
-        boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: BoxOfficeCollectionViewCell.className)
+    
+    func setBoxOfficeCollectionViewDelegate(_ viewController: BoxOfficeViewController) {
         boxOfficeCollectionView.dataSource = viewController
         boxOfficeCollectionView.delegate = viewController
+    }
+    
+    func setBoxOfficeCollectionViewProperties(_ viewController: BoxOfficeViewController, loadingIndicatorView: UIActivityIndicatorView) {
+        boxOfficeCollectionView.backgroundView = loadingIndicatorView
+        boxOfficeCollectionView.isScrollEnabled = false
+        boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: BoxOfficeCollectionViewCell.className)
     }
     
     func configureRefreshControl(_ viewController: BoxOfficeViewController) {
