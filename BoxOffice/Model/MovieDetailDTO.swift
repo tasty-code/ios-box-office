@@ -5,7 +5,7 @@
 //  Created by 박찬호 on 2/20/24.
 //
 
-struct MovieDatailDTO {
+struct MovieDetailDTO {
     let movieCode: String
     let movieName: String
     let movieNameEnglish: String
