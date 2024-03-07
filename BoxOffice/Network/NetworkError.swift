@@ -7,9 +7,10 @@
 
 enum NetworkError: Error {
     case badURL
-    case requestFiled
-    case unknown
+    case unknown(String?)
     case invalidURL
-    case unsuccessfulResponse
-    case APIInvalidResponse
+    case requestDelay(Int)
+    case insufficientRequest(Int)
+    case invalidRequest(Int)
+    case serverErorr(Int)
 }

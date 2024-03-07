@@ -17,35 +17,34 @@ final class NetworkManager {
     private func performRequest<T: Decodable>(with url: URL, completion: @escaping (Result<T, NetworkError>) -> Void) {
         let task = session.dataTask(with: url) { data, response, error in
             guard let response = response as? HTTPURLResponse else {
-                completion(.failure(.unknown))
+                completion(.failure(.unknown(error?.localizedDescription)))
                 return
             }
-            
-            switch response.statusCode {
+            let statusCode = response.statusCode
+            switch statusCode {
             case 200..<300:
                 guard let data = data, error == nil else {
-                    completion(.failure(.requestFiled))
+                    completion(.failure(.unknown(error?.localizedDescription)))
                     return
                 }
-                
+
                 do {
                     let decoder = JSONDecoder()
                     let result = try decoder.decode(T.self, from: data)
                     completion(.success(result))
                 } catch {
-                    print("Decoding error: \(error.localizedDescription)")
-                    completion(.failure(.unknown))
+                    completion(.failure(.unknown(error.localizedDescription)))
                 }
             case 100..<200:
-                completion(.failure(.APIInvalidResponse))
+                completion(.failure(.requestDelay(statusCode)))
             case 300..<400:
-                completion(.failure(.unsuccessfulResponse))
+                completion(.failure(.insufficientRequest(statusCode)))
             case 400..<500:
-                completion(.failure(.requestFiled))
+                completion(.failure(.invalidRequest(statusCode)))
             case 500..<600:
-                completion(.failure(.requestFiled))
+                completion(.failure(.serverErorr(statusCode)))
             default:
-                completion(.failure(.unknown))
+                completion(.failure(.unknown(error?.localizedDescription)))
             }
         }
         task.resume()
