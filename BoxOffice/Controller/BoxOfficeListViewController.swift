@@ -23,3 +23,11 @@ class BoxOfficeListViewController: UIViewController {
 }
 
 
+extension BoxOfficeListViewController {
+    private func configureNavigationBarTitle() {
+         navigationItem.title = Date.todayStringFormatter
+         let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20)]
+         navigationController?.navigationBar.titleTextAttributes = attributes
+     }
+}
+
