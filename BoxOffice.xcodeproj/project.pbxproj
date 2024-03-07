@@ -22,6 +22,7 @@
 		703BF00D2B84AAAE00F1DD40 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703BF00C2B84AAAE00F1DD40 /* NetworkError.swift */; };
 		703BF0142B85C3A900F1DD40 /* box_office_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 703BF0132B85C3A900F1DD40 /* box_office_sample.json */; };
 		70F8EE042B8D92DA00EAC5B1 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F8EE032B8D92DA00EAC5B1 /* NetworkManager.swift */; };
+		70F9762F2B99A88800FA5B6D /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F9762E2B99A88800FA5B6D /* DateExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		703BF00C2B84AAAE00F1DD40 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		703BF0132B85C3A900F1DD40 /* box_office_sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = box_office_sample.json; sourceTree = SOURCE_ROOT; };
 		70F8EE032B8D92DA00EAC5B1 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		70F9762E2B99A88800FA5B6D /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 		63DF20ED2970E1A0005DF7D1 /* BoxOffice */ = {
 			isa = PBXGroup;
 			children = (
+				70F9762E2B99A88800FA5B6D /* DateExtension.swift */,
 				703BF0062B84AA7300F1DD40 /* Model */,
 				703BF0072B84AA7A00F1DD40 /* View */,
 				703BF0082B84AA7E00F1DD40 /* Controller */,
@@ -207,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63DF20F32970E1A0005DF7D1 /* ViewController.swift in Sources */,
+				70F9762F2B99A88800FA5B6D /* DateExtension.swift in Sources */,
 				703BF0052B84AA5D00F1DD40 /* MovieAPIFetcher.swift in Sources */,
 				703BF00B2B84AAA500F1DD40 /* JSONFileError.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
