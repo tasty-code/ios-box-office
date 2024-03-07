@@ -1,4 +1,5 @@
 import Foundation
+
 extension String {
     func toDate() -> Date? {
         let dateFormatter = DateFormatter()

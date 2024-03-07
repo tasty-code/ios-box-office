@@ -12,7 +12,7 @@ protocol ResponseDecoder {
     func decode<T: Decodable>(_ data: Data) throws -> T
 }
 
-class JSONResponseDecoder: ResponseDecoder {
+final class JSONResponseDecoder: ResponseDecoder {
     private let jsonDecoder = JSONDecoder()
     
     func decode<T: Decodable>(_ data: Data) throws -> T {

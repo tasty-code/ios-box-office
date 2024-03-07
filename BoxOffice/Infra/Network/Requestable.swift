@@ -26,6 +26,32 @@ protocol Requestable {
     func toURLRequest() -> URLRequest?
 }
 
+extension Requestable {
+    private func toURL() -> URL? {
+        var components = URLComponents()
+        components.scheme = URLScheme.https.rawValue
+        components.host = baseURL
+        components.path = path
+        components.queryItems = queryParameters.map { URLQueryItem(name: $0, value: $1 as? String) }
+        return components.url
+    }
+    
+    func toURLRequest() -> URLRequest? {
+        guard let url = toURL() else {
+            return nil
+        }
+        var urlRequest = URLRequest(url: url)
+        if !bodyParameters.isEmpty {
+            urlRequest.httpBody = bodyEncoder.encode(bodyParameters)
+        }
+        urlRequest.httpMethod = method.rawValue
+        urlRequest.allHTTPHeaderFields = headerParameters.reduce(into: [:]) { partialResult, headerParameter in
+            partialResult[headerParameter.key] = headerParameter.value
+        }
+        return urlRequest
+    }
+}
+
 struct APIConfig<R>: HTTPInteractable {
     typealias Response = R
     
@@ -55,32 +81,6 @@ struct APIConfig<R>: HTTPInteractable {
         self.bodyParameters = bodyParameters
         self.bodyEncoder = bodyEncoder
         self.responseDecoder = responseDecoder
-    }
-}
-
-extension APIConfig {
-    private func toURL() -> URL? {
-        var components = URLComponents()
-        components.scheme = URLScheme.https.rawValue
-        components.host = baseURL
-        components.path = path
-        components.queryItems = queryParameters.map { URLQueryItem(name: $0, value: $1 as? String) }
-        return components.url
-    }
-    
-    func toURLRequest() -> URLRequest? {
-        guard let url = toURL() else {
-            return nil
-        }
-        var urlRequest = URLRequest(url: url)
-        if !bodyParameters.isEmpty {
-            urlRequest.httpBody = bodyEncoder.encode(bodyParameters)
-        }
-        urlRequest.httpMethod = method.rawValue
-        urlRequest.allHTTPHeaderFields = headerParameters.reduce(into: [:]) { partialResult, headerParameter in
-            partialResult[headerParameter.key] = headerParameter.value
-        }
-        return urlRequest
     }
 }
 

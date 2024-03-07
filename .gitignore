@@ -100,7 +100,7 @@ iOSInjectionProject/
 
 ### DS_Store ###
 .DS_Store
-
+Info.plist
 
 ## Gcc Patch
 /*.gcno

@@ -1,13 +1,13 @@
 import Foundation
 
 struct MovieBoxOffice {
-    private let rank: Int
-    private let rankChangesWithPreviousDay: Int
-    private let rankOldAndNew: RankOldAndNew
-    private let movieCode: String
-    private let movieName: String
-    private let audienceCount: Int
-    private let audienceAccumulation: Int
+    let rank: Int
+    let rankChangesWithPreviousDay: Int
+    let rankOldAndNew: RankOldAndNew
+    let movieCode: String
+    let movieName: String
+    let audienceCount: Int
+    let audienceAccumulation: Int
     
     init(from movieBoxOfficeDTO: BoxOfficeResponseDTO.BoxOfficeDTO.MovieBoxOfficeDTO) {
         self.rank = Int(movieBoxOfficeDTO.rank) ?? 0
