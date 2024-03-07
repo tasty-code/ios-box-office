@@ -18,10 +18,31 @@ class BoxOfficeListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         
-
+        setupCollectionView()
+        fetchBoxOfficeData()
+        configureNavigationBarTitle()
     }
     
+}
+
+extension BoxOfficeListViewController: BoxOfficeListDelegate {
+     func refreshBoxOfficeData() {
+        self.movieListCollectionView?.loadingIndicator.startAnimating()
+        movieAPIFetcher.fetchBoxOffice { [weak self] result in
+            DispatchQueue.main.async {
+                self?.movieListCollectionView?.loadingIndicator.stopAnimating()
+                self?.movieListCollectionView?.refreshControl?.endRefreshing()
+
+                switch result {
+                case .success(let boxOfficeList):
+                    self?.dailyBoxOfficeList = boxOfficeList
+                    self?.movieListCollectionView?.reloadData()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
 }
 
 extension BoxOfficeListViewController {
@@ -36,6 +57,9 @@ extension BoxOfficeListViewController {
         layout.itemSize = CGSize(width: view.frame.width, height: 100)
         movieListCollectionView = BoxOfficeListView(frame: .zero, collectionViewLayout: layout)
         guard let movieListCollectionView = movieListCollectionView else { return }
+        movieListCollectionView.movieListDelegate = self
+        movieListCollectionView.delegate = self
+        movieListCollectionView.dataSource = self
         view.addSubview(movieListCollectionView)
         movieListCollectionView.frame = view.bounds
     }
@@ -69,3 +93,5 @@ extension BoxOfficeListViewController: UICollectionViewDataSource, UICollectionV
         return cell
     }
 }
+
+
