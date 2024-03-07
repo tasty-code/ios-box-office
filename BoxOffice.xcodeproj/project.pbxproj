@@ -25,6 +25,7 @@
 		70F9762F2B99A88800FA5B6D /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F9762E2B99A88800FA5B6D /* DateExtension.swift */; };
 		70F976312B99A99B00FA5B6D /* CustomDailyBoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F976302B99A99B00FA5B6D /* CustomDailyBoxOffice.swift */; };
 		70F976342B99AC3C00FA5B6D /* MovieStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F976332B99AC3C00FA5B6D /* MovieStackView.swift */; };
+		70F976362B99AC9E00FA5B6D /* RankStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F976352B99AC9E00FA5B6D /* RankStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		70F9762E2B99A88800FA5B6D /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		70F976302B99A99B00FA5B6D /* CustomDailyBoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDailyBoxOffice.swift; sourceTree = "<group>"; };
 		70F976332B99AC3C00FA5B6D /* MovieStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStackView.swift; sourceTree = "<group>"; };
+		70F976352B99AC9E00FA5B6D /* RankStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				70F976332B99AC3C00FA5B6D /* MovieStackView.swift */,
+				70F976352B99AC9E00FA5B6D /* RankStackView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				70F8EE042B8D92DA00EAC5B1 /* NetworkManager.swift in Sources */,
 				703BF0012B84A95B00F1DD40 /* JSONLoader.swift in Sources */,
 				703BEFFD2B84A92D00F1DD40 /* BoxOfficeResponse.swift in Sources */,
+				70F976362B99AC9E00FA5B6D /* RankStackView.swift in Sources */,
 				70F976312B99A99B00FA5B6D /* CustomDailyBoxOffice.swift in Sources */,
 				703BEFFF2B84A94200F1DD40 /* MovieInfoResponse.swift in Sources */,
 				703BF0032B84AA4500F1DD40 /* EndPoint.swift in Sources */,
