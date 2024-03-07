@@ -39,7 +39,7 @@ extension BoxOfficeView {
         boxOfficeCollectionView.backgroundView = loadingIndicatorView
         loadingIndicatorView.startAnimating()
         boxOfficeCollectionView.isScrollEnabled = false
-        boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: "BoxOfficeCollectionViewCell")
+        boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: BoxOfficeCollectionViewCell.className)
         boxOfficeCollectionView.dataSource = viewController
         boxOfficeCollectionView.delegate = viewController
     }
