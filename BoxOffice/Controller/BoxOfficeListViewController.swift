@@ -39,4 +39,18 @@ extension BoxOfficeListViewController {
         view.addSubview(movieListCollectionView)
         movieListCollectionView.frame = view.bounds
     }
+    
+    private func fetchBoxOfficeData() {
+        movieAPIFetcher.fetchBoxOffice { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let boxOfficeList):
+                    self?.dailyBoxOfficeList = boxOfficeList
+                    self?.movieListCollectionView?.reloadData()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
 }
