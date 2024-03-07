@@ -7,12 +7,12 @@ protocol NetworkManagerProtocol {
 struct NetworkManager: NetworkManagerProtocol {
     private func loadJSONFromURL<T: Codable>(from urlString: String, completion: @escaping (Result<T, Error>) -> Void) {
         guard let url = URL(string: urlString) else {
-            completion(.failure(NetworkError.urlError))
+            completion(.failure(NSError(domain: "URLError", code: 404, userInfo: nil)))
             return
         }
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
-                completion(.failure(NetworkError.dataLoadingError))
+            completion(.failure(NSError(domain: "URLSession.shared.dataTask Error", code: 500, userInfo: nil)))
                 return
             }
             let decoder = JSONDecoder()
