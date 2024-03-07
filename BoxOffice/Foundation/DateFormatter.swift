@@ -8,12 +8,18 @@
 import Foundation
 
 extension Date {
-    func getYesterday(_ format: String) -> String {
-        guard let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: self) else {
-            return ""
-        }
+    static var yesterday: Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
+    }
+    
+    enum Format: String {
+        case standard = "yyyy-MM-dd"
+        case apiFormat = "yyyyMMdd"
+    }
+
+    func formatted(using format: Format) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = format
-        return formatter.string(from: yesterday)
+        formatter.dateFormat = format.rawValue
+        return formatter.string(from: self)
     }
 }

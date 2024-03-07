@@ -21,7 +21,7 @@ final class DailyBoxOffice: LoadDataProtocol {
     }
     
     func loadData() async throws {
-        let url: String = KoreanFilmCouncilURL.dailyBoxOffice(targetDate: Date().getYesterday("yyyyMMdd")).url
+        let url: String = KoreanFilmCouncilURL.dailyBoxOffice(targetDate: Date.yesterday.formatted(using: .apiFormat)).url
         let data: BoxOfficeResult = try await self.networkManager.request(url)
         let movies = data.boxOfficeResult.dailyBoxOfficeList
         loadedData = converted(movies)
