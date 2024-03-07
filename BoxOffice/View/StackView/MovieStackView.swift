@@ -1,7 +1,7 @@
 
 import UIKit
 
-class MovieStackView: UIStackView {
+final class MovieStackView: UIStackView {
     private let movieNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title2)

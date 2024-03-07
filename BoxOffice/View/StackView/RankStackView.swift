@@ -1,6 +1,6 @@
 import UIKit
 
-class RankStackView: UIStackView {
+final class RankStackView: UIStackView {
     private let rankLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 15)

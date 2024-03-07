@@ -1,6 +1,6 @@
 import UIKit
 
-class BoxOfficeListViewCell: UICollectionViewListCell {
+final class BoxOfficeListViewCell: UICollectionViewListCell {
     static let reuseIdentifier = String(describing: BoxOfficeListViewCell.self)
     private let oldAndNewStackView = OldAndNewStackView()
     private let movieStackView = MovieStackView()

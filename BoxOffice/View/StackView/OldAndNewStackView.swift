@@ -1,6 +1,6 @@
 import UIKit
 
-class OldAndNewStackView: UIStackView {
+final class OldAndNewStackView: UIStackView {
     
     private let rankStackView  = RankStackView()
     private let rankLabel: UILabel = {
