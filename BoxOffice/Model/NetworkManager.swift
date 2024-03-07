@@ -1,7 +1,7 @@
 import Foundation
 
 protocol NetworkManagerProtocol {
-    func fetchDetails<T: Codable>(from urlString: String, completion: @escaping (Result<T, Error>) -> Void)
+    func fetch<T: Codable>(from urlString: String, completion: @escaping (Result<T, Error>) -> Void)
 }
 
 struct NetworkManager: NetworkManagerProtocol {
@@ -26,7 +26,7 @@ struct NetworkManager: NetworkManagerProtocol {
         task.resume()
     }
     
-    func fetchDetails <T: Codable>(from urlString: String, completion: @escaping (Result<T, Error>) -> Void) {
+    func fetch <T: Codable>(from urlString: String, completion: @escaping (Result<T, Error>) -> Void) {
         loadJSONFromURL(from: urlString, completion: completion)
     }
     
