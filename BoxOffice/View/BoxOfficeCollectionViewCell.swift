@@ -11,77 +11,20 @@ final class BoxOfficeCollectionViewCell: UICollectionViewListCell {
     
     static let className: String = String(describing: BoxOfficeCollectionViewCell.self)
     
-    let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fill
-        return stackView
-    }()
-
-    let rankStackView: UIStackView = {
-        let rankStackView = UIStackView()
-        rankStackView.axis = .vertical
-        rankStackView.distribution = .fillProportionally
-        return rankStackView
-    }()
+    let stackView: UIStackView = UIStackView(axis: .horizontal, distribution: .fill)
     
-    let rankLabel: UILabel = {
-        let label = UILabel()
-        label.font  = .preferredFont(forTextStyle: .largeTitle)
-        label.textAlignment = .center
-        label.textColor = .black
-        return label
-    }()
+    let rankStackView: UIStackView = UIStackView(axis: .vertical, distribution: .fillProportionally)
+    let rankLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .largeTitle), textAlignment: .center, textColor: .black)
+    let rankStatusLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .body), textAlignment: .center, textColor: .gray)
     
-    let rankStatusLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body)
-        label.textAlignment = .center
-        label.textColor = .gray
-        return label
-    }()
+    let rankChangedAmountStackView: UIStackView = UIStackView(axis: .horizontal, distribution: .fillEqually)
+    let rankChangedIndicatorImageView: UIImageView = UIImageView(adjustsImageSizeForAccessibilityContentSizeCategory: true, contentMode: .right)
+    let rankChangedAmountLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .footnote), textAlignment: .left)
     
-    let rankChangedAmountStackView: UIStackView = {
-        let rankChangedAmountStackView = UIStackView()
-        rankChangedAmountStackView.axis = .horizontal
-        rankChangedAmountStackView.distribution = .fillEqually
-        return rankChangedAmountStackView
-    }()
+    let informationStackView: UIStackView = UIStackView(axis: .vertical, distribution: .fillEqually)
+    let movieNameLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .title3), textAlignment: .left)
+    let audienceLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .body), textAlignment: .left)
     
-    let rankChangedIndicatorImageView: UIImageView = {
-        let rankChangedIndicatorImageView = UIImageView(image: nil)
-        rankChangedIndicatorImageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
-        rankChangedIndicatorImageView.contentMode = .right
-        return rankChangedIndicatorImageView
-    }()
-    
-    let rankChangedAmountLabel: UILabel = {
-        let rankChangedAmountLabel = UILabel()
-        rankChangedAmountLabel.textAlignment = .left
-        rankChangedAmountLabel.font = .preferredFont(forTextStyle: .footnote)
-        return rankChangedAmountLabel
-    }()
-    
-    let informationStackView: UIStackView = {
-        let informationStackView = UIStackView()
-        informationStackView.axis = .vertical
-        informationStackView.distribution = .fillEqually
-        return informationStackView
-    }()
-    
-    let movieNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title3)
-        label.textAlignment = .left
-        return label
-    }()
-    
-    let audienceLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body)
-        label.textAlignment = .left
-        return label
-    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
