@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BoxOfficeView: UIView {
+final class BoxOfficeView: UIView {
     lazy var navigationBar: UINavigationBar = {
         let navigationBar = UINavigationBar()
         let navigationItem = UINavigationItem(title: Date.yesterday.formatted(using: .standard))
