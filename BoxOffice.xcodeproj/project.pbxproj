@@ -156,9 +156,9 @@
 		70F9763D2B99B20A00FA5B6D /* StackView */ = {
 			isa = PBXGroup;
 			children = (
-				70F976332B99AC3C00FA5B6D /* MovieStackView.swift */,
 				70F976352B99AC9E00FA5B6D /* RankStackView.swift */,
 				70F976372B99AE2B00FA5B6D /* OldAndNewStackView.swift */,
+				70F976332B99AC3C00FA5B6D /* MovieStackView.swift */,
 			);
 			path = StackView;
 			sourceTree = "<group>";

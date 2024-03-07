@@ -23,7 +23,7 @@ class OldAndNewStackView: UIStackView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-    
+        self.setupStackView()
     }
     
     required init(coder: NSCoder) {
