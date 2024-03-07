@@ -1,7 +1,7 @@
 
 import UIKit
 
-final class BoxOfficeCollectionViewController: UIViewController {
+final class BoxOfficeViewController: UIViewController {
     
     private let usecase: BoxOfficeUseCaseProtocol
     
@@ -23,7 +23,7 @@ final class BoxOfficeCollectionViewController: UIViewController {
     }
 }
 
-extension BoxOfficeCollectionViewController {
+extension BoxOfficeViewController {
     
     func fetchBoxOfficeData() async {
         let result = await usecase.fetchBoxOfficeData()
@@ -37,7 +37,7 @@ extension BoxOfficeCollectionViewController {
     }
     
     func fetchDetailMovieData() async {
-        let result = await usecase.fetchDetailMovieData()
+        let result = await usecase.fetchDetailMovieData(movie: "20231010")
         switch result {
         case .success(let data):
             print("영화 개별 상세 조회")

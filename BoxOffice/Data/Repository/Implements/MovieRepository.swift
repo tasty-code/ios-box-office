@@ -1,45 +1,66 @@
-
 import Foundation
 
 final class MovieRepository: MovieRepositoryProtocol {
     
-    private let requestProvider: RequestProvidable
-    private let sessionProvider: SessionProvidable
-    private let decoder: URLDecodeProtocol
-    
-    init(request: RequestProvidable, session: SessionProvidable, decoder: URLDecodeProtocol) {
-        self.requestProvider = request
-        self.sessionProvider = session
-        self.decoder = decoder
+    private let networkManager: Networkmanagable
+    private let urlBuilder: URLBuilderProtocol
+
+    init(networkManager: Networkmanagable, urlBuilder: URLBuilderProtocol) {
+        self.networkManager = networkManager
+        self.urlBuilder = urlBuilder
     }
 
-    func requestBoxofficeData() async -> Result<BoxOfficeDTO, NetworkError> {
-        guard let request = requestProvider.makeURLRequest(for: URLProvider.dailyBoxOffice(date: Date().dayBefore.formattedDate(withFormat: "yyyyMMdd"))) else { return .failure(.urlError) }
-        let result = await sessionProvider.loadAPIRequest(using: request)
-    
+    func requestBoxofficeData() async -> Result<[BoxOfficeMovie], DomainError> {
+        
+        guard let url = makeBoxOfficeURL() else { return .failure(.networkIssue)}
+        let result: Result<BoxOfficeDTO, NetworkError> = await networkManager.bringNetworkResult(from: url)
+
         switch result {
-        case .success(let networkResponse):
-            guard let data = networkResponse.data else { return .failure(.notFound)}
-            let decodeResult: Result<BoxOfficeDTO, NetworkError> = decoder.decode(data)
-            return decodeResult
+        case .success(let boxOfficeDTO):
+            return .success(boxOfficeDTO.boxOfficeResult.dailyBoxOfficeList.map { $0.toEntity() })
         case .failure(let networkError):
-            return .failure(networkError)
+            logNetworkError(networkError)
+            return .failure(networkError.mapToDomainError())
+        }
+    }
+
+    func requestDetailMovieData(movie: String) async -> Result<MovieDetailInfo, DomainError> {
+        
+        guard let url = makeMovieDetailURL(movieCode: movie) else { return .failure(.networkIssue)}
+        let result: Result<DetailMovieInfoDTO, NetworkError> = await networkManager.bringNetworkResult(from: url)
+
+        switch result {
+        case .success(let detailMovieInfoDTO):
+            return .success(detailMovieInfoDTO.movieInfoResult.movieInfo.toEntity())
+        case .failure(let networkError):
+            logNetworkError(networkError)
+            return .failure(networkError.mapToDomainError())
         }
     }
     
-    func requestDetailMovieData() async -> Result<DetailMovieInfoDTO, NetworkError> {
-        guard let request = requestProvider.makeURLRequest(for: URLProvider.detailMovieInformation(code: "20234675")) else { return .failure(.urlError) }
-        let result = await sessionProvider.loadAPIRequest(using: request)
+    private func makeBoxOfficeURL() -> URL? {
+        let url = urlBuilder
+            .setBaseURL(type: .kobis)
+            .setPath("/boxoffice/searchDailyBoxOfficeList.json")
+            .addQueryItem(name: "targetDt", value: Date().dayBefore.formattedDate(withFormat: "yyyyMMdd"))
+            .setApiKey(apiKey: ENV.API_KEY)
+            .build()
         
-        switch result {
-        case .success(let networkResponse):
-            guard let data = networkResponse.data else { return .failure(.notFound)}
-            let decodeResult: Result<DetailMovieInfoDTO, NetworkError> = decoder.decode(data)
-            return decodeResult
-        case .failure(let networkError):
-            return .failure(networkError)
-        }
+        return url
+    }
+
+    private func makeMovieDetailURL(movieCode: String) -> URL? {
+        let url = urlBuilder
+            .setBaseURL(type: .kobis)
+            .setPath("/movie/searchMovieInfo.json")
+            .addQueryItem(name: "movieCd", value: movieCode)
+            .setApiKey(apiKey: ENV.API_KEY)
+            .build()
+        
+        return url
+    }
+
+    private func logNetworkError(_ error: NetworkError) {
+        print("Network Error: \(error.localizedDescription)")
     }
 }
-
-

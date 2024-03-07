@@ -23,4 +23,9 @@ final class SessionProvider: SessionProvidable {
         return .success(NetworkResponse(response: httpResponse, data: data))
     }
     
+    private func printNetworkError(_ error: NetworkError) {
+        print("Network Error: \(error.localizedDescription)")
+    }
+
+    
 }
