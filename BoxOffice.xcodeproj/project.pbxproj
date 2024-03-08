@@ -222,12 +222,12 @@
 			path = Interfaces;
 			sourceTree = "<group>";
 		};
-		08A6CE5B2B99C66400F2F2CA /* Model */ = {
+		08A6CE5B2B99C66400F2F2CA /* DisplayModel */ = {
 			isa = PBXGroup;
 			children = (
 				08A6CE5C2B99C6CB00F2F2CA /* BoxOfficeDisplayModel.swift */,
 			);
-			path = Model;
+			path = DisplayModel;
 			sourceTree = "<group>";
 		};
 		08AB8E772B7F249600564AC5 /* App */ = {
@@ -336,7 +336,7 @@
 		C76965DC2B86E66500EF8F87 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				08A6CE5B2B99C66400F2F2CA /* Model */,
+				08A6CE5B2B99C66400F2F2CA /* DisplayModel */,
 				08AB8E7B2B7F24BE00564AC5 /* Controller */,
 			);
 			path = Presentation;

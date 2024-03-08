@@ -52,7 +52,12 @@ extension DailyBoxOfficeDTO: Mappable {
                      releaseDate: openDate,
                      rank: rank,
                      salesAmount: salesAmount,
-                     movieCode: movieCode)
+                     movieCode: movieCode,
+                     dalilyAudience: audienceCount,
+                     cumulateAudience: audienceAccount,
+                     rankChange: rankIntensity,
+                     isNew: rankOldAndNew == RankOldAndNewDTO.new ? true : false
+        )
     }
 }
 
