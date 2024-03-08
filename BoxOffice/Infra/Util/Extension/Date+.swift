@@ -1,11 +1,13 @@
 import Foundation
 
 extension Date {
-    var yesterday: Date {
-        return Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? self
-    }
     func yesterdayString(with format: String) -> String {
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? self
         return DateFormatter.formatter(with: format).string(from: yesterday)
+    }
+    
+    func openingDayString(with day: Date, with format: String) -> String {
+        return DateFormatter.formatter(with: format).string(from: day)
     }
 }
 
