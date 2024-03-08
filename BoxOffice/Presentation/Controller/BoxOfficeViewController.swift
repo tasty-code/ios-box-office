@@ -92,8 +92,8 @@ private extension BoxOfficeViewController {
             cell.rankLabel.text = movie.rank
             cell.movieNameLabel.text = movie.movieName
             guard let rankIntensity = Int(movie.rankIntensity) else { return }
-            cell.test(new: movie.isNew,num: rankIntensity)
-            cell.audienceAccount(cell: movie)
+            cell.matchRankIntensity(of: movie.isNew, with: rankIntensity)
+            cell.matchAudienceAccount(of: movie)
         }
     }
 }
@@ -109,7 +109,6 @@ private extension BoxOfficeViewController {
         }
     }
     
-    @MainActor
     func handleFetchResult(_ result: Result<[BoxOfficeMovie], DomainError>) {
         boxOfficeCollectionView.refreshControl?.endRefreshing()
         switch result {
@@ -138,7 +137,6 @@ private extension BoxOfficeViewController {
 // MARK: - Update UI
 private extension BoxOfficeViewController {
     // 결과에 따라 UI 업데이트
-    @MainActor
     private func updateUI(with result: Result<[BoxOfficeDisplayModel], DomainError>, isLoading: Bool = false) {
         switch result {
         case .success(let movies):

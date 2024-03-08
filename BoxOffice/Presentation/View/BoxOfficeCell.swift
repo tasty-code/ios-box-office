@@ -124,24 +124,24 @@ extension BoxOfficeCell {
         ])
     }
     
-     func test(new: Bool, num: Int) {
-            if new {
+     func matchRankIntensity(of isNew: Bool, with rankNumber: Int) {
+            if isNew {
                 rankIntensityLabel.textColor = .red
                 rankIntensityLabel.text = "신작"
                 return
             }
 
-            switch num {
+            switch rankNumber {
             case let x where x > 0:
-                movieRank(number: num, image: "arrowtriangle.up.fill", color: .red)
+                matchRankIntensity(for: rankNumber, withImage: "arrowtriangle.up.fill", setColor: .red)
             case let x where x < 0:
-                movieRank(number: num, image: "arrowtriangle.down.fill", color: .blue)
+                matchRankIntensity(for: rankNumber, withImage: "arrowtriangle.down.fill", setColor: .blue)
             default:
                 rankIntensityLabel.text = "-"
             }
         }
 
-    func movieRank(number: Int, image: String, color: UIColor) {
+    func matchRankIntensity(for number: Int, withImage image: String, setColor color: UIColor) {
         let imageAttachement = NSTextAttachment()
         imageAttachement.image = UIImage(systemName: image)?.withTintColor(color, renderingMode: .alwaysTemplate)
         let attributedString = NSMutableAttributedString(attachment: imageAttachement)
@@ -149,7 +149,7 @@ extension BoxOfficeCell {
         rankIntensityLabel.attributedText = attributedString
     }
     
-    func audienceAccount(cell: BoxOfficeDisplayModel) {
+    func matchAudienceAccount(of cell: BoxOfficeDisplayModel) {
         audienceAccountLabel.text = "오늘 \(self.numberFormatter(for: cell.audienceCount)) / 총 \(self.numberFormatter(for: cell.audienceAccount))"
     }
     
