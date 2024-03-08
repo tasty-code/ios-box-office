@@ -1,5 +1,5 @@
 //
-//  MovieCollectionCell.swift
+//  MovieCell.swift
 //  BoxOffice
 //
 //  Created by Matthew on 2/21/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MovieCollectionCell: UICollectionViewListCell {
+final class MovieCell: UICollectionViewListCell {
     
     static var identifier: String {
         return String(describing: self)
@@ -35,7 +35,7 @@ final class MovieCollectionCell: UICollectionViewListCell {
     }
 }
 
-private extension MovieCollectionCell {
+private extension MovieCell {
     func setupView() {
         self.addSubview(boxOfficeStackView)
     }
@@ -51,15 +51,17 @@ private extension MovieCollectionCell {
     }
 }
 
-extension MovieCollectionCell {
+extension MovieCell {
     func configure(result: DailyBoxOfficeList) {
         rankStackView.configure(
             rank: result.rank,
             rankState: result.rankOldAndNew.rawValue,
-            rankChanged: result.rankChanged)
+            rankChanged: result.rankChanged
+        )
         movieStackView.configureStackView(
             movieName: result.name,
             totalAudience: result.audiencesAccumulated,
-            todayAudience: result.audiencesCount)
+            todayAudience: result.audiencesCount
+        )
     }
 }
