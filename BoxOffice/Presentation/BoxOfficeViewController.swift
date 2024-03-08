@@ -10,8 +10,10 @@ import UIKit
 class BoxOfficeViewController: UIViewController {
     
     private let viewModel: BoxOfficeViewModel
+    private var refreshAction: Observable<Void> = Observable(())
+    private var boxOfficeList: [BoxOfficeEntity] = []
     
-    init(viewModel: BoxOfficeViewModel = BoxOfficeViewModel()) {
+    init(viewModel: BoxOfficeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,12 +40,13 @@ class BoxOfficeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupCollectionView()
         configureUI()
         setupConstraint()
         setupNavigationBar()
         setupRefreshControl()
-        fetchData()
+        bindViewModel()
     }
     
     private func configureUI() {
@@ -80,34 +83,34 @@ class BoxOfficeViewController: UIViewController {
         collectionView.refreshControl = refreshControl
     }
     
-    private func fetchData() {
-        viewModel.fetchBoxOfficeData(completion: { [weak self] result in
-            switch result {
-            case .success:
-                self?.collectionView.reloadData()
-            case .failure(let error):
-                print("Error: \(error.localizedDescription)")
-            }
-        })
+    @objc private func refreshBoxOfficeData(_ sender: UIRefreshControl) {
+        refreshAction.value = ()
+        sender.endRefreshing()
     }
     
-    @objc private func refreshBoxOfficeData(_ sender: UIRefreshControl) {
-        fetchData()
-        sender.endRefreshing()
+    private func bindViewModel() {
+        let input = BoxOfficeViewModel.Input(
+            viewDidLoad: Observable(()),
+            refreshAction: refreshAction)
+        let output = viewModel.transform(input: input)
+        
+        output.boxOfficeData.subscribe { [weak self] result in
+            self?.boxOfficeList = result
+            self?.collectionView.reloadData()
+        }
     }
 }
 
 extension BoxOfficeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.boxOfficeCount
+        return boxOfficeList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeCollectionViewCell.identifier, for: indexPath) as? BoxOfficeCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let boxOffice = viewModel.boxOffice(at: indexPath.row)
-        cell.configure(with: boxOffice)
+        cell.configure(with: boxOfficeList[indexPath.row])
         
         return cell
     }
