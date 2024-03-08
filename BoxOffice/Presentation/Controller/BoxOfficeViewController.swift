@@ -141,7 +141,7 @@ private extension BoxOfficeViewController {
         var initialSnapshot = NSDiffableDataSourceSnapshot<Section, BoxOfficeDisplayModel>()
         initialSnapshot.appendSections([.main])
         initialSnapshot.appendItems(loadingPlaceholder, toSection: .main)
-        dataSource.apply(initialSnapshot, animatingDifferences: false) // 초기 스냅샷 적용
+        dataSource.apply(initialSnapshot, animatingDifferences: false)
     }
     
     func applySnapshot(movies: [BoxOfficeDisplayModel], animatingDifferences: Bool) {

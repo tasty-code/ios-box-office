@@ -6,13 +6,13 @@ enum Section {
 }
 
 struct BoxOfficeDisplayModel: Hashable {
-    var id: UUID = UUID()
-    var rank: String
-    var rankIntensity: String
+    let id: UUID = UUID()
+    let rank: String
+    let rankIntensity: String
     let isNew: Bool
-    var movieName: String
+    let movieName: String
     let audienceCount: String
-    var audienceAccount: String
+    let audienceAccount: String
 }
 
 extension BoxOfficeDisplayModel {
