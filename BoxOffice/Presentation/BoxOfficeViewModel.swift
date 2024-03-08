@@ -7,71 +7,52 @@
 
 import Foundation
 
-class BoxOfficeViewModel {
+final class BoxOfficeViewModel: ViewModelType {
     
-    private let boxOfficeAPI: BoxOfficeAPIService
-    private var boxOfficeData: [BoxOfficeEntity] = []
+    private let boxOfficeRepository: BoxOfficeRepository
+    var boxOfficeData: Observable<[BoxOfficeEntity]> = Observable([])
     
-    var boxOfficeCount: Int {
-        return boxOfficeData.count
+    init(boxOfficeRepository: BoxOfficeRepository) {
+        self.boxOfficeRepository = boxOfficeRepository
     }
     
-    init(boxOfficeAPI: BoxOfficeAPIService = BoxOfficeAPIService.shared) {
-        self.boxOfficeAPI = boxOfficeAPI
+    struct Input {
+        let viewDidLoad: Observable<Void>
+        let refreshAction: Observable<Void>
     }
     
-    func fetchBoxOfficeData(completion: @escaping (Result<[BoxOfficeEntity], Error>) -> Void) {
-        guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String else { return }
-        let yesterday = Date.convertYesterdayDateToString()
-        
-        BoxOfficeAPIService.shared.requestDailyBoxOfficeAPI(userKey: apiKey, date: yesterday) { networkResult in
-            switch networkResult {
-            case .success(let data):
-                if let boxOfficeData = data as? BoxOfficeDTO {
-                    DispatchQueue.main.async {
-                        self.handleBoxOfficeData(boxOfficeData)
-                        completion(.success(self.boxOfficeData))
-                    }
-                }
-            default:
-                handleError(networkResult)
+    struct Output {
+        let boxOfficeData: Observable<[BoxOfficeEntity]>
+    }
+    
+    func transform(input: Input) -> Output {
+        input.viewDidLoad
+            .subscribe { [weak self] in
+                self?.updateBoxOfficeList()
             }
-        }
-    }
-    
-    private func handleBoxOfficeData(_ data: BoxOfficeDTO) {
-        let boxOfficeResult = data.boxOfficeResult
-        let dailyBoxOfficeList = boxOfficeResult.dailyBoxOfficeList
-        var entities: [BoxOfficeEntity] = []
-        for boxOfficeItem in dailyBoxOfficeList {
-            let isNewMovie = boxOfficeItem.rankOldAndNew == "NEW" ? true : false
-            let entity = BoxOfficeEntity(rank: boxOfficeItem.rank,
-                                         movieName: boxOfficeItem.movieName,
-                                         salesAmount: boxOfficeItem.salesAmount,
-                                         audienceCount: boxOfficeItem.audienceCount,
-                                         rankChangeValue: boxOfficeItem.rankChangeValue,
-                                         isNewMovie: isNewMovie)
-            entities.append(entity)
-        }
-        self.boxOfficeData = entities
-    }
-    
-    func boxOffice(at index: Int) -> BoxOfficeEntity {
-        return boxOfficeData[index]
+        
+        input.refreshAction
+            .subscribe { [weak self] in
+                self?.updateBoxOfficeList()
+            }
+        
+        return Output(boxOfficeData: boxOfficeData)
     }
 }
 
-private func handleError(_ networkResult: NetworkResult<Any>) {
-    switch networkResult {
-    case .pathError:
-        print("pathErr")
-    case .requestError(_):
-        print("requestErr")
-    case .networkFail:
-        print("networkFail")
-    case .serverError:
-        print("serverErr")
-    default:
-        break
+extension BoxOfficeViewModel {
+    
+    private func updateBoxOfficeList() {
+        boxOfficeRepository.fetchBoxOfficeData { [weak self] result in
+            switch result {
+            case .success(let data):
+                DispatchQueue.main.async {
+                    self?.boxOfficeData.value = data
+                }
+            case .failure(let error):
+                // TODO: 에러처리 필요
+                print(error.localizedDescription)
+            }
+        }
     }
 }
