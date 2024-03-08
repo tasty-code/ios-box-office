@@ -12,7 +12,7 @@ struct NetworkAPI {
     func buildDailyBoxOfficeAPI(targetDate: APIURLCompnents.QueryValues) -> URL? {
         return buildUrl(apiType: .dailyBoxOffice, query: targetDate).url
     }
-    
+
     func buildMovieDetailAPI(movieCode: APIURLCompnents.QueryValues) -> URL? {
         return buildUrl(apiType: .movieDetail, query: movieCode).url
     }

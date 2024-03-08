@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import OSLog
 final class MovieListViewController: UIViewController {
     
     private let networking = NetworkManager.shared
@@ -14,8 +14,12 @@ final class MovieListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        callDailyBoxOfficeAPI()
+//        callDailyBoxOfficeAPI()
         callMovieDetailAPI()
+
+        os_log("네트워크 오류남", log: .network, type: .error)
+        os_log("네트워크 오류남", type: .error)
+        os_log("default")
     }
     
     private func callMovieDetailAPI() {
@@ -24,11 +28,11 @@ final class MovieListViewController: UIViewController {
             switch result {
             case .success(let data):
                 guard let data = data,
-                      let decodedData = JSONParser().parseJSON(data as! Data, DTO: MovieDetailDTO.self)
+                      let decodedData = JSONParser().decode(data as! Data, DTO: DailyBoxOfficeResultDTO.self)
                 else {
                     return
                 }
-                print(decodedData.movieInfoResult.movieInfo.companys)
+                print(decodedData)
             case .failure(let error):
                 print(error)
             }
@@ -41,7 +45,7 @@ final class MovieListViewController: UIViewController {
             switch result {
             case .success(let data):
                 guard let data = data,
-                      let decodedData = JSONParser().parseJSON(data as! Data, DTO: DailyBoxOfficeResultDTO.self)
+                      let decodedData = JSONParser().decode(data as! Data, DTO: DailyBoxOfficeResultDTO.self)
                 else {
                     return
                 }
@@ -51,4 +55,10 @@ final class MovieListViewController: UIViewController {
             }
         }
     }
+}
+
+extension OSLog {
+    private static var subsystem = Bundle.main.bundleIdentifier!
+    
+    static let network = OSLog(subsystem: subsystem, category: "Network")
 }
