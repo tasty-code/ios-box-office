@@ -9,4 +9,3 @@ struct MovieImage: Codable {
     let meta: Meta
     let documents: [Document]
 }
-
