@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TemporaryUnavailableView: UIView {
+final class TemporaryUnavailableView: UIView {
     private var messageLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .headline), textAlignment: .center, textColor: .black)
     
     override init(frame: CGRect) {
