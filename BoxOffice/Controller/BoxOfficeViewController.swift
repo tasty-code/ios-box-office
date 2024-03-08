@@ -10,12 +10,11 @@ import UIKit
 final class BoxOfficeViewController: UIViewController {
     private let movieManager: MovieManager
     private let boxOfficeListView: BoxOfficeListView = {
-        let config = UICollectionLayoutListConfiguration(appearance: .plain)
-        let layout = UICollectionViewCompositionalLayout.list(using: config)
+        let configure = UICollectionLayoutListConfiguration(appearance: .plain)
+        let layout = UICollectionViewCompositionalLayout.list(using: configure)
         let view = BoxOfficeListView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
-    
     private lazy var dataSource = BoxOfficeListDataSource(self.boxOfficeListView)
     
     init(movieManager: MovieManager) {
@@ -30,6 +29,7 @@ final class BoxOfficeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         boxOfficeListView.boxOfficeListDelegate = self
+        boxOfficeListView.delegate = self
         boxOfficeListView.dataSource = dataSource
         view = boxOfficeListView
         setupBoxOfficeData()
@@ -38,14 +38,14 @@ final class BoxOfficeViewController: UIViewController {
 
 private extension BoxOfficeViewController {
     func configureNavigation(date: Date) {
-        self.title = date.toString(format: "yyyy-MM-dd")
+        self.title = Date.titleDateFormatter.string(from: date)
     }
     
     func setupBoxOfficeData() {
-        self.movieManager.fetchBoxOfficeResultData(date: yesterday.toString(format: "yyyyMMdd")) { [weak self] result in
+        movieManager.fetchBoxOfficeResultData(date: Date.movieDateToString) { result in
             switch result {
             case .success(let success):
-                self?.reloadCollectionListData(result: success)
+                self.reloadCollectionListData(result: success)
             case .failure(let failure):
                 print("fetchBoxOfficeResultData 실패: \(failure)")
             }
@@ -61,13 +61,13 @@ private extension BoxOfficeViewController {
     }
     
     func updateBoxOfficeList() {
-        movieManager.fetchBoxOfficeResultData(date: yesterday.toString(format: "yyyyMMdd")) { [weak self] result in
+        movieManager.fetchBoxOfficeResultData(date: Date.movieDateToString) { [weak self] result in
             switch result {
             case .success(let success):
                 DispatchQueue.main.async {
                     self?.applyBoxOfficeList(result: success)
                     guard
-                        let date = success.showRange.toDate()
+                        let date = success.showRange.toDateFromRange()
                     else {
                         return
                     }
@@ -78,22 +78,27 @@ private extension BoxOfficeViewController {
             }
         }
     }
-}
-
-extension BoxOfficeViewController: BoxOfficeListViewDelegate, DateHandlerable {
-    func applyBoxOfficeListView() {
-        DispatchQueue.main.async {
-            self.updateBoxOfficeList()
-        }
-    }
     
     func reloadCollectionListData(result: BoxOfficeResult) {
         DispatchQueue.main.async {
             self.boxOfficeListView.indicatorView.stopAnimating()
-            self.configureNavigation(date: self.yesterday)
+            self.configureNavigation(date: Date.yesterday)
             self.applyBoxOfficeList(result: result)
             self.boxOfficeListView.isScrollEnabled = true
         }
     }
 }
 
+extension BoxOfficeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.navigationController?.popViewController(animated: true)
+    }
+}
+
+extension BoxOfficeViewController: BoxOfficeListViewDelegate {
+    func applyBoxOfficeListView() {
+        DispatchQueue.main.async {
+            self.updateBoxOfficeList()
+        }
+    }
+}
