@@ -10,9 +10,6 @@ import Foundation
 final class MovieManager {
     var movieDetailData: MovieInfomationDetail?
     var dailyBoxOfficeData: BoxOfficeResult?
-    var movieCount: Int {
-        self.dailyBoxOfficeData?.dailyBoxOfficeList.count ?? 0
-    }
 }
 
 extension MovieManager {
