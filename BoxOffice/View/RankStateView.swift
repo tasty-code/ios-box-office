@@ -74,10 +74,11 @@ private extension RankStateView {
 extension RankStateView {
     func configureRankStateView(rankState: String) {
         guard 
-            let intRankState = Int(rankState) 
+            let intRankState = Int(rankState)
         else {
             return
         }
+        self.subviews.forEach { $0.removeFromSuperview() }
         switch intRankState {
         case let state where 0 < state :
             return configureRankUp(rankState: rankState)
