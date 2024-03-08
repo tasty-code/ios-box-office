@@ -9,11 +9,11 @@ import Foundation
 
 final class BoxOfficeViewModel: ViewModelType {
     
-    private let boxOfficeRepository: BoxOfficeRepository
+    private let boxOfficeUseCase: BoxOfficeUseCase
     var boxOfficeData: Observable<[BoxOfficeEntity]> = Observable([])
     
-    init(boxOfficeRepository: BoxOfficeRepository) {
-        self.boxOfficeRepository = boxOfficeRepository
+    init(boxOfficeUseCase: BoxOfficeUseCase) {
+        self.boxOfficeUseCase = boxOfficeUseCase
     }
     
     struct Input {
@@ -43,7 +43,7 @@ final class BoxOfficeViewModel: ViewModelType {
 extension BoxOfficeViewModel {
     
     private func updateBoxOfficeList() {
-        boxOfficeRepository.fetchBoxOfficeData { [weak self] result in
+        boxOfficeUseCase.execute { [weak self] result in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {

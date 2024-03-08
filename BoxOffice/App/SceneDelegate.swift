@@ -16,7 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let boxOfficeAPIService = BoxOfficeAPIService(provider: NetworkProvider())
         let boxOfficeRepository = DefaultBoxOfficeRepository(apiService: boxOfficeAPIService)
-        let boxOfficeViewModel = BoxOfficeViewModel(boxOfficeRepository: boxOfficeRepository)
+        let boxOfficeUseCase = DefaultBoxOfficeUseCase(boxOfficeRepository: boxOfficeRepository)
+        let boxOfficeViewModel = BoxOfficeViewModel(boxOfficeUseCase: boxOfficeUseCase)
         let boxOfficeViewController = BoxOfficeViewController(viewModel: boxOfficeViewModel)
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = UINavigationController(rootViewController: boxOfficeViewController)
