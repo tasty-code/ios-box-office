@@ -8,28 +8,77 @@
 import XCTest
 
 final class DateFormatterTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
+    let dateFormatter = DateFormatter()
+    let yesterday: Date = {
+        return Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date() - 86400
+    }()
+    
+    lazy var yesterdayToString: String = {
+        return Date.toString(date: yesterday)
+    }()
+    
+    func test_기존_Date_Extension_활용_효율성_검사() throws { // 0.001
         self.measure {
-            // Put the code you want to measure the time of here.
+            for _ in (0..<500) {
+                _ = yesterdayToString
+            }
         }
     }
+    
+    func test_Date_Extension_static_키워드_활용_효율성_검사() throws { // 0.000
+        self.measure {
+            for _ in (0..<500) {
+                _ = Date.yesterdayToString
+            }
+        }
+    }
+    
+    func test_싱글턴_활용_효율성_검사() throws { // 0.002
+        self.measure {
+            for _ in (0..<500) {
+                _ = Test.shared.yesterdayToString
+            }
+        }
+    }
+}
 
+extension Date {
+    static let df: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        return dateFormatter
+    }()
+    
+    static let yesterday: Date = {
+        return Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date() - 86400
+    }()
+    
+    static let yesterdayToString: String = {
+        return toString(date: yesterday)
+    }()
+    
+    static func toString(date: Date) -> String {
+        return df.string(from: date)
+    }
+}
+
+final class Test {
+    static let shared = Test()
+    var yesterday: Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date() - 86400
+    }
+    
+    var yesterdayToString: String {
+        return toString(date: yesterday)
+    }
+    
+    private let df: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        return dateFormatter
+    }()
+    
+    func toString(date: Date) -> String {
+        return df.string(from: date)
+    }
 }
