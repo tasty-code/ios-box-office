@@ -8,7 +8,7 @@
 import Foundation
 
 extension String {
-    func toDate() -> Date? {
+    func toDateFromRange() -> Date? {
         guard let result = self.split(separator: "~").last else { return nil }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
