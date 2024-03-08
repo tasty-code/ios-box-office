@@ -130,14 +130,6 @@
 			path = BoxOffice;
 			sourceTree = "<group>";
 		};
-		8A494C7E2B84D17C00128F75 /* Session */ = {
-			isa = PBXGroup;
-			children = (
-				8A494C7F2B84D18300128F75 /* Interface */,
-			);
-			path = Session;
-			sourceTree = "<group>";
-		};
 		8A494C7F2B84D18300128F75 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,16 +146,6 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
-		8A494C832B84D25E00128F75 /* URL */ = {
-			isa = PBXGroup;
-			children = (
-				8A7E8B4C2B7DFA3600B73165 /* BoxOfficeAPI.swift */,
-				8A7240A72B88861F0004B6AF /* HTTPMethod.swift */,
-				8A748F382B9AA5EA0004ECC3 /* URLRequestBuilder.swift */,
-			);
-			path = URL;
-			sourceTree = "<group>";
-		};
 		8A494C842B84D2A900128F75 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,11 +158,31 @@
 		8A65CC822B8617E800414589 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				8A494C822B84D24800128F75 /* Error */,
 				8A65CC832B8617FD00414589 /* IntFormatter.swift */,
 				9BEE61C62B86EB8700CA364A /* DateFormatter.swift */,
 				8A748F3A2B9AAD360004ECC3 /* SafeArraySubscript.swift */,
 			);
 			path = Foundation;
+			sourceTree = "<group>";
+		};
+		8A748F3C2B9AB3A10004ECC3 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				8A760EB42B7C4F9C00199C18 /* NetworkManager.swift */,
+				8A748F382B9AA5EA0004ECC3 /* URLRequestBuilder.swift */,
+				8A7240A72B88861F0004B6AF /* HTTPMethod.swift */,
+				8A494C7F2B84D18300128F75 /* Interface */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		8A748F3D2B9AB44C0004ECC3 /* BoxOffice */ = {
+			isa = PBXGroup;
+			children = (
+				8A7E8B4C2B7DFA3600B73165 /* BoxOfficeAPI.swift */,
+			);
+			path = BoxOffice;
 			sourceTree = "<group>";
 		};
 		8A8903852B7B756A00E0A48D /* Controller */ = {
@@ -213,11 +215,8 @@
 		9B8ACB432B7F291000AF2527 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				8A760EB42B7C4F9C00199C18 /* NetworkManager.swift */,
-				8A494C842B84D2A900128F75 /* DTO */,
-				8A494C832B84D25E00128F75 /* URL */,
-				8A494C822B84D24800128F75 /* Error */,
-				8A494C7E2B84D17C00128F75 /* Session */,
+				8A748F3D2B9AB44C0004ECC3 /* BoxOffice */,
+				8A748F3C2B9AB3A10004ECC3 /* Infrastructure */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -272,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				9B4A89C22B9897630027C740 /* Interface */,
+				8A494C842B84D2A900128F75 /* DTO */,
 				9BEE61C22B8606DE00CA364A /* DailyBoxOffice.swift */,
 			);
 			path = Model;
