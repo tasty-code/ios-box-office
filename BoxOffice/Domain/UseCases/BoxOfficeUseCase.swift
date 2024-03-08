@@ -8,5 +8,20 @@
 import Foundation
 
 protocol BoxOfficeUseCase {
+    func execute(completion: @escaping (Result<[BoxOfficeEntity], Error>) -> Void)
+}
+
+final class DefaultBoxOfficeUseCase: BoxOfficeUseCase {
     
+    private let boxOfficeRepository: BoxOfficeRepository
+    
+    init(boxOfficeRepository: BoxOfficeRepository) {
+        self.boxOfficeRepository = boxOfficeRepository
+    }
+    
+    func execute(completion: @escaping (Result<[BoxOfficeEntity], Error>) -> Void) {
+        boxOfficeRepository.fetchBoxOfficeData { result in
+            completion(result)
+        }
+    }
 }
