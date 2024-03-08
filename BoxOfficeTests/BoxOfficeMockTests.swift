@@ -11,12 +11,7 @@ import XCTest
 final class BoxOfficeMockTests: XCTestCase {    
     func test_MockURLSession의_응답코드가_400이면_clientError가_발생한다() {
         // given
-        guard
-            let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
-        else {
-            return
-        }
-        let urlString = MovieURL.makeDailyBoxOfficeURL(date: yesterday.toString(format: "yyyyMMdd"))
+        let urlString = MovieURL.makeDailyBoxOfficeURL(date: Date.movieDateToString)
         let mockURLSession = makeMockURLSession(fileName: JSONFileName.boxOffice, url: urlString, statusCode: 400)
         let sut = setSUT(session: mockURLSession)
         
