@@ -30,7 +30,7 @@ final class BoxOfficeViewController: UIViewController {
             await loadDailyBoxOfficeData()
             boxOfficeView.boxOfficeCollectionView.isScrollEnabled = true
         }
-        boxOfficeView.setBoxOfficeCollectionViewProperties(self, loadingIndicatorView: loadingIndicatorView)
+        boxOfficeView.setBoxOfficeCollectionViewProperties(loadingIndicatorView: loadingIndicatorView)
         boxOfficeView.setBoxOfficeCollectionViewDelegate(self)
         boxOfficeView.configureRefreshControl(self)
     }
@@ -78,5 +78,4 @@ extension BoxOfficeViewController: DataDelegate {
             self.boxOfficeView.reloadData()
         }
     }
-    
 }

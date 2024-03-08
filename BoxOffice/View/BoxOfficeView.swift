@@ -41,7 +41,7 @@ extension BoxOfficeView {
         boxOfficeCollectionView.delegate = viewController
     }
     
-    func setBoxOfficeCollectionViewProperties(_ viewController: BoxOfficeViewController, loadingIndicatorView: UIActivityIndicatorView) {
+    func setBoxOfficeCollectionViewProperties(loadingIndicatorView: UIActivityIndicatorView) {
         boxOfficeCollectionView.backgroundView = loadingIndicatorView
         boxOfficeCollectionView.isScrollEnabled = false
         boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: BoxOfficeCollectionViewCell.className)
