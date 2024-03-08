@@ -61,11 +61,12 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeCollectionViewCell.className, for: indexPath) as? BoxOfficeCollectionViewCell,
-              let data = dataSource.loadedData as? [DailyBoxOffice.Movie] else {
+              let movies = dataSource.loadedData as? [DailyBoxOffice.Movie],
+              let data = movies[safeIndex: indexPath.row] else {
             return UICollectionViewCell()
         }
         
-        cell.configure(data: data[indexPath.row])
+        cell.configure(data: data)
         
         return cell
     }
