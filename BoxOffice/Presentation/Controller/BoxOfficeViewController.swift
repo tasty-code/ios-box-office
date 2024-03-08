@@ -113,7 +113,7 @@ private extension BoxOfficeViewController {
             self.movies = displayMovies
             applySnapshot(movies: displayMovies, animatingDifferences: true)
         case .failure(let error):
-            presentAlert(title: "네트워크 오류", message: "네트워크에 문제가 있습니다", confirmTitle: "확인")
+            presentAlert(title: "네트워크 오류", message: "네트워크에 문제가 있습니다 \(error)", confirmTitle: "확인")
         }
     }
     
