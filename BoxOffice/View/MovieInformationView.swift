@@ -7,41 +7,29 @@
 
 import UIKit
 
-class MovieInformationView: UIScrollView {
+class MovieInformationView: UIView {
     
+    private let scrollView: UIScrollView = UIScrollView()
     private let stackView: UIStackView = UIStackView(axis: .vertical, distribution: .fillProportionally)
     private let imageView: UIImageView = UIImageView(image: nil)
     private let detailInformationStackView: UIStackView = UIStackView(axis: .vertical, distribution: .fillProportionally)
     
-    private lazy var directorStackView: UIStackView = informationStackViewFactory(title: "감독")
-    private lazy var productionYearStackView: UIStackView = informationStackViewFactory(title: "제작년도")
-    private lazy var openDateStackView: UIStackView = informationStackViewFactory(title: "개봉일")
-    private lazy var showTimeStackView: UIStackView = informationStackViewFactory(title: "상영시간")
-    private lazy var auditsStackView: UIStackView = informationStackViewFactory(title: "관람등급")
-    private lazy var nationsStackView: UIStackView = informationStackViewFactory(title: "제작국가")
-    private lazy var genresStackView: UIStackView = informationStackViewFactory(title: "장르")
-    
-    private var actorsStackView: UIStackView = {
-        let actorsStackView: UIStackView = UIStackView(axis: .horizontal, distribution: .fillProportionally)
-        let titleLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .headline), textAlignment: .center)
-        let contentView: UITextView = UITextView()
-        contentView.isEditable = false
-        
-        actorsStackView.addArrangedSubview(titleLabel)
-        actorsStackView.addArrangedSubview(contentView)
-        
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.widthAnchor.constraint(equalTo: actorsStackView.widthAnchor, multiplier: 0.2).isActive = true
-        contentView.widthAnchor.constraint(equalTo: actorsStackView.widthAnchor, multiplier: 0.8).isActive = true
-        
-        return actorsStackView
-    }()
+    private let directorStackView: InformationStackView = InformationStackView().setTitleText("감독")
+    private let productionYearStackView: InformationStackView = InformationStackView().setTitleText("제작년도")
+    private let openDateStackView: InformationStackView = InformationStackView().setTitleText("개봉일")
+    private let showTimeStackView: InformationStackView = InformationStackView().setTitleText("상영시간")
+    private let auditsStackView: InformationStackView = InformationStackView().setTitleText("관람등급")
+    private let nationsStackView: InformationStackView = InformationStackView().setTitleText("제작국가")
+    private let genresStackView: InformationStackView = InformationStackView().setTitleText("장르")
+    private let actorsStackView: InformationStackView = InformationStackView().setTitleText("배우")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        setScrollView()
         addDetailInformationStackViewSubview()
+        insertData()
+        imageView.image = UIImage(systemName: "photo")
     }
     
     required init?(coder: NSCoder) {
@@ -50,47 +38,48 @@ class MovieInformationView: UIScrollView {
 }
 
 extension MovieInformationView {
-    private func informationStackViewFactory(title: String) -> UIStackView {
-        let stackView: UIStackView = UIStackView(axis: .horizontal, distribution: .fillProportionally)
-        let titleLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .headline), textAlignment: .center)
-        let contentLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .body), textAlignment: .left)
-        
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(contentLabel)
-        
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        titleLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.2).isActive = true
-        contentLabel.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.8).isActive = true
-        
-        titleLabel.text = title
-        return stackView
+    func insertData() {
+        directorStackView.contentLabel.text = "test"
+        productionYearStackView.contentLabel.text = "test"
+        openDateStackView.contentLabel.text = "test"
+        showTimeStackView.contentLabel.text = "test"
+        auditsStackView.contentLabel.text = "test"
+        nationsStackView.contentLabel.text = "test"
+        genresStackView.contentLabel.text = "test"
+        actorsStackView.contentLabel.text = "test"
     }
-    
+}
+
+extension MovieInformationView {
     private func addDetailInformationStackViewSubview() {
         detailInformationStackView.addArrangedSubview(directorStackView)
         detailInformationStackView.addArrangedSubview(productionYearStackView)
         detailInformationStackView.addArrangedSubview(openDateStackView)
         detailInformationStackView.addArrangedSubview(showTimeStackView)
-        detailInformationStackView.addArrangedSubview(showTimeStackView)
         detailInformationStackView.addArrangedSubview(auditsStackView)
         detailInformationStackView.addArrangedSubview(nationsStackView)
         detailInformationStackView.addArrangedSubview(genresStackView)
+        detailInformationStackView.addArrangedSubview(actorsStackView)
     }
     
     private func setScrollView() {
-        self.addSubview(stackView)
+        self.addSubview(scrollView)
+        scrollView.addSubview(stackView)
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(detailInformationStackView)
         
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: self.topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            scrollView.frameLayoutGuide.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            scrollView.frameLayoutGuide.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            scrollView.frameLayoutGuide.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            scrollView.frameLayoutGuide.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            scrollView.contentLayoutGuide.topAnchor.constraint(equalTo: stackView.topAnchor),
+            scrollView.contentLayoutGuide.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            scrollView.contentLayoutGuide.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
         ])
     }
 }
-
