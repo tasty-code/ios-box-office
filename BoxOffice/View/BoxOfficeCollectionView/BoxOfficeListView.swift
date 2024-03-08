@@ -10,7 +10,7 @@ import UIKit
 final class BoxOfficeListView: UICollectionView {
     weak var boxOfficeListDelegate: BoxOfficeListViewDelegate?
     let indicatorView = UIActivityIndicatorView()
-    private lazy var refresh: UIRefreshControl = {
+    private lazy var refresher: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         let action = UIAction { _ in
             self.refreshCollectionView()
@@ -36,10 +36,10 @@ final class BoxOfficeListView: UICollectionView {
 private extension BoxOfficeListView {
     func collectionViewRegister() {
         self.register(
-            MovieCollectionCell.self,
-            forCellWithReuseIdentifier: MovieCollectionCell.identifier
+            MovieCell.self,
+            forCellWithReuseIdentifier: MovieCell.identifier
         )
-        self.refreshControl = refresh
+        self.refreshControl = refresher
     }
     
     func setupIndicatorView() {
