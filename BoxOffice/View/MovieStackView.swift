@@ -49,7 +49,7 @@ extension MovieStackView {
         else {
             return
         }
-        movieAudienceLabel.text = "오늘 \(todayAudienceCount.numberFormatter()) / 총 \(totalAudienceCount.numberFormatter())"
+        movieAudienceLabel.text = "오늘 \(todayAudienceCount.numberFormatter) / 총 \(totalAudienceCount.numberFormatter)"
         self.addArrangedSubview(movieNameLabel)
         self.addArrangedSubview(movieAudienceLabel)
     }
