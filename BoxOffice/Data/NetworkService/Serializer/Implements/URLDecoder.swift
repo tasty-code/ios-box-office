@@ -1,7 +1,6 @@
 
 import Foundation
 
-
 struct URLDecoder: URLDecodeProtocol {
     
     func decode<T: Decodable>(_ data: Data) -> Result<T, NetworkError> {
