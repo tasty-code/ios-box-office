@@ -28,7 +28,7 @@ class BaseAPIService {
         case 200..<300:
             return .success(decodedData)
         case 400..<500:
-            return .requestError(decodedData)
+            return .requestError
         case 500:
             return .serverError
         default:

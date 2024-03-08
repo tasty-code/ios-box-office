@@ -10,7 +10,8 @@ import Foundation
 final class BoxOfficeViewModel: ViewModelType {
     
     private let boxOfficeUseCase: BoxOfficeUseCase
-    var boxOfficeData: Observable<[BoxOfficeEntity]> = Observable([])
+    private var boxOfficeData: Observable<[BoxOfficeEntity]> = Observable([])
+    private var networkError: Observable<Bool> = Observable(false)
     
     init(boxOfficeUseCase: BoxOfficeUseCase) {
         self.boxOfficeUseCase = boxOfficeUseCase
@@ -23,6 +24,7 @@ final class BoxOfficeViewModel: ViewModelType {
     
     struct Output {
         let boxOfficeData: Observable<[BoxOfficeEntity]>
+        let networkError: Observable<Bool>
     }
     
     func transform(input: Input) -> Output {
@@ -37,7 +39,7 @@ final class BoxOfficeViewModel: ViewModelType {
                 self?.updateBoxOfficeList(yesterday: yesterday)
             }
         
-        return Output(boxOfficeData: boxOfficeData)
+        return Output(boxOfficeData: boxOfficeData, networkError: networkError)
     }
 }
 
@@ -50,9 +52,10 @@ extension BoxOfficeViewModel {
                 DispatchQueue.main.async {
                     self?.boxOfficeData.value = data
                 }
-            case .failure(let error):
-                // TODO: 에러처리 필요
-                print(error.localizedDescription)
+            default:
+                DispatchQueue.main.async {
+                    self?.networkError.value = true
+                }
             }
         }
     }

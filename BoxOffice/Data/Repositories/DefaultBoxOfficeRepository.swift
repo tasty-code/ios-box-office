@@ -15,7 +15,7 @@ final class DefaultBoxOfficeRepository: BoxOfficeRepository {
         self.apiService = apiService
     }
     
-    func fetchBoxOfficeData(yesterday: String, completion: @escaping (Result<[BoxOfficeEntity], Error>) -> Void) {
+    func fetchBoxOfficeData(yesterday: String, completion: @escaping (NetworkResult<[BoxOfficeEntity]>) -> Void) {
         guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String else { return }
         
         apiService.requestDailyBoxOfficeAPI(userKey: apiKey, date: yesterday) { networkResult in
@@ -27,9 +27,14 @@ final class DefaultBoxOfficeRepository: BoxOfficeRepository {
                             .map { $0.toDomain() }))
                     }
                 }
-            default:
-                // TODO: 에러 처리 필요
-                print("error")
+            case .pathError:
+                completion(.pathError)
+            case .requestError:
+                completion(.requestError)
+            case .serverError:
+                completion(.serverError)
+            case .networkFail:
+                completion(.networkFail)
             }
         }
     }

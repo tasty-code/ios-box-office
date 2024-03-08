@@ -8,7 +8,7 @@
 import Foundation
 
 protocol BoxOfficeUseCase {
-    func execute(yesterday: String, completion: @escaping (Result<[BoxOfficeEntity], Error>) -> Void)
+    func execute(yesterday: String, completion: @escaping (NetworkResult<[BoxOfficeEntity]>) -> Void)
 }
 
 final class DefaultBoxOfficeUseCase: BoxOfficeUseCase {
@@ -19,7 +19,7 @@ final class DefaultBoxOfficeUseCase: BoxOfficeUseCase {
         self.boxOfficeRepository = boxOfficeRepository
     }
     
-    func execute(yesterday: String, completion: @escaping (Result<[BoxOfficeEntity], Error>) -> Void) {
+    func execute(yesterday: String, completion: @escaping (NetworkResult<[BoxOfficeEntity]>) -> Void) {
         boxOfficeRepository.fetchBoxOfficeData(yesterday: yesterday) { result in
             completion(result)
         }
