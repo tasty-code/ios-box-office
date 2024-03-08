@@ -1,9 +1,8 @@
 import Foundation
 
 extension String {
-    func toDate() -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+    func toDate(with format: String) -> Date? {
+        let dateFormatter = DateFormatter.formatter(with: format)
         dateFormatter.timeZone = TimeZone(identifier: "KST")
         return dateFormatter.date(from: self)
     }
