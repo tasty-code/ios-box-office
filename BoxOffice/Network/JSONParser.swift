@@ -9,13 +9,15 @@ import Foundation
 
 struct JSONParser{
     
-    func parseJSON<T: Decodable>(_ movieData: Data, DTO: T.Type) -> T? {
+    func decode<T: Decodable>(_ data: Data, DTO: T.Type) -> T? {
         do {
-            let decodedData = try JSONDecoder().decode(T.self, from: movieData)
+            let decodedData = try JSONDecoder().decode(T.self, from: data)
             return decodedData
         } catch {
-            print("파싱 에러")
+            print("파싱 에러: \(NetworkError.parseError)")
             return nil
         }
     }
 }
+
+
