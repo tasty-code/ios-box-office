@@ -67,7 +67,21 @@ class BoxOfficeViewController: UIViewController {
     }
 
     private func setupNavigationBar() {
-        self.navigationItem.title = Date.convertYesterdayDateToString()
+        let dateString = Date.convertYesterdayDateToString()
+        let formattedDateString = formatDateString(dateString)
+        self.navigationItem.title = formattedDateString
+    }
+
+    private func formatDateString(_ dateString: String) -> String {
+        let yearIndex = dateString.index(dateString.startIndex, offsetBy: 0)
+        let monthIndex = dateString.index(dateString.startIndex, offsetBy: 4)
+        let dayIndex = dateString.index(dateString.startIndex, offsetBy: 6)
+        
+        let year = dateString[yearIndex..<monthIndex]
+        let month = dateString[monthIndex..<dayIndex]
+        let day = dateString[dayIndex...]
+        
+        return "\(year)-\(month)-\(day)"
     }
     
     private func setupCollectionView() {
