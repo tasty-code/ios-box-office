@@ -25,7 +25,11 @@ final class BoxOfficeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        boxOfficeView.delegate = self
+        
         loadingIndicatorView.startAnimating()
+        
         Task {
             await loadDailyBoxOfficeData()
             boxOfficeView.boxOfficeCollectionView.isScrollEnabled = true
@@ -34,20 +38,13 @@ final class BoxOfficeViewController: UIViewController {
         boxOfficeView.setBoxOfficeCollectionViewDelegate(self)
         boxOfficeView.configureRefreshControl(self)
     }
-    
-    @objc func handleRefreshControl() {
-        Task {
-            await loadDailyBoxOfficeData()
-        }
-    }
 }
 
-extension BoxOfficeViewController {
-    private func loadDailyBoxOfficeData() async {
+extension BoxOfficeViewController: BoxOfficeCollectionViewDelegate {
+    func loadDailyBoxOfficeData() async {
         do {
             try await dataSource.loadData()
             self.loadingIndicatorView.stopAnimating()
-            self.boxOfficeView.endRefreshControl()
         } catch {
             self.alert(with: error)
         }

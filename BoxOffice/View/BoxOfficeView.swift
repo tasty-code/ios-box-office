@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol BoxOfficeCollectionViewDelegate: AnyObject {
+    func loadDailyBoxOfficeData() async
+}
+
 final class BoxOfficeView: UIView {
+    weak var delegate: BoxOfficeCollectionViewDelegate?
+    
     lazy var navigationBar: UINavigationBar = {
         let navigationBar = UINavigationBar()
         let navigationItem = UINavigationItem(title: Date.yesterday.formatted(using: .standard))
@@ -35,7 +41,26 @@ final class BoxOfficeView: UIView {
 }
 
 extension BoxOfficeView {
+    func configureRefreshControl(_ viewController: BoxOfficeViewController) {
+        boxOfficeCollectionView.refreshControl = UIRefreshControl()
+        boxOfficeCollectionView.refreshControl?.addTarget(self, action: #selector(handleRefreshControl), for: .valueChanged)
+    }
     
+    @objc func handleRefreshControl() {
+        Task {
+            await delegate?.loadDailyBoxOfficeData()
+            DispatchQueue.main.async {
+                self.boxOfficeCollectionView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+    
+    func reloadData() {
+        boxOfficeCollectionView.reloadData()
+    }
+}
+
+extension BoxOfficeView {
     func setBoxOfficeCollectionViewDelegate(_ viewController: BoxOfficeViewController) {
         boxOfficeCollectionView.dataSource = viewController
         boxOfficeCollectionView.delegate = viewController
@@ -45,19 +70,6 @@ extension BoxOfficeView {
         boxOfficeCollectionView.backgroundView = loadingIndicatorView
         boxOfficeCollectionView.isScrollEnabled = false
         boxOfficeCollectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: BoxOfficeCollectionViewCell.className)
-    }
-    
-    func configureRefreshControl(_ viewController: BoxOfficeViewController) {
-        boxOfficeCollectionView.refreshControl = UIRefreshControl()
-        boxOfficeCollectionView.refreshControl?.addTarget(viewController, action: #selector(viewController.handleRefreshControl), for: .valueChanged)
-    }
-    
-    func reloadData() {
-        boxOfficeCollectionView.reloadData()
-    }
-    
-    func endRefreshControl() {
-        boxOfficeCollectionView.refreshControl?.endRefreshing()
     }
 }
 

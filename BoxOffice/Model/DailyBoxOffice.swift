@@ -15,9 +15,7 @@ final class DailyBoxOffice: LoadDataProtocol {
     let networkManager: NetworkManager = NetworkManager(urlSession: URLSession.shared)
     
     var loadedData: [Movie] = [] {
-        didSet {
-            delegate?.reloadView()
-        }
+        didSet { delegate?.reloadView() }
     }
     
     func loadData() async throws {
