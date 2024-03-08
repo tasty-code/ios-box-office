@@ -66,4 +66,13 @@ extension DailyBoxOfficeList {
         case screenCount = "scrnCnt"
         case showCount = "showCnt"
     }
+    
+    func toDomain() -> BoxOfficeEntity {
+        return BoxOfficeEntity(rank: rank,
+                               movieName: movieName,
+                               salesAmount: salesAmount,
+                               audienceCount: audienceCount,
+                               rankChangeValue: rankChangeValue,
+                               isNewMovie: rankOldAndNew == "New" ? true : false)
+    }
 }
