@@ -9,14 +9,12 @@ import Foundation
 
 final class BoxOfficeAPIService: BaseAPIService {
     
-    static let shared = BoxOfficeAPIService(provider: NetworkProvider())
-    
-    private override init(provider: Requestable) {
-        super.init(provider: provider)
+    override init(provider: Requestable) {
+        super.init(provider: NetworkProvider())
     }
     
     func requestDailyBoxOfficeAPI(userKey: String, date: String,
-                         completion: @escaping ((NetworkResult<Any>) -> Void)) {
+                                  completion: @escaping ((NetworkResult<Any>) -> Void)) {
         guard let request = try? BoxOfficeAPI
             .requestDailyBoxOfficeInfo(userkey: userKey, date: date)
             .creatURLRequest()
