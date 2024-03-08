@@ -1,23 +1,16 @@
 import Foundation
 
 struct Movie {
-    private let movieCode: Int
-    private let movieName: String
-    private let englishMovieName: String
-    private let originalMovieName: String
-    private let productionYear: Int
-    private let duration: Int
-    private let openingDate: Date
-    private let productionStatus: ProductionStatus
-    private let runtimeType: RuntimeType
-    private let nations: [Nation]
-    private let genres: [Genre]
-    private let directors: [Director]
-    private let actors: [Performer]
-    private let showTypes: [ShowType]
-    private let companies: [Company]
-    private let audits: [Audit]
-    private let staffs: [Staff]
+    let movieCode: String
+    let movieName: String
+    let productionYear: Int
+    let duration: Int
+    let openingDate: Date
+    let nations: [Nation]
+    let genres: [Genre]
+    let directors: [Director]
+    let actors: [Performer]
+    let audits: [Audit]
 }
 
 struct Nation: Decodable {
@@ -139,22 +132,15 @@ enum RuntimeType: String {
 
 extension Movie {
     init(from movieDTO: MovieDetailResponseDTO.MovieInfoResultDTO.MovieDTO) {
-        self.movieCode = Int(movieDTO.movieCode) ?? 0
+        self.movieCode = movieDTO.movieCode
         self.movieName = movieDTO.movieName
-        self.englishMovieName = movieDTO.englishMovieName
-        self.originalMovieName = movieDTO.originalMovieName
         self.productionYear = Int(movieDTO.productionYear) ?? 0
         self.duration = Int(movieDTO.duration) ?? 0
-        self.openingDate = movieDTO.openingDate.toDate() ?? Date()
-        self.productionStatus = ProductionStatus(rawValue: movieDTO.productionStatus)
-        self.runtimeType = RuntimeType(rawValue: movieDTO.runtimeType)
+        self.openingDate = movieDTO.openingDate.toDate(with: DateFormatter.yyyyMMdd) ?? Date()
         self.nations = movieDTO.nations
         self.genres = movieDTO.genres
         self.directors = movieDTO.directors
         self.actors = movieDTO.actors
-        self.showTypes = movieDTO.showTypes
-        self.companies = movieDTO.companies
         self.audits = movieDTO.audits
-        self.staffs = movieDTO.staffs
     }
 }
