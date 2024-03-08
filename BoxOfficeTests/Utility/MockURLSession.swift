@@ -34,13 +34,13 @@ struct MockURLSession: URLSessionProtocol {
         do {
             let sampleUrl = Bundle.main.url(forResource: fileURL, withExtension: "json")
             let data = try Data(contentsOf: sampleUrl!)
-            let url: String
+            let request: URLRequest?
             if fileURL == "searchDailyBoxOfficeList" {
-                url = KoreanFilmCouncilURL.dailyBoxOffice(targetDate: "20220105").url
+                request = BoxOfficeAPI.dailyBoxOffice(targetDate: "20220105").urlRequest
             } else {
-                url = KoreanFilmCouncilURL.movieDetailInformation(movieCode: queryValue).url
+                request = BoxOfficeAPI.movieDetailInformation(movieCode: queryValue).urlRequest
             }
-            let response = HTTPURLResponse(url: URL(string: url)!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            let response = HTTPURLResponse(url: (request?.url)!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             return (data, response)
         } catch {
             print(error)
