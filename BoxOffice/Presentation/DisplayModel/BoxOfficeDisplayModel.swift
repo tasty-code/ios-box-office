@@ -14,3 +14,9 @@ struct BoxOfficeDisplayModel: Hashable {
     let audienceCount: String
     var audienceAccount: String
 }
+
+extension BoxOfficeDisplayModel {
+    static var placeholder: BoxOfficeDisplayModel {
+        return BoxOfficeDisplayModel(rank: "", rankIntensity: "0", isNew: false, movieName: "Loading...", audienceCount: "", audienceAccount: "")
+    }
+}
