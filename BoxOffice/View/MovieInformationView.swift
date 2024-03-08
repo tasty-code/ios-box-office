@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieInformationView: UIView {
+final class MovieInformationView: UIView {
     
     private let scrollView: UIScrollView = UIScrollView()
     private let stackView: UIStackView = UIStackView(axis: .vertical, distribution: .fillProportionally)

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InformationStackView: UIStackView {
+final class InformationStackView: UIStackView {
     let titleLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .headline), textAlignment: .center)
     let contentLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .body), textAlignment: .left)
     
