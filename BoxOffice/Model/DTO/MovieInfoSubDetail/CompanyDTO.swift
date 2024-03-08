@@ -5,7 +5,7 @@
 //  Created by dopamint on 2/18/24.
 //
 
-struct Company: Decodable {
+struct CompanyDTO: Decodable {
     let companyCode: String
     let companyName: String
     let companyNameInEnglish: String

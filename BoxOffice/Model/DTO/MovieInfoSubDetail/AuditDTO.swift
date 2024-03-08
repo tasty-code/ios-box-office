@@ -5,7 +5,7 @@
 //  Created by dopamint on 2/18/24.
 //
 
-struct Audit: Decodable {
+struct AuditDTO: Decodable {
     let auditNumber: String
     let watchGradeName: String
     
