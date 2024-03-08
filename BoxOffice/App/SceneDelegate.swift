@@ -14,7 +14,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let boxOfficeViewController = BoxOfficeViewController()
+        let boxOfficeAPIService = BoxOfficeAPIService(provider: NetworkProvider())
+        let boxOfficeRepository = DefaultBoxOfficeRepository(apiService: boxOfficeAPIService)
+        let boxOfficeViewModel = BoxOfficeViewModel(boxOfficeRepository: boxOfficeRepository)
+        let boxOfficeViewController = BoxOfficeViewController(viewModel: boxOfficeViewModel)
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = UINavigationController(rootViewController: boxOfficeViewController)
         window?.makeKeyAndVisible()
