@@ -8,5 +8,5 @@
 import Foundation
 
 protocol BoxOfficeRepository {
-    func fetchBoxOfficeData(completion: @escaping (Result<[BoxOfficeEntity], Error>) -> Void)
+    func fetchBoxOfficeData(yesterday: String, completion: @escaping (Result<[BoxOfficeEntity], Error>) -> Void)
 }

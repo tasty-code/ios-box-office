@@ -26,14 +26,15 @@ final class BoxOfficeViewModel: ViewModelType {
     }
     
     func transform(input: Input) -> Output {
+        let yesterday = Date.convertYesterdayDateToString()
         input.viewDidLoad
             .subscribe { [weak self] in
-                self?.updateBoxOfficeList()
+                self?.updateBoxOfficeList(yesterday: yesterday)
             }
         
         input.refreshAction
             .subscribe { [weak self] in
-                self?.updateBoxOfficeList()
+                self?.updateBoxOfficeList(yesterday: yesterday)
             }
         
         return Output(boxOfficeData: boxOfficeData)
@@ -42,8 +43,8 @@ final class BoxOfficeViewModel: ViewModelType {
 
 extension BoxOfficeViewModel {
     
-    private func updateBoxOfficeList() {
-        boxOfficeUseCase.execute { [weak self] result in
+    private func updateBoxOfficeList(yesterday: String) {
+        boxOfficeUseCase.execute(yesterday: yesterday) { [weak self] result in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {

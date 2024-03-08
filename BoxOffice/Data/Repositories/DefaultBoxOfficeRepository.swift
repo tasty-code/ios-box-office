@@ -15,9 +15,8 @@ final class DefaultBoxOfficeRepository: BoxOfficeRepository {
         self.apiService = apiService
     }
     
-    func fetchBoxOfficeData(completion: @escaping (Result<[BoxOfficeEntity], Error>) -> Void) {
+    func fetchBoxOfficeData(yesterday: String, completion: @escaping (Result<[BoxOfficeEntity], Error>) -> Void) {
         guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String else { return }
-        let yesterday = Date.convertYesterdayDateToString()
         
         apiService.requestDailyBoxOfficeAPI(userKey: apiKey, date: yesterday) { networkResult in
             switch networkResult {

@@ -131,6 +131,7 @@ extension BoxOfficeCollectionViewCell {
         
         if boxOffice.isNewMovie {
             rankChangeLabel.text = "신작"
+            return
         }
         
         if let rankChangeValue = Int(boxOffice.rankChangeValue) {
