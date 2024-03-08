@@ -16,6 +16,10 @@ struct NetworkManager {
     
     func request<T: Decodable>(_ request: URLRequest) async throws -> T {
         let (data, response) = try await urlSession.data(for: request, delegate: nil)
+        guard String(data: data, encoding: .utf8)?.starts(with: "{\"faultInfo") == false else {
+            throw NetworkError.invalidAPIKey
+        }
+        
         guard let httpResponse = response as? HTTPURLResponse else {
             throw NetworkError.invalidURLResponse
         }

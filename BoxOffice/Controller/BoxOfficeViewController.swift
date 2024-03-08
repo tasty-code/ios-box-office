@@ -44,10 +44,14 @@ extension BoxOfficeViewController: BoxOfficeCollectionViewDelegate {
     func loadDailyBoxOfficeData() async {
         do {
             try await dataSource.loadData()
-            self.loadingIndicatorView.stopAnimating()
         } catch {
-            self.alert(with: error)
+            guard let networkError = error as? NetworkError else {
+                print(error.localizedDescription)
+                return
+            }
+            self.alert(with: networkError)
         }
+        self.loadingIndicatorView.stopAnimating()
     }
 }
 
