@@ -17,11 +17,11 @@ final class BoxOfficeListDataSource: UICollectionViewDiffableDataSource<MovieSec
     static let cellProvider: CellProvider = { collectionView, indexPath, movie in
         guard
             let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: MovieCollectionCell.identifier,
+                withReuseIdentifier: MovieCell.identifier,
                 for: indexPath
-            ) as? MovieCollectionCell
+            ) as? MovieCell
         else {
-            return MovieCollectionCell()
+            return MovieCell()
         }
         cell.configure(result: movie)
         cell.accessories = [.disclosureIndicator()]
