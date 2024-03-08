@@ -12,7 +12,11 @@
 		63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
 		772025692B7C7E4E00439CFD /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772025682B7C7E4E00439CFD /* BaseTestCase.swift */; };
+		7727D2442B9AA7FF001463E1 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7727D2432B9AA7FF001463E1 /* ViewModelType.swift */; };
+		7727D2462B9AAA16001463E1 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7727D2452B9AAA16001463E1 /* Observable.swift */; };
 		776DF5842B955A880049BF66 /* BoxOfficeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776DF5832B955A880049BF66 /* BoxOfficeUseCase.swift */; };
+		776DF58E2B95680F0049BF66 /* BoxOfficeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776DF58D2B95680F0049BF66 /* BoxOfficeRepository.swift */; };
+		776DF5902B956A720049BF66 /* DefaultBoxOfficeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776DF58F2B956A720049BF66 /* DefaultBoxOfficeRepository.swift */; };
 		7773387B2B848C0200143672 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7773387A2B848C0200143672 /* Requestable.swift */; };
 		7773387D2B848C2400143672 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7773387C2B848C2400143672 /* NetworkResponse.swift */; };
 		7773387F2B848D1200143672 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7773387E2B848D1200143672 /* NetworkProvider.swift */; };
@@ -58,7 +62,11 @@
 		63DF20FA2970E1A1005DF7D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63DF20FC2970E1A1005DF7D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		772025682B7C7E4E00439CFD /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
+		7727D2432B9AA7FF001463E1 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		7727D2452B9AAA16001463E1 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		776DF5832B955A880049BF66 /* BoxOfficeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeUseCase.swift; sourceTree = "<group>"; };
+		776DF58D2B95680F0049BF66 /* BoxOfficeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeRepository.swift; sourceTree = "<group>"; };
+		776DF58F2B956A720049BF66 /* DefaultBoxOfficeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBoxOfficeRepository.swift; sourceTree = "<group>"; };
 		7773387A2B848C0200143672 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
 		7773387C2B848C2400143672 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 		7773387E2B848D1200143672 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
@@ -175,13 +183,6 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		776DF5852B955B580049BF66 /* Repositories */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Repositories;
-			sourceTree = "<group>";
-		};
 		776DF5862B955BF40049BF66 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +218,30 @@
 				952AD2CE2B84A31500598680 /* BoxOfficeAPIService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		776DF58A2B95654C0049BF66 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				776DF58B2B9565670049BF66 /* Repositories */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		776DF58B2B9565670049BF66 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				776DF58D2B95680F0049BF66 /* BoxOfficeRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		776DF58C2B9567DC0049BF66 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				776DF58F2B956A720049BF66 /* DefaultBoxOfficeRepository.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		777338792B848BBD00143672 /* Foundation */ = {
@@ -256,6 +281,8 @@
 		952AD2EB2B88D36D00598680 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				7727D2432B9AA7FF001463E1 /* ViewModelType.swift */,
+				7727D2452B9AAA16001463E1 /* Observable.swift */,
 				777338862B84960A00143672 /* Extension */,
 			);
 			path = Util;
@@ -266,6 +293,7 @@
 			children = (
 				776DF5822B955A5C0049BF66 /* Entities */,
 				776DF5812B955A470049BF66 /* UseCases */,
+				776DF58A2B95654C0049BF66 /* Interfaces */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -273,8 +301,8 @@
 		952AD2EF2B88D43500598680 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				776DF58C2B9567DC0049BF66 /* Repositories */,
 				776DF5862B955BF40049BF66 /* Network */,
-				776DF5852B955B580049BF66 /* Repositories */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -436,7 +464,9 @@
 				952AD2C62B84898000598680 /* HTTPMethod.swift in Sources */,
 				7773388D2B849BBD00143672 /* MovieAPIService.swift in Sources */,
 				7773387B2B848C0200143672 /* Requestable.swift in Sources */,
+				7727D2442B9AA7FF001463E1 /* ViewModelType.swift in Sources */,
 				777338852B848E0800143672 /* TargetType.swift in Sources */,
+				776DF58E2B95680F0049BF66 /* BoxOfficeRepository.swift in Sources */,
 				95C84DE22B8B9AD600B77048 /* BoxOfficeCollectionViewCell.swift in Sources */,
 				952AD2CD2B84A01300598680 /* BoxOfficeAPI.swift in Sources */,
 				95C84DE42B8B9DB200B77048 /* BoxOfficeViewController.swift in Sources */,
@@ -445,12 +475,14 @@
 				95C84DE82B8BAACB00B77048 /* BoxOfficeViewModel.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
 				952AD2C42B84880A00598680 /* NetworkError.swift in Sources */,
+				776DF5902B956A720049BF66 /* DefaultBoxOfficeRepository.swift in Sources */,
 				952AD2CF2B84A31500598680 /* BoxOfficeAPIService.swift in Sources */,
 				7773387F2B848D1200143672 /* NetworkProvider.swift in Sources */,
 				952AD2C12B8484B300598680 /* MovieDTO.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
 				7773388B2B849B0E00143672 /* BaseAPIService.swift in Sources */,
 				952AD2C82B848A4800598680 /* NetworkResult.swift in Sources */,
+				7727D2462B9AAA16001463E1 /* Observable.swift in Sources */,
 				777338902B849BFB00143672 /* MovieAPI.swift in Sources */,
 				777338832B848DE600143672 /* NetworkEnvironment.swift in Sources */,
 				776DF5842B955A880049BF66 /* BoxOfficeUseCase.swift in Sources */,
