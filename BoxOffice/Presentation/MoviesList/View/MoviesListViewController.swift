@@ -50,6 +50,11 @@ extension MoviesListViewController {
                 self?.refreshControl.endRefreshing()
             }
         }
+        viewModel.movieDetail.bind { [weak self] movieDetail in
+            guard let movieDetail = movieDetail else { return }
+            let movieDetailViewController = MovieDetailView(movie: movieDetail)
+            self?.navigationController?.pushViewController(movieDetailViewController, animated: true)
+        }
     }
     
     private func setupNavigationBar() {
@@ -87,12 +92,7 @@ extension MoviesListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedMovie = viewModel.movies.value[indexPath.item]
-        showMovieDetailScreen(for: selectedMovie)
-    }
-    
-    private func showMovieDetailScreen(for movie: MovieBoxOffice) {
-        let movieDetailViewController = MovieDetailView(movie: movie)
-        navigationController?.pushViewController(movieDetailViewController, animated: true)
+        viewModel.fetchMovieDetail(movieCode: selectedMovie.movieCode)
     }
     
     private func reload() {
