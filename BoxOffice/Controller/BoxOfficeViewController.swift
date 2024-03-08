@@ -91,7 +91,8 @@ private extension BoxOfficeViewController {
 
 extension BoxOfficeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.navigationController?.popViewController(animated: true)
+        let detailVC = BoxOfficeDetailViewController()
+        self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
