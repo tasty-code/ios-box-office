@@ -12,7 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         configureURL()
         
-        let mainViewController = DependencyEnvironment.shared.makeBoxOfficeCollectionViewController()
+        let mainViewController = UINavigationController(rootViewController: DependencyEnvironment.shared.makeBoxOfficeCollectionViewController())
         
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()

@@ -141,14 +141,25 @@ extension BoxOfficeCell {
             }
         }
 
-        func movieRank(number: Int, image: String, color: UIColor) {
-            let imageAttachement = NSTextAttachment()
-            imageAttachement.image = UIImage(systemName: image)?.withTintColor(color, renderingMode: .alwaysTemplate)
-            let attributedString = NSMutableAttributedString(attachment: imageAttachement)
-            attributedString.append(NSAttributedString(string: String(abs(number))))
-            rankIntensityLabel.attributedText = attributedString
-        }
-
+    func movieRank(number: Int, image: String, color: UIColor) {
+        let imageAttachement = NSTextAttachment()
+        imageAttachement.image = UIImage(systemName: image)?.withTintColor(color, renderingMode: .alwaysTemplate)
+        let attributedString = NSMutableAttributedString(attachment: imageAttachement)
+        attributedString.append(NSAttributedString(string: String(abs(number))))
+        rankIntensityLabel.attributedText = attributedString
+    }
+    
+    func audienceAccount(cell: BoxOfficeDisplayModel) {
+        audienceAccountLabel.text = "오늘 \(self.numberFormatter(for: cell.audienceCount)) / 총 \(self.numberFormatter(for: cell.audienceAccount))"
+    }
+    
+    func numberFormatter(for data: String) -> String {
+        let numberFormatter: NumberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        guard let result = numberFormatter.string(from: NSNumber(value: Double(data) ?? 0)) else { return "error" }
+        return result
+    }
+    
     func updateSeparator() {
         separatorView.isHidden = !showsSeparator
     }

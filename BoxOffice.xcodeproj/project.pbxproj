@@ -350,9 +350,9 @@
 			children = (
 				08AB8E772B7F249600564AC5 /* App */,
 				C76965DC2B86E66500EF8F87 /* Presentation */,
-				082798482B884F8B00ACC723 /* Common */,
 				C76965DD2B86E68B00EF8F87 /* Domain */,
 				C76965DE2B86E69900EF8F87 /* Data */,
+				082798482B884F8B00ACC723 /* Common */,
 				08A6CE692B9AA74E00F2F2CA /* Private */,
 				08AB8E7D2B7F288500564AC5 /* Resource */,
 			);
@@ -362,10 +362,10 @@
 		C76965DC2B86E66500EF8F87 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				08A6CE712B9AAA3900F2F2CA /* Common */,
-				08A6CE6C2B9AA75400F2F2CA /* View */,
 				08A6CE5B2B99C66400F2F2CA /* DisplayModel */,
+				08A6CE6C2B9AA75400F2F2CA /* View */,
 				08AB8E7B2B7F24BE00564AC5 /* Controller */,
+				08A6CE712B9AAA3900F2F2CA /* Common */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
