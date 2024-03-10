@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BoxOfficeCollectionViewCell: UICollectionViewCell {
+final class BoxOfficeCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "BoxOfficeCollectionViewCell"
 
@@ -40,7 +40,7 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var rankStactkView: UIStackView = {
+    private lazy var rankStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [rankLabel, rankChangeLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .fillEqually
@@ -68,55 +68,50 @@ class BoxOfficeCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
+        
         configureUI()
-        setupConstraint()
+        setUpLayout()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupUI()
-        configureUI()
-        setupConstraint()
     }
-    
 }
 
 extension BoxOfficeCollectionViewCell {
-    func setupUI() {
+    
+    private func configureUI() {
         layer.borderColor = UIColor.lightGray.cgColor
         layer.borderWidth = 0.2
     }
     
-    func configureUI() {
+    private func setUpLayout() {
         contentView.addSubview(titleStackView)
-        contentView.addSubview(rankStactkView)
+        contentView.addSubview(rankStackView)
         contentView.addSubview(accessoryButton)
+        
+        setUpRankStackVeiwConstraint()
+        setUpMovieInfomationStackViewConstraint()
+        setUpAccessoryButtonViewConstraint()
     }
 
-    func setupConstraint() {
-        setupRankStackVeiwConstraint()
-        setupMovieInfomationStackViewConstraint()
-        setupAccessoryButtonViewConstraint()
-    }
-
-    func setupRankStackVeiwConstraint() {
+    private func setUpRankStackVeiwConstraint() {
         NSLayoutConstraint.activate([
-            rankStactkView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            rankStactkView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            rankStactkView.widthAnchor.constraint(equalToConstant: 40)
+            rankStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            rankStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            rankStackView.widthAnchor.constraint(equalToConstant: 40)
         ])
     }
 
-    func setupMovieInfomationStackViewConstraint() {
+    private func setUpMovieInfomationStackViewConstraint() {
         NSLayoutConstraint.activate([
             titleStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            titleStackView.leadingAnchor.constraint(equalTo: rankStactkView.trailingAnchor, constant: 30),
+            titleStackView.leadingAnchor.constraint(equalTo: rankStackView.trailingAnchor, constant: 30),
             titleStackView.trailingAnchor.constraint(equalTo: accessoryButton.leadingAnchor, constant: -20)
         ])
     }
 
-    func setupAccessoryButtonViewConstraint() {
+    private func setUpAccessoryButtonViewConstraint() {
         NSLayoutConstraint.activate([
             accessoryButton.widthAnchor.constraint(equalToConstant: 20),
             accessoryButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
