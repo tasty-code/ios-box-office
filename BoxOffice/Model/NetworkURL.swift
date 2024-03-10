@@ -24,11 +24,23 @@ struct NetworkURL {
         return url
     }
     
-    static func makeMovieImageURL(code: String) -> String {
+    static func makeMovieImageURL(movieName: String) -> URLRequest? {
         let key = Bundle.main.kakaoApiKey
-        var url: String {
-            return "https://dapi.kakao.com/v2/search/image/&query=\(code)"
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "dapi.kakao.com"
+        urlComponents.path = "/v2/search/image"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "query", value: "\(movieName) 영화포스터"),
+            URLQueryItem(name: "sort", value: "accuracy")
+        ]
+        guard let url = urlComponents.url else {
+            return nil
         }
-        return url
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = ["Authorization": "KakaoAK \(key)"]
+        return request
     }
 }
