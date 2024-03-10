@@ -91,7 +91,12 @@ private extension BoxOfficeViewController {
 
 extension BoxOfficeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailVC = BoxOfficeDetailViewController()
+        guard
+            let movieName = movieManager.dailyBoxOfficeData?.dailyBoxOfficeList[indexPath.row].name
+        else {
+            return
+        }
+        let detailVC = BoxOfficeDetailViewController(movieName: movieName, movieManger: movieManager)
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
