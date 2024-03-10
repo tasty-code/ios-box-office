@@ -11,7 +11,7 @@ import XCTest
 final class BoxOfficeMockTests: XCTestCase {    
     func test_MockURLSession의_응답코드가_400이면_clientError가_발생한다() {
         // given
-        let urlString = MovieURL.makeDailyBoxOfficeURL(date: Date.movieDateToString)
+        let urlString = NetworkURL.makeDailyBoxOfficeURL(date: Date.movieDateToString)
         let mockURLSession = makeMockURLSession(fileName: JSONFileName.boxOffice, url: urlString, statusCode: 400)
         let sut = setSUT(session: mockURLSession)
         
@@ -35,7 +35,7 @@ final class BoxOfficeMockTests: XCTestCase {
     func test_MockURLSession의_응답코드가_200이면_boxOfficeResult는_nil이_아니다() {
         // given
         let date = "20240210"
-        let urlString = MovieURL.makeDailyBoxOfficeURL(date: date)
+        let urlString = NetworkURL.makeDailyBoxOfficeURL(date: date)
         let mockURLSession = makeMockURLSession(fileName: JSONFileName.boxOffice, url: urlString, statusCode: 200)
         let sut = setSUT(session: mockURLSession)
         

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieURL {
+struct NetworkURL {
     static func makeDailyBoxOfficeURL(date: String) -> String {
         let key = Bundle.main.movieApiKey
         var url: String {
@@ -20,6 +20,14 @@ struct MovieURL {
         let key = Bundle.main.movieApiKey
         var url: String {
             return "https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=\(String(describing: key))&movieCd=\(code)"
+        }
+        return url
+    }
+    
+    static func makeMovieImageURL(code: String) -> String {
+        let key = Bundle.main.kakaoApiKey
+        var url: String {
+            return "https://dapi.kakao.com/v2/search/image/&query=\(code)"
         }
         return url
     }
