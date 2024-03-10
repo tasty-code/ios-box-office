@@ -14,6 +14,19 @@ struct APIService {
         self.session = session
     }
     
+    func fetchImageData<T: Decodable>(urlRequest: URLRequest, completion: @escaping (Result<T, NetworkError>) -> Void) {
+        self.session.dataTask(with: urlRequest) { data, response, error in
+            DispatchQueue.global().async {
+                self.handleDataTaskCompletion(
+                    data: data,
+                    response: response,
+                    error: error,
+                    completion: completion
+                )
+            }
+        }.resume()
+    }
+    
     func fetchData<T: Decodable>(urlString: String, completion: @escaping (Result<T, NetworkError>) -> Void) {
         guard
             let url = URL(string: urlString)
@@ -82,15 +95,16 @@ struct APIService {
         data: Data?,
         completion: @escaping (Result<T, NetworkError>) -> Void
     ) {
+        var receivedData = Data()
         guard
             let data = data
         else {
             completion(.failure(.noDataError))
             return
         }
-        
+        receivedData.append(data)
         do {
-            let decodedData = try JSONDecoder().decode(T.self, from: data)
+            let decodedData = try JSONDecoder().decode(T.self, from: receivedData)
             completion(.success(decodedData))
         } catch {
             completion(.failure(.decodingError))
