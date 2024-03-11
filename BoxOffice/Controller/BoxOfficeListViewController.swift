@@ -25,7 +25,7 @@ final class BoxOfficeListViewController: UIViewController {
 }
 
 extension BoxOfficeListViewController: BoxOfficeListDelegate {
-     func refreshBoxOfficeList() {
+    func refreshBoxOfficeList() {
         self.movieListCollectionView?.toggleLoadingIndicator(shouldStart: true)
         movieAPIFetcher.fetchBoxOffice { [weak self] result in
             DispatchQueue.main.async {
@@ -45,23 +45,11 @@ extension BoxOfficeListViewController: BoxOfficeListDelegate {
 
 extension BoxOfficeListViewController {
     private func configureNavigationBarTitle() {
-         navigationItem.title = Date.todayStringFormatter
-         let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20)]
-         navigationController?.navigationBar.titleTextAttributes = attributes
-     }
-    
-    private func setupCollectionView() {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: view.frame.width, height: 100)
-        movieListCollectionView = BoxOfficeListCollectionView(frame: .zero, collectionViewLayout: layout)
-        guard let movieListCollectionView = movieListCollectionView else { return }
-        movieListCollectionView.setboxOfficeDelegete(delegate: self)
-        movieListCollectionView.delegate = self
-        movieListCollectionView.dataSource = self
-        view.addSubview(movieListCollectionView)
-        movieListCollectionView.frame = view.bounds
+        navigationItem.title = Date.todayStringFormatter
+        let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20)]
+        navigationController?.navigationBar.titleTextAttributes = attributes
     }
-    
+
     private func fetchBoxOfficeData() {
         movieAPIFetcher.fetchBoxOffice { [weak self] result in
             DispatchQueue.main.async {
@@ -74,6 +62,30 @@ extension BoxOfficeListViewController {
                 }
             }
         }
+    }
+}
+
+extension BoxOfficeListViewController {
+    private func setupCollectionView() {
+        movieListCollectionView = BoxOfficeListCollectionView(frame: .zero, collectionViewLayout: configuerCompositionalLayout())
+        guard let movieListCollectionView = movieListCollectionView else { return }
+        movieListCollectionView.setboxOfficeDelegete(delegate: self)
+        movieListCollectionView.delegate = self
+        movieListCollectionView.dataSource = self
+        view.addSubview(movieListCollectionView)
+        movieListCollectionView.frame = view.bounds
+    }
+    
+    private func configuerCompositionalLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            let section = NSCollectionLayoutSection(group: group)
+            return section
+        }
+        return layout
     }
 }
 
@@ -91,5 +103,8 @@ extension BoxOfficeListViewController: UICollectionViewDataSource, UICollectionV
         return cell
     }
 }
+
+
+
 
 
