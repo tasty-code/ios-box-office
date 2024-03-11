@@ -1,11 +1,11 @@
 //
-//  BoxOfficeData.swift
+//  BoxOfficeDTO.swift
 //  BoxOffice
 //
 //  Created by nayeon  on 2/14/24.
 //
 
-struct BoxOfficeData: Decodable {
+struct BoxOfficeDTO: Decodable {
     let boxOfficeResult: BoxOfficeResult
 }
 
@@ -65,5 +65,14 @@ extension DailyBoxOfficeList {
         case audienceAccumulation = "audiAcc"
         case screenCount = "scrnCnt"
         case showCount = "showCnt"
+    }
+    
+    func toDomain() -> BoxOfficeEntity {
+        return BoxOfficeEntity(rank: rank,
+                               movieName: movieName,
+                               salesAmount: salesAmount,
+                               audienceCount: audienceCount,
+                               rankChangeValue: rankChangeValue,
+                               isNewMovie: rankOldAndNew == "New" ? true : false)
     }
 }

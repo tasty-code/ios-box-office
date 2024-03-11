@@ -1,5 +1,5 @@
 //
-//  BoxOfficeAPI.swift
+//  BoxOfficeAPIService.swift
 //  BoxOffice
 //
 //  Created by nayeon  on 2/20/24.
@@ -7,17 +7,15 @@
 
 import Foundation
 
-final class BoxOfficeAPI: BaseAPI {
+final class BoxOfficeAPIService: BaseAPIService {
     
-    static let shared = BoxOfficeAPI(provider: NetworkProvider())
-    
-    private override init(provider: Requestable) {
-        super.init(provider: provider)
+    override init(provider: Requestable) {
+        super.init(provider: NetworkProvider())
     }
     
     func requestDailyBoxOfficeAPI(userKey: String, date: String,
-                         completion: @escaping ((NetworkResult<Any>) -> Void)) {
-        guard let request = try? BoxOfficeService
+                                  completion: @escaping ((NetworkResult<Any>) -> Void)) {
+        guard let request = try? BoxOfficeAPI
             .requestDailyBoxOfficeInfo(userkey: userKey, date: date)
             .creatURLRequest()
         else {
@@ -30,7 +28,7 @@ final class BoxOfficeAPI: BaseAPI {
             case .success(let result):
                 let networkResult = self.judgeStatus(by: result.response.statusCode,
                                                      result.data,
-                                                     BoxOfficeData.self)
+                                                     BoxOfficeDTO.self)
                 completion(networkResult)
             case .failure(_):
                 completion(.networkFail)

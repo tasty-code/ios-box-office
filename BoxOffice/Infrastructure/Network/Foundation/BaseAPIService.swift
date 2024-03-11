@@ -1,5 +1,5 @@
 //
-//  BaseAPI.swift
+//  BaseAPIService.swift
 //  BoxOffice
 //
 //  Created by EUNJU on 2/20/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BaseAPI {
+class BaseAPIService {
     
     let provider: Requestable
     
@@ -28,7 +28,7 @@ class BaseAPI {
         case 200..<300:
             return .success(decodedData)
         case 400..<500:
-            return .requestError(decodedData)
+            return .requestError
         case 500:
             return .serverError
         default:
