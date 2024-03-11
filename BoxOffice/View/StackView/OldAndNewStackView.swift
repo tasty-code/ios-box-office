@@ -55,7 +55,7 @@ extension OldAndNewStackView {
         rankLabel.text = rank
         arrangedSubviews.forEach { $0.removeFromSuperview() }
         addArrangedSubview(rankLabel)
-        if rankOldAndNew == "NEW" {
+        if rankOldAndNew == RankState.new.rawValue {
             addArrangedSubview(newMovieLabel)
         } else {
             rankStackView.configurePresentRank(rankChange: rankChanged)
