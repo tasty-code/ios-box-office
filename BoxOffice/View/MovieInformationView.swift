@@ -28,7 +28,6 @@ final class MovieInformationView: UIView {
         
         setScrollView()
         addDetailInformationStackViewSubview()
-        insertData()
         imageView.image = UIImage(systemName: "photo")
     }
     
@@ -38,15 +37,15 @@ final class MovieInformationView: UIView {
 }
 
 extension MovieInformationView {
-    func insertData() {
-        directorStackView.contentLabel.text = "test"
-        productionYearStackView.contentLabel.text = "test"
-        openDateStackView.contentLabel.text = "test"
-        showTimeStackView.contentLabel.text = "test"
-        auditsStackView.contentLabel.text = "test"
-        nationsStackView.contentLabel.text = "test"
-        genresStackView.contentLabel.text = "test"
-        actorsStackView.contentLabel.text = "test"
+    func insertData(data: MovieInformation.MovieDetail) {
+        directorStackView.contentLabel.text = data.directors
+        productionYearStackView.contentLabel.text = data.productionYear
+        openDateStackView.contentLabel.text = data.openDate
+        showTimeStackView.contentLabel.text = data.showTime
+        auditsStackView.contentLabel.text = data.audits
+        nationsStackView.contentLabel.text = data.nations
+        genresStackView.contentLabel.text = data.genres
+        actorsStackView.contentLabel.text = data.actors
     }
 }
 
@@ -77,9 +76,11 @@ extension MovieInformationView {
             scrollView.frameLayoutGuide.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             scrollView.frameLayoutGuide.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             scrollView.contentLayoutGuide.topAnchor.constraint(equalTo: stackView.topAnchor),
-            scrollView.contentLayoutGuide.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-            scrollView.contentLayoutGuide.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+//            scrollView.contentLayoutGuide.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 8),
+//            scrollView.contentLayoutGuide.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -8),
             scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8),
         ])
     }
 }
