@@ -74,6 +74,15 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let movies = dataSource.loadedData as? [DailyBoxOffice.Movie],
+        let movieCode = movies[safeIndex: indexPath.row]?.movieCode else {
+            return
+        }
+        let movieInformationViewController = MovieInformationViewController(movieCode: movieCode)
+        present(movieInformationViewController, animated: true)
+    }
 }
 
 extension BoxOfficeViewController: DataDelegate {
