@@ -9,7 +9,7 @@ import Foundation
 
 final class DailyBoxOffice: LoadDataProtocol {
     
-    typealias LoadedData = Movie
+    typealias LoadedData = [Movie]
     
     weak var delegate: DataDelegate?
     let networkManager: NetworkManager = NetworkManager(urlSession: URLSession.shared)

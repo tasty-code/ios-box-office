@@ -57,7 +57,10 @@ extension BoxOfficeViewController: BoxOfficeCollectionViewDelegate {
 
 extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.loadedData.count
+        guard let data = dataSource.loadedData as? [DailyBoxOffice.Movie] else {
+            return 0
+        }
+        return data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
