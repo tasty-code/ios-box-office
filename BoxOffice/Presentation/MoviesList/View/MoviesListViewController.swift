@@ -3,6 +3,7 @@ import UIKit
 final class MoviesListViewController: UIViewController {
     
     private let viewModel: MoviesListViewModel
+    private let navigator: NavigatorProtocol
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -17,8 +18,9 @@ final class MoviesListViewController: UIViewController {
     
     private let refreshControl = UIRefreshControl()
     
-    init(viewModel: MoviesListViewModel, isRefreshing: Bool = false) {
+    init(viewModel: MoviesListViewModel, navigator: NavigatorProtocol, isRefreshing: Bool = false) {
         self.viewModel = viewModel
+        self.navigator = navigator
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -49,11 +51,6 @@ extension MoviesListViewController {
             if !isRefreshing {
                 self?.refreshControl.endRefreshing()
             }
-        }
-        viewModel.movieDetail.bind { [weak self] movieDetail in
-            guard let movieDetail = movieDetail else { return }
-            let movieDetailViewController = MovieDetailView(movie: movieDetail)
-            self?.navigationController?.pushViewController(movieDetailViewController, animated: true)
         }
     }
     
@@ -92,7 +89,8 @@ extension MoviesListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedMovie = viewModel.movies.value[indexPath.item]
-        viewModel.fetchMovieDetail(movieCode: selectedMovie.movieCode)
+        let destination = Navigator.Destination.detailMovie(movieCode: selectedMovie.movieCode)
+        navigator.navigate(to: destination, from: self)
     }
     
     private func reload() {
