@@ -2,7 +2,6 @@
 import UIKit
 
 final class BoxOfficeViewController: UIViewController {
-    
     private let boxOfficeUseCase: BoxOfficeUseCaseProtocol
     
     @SynchronizedLock private var movies = [BoxOfficeDisplayModel]()
@@ -28,7 +27,6 @@ final class BoxOfficeViewController: UIViewController {
 
 // MARK: - 생명주기
 extension BoxOfficeViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -40,7 +38,6 @@ extension BoxOfficeViewController {
 
 // MARK: - Setup UI
 private extension BoxOfficeViewController {
-    
     func setupUI() {
         setupBoxOfficeView()
         configureCellRegistration()
@@ -96,7 +93,6 @@ private extension BoxOfficeViewController {
 
 // MARK: - Fetch Data
 private extension BoxOfficeViewController {
-    
     func fetchBoxOfficeData() {
         fetchTask = Task {
             let result = await boxOfficeUseCase.fetchBoxOfficeData()
@@ -131,7 +127,6 @@ private extension BoxOfficeViewController {
 
 // MARK: - Apply Diffable DataSource
 private extension BoxOfficeViewController {
-    
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, BoxOfficeDisplayModel>(collectionView: boxOfficeCollectionView) {
             (collectionView, indexPath, movie) -> UICollectionViewCell? in

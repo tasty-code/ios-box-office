@@ -2,7 +2,6 @@
 import Foundation
 
 final class SessionProvider: SessionProvidable {
-    
     private let session: URLSession
     
     init(session: URLSession = .shared) {
@@ -10,7 +9,6 @@ final class SessionProvider: SessionProvidable {
     }
     
     func requestAPI(using urlRequest: URLRequest) async -> Result<NetworkResponse, NetworkError> {
-        
         guard let (data, response) = try? await session.data(for: urlRequest)
         else { return .failure(.connectivity) }
         
@@ -26,6 +24,4 @@ final class SessionProvider: SessionProvidable {
     private func printNetworkError(_ error: NetworkError) {
         print("Network Error: \(error.localizedDescription)")
     }
-
-    
 }

@@ -1,7 +1,6 @@
 
 import Foundation
 
-
 /// 참고: https://medium.com/@vyacheslavansimov/swift-utilities-thread-safe-property-5498afc2eb53
 @propertyWrapper
 struct SynchronizedLock<Value> {
@@ -19,7 +18,6 @@ struct SynchronizedLock<Value> {
 }
 
 private extension NSLock {
-
     func synchronized<T>(_ block: () -> T) -> T {
         lock()
         defer { unlock() }

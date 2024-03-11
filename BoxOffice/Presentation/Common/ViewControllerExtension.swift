@@ -2,7 +2,6 @@
 import UIKit
 
 extension UIViewController {
-
     // MARK: - Alert Controller
     func presentAlert(title: String,
                       message: String,

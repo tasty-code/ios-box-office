@@ -6,7 +6,6 @@ protocol APIKey {
 }
 
 class BaseEnvironment {
-    
     let dict: NSDictionary
     
     init(resourceName: String) {
@@ -19,7 +18,6 @@ class BaseEnvironment {
 }
 
 final class DebugEnvironment: BaseEnvironment, APIKey {
-    
     var API_KEY: String {
         dict.object(forKey: "API_KEY") as? String ?? ""
     }

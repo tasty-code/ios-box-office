@@ -2,7 +2,6 @@
 import Foundation
 
 final class RequestBuilder: RequestBuilderProtocol {
-    
     private var request: URLRequest?
         
     // URL 설정

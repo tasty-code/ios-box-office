@@ -2,7 +2,6 @@
 import Foundation
 
 extension Date {
-    
     static var yesterday: Date { return Date().dayBefore }
     
     var dayBefore: Date {

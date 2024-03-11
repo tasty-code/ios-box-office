@@ -2,7 +2,6 @@
 import Foundation
 
 enum DomainError: LocalizedError {
-    
     case networkIssue
     case dataUnavailable
     case unknown

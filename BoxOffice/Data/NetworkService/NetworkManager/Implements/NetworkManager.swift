@@ -2,8 +2,7 @@
 import Foundation
 
 
-class NetworkManager: NetworkManagerProtocol {
-    
+final class NetworkManager: NetworkManagerProtocol {
     private let sessionProvider: SessionProvidable
     private let decoder: JsonDecodeProtocol
     

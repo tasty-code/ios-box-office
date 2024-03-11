@@ -2,7 +2,6 @@
 import UIKit
 
 final class BoxOfficeCell: UICollectionViewListCell {
-    
     let rankIntensityLabel = UILabel()
     let audienceAccountLabel = UILabel()
     
@@ -61,7 +60,6 @@ final class BoxOfficeCell: UICollectionViewListCell {
 }
 
 extension BoxOfficeCell {
-    
     private func configureLayout() {
         configureLabels()
         configureStackViews()

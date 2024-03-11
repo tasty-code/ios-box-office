@@ -3,7 +3,6 @@ import UIKit
 
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    
     var window: UIWindow?
     private let viewControllerFactory:ViewControllerFactoryProtocol = DependencyEnvironment()
 
