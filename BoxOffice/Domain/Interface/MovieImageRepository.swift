@@ -1,8 +1,5 @@
-//
-//  MovieImageRepository.swift
-//  BoxOffice
-//
-//  Created by 윤진영 on 3/10/24.
-//
-
 import Foundation
+
+protocol MovieImageRepository {
+    func fetchMovieImage(for query: String, completion: @escaping (Result<MovieImage, Error>) -> Void) -> URLSessionTask?
+}

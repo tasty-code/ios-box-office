@@ -6,7 +6,7 @@ extension Date {
         return DateFormatter.formatter(with: format).string(from: yesterday)
     }
     
-    func openingDayString(with day: Date, with format: String) -> String {
+    func openingDayString(day: Date, format: String) -> String {
         return DateFormatter.formatter(with: format).string(from: day)
     }
 }
