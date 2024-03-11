@@ -10,19 +10,20 @@ import Foundation
 final class MovieInformation: LoadDataProtocol {
     
     let movieCode: String
+    weak var delegate: DataDelegate?
     
-    init(movieCode: String, delegate: DataDelegate? = nil) {
+    init(movieCode: String) {
         self.movieCode = movieCode
-        self.delegate = delegate
     }
     
-    typealias LoadedData = MovieDetail
+    typealias LoadedData = MovieDetail?
     
-    weak var delegate: DataDelegate?
     let networkManager: NetworkManager = NetworkManager(urlSession: URLSession.shared)
     
-    var loadedData: MovieDetail {
-        didSet { delegate?.reloadView() }
+    var loadedData: MovieDetail? {
+        didSet {
+            delegate?.reloadView()
+        }
     }
     
     func loadData() async throws {
