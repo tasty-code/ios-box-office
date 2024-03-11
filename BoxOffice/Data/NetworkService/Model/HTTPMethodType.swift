@@ -1,7 +1,7 @@
 
 import Foundation
 
-enum HTTPMethodType {
-    static let get = "GET"
-    static let post = "POST"
+enum HTTPMethodType: String {
+    case get = "GET"
+    case post = "POST"
 }

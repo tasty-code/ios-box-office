@@ -19,12 +19,12 @@ final class DependencyEnvironment {
     private(set) lazy var decodeProvider: JsonDecodeProtocol = JsonDecoder(jsonDecoder: jsonDecoder)
 
     
-    private(set) lazy var networkManager: Networkmanagable = {
+    private(set) lazy var networkManager: NetworkManagerProtocol = {
         NetworkManager(sessionProvider: sessionProvider, decoder: decodeProvider)
     }()
 
     private(set) lazy var movieRepository: MovieRepositoryProtocol = {
-        MovieRepository(networkManager: networkManager)
+        MovieRepository(networkManager: networkManager, requestBuilder: RequestBuilder())
     }()
     
     private(set) lazy var boxOfficeUseCase: BoxOfficeUseCaseProtocol = BoxOfficeUseCase(moviesRepository: movieRepository)
