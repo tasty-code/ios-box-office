@@ -23,14 +23,6 @@ final class BoxOfficeListCollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func toggleLoadingIndicator(shouldStart: Bool) {
-        shouldStart ? loadingIndicator.startAnimating() : loadingIndicator.stopAnimating()
-    }
-    
-    func setboxOfficeDelegete(delegate: BoxOfficeListDelegate) {
-        self.boxofficeListDelegate = delegate
-    }
-    
     private func setupCollectionView() {
         registerCells()
         configureLoadingIndicator()
@@ -53,5 +45,15 @@ final class BoxOfficeListCollectionView: UICollectionView {
     
     private func refreshBoxOfficeCollectionView() {
         self.boxofficeListDelegate?.refreshBoxOfficeList()
+    }
+}
+
+extension BoxOfficeListCollectionView {
+    func toggleLoadingIndicator(shouldStart: Bool) {
+        shouldStart ? loadingIndicator.startAnimating() : loadingIndicator.stopAnimating()
+    }
+    
+    func setboxOfficeDelegete(delegate: BoxOfficeListDelegate) {
+        self.boxofficeListDelegate = delegate
     }
 }
