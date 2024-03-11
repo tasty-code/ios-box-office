@@ -3,7 +3,7 @@ import UIKit
 final class BoxOfficeListViewController: UIViewController {
     private var movieAPIFetcher: MovieAPIFetcher
     private var dailyBoxOfficeList: [CustomDailyBoxOffice] = []
-    private var movieListCollectionView: BoxOfficeListView?
+    private var movieListCollectionView: BoxOfficeListCollectionView?
     
     
     init(fetcher: MovieAPIFetcher) {
@@ -25,7 +25,7 @@ final class BoxOfficeListViewController: UIViewController {
 }
 
 extension BoxOfficeListViewController: BoxOfficeListDelegate {
-     func refreshBoxOfficeData() {
+     func refreshBoxOfficeList() {
         self.movieListCollectionView?.loadingIndicator.startAnimating()
         movieAPIFetcher.fetchBoxOffice { [weak self] result in
             DispatchQueue.main.async {
@@ -53,9 +53,9 @@ extension BoxOfficeListViewController {
     private func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: view.frame.width, height: 100)
-        movieListCollectionView = BoxOfficeListView(frame: .zero, collectionViewLayout: layout)
+        movieListCollectionView = BoxOfficeListCollectionView(frame: .zero, collectionViewLayout: layout)
         guard let movieListCollectionView = movieListCollectionView else { return }
-        movieListCollectionView.movieListDelegate = self
+        movieListCollectionView.boxofficeListDelegate = self
         movieListCollectionView.delegate = self
         movieListCollectionView.dataSource = self
         view.addSubview(movieListCollectionView)
@@ -82,7 +82,7 @@ extension BoxOfficeListViewController: UICollectionViewDataSource, UICollectionV
         return dailyBoxOfficeList.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeListViewCell.reuseIdentifier, for: indexPath) as? BoxOfficeListViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeListViewListCell.reuseIdentifier, for: indexPath) as? BoxOfficeListViewListCell else {
             fatalError("BoxOfficeListViewCell dequeueReusableCell Error ")
         }
         let boxOffice = dailyBoxOfficeList[indexPath.row]

@@ -1,11 +1,11 @@
 import UIKit
 
 protocol BoxOfficeListDelegate: AnyObject {
-    func refreshBoxOfficeData()
+    func refreshBoxOfficeList()
 }
 
-final class BoxOfficeListView: UICollectionView {
-    weak var movieListDelegate: BoxOfficeListDelegate?
+final class BoxOfficeListCollectionView: UICollectionView {
+    weak var boxofficeListDelegate: BoxOfficeListDelegate?
     let loadingIndicator = UIActivityIndicatorView(style: .medium)
     
     private lazy var pullToRefreshControl: UIRefreshControl = {
@@ -30,7 +30,7 @@ final class BoxOfficeListView: UICollectionView {
     }
     
     private func registerCells() {
-        self.register(BoxOfficeListViewCell.self, forCellWithReuseIdentifier: BoxOfficeListViewCell.reuseIdentifier)
+        self.register(BoxOfficeListViewListCell.self, forCellWithReuseIdentifier: BoxOfficeListViewListCell.reuseIdentifier)
     }
     
     private func configureLoadingIndicator() {
@@ -44,6 +44,6 @@ final class BoxOfficeListView: UICollectionView {
     }
     
     private func refreshBoxOfficeCollectionView() {
-            self.movieListDelegate?.refreshBoxOfficeData()
+            self.boxofficeListDelegate?.refreshBoxOfficeList()
     }
 }

@@ -1,10 +1,10 @@
 import UIKit
 
-final class BoxOfficeListViewCell: UICollectionViewListCell {
-    static let reuseIdentifier = String(describing: BoxOfficeListViewCell.self)
+final class BoxOfficeListViewListCell: UICollectionViewListCell {
+    static let reuseIdentifier = String(describing: BoxOfficeListViewListCell.self)
     private let oldAndNewStackView = OldAndNewStackView()
     private let movieStackView = MovieStackView()
-    private lazy var mainStackOfMovieListCollectionViewCell: UIStackView = {
+    private lazy var mainStackOfMovieListCollectionViewCellStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [oldAndNewStackView, movieStackView])
         stack.axis = .horizontal
         stack.distribution = .fillProportionally
@@ -13,7 +13,7 @@ final class BoxOfficeListViewCell: UICollectionViewListCell {
         return stack
     }()
     
-    private let separatorLine: UIView = {
+    private let separatorLineView: UIView = {
         let view = UIView()
         view.backgroundColor = .lightGray
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -32,34 +32,34 @@ final class BoxOfficeListViewCell: UICollectionViewListCell {
     }
 }
 
-extension BoxOfficeListViewCell {
+extension BoxOfficeListViewListCell {
    private func configureViews() {
-        contentView.addSubview(mainStackOfMovieListCollectionViewCell)
+        contentView.addSubview(mainStackOfMovieListCollectionViewCellStackView)
     }
     
     private func setupConstraints() {
         oldAndNewStackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2).isActive = true
-        mainStackOfMovieListCollectionViewCell.translatesAutoresizingMaskIntoConstraints = false
+        mainStackOfMovieListCollectionViewCellStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            mainStackOfMovieListCollectionViewCell.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            mainStackOfMovieListCollectionViewCell.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            mainStackOfMovieListCollectionViewCell.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            mainStackOfMovieListCollectionViewCell.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+            mainStackOfMovieListCollectionViewCellStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+            mainStackOfMovieListCollectionViewCellStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            mainStackOfMovieListCollectionViewCellStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            mainStackOfMovieListCollectionViewCellStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }
     
     private func setupSeparatorLine() {
-        addSubview(separatorLine)
+        addSubview(separatorLineView)
         NSLayoutConstraint.activate([
-            separatorLine.leadingAnchor.constraint(equalTo: leadingAnchor),
-            separatorLine.trailingAnchor.constraint(equalTo: trailingAnchor),
-            separatorLine.bottomAnchor.constraint(equalTo: bottomAnchor),
-            separatorLine.heightAnchor.constraint(equalToConstant: 1)
+            separatorLineView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            separatorLineView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            separatorLineView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            separatorLineView.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
 }
 
-extension BoxOfficeListViewCell {
+extension BoxOfficeListViewListCell {
     func configure(with result: CustomDailyBoxOffice) {
         oldAndNewStackView.configure(rank: result.rank,
                                      rankOldAndNew: result.rankOldAndNew.rawValue,
