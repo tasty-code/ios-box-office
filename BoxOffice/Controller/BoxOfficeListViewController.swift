@@ -17,9 +17,9 @@ final class BoxOfficeListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationBarTitle()
         setupCollectionView()
         fetchBoxOfficeData()
-        configureNavigationBarTitle()
     }
     
 }
