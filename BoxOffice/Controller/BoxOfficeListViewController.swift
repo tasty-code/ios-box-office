@@ -55,7 +55,7 @@ extension BoxOfficeListViewController {
         layout.itemSize = CGSize(width: view.frame.width, height: 100)
         movieListCollectionView = BoxOfficeListCollectionView(frame: .zero, collectionViewLayout: layout)
         guard let movieListCollectionView = movieListCollectionView else { return }
-        movieListCollectionView.boxofficeListDelegate = self
+        movieListCollectionView.setboxOfficeDelegete(delegate: self)
         movieListCollectionView.delegate = self
         movieListCollectionView.dataSource = self
         view.addSubview(movieListCollectionView)

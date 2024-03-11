@@ -5,7 +5,7 @@ protocol BoxOfficeListDelegate: AnyObject {
 }
 
 final class BoxOfficeListCollectionView: UICollectionView {
-    weak var boxofficeListDelegate: BoxOfficeListDelegate?
+    private weak var boxofficeListDelegate: BoxOfficeListDelegate?
     private let loadingIndicator = UIActivityIndicatorView(style: .medium)
     
     private lazy var pullToRefreshControl: UIRefreshControl = {
@@ -27,6 +27,9 @@ final class BoxOfficeListCollectionView: UICollectionView {
         shouldStart ? loadingIndicator.startAnimating() : loadingIndicator.stopAnimating()
     }
     
+    func setboxOfficeDelegete(delegate: BoxOfficeListDelegate) {
+        self.boxofficeListDelegate = delegate
+    }
     
     private func setupCollectionView() {
         registerCells()
@@ -49,6 +52,6 @@ final class BoxOfficeListCollectionView: UICollectionView {
     }
     
     private func refreshBoxOfficeCollectionView() {
-            self.boxofficeListDelegate?.refreshBoxOfficeList()
+        self.boxofficeListDelegate?.refreshBoxOfficeList()
     }
 }
