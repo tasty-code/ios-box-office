@@ -23,7 +23,7 @@ final class DailyBoxOffice: LoadDataProtocol {
             throw NetworkError.invalidURL
         }
         let data: BoxOfficeResult = try await self.networkManager.request(request)
-        let movies = data.boxOfficeResult.dailyBoxOfficeList
+        let movies = data.boxOfficeDetail.dailyBoxOfficeList
         loadedData = converted(movies)
     }
     

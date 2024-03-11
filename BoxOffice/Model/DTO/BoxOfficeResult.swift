@@ -8,7 +8,7 @@
 import Foundation
 
 struct BoxOfficeResult: Decodable {
-    let boxOfficeResult: BoxOfficeDetail
+    let boxOfficeDetail: BoxOfficeDetail
 }
 
 struct BoxOfficeDetail: Decodable {
