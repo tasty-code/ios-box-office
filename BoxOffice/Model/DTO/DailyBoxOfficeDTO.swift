@@ -1,25 +1,26 @@
 //
-//  MovieInfo.swift
+//  BoxOfficeDTO.swift
 //  BoxOffice
 //
-//  Created by 둘리 on 2024/02/15.
+//  Created by dopamint on 2/14/24.
 //
 
 import Foundation
 
-struct BoxOfficeResultDTO: Decodable {
+struct DailyBoxOfficeResultDTO: Decodable {
     let boxOfficeResult: BoxOfficeDTO
 }
 
-extension BoxOfficeResultDTO {
+extension DailyBoxOfficeResultDTO {
     struct BoxOfficeDTO: Decodable {
         let boxOfficeType: String
         let dateRange: String
         let dailyBoxOfficeList: [MovieInfo]?
     }
+    
 }
 
-extension BoxOfficeResultDTO.BoxOfficeDTO {
+extension DailyBoxOfficeResultDTO.BoxOfficeDTO {
     enum CodingKeys: String, CodingKey {
         case dateRange = "showRange"
         case boxOfficeType = "boxofficeType"
@@ -27,7 +28,7 @@ extension BoxOfficeResultDTO.BoxOfficeDTO {
     }
 }
 
-extension BoxOfficeResultDTO.BoxOfficeDTO {
+extension DailyBoxOfficeResultDTO.BoxOfficeDTO {
     struct MovieInfo: Decodable {
         let rankNumber: String
         let rank: String
@@ -50,7 +51,7 @@ extension BoxOfficeResultDTO.BoxOfficeDTO {
     }
 }
 
-extension BoxOfficeResultDTO.BoxOfficeDTO.MovieInfo {
+extension DailyBoxOfficeResultDTO.BoxOfficeDTO.MovieInfo {
     enum CodingKeys: String, CodingKey {
         case rankNumber = "rnum"
         case rank
