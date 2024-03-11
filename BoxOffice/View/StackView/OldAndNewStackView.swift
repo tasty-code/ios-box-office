@@ -51,17 +51,19 @@ private extension OldAndNewStackView {
 }
 
 extension OldAndNewStackView {
-    func configure(rank: String, rankOldAndNew: String, rankChanged: String) {
+    func configure(rank: String, rankOldAndNew: RankOldAndNew, rankChanged: String) {
         rankLabel.text = rank
         arrangedSubviews.forEach { $0.removeFromSuperview() }
         addArrangedSubview(rankLabel)
-        if rankOldAndNew == RankState.new.rawValue {
+        switch rankOldAndNew {
+        case .new:
             addArrangedSubview(newMovieLabel)
-        } else {
+        case .old:
             rankStackView.configurePresentRank(rankChange: rankChanged)
             addArrangedSubview(rankStackView)
         }
     }
 }
+
 
 

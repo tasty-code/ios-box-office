@@ -62,9 +62,8 @@ extension BoxOfficeListViewListCell {
 extension BoxOfficeListViewListCell {
     func configure(with result: CustomDailyBoxOffice) {
         oldAndNewStackView.configure(rank: result.rank,
-                                     rankOldAndNew: result.rankOldAndNew.rawValue,
+                                     rankOldAndNew: result.rankOldAndNew,
                                      rankChanged: result.rankChange)
-        
         movieStackView.configureMovieStackView(todayAdience: result.todayAudience,
                                                movieName: result.movieName,
                                                totalAdience: result.totalAudience)
