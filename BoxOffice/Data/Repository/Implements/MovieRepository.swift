@@ -3,11 +3,9 @@ import Foundation
 final class MovieRepository: MovieRepositoryProtocol {
     
     private let networkManager: Networkmanagable
-    private let urlBuilder: URLBuilderProtocol
 
-    init(networkManager: Networkmanagable, urlBuilder: URLBuilderProtocol) {
+    init(networkManager: Networkmanagable) {
         self.networkManager = networkManager
-        self.urlBuilder = urlBuilder
     }
 
     func requestBoxofficeData() async -> Result<[BoxOfficeMovie], DomainError> {
@@ -39,24 +37,12 @@ final class MovieRepository: MovieRepositoryProtocol {
     }
     
     private func makeBoxOfficeURL() -> URL? {
-        let url = urlBuilder
-            .setBaseURL(type: .kobis)
-            .setPath("/boxoffice/searchDailyBoxOfficeList.json")
-            .addQueryItem(name: "targetDt", value: Date().dayBefore.formattedDate(withFormat: "yyyyMMdd"))
-            .setApiKey(apiKey: ENV.API_KEY)
-            .build()
-        
+        let url = EndPoint(urlInformation: .daily(date: Date().dayBefore.formattedDate(withFormat: "yyyMMdd")), apiHost: .kobis).url
         return url
     }
 
     private func makeMovieDetailURL(movieCode: String) -> URL? {
-        let url = urlBuilder
-            .setBaseURL(type: .kobis)
-            .setPath("/movie/searchMovieInfo.json")
-            .addQueryItem(name: "movieCd", value: movieCode)
-            .setApiKey(apiKey: ENV.API_KEY)
-            .build()
-        
+        let url = EndPoint(urlInformation: .detail(code: movieCode), apiHost: .kobis).url
         return url
     }
 
