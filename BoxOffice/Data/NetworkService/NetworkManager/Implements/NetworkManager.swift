@@ -14,7 +14,7 @@ class NetworkManager: NetworkManagerProtocol {
     
     func bringNetworkResult<T: Decodable>(from request: URLRequest) async -> Result<T, NetworkError> {
         
-        let result = await sessionProvider.loadAPIRequest(using: request)
+        let result = await sessionProvider.requestAPI(using: request)
         
         switch result {
         case .success(let networkResponse):

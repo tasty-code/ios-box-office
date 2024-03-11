@@ -9,7 +9,7 @@ final class SessionProvider: SessionProvidable {
         self.session = session
     }
     
-    func loadAPIRequest(using urlRequest: URLRequest) async -> Result<NetworkResponse, NetworkError> {
+    func requestAPI(using urlRequest: URLRequest) async -> Result<NetworkResponse, NetworkError> {
         
         guard let (data, response) = try? await session.data(for: urlRequest)
         else { return .failure(.connectivity) }

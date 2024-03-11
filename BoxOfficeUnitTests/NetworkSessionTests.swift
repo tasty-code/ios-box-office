@@ -37,7 +37,7 @@ class NetworkSessionTests: XCTestCase {
         }
         
         // When
-        let result = await sessionProvider.loadAPIRequest(using: stubReqeust)
+        let result = await sessionProvider.requestAPI(using: stubReqeust)
         
         // Then
         switch result {
@@ -59,7 +59,7 @@ class NetworkSessionTests: XCTestCase {
         }
         
         // When
-        let result = await sessionProvider.loadAPIRequest(using: stubReqeust)
+        let result = await sessionProvider.requestAPI(using: stubReqeust)
         
         // Then
         if case .failure(let error) = result,
