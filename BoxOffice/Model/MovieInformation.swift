@@ -11,10 +11,9 @@ final class MovieInformation: LoadDataProtocol {
     
     let movieCode: String
     
-    init(movieCode: String, delegate: DataDelegate? = nil, loadedData: MovieDetail) {
+    init(movieCode: String, delegate: DataDelegate? = nil) {
         self.movieCode = movieCode
         self.delegate = delegate
-        self.loadedData = loadedData
     }
     
     typealias LoadedData = MovieDetail
@@ -37,24 +36,27 @@ final class MovieInformation: LoadDataProtocol {
     
     private func converted(_ movie: Movie) -> MovieDetail {
         let movieName: String = movie.movieName
-        let directors: String = movie.directors.map { director in
-            director.personName
-        }.joined(separator: ", ")
         let productionYear: String = movie.productionYear
         let openDate: String = movie.openDate
         let showTime: String = movie.showTime
+
+        let separator: String = ", "
+        let directors: String = movie.directors.map { director in
+            director.personName
+        }.joined(separator: separator)
         let audits: String = movie.audits.map { audit in
             audit.watchGradeName
-        }.joined(separator: ", ")
+        }.joined(separator: separator)
         let nations: String = movie.nations.map { nation in
             nation.nationName
-        }.joined(separator: ", ")
+        }.joined(separator: separator)
         let genres: String = movie.genres.map { genre in
             genre.genreName
-        }.joined(separator: ", ")
+        }.joined(separator: separator)
         let actors: String = movie.actors.map { actor in
             actor.personName
-        }.joined(separator: ", ")
+        }.joined(separator: separator)
+        
             let movie = MovieInformation.MovieDetail(movieName: movieName,
                                                directors: directors,
                                                productionYear: productionYear,
