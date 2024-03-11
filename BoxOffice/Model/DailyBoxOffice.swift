@@ -29,6 +29,7 @@ final class DailyBoxOffice: LoadDataProtocol {
     
     private func converted(_ boxOfficeMovies: [BoxOfficeMovie]) -> [Movie] {
         boxOfficeMovies.map { boxOfficeMovie in
+            let movieCode = boxOfficeMovie.movieCode
             let index: Int = Int(boxOfficeMovie.index) ?? 0
             let rank: String = boxOfficeMovie.rank
             let rankChangedAmount: Int = Int(boxOfficeMovie.rankChangedAmount) ?? 0
@@ -36,18 +37,20 @@ final class DailyBoxOffice: LoadDataProtocol {
             let movieName: String = boxOfficeMovie.movieName
             let audienceCount: Int = Int(boxOfficeMovie.audienceCount) ?? 0
             let audienceAccumulated: Int = Int(boxOfficeMovie.audienceAccumulated) ?? 0
-            let movie = DailyBoxOffice.Movie(index: index,
-                                                      rank: rank,
-                                                      rankChangedAmount: rankChangedAmount,
-                                                      rankStatus: rankStatus,
-                                                      movieName: movieName,
-                                                      audienceCount: audienceCount,
-                                                      audienceAccumulated: audienceAccumulated)
+            let movie = DailyBoxOffice.Movie(movieCode: movieCode,
+                                             index: index,
+                                             rank: rank,
+                                             rankChangedAmount: rankChangedAmount,
+                                             rankStatus: rankStatus,
+                                             movieName: movieName,
+                                             audienceCount: audienceCount,
+                                             audienceAccumulated: audienceAccumulated)
             return movie
         }
     }
     
     final class Movie {
+        let movieCode: String
         let index: Int
         let rank: String
         let rankChangedAmount: Int
@@ -61,7 +64,8 @@ final class DailyBoxOffice: LoadDataProtocol {
             case old = "OLD"
         }
         
-        init(index: Int, rank: String, rankChangedAmount: Int, rankStatus: RankStatus, movieName: String, audienceCount: Int, audienceAccumulated: Int) {
+        init(movieCode: String, index: Int, rank: String, rankChangedAmount: Int, rankStatus: RankStatus, movieName: String, audienceCount: Int, audienceAccumulated: Int) {
+            self.movieCode = movieCode
             self.index = index
             self.rank = rank
             self.rankChangedAmount = rankChangedAmount
