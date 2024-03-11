@@ -6,7 +6,7 @@ protocol BoxOfficeListDelegate: AnyObject {
 
 final class BoxOfficeListCollectionView: UICollectionView {
     weak var boxofficeListDelegate: BoxOfficeListDelegate?
-    let loadingIndicator = UIActivityIndicatorView(style: .medium)
+    private let loadingIndicator = UIActivityIndicatorView(style: .medium)
     
     private lazy var pullToRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -22,6 +22,11 @@ final class BoxOfficeListCollectionView: UICollectionView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func toggleLoadingIndicator(shouldStart: Bool) {
+        shouldStart ? loadingIndicator.startAnimating() : loadingIndicator.stopAnimating()
+    }
+    
     
     private func setupCollectionView() {
         registerCells()

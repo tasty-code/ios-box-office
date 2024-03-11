@@ -26,10 +26,10 @@ final class BoxOfficeListViewController: UIViewController {
 
 extension BoxOfficeListViewController: BoxOfficeListDelegate {
      func refreshBoxOfficeList() {
-        self.movieListCollectionView?.loadingIndicator.startAnimating()
+        self.movieListCollectionView?.toggleLoadingIndicator(shouldStart: true)
         movieAPIFetcher.fetchBoxOffice { [weak self] result in
             DispatchQueue.main.async {
-                self?.movieListCollectionView?.loadingIndicator.stopAnimating()
+                self?.movieListCollectionView?.toggleLoadingIndicator(shouldStart: false)
                 self?.movieListCollectionView?.refreshControl?.endRefreshing()
                 switch result {
                 case .success(let boxOfficeList):
