@@ -34,7 +34,7 @@ enum BoxOfficeAPI {
             return URLRequestBuilder()
                 .baseURL(baseURL)
                 .path("movie/searchMovieInfo.json")
-                .parameters([["key": apiKey, "targetDt": movieCode ]])
+                .parameters([["key": apiKey, "movieCd": movieCode]])
                 .createURLRequest()
         }
     }
