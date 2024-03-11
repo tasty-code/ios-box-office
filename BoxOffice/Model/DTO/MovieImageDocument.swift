@@ -1,5 +1,5 @@
 //
-//  MoviePoster.swift
+//  MovieImageDocument.swift
 //  BoxOffice
 //
 //  Created by Kim EenSung on 3/11/24.
