@@ -6,29 +6,24 @@ protocol MoviesListInput {
     func viewDidLoad()
     func refresh()
     func loadCell(_ index: Int)
-    func fetchMovieDetail(movieCode: String)
 }
 
 protocol MoviesListOutput {
     var movies: Observable<[MovieBoxOffice]> { get }
-    var movieDetail: Observable<Movie?> { get }
     var errorMessage: Observable<String> { get }
     var isRefreshing: Observable<Bool> { get }
     var nowCellInformation: Observable<(String, String, String, UIColor, String)> { get }
 }
 
 final class DefaultMoviesListViewModel: MoviesListViewModel {
-    var movieDetail: Observable<Movie?> = Observable(nil)
-    private let detailUseCase: MovieDetailUseCase
     private let useCase: BoxOfficeUseCase
     var movies: Observable<[MovieBoxOffice]> = Observable([])
     var errorMessage: Observable<String> = Observable("")
     var isRefreshing: Observable<Bool> = Observable(false)
     var nowCellInformation: Observable<(String, String, String, UIColor, String)> = Observable(("", "", "", .white, ""))
     
-    init(useCase: BoxOfficeUseCase, movieUseCase: MovieDetailUseCase) {
+    init(useCase: BoxOfficeUseCase) {
         self.useCase = useCase
-        self.detailUseCase = movieUseCase
     }
     
     private func fetchData() {
@@ -102,19 +97,5 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
         }
         let cellInformation = (movieName, rank, rankChangeText, rankChangeColor, audienceText)
         nowCellInformation.value = cellInformation
-    }
-    
-    func fetchMovieDetail(movieCode: String) {
-        detailUseCase.fetch(movieCode: movieCode) { [weak self] result in
-            switch result {
-            case .success(let movie):
-                DispatchQueue.main.async {
-                    self?.movieDetail.value = movie
-                    print("\(movieCode)")
-                }
-            case .failure(let error):
-                self?.errorMessage.value = error.localizedDescription
-            }
-        }
     }
 }
