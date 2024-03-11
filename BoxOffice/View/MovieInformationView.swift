@@ -76,8 +76,6 @@ extension MovieInformationView {
             scrollView.frameLayoutGuide.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             scrollView.frameLayoutGuide.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             scrollView.contentLayoutGuide.topAnchor.constraint(equalTo: stackView.topAnchor),
-//            scrollView.contentLayoutGuide.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 8),
-//            scrollView.contentLayoutGuide.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -8),
             scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: stackView.bottomAnchor),
             stackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 8),
             stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8),
