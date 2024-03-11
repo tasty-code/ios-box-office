@@ -8,39 +8,75 @@
 import UIKit
 
 final class BoxOfficeViewController: UIViewController {
+ 
+    private let boxOfficeView: BoxOfficeView = BoxOfficeView()
+    private let loadingIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
     
-    private var dataSource: NetworkDataProtocol? = nil
-    private let networkManager: NetworkManager
-    
-    init(dataSource: BoxOfficeResult? = nil, networkManager: NetworkManager) {
-        self.dataSource = dataSource
-        self.networkManager = networkManager
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private lazy var dataSource: any LoadDataProtocol = {
+        let dataSource = DailyBoxOffice()
+        dataSource.delegate = self
+        return dataSource
+    }()
+
+    override func loadView() {
+        view = boxOfficeView
+        view.backgroundColor = .white
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadData()
+        
+        boxOfficeView.delegate = self
+        
+        loadingIndicatorView.startAnimating()
+        
+        Task {
+            await loadDailyBoxOfficeData()
+            boxOfficeView.boxOfficeCollectionView.isScrollEnabled = true
+        }
+        boxOfficeView.setBoxOfficeCollectionViewProperties(loadingIndicatorView: loadingIndicatorView)
+        boxOfficeView.setBoxOfficeCollectionViewDelegate(self)
+        boxOfficeView.configureRefreshControl(self)
     }
 }
 
-extension BoxOfficeViewController {
-    private func loadData() {
-        Task {
-            let type: KoreanFilmCouncilURL = .dailyBoxOffice(queryValue: "20120419")
-            guard let request = self.networkManager.makeRequest(type) else {
+extension BoxOfficeViewController: BoxOfficeCollectionViewDelegate {
+    func loadDailyBoxOfficeData() async {
+        do {
+            try await dataSource.loadData()
+        } catch {
+            guard let networkError = error as? NetworkError else {
+                print(error.localizedDescription)
                 return
             }
-            let data = await self.networkManager.request(request, into: type) { networkError in
-                DispatchQueue.main.async {
-                    self.alert(with: networkError)                    
-                }
-            }
-            dataSource = data
+            self.alert(with: networkError)
+        }
+        self.loadingIndicatorView.stopAnimating()
+    }
+}
+
+extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataSource.loadedData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeCollectionViewCell.className, for: indexPath) as? BoxOfficeCollectionViewCell,
+              let movies = dataSource.loadedData as? [DailyBoxOffice.Movie],
+              let data = movies[safeIndex: indexPath.row] else {
+            return UICollectionViewCell()
+        }
+        
+        cell.configure(data: data)
+        
+        return cell
+    }
+}
+
+extension BoxOfficeViewController: DataDelegate {
+    func reloadView() {
+        DispatchQueue.main.async {
+            self.boxOfficeView.reloadData()
         }
     }
 }

@@ -17,32 +17,61 @@ final class NetworkManagerTests: XCTestCase {
         sut = NetworkManager(urlSession: mockSession)
     }
     
-    func test_makeRequest메서드는_URLRequest를_반환한다() {
+//    func test_makeRequest메서드는_http메서드를전달하지않으면_get메서드를반환한다() throws {
+//        // given
+//        let input: KoreanFilmCouncilURL = .dailyBoxOffice(targetDate: "20120419")
+//        let expectation = "GET"
+//        
+//        // when
+//        let request = sut?.makeRequest(input.url)
+//        
+//        // then
+//        XCTAssertEqual(request?.httpMethod, expectation)
+//    }
+//    
+//    func test_makeRequest메서드는_알맞은URL을_반환한다() throws {
+//        // given
+//        let input: String = KoreanFilmCouncilURL.dailyBoxOffice(targetDate: "20120419").url
+//        guard let apiKey = Bundle.main.infoDictionary?["API_KEY"] as? String else {
+//            return XCTFail()
+//        }
+//        let expectation = URL(string: KoreanFilmCouncilURL.dailyBoxOffice(targetDate: "20120419").url)
+//        
+//        // when
+//        let request = sut?.makeRequest(input)
+//        
+//        // then
+//        XCTAssertEqual(request?.url, expectation)
+//    }
+    
+    func test_request메서드는_parsing된데이터를_반환한다() async throws {
         // given
-        let input = "20120419"
+        let input: URLRequest! = BoxOfficeAPI.dailyBoxOffice(targetDate: "20220105").urlRequest
         
         // when
-        let request = sut?.makeRequest(.dailyBoxOffice(queryValue: input))
+        let result: BoxOfficeResult? = try await sut?.request(input)
         
         // then
-        XCTAssertNotNil(request)
+        XCTAssertNotNil(result)
     }
     
-    func test_request메서드는_parsing된데이터를_반환한다() {
+    func test_request메서드는_잘못된APIKey가입력될경우_에러를반환한다() async {
         // given
-        let input: KoreanFilmCouncilURL = .dailyBoxOffice(queryValue: "20120419")
-        guard let request = sut?.makeRequest(input) else {
-            return
-        }
+        let invalidAPIKey: String = "잘못된APIKey"
+        let input: URLRequest! = URLRequestBuilder()
+            .baseURL("https://kobis.or.kr/kobisopenapi/webservice/rest/")
+            .path("boxoffice/searchDailyBoxOfficeList.json")
+            .parameters([["key": invalidAPIKey], ["targetDt": "20220105"]])
+            .createURLRequest()
+        let expectation = XCTestExpectation(description: "잘못된 URL은 에러를 반환한다.")
         
         // when
-        Task {
-            let result = await sut?.request(request, into: input, errorHandler: { networkError in
-                print(networkError)
-            })
+        do {
+            let _: BoxOfficeResult? = try await sut?.request(input)
+        } catch {
             
-            // then
-            XCTAssertNotNil(result)
+        // then
+            expectation.fulfill()
         }
     }
 }

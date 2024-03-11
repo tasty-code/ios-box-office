@@ -9,22 +9,42 @@ import Foundation
 @testable import BoxOffice
 
 struct MockURLSession: URLSessionProtocol {
+    let successSampleBoxOffice: (Data, URLResponse)? = MockURLSession.makeSample(with: "sample_searchDailyBoxOfficeList", queryValue: "20220105")
+    
+    let successSampleMovieInformation: (Data, URLResponse)? = MockURLSession.makeSample(with: "sample_searchMovieInfo", queryValue: "20124079")
+    
+    let failure: NetworkError = .invalidURL
+    
     func data(for request: URLRequest, delegate: (URLSessionTaskDelegate)? = nil) async throws -> (Data, URLResponse) {
-        guard let url = request.url else {
-            throw NetworkError.invalidStatusCode(404)
+        let lastPathComponent = request.url?.lastPathComponent
+        let last = request.url?.query
+        
+        if lastPathComponent == "searchDailyBoxOfficeList.json", last!.contains("20220105") {
+            return successSampleBoxOffice!
         }
         
-        let lastPathComponent = url.lastPathComponent
-        let resourceName = "sample_" + lastPathComponent.replacingOccurrences(of: ".json", with: "")
-        
-        guard let sample = Bundle.main.url(forResource: resourceName, withExtension: "json") else {
-            throw NetworkError.invalidStatusCode(503)
+        if lastPathComponent == "searchMovieInfo.json", last!.contains("20124079") {
+            return successSampleMovieInformation!
         }
-        let input = try Data(contentsOf: sample)
-        guard let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil) else {
-            throw NetworkError.invalidStatusCode(500)
+
+        throw failure
+    }
+    
+    static func makeSample(with fileURL: String, queryValue: String) -> (Data, URLResponse)? {
+        do {
+            let sampleUrl = Bundle.main.url(forResource: fileURL, withExtension: "json")
+            let data = try Data(contentsOf: sampleUrl!)
+            let request: URLRequest?
+            if fileURL == "searchDailyBoxOfficeList" {
+                request = BoxOfficeAPI.dailyBoxOffice(targetDate: "20220105").urlRequest
+            } else {
+                request = BoxOfficeAPI.movieDetailInformation(movieCode: queryValue).urlRequest
+            }
+            let response = HTTPURLResponse(url: (request?.url)!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            return (data, response)
+        } catch {
+            print(error)
+            return nil
         }
-        
-        return (input, response)
     }
 }
