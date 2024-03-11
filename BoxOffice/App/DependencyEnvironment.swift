@@ -2,6 +2,13 @@
 import Foundation
 
 final class DependencyEnvironment {
+
+    /// 디코더 설정 셋팅 예시
+    private let jsonDecoder: JSONDecoder = {
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.dateDecodingStrategy = .iso8601
+        return jsonDecoder
+    }()
     
     static let shared = DependencyEnvironment()
     
@@ -9,7 +16,7 @@ final class DependencyEnvironment {
     
     private(set) lazy var sessionProvider: SessionProvidable = SessionProvider()
     
-    private(set) lazy var decodeProvider: URLDecodeProtocol = URLDecoder()
+    private(set) lazy var decodeProvider: JsonDecodeProtocol = JsonDecoder(jsonDecoder: jsonDecoder)
 
     private(set) lazy var urlBuilder: URLBuilder = URLBuilder(baseURLProvider: BaseURLManager.shared)
     
