@@ -1,0 +1,4 @@
+
+enum BaseURLType {
+    case kobis
+}
