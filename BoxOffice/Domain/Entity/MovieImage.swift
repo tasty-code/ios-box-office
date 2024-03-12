@@ -6,7 +6,7 @@ struct MovieImage {
 }
 
 struct MovieDocument {
-    let collection: Collection
+    let collection: String
     let datetime: String
     let displaySitename: String
     let docURL: String

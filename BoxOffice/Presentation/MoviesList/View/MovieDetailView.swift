@@ -3,18 +3,30 @@ import UIKit
 final class MovieDetailView: UIViewController {
     
     var movieCode: String
+    var movieName: String
     private var detailViewModel: MovieDetailViewModel
     
-    init(movieCode: String, viewModel: MovieDetailViewModel) {
+    init(movieCode: String, movieName: String, viewModel: MovieDetailViewModel) {
         self.movieCode = movieCode
+        self.movieName = movieName
         self.detailViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         detailViewModel.fetchMovieDetail(movieCode: movieCode)
+        detailViewModel.fetchMovieImage(movieName: movieName)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: UIActivityIndicatorView
+    private lazy var indicatorView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.color = UIColor.gray
+        indicator.startAnimating()
+        return indicator
+    }()
     
     // MARK: UIScrollView
     private let scrollView =  UIScrollView()
@@ -49,14 +61,14 @@ final class MovieDetailView: UIViewController {
     private lazy var genresTitleLabel = makeLabel(text: "장르", textAlignment: .center, bold: true)
     private lazy var genresLabel = makeLabel(textAlignment: .left, bold: false)
     private lazy var actorsTitleLabel = makeLabel(text: "배우", textAlignment: .center, bold: true)
-    private lazy var actorsLabel = makeLabel(textAlignment: .left, bold: false, numberOfLines: 10)
+    private lazy var actorsLabel = makeLabel(textAlignment: .left, bold: false, numberOfLines: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupViews()
+        addSubviewsAndSetupLayout()
+        setupLayoutViews()
         bind()
-        configureImageView()
     }
 }
 
@@ -69,6 +81,10 @@ extension MovieDetailView {
         }
         detailViewModel.errorMessage.bind{ [weak self] errorMessage in
             self?.makeAlert(message: errorMessage, confirmAction: nil)
+        }
+        detailViewModel.movieImage.bind { [weak self] movieImage in
+            guard let movieImage = movieImage else { return }
+            self?.configureImageView(with: movieImage)
         }
     }
     
@@ -84,8 +100,25 @@ extension MovieDetailView {
         actorsLabel.text = "\(movie.actors.isEmpty ? "-" : movie.actors.map { $0.name }.joined(separator: ", "))"
     }
     
-    private func configureImageView() {
-        movieImageView.image = UIImage(systemName: "tree.fill")
+    private func configureImageView(with movieImage: MovieImage) {
+        guard let imageURLString = movieImage.documents.first?.imageURL,
+              let imageURL = URL(string: imageURLString) else {
+            print("URL error")
+            return
+        }
+        DispatchQueue.global().async { [weak self] in
+            do {
+                let imageData = try Data(contentsOf: imageURL)
+                let image = UIImage(data: imageData)
+                DispatchQueue.main.async {
+                    self?.indicatorView.stopAnimating()
+                    self?.indicatorView.removeFromSuperview()
+                    self?.movieImageView.image = image
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -116,7 +149,7 @@ extension MovieDetailView {
 
 // MARK: Layout
 extension MovieDetailView {
-    private func setupViews() {
+    private func addSubviewsAndSetupLayout() {
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
@@ -147,7 +180,9 @@ extension MovieDetailView {
         genresStackView.addArrangedSubview(genresLabel)
         actorsStackView.addArrangedSubview(actorsTitleLabel)
         actorsStackView.addArrangedSubview(actorsLabel)
-        
+        movieImageView.addSubview(indicatorView)
+    }
+    private func setupLayoutViews() {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -161,7 +196,10 @@ extension MovieDetailView {
             totalStackView.widthAnchor.constraint(equalToConstant: 410),
             
             movieImageView.widthAnchor.constraint(equalToConstant: 410),
-            movieImageView.heightAnchor.constraint(equalToConstant: 300),
+            movieImageView.heightAnchor.constraint(equalToConstant: 500),
+            
+            indicatorView.centerXAnchor.constraint(equalTo: movieImageView.centerXAnchor),
+            indicatorView.centerYAnchor.constraint(equalTo: movieImageView.centerYAnchor),
             
             directorTitleLabel.widthAnchor.constraint(equalToConstant: 60),
             productionYearTitleLabel.widthAnchor.constraint(equalToConstant: 60),

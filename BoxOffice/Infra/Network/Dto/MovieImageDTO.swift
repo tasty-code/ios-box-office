@@ -1,13 +1,13 @@
 import Foundation
 
-struct MovieImageDTO: Codable {
+struct MovieImageDTO: Decodable {
     let documents: [DocumentDTO]
     let meta: MetaDTO
 }
 
 extension MovieImageDTO {
-    struct DocumentDTO: Codable {
-        let collection: Collection
+    struct DocumentDTO: Decodable {
+        let collection: String
         let datetime: String
         let displaySitename: String
         let docURL: String
@@ -28,13 +28,8 @@ extension MovieImageDTO {
     }
 }
 
-
-enum Collection: String, Codable {
-    case news = "news"
-}
-
 extension MovieImageDTO {
-    struct MetaDTO: Codable {
+    struct MetaDTO: Decodable {
         let isEnd: Bool
         let pageableCount: Int
         let totalCount: Int

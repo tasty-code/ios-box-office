@@ -89,7 +89,7 @@ extension MoviesListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedMovie = viewModel.movies.value[indexPath.item]
-        let destination = Navigator.Destination.detailMovie(movieCode: selectedMovie.movieCode)
+        let destination = Navigator.Destination.detailMovie(movieCode: selectedMovie.movieCode, movieName: selectedMovie.movieName)
         navigator.navigate(to: destination, from: self)
     }
     
