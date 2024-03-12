@@ -18,8 +18,8 @@ final class BoxOfficeListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBarTitle()
-        setupCollectionView()
-        fetchBoxOfficeData()
+        setupCompositionalLayout()
+        fetchDailyBoxOfficeList()
     }
     
 }
@@ -50,7 +50,7 @@ extension BoxOfficeListViewController {
         navigationController?.navigationBar.titleTextAttributes = attributes
     }
 
-    private func fetchBoxOfficeData() {
+    private func fetchDailyBoxOfficeList() {
         movieAPIFetcher.fetchBoxOffice { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
@@ -66,7 +66,7 @@ extension BoxOfficeListViewController {
 }
 
 extension BoxOfficeListViewController {
-    private func setupCollectionView() {
+    private func setupCompositionalLayout() {
         movieListCollectionView = BoxOfficeListCollectionView(frame: .zero, collectionViewLayout: configuerCompositionalLayout())
         guard let movieListCollectionView = movieListCollectionView else { return }
         movieListCollectionView.setboxOfficeDelegete(delegate: self)
