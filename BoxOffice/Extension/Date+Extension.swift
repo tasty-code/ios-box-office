@@ -8,9 +8,20 @@
 import Foundation
 
 extension Date {
-    static let yesterday: Date = {
+    private static var cachedYesterday: Date = {
         return Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date() - 86400
     }()
+
+    static var yesterday: Date {
+        let currentDate = Date()
+        guard 
+            Calendar.current.isDate(currentDate, inSameDayAs: cachedYesterday)
+        else {
+            cachedYesterday = Calendar.current.date(byAdding: .day, value: -1, to: currentDate) ?? currentDate - 86400
+            return cachedYesterday
+        }
+        return cachedYesterday
+    }
     
     static let titleDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
