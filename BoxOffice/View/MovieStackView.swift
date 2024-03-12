@@ -37,6 +37,8 @@ private extension MovieStackView {
         self.spacing = 0
         self.distribution = .fillEqually
         self.alignment = .leading
+        self.addArrangedSubview(movieNameLabel)
+        self.addArrangedSubview(movieAudienceLabel)
     }
 }
 
@@ -50,7 +52,5 @@ extension MovieStackView {
             return
         }
         movieAudienceLabel.text = "오늘 \(todayAudienceCount.numberFormatter) / 총 \(totalAudienceCount.numberFormatter)"
-        self.addArrangedSubview(movieNameLabel)
-        self.addArrangedSubview(movieAudienceLabel)
     }
 }

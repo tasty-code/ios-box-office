@@ -42,7 +42,7 @@ private extension BoxOfficeViewController {
     }
     
     func setupBoxOfficeData() {
-        movieManager.fetchBoxOfficeResultData(date: Date.movieDateToString) { result in
+        movieManager.fetchMockData(date: Date.movieDateToString) { result in
             switch result {
             case .success(let success):
                 self.reloadCollectionListData(result: success)
@@ -63,18 +63,18 @@ private extension BoxOfficeViewController {
     func updateBoxOfficeList() {
         movieManager.fetchBoxOfficeResultData(date: Date.movieDateToString) { [weak self] result in
             switch result {
-            case .success(let success):
+            case .success(let result):
                 DispatchQueue.main.async {
-                    self?.applyBoxOfficeList(result: success)
+                    self?.applyBoxOfficeList(result: result)
                     guard
-                        let date = success.showRange.toDateFromRange()
+                        let date = result.showRange.toDateFromRange()
                     else {
                         return
                     }
                     self?.configureNavigation(date: date)
                 }
-            case .failure(let failure):
-                print(failure.localizedDescription)
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
