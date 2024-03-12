@@ -24,7 +24,6 @@ enum KakaoAPI {
     var urlRequest: URLRequest? {
         switch self {
         case .image(let query):
-            print(apiKey)
             return URLRequestBuilder(headers: ["Authorization": apiKey])
                 .baseURL(baseURL)
                 .parameters([["query": query], ["size": 1]])
