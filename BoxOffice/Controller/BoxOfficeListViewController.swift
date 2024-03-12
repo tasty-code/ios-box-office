@@ -1,12 +1,11 @@
 import UIKit
 
 final class BoxOfficeListViewController: UIViewController {
-    private var movieAPIFetcher: MovieAPIFetcher
+    private var movieAPIFetcher: MovieAPIFetcherProtocol
     private var dailyBoxOfficeList: [CustomDailyBoxOffice] = []
     private var movieListCollectionView: BoxOfficeListCollectionView?
     
-    
-    init(fetcher: MovieAPIFetcher) {
+    init(fetcher: MovieAPIFetcherProtocol) {
         self.movieAPIFetcher = fetcher
         super.init(nibName: nil, bundle: nil)
     }
@@ -54,7 +53,7 @@ extension BoxOfficeListViewController {
         let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20)]
         navigationController?.navigationBar.titleTextAttributes = attributes
     }
-
+    
     private func fetchDailyBoxOfficeList() {
         movieAPIFetcher.fetchBoxOffice { [weak self] result in
             switch result {

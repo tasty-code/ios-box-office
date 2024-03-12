@@ -1,6 +1,11 @@
 import Foundation
 
-struct MovieAPIFetcher {
+protocol MovieAPIFetcherProtocol {
+    func fetchDetailMovieInfo(movieCode: String)
+    func fetchBoxOffice(completion: @escaping (Result<[CustomDailyBoxOffice], Error>) -> Void)
+}
+
+struct MovieAPIFetcher: MovieAPIFetcherProtocol {
     let networkManager: NetworkManagerProtocol
     
     init(networkManager: NetworkManagerProtocol = NetworkManager()) {
@@ -50,4 +55,7 @@ struct MovieAPIFetcher {
         }
     }
 }
+
+
+
 
