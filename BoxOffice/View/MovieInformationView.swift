@@ -47,6 +47,10 @@ extension MovieInformationView {
         genresStackView.contentLabel.text = data.genres
         actorsStackView.contentLabel.text = data.actors
     }
+    
+    func appendImage(_ image: UIImage?) {
+        imageView.image = image
+    }
 }
 
 extension MovieInformationView {

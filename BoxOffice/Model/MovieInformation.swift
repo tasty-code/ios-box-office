@@ -5,11 +5,14 @@
 //  Created by LeeSeongYeon on 2024/03/11.
 //
 
-import Foundation
+import UIKit
 
 final class MovieInformation: LoadDataProtocol {
     
     let movieCode: String
+    private(set) var movieImage: UIImage? = nil {
+        didSet { delegate?.reloadView() }
+    }
     weak var delegate: DataDelegate?
     
     init(movieCode: String) {
@@ -33,6 +36,23 @@ final class MovieInformation: LoadDataProtocol {
         let data: MovieInformationResult = try await self.networkManager.request(request)
         let movie = data.movieInformationDetail.movie
         loadedData = converted(movie)
+        movieImage = try await loadImage()
+    }
+    
+    private func loadImage() async throws -> UIImage? {
+        guard let movieName = loadedData?.movieName,
+            let request = KakaoAPI.image(query: movieName).urlRequest else {
+            throw NetworkError.invalidAPIKey
+        }
+        let imageDocument: MovieImageDocument = try await self.networkManager.request(request)
+        guard let imageUrl = imageDocument.documentResults[safeIndex: 0]?.imageURL,
+              let URL = URL(string: imageUrl) else {
+            // 에러 필요함
+            return nil
+        }
+        let (data, response) = try await URLSession.shared.data(from: URL)
+        let image = UIImage(data: data)
+        return image
     }
     
     private func converted(_ movie: Movie) -> MovieDetail {
