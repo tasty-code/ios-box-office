@@ -71,7 +71,7 @@ extension BoxOfficeListViewController {
     private func setupCompositionalLayout() {
         movieListCollectionView = BoxOfficeListCollectionView(frame: .zero, collectionViewLayout: configuerCompositionalLayout())
         guard let movieListCollectionView = movieListCollectionView else { return }
-        movieListCollectionView.setboxOfficeDelegete(delegate: self)
+        movieListCollectionView.setBoxOfficeDelegete(delegate: self)
         movieListCollectionView.delegate = self
         movieListCollectionView.dataSource = self
         view.addSubview(movieListCollectionView)

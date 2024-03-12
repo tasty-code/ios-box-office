@@ -53,7 +53,7 @@ extension BoxOfficeListCollectionView {
         shouldStart ? loadingIndicator.startAnimating() : loadingIndicator.stopAnimating()
     }
     
-    func setboxOfficeDelegete(delegate: BoxOfficeListDelegate) {
+    func setBoxOfficeDelegete(delegate: BoxOfficeListDelegate) {
         self.boxofficeListDelegate = delegate
     }
 }
