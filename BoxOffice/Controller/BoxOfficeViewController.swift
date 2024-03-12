@@ -42,7 +42,7 @@ private extension BoxOfficeViewController {
     }
     
     func setupBoxOfficeData() {
-        movieManager.fetchMockData(date: Date.movieDateToString) { result in
+        movieManager.fetchBoxOfficeResultData(date: Date.movieDateToString) { result in
             switch result {
             case .success(let success):
                 self.reloadCollectionListData(result: success)
