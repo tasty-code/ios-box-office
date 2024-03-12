@@ -23,7 +23,6 @@
 		2757938A2B7F51BF00C08906 /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275793892B7F51BF00C08906 /* URLSession+Extension.swift */; };
 		2757938C2B7F52B500C08906 /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2757938B2B7F52B500C08906 /* JSONLoader.swift */; };
 		2757938D2B7F546300C08906 /* box_office.json in Resources */ = {isa = PBXBuildFile; fileRef = 275793822B7F402300C08906 /* box_office.json */; };
-		2757D9D82B9A9EDB00B13BD7 /* DateFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2757D9D72B9A9EDB00B13BD7 /* DateFormatterTests.swift */; };
 		276ED7632B7B002600D37EBF /* BoxOfficeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276ED7622B7B002600D37EBF /* BoxOfficeTests.swift */; };
 		276ED76A2B7B006400D37EBF /* BoxOffice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276ED7692B7B006400D37EBF /* BoxOffice.swift */; };
 		276ED76C2B7B006D00D37EBF /* MovieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276ED76B2B7B006D00D37EBF /* MovieManager.swift */; };
@@ -84,7 +83,6 @@
 		275793872B7F518900C08906 /* MockURLSessionDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionDataTask.swift; sourceTree = "<group>"; };
 		275793892B7F51BF00C08906 /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
 		2757938B2B7F52B500C08906 /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
-		2757D9D72B9A9EDB00B13BD7 /* DateFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterTests.swift; sourceTree = "<group>"; };
 		276ED7602B7B002600D37EBF /* BoxOfficeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxOfficeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		276ED7622B7B002600D37EBF /* BoxOfficeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeTests.swift; sourceTree = "<group>"; };
 		276ED7692B7B006400D37EBF /* BoxOffice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOffice.swift; sourceTree = "<group>"; };
@@ -192,7 +190,6 @@
 			children = (
 				276ED7622B7B002600D37EBF /* BoxOfficeTests.swift */,
 				27AE2ED72B86DAFD009B43E2 /* BoxOfficeMockTests.swift */,
-				2757D9D72B9A9EDB00B13BD7 /* DateFormatterTests.swift */,
 			);
 			path = BoxOfficeTests;
 			sourceTree = "<group>";
@@ -442,7 +439,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2757D9D82B9A9EDB00B13BD7 /* DateFormatterTests.swift in Sources */,
 				276ED7632B7B002600D37EBF /* BoxOfficeTests.swift in Sources */,
 				27AE2ED82B86DAFD009B43E2 /* BoxOfficeMockTests.swift in Sources */,
 			);
@@ -684,6 +680,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K9NKZR257N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BoxOffice/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -711,6 +708,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K9NKZR257N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BoxOffice/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
