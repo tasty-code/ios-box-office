@@ -21,23 +21,28 @@ final class BoxOfficeListViewController: UIViewController {
         setupCompositionalLayout()
         fetchDailyBoxOfficeList()
     }
-    
 }
 
 extension BoxOfficeListViewController: BoxOfficeListDelegate {
+    private func reloadMovieListCollectionView() {
+        DispatchQueue.main.async {
+            self.movieListCollectionView?.reloadData()
+        }
+    }
+    
     func refreshBoxOfficeList() {
         self.movieListCollectionView?.toggleLoadingIndicator(shouldStart: true)
         movieAPIFetcher.fetchBoxOffice { [weak self] result in
             DispatchQueue.main.async {
                 self?.movieListCollectionView?.toggleLoadingIndicator(shouldStart: false)
                 self?.movieListCollectionView?.refreshControl?.endRefreshing()
-                switch result {
-                case .success(let boxOfficeList):
-                    self?.dailyBoxOfficeList = boxOfficeList
-                    self?.movieListCollectionView?.reloadData()
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
+            }
+            switch result {
+            case .success(let boxOfficeList):
+                self?.dailyBoxOfficeList = boxOfficeList
+                self?.reloadMovieListCollectionView()
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
@@ -52,14 +57,12 @@ extension BoxOfficeListViewController {
 
     private func fetchDailyBoxOfficeList() {
         movieAPIFetcher.fetchBoxOffice { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let boxOfficeList):
-                    self?.dailyBoxOfficeList = boxOfficeList
-                    self?.movieListCollectionView?.reloadData()
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
+            switch result {
+            case .success(let boxOfficeList):
+                self?.reloadMovieListCollectionView()
+                self?.dailyBoxOfficeList = boxOfficeList
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
