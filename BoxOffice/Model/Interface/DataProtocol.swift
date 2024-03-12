@@ -11,6 +11,6 @@ protocol DataDelegate: AnyObject {
 
 protocol LoadDataProtocol {
     associatedtype LoadedData
-    var loadedData: [LoadedData] { get }
+    var loadedData: LoadedData { get }
     func loadData() async throws
 }

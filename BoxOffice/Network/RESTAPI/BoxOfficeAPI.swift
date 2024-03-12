@@ -16,7 +16,7 @@ enum BoxOfficeAPI {
     }
     
     var apiKey: String {
-        guard let apiKey = Bundle.main.infoDictionary?["API_KEY"] as? String else {
+        guard let apiKey = Bundle.main.infoDictionary?["BOXOFFICE_API_KEY"] as? String else {
             return ""
         }
         return apiKey
@@ -34,7 +34,7 @@ enum BoxOfficeAPI {
             return URLRequestBuilder()
                 .baseURL(baseURL)
                 .path("movie/searchMovieInfo.json")
-                .parameters([["key": apiKey, "targetDt": movieCode ]])
+                .parameters([["key": apiKey, "movieCd": movieCode]])
                 .createURLRequest()
         }
     }

@@ -8,7 +8,11 @@
 import Foundation
 
 struct BoxOfficeResult: Decodable {
-    let boxOfficeResult: BoxOfficeDetail
+    let boxOfficeDetail: BoxOfficeDetail
+    
+    private enum CodingKeys: String, CodingKey {
+        case boxOfficeDetail = "boxOfficeResult"
+    }
 }
 
 struct BoxOfficeDetail: Decodable {

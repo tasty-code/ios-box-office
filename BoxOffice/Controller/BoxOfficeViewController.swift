@@ -57,7 +57,10 @@ extension BoxOfficeViewController: BoxOfficeCollectionViewDelegate {
 
 extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.loadedData.count
+        guard let data = dataSource.loadedData as? [DailyBoxOffice.Movie] else {
+            return 0
+        }
+        return data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -70,6 +73,15 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
         cell.configure(data: data)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let movies = dataSource.loadedData as? [DailyBoxOffice.Movie],
+        let movieCode = movies[safeIndex: indexPath.row]?.movieCode else {
+            return
+        }
+        let movieInformationViewController = MovieInformationViewController(movieCode: movieCode)
+        present(movieInformationViewController, animated: true)
     }
 }
 
