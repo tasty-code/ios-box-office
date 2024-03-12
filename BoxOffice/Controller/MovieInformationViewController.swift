@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieInformationViewController: UIViewController {
+final class MovieInformationViewController: UIViewController {
     
     let movieInformationView: MovieInformationView = MovieInformationView()
     let movieCode: String
@@ -18,9 +18,10 @@ class MovieInformationViewController: UIViewController {
         return dataSource
     }()
 
-    init(movieCode: String) {
+    init(movieCode: String, movieName: String) {
         self.movieCode = movieCode
         super.init(nibName: nil, bundle: nil)
+        self.navigationItem.title = movieName
     }
     
     required init?(coder: NSCoder) {
@@ -32,7 +33,6 @@ class MovieInformationViewController: UIViewController {
         Task {
            await loadInformation()
         }
-       
     }
     
     override func loadView() {
@@ -61,6 +61,5 @@ extension MovieInformationViewController {
         } catch {
             print(error)
         }
-           
     }
 }

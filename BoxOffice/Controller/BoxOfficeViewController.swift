@@ -25,6 +25,7 @@ final class BoxOfficeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = Date.yesterday.formatted(using: .standard)
         
         boxOfficeView.delegate = self
         
@@ -77,11 +78,11 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movies = dataSource.loadedData as? [DailyBoxOffice.Movie],
-        let movieCode = movies[safeIndex: indexPath.row]?.movieCode else {
+              let movieCode = movies[safeIndex: indexPath.row]?.movieCode, let movieName = movies[safeIndex: indexPath.row]?.movieName else {
             return
         }
-        let movieInformationViewController = MovieInformationViewController(movieCode: movieCode)
-        present(movieInformationViewController, animated: true)
+        let movieInformationViewController: UIViewController = MovieInformationViewController(movieCode: movieCode, movieName: movieName)
+        self.navigationController?.pushViewController(movieInformationViewController, animated: true)
     }
 }
 
