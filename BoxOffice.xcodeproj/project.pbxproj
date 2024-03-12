@@ -206,9 +206,9 @@
 		08AB8E792B7F24B000564AC5 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
+				C76965E42B86E7DE00EF8F87 /* Model */,
 				C78D993C2B9F2F8700D8000A /* RequestBuilder */,
 				08A6CE542B99A7BE00F2F2CA /* NetworkManager */,
-				C76965E42B86E7DE00EF8F87 /* Model */,
 				0827981A2B8774E700ACC723 /* URLBuilder */,
 				C76965E12B86E74D00EF8F87 /* SessionProvider */,
 				C76965E22B86E78F00EF8F87 /* Serializer */,
@@ -230,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				08AB8E8E2B7F479D00564AC5 /* KeyEnvironmentHandler.swift */,
-				0864FC622B9F2EE500CE0725 /* APIHostType.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -349,6 +348,7 @@
 			children = (
 				C76965E52B86E83100EF8F87 /* NetworkResponse.swift */,
 				0827983F2B8833F000ACC723 /* HTTPMethodType.swift */,
+				0864FC622B9F2EE500CE0725 /* APIHostType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
