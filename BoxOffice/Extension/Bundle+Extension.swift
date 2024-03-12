@@ -8,13 +8,13 @@
 import Foundation
 
 extension Bundle {
-    var apiKey: String? {
+    var apiKey: String {
         guard
             let file = self.path(forResource: "Private", ofType: "plist"),
             let resource = NSDictionary(contentsOfFile: file),
             let key = resource["API_KEY"] as? String
         else {
-            return nil
+            return ""
         }
         return key
     }
