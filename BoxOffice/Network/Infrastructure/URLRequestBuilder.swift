@@ -29,13 +29,10 @@ class URLRequestBuilder {
         return self
     }
     
-    func parameters(_ parameters: [[String: Any]]) -> Self {
+    func parameters(_ parameters: [[String: String]]) -> Self {
         url += "?"
         parameters.forEach { parameter in
             for (key, value) in parameter {
-                guard let value = value as? String else {
-                    return
-                }
                 url += key + "=" + value + "&"
             }
         }
