@@ -9,24 +9,21 @@ import UIKit
 
 final class MovieInformation: LoadDataProtocol {
     
+    typealias LoadedData = MovieDetail?
+    var loadedData: MovieDetail?
+    
     let movieCode: String
     private(set) var movieImage: UIImage? = nil {
-        didSet { delegate?.reloadView() }
-    }
-    weak var delegate: DataDelegate?
-    
-    init(movieCode: String) {
-        self.movieCode = movieCode
-    }
-    
-    typealias LoadedData = MovieDetail?
-    
-    let networkManager: NetworkManager = NetworkManager(urlSession: URLSession.shared)
-    
-    var loadedData: MovieDetail? {
         didSet {
             delegate?.reloadView()
         }
+    }
+    
+    weak var delegate: DataDelegate?
+    let networkManager: NetworkManager = NetworkManager(urlSession: URLSession.shared)
+    
+    init(movieCode: String) {
+        self.movieCode = movieCode
     }
     
     func loadData() async throws {
@@ -50,7 +47,7 @@ final class MovieInformation: LoadDataProtocol {
             // 에러 필요함
             return nil
         }
-        let (data, response) = try await URLSession.shared.data(from: URL)
+        let (data, _) = try await URLSession.shared.data(from: URL)
         let image = UIImage(data: data)
         return image
     }
