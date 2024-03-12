@@ -10,7 +10,6 @@ final class MovieRepository: MovieRepositoryProtocol {
         self.requestBuilder = requestBuilder
     }
     
-    
     func requestBoxofficeData() async -> Result<[BoxOfficeMovie], DomainError> {
         guard let url = makeBoxOfficeURL(),
               let request = makeRequest(url: url) else { logNetworkError(.requestError); return .failure(.networkIssue) }
@@ -42,7 +41,7 @@ final class MovieRepository: MovieRepositoryProtocol {
     }
     
     private func makeBoxOfficeURL() -> URL? {
-        let url = EndPoint(urlInformation: .daily(date: Date().dayBefore.formattedDate(withFormat: "yyyMMdd")), apiHost: .kobis).url
+        let url = EndPoint(urlInformation: .daily(date: Date().dayBefore.formattedDate(withFormat: "yyyyMMdd")), apiHost: .kobis).url
         return url
     }
     

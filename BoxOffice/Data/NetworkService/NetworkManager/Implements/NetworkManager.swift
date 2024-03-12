@@ -1,7 +1,6 @@
 
 import Foundation
 
-
 final class NetworkManager: NetworkManagerProtocol {
     private let session: SessionProvidable
     private let decoder: JsonDecodeProtocol
