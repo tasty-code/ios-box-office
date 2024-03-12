@@ -9,6 +9,8 @@ import UIKit
 
 final class MovieInformationView: UIView {
     
+    private let loadingIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     private let scrollView: UIScrollView = UIScrollView()
     private let imageView: UIImageView = UIImageView(image: nil)
     private let detailInformationStackView: UIStackView = UIStackView(axis: .vertical, distribution: .fillProportionally)
@@ -24,7 +26,8 @@ final class MovieInformationView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        imageView.addSubview(loadingIndicatorView)
+        loadingIndicatorView.startAnimating()
         setScrollView()
         addDetailInformationStackViewSubview()
     }
@@ -47,6 +50,7 @@ extension MovieInformationView {
     }
     
     func appendImage(_ image: UIImage?) {
+        loadingIndicatorView.stopAnimating()
         imageView.image = image
     }
 }
@@ -71,6 +75,7 @@ extension MovieInformationView {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
         detailInformationStackView.translatesAutoresizingMaskIntoConstraints = false
+        loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             imageView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
@@ -80,6 +85,9 @@ extension MovieInformationView {
             detailInformationStackView.topAnchor.constraint(equalTo: imageView.bottomAnchor),
             detailInformationStackView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
             detailInformationStackView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
+            
+            loadingIndicatorView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
+            loadingIndicatorView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
             
             scrollView.frameLayoutGuide.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             scrollView.frameLayoutGuide.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
