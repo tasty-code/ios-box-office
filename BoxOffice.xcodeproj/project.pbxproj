@@ -132,58 +132,10 @@
 		0827981A2B8774E700ACC723 /* URLBuilder */ = {
 			isa = PBXGroup;
 			children = (
-				0827981E2B87751200ACC723 /* Interfaces */,
-				0827981D2B87750D00ACC723 /* Implements */,
-			);
-			path = URLBuilder;
-			sourceTree = "<group>";
-		};
-		0827981D2B87750D00ACC723 /* Implements */ = {
-			isa = PBXGroup;
-			children = (
+				082798252B87771700ACC723 /* EndPointMakable.swift */,
 				082798272B87778200ACC723 /* EndPoint.swift */,
 			);
-			path = Implements;
-			sourceTree = "<group>";
-		};
-		0827981E2B87751200ACC723 /* Interfaces */ = {
-			isa = PBXGroup;
-			children = (
-				082798252B87771700ACC723 /* EndPointMakable.swift */,
-			);
-			path = Interfaces;
-			sourceTree = "<group>";
-		};
-		082798332B882B3600ACC723 /* Interfaces */ = {
-			isa = PBXGroup;
-			children = (
-				082798352B882B8400ACC723 /* JsonDecodableProtocol.swift */,
-			);
-			path = Interfaces;
-			sourceTree = "<group>";
-		};
-		082798342B882B6600ACC723 /* Implements */ = {
-			isa = PBXGroup;
-			children = (
-				C77ADAB92B7C76B40069AE0F /* JsonDecoder.swift */,
-			);
-			path = Implements;
-			sourceTree = "<group>";
-		};
-		082798392B88325F00ACC723 /* Interfaces */ = {
-			isa = PBXGroup;
-			children = (
-				0827983B2B88328B00ACC723 /* BoxOfficeUseCaseProtocol.swift */,
-			);
-			path = Interfaces;
-			sourceTree = "<group>";
-		};
-		0827983A2B88326600ACC723 /* Implements */ = {
-			isa = PBXGroup;
-			children = (
-				C76965F22B86ECBD00EF8F87 /* BoxOfficeUseCase.swift */,
-			);
-			path = Implements;
+			path = URLBuilder;
 			sourceTree = "<group>";
 		};
 		082798482B884F8B00ACC723 /* Common */ = {
@@ -198,26 +150,10 @@
 		08A6CE542B99A7BE00F2F2CA /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
-				08A6CE572B99A81E00F2F2CA /* Implements */,
-				08A6CE582B99A82400F2F2CA /* Interfaces */,
-			);
-			path = NetworkManager;
-			sourceTree = "<group>";
-		};
-		08A6CE572B99A81E00F2F2CA /* Implements */ = {
-			isa = PBXGroup;
-			children = (
 				08A6CE552B99A7C900F2F2CA /* NetworkManager.swift */,
-			);
-			path = Implements;
-			sourceTree = "<group>";
-		};
-		08A6CE582B99A82400F2F2CA /* Interfaces */ = {
-			isa = PBXGroup;
-			children = (
 				08A6CE592B99A83C00F2F2CA /* NetworkManagable.swift */,
 			);
-			path = Interfaces;
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 		08A6CE5B2B99C66400F2F2CA /* DisplayModel */ = {
@@ -260,8 +196,9 @@
 		08AB8E782B7F24AB00564AC5 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				C7A1E7702B883C0400F9AB6B /* Interfaces */,
-				C7A1E7712B883C0B00F9AB6B /* Implements */,
+				082798372B88311400ACC723 /* MappableProtocol.swift */,
+				C7C8D3322B7C5EA9009DE42F /* BoxOfficeDTO.swift */,
+				C7A1E7722B883CE300F9AB6B /* DetailMovieInfoDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -384,8 +321,8 @@
 		C76965E12B86E74D00EF8F87 /* SessionProvider */ = {
 			isa = PBXGroup;
 			children = (
-				C76965F62B86EE4800EF8F87 /* Interfaces */,
-				C76965F72B86EE5200EF8F87 /* Implements */,
+				C76965F82B86EE7200EF8F87 /* SessionProvidable.swift */,
+				C76965E92B86E83D00EF8F87 /* SessionProvider.swift */,
 			);
 			path = SessionProvider;
 			sourceTree = "<group>";
@@ -393,8 +330,8 @@
 		C76965E22B86E78F00EF8F87 /* Serializer */ = {
 			isa = PBXGroup;
 			children = (
-				082798332B882B3600ACC723 /* Interfaces */,
-				082798342B882B6600ACC723 /* Implements */,
+				082798352B882B8400ACC723 /* JsonDecodableProtocol.swift */,
+				C77ADAB92B7C76B40069AE0F /* JsonDecoder.swift */,
 			);
 			path = Serializer;
 			sourceTree = "<group>";
@@ -419,8 +356,8 @@
 		C76965EB2B86E85200EF8F87 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				082798392B88325F00ACC723 /* Interfaces */,
-				0827983A2B88326600ACC723 /* Implements */,
+				0827983B2B88328B00ACC723 /* BoxOfficeUseCaseProtocol.swift */,
+				C76965F22B86ECBD00EF8F87 /* BoxOfficeUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -437,51 +374,19 @@
 		C76965ED2B86E89000EF8F87 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				C7A1E7652B882C0D00F9AB6B /* Interfaces */,
-				C7A1E7662B882C1700F9AB6B /* Implements */,
+				C7A1E7672B882C3A00F9AB6B /* MovieRepositoryProtocol.swift */,
+				C76965EE2B86E89B00EF8F87 /* MovieRepository.swift */,
 			);
 			path = Repository;
-			sourceTree = "<group>";
-		};
-		C76965F62B86EE4800EF8F87 /* Interfaces */ = {
-			isa = PBXGroup;
-			children = (
-				C76965F82B86EE7200EF8F87 /* SessionProvidable.swift */,
-			);
-			path = Interfaces;
-			sourceTree = "<group>";
-		};
-		C76965F72B86EE5200EF8F87 /* Implements */ = {
-			isa = PBXGroup;
-			children = (
-				C76965E92B86E83D00EF8F87 /* SessionProvider.swift */,
-			);
-			path = Implements;
 			sourceTree = "<group>";
 		};
 		C78D993C2B9F2F8700D8000A /* RequestBuilder */ = {
 			isa = PBXGroup;
 			children = (
-				C78D993D2B9F2F9B00D8000A /* Interfaces */,
-				C78D993E2B9F2FAC00D8000A /* Implements */,
-			);
-			path = RequestBuilder;
-			sourceTree = "<group>";
-		};
-		C78D993D2B9F2F9B00D8000A /* Interfaces */ = {
-			isa = PBXGroup;
-			children = (
 				C78D993F2B9F300E00D8000A /* RequestBuilderProtocol.swift */,
-			);
-			path = Interfaces;
-			sourceTree = "<group>";
-		};
-		C78D993E2B9F2FAC00D8000A /* Implements */ = {
-			isa = PBXGroup;
-			children = (
 				C78D99412B9F301F00D8000A /* RequestBuilder.swift */,
 			);
-			path = Implements;
+			path = RequestBuilder;
 			sourceTree = "<group>";
 		};
 		C78D99442B9F311100D8000A /* Private */ = {
@@ -492,45 +397,12 @@
 			path = Private;
 			sourceTree = "<group>";
 		};
-		C7A1E7652B882C0D00F9AB6B /* Interfaces */ = {
-			isa = PBXGroup;
-			children = (
-				C7A1E7672B882C3A00F9AB6B /* MovieRepositoryProtocol.swift */,
-			);
-			path = Interfaces;
-			sourceTree = "<group>";
-		};
-		C7A1E7662B882C1700F9AB6B /* Implements */ = {
-			isa = PBXGroup;
-			children = (
-				C76965EE2B86E89B00EF8F87 /* MovieRepository.swift */,
-			);
-			path = Implements;
-			sourceTree = "<group>";
-		};
 		C7A1E76B2B8831FA00F9AB6B /* Error */ = {
 			isa = PBXGroup;
 			children = (
 				C7A1E7692B8831AA00F9AB6B /* DomainError.swift */,
 			);
 			path = Error;
-			sourceTree = "<group>";
-		};
-		C7A1E7702B883C0400F9AB6B /* Interfaces */ = {
-			isa = PBXGroup;
-			children = (
-				082798372B88311400ACC723 /* MappableProtocol.swift */,
-			);
-			path = Interfaces;
-			sourceTree = "<group>";
-		};
-		C7A1E7712B883C0B00F9AB6B /* Implements */ = {
-			isa = PBXGroup;
-			children = (
-				C7C8D3322B7C5EA9009DE42F /* BoxOfficeDTO.swift */,
-				C7A1E7722B883CE300F9AB6B /* DetailMovieInfoDTO.swift */,
-			);
-			path = Implements;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -24,7 +24,6 @@ final class BoxOfficeViewController: UIViewController {
     }
 }
 
-
 // MARK: - 생명주기
 extension BoxOfficeViewController {
     override func viewDidLoad() {
@@ -34,7 +33,6 @@ extension BoxOfficeViewController {
         fetchBoxOfficeData()
     }
 }
-
 
 // MARK: - Setup UI
 private extension BoxOfficeViewController {
@@ -89,7 +87,6 @@ private extension BoxOfficeViewController {
         fetchBoxOfficeData()
     }
 }
-
 
 // MARK: - Fetch Data
 private extension BoxOfficeViewController {
