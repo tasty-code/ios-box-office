@@ -55,7 +55,14 @@ final class MovieInformation: LoadDataProtocol {
     private func converted(_ movie: Movie) -> MovieDetail {
         let movieName: String = movie.movieName
         let productionYear: String = movie.productionYear
-        let openDate: String = movie.openDate
+        let openDate: String = {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyyMMdd"
+            guard let date = dateFormatter.date(from: movie.openDate) else {
+                return ""
+            }
+            return date.formatted(using: .standard)
+        }()
         let showTime: String = movie.showTime
 
         let separator: String = ", "
