@@ -5,7 +5,7 @@
 //  Created by 강창현 on 2/13/24.
 //
 
-struct DailyBoxOfficeList: Codable {
+struct DailyBoxOfficeList: Codable, Hashable {
     let number: String
     let rank: String
     let rankChanged: String

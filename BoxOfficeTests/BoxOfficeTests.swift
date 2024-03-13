@@ -89,12 +89,7 @@ final class BoxOfficeTests: XCTestCase {
     
     func test_어제날짜_영화_데이터_파싱이_올바르게_됐을_때_fetchData에_boxOfficeResult는_nil이_아니다() {
         // given
-        guard 
-            let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
-        else {
-            return
-        }
-        let urlString = MovieURL.makeDailyBoxOfficeURL(date: yesterday.toString())
+        let urlString = MovieURL.makeDailyBoxOfficeURL(date: Date.movieDateToString)
         
         // when
         let expectation = XCTestExpectation(description: "데이터 패치 중...")
