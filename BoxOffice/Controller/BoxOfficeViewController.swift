@@ -20,7 +20,6 @@ final class BoxOfficeViewController: UIViewController {
 
     override func loadView() {
         view = boxOfficeView
-        view.backgroundColor = .white
     }
     
     override func viewDidLoad() {

@@ -37,7 +37,6 @@ final class MovieInformationViewController: UIViewController {
     
     override func loadView() {
         view = movieInformationView
-        view.backgroundColor = .white
     }
 }
 

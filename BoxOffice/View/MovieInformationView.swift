@@ -30,6 +30,7 @@ final class MovieInformationView: UIView {
         loadingIndicatorView.startAnimating()
         setScrollView()
         addDetailInformationStackViewSubview()
+        self.backgroundColor = .systemBackground
     }
     
     required init?(coder: NSCoder) {
@@ -78,9 +79,9 @@ extension MovieInformationView {
         loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
-            imageView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.6),
-            imageView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            imageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9),
+            imageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.6),
+            imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
             detailInformationStackView.topAnchor.constraint(equalTo: imageView.bottomAnchor),
             detailInformationStackView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
@@ -89,14 +90,14 @@ extension MovieInformationView {
             loadingIndicatorView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
             loadingIndicatorView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
             
-            scrollView.frameLayoutGuide.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            scrollView.frameLayoutGuide.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            scrollView.frameLayoutGuide.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            scrollView.frameLayoutGuide.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            scrollView.frameLayoutGuide.topAnchor.constraint(equalTo: self.topAnchor),
+            scrollView.frameLayoutGuide.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            scrollView.frameLayoutGuide.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            scrollView.frameLayoutGuide.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             scrollView.contentLayoutGuide.topAnchor.constraint(equalTo: imageView.topAnchor),
             scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: detailInformationStackView.bottomAnchor),
-            scrollView.contentLayoutGuide.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            scrollView.contentLayoutGuide.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            scrollView.contentLayoutGuide.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            scrollView.contentLayoutGuide.trailingAnchor.constraint(equalTo: self.trailingAnchor),
         ])
     }
 }

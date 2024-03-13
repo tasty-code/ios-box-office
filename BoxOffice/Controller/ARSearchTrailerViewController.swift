@@ -25,7 +25,6 @@ class ARSearchTrailerViewController: UIViewController, ARSessionDelegate {
     
     func loadAR() {
         let configuration = ARImageTrackingConfiguration()
-//        configuration.trackingImages
         session.delegate = self
         session.run(configuration)
     }

@@ -32,6 +32,9 @@ class BoxOfficeTabBarController: UITabBarController {
         
         trailerSearchItem.title = "트레일러 검색"
         trailerSearchItem.image = UIImage(systemName: "camera.metering.center.weighted")
+        
+        tabBar.backgroundColor = .systemBackground
+        tabBar.backgroundColor = .systemGray
     }
     
 }
