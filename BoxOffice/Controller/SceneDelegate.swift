@@ -15,9 +15,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let viewController = BoxOfficeViewController()
-        let navigationController: UINavigationController = UINavigationController(rootViewController: viewController)
-        window?.rootViewController = navigationController
+//        let viewController = BoxOfficeViewController()
+//        let navigationController: UINavigationController = UINavigationController(rootViewController: viewController)
+        let tabBarController: BoxOfficeTabBarController = BoxOfficeTabBarController()
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }
 }
