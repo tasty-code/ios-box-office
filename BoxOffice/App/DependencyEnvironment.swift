@@ -1,5 +1,11 @@
 
-import Foundation
+import UIKit
+
+enum ViewControllerType {
+    case boxOffice
+    //case 이후뷰컨들
+}
+
 
 final class DependencyEnvironment {
     /// 디코더 설정 셋팅 예시
@@ -23,7 +29,10 @@ final class DependencyEnvironment {
 }
 
 extension DependencyEnvironment: ViewControllerFactoryProtocol {
-    func makeBoxOfficeCollectionViewController() -> BoxOfficeViewController {
-        BoxOfficeViewController(boxOfficeUseCase: boxOfficeUseCase)
+    func makeViewController(for type: ViewControllerType) -> UIViewController {
+        switch type {
+        case .boxOffice:
+            return BoxOfficeViewController(boxOfficeUseCase: boxOfficeUseCase)
+        }
     }
 }

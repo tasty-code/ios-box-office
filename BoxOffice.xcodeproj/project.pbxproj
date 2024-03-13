@@ -18,6 +18,7 @@
 		0827984C2B88519900ACC723 /* MovieDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0827984B2B88519900ACC723 /* MovieDetailInfo.swift */; };
 		0864FC632B9F2EE500CE0725 /* APIHostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0864FC622B9F2EE500CE0725 /* APIHostType.swift */; };
 		0864FC652B9F318000CE0725 /* ViewControllerFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0864FC642B9F318000CE0725 /* ViewControllerFactoryProtocol.swift */; };
+		0887A4FF2BA18B8800B69306 /* DEBUG-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0887A4FE2BA18B8700B69306 /* DEBUG-Keys.plist */; };
 		08A6CE562B99A7C900F2F2CA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6CE552B99A7C900F2F2CA /* NetworkManager.swift */; };
 		08A6CE5A2B99A83C00F2F2CA /* NetworkManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6CE592B99A83C00F2F2CA /* NetworkManagable.swift */; };
 		08A6CE5D2B99C6CB00F2F2CA /* BoxOfficeDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6CE5C2B99C6CB00F2F2CA /* BoxOfficeDisplayModel.swift */; };
@@ -43,7 +44,6 @@
 		C77ADABA2B7C76B40069AE0F /* JsonDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ADAB92B7C76B40069AE0F /* JsonDecoder.swift */; };
 		C78D99402B9F300E00D8000A /* RequestBuilderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78D993F2B9F300E00D8000A /* RequestBuilderProtocol.swift */; };
 		C78D99422B9F301F00D8000A /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78D99412B9F301F00D8000A /* RequestBuilder.swift */; };
-		C78D99452B9F311100D8000A /* DEBUG-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C78D99432B9F311100D8000A /* DEBUG-Keys.plist */; };
 		C7A1E7682B882C3A00F9AB6B /* MovieRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A1E7672B882C3A00F9AB6B /* MovieRepositoryProtocol.swift */; };
 		C7A1E76A2B8831AA00F9AB6B /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A1E7692B8831AA00F9AB6B /* DomainError.swift */; };
 		C7A1E76D2B883AAC00F9AB6B /* StubJSONData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A1E76C2B883AAC00F9AB6B /* StubJSONData.swift */; };
@@ -74,6 +74,7 @@
 		0827984B2B88519900ACC723 /* MovieDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailInfo.swift; sourceTree = "<group>"; };
 		0864FC622B9F2EE500CE0725 /* APIHostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHostType.swift; sourceTree = "<group>"; };
 		0864FC642B9F318000CE0725 /* ViewControllerFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactoryProtocol.swift; sourceTree = "<group>"; };
+		0887A4FE2BA18B8700B69306 /* DEBUG-Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DEBUG-Keys.plist"; sourceTree = "<group>"; };
 		08A6CE552B99A7C900F2F2CA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		08A6CE592B99A83C00F2F2CA /* NetworkManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagable.swift; sourceTree = "<group>"; };
 		08A6CE5C2B99C6CB00F2F2CA /* BoxOfficeDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeDisplayModel.swift; sourceTree = "<group>"; };
@@ -102,7 +103,6 @@
 		C77ADAB92B7C76B40069AE0F /* JsonDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecoder.swift; sourceTree = "<group>"; };
 		C78D993F2B9F300E00D8000A /* RequestBuilderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilderProtocol.swift; sourceTree = "<group>"; };
 		C78D99412B9F301F00D8000A /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
-		C78D99432B9F311100D8000A /* DEBUG-Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DEBUG-Keys.plist"; sourceTree = "<group>"; };
 		C7A1E7672B882C3A00F9AB6B /* MovieRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepositoryProtocol.swift; sourceTree = "<group>"; };
 		C7A1E7692B8831AA00F9AB6B /* DomainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
 		C7A1E76C2B883AAC00F9AB6B /* StubJSONData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubJSONData.swift; sourceTree = "<group>"; };
@@ -145,6 +145,14 @@
 				08A6CE6F2B9AA9EF00F2F2CA /* SynchronizedLockPropertyWrapper.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		0887A4FD2BA18B8700B69306 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				0887A4FE2BA18B8700B69306 /* DEBUG-Keys.plist */,
+			);
+			path = Private;
 			sourceTree = "<group>";
 		};
 		08A6CE542B99A7BE00F2F2CA /* NetworkManager */ = {
@@ -280,7 +288,7 @@
 				C76965DD2B86E68B00EF8F87 /* Domain */,
 				C76965DE2B86E69900EF8F87 /* Data */,
 				082798482B884F8B00ACC723 /* Common */,
-				C78D99442B9F311100D8000A /* Private */,
+				0887A4FD2BA18B8700B69306 /* Private */,
 				08AB8E7D2B7F288500564AC5 /* Resource */,
 			);
 			path = BoxOffice;
@@ -389,14 +397,6 @@
 			path = RequestBuilder;
 			sourceTree = "<group>";
 		};
-		C78D99442B9F311100D8000A /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				C78D99432B9F311100D8000A /* DEBUG-Keys.plist */,
-			);
-			path = Private;
-			sourceTree = "<group>";
-		};
 		C7A1E76B2B8831FA00F9AB6B /* Error */ = {
 			isa = PBXGroup;
 			children = (
@@ -495,7 +495,7 @@
 			files = (
 				63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */,
 				63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */,
-				C78D99452B9F311100D8000A /* DEBUG-Keys.plist in Resources */,
+				0887A4FF2BA18B8800B69306 /* DEBUG-Keys.plist in Resources */,
 				08DCFED72B7C5722002E22EA /* BoxOfficeSample.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -754,7 +754,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z7DU6436DS;
+				DEVELOPMENT_TEAM = VGM28F2FH7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BoxOffice/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -782,7 +782,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z7DU6436DS;
+				DEVELOPMENT_TEAM = VGM28F2FH7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BoxOffice/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
