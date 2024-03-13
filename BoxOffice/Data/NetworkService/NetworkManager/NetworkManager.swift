@@ -3,14 +3,14 @@ import Foundation
 
 final class NetworkManager: NetworkManagerProtocol {
     private let session: SessionProvidable
-    private let decoder: JsonDecodeProtocol
+    private let decoder: DecoderProtocol
     
-    init(sessionProvider: SessionProvidable, decoder: JsonDecodeProtocol) {
+    init(sessionProvider: SessionProvidable, decoder: DecoderProtocol) {
         self.session = sessionProvider
         self.decoder = decoder
     }
     
-    func bringNetworkResult<T: Decodable>(from request: URLRequest) async -> Result<T, NetworkError> {
+    func performRequest<T: Decodable>(from request: URLRequest) async -> Result<T, NetworkError> {
         
         let result = await session.requestAPI(using: request)
         

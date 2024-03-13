@@ -15,7 +15,7 @@ final class DependencyEnvironment {
         return jsonDecoder
     }()
 
-    private lazy var decodeProvider: JsonDecodeProtocol = JsonDecoder(jsonDecoder: jsonDecoder)
+    private lazy var decodeProvider: DecoderProtocol = JsonDecoder(jsonDecoder: jsonDecoder)
 
     private lazy var sessionProvider: SessionProvidable = SessionProvider()
     

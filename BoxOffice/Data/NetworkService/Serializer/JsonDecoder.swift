@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct JsonDecoder: JsonDecodeProtocol {
+struct JsonDecoder: DecoderProtocol {
     private let jsonDecoder: JSONDecoder
     
     init(jsonDecoder: JSONDecoder) {

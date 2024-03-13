@@ -14,7 +14,7 @@ final class MovieRepository: MovieRepositoryProtocol {
         guard let url = makeBoxOfficeURL(),
               let request = makeRequest(url: url) else { logNetworkError(.requestError); return .failure(.networkIssue) }
         
-        let result: Result<BoxOfficeDTO, NetworkError> = await networkManager.bringNetworkResult(from: request)
+        let result: Result<BoxOfficeDTO, NetworkError> = await networkManager.performRequest(from: request)
         
         switch result {
         case .success(let boxOfficeDTO):
@@ -29,7 +29,7 @@ final class MovieRepository: MovieRepositoryProtocol {
         guard let url = makeBoxOfficeURL(),
               let request = makeRequest(url: url) else { logNetworkError(.requestError); return .failure(.networkIssue) }
         
-        let result: Result<DetailMovieInfoDTO, NetworkError> = await networkManager.bringNetworkResult(from: request)
+        let result: Result<DetailMovieInfoDTO, NetworkError> = await networkManager.performRequest(from: request)
         
         switch result {
         case .success(let detailMovieInfoDTO):
