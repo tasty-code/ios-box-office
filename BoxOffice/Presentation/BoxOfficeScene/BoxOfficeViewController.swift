@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BoxOfficeViewController: UIViewController {
+final class BoxOfficeViewController: UIViewController {
     
     private let viewModel: BoxOfficeViewModel
     private var refreshAction: Observable<Void> = Observable(())
@@ -72,6 +72,7 @@ class BoxOfficeViewController: UIViewController {
         self.navigationItem.title = formattedDateString
     }
 
+    // TODO: 위치 옮기기
     private func formatDateString(_ dateString: String) -> String {
         let yearIndex = dateString.index(dateString.startIndex, offsetBy: 0)
         let monthIndex = dateString.index(dateString.startIndex, offsetBy: 4)
@@ -88,7 +89,8 @@ class BoxOfficeViewController: UIViewController {
         collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(BoxOfficeCollectionViewCell.self, forCellWithReuseIdentifier: "BoxOfficeCollectionViewCell")
+        collectionView.register(BoxOfficeCollectionViewCell.self,
+                                forCellWithReuseIdentifier: String(describing: BoxOfficeCollectionViewCell.self))
     }
     
     private func setupRefreshControl() {
@@ -127,7 +129,8 @@ extension BoxOfficeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeCollectionViewCell.identifier, for: indexPath) as? BoxOfficeCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: BoxOfficeCollectionViewCell.self), for: indexPath) as? BoxOfficeCollectionViewCell 
+        else {
             return UICollectionViewCell()
         }
         cell.configure(with: boxOfficeList[indexPath.row])
