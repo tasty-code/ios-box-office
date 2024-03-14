@@ -26,10 +26,8 @@ final class MovieInformationView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        imageView.addSubview(loadingIndicatorView)
+        setConstraints()
         loadingIndicatorView.startAnimating()
-        setScrollView()
-        addDetailInformationStackViewSubview()
     }
     
     required init?(coder: NSCoder) {
@@ -57,7 +55,7 @@ extension MovieInformationView {
 }
 
 extension MovieInformationView {
-    private func addDetailInformationStackViewSubview() {
+    private func setDetailInformationStackViewSubview() {
         detailInformationStackView.addArrangedSubview(directorStackView)
         detailInformationStackView.addArrangedSubview(productionYearStackView)
         detailInformationStackView.addArrangedSubview(openDateStackView)
@@ -68,10 +66,13 @@ extension MovieInformationView {
         detailInformationStackView.addArrangedSubview(actorsStackView)
     }
     
-    private func setScrollView() {
+    private func setConstraints() {
         self.addSubview(scrollView)
         scrollView.addSubview(imageView)
         scrollView.addSubview(detailInformationStackView)
+        
+        imageView.addSubview(loadingIndicatorView)
+        setDetailInformationStackViewSubview()
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
