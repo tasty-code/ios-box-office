@@ -118,10 +118,11 @@ class CollectionViewCell: UICollectionViewListCell {
         }
         
         if rankChangeValueInt > 0 {
-            movieChangeRankLabel.text = "🔺\(rankChangeValueInt)"
+            movieChangeRankLabel.text = "▲\(rankChangeValueInt)"
+            movieChangeRankLabel.textColor = .red
         }
         else if rankChangeValueInt < 0 {
-            movieChangeRankLabel.text = "🔻\(-rankChangeValueInt)"
+            movieChangeRankLabel.text = "▼\(-rankChangeValueInt)"
             movieChangeRankLabel.textColor = .blue
         }
         else {

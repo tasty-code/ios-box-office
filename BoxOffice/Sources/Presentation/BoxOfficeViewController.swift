@@ -26,6 +26,7 @@ class BoxOfficeViewController: UIViewController, DailyFormatter{
         configureView()
         addView()
         setLayout()
+        initRefresh()
         
         let dailyBoxOffice = DailyBoxOfficeUseCase()
         dailyBoxOffice.execute(complection: { [self] result in
@@ -35,6 +36,18 @@ class BoxOfficeViewController: UIViewController, DailyFormatter{
                 self.boxOfficeCollectionView.reloadData()
             }
         })
+    }
+    
+    private func initRefresh() {
+        refreshControl.addTarget(self, action: #selector(updatUI(refresh:)), for: .valueChanged)
+        boxOfficeCollectionView.refreshControl = refreshControl
+    }
+    
+    @objc func updatUI(refresh: UIRefreshControl) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.boxOfficeCollectionView.reloadData()
+            refresh.endRefreshing()
+        }
     }
     
     private func configureView() {
@@ -66,6 +79,8 @@ extension BoxOfficeViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.configure(with: dailyBoxOfficeList[indexPath.row])
+        cell.accessories = [.disclosureIndicator()]
         return cell
     }
+
 }
