@@ -1,29 +1,49 @@
 import UIKit
 
-typealias MoviesListViewModel = MoviesListInput & MoviesListOutput
-
-protocol MoviesListInput {
-    func viewDidLoad()
-    func refresh()
-    func loadCell(_ index: Int)
+protocol ViewModel {
+    associatedtype Input
+    associatedtype Output
+    
+    func transform(input: Input) -> Output
 }
 
-protocol MoviesListOutput {
-    var movies: Observable<[MovieBoxOffice]> { get }
-    var errorMessage: Observable<String> { get }
-    var isRefreshing: Observable<Bool> { get }
-    var nowCellInformation: Observable<(String, String, String, UIColor, String)> { get }
-}
-
-final class DefaultMoviesListViewModel: MoviesListViewModel {
+final class MoviesListViewModel: ViewModel {
+    struct Input {
+        var viewDidLoad: Observable<Void>
+        var refresh: Observable<Void>
+        var loadCell: Observable<Int>
+    }
+    struct Output {
+        var movies: Observable<[MovieBoxOffice]>
+        var errorMessage: Observable<String>
+        var isRefreshing: Observable<Bool>
+        var nowCellInformation: Observable<(String, String, String, UIColor, String)>
+    }
+    
     private let useCase: BoxOfficeUseCase
-    var movies: Observable<[MovieBoxOffice]> = Observable([])
-    var errorMessage: Observable<String> = Observable("")
-    var isRefreshing: Observable<Bool> = Observable(false)
-    var nowCellInformation: Observable<(String, String, String, UIColor, String)> = Observable(("", "", "", .white, ""))
+    private var movies: Observable<[MovieBoxOffice]> = Observable([])
+    private var errorMessage: Observable<String> = Observable("")
+    private var isRefreshing: Observable<Bool> = Observable(false)
+    private var nowCellInformation: Observable<(String, String, String, UIColor, String)> = Observable(("", "", "", .white, ""))
     
     init(useCase: BoxOfficeUseCase) {
         self.useCase = useCase
+    }
+    
+    func transform(input: Input) -> Output {
+        input.viewDidLoad.bind { [weak self] _ in
+            self?.viewDidLoad()
+        }
+        input.refresh.bind { [weak self] _ in
+            self?.refresh()
+        }
+        input.loadCell.bind { [weak self] index in
+            self?.loadCell(index)
+        }
+        return .init(movies: movies,
+                     errorMessage: errorMessage,
+                     isRefreshing: isRefreshing,
+                     nowCellInformation: nowCellInformation)
     }
     
     private func fetchData() {
@@ -40,16 +60,16 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
         }
     }
     
-    func viewDidLoad() {
+    private func viewDidLoad() {
         fetchData()
     }
     
-    func refresh() {
+    private func refresh() {
         isRefreshing.value = true
         fetchData()
     }
     
-    func loadCell(_ index: Int) {
+    private func loadCell(_ index: Int) {
         let movie = movies.value[index]
         var movieName: String {
             var text = movie.movieName
@@ -60,7 +80,6 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
             }
             return text
         }
-        
         var rank: String {
             return "\(movie.rank)"
         }

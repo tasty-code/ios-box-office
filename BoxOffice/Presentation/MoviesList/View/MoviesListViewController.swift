@@ -1,9 +1,12 @@
 import UIKit
 
 final class MoviesListViewController: UIViewController {
-    
     private let viewModel: MoviesListViewModel
     private let navigator: NavigatorProtocol
+    private let refreshControl = UIRefreshControl()
+    private var viewDidLoadEvent: Observable<Void> = Observable(())
+    private var refreshEvent: Observable<Void> = Observable(())
+    private var loadCellEvent: Observable<Int> = Observable(-1)
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -12,13 +15,17 @@ final class MoviesListViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(MoviesListCell.self, forCellWithReuseIdentifier: String(describing: MoviesListCell.self))
+        collectionView.register(MoviesListCell.self, forCellWithReuseIdentifier: MoviesListCell.className)
         return collectionView
     }()
+    private lazy var input = MoviesListViewModel.Input(viewDidLoad: viewDidLoadEvent,
+                                                       refresh: refreshEvent,
+                                                       loadCell: loadCellEvent)
+    private lazy var output = viewModel.transform(input: input)
     
-    private let refreshControl = UIRefreshControl()
-    
-    init(viewModel: MoviesListViewModel, navigator: NavigatorProtocol, isRefreshing: Bool = false) {
+    init(viewModel: MoviesListViewModel, 
+         navigator: NavigatorProtocol,
+         isRefreshing: Bool = false) {
         self.viewModel = viewModel
         self.navigator = navigator
         super.init(nibName: nil, bundle: nil)
@@ -34,20 +41,23 @@ final class MoviesListViewController: UIViewController {
         setupRefreshControl()
         setupNavigationBar()
         bind()
-        viewModel.viewDidLoad()
+        callViewDidLoadEvent()
     }
 }
 
 extension MoviesListViewController {
+    private func callViewDidLoadEvent() {
+        input.viewDidLoad.value = ()
+    }
     
     private func bind() {
-        viewModel.movies.bind { [weak self] _ in
+        output.movies.bind { [weak self] _ in
             self?.reload()
         }
-        viewModel.errorMessage.bind { [weak self] errorMessage in
+        output.errorMessage.bind { [weak self] errorMessage in
             self?.makeAlert(message: errorMessage, confirmAction: nil)
         }
-        viewModel.isRefreshing.bind { [weak self] isRefreshing in
+        output.isRefreshing.bind { [weak self] isRefreshing in
             if !isRefreshing {
                 self?.refreshControl.endRefreshing()
             }
@@ -64,23 +74,23 @@ extension MoviesListViewController {
     }
     
     @objc private func refreshData() {
-        viewModel.refresh()
+        input.refresh.value = ()
     }
 }
 
 extension MoviesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.movies.value.count
+        return output.movies.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MoviesListCell.self), for: indexPath) as? MoviesListCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviesListCell.className, for: indexPath) as? MoviesListCell else {
             fatalError("MoviesListCell 에러")
         }
-        viewModel.nowCellInformation.bind { cellInformation in
+        output.nowCellInformation.bind { cellInformation in
             cell.configure(with: cellInformation)
         }
-        viewModel.loadCell(indexPath.row)
+        input.loadCell.value = indexPath.row
         cell.selectedBackgroundView = UIView()
         cell.selectedBackgroundView?.backgroundColor = .clear
         cell.accessories = [.disclosureIndicator()]
@@ -88,7 +98,7 @@ extension MoviesListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedMovie = viewModel.movies.value[indexPath.item]
+        let selectedMovie = output.movies.value[indexPath.item]
         let destination = Navigator.Destination.detailMovie(movieCode: selectedMovie.movieCode, movieName: selectedMovie.movieName)
         navigator.navigate(to: destination, from: self)
     }

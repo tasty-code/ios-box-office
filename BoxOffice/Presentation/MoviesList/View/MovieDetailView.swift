@@ -1,18 +1,17 @@
 import UIKit
 
 final class MovieDetailView: UIViewController {
+    private var viewModel: MovieDetailViewModel
+    private var callMovieDetailEvent: Observable<Void> = Observable(())
+    private var callMovieImageEvent: Observable<Void> = Observable(())
     
-    var movieCode: String
-    var movieName: String
-    private var detailViewModel: MovieDetailViewModel
+    private lazy var input = MovieDetailViewModel.Input(callMovieDetailEvent: callMovieDetailEvent,
+                                                        callMovieImageEvent: callMovieImageEvent)
+    private lazy var output = viewModel.transform(input: input)
     
-    init(movieCode: String, movieName: String, viewModel: MovieDetailViewModel) {
-        self.movieCode = movieCode
-        self.movieName = movieName
-        self.detailViewModel = viewModel
+    init(viewModel: MovieDetailViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        detailViewModel.fetchMovieDetail(movieCode: movieCode)
-        detailViewModel.fetchMovieImage(movieName: movieName)
     }
     
     required init?(coder: NSCoder) {
@@ -69,20 +68,26 @@ final class MovieDetailView: UIViewController {
         addSubviewsAndSetupLayout()
         setupLayoutViews()
         bind()
+        callMovieData()
     }
 }
 
 // MARK: Binding
 extension MovieDetailView {
+    private func callMovieData() {
+        input.callMovieDetailEvent.value = ()
+        input.callMovieImageEvent.value = ()
+    }
+    
     private func bind() {
-        detailViewModel.movieDetail.bind{ [weak self] movie in
+        output.movieDetail.bind{ [weak self] movie in
             guard let movie = movie else { return }
             self?.configureLabels(with: movie)
         }
-        detailViewModel.errorMessage.bind{ [weak self] errorMessage in
+        output.errorMessage.bind{ [weak self] errorMessage in
             self?.makeAlert(message: errorMessage, confirmAction: nil)
         }
-        detailViewModel.movieImage.bind { [weak self] movieImage in
+        output.movieImage.bind { [weak self] movieImage in
             guard let movieImage = movieImage else { return }
             self?.configureImageView(with: movieImage)
         }

@@ -20,7 +20,7 @@ class Navigator: NavigatorProtocol {
         case .movieList:
             let boxOfficeRepository = DefaultBoxOfficeRepository(dataTransferService: dataTransferService)
             let boxOfficeUseCase = DefaulBoxOfficeUseCase(boxOfficeRepository: boxOfficeRepository)
-            let movieListViewModel = DefaultMoviesListViewModel(useCase: boxOfficeUseCase)
+            let movieListViewModel = MoviesListViewModel(useCase: boxOfficeUseCase)
             let moviesListViewController = MoviesListViewController(viewModel: movieListViewModel, navigator: self)
             let navigationController = UINavigationController(rootViewController: moviesListViewController)
             return navigationController
@@ -31,8 +31,8 @@ class Navigator: NavigatorProtocol {
             let movieImageRepository = DefaultMovieImageRepository(dataTransferService: dataTransferService)
             let movieImageUseCase = DefaulMovieImageUseCase(movieImageRepository: movieImageRepository)
             
-            let movieDetailViewModel = DefaltMovieDetailViewModel(detailUseCase: movieDetailUseCase, imageUseCase: movieImageUseCase)
-            let movieDetailView = MovieDetailView(movieCode: movieCode, movieName: movieName, viewModel: movieDetailViewModel)
+            let movieDetailViewModel = MovieDetailViewModel(detailUseCase: movieDetailUseCase, imageUseCase: movieImageUseCase, movieCode: movieCode, movieName: movieName)
+            let movieDetailView = MovieDetailView(viewModel: movieDetailViewModel)
             return movieDetailView
         }
     }
@@ -43,8 +43,6 @@ class Navigator: NavigatorProtocol {
             guard let detailViewController = initializeViewController(destination: destination) as? MovieDetailView else {
                 fatalError("MovieDetailView 에러")
             }
-            detailViewController.movieCode = movieCode
-            detailViewController.movieName = movieName
             viewController.navigationController?.pushViewController(detailViewController, animated: true)
         default:
             let destinationVC = initializeViewController(destination: destination)
