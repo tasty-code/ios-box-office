@@ -28,24 +28,8 @@ final class BoxOfficeProvider: LoadDataProtocol {
     }
     
     private func converted(_ boxOfficeMovies: [BoxOfficeMovie]) -> [Movie] {
-        boxOfficeMovies.map { boxOfficeMovie in
-            let movieCode = boxOfficeMovie.movieCode
-            let index: Int = Int(boxOfficeMovie.index) ?? 0
-            let rank: String = boxOfficeMovie.rank
-            let rankChangedAmount: Int = Int(boxOfficeMovie.rankChangedAmount) ?? 0
-            let rankStatus: BoxOfficeProvider.Movie.RankStatus = boxOfficeMovie.rankStatus == "NEW" ? .new : .old
-            let movieName: String = boxOfficeMovie.movieName
-            let audienceCount: Int = Int(boxOfficeMovie.audienceCount) ?? 0
-            let audienceAccumulated: Int = Int(boxOfficeMovie.audienceAccumulated) ?? 0
-            let movie = BoxOfficeProvider.Movie(movieCode: movieCode,
-                                             index: index,
-                                             rank: rank,
-                                             rankChangedAmount: rankChangedAmount,
-                                             rankStatus: rankStatus,
-                                             movieName: movieName,
-                                             audienceCount: audienceCount,
-                                             audienceAccumulated: audienceAccumulated)
-            return movie
+        return boxOfficeMovies.map { boxOfficeMovie in
+            return boxOfficeMovie.toMovie()
         }
     }
     

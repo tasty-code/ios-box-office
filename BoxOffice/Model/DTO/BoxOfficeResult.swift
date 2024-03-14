@@ -61,4 +61,21 @@ struct BoxOfficeMovie: Decodable {
         case screenCount = "scrnCnt"
         case showCount = "showCnt"
     }
+    
+    func toMovie() -> BoxOfficeProvider.Movie {
+        let index: Int = Int(index) ?? 0
+        let rankChangedAmount: Int = Int(rankChangedAmount) ?? 0
+        let rankStatus: BoxOfficeProvider.Movie.RankStatus = rankStatus == "NEW" ? .new : .old
+        let audienceCount: Int = Int(audienceCount) ?? 0
+        let audienceAccumulated: Int = Int(audienceAccumulated) ?? 0
+        let movie = BoxOfficeProvider.Movie(movieCode: movieCode,
+                                         index: index,
+                                         rank: rank,
+                                         rankChangedAmount: rankChangedAmount,
+                                         rankStatus: rankStatus,
+                                         movieName: movieName,
+                                         audienceCount: audienceCount,
+                                         audienceAccumulated: audienceAccumulated)
+        return movie
+    }
 }
