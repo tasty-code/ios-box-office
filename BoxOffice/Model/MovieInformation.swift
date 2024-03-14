@@ -42,8 +42,8 @@ final class MovieInformation: LoadDataProtocol {
             throw NetworkError.invalidAPIKey
         }
         let imageDocument: MovieImageDocument = try await self.networkManager.request(request)
-        guard let imageUrl = imageDocument.documentResults[safeIndex: 0]?.imageURL,
-              let url = URL(string: imageUrl) else {
+        guard let firstImageURL = imageDocument.documentResults.first?.imageURL,
+              let url = URL(string: firstImageURL) else {
             throw NetworkError.invalidURL
         }
         let (data, _) = try await URLSession.shared.data(from: url)
