@@ -12,10 +12,15 @@ final class BoxOfficeProvider: LoadDataProtocol {
     typealias LoadedData = [Movie]
     
     weak var delegate: DataDelegate?
-    let networkManager: NetworkManager = NetworkManager(urlSession: URLSession.shared)
+    let networkManager: NetworkManager
     
     var loadedData: [Movie] = [] {
         didSet { delegate?.reloadView() }
+    }
+    
+    init(loadedData: [Movie] = [], networkManager: NetworkManager = NetworkManager(urlSession: URLSession.shared)) {
+        self.loadedData = loadedData
+        self.networkManager = networkManager
     }
     
     func loadData() async throws {

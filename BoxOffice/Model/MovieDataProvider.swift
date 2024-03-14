@@ -20,10 +20,11 @@ final class MovieDataProvider: LoadDataProtocol {
     }
     
     weak var delegate: DataDelegate?
-    let networkManager: NetworkManager = NetworkManager(urlSession: URLSession.shared)
+    let networkManager: NetworkManager
     
-    init(movieCode: String) {
+    init(movieCode: String, networkManager: NetworkManager = NetworkManager(urlSession: URLSession.shared)) {
         self.movieCode = movieCode
+        self.networkManager = networkManager
     }
     
     func loadData() async throws {
