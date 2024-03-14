@@ -34,33 +34,33 @@ final class MovieDetailView: UIViewController {
     private let movieImageView = UIImageView()
     
     // MARK: UIStackView
-    private lazy var totalStackView = makeStack(axis: .vertical, alignment: .leading)
-    private lazy var directorStackView = makeStack(axis: .horizontal, alignment: .center)
-    private lazy var productionYearStackView = makeStack(axis: .horizontal, alignment: .center)
-    private lazy var openingDateStackView = makeStack(axis: .horizontal, alignment: .center)
-    private lazy var durationStackView = makeStack(axis: .horizontal, alignment: .center)
-    private lazy var ratingStackView = makeStack(axis: .horizontal, alignment: .center)
-    private lazy var nationsStackView = makeStack(axis: .horizontal, alignment: .center)
-    private lazy var genresStackView = makeStack(axis: .horizontal, alignment: .center)
-    private lazy var actorsStackView = makeStack(axis: .horizontal, alignment: .center)
+    private let totalStackView = UIStackView().makeStackView(axis: .vertical, alignment: .leading, spacing: 8)
+    private let directorStackView = UIStackView().makeStackView(axis: .horizontal, alignment: .center, spacing: 8)
+    private let productionYearStackView = UIStackView().makeStackView(axis: .horizontal, alignment: .center, spacing: 8)
+    private let openingDateStackView = UIStackView().makeStackView(axis: .horizontal, alignment: .center, spacing: 8)
+    private let durationStackView = UIStackView().makeStackView(axis: .horizontal, alignment: .center, spacing: 8)
+    private let ratingStackView = UIStackView().makeStackView(axis: .horizontal, alignment: .center, spacing: 8)
+    private let nationsStackView = UIStackView().makeStackView(axis: .horizontal, alignment: .center, spacing: 8)
+    private let genresStackView = UIStackView().makeStackView(axis: .horizontal, alignment: .center, spacing: 8)
+    private let actorsStackView = UIStackView().makeStackView(axis: .horizontal, alignment: .center, spacing: 8)
     
     // MARK: UILabel
-    private lazy var directorTitleLabel = makeLabel(text: "감독", textAlignment: .center, bold: true)
-    private lazy var directorsLabel = makeLabel(textAlignment: .left, bold: false)
-    private lazy var productionYearTitleLabel = makeLabel(text: "제작년도", textAlignment: .center, bold: true)
-    private lazy var productionYearLabel = makeLabel(textAlignment: .left, bold: false)
-    private lazy var openingDateTitleLabel = makeLabel(text: "개봉일", textAlignment: .center, bold: true)
-    private lazy var openingDateLabel = makeLabel(textAlignment: .center, bold: false)
-    private lazy var durationTitleLabel = makeLabel(text: "상영시간", textAlignment: .center, bold: true)
-    private lazy var durationLabel = makeLabel(textAlignment: .left, bold: false)
-    private lazy var ratingTitleLabel = makeLabel(text: "관람등급", textAlignment: .center, bold: true)
-    private lazy var ratingLabel = makeLabel( textAlignment: .left, bold: false)
-    private lazy var nationsTitleLabel = makeLabel(text: "제작국가", textAlignment: .center, bold: true)
-    private lazy var nationsLabel = makeLabel(textAlignment: .left, bold: false)
-    private lazy var genresTitleLabel = makeLabel(text: "장르", textAlignment: .center, bold: true)
-    private lazy var genresLabel = makeLabel(textAlignment: .left, bold: false)
-    private lazy var actorsTitleLabel = makeLabel(text: "배우", textAlignment: .center, bold: true)
-    private lazy var actorsLabel = makeLabel(textAlignment: .left, bold: false, numberOfLines: 0)
+    private let directorTitleLabel = UILabel().makeDetailLabel(text: "감독", textAlignment: .center, bold: true)
+    private let directorsLabel = UILabel().makeDetailLabel(textAlignment: .left, bold: false)
+    private let productionYearTitleLabel = UILabel().makeDetailLabel(text: "제작년도", textAlignment: .center, bold: true)
+    private let productionYearLabel = UILabel().makeDetailLabel(textAlignment: .left, bold: false)
+    private let openingDateTitleLabel = UILabel().makeDetailLabel(text: "개봉일", textAlignment: .center, bold: true)
+    private let openingDateLabel = UILabel().makeDetailLabel(textAlignment: .center, bold: false)
+    private let durationTitleLabel = UILabel().makeDetailLabel(text: "상영시간", textAlignment: .center, bold: true)
+    private let durationLabel = UILabel().makeDetailLabel(textAlignment: .left, bold: false)
+    private let ratingTitleLabel = UILabel().makeDetailLabel(text: "관람등급", textAlignment: .center, bold: true)
+    private let ratingLabel = UILabel().makeDetailLabel( textAlignment: .left, bold: false)
+    private let nationsTitleLabel = UILabel().makeDetailLabel(text: "제작국가", textAlignment: .center, bold: true)
+    private let nationsLabel = UILabel().makeDetailLabel(textAlignment: .left, bold: false)
+    private let genresTitleLabel = UILabel().makeDetailLabel(text: "장르", textAlignment: .center, bold: true)
+    private let genresLabel = UILabel().makeDetailLabel(textAlignment: .left, bold: false)
+    private let actorsTitleLabel = UILabel().makeDetailLabel(text: "배우", textAlignment: .center, bold: true)
+    private let actorsLabel = UILabel().makeDetailLabel(textAlignment: .left, bold: false, numberOfLines: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,31 +127,6 @@ extension MovieDetailView {
     }
 }
 
-// MARK: Custom
-extension MovieDetailView {
-    private func makeStack(axis: NSLayoutConstraint.Axis, alignment: UIStackView.Alignment) -> UIStackView {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = axis
-        stackView.alignment = alignment
-        stackView.distribution = .fill
-        stackView.spacing = 8
-        return stackView
-    }
-    
-    private func makeLabel(text: String? = nil, textAlignment: NSTextAlignment, bold: Bool, numberOfLines: Int? = nil) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        label.font = bold ? .boldSystemFont(ofSize: 15) : .systemFont(ofSize: 15)
-        label.textColor = .black
-        label.textAlignment = textAlignment
-        if let numberOfLines = numberOfLines {
-            label.numberOfLines = numberOfLines
-        }
-        return label
-    }
-}
-
 // MARK: Layout
 extension MovieDetailView {
     private func addSubviewsAndSetupLayout() {
@@ -187,21 +162,21 @@ extension MovieDetailView {
         actorsStackView.addArrangedSubview(actorsLabel)
         movieImageView.addSubview(indicatorView)
     }
+    
     private func setupLayoutViews() {
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            totalStackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor, constant: 10),
-            totalStackView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor, constant: 10),
-            totalStackView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor, constant: -10),
-            totalStackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor, constant: -10),
-            totalStackView.widthAnchor.constraint(equalToConstant: 410),
+            totalStackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            totalStackView.leadingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.leadingAnchor, constant: 10),
+            totalStackView.trailingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.trailingAnchor, constant: -10),
+            totalStackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
             
-            movieImageView.widthAnchor.constraint(equalToConstant: 410),
-            movieImageView.heightAnchor.constraint(equalToConstant: 500),
+            movieImageView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor, constant: -20),
+            movieImageView.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor, multiplier: 1.5),
             
             indicatorView.centerXAnchor.constraint(equalTo: movieImageView.centerXAnchor),
             indicatorView.centerYAnchor.constraint(equalTo: movieImageView.centerYAnchor),

@@ -1,48 +1,13 @@
 import UIKit
 
 final class MoviesListCell: UICollectionViewListCell {
-    private let rankStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .equalCentering
-        stackView.spacing = 4
-        return stackView
-    }()
-    private let titleAndAudienceStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .equalCentering
-        stackView.spacing = 4
-        return stackView
-    }()
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 15)
-        label.textColor = .black
-        return label
-    }()
-    private let rankLabel: UILabel = {
-        let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 25)
-        label.textColor = .black
-        return label
-    }()
-    private let changeLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 13)
-        label.textColor = .red
-        return label
-    }()
-    private let audienceLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
-        label.textColor = .gray
-        return label
-    }()
+
+    private let rankStackView = UIStackView().makeStackView(axis: .vertical, alignment: .center, spacing: 4)
+    private let titleAndAudienceStackView = UIStackView().makeStackView(axis: .vertical, alignment: .fill, spacing: 4)
+    private let titleLabel = UILabel().makeCellLabel(fontSize: 15, textColor: .black)
+    private let rankLabel = UILabel().makeCellLabel(fontSize: 25, textColor: .black)
+    private let changeLabel = UILabel().makeCellLabel(fontSize: 13, textColor: .red)
+    private let audienceLabel = UILabel().makeCellLabel(fontSize: 14, textColor: .gray)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

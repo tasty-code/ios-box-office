@@ -56,7 +56,6 @@ class MovieDetailViewModel: ViewModel {
             case .success(let movie):
                 DispatchQueue.main.async {
                     self?.movieDetail.value = movie
-                    print("\(movie.movieCode)")
                 }
             case .failure(let error):
                 self?.errorMessage.value = error.localizedDescription
@@ -70,7 +69,6 @@ class MovieDetailViewModel: ViewModel {
             case .success(let movieImage):
                 DispatchQueue.main.async {
                     self?.movieImage.value = movieImage
-                    print("\(movieName)")
                 }
             case .failure(let error):
                 self?.imageErrorMessage.value = error.localizedDescription
