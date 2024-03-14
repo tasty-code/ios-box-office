@@ -40,3 +40,4 @@ struct DailyBoxOfficeDTO: Decodable {
 
 
 
+
