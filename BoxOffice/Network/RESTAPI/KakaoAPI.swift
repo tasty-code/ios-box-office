@@ -18,7 +18,7 @@ enum KakaoAPI {
         guard let apiKey = Bundle.main.infoDictionary?["KAKAO_API_KEY"] as? String else {
             return ""
         }
-        return "KakaoAK " + apiKey
+        return "KakaoAK \(apiKey)"
     }
     
     var urlRequest: URLRequest? {
