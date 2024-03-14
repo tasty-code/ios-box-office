@@ -49,7 +49,7 @@ final class DailyBoxOffice: LoadDataProtocol {
         }
     }
     
-    final class Movie {
+    struct Movie {
         let movieCode: String
         let index: Int
         let rank: String
