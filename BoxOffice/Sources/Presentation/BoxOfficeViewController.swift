@@ -8,7 +8,10 @@
 
 import UIKit
 
-class BoxOfficeViewController: UIViewController {
+class BoxOfficeViewController: UIViewController, DailyFormatter{
+    
+    private var dailyBoxOfficeList: [BoxOfficeEntity] = []
+    private let refreshControl = UIRefreshControl()
     
     private lazy var boxOfficeCollectionView: UICollectionView = {
         let layout = UICollectionViewCompositionalLayout.list(using: .init(appearance: .plain))
@@ -19,16 +22,23 @@ class BoxOfficeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
-        navigationItem.title = "오늘 날짜"
+        navigationItem.title = dailyFormatter(format: "yyyy-MM-dd")
         configureView()
         addView()
         setLayout()
+        
+        let dailyBoxOffice = DailyBoxOfficeUseCase()
+        dailyBoxOffice.execute(complection: { [self] result in
+            dailyBoxOfficeList = result
+
+            DispatchQueue.main.async {
+                self.boxOfficeCollectionView.reloadData()
+            }
+        })
     }
     
     private func configureView() {
         boxOfficeCollectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        boxOfficeCollectionView.delegate = self
         boxOfficeCollectionView.dataSource = self
     }
     
@@ -43,18 +53,19 @@ class BoxOfficeViewController: UIViewController {
             boxOfficeCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             boxOfficeCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
-        
     }
 }
 
-extension BoxOfficeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension BoxOfficeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return dailyBoxOfficeList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .red
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? CollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.configure(with: dailyBoxOfficeList[indexPath.row])
         return cell
     }
 }
