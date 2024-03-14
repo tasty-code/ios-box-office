@@ -1,7 +1,6 @@
 import UIKit
 
 final class MoviesListCell: UICollectionViewListCell {
-
     private let rankStackView = UIStackView().makeStackView(axis: .vertical, alignment: .center, spacing: 4)
     private let titleAndAudienceStackView = UIStackView().makeStackView(axis: .vertical, alignment: .fill, spacing: 4)
     private let titleLabel = UILabel().makeCellLabel(fontSize: 15, textColor: .black)

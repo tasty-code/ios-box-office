@@ -1,6 +1,6 @@
 import UIKit
 
-final class MovieDetailView: UIViewController {
+final class MovieDetailViewController: UIViewController {
     private var viewModel: MovieDetailViewModel
     private var callMovieDetailEvent: Observable<Void> = Observable(())
     private var callMovieImageEvent: Observable<Void> = Observable(())
@@ -73,7 +73,7 @@ final class MovieDetailView: UIViewController {
 }
 
 // MARK: Binding
-extension MovieDetailView {
+extension MovieDetailViewController {
     private func callMovieData() {
         input.callMovieDetailEvent.value = ()
         input.callMovieImageEvent.value = ()
@@ -128,7 +128,7 @@ extension MovieDetailView {
 }
 
 // MARK: Layout
-extension MovieDetailView {
+extension MovieDetailViewController {
     private func addSubviewsAndSetupLayout() {
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false

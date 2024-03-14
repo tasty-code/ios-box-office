@@ -32,15 +32,15 @@ class Navigator: NavigatorProtocol {
             let movieImageUseCase = DefaulMovieImageUseCase(movieImageRepository: movieImageRepository)
             
             let movieDetailViewModel = MovieDetailViewModel(detailUseCase: movieDetailUseCase, imageUseCase: movieImageUseCase, movieCode: movieCode, movieName: movieName)
-            let movieDetailView = MovieDetailView(viewModel: movieDetailViewModel)
+            let movieDetailView = MovieDetailViewController(viewModel: movieDetailViewModel)
             return movieDetailView
         }
     }
     
     func navigate(to destination: Destination, from viewController: UIViewController) {
         switch destination {
-        case .detailMovie(let movieCode, let movieName):
-            guard let detailViewController = initializeViewController(destination: destination) as? MovieDetailView else {
+        case .detailMovie(_, _):
+            guard let detailViewController = initializeViewController(destination: destination) as? MovieDetailViewController else {
                 fatalError("MovieDetailView 에러")
             }
             viewController.navigationController?.pushViewController(detailViewController, animated: true)
