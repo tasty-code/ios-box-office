@@ -1,5 +1,5 @@
 //
-//  DailyBoxOffice.swift
+//  BoxOfficeProvider.swift
 //  BoxOffice
 //
 //  Created by LeeSeongYeon on 2024/02/21.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DailyBoxOffice: LoadDataProtocol {
+final class BoxOfficeProvider: LoadDataProtocol {
     
     typealias LoadedData = [Movie]
     
@@ -33,11 +33,11 @@ final class DailyBoxOffice: LoadDataProtocol {
             let index: Int = Int(boxOfficeMovie.index) ?? 0
             let rank: String = boxOfficeMovie.rank
             let rankChangedAmount: Int = Int(boxOfficeMovie.rankChangedAmount) ?? 0
-            let rankStatus: DailyBoxOffice.Movie.RankStatus = boxOfficeMovie.rankStatus == "NEW" ? .new : .old
+            let rankStatus: BoxOfficeProvider.Movie.RankStatus = boxOfficeMovie.rankStatus == "NEW" ? .new : .old
             let movieName: String = boxOfficeMovie.movieName
             let audienceCount: Int = Int(boxOfficeMovie.audienceCount) ?? 0
             let audienceAccumulated: Int = Int(boxOfficeMovie.audienceAccumulated) ?? 0
-            let movie = DailyBoxOffice.Movie(movieCode: movieCode,
+            let movie = BoxOfficeProvider.Movie(movieCode: movieCode,
                                              index: index,
                                              rank: rank,
                                              rankChangedAmount: rankChangedAmount,

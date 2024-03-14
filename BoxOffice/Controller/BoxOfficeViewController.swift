@@ -13,7 +13,7 @@ final class BoxOfficeViewController: UIViewController {
     private let loadingIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
     
     private lazy var dataSource: any LoadDataProtocol = {
-        let dataSource = DailyBoxOffice()
+        let dataSource = BoxOfficeProvider()
         dataSource.delegate = self
         return dataSource
     }()
@@ -58,7 +58,7 @@ extension BoxOfficeViewController: BoxOfficeCollectionViewDelegate {
 
 extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let data = dataSource.loadedData as? [DailyBoxOffice.Movie] else {
+        guard let data = dataSource.loadedData as? [BoxOfficeProvider.Movie] else {
             return 0
         }
         return data.count
@@ -66,7 +66,7 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeCollectionViewCell.className, for: indexPath) as? BoxOfficeCollectionViewCell,
-              let movies = dataSource.loadedData as? [DailyBoxOffice.Movie],
+              let movies = dataSource.loadedData as? [BoxOfficeProvider.Movie],
               let data = movies[safeIndex: indexPath.row] else {
             return UICollectionViewCell()
         }
@@ -77,7 +77,7 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movies = dataSource.loadedData as? [DailyBoxOffice.Movie],
+        guard let movies = dataSource.loadedData as? [BoxOfficeProvider.Movie],
               let movieCode = movies[safeIndex: indexPath.row]?.movieCode, let movieName = movies[safeIndex: indexPath.row]?.movieName else {
             return
         }
