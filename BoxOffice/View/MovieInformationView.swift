@@ -38,7 +38,7 @@ final class MovieInformationView: UIView {
 }
 
 extension MovieInformationView {
-    func insertData(data: MovieInformation.MovieDetail) {
+    func setData(data: MovieInformation.MovieDetail) {
         directorStackView.contentLabel.text = data.directors
         productionYearStackView.contentLabel.text = data.productionYear
         openDateStackView.contentLabel.text = data.openDate
@@ -49,8 +49,12 @@ extension MovieInformationView {
         actorsStackView.contentLabel.text = data.actors
     }
     
-    func appendImage(_ image: UIImage?) {
+    func setImage(_ image: UIImage?) {
         loadingIndicatorView.stopAnimating()
+        guard image != nil else {
+            imageView.image = UIImage(systemName: "photo")
+            return
+        }
         imageView.image = image
     }
 }
