@@ -11,20 +11,16 @@ final class InformationStackView: UIStackView {
     let titleLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .headline), textAlignment: .center)
     let contentLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .body), textAlignment: .left)
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(titleText: String) {
+        super.init(frame: .zero)
+        titleLabel.text = titleText
         setConstraints()
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func setTitleText(_ text: String) -> Self {
-        titleLabel.text = text
-        return self
-    }
-    
+
     private func setConstraints() {
         self.addArrangedSubview(titleLabel)
         self.addArrangedSubview(contentLabel)

@@ -15,14 +15,14 @@ final class MovieInformationView: UIView {
     private let imageView: UIImageView = UIImageView(image: UIImage(systemName: "photo"))
     private let detailInformationStackView: UIStackView = UIStackView(axis: .vertical, distribution: .fillProportionally)
     
-    private let directorStackView: InformationStackView = InformationStackView().setTitleText("감독")
-    private let productionYearStackView: InformationStackView = InformationStackView().setTitleText("제작년도")
-    private let openDateStackView: InformationStackView = InformationStackView().setTitleText("개봉일")
-    private let showTimeStackView: InformationStackView = InformationStackView().setTitleText("상영시간")
-    private let auditsStackView: InformationStackView = InformationStackView().setTitleText("관람등급")
-    private let nationsStackView: InformationStackView = InformationStackView().setTitleText("제작국가")
-    private let genresStackView: InformationStackView = InformationStackView().setTitleText("장르")
-    private let actorsStackView: InformationStackView = InformationStackView().setTitleText("배우")
+    private let directorStackView: InformationStackView = InformationStackView(titleText: "감독")
+    private let productionYearStackView: InformationStackView = InformationStackView(titleText: "제작년도")
+    private let openDateStackView: InformationStackView = InformationStackView(titleText: "개봉일")
+    private let showTimeStackView: InformationStackView = InformationStackView(titleText: "상영시간")
+    private let auditsStackView: InformationStackView = InformationStackView(titleText: "관람등급")
+    private let nationsStackView: InformationStackView = InformationStackView(titleText: "제작국가")
+    private let genresStackView: InformationStackView = InformationStackView(titleText: "장르")
+    private let actorsStackView: InformationStackView = InformationStackView(titleText: "배우")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
