@@ -47,8 +47,8 @@ class URLRequestBuilder {
         var urlRequest = URLRequest(url: url)
         if httpMethod == .post {
             urlRequest.httpBody = body
-            urlRequest.httpMethod = httpMethod.rawValue
         }
+        urlRequest.httpMethod = httpMethod.rawValue
         urlRequest.allHTTPHeaderFields = headers
         return urlRequest
     }
