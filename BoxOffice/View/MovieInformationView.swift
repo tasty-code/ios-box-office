@@ -38,7 +38,7 @@ final class MovieInformationView: UIView {
 }
 
 extension MovieInformationView {
-    func setData(data: MovieInformation.MovieDetail) {
+    func setData(data: MovieDataProvider.MovieDetail) {
         directorStackView.contentLabel.text = data.directors
         productionYearStackView.contentLabel.text = data.productionYear
         openDateStackView.contentLabel.text = data.openDate

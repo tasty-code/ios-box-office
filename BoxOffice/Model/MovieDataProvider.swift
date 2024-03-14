@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MovieInformation: LoadDataProtocol {
+final class MovieDataProvider: LoadDataProtocol {
     
     typealias LoadedData = MovieDetail?
     var loadedData: MovieDetail?
@@ -81,7 +81,7 @@ final class MovieInformation: LoadDataProtocol {
             actor.personName
         }.joined(separator: separator)
         
-            let movie = MovieInformation.MovieDetail(movieName: movieName,
+            let movie = MovieDataProvider.MovieDetail(movieName: movieName,
                                                directors: directors,
                                                productionYear: productionYear,
                                                openDate: openDate,

@@ -13,7 +13,7 @@ final class MovieInformationViewController: UIViewController {
     let movieCode: String
     
     private lazy var dataSource: any LoadDataProtocol = {
-       let dataSource = MovieInformation(movieCode: movieCode)
+       let dataSource = MovieDataProvider(movieCode: movieCode)
         dataSource.delegate = self
         return dataSource
     }()
@@ -43,7 +43,7 @@ final class MovieInformationViewController: UIViewController {
 
 extension MovieInformationViewController: DataDelegate {
     func reloadView() {
-        guard let data = dataSource as? MovieInformation,
+        guard let data = dataSource as? MovieDataProvider,
         let loadedData = data.loadedData else {
             return
         }
