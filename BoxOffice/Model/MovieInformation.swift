@@ -43,11 +43,10 @@ final class MovieInformation: LoadDataProtocol {
         }
         let imageDocument: MovieImageDocument = try await self.networkManager.request(request)
         guard let imageUrl = imageDocument.documentResults[safeIndex: 0]?.imageURL,
-              let URL = URL(string: imageUrl) else {
-            // 에러 필요함
-            return nil
+              let url = URL(string: imageUrl) else {
+            throw NetworkError.invalidURL
         }
-        let (data, _) = try await URLSession.shared.data(from: URL)
+        let (data, _) = try await URLSession.shared.data(from: url)
         let image = UIImage(data: data)
         return image
     }
@@ -94,7 +93,7 @@ final class MovieInformation: LoadDataProtocol {
             return movie
     }
     
-    final class MovieDetail {
+    struct MovieDetail {
         let movieName: String
         let directors: String
         let productionYear: String
