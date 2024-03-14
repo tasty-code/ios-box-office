@@ -57,6 +57,43 @@ struct Movie: Decodable {
         case companies = "companys"
         case nations, genres, directors, actors, showTypes, audits, staffs
     }
+    
+    func toMovieDetail() -> MovieDataProvider.MovieDetail {
+        let openDate: String = {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyyMMdd"
+            guard let date = dateFormatter.date(from: self.openDate) else {
+                return ""
+            }
+            return date.formatted(using: .standard)
+        }()
+        
+        let directors: String = directors.map { director in
+            director.personName
+        }.toString()
+        let audits: String = audits.map { audit in
+            audit.watchGradeName
+        }.toString()
+        let nations: String = nations.map { nation in
+            nation.nationName
+        }.toString()
+        let genres: String = genres.map { genre in
+            genre.genreName
+        }.toString()
+        let actors: String = actors.map { actor in
+            actor.personName
+        }.toString()
+        
+        return MovieDataProvider.MovieDetail(movieName: movieName,
+                                                  directors: directors,
+                                                  productionYear: productionYear,
+                                                  openDate: openDate,
+                                                  showTime: showTime,
+                                                  audits: audits,
+                                                  nations: nations,
+                                                  genres: genres,
+                                                  actors: actors)
+    }
 }
 
 struct Actor: Decodable {

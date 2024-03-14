@@ -52,45 +52,7 @@ final class MovieDataProvider: LoadDataProtocol {
     }
     
     private func converted(_ movie: Movie) -> MovieDetail {
-        let movieName: String = movie.movieName
-        let productionYear: String = movie.productionYear
-        let openDate: String = {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyyMMdd"
-            guard let date = dateFormatter.date(from: movie.openDate) else {
-                return ""
-            }
-            return date.formatted(using: .standard)
-        }()
-        let showTime: String = movie.showTime
-
-        let separator: String = ", "
-        let directors: String = movie.directors.map { director in
-            director.personName
-        }.joined(separator: separator)
-        let audits: String = movie.audits.map { audit in
-            audit.watchGradeName
-        }.joined(separator: separator)
-        let nations: String = movie.nations.map { nation in
-            nation.nationName
-        }.joined(separator: separator)
-        let genres: String = movie.genres.map { genre in
-            genre.genreName
-        }.joined(separator: separator)
-        let actors: String = movie.actors.map { actor in
-            actor.personName
-        }.joined(separator: separator)
-        
-            let movie = MovieDataProvider.MovieDetail(movieName: movieName,
-                                               directors: directors,
-                                               productionYear: productionYear,
-                                               openDate: openDate,
-                                               showTime: showTime,
-                                               audits: audits,
-                                               nations: nations,
-                                               genres: genres,
-                                               actors: actors)
-            return movie
+        return movie.toMovieDetail()
     }
     
     struct MovieDetail {
