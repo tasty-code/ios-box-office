@@ -12,7 +12,7 @@ final class MovieInformationView: UIView {
     private let loadingIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
     
     private let scrollView: UIScrollView = UIScrollView()
-    private let imageView: UIImageView = UIImageView(image: nil)
+    private let imageView: UIImageView = UIImageView(image: UIImage(systemName: "photo"))
     private let detailInformationStackView: UIStackView = UIStackView(axis: .vertical, distribution: .fillProportionally)
     
     private let directorStackView: InformationStackView = InformationStackView().setTitleText("감독")
@@ -38,7 +38,7 @@ final class MovieInformationView: UIView {
 }
 
 extension MovieInformationView {
-    func setData(data: MovieDataProvider.MovieDetail) {
+    func setData(_ data: MovieDataProvider.MovieDetail) {
         directorStackView.contentLabel.text = data.directors
         productionYearStackView.contentLabel.text = data.productionYear
         openDateStackView.contentLabel.text = data.openDate
@@ -49,12 +49,9 @@ extension MovieInformationView {
         actorsStackView.contentLabel.text = data.actors
     }
     
-    func setImage(_ image: UIImage?) {
+    func setImage(_ data: Data) {
         loadingIndicatorView.stopAnimating()
-        guard image != nil else {
-            imageView.image = UIImage(systemName: "photo")
-            return
-        }
+        let image = UIImage(data: data)
         imageView.image = image
     }
 }

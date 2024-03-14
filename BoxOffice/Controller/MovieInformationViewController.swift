@@ -44,12 +44,13 @@ final class MovieInformationViewController: UIViewController {
 extension MovieInformationViewController: DataDelegate {
     func reloadView() {
         guard let data = dataSource as? MovieDataProvider,
-        let loadedData = data.loadedData else {
+        let loadedData = data.loadedData,
+        let posterData = data.posterData else {
             return
         }
         DispatchQueue.main.async {
-            self.movieInformationView.setData(data: loadedData)
-            self.movieInformationView.setImage(data.movieImage)
+            self.movieInformationView.setData(loadedData)
+            self.movieInformationView.setImage(posterData)
         }
     }
 }

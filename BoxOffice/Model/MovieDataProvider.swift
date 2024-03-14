@@ -5,7 +5,7 @@
 //  Created by LeeSeongYeon on 2024/03/11.
 //
 
-import UIKit
+import Foundation
 
 final class MovieDataProvider: LoadDataProtocol {
     
@@ -13,7 +13,7 @@ final class MovieDataProvider: LoadDataProtocol {
     var loadedData: MovieDetail?
     
     let movieCode: String
-    private(set) var movieImage: UIImage? = nil {
+    private(set) var posterData: Data? = nil {
         didSet {
             delegate?.reloadView()
         }
@@ -33,10 +33,10 @@ final class MovieDataProvider: LoadDataProtocol {
         let data: MovieInformationResult = try await self.networkManager.request(request)
         let movie = data.movieInformationDetail.movie
         loadedData = converted(movie)
-        movieImage = try await loadImage()
+        try await loadImage()
     }
     
-    private func loadImage() async throws -> UIImage? {
+    private func loadImage() async throws {
         guard let movieName = loadedData?.movieName,
             let request = KakaoAPI.image(query: movieName).urlRequest else {
             throw NetworkError.invalidAPIKey
@@ -47,8 +47,7 @@ final class MovieDataProvider: LoadDataProtocol {
             throw NetworkError.invalidURL
         }
         let (data, _) = try await URLSession.shared.data(from: url)
-        let image = UIImage(data: data)
-        return image
+        posterData = data
     }
     
     private func converted(_ movie: Movie) -> MovieDetail {
