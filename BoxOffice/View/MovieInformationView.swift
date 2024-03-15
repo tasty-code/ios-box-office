@@ -12,7 +12,12 @@ final class MovieInformationView: UIView {
     private let loadingIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
     
     private let scrollView: UIScrollView = UIScrollView()
-    private let imageView: UIImageView = UIImageView(image: UIImage(systemName: "photo"))
+    private let imageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(systemName: "photo"))
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
     private let detailInformationStackView: UIStackView = UIStackView(axis: .vertical, distribution: .fillProportionally)
     
     private let directorStackView: InformationStackView = InformationStackView(titleText: "감독")
@@ -50,7 +55,7 @@ extension MovieInformationView {
     func setImage(_ data: Data) {
         loadingIndicatorView.stopAnimating()
         let image = UIImage(data: data)
-        imageView.image = image
+        imageView.image = image?.resize(newWidth: bounds.width * 0.9)
     }
 }
 
@@ -80,25 +85,23 @@ extension MovieInformationView {
         loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
-            imageView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.6),
-            imageView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            imageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            imageView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor, multiplier: 0.9),
             
             detailInformationStackView.topAnchor.constraint(equalTo: imageView.bottomAnchor),
-            detailInformationStackView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
-            detailInformationStackView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
+            detailInformationStackView.widthAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1),
             
             loadingIndicatorView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
             loadingIndicatorView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
             
-            scrollView.frameLayoutGuide.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            scrollView.frameLayoutGuide.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            scrollView.frameLayoutGuide.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            scrollView.frameLayoutGuide.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             scrollView.contentLayoutGuide.topAnchor.constraint(equalTo: imageView.topAnchor),
             scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: detailInformationStackView.bottomAnchor),
-            scrollView.contentLayoutGuide.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            scrollView.contentLayoutGuide.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            scrollView.contentLayoutGuide.leadingAnchor.constraint(equalTo: detailInformationStackView.leadingAnchor),
+            scrollView.contentLayoutGuide.trailingAnchor.constraint(equalTo: detailInformationStackView.trailingAnchor),
         ])
     }
 }
