@@ -7,18 +7,18 @@
 
 import UIKit
 
-class BoxOfficeDetailView: UIScrollView {
+final class BoxOfficeDetailView: UIScrollView {
     
-    let directorView = ReusedDetailStackView()
-    let productYearView = ReusedDetailStackView()
-    let openDateView = ReusedDetailStackView()
-    let showTimeView = ReusedDetailStackView()
-    let watchGradeView = ReusedDetailStackView()
-    let nationsView = ReusedDetailStackView()
-    let genresView = ReusedDetailStackView()
-    let actorsView = ReusedDetailStackView()
+    private let directorView = ReusedDetailStackView()
+    private let productYearView = ReusedDetailStackView()
+    private let openDateView = ReusedDetailStackView()
+    private let showTimeView = ReusedDetailStackView()
+    private let watchGradeView = ReusedDetailStackView()
+    private let nationsView = ReusedDetailStackView()
+    private let genresView = ReusedDetailStackView()
+    private let actorsView = ReusedDetailStackView()
     
-    lazy var movieInfoStackView: UIStackView = {
+    private lazy var movieInfoStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [
             directorView,
             productYearView,
@@ -36,16 +36,15 @@ class BoxOfficeDetailView: UIScrollView {
         return stack
     }()
     
-    lazy var innerView: UIView = {
+    private lazy var innerView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         return view
     }()
     
-    let movieImageView: UIImageView = {
+    private let movieImageView: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(systemName: "photo.fill")
-        
+        view.image = UIImage(named: "prepare")
         return view
     }()
     
@@ -53,20 +52,29 @@ class BoxOfficeDetailView: UIScrollView {
         super.init(frame: frame)
         setupView()
         setupConstraints()
-        directorView.setupStackView(title: "", contents: [""])
-        productYearView.setupStackView(title: "", contents: [""])
-        openDateView.setupStackView(title: "", contents: [""])
-        showTimeView.setupStackView(title: "", contents: [""])
-        watchGradeView.setupStackView(title: "", contents: [""])
-        nationsView.setupStackView(title: "", contents: [""])
-        genresView.setupStackView(title: "", contents: [""])
-        actorsView.setupStackView(title: "", contents: [""])
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func setupDetailView(data: MovieInfo) {
+        directorView.setupStackView(title: "감독", contents: data.directors.map { $0.peopleName })
+        productYearView.setupStackView(title: "제작년도", contents: ["\(data.productYear)년"])
+        openDateView.setupStackView(title: "개봉일", contents: [data.openDate.makeDateFormat])
+        showTimeView.setupStackView(title: "상영시간", contents: ["\(data.showTime)분"])
+        watchGradeView.setupStackView(title: "관람등급", contents: data.audits.map { $0.watchGradeName })
+        nationsView.setupStackView(title: "제작국가", contents: data.nations.map { $0.nationName })
+        genresView.setupStackView(title: "장르", contents: data.genres.map { $0.genreName })
+        actorsView.setupStackView(title: "배우", contents: data.actors.map { $0.peopleName })
+    }
     
+    func setupImage(image: UIImage?) {
+        self.movieImageView.image = image
+    }
+}
+
+private extension BoxOfficeDetailView {
     func setupView() {
         self.addSubview(innerView)
         innerView.addSubview(movieImageView)
@@ -75,14 +83,14 @@ class BoxOfficeDetailView: UIScrollView {
     
     func setupConstraints() {
         innerView.translatesAutoresizingMaskIntoConstraints = false
-        innerView.topAnchor.constraint(equalTo: self.contentLayoutGuide.topAnchor).isActive = true
-        innerView.leadingAnchor.constraint(equalTo: self.contentLayoutGuide.leadingAnchor).isActive = true
-        innerView.trailingAnchor.constraint(equalTo: self.contentLayoutGuide.trailingAnchor).isActive = true
+        innerView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        innerView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        innerView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         innerView.bottomAnchor.constraint(equalTo: self.contentLayoutGuide.bottomAnchor).isActive = true
         
         innerView.widthAnchor.constraint(equalTo: self.frameLayoutGuide.widthAnchor).isActive = true
-        innerView.heightAnchor.constraint(equalToConstant: 1000).isActive = true
-        
+        innerView.heightAnchor.constraint(equalTo: self.contentLayoutGuide.heightAnchor).isActive = true
+
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
         movieImageView.topAnchor.constraint(equalTo: innerView.topAnchor, constant: 10).isActive = true
         movieImageView.centerXAnchor.constraint(equalTo: innerView.centerXAnchor).isActive = true
@@ -91,7 +99,8 @@ class BoxOfficeDetailView: UIScrollView {
         
         movieInfoStackView.translatesAutoresizingMaskIntoConstraints = false
         movieInfoStackView.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 10).isActive = true
-        movieInfoStackView.leadingAnchor.constraint(equalTo: innerView.leadingAnchor).isActive = true
-        movieInfoStackView.trailingAnchor.constraint(equalTo: innerView.trailingAnchor).isActive = true
+        movieInfoStackView.leadingAnchor.constraint(equalTo: innerView.leadingAnchor, constant: 10).isActive = true
+        movieInfoStackView.trailingAnchor.constraint(equalTo: innerView.trailingAnchor, constant: -10).isActive = true
+        movieInfoStackView.bottomAnchor.constraint(equalTo: innerView.bottomAnchor, constant: -10).isActive = true
     }
 }
