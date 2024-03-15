@@ -9,7 +9,13 @@ protocol DataDelegate: AnyObject {
     func reloadView()
 }
 
-protocol LoadDataProtocol {
+protocol BoxOfficeViewControllerDataSource {
+    associatedtype LoadedData
+    var loadedData: [LoadedData] { get }
+    func loadData() async throws
+}
+
+protocol MovieInformationViewControllerDataSource {
     associatedtype LoadedData
     var loadedData: LoadedData { get }
     func loadData() async throws

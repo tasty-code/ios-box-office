@@ -12,7 +12,7 @@ final class MovieInformationViewController: UIViewController {
     let movieInformationView: MovieInformationView = MovieInformationView()
     let movieCode: String
     
-    private lazy var dataSource: any LoadDataProtocol = {
+    private lazy var dataSource: any MovieInformationViewControllerDataSource = {
        let dataSource = MovieDataProvider(movieCode: movieCode)
         dataSource.delegate = self
         return dataSource

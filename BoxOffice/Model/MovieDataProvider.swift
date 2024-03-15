@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MovieDataProvider: LoadDataProtocol {
+final class MovieDataProvider: MovieInformationViewControllerDataSource {
     
     typealias LoadedData = MovieDetail?
     var loadedData: MovieDetail?

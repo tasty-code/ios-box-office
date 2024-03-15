@@ -12,7 +12,7 @@ final class BoxOfficeViewController: UIViewController {
     private let boxOfficeView: BoxOfficeView = BoxOfficeView()
     private let loadingIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
     
-    private lazy var dataSource: any LoadDataProtocol = {
+    private lazy var dataSource: any BoxOfficeViewControllerDataSource = {
         let dataSource = BoxOfficeProvider()
         dataSource.delegate = self
         return dataSource
@@ -58,10 +58,7 @@ extension BoxOfficeViewController: BoxOfficeCollectionViewDelegate {
 
 extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let data = dataSource.loadedData as? [BoxOfficeProvider.Movie] else {
-            return 0
-        }
-        return data.count
+        return dataSource.loadedData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

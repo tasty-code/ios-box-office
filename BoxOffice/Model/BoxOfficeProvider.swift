@@ -7,9 +7,9 @@
 
 import Foundation
 
-final class BoxOfficeProvider: LoadDataProtocol {
+final class BoxOfficeProvider: BoxOfficeViewControllerDataSource {
     
-    typealias LoadedData = [Movie]
+    typealias LoadedData = Movie
     
     weak var delegate: DataDelegate?
     let networkManager: NetworkManager
