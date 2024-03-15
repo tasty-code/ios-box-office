@@ -41,7 +41,7 @@ final class MovieInformationView: UIView {
 }
 
 extension MovieInformationView {
-    func setData(_ data: MovieDataProvider.MovieDetail) {
+    func setData(loadedData data: MovieDataProvider.MovieDetail, posterData: Data) {
         directorStackView.contentLabel.text = data.directors
         productionYearStackView.contentLabel.text = data.productionYear
         openDateStackView.contentLabel.text = data.openDate
@@ -50,9 +50,11 @@ extension MovieInformationView {
         nationsStackView.contentLabel.text = data.nations
         genresStackView.contentLabel.text = data.genres
         actorsStackView.contentLabel.text = data.actors
+        
+        setImage(posterData)
     }
     
-    func setImage(_ data: Data) {
+    private func setImage(_ data: Data) {
         loadingIndicatorView.stopAnimating()
         let image = UIImage(data: data)
         imageView.image = image?.resize(newWidth: bounds.width * 0.9)

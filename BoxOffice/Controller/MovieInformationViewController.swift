@@ -49,8 +49,7 @@ extension MovieInformationViewController: DataDelegate {
             return
         }
         DispatchQueue.main.async {
-            self.movieInformationView.setData(loadedData)
-            self.movieInformationView.setImage(posterData)
+            self.movieInformationView.setData(loadedData: loadedData, posterData: posterData)
         }
     }
 }
