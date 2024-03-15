@@ -164,3 +164,27 @@ extension Staff {
         case roleName = "staffRoleNm"
     }
 }
+
+extension DetailMovieInformation {
+    func toEntity() -> MovieEntity {
+        let movieName = self.movieName
+        let director = directors.map { $0.name }.joined(separator: ", ")
+        let productYear = self.productYear
+        let openDate = self.openDate
+        let showTime = self.showTime
+        let watchGrade = audits.map { $0.watchGrade }.joined(separator: ", ")
+        let nation = nations.map { $0.name }.joined(separator: ", ")
+        let genres = self.genres.map { $0.name }.joined(separator: ", ")
+        let actors = self.actors.map { $0.name }.joined(separator: ", ")
+        
+        return MovieEntity(movieName: movieName,
+                           director: director,
+                           productYear: productYear,
+                           openDate: openDate,
+                           showTime: showTime,
+                           watchGrade: watchGrade,
+                           nation: nation,
+                           genres: genres,
+                           actors: actors)
+    }
+}

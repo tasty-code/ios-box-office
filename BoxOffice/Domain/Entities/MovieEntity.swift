@@ -8,6 +8,7 @@
 import Foundation
 
 struct MovieEntity {
+    let movieName: String
     let director: String
     let productYear: String
     let openDate: String
