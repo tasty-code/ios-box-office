@@ -11,6 +11,7 @@ import UIKit
 class BoxOfficeViewController: UIViewController, DailyFormatter{
     private var dailyBoxOfficeList: [BoxOfficeEntity] = []
     private let refreshControl = UIRefreshControl()
+    let dailyBoxOffice = DailyBoxOfficeUseCase()
     
     private lazy var boxOfficeCollectionView: UICollectionView = {
         let layout = UICollectionViewCompositionalLayout.list(using: .init(appearance: .plain))
@@ -26,8 +27,10 @@ class BoxOfficeViewController: UIViewController, DailyFormatter{
         addView()
         setLayout()
         initRefresh()
-        
-        let dailyBoxOffice = DailyBoxOfficeUseCase()
+        executeDailyBoxOffice()
+    }
+    
+    private func executeDailyBoxOffice() {
         dailyBoxOffice.execute(complection: { [self] result in
             dailyBoxOfficeList = result
 
@@ -61,13 +64,12 @@ class BoxOfficeViewController: UIViewController, DailyFormatter{
     }
     
     @objc func updatUI(refresh: UIRefreshControl) {
+        executeDailyBoxOffice()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.boxOfficeCollectionView.reloadData()
             refresh.endRefreshing()
         }
     }
-    
-    
 }
 
 extension BoxOfficeViewController: UICollectionViewDataSource {
