@@ -9,14 +9,12 @@ import Foundation
 
 final class MovieAPIService: BaseAPIService {
     
-    static let shared = MovieAPIService(provider: NetworkProvider())
-    
-    private override init(provider: Requestable) {
-        super.init(provider: provider)
+    override init(provider: Requestable) {
+        super.init(provider: NetworkProvider())
     }
     
     func requestMovieDetailAPI(userKey: String, movieCode: String,
-                         completion: @escaping ((NetworkResult<Any>) -> Void)) {
+                               completion: @escaping ((NetworkResult<Any>) -> Void)) {
         guard let request = try? MovieAPI
             .requestMovieDetailInfo(userKey: userKey, movieCode: movieCode)
             .creatURLRequest()
