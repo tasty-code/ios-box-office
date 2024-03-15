@@ -15,25 +15,32 @@ final class RankStateView: UIStackView {
         return label
     }()
     
-    private let rankUpImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "arrowtriangle.up.fill")
-        imageView.tintColor = .systemRed
-        imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
-        return imageView
+    private var rankStateImage = UIImageView()
+    
+    private let rankUpImage: UIImage? = {
+        let image = UIImage(
+            systemName: "arrowtriangle.up.fill"
+        )?.withTintColor(
+            .systemRed,
+            renderingMode: .alwaysOriginal
+        )
+        return image
     }()
     
-    private let rankDownImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "arrowtriangle.down.fill")
-        imageView.tintColor = .systemBlue
-        imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
-        return imageView
+    private let rankDownImage: UIImage? = {
+        let image = UIImage(
+            systemName: "arrowtriangle.down.fill"
+        )?.withTintColor(
+                .systemBlue,
+                renderingMode: .alwaysOriginal
+            )
+        return image
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupStackView()
+        setupConstraints()
     }
     
     required init(coder: NSCoder) {
@@ -47,45 +54,53 @@ private extension RankStateView {
         self.spacing = 0
         self.distribution = .fill
         self.alignment = .center
+        self.addArrangedSubview(rankStateImage)
+        self.addArrangedSubview(rankStateLabel)
     }
     
-    func configureRankUp(rankState: String) {
-        self.rankStateLabel.text = rankState
-        self.addArrangedSubview(rankUpImage)
-        self.addArrangedSubview(rankStateLabel)
-        rankUpImage.translatesAutoresizingMaskIntoConstraints = false
-        rankUpImage.heightAnchor.constraint(equalTo: rankStateLabel.heightAnchor).isActive = true
+    func setupConstraints() {
+        rankStateImage.translatesAutoresizingMaskIntoConstraints = false
+        rankStateImage.heightAnchor.constraint(equalTo: rankStateLabel.heightAnchor).isActive = true
     }
-    
-    func configureRankDown(rankState: String) {
-        self.rankStateLabel.text = rankState
-        self.addArrangedSubview(rankDownImage)
-        self.addArrangedSubview(rankStateLabel)
-        rankDownImage.translatesAutoresizingMaskIntoConstraints = false
-        rankDownImage.heightAnchor.constraint(equalTo: rankStateLabel.heightAnchor).isActive = true
-    }
-    
-    func configureRankNone() {
-        self.rankStateLabel.text = "-"
-        self.addArrangedSubview(rankStateLabel)
+
+    func setRankStateView(rankState: String) -> [String? : UIImage?] {
+        guard
+            let intRankState = Int(rankState)
+        else {
+            return [nil: nil]
+        }
+        self.rankStateLabel.textColor = .black
+        switch intRankState {
+        case let state where 0 < state :
+            return [String(state): rankUpImage]
+        case let state where state < 0 :
+            return [String(abs(state)): rankDownImage]
+        default :
+            return ["-": nil]
+        }
     }
 }
 
 extension RankStateView {
-    func configureRankStateView(rankState: String) {
-        guard 
-            let intRankState = Int(rankState)
+    func configureRankState(rankState: String, rankChanged: String) {
+        guard
+            rankState != "NEW"
         else {
+            self.rankStateLabel.textColor = .systemRed
+            self.rankStateLabel.text = "신작"
             return
         }
-        self.subviews.forEach { $0.removeFromSuperview() }
-        switch intRankState {
-        case let state where 0 < state :
-            return configureRankUp(rankState: rankState)
-        case let state where state < 0 :
-            return configureRankDown(rankState: String(abs(intRankState)))
-        default:
-            return configureRankNone()
+        
+        _ = setRankStateView(rankState: rankChanged).map { (key: String?, value: UIImage?) in
+            self.rankStateLabel.text = key
+            guard
+                let rankImageView = value
+            else {
+                rankStateImage.isHidden = true
+                return
+            }
+            rankStateImage.isHidden = false
+            self.rankStateImage.image = rankImageView
         }
     }
 }
