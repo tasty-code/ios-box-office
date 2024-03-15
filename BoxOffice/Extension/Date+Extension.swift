@@ -8,9 +8,17 @@
 import Foundation
 
 extension Date {
-    static let yesterday: Date = {
+    static var yesterday: Date {
         return Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date() - 86400
-    }()
+    }
+    
+    static var movieDateToString: String {
+        return movieDateFormatter.string(from: yesterday)
+    }
+    
+    static var titleDateToString: String {
+        return titleDateFormatter.string(from: yesterday)
+    }
     
     static let titleDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -22,13 +30,5 @@ extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
         return dateFormatter
-    }()
-    
-    static let movieDateToString: String = {
-        return movieDateFormatter.string(from: yesterday)
-    }()
-    
-    static let titleDateToString: String = {
-        return titleDateFormatter.string(from: yesterday)
     }()
 }
