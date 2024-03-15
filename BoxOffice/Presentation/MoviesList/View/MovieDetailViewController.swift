@@ -1,7 +1,8 @@
 import UIKit
 
 final class MovieDetailViewController: UIViewController {
-    private var viewModel: MovieDetailViewModel
+    private let viewModel: MovieDetailViewModel
+    private let navigator: Navigator
     private var callMovieDetailEvent: Observable<Void> = Observable(())
     private var callMovieImageEvent: Observable<Void> = Observable(())
     
@@ -9,8 +10,10 @@ final class MovieDetailViewController: UIViewController {
                                                         callMovieImageEvent: callMovieImageEvent)
     private lazy var output = viewModel.transform(input: input)
     
-    init(viewModel: MovieDetailViewModel) {
+    init(viewModel: MovieDetailViewModel,
+         navigator: Navigator) {
         self.viewModel = viewModel
+        self.navigator = navigator
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -74,6 +77,14 @@ final class MovieDetailViewController: UIViewController {
 
 // MARK: Binding
 extension MovieDetailViewController {
+    private func setBackButtonAction() {
+        navigationItem.leftBarButtonItem?.action = #selector(goBack)
+    }
+    
+    @objc private func goBack() {
+        navigator.navigate(to: .movieList, from: self)
+    }
+    
     private func callMovieData() {
         input.callMovieDetailEvent.value = ()
         input.callMovieImageEvent.value = ()

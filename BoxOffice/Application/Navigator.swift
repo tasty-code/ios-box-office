@@ -5,17 +5,17 @@ protocol NavigatorProtocol {
     func navigate(to destination: Navigator.Destination, from viewController: UIViewController)
 }
 
-class Navigator: NavigatorProtocol {
+final class Navigator: NavigatorProtocol {
     enum Destination {
         case movieList
         case detailMovie(movieCode: String, movieName: String)
     }
     
+    let sessionMananger = DefaultNetworkSessionManager()
+    lazy var networkService = DefaultNetworkService(sessionManager: sessionMananger)
+    lazy var dataTransferService = DefaultDataTransferService(with: networkService)
+    
     func initializeViewController(destination: Destination) -> UIViewController {
-        let sessionMananger = DefaultNetworkSessionManager()
-        let networkService = DefaultNetworkService(sessionManager: sessionMananger)
-        let dataTransferService = DefaultDataTransferService(with: networkService)
-        
         switch destination {
         case .movieList:
             let boxOfficeRepository = DefaultBoxOfficeRepository(dataTransferService: dataTransferService)
@@ -24,6 +24,7 @@ class Navigator: NavigatorProtocol {
             let moviesListViewController = MoviesListViewController(viewModel: movieListViewModel, navigator: self)
             let navigationController = UINavigationController(rootViewController: moviesListViewController)
             return navigationController
+            
         case .detailMovie(let movieCode, let movieName):
             let movieDetailRepository = DefaultMovieDetailRepository(dataTransferService: dataTransferService)
             let movieDetailUseCase = DefaultMovieDetailUseCase(movieDetailRepository: movieDetailRepository)
@@ -32,21 +33,20 @@ class Navigator: NavigatorProtocol {
             let movieImageUseCase = DefaulMovieImageUseCase(movieImageRepository: movieImageRepository)
             
             let movieDetailViewModel = MovieDetailViewModel(detailUseCase: movieDetailUseCase, imageUseCase: movieImageUseCase, movieCode: movieCode, movieName: movieName)
-            let movieDetailView = MovieDetailViewController(viewModel: movieDetailViewModel)
+            let movieDetailView = MovieDetailViewController(viewModel: movieDetailViewModel, navigator: self)
             return movieDetailView
         }
     }
     
     func navigate(to destination: Destination, from viewController: UIViewController) {
         switch destination {
-        case .detailMovie(_, _):
+        case .movieList:
+            viewController.dismiss(animated: true)
+        case .detailMovie:
             guard let detailViewController = initializeViewController(destination: destination) as? MovieDetailViewController else {
                 fatalError("MovieDetailView 에러")
             }
             viewController.navigationController?.pushViewController(detailViewController, animated: true)
-        default:
-            let destinationVC = initializeViewController(destination: destination)
-            viewController.navigationController?.setViewControllers([destinationVC], animated: true)
         }
     }
 }
