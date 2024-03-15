@@ -22,7 +22,7 @@ final class MovieDetailViewController: UIViewController {
     }
     
     // MARK: UIActivityIndicatorView
-    private lazy var indicatorView: UIActivityIndicatorView = {
+    private let indicatorView: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.color = UIColor.gray
@@ -68,7 +68,7 @@ final class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        addSubviewsAndSetupLayout()
+        addSubviews()
         setupLayoutViews()
         bind()
         callMovieData()
@@ -140,7 +140,7 @@ extension MovieDetailViewController {
 
 // MARK: Layout
 extension MovieDetailViewController {
-    private func addSubviewsAndSetupLayout() {
+    private func addSubviews() {
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)

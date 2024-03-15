@@ -40,17 +40,13 @@ final class MoviesListViewController: UIViewController {
         setupCollectionView()
         setupRefreshControl()
         setupNavigationBar()
-        bind()
-        callViewDidLoadEvent()
+        bindOutput()
+        input.viewDidLoad.value = ()
     }
 }
 
 extension MoviesListViewController {
-    private func callViewDidLoadEvent() {
-        input.viewDidLoad.value = ()
-    }
-    
-    private func bind() {
+    private func bindOutput() {
         output.movies.bind { [weak self] _ in
             self?.reload()
         }
