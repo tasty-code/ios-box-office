@@ -9,7 +9,7 @@ import Foundation
 
 final class MovieDataProvider: MovieInformationViewControllerDataSource {
     
-    typealias LoadedData = MovieDetail?
+    typealias MovieInformationData = MovieDetail?
     var loadedData: MovieDetail?
     
     let movieCode: String
@@ -27,7 +27,7 @@ final class MovieDataProvider: MovieInformationViewControllerDataSource {
         self.networkManager = networkManager
     }
     
-    func loadData() async throws {
+    func loadMovieInformationData() async throws {
         guard let request = BoxOfficeAPI.movieDetailInformation(movieCode: movieCode).urlRequest else {
             throw NetworkError.invalidURL
         }

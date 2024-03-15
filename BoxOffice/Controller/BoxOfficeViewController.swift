@@ -44,7 +44,7 @@ final class BoxOfficeViewController: UIViewController {
 extension BoxOfficeViewController: BoxOfficeCollectionViewDelegate {
     func loadDailyBoxOfficeData() async {
         do {
-            try await dataSource.loadData()
+            try await dataSource.loadBoxOfficeData()
         } catch {
             guard let networkError = error as? NetworkError else {
                 print(error.localizedDescription)

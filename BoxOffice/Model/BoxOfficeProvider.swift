@@ -9,7 +9,7 @@ import Foundation
 
 final class BoxOfficeProvider: BoxOfficeViewControllerDataSource {
     
-    typealias LoadedData = Movie
+    typealias BoxOfficeData = Movie
     
     weak var delegate: DataDelegate?
     let networkManager: NetworkManager
@@ -23,7 +23,7 @@ final class BoxOfficeProvider: BoxOfficeViewControllerDataSource {
         self.networkManager = networkManager
     }
     
-    func loadData() async throws {
+    func loadBoxOfficeData() async throws {
         guard let request = BoxOfficeAPI.dailyBoxOffice(targetDate: Date.yesterday.formatted(using: .apiFormat)).urlRequest else {
             throw NetworkError.invalidURL
         }

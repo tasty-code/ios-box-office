@@ -58,7 +58,7 @@ extension MovieInformationViewController: DataDelegate {
 extension MovieInformationViewController {
     func loadInformation() async {
         do {
-            try await self.dataSource.loadData()
+            try await self.dataSource.loadMovieInformationData()
         } catch {
             print(error)
         }
