@@ -7,18 +7,18 @@
 
 import UIKit
 
-class ReusedDetailStackView: UIStackView {
-    lazy var titleLabel: UILabel = {
+final class ReusedDetailStackView: UIStackView {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(for: .body, weight: .bold)
         label.textAlignment = .center
         return label
     }()
     
-    lazy var contentLabel: UILabel = {
+    private lazy var contentLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .body)
-        label.numberOfLines = 10
+        label.numberOfLines = 0
         label.textAlignment = .left
         return label
     }()
@@ -32,19 +32,15 @@ class ReusedDetailStackView: UIStackView {
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func configure() {
-        self.addArrangedSubview(titleLabel)
-        self.addArrangedSubview(contentLabel)
-        self.axis = .horizontal
-        self.alignment = .leading
-        self.distribution = .fill
-        self.spacing = 5
-        self.backgroundColor = .red
-    }
-    
+
     func setupStackView(title: String, contents: [String]) {
         titleLabel.text = title
+        guard 
+            !contents.isEmpty
+        else {
+            contentLabel.text = "-"
+            return
+        }
         var textList: String = ""
         for (index, text) in contents.enumerated() {
             textList.append(text)
@@ -54,13 +50,19 @@ class ReusedDetailStackView: UIStackView {
         }
         contentLabel.text = textList
     }
-    
-    func setupStackView(title: String, content: String) {
-        titleLabel.text = title
-        contentLabel.text = content
+}
+
+private extension ReusedDetailStackView {
+    private func configure() {
+        self.addArrangedSubview(titleLabel)
+        self.addArrangedSubview(contentLabel)
+        self.axis = .horizontal
+        self.alignment = .leading
+        self.distribution = .fill
+        self.spacing = 5
     }
     
-    func setupConstraint() {
+    private func setupConstraint() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 6).isActive = true
     }
