@@ -12,7 +12,7 @@ class CollectionViewCell: UICollectionViewListCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 20)
-        label.text = "movieName"
+        label.text = ""
         return label
     }()
     
@@ -20,7 +20,7 @@ class CollectionViewCell: UICollectionViewListCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 30)
-        label.text = "1"
+        label.text = ""
         return label
     }()
     
@@ -28,6 +28,7 @@ class CollectionViewCell: UICollectionViewListCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 15)
+        label.text = ""
         return label
     }()
     
@@ -35,7 +36,7 @@ class CollectionViewCell: UICollectionViewListCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 15)
-        label.text = "numbers"
+        label.text = ""
         return label
     }()
     

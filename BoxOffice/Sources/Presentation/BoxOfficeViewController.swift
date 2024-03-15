@@ -9,7 +9,6 @@
 import UIKit
 
 class BoxOfficeViewController: UIViewController, DailyFormatter{
-    
     private var dailyBoxOfficeList: [BoxOfficeEntity] = []
     private let refreshControl = UIRefreshControl()
     
@@ -38,18 +37,6 @@ class BoxOfficeViewController: UIViewController, DailyFormatter{
         })
     }
     
-    private func initRefresh() {
-        refreshControl.addTarget(self, action: #selector(updatUI(refresh:)), for: .valueChanged)
-        boxOfficeCollectionView.refreshControl = refreshControl
-    }
-    
-    @objc func updatUI(refresh: UIRefreshControl) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.boxOfficeCollectionView.reloadData()
-            refresh.endRefreshing()
-        }
-    }
-    
     private func configureView() {
         boxOfficeCollectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         boxOfficeCollectionView.dataSource = self
@@ -67,6 +54,20 @@ class BoxOfficeViewController: UIViewController, DailyFormatter{
             boxOfficeCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
     }
+    
+    private func initRefresh() {
+        refreshControl.addTarget(self, action: #selector(updatUI(refresh:)), for: .valueChanged)
+        boxOfficeCollectionView.refreshControl = refreshControl
+    }
+    
+    @objc func updatUI(refresh: UIRefreshControl) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.boxOfficeCollectionView.reloadData()
+            refresh.endRefreshing()
+        }
+    }
+    
+    
 }
 
 extension BoxOfficeViewController: UICollectionViewDataSource {
