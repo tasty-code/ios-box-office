@@ -8,15 +8,19 @@
 import UIKit
 
 final class BoxOfficeDetailViewController: UIViewController {
-    
     private let movieName: String
-    private let movieManger: MovieManager
+    private let movieCode: String
+    private let movieManager: MovieManager
     private let scrollView = BoxOfficeDetailView()
-    private var receivedData: Data?
     
-    init(movieName: String, movieManger: MovieManager) {
+    init(
+        movieName: String,
+        movieCode: String,
+        movieManager: MovieManager
+    ) {
         self.movieName = movieName
-        self.movieManger = movieManger
+        self.movieCode = movieCode
+        self.movieManager = movieManager
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -26,21 +30,43 @@ final class BoxOfficeDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+        fetchBoxOfficeDetailData()
+    }
+}
+
+private extension BoxOfficeDetailViewController {
+    func setupView() {
+        LoadingIndicatorView.showLoading()
         view = scrollView
         view.backgroundColor = .white
-        setupMovieImage()
+        self.title = movieName
     }
     
-    func setupMovieImage() {
-        movieManger.fetchMoiveImageData(movieName: movieName) { result in
-            switch result {
-            case .success(let data):
-                DispatchQueue.main.async {
-                    self.scrollView.movieImageView.image = self.movieManger.loadImage(data: data)
-                }
-            case .failure(let failure):
-                print("fetchMoiveImageData 실패: \(failure)")
+    func fetchBoxOfficeDetailData() {
+        Task {
+            do {
+                try await fetchMoiveImageURL()
+                try await fetchMovieInfo()
+                try await setupMovieImage()
+            } catch {
+                print(error.localizedDescription)
             }
+            LoadingIndicatorView.hideLoading()
         }
+    }
+    
+    func fetchMovieInfo() async throws {
+        let data = try await movieManager.fetchMovieInfoResultData(code: movieCode)
+        self.scrollView.setupDetailView(data: data)
+    }
+    
+    func fetchMoiveImageURL() async throws {
+        try await movieManager.fetchMoiveImageURL(movieName: movieName)
+    }
+
+    func setupMovieImage() async throws {
+        guard let data = try await movieManager.fetchImageData() else { return }
+        self.scrollView.setupImage(image: UIImage(data: data))
     }
 }

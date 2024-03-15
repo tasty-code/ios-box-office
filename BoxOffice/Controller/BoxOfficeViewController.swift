@@ -28,10 +28,7 @@ final class BoxOfficeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        boxOfficeListView.boxOfficeListDelegate = self
-        boxOfficeListView.delegate = self
-        boxOfficeListView.dataSource = dataSource
-        view = boxOfficeListView
+        setupBoxOfficeListView()
         setupBoxOfficeData()
     }
 }
@@ -41,13 +38,22 @@ private extension BoxOfficeViewController {
         self.title = Date.titleDateFormatter.string(from: date)
     }
     
+    func setupBoxOfficeListView() {
+        LoadingIndicatorView.showLoading()
+        boxOfficeListView.boxOfficeListDelegate = self
+        boxOfficeListView.delegate = self
+        boxOfficeListView.dataSource = dataSource
+        view = boxOfficeListView
+    }
+    
     func setupBoxOfficeData() {
-        movieManager.fetchBoxOfficeResultData(date: Date.movieDateToString) { result in
-            switch result {
-            case .success(let success):
-                self.reloadCollectionListData(result: success)
-            case .failure(let failure):
-                print("fetchBoxOfficeResultData 실패: \(failure)")
+        Task {
+            do {
+                let result = try await movieManager.fetchBoxOfficeResultData(date: Date.movieDateToString)
+                self.reloadCollectionListData(result: result)
+                LoadingIndicatorView.hideLoading()
+            } catch {
+                print(error.localizedDescription)
             }
         }
     }
@@ -61,27 +67,26 @@ private extension BoxOfficeViewController {
     }
     
     func updateBoxOfficeList() {
-        movieManager.fetchBoxOfficeResultData(date: Date.movieDateToString) { [weak self] result in
-            switch result {
-            case .success(let success):
-                DispatchQueue.main.async {
-                    self?.applyBoxOfficeList(result: success)
-                    guard
-                        let date = success.showRange.toDateFromRange()
-                    else {
-                        return
-                    }
-                    self?.configureNavigation(date: date)
+        Task {
+            do {
+                let result = try await self.movieManager.fetchBoxOfficeResultData(
+                    date: Date.movieDateToString
+                )
+                self.applyBoxOfficeList(result: result)
+                guard
+                    let date = result.showRange.toDateFromRange()
+                else {
+                    return
                 }
-            case .failure(let failure):
-                print(failure.localizedDescription)
+                self.configureNavigation(date: date)
+            } catch {
+                print(error.localizedDescription)
             }
         }
     }
     
     func reloadCollectionListData(result: BoxOfficeResult) {
         DispatchQueue.main.async {
-            self.boxOfficeListView.indicatorView.stopAnimating()
             self.configureNavigation(date: Date.yesterday)
             self.applyBoxOfficeList(result: result)
             self.boxOfficeListView.isScrollEnabled = true
@@ -91,13 +96,17 @@ private extension BoxOfficeViewController {
 
 extension BoxOfficeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard
-            let movieName = movieManager.dailyBoxOfficeData?.dailyBoxOfficeList[indexPath.row].name
+        guard 
+            let data = movieManager.setupBoxOfficeDetailData(for: indexPath.row)
         else {
             return
         }
-        let detailVC = BoxOfficeDetailViewController(movieName: movieName, movieManger: movieManager)
-        self.navigationController?.pushViewController(detailVC, animated: true)
+        let detailViewController = BoxOfficeDetailViewController(
+            movieName: data.movieName,
+            movieCode: data.movieCode,
+            movieManager: movieManager
+        )
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
