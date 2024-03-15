@@ -25,10 +25,8 @@ final class BoxOfficeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = Date.yesterday.formatted(using: .standard)
-        
         boxOfficeView.delegate = self
-        
+        setNavigationItemTitle(Date.yesterday)
         loadingIndicatorView.startAnimating()
         
         Task {
@@ -38,6 +36,12 @@ final class BoxOfficeViewController: UIViewController {
         boxOfficeView.setBoxOfficeCollectionViewProperties(loadingIndicatorView: loadingIndicatorView)
         boxOfficeView.setBoxOfficeCollectionViewDelegate(self)
         boxOfficeView.configureRefreshControl(self)
+    }
+}
+
+extension BoxOfficeViewController {
+    private func setNavigationItemTitle(_ date: Date) {
+        self.navigationItem.title = date.formatted(using: .standard)
     }
 }
 
