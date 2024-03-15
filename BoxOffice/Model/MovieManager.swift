@@ -8,98 +8,64 @@
 import UIKit
 
 final class MovieManager {
-    var movieDetailData: MovieInfomationDetail?
     var dailyBoxOfficeData: BoxOfficeResult?
-    var movieImageData: Document?
+    private let movieRepository = MovieRepository()
+    private var imageURL: String?
 }
 
 extension MovieManager {
-    func fetchBoxOfficeResultData(
-        date: String,
-        completion: @escaping (Result<BoxOfficeResult, NetworkError>) -> Void
-    ) {
-        let apiService = APIService()
-        let urlString = NetworkURL.makeDailyBoxOfficeURL(date: date)
-        
-        apiService.fetchData(urlString: urlString) { [weak self] (result: Result<BoxOffice, NetworkError>) in
-            switch result {
-            case .success(let movies):
-                self?.dailyBoxOfficeData = movies.boxOfficeResult
-                guard let result = self?.dailyBoxOfficeData else { return }
-                completion(.success(result))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    func fetchMovieInfoResultData(
-        code: String,
-        completion: @escaping (Result<MovieInfomationDetail, NetworkError>) -> Void
-    ) {
-        let apiService = APIService()
-        let urlString = NetworkURL.makeMovieInfomationDetailURL(code: code)
-        
-        apiService.fetchData(urlString: urlString) { (result: Result<MovieInfomationDetail, NetworkError>) in
-            switch result {
-            case .success(let movies):
-                completion(.success(movies))
-                self.movieDetailData = movies
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    func fetchMoiveImageData(
-        movieName: String,
-        completion: @escaping (Result<Document, NetworkError>) -> Void
-    ) {
-        let apiService = APIService()
+    func setupBoxOfficeDetailData(for indexPath: Int) -> (movieName: String, movieCode: String)? {
         guard
-            let urlString = NetworkURL.makeMovieImageURL(movieName: movieName)
+            let movieName = dailyBoxOfficeData?.dailyBoxOfficeList[indexPath].name,
+            let movieCode = dailyBoxOfficeData?.dailyBoxOfficeList[indexPath].code
         else {
-            print("fetchMoiveImageData\(NetworkError.invalidURLError)")
-            return
+            return nil
         }
-        
-        apiService.fetchImageData(urlRequest: urlString) { [weak self] (result: Result<MovieImage, NetworkError>) in
-            switch result {
-            case .success(let image):
-                self?.movieImageData = image.documents[0]
-                guard
-                    let data = self?.movieImageData
-                else {
-                    return
-                }
-                completion(.success(data))
-            case .failure(let error):
-                completion(.failure(error))
-            }
+        return (movieName, movieCode)
+    }
+    
+    func fetchBoxOfficeResultData(date: String) async throws -> BoxOfficeResult {
+        let result = try await movieRepository.fetchBoxOfficeResultData(date: date)
+        switch result {
+        case .success(let movies):
+            let result = movies.boxOfficeResult
+            self.dailyBoxOfficeData = result
+            return result
+        case .failure(let error):
+            throw error
         }
     }
     
-    private func makeHttps(data: Document) -> String {
-        let originUrl = data.imageURL
-        var editingUrl = originUrl.components(separatedBy: "://")
-        editingUrl[0] = "https"
-        let resultUrl = "\(editingUrl[0])://\(editingUrl[1])"
-        return resultUrl
+    func fetchMovieInfoResultData(code: String) async throws -> MovieInfo {
+        let result = try await movieRepository.fetchMovieInfoResultData(code: code)
+        switch result {
+        case .success(let movies):
+            let result = movies.movieInfoResult.movieInfo
+            return result
+        case .failure(let error):
+            throw error
+        }
     }
     
-    func loadImage(data: Document,
-                   completion: @escaping (Result<UIImage, NetworkError>) -> Void) -> UIImage? {
-        let url = makeHttps(data: data)
-        APIService().fetchData(urlString: url) { (result: Result<MovieImage, NetworkError>) in
-            <#code#>
+    func fetchMoiveImageURL(movieName: String) async throws {
+        let result = try await movieRepository.fetchMoiveImageURL(movieName: movieName)
+        switch result {
+        case .success(let image):
+            let movieImageData = image.documents[0]
+            self.imageURL = movieImageData.imageURL
+        case .failure(let error):
+            throw error
         }
-//        guard
-//            let url = URL(string: url),
-//            let data = try? Data(contentsOf: url),
-//            let image = UIImage(data: data)
-//        else {
-//            return nil
-//        }
-//        return image
+    }
+    
+    func fetchImageData() async throws -> Data? {
+        guard let imageURL else { return nil }
+        let result = try await movieRepository.fetchMovieImage(urlString: imageURL)
+        switch result {
+        case .success(let data):
+            return data
+        case .failure(let error):
+            throw error
+        }
     }
 }

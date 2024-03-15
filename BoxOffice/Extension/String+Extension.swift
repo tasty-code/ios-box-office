@@ -9,9 +9,20 @@ import Foundation
 
 extension String {
     func toDateFromRange() -> Date? {
-        guard let result = self.split(separator: "~").last else { return nil }
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd"
-        return dateFormatter.date(from: Self(result))
+        guard
+            let result = self.split(separator: "~").last
+        else {
+            return nil
+        }
+        return Date.movieDateFormatter.date(from: Self(result))
+    }
+    
+    var makeDateFormat: String {
+        guard 
+            let date = Date.movieDateFormatter.date(from: self)
+        else {
+            return "-"
+        }
+        return Date.titleDateFormatter.string(from: date)
     }
 }
