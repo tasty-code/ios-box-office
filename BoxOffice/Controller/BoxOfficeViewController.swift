@@ -12,8 +12,8 @@ final class BoxOfficeViewController: UIViewController {
     private let boxOfficeView: BoxOfficeView = BoxOfficeView()
     private let loadingIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
     
-    private lazy var dataSource: any LoadDataProtocol = {
-        let dataSource = DailyBoxOffice()
+    private lazy var dataSource: any BoxOfficeViewControllerDataSource = {
+        let dataSource = BoxOfficeProvider()
         dataSource.delegate = self
         return dataSource
     }()
@@ -25,9 +25,8 @@ final class BoxOfficeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         boxOfficeView.delegate = self
-        
+        setNavigationItemTitle(Date.yesterday)
         loadingIndicatorView.startAnimating()
         
         Task {
@@ -40,10 +39,16 @@ final class BoxOfficeViewController: UIViewController {
     }
 }
 
+extension BoxOfficeViewController {
+    private func setNavigationItemTitle(_ date: Date) {
+        self.navigationItem.title = date.formatted(using: .standard)
+    }
+}
+
 extension BoxOfficeViewController: BoxOfficeCollectionViewDelegate {
     func loadDailyBoxOfficeData() async {
         do {
-            try await dataSource.loadData()
+            try await dataSource.loadBoxOfficeData()
         } catch {
             guard let networkError = error as? NetworkError else {
                 print(error.localizedDescription)
@@ -62,7 +67,7 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeCollectionViewCell.className, for: indexPath) as? BoxOfficeCollectionViewCell,
-              let movies = dataSource.loadedData as? [DailyBoxOffice.Movie],
+              let movies = dataSource.loadedData as? [BoxOfficeProvider.Movie],
               let data = movies[safeIndex: indexPath.row] else {
             return UICollectionViewCell()
         }
@@ -70,6 +75,15 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
         cell.configure(data: data)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let movies = dataSource.loadedData as? [BoxOfficeProvider.Movie],
+              let movieCode = movies[safeIndex: indexPath.row]?.movieCode, let movieName = movies[safeIndex: indexPath.row]?.movieName else {
+            return
+        }
+        let movieInformationViewController: UIViewController = MovieInformationViewController(movieCode: movieCode, movieName: movieName)
+        self.navigationController?.pushViewController(movieInformationViewController, animated: true)
     }
 }
 

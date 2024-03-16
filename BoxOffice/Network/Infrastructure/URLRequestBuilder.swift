@@ -44,6 +44,12 @@ class URLRequestBuilder {
         guard let url = URL(string: self.url) else {
             return nil
         }
-        return URLRequest(url: url)
+        var urlRequest = URLRequest(url: url)
+        if httpMethod == .post {
+            urlRequest.httpBody = body
+        }
+        urlRequest.httpMethod = httpMethod.rawValue
+        urlRequest.allHTTPHeaderFields = headers
+        return urlRequest
     }
 }

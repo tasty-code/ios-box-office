@@ -8,24 +8,24 @@
 import Foundation
 
 struct MovieInformationResult: Decodable {
-    let movieInformationResult: MovieInformationDetail
+    let movieInformationDetail: MovieInformationDetail
     
     private enum CodingKeys: String, CodingKey {
-        case movieInformationResult = "movieInfoResult"
+        case movieInformationDetail = "movieInfoResult"
     }
 }
 
 struct MovieInformationDetail: Decodable {
-    let movieInformation: MovieInformation
+    let movie: Movie
     let source: String
     
     private enum CodingKeys: String, CodingKey {
-        case movieInformation = "movieInfo"
+        case movie = "movieInfo"
         case source
     }
 }
 
-struct MovieInformation: Decodable {
+struct Movie: Decodable {
     let movieCode: String
     let movieName: String
     let movieNameEnglish: String
@@ -56,6 +56,43 @@ struct MovieInformation: Decodable {
         case typeName = "typeNm"
         case companies = "companys"
         case nations, genres, directors, actors, showTypes, audits, staffs
+    }
+    
+    func toMovieDetail() -> MovieDataProvider.MovieDetail {
+        let openDate: String = {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyyMMdd"
+            guard let date = dateFormatter.date(from: self.openDate) else {
+                return ""
+            }
+            return date.formatted(using: .standard)
+        }()
+        
+        let directors: String = directors.map { director in
+            director.personName
+        }.toString()
+        let audits: String = audits.map { audit in
+            audit.watchGradeName
+        }.toString()
+        let nations: String = nations.map { nation in
+            nation.nationName
+        }.toString()
+        let genres: String = genres.map { genre in
+            genre.genreName
+        }.toString()
+        let actors: String = actors.map { actor in
+            actor.personName
+        }.toString()
+        
+        return MovieDataProvider.MovieDetail(movieName: movieName,
+                                                  directors: directors,
+                                                  productionYear: productionYear,
+                                                  openDate: openDate,
+                                                  showTime: showTime,
+                                                  audits: audits,
+                                                  nations: nations,
+                                                  genres: genres,
+                                                  actors: actors)
     }
 }
 

@@ -7,20 +7,8 @@
 
 import UIKit
 
-protocol BoxOfficeCollectionViewDelegate: AnyObject {
-    func loadDailyBoxOfficeData() async
-}
-
 final class BoxOfficeView: UIView {
     weak var delegate: BoxOfficeCollectionViewDelegate?
-    
-    lazy var navigationBar: UINavigationBar = {
-        let navigationBar = UINavigationBar()
-        let navigationItem = UINavigationItem(title: Date.yesterday.formatted(using: .standard))
-        navigationBar.isTranslucent = false
-        navigationBar.pushItem(navigationItem, animated: true)
-        return navigationBar
-    }()
     
     lazy var boxOfficeCollectionView: UICollectionView = {
         let config = UICollectionLayoutListConfiguration(appearance: .plain)
@@ -75,19 +63,14 @@ extension BoxOfficeView {
 
 extension BoxOfficeView {
     private func setupSubview() {
-        addSubview(navigationBar)
         addSubview(boxOfficeCollectionView)
     }
     
     private func setupConstraints() {
-        navigationBar.translatesAutoresizingMaskIntoConstraints = false
         boxOfficeCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            navigationBar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            navigationBar.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            navigationBar.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            boxOfficeCollectionView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
+            boxOfficeCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             boxOfficeCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             boxOfficeCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             boxOfficeCollectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
