@@ -19,6 +19,8 @@ final class MovieInfoTableViewCell: UITableViewCell {
     private let infoLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
@@ -55,7 +57,9 @@ final class MovieInfoTableViewCell: UITableViewCell {
         ])
     }
     
-    func setUpData(with entity: MovieEntity) {
-        // TODO: cell 별 데이터 삽입 필요
-    }
+    func setUpData(with info: (title: String, info: String)?) {
+         guard let info = info else { return }
+         titleLabel.text = info.title
+         infoLabel.text = info.info
+     }
 }
