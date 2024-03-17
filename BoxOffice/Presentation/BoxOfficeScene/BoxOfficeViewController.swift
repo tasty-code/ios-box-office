@@ -145,3 +145,21 @@ extension BoxOfficeViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: collectionView.bounds.width, height: 100)
     }
 }
+
+extension BoxOfficeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedMovieCode = Observable<String>(boxOfficeList[indexPath.item].movieCode)
+        
+        let movieDetailVC = MovieDetailViewController(
+            viewModel: MovieDetailViewModel(
+                movieUseCase: DefaultMovieUseCase(
+                    movieRepository: DefaultMovieRepository(
+                        apiService: MovieAPIService(provider: NetworkProvider())
+                    )
+                )
+            ),
+            movieCode: selectedMovieCode
+        )
+        navigationController?.pushViewController(movieDetailVC, animated: true)
+    }
+}
