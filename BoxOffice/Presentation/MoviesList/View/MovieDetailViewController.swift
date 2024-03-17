@@ -117,22 +117,11 @@ extension MovieDetailViewController {
     }
     
     private func configureImageView(with movieImage: MovieImage) {
-        guard let imageURLString = movieImage.documents.first?.imageURL,
-              let imageURL = URL(string: imageURLString) else {
-            print("URL error")
-            return
-        }
-        DispatchQueue.global().async { [weak self] in
-            do {
-                let imageData = try Data(contentsOf: imageURL)
-                let image = UIImage(data: imageData)
-                DispatchQueue.main.async {
-                    self?.indicatorView.stopAnimating()
-                    self?.indicatorView.removeFromSuperview()
-                    self?.movieImageView.image = image
-                }
-            } catch {
-                print(error.localizedDescription)
+        UIImage.load(with: movieImage) { [weak self] image in
+            DispatchQueue.main.async {
+                self?.indicatorView.stopAnimating()
+                self?.indicatorView.removeFromSuperview()
+                self?.movieImageView.image = image
             }
         }
     }

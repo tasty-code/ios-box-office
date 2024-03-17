@@ -18,10 +18,8 @@ final class DepengencyManager {
                                        movieName: String) -> MovieDetailViewController {
         let movieDetailRepository = DefaultMovieDetailRepository(dataTransferService: dataTransferService)
         let movieDetailUseCase = DefaultMovieDetailUseCase(movieDetailRepository: movieDetailRepository)
-        
         let movieImageRepository = DefaultMovieImageRepository(dataTransferService: dataTransferService)
         let movieImageUseCase = DefaulMovieImageUseCase(movieImageRepository: movieImageRepository)
-        
         let movieDetailViewModel = MovieDetailViewModel(detailUseCase: movieDetailUseCase, 
                                                         imageUseCase: movieImageUseCase,
                                                         movieCode: movieCode,
