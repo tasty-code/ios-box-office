@@ -10,31 +10,18 @@ final class Navigator: NavigatorProtocol {
         case movieList
         case detailMovie(movieCode: String, movieName: String)
     }
-    
-    let sessionMananger = DefaultNetworkSessionManager()
-    lazy var networkService = DefaultNetworkService(sessionManager: sessionMananger)
-    lazy var dataTransferService = DefaultDataTransferService(with: networkService)
+    private let depengencyManager: DepengencyManager = DepengencyManager()
     
     func initializeViewController(destination: Destination) -> UIViewController {
         switch destination {
         case .movieList:
-            let boxOfficeRepository = DefaultBoxOfficeRepository(dataTransferService: dataTransferService)
-            let boxOfficeUseCase = DefaulBoxOfficeUseCase(boxOfficeRepository: boxOfficeRepository)
-            let movieListViewModel = MoviesListViewModel(useCase: boxOfficeUseCase)
-            let moviesListViewController = MoviesListViewController(viewModel: movieListViewModel, navigator: self)
-            let navigationController = UINavigationController(rootViewController: moviesListViewController)
+            let navigationController = UINavigationController(rootViewController: depengencyManager.makeMoviesListViewController(navigator: self))
             return navigationController
             
         case .detailMovie(let movieCode, let movieName):
-            let movieDetailRepository = DefaultMovieDetailRepository(dataTransferService: dataTransferService)
-            let movieDetailUseCase = DefaultMovieDetailUseCase(movieDetailRepository: movieDetailRepository)
-            
-            let movieImageRepository = DefaultMovieImageRepository(dataTransferService: dataTransferService)
-            let movieImageUseCase = DefaulMovieImageUseCase(movieImageRepository: movieImageRepository)
-            
-            let movieDetailViewModel = MovieDetailViewModel(detailUseCase: movieDetailUseCase, imageUseCase: movieImageUseCase, movieCode: movieCode, movieName: movieName)
-            let movieDetailView = MovieDetailViewController(viewModel: movieDetailViewModel, navigator: self)
-            return movieDetailView
+            return depengencyManager.makeMovieDetailViewController(navigator: self,
+                                                                   movieCode: movieCode,
+                                                                   movieName: movieName)
         }
     }
     
