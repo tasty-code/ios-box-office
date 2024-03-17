@@ -44,6 +44,7 @@
 		95AC03D72B7C9A9200173FB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
 		95B4F2FE2BA1C25600AB4952 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B4F2FD2BA1C25600AB4952 /* MovieRepository.swift */; };
 		95B4F3002BA1C32A00AB4952 /* DefaultMovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B4F2FF2BA1C32A00AB4952 /* DefaultMovieRepository.swift */; };
+		95B4F3042BA1CC0F00AB4952 /* MovieUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B4F3032BA1CC0F00AB4952 /* MovieUseCase.swift */; };
 		95C84DE22B8B9AD600B77048 /* BoxOfficeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C84DE12B8B9AD600B77048 /* BoxOfficeCollectionViewCell.swift */; };
 		95C84DE42B8B9DB200B77048 /* BoxOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C84DE32B8B9DB200B77048 /* BoxOfficeViewController.swift */; };
 		95C84DE62B8BA9E200B77048 /* BoxOfficeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C84DE52B8BA9E200B77048 /* BoxOfficeEntity.swift */; };
@@ -101,6 +102,7 @@
 		95AC03D32B7C4F0A00173FB5 /* BoxOfficeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeDTO.swift; sourceTree = "<group>"; };
 		95B4F2FD2BA1C25600AB4952 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
 		95B4F2FF2BA1C32A00AB4952 /* DefaultMovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMovieRepository.swift; sourceTree = "<group>"; };
+		95B4F3032BA1CC0F00AB4952 /* MovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieUseCase.swift; sourceTree = "<group>"; };
 		95C84DE12B8B9AD600B77048 /* BoxOfficeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeCollectionViewCell.swift; sourceTree = "<group>"; };
 		95C84DE32B8B9DB200B77048 /* BoxOfficeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeViewController.swift; sourceTree = "<group>"; };
 		95C84DE52B8BA9E200B77048 /* BoxOfficeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeEntity.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				776DF5832B955A880049BF66 /* BoxOfficeUseCase.swift */,
+				95B4F3032BA1CC0F00AB4952 /* MovieUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				773B32E72BA0222400F1486A /* MovieDetailViewController.swift in Sources */,
 				952AD2CF2B84A31500598680 /* BoxOfficeAPIService.swift in Sources */,
 				95B4F2FE2BA1C25600AB4952 /* MovieRepository.swift in Sources */,
+				95B4F3042BA1CC0F00AB4952 /* MovieUseCase.swift in Sources */,
 				7773387F2B848D1200143672 /* NetworkProvider.swift in Sources */,
 				952AD2C12B8484B300598680 /* MovieDTO.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
