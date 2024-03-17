@@ -9,10 +9,14 @@ import UIKit
 
 final class MovieDetailViewController: UIViewController {
     
-    private let movieDetailTableView = UITableView()
+    private let viewModel: MovieDetailViewModel
+    private let movieCode: Observable<String>
+    private var movieDetailTableView = UITableView()
+    private var movieDetail: MovieEntity?
     
-    init() {
-        // TODO: viewmodel 주입 필요
+    init(viewModel: MovieDetailViewModel, movieCode: Observable<String>) {
+        self.viewModel = viewModel
+        self.movieCode = movieCode
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -25,13 +29,15 @@ final class MovieDetailViewController: UIViewController {
         
         configureUI()
         setUpLayout()
-        setUpNavigationBar()
+        setUpNavigationBar(movieName: "")
         setUpTableView()
         registerCell()
+        bindViewModel()
     }
     
     private func configureUI() {
         view.backgroundColor = .white
+        movieDetailTableView.separatorStyle = .none
     }
     
     private func setUpLayout() {
@@ -46,9 +52,8 @@ final class MovieDetailViewController: UIViewController {
         ])
     }
     
-    private func setUpNavigationBar() {
-        // TODO: fetch 해온 영화 제목 넣기
-        self.navigationItem.title = "영화 제목"
+    private func setUpNavigationBar(movieName: String) {
+        self.navigationItem.title = movieName
     }
     
     private func setUpTableView() {
@@ -59,6 +64,28 @@ final class MovieDetailViewController: UIViewController {
     private func registerCell() {
         movieDetailTableView.register(MovieInfoTableViewCell.self,
                                       forCellReuseIdentifier: String(describing: MovieInfoTableViewCell.self))
+    }
+    
+    private func bindViewModel() {
+        let input = MovieDetailViewModel.Input(
+            viewDidLoad: Observable(()),
+            refreshAction: Observable(()),
+            movieCode: movieCode
+        )
+        let output = viewModel.transform(input: input)
+        
+        output.movieDetail.subscribe { [weak self] movieEntity in
+            guard let movieEntity = movieEntity else { return }
+            self?.movieDetail = movieEntity
+            self?.setUpNavigationBar(movieName: movieEntity.movieName)
+            self?.movieDetailTableView.reloadData()
+        }
+        
+        output.networkError.subscribe { [weak self] result in
+            if result {
+                self?.presentAlert(title: "네트워크 오류로 인해\n데이터를 불러올 수 없습니다.\n다시 시도해 주세요.")
+            }
+        }
     }
 }
 
@@ -72,6 +99,9 @@ extension MovieDetailViewController: UITableViewDelegate {
 
 // MARK: - UITableViewDataSource
 extension MovieDetailViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
@@ -82,11 +112,17 @@ extension MovieDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieInfoTableViewCell.self), for: indexPath) as? MovieInfoTableViewCell
-        else {
+        switch indexPath.section {
+        case 0:
+            // TODO: 이미지를 불러온 후 보여주는 Cell 작성
+            return UITableViewCell()
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieInfoTableViewCell.self), for: indexPath) as! MovieInfoTableViewCell
+            let info = movieDetail?.getInfoArray()[indexPath.row]
+            cell.setUpData(with: info)
+            return cell
+        default:
             return UITableViewCell()
         }
-        
-        return cell
     }
 }
