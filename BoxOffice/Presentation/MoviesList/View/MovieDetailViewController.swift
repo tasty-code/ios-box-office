@@ -106,7 +106,7 @@ extension MovieDetailViewController {
     
     private func configureLabels(with movie: Movie) {
         navigationItem.title = movie.movieName
-        directorsLabel.text = "\(movie.directors.map { $0.name }.joined(separator: ", "))"
+        directorsLabel.text = "\(movie.directors.isEmpty ? "-" : movie.directors.map { $0.name }.joined(separator: ", "))"
         productionYearLabel.text = "\(movie.productionYear)"
         openingDateLabel.text = "\(Date().openingDayString(day: movie.openingDate, format: DateFormatter.yyMMddDashed))"
         durationLabel.text = "\(movie.duration)분"

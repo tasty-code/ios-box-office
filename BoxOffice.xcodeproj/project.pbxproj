@@ -222,8 +222,8 @@
 				63DF20EE2970E1A0005DF7D1 /* AppDelegate.swift */,
 				63DF20F02970E1A0005DF7D1 /* SceneDelegate.swift */,
 				99DE23742B9DA8BF001CDFBC /* Navigator.swift */,
-				63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */,
 				BDCA3EAE2BA6D40500F16FF2 /* DepengencyManager.swift */,
+				63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */,
 			);
 			path = Application;
 			sourceTree = "<group>";
