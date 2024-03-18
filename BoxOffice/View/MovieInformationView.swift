@@ -74,6 +74,7 @@ extension MovieInformationView {
     }
     
     private func setConstraints() {
+        self.backgroundColor = .systemBackground
         self.addSubview(scrollView)
         scrollView.addSubview(imageView)
         scrollView.addSubview(detailInformationStackView)
