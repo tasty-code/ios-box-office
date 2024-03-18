@@ -95,19 +95,23 @@ private extension BoxOfficeViewController {
             let result = await boxOfficeUseCase.fetchBoxOfficeData()
             handleFetchResult(result)
         }
+        self.boxOfficeCollectionView.refreshControl?.endRefreshing()
     }
     
-    @MainActor
     func handleFetchResult(_ result: Result<[BoxOfficeMovie], DomainError>) {
-        boxOfficeCollectionView.refreshControl?.endRefreshing()
         switch result {
         case .success(let boxOfficeMovies):
             let displayMovies = mapEntityToDisplayModel(boxOfficeMovies)
             self.movies = displayMovies
             applySnapshot(movies: displayMovies, animatingDifferences: true)
         case .failure(let error):
-            presentAlert(title: "네트워크 오류", message: "네트워크에 문제가 있습니다 \(error)", confirmTitle: "확인")
+            presentAlert(error: error)
         }
+    }
+    
+    @MainActor
+    func presentAlert(error: DomainError) {
+        self.presentAlert(title: "네트워크 오류", message: "네트워크에 문제가 있습니다 \(error)", confirmTitle: "확인")
     }
     
     func mapEntityToDisplayModel(_ boxOfficeMovies: [BoxOfficeMovie]) -> [BoxOfficeDisplayModel] {
