@@ -26,6 +26,13 @@ final class BoxOfficeViewController: UIViewController {
 
 // MARK: - 생명주기
 extension BoxOfficeViewController {
+    
+    override func loadView() {
+        self.boxOfficeCollectionView = BoxOfficeCollectionView(frame: .zero)
+        self.view = boxOfficeCollectionView
+
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -37,7 +44,6 @@ extension BoxOfficeViewController {
 // MARK: - Setup UI
 private extension BoxOfficeViewController {
     func setupUI() {
-        setupBoxOfficeView()
         configureCellRegistration()
         configureNavigationBar()
         setupRefreshControl()
@@ -45,23 +51,6 @@ private extension BoxOfficeViewController {
     
     func configureNavigationBar() {
         navigationItem.title = Date().formattedDate(withFormat: "YYYY-MM-dd")
-    }
-    
-    // 커스텀 뷰 설정
-    func setupBoxOfficeView() {
-        boxOfficeCollectionView = BoxOfficeCollectionView(frame: .zero)
-        view.backgroundColor = boxOfficeCollectionView.backgroundColor
-        view.addSubview(boxOfficeCollectionView)
-        boxOfficeCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            boxOfficeCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            boxOfficeCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            boxOfficeCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            boxOfficeCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        ])
-        
-        configureCellRegistration()
     }
     
     // 셀 등록 설정 메서드
