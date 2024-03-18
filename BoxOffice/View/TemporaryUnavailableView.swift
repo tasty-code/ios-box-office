@@ -8,14 +8,13 @@
 import UIKit
 
 final class TemporaryUnavailableView: UIView {
-    private var messageLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .headline), textAlignment: .center, textColor: .black)
+    private var messageLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .headline), textAlignment: .center)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.messageLabel.numberOfLines = 2
         self.messageLabel.text = "해당 탭은 임시적으로 사용이 불가합니다.\n불편을 드려 죄송합니다."
         setConstraints()
-        self.backgroundColor = .white
     }
     
     required init?(coder: NSCoder) {

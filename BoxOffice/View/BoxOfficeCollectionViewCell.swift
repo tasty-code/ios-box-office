@@ -14,8 +14,8 @@ final class BoxOfficeCollectionViewCell: UICollectionViewListCell {
     let stackView: UIStackView = UIStackView(axis: .horizontal, distribution: .fill)
     
     let rankStackView: UIStackView = UIStackView(axis: .vertical, distribution: .fillProportionally)
-    let rankLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .largeTitle), textAlignment: .center, textColor: .black)
-    let rankStatusLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .body), textAlignment: .center, textColor: .gray)
+    let rankLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .largeTitle), textAlignment: .center)
+    let rankStatusLabel: UILabel = UILabel(font: .preferredFont(forTextStyle: .body), textAlignment: .center, textColor: .systemGray)
     
     let rankChangedAmountStackView: UIStackView = UIStackView(axis: .horizontal, distribution: .fillEqually)
     let rankChangedIndicatorImageView: UIImageView = UIImageView(adjustsImageSizeForAccessibilityContentSizeCategory: true, contentMode: .right)
@@ -84,7 +84,7 @@ extension BoxOfficeCollectionViewCell {
     private func addRankStatusLabel(text: String) {
         rankChangedAmountStackView.removeFromSuperview()
         rankStatusLabel.text = text
-        rankStatusLabel.textColor = .gray
+        rankStatusLabel.textColor = .systemGray
         rankStackView.addArrangedSubview(rankStatusLabel)
     }
 }
