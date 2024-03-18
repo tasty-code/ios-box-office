@@ -7,6 +7,7 @@
 
 import UIKit
 import ARKit
+import AVKit
 
 class ARSearchTrailerViewController: UIViewController, ARSessionDelegate {
     private let session: ARSession = ARSession()
@@ -25,12 +26,27 @@ class ARSearchTrailerViewController: UIViewController, ARSessionDelegate {
         Task {
             await loadImage()
         }
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        self.trailerSearchView.addGestureRecognizer(tapGesture)
     }
     
     override func loadView() {
         view = trailerSearchView
         trailerSearchView.session = session
     }
+    
+    @objc private func handleTap(_ gestureRecognize: UIGestureRecognizer) {
+        let location = gestureRecognize.location(in: trailerSearchView)
+        let hitResults = trailerSearchView.hitTest(location, options: [:])
+        if hitResults.first != nil {
+            let avPlayer: AVPlayerViewController = AVPlayerViewController()
+            avPlayer.player = AVPlayer(url: TrailerVideoURL.exhuma.url!)
+            avPlayer.player?.play()
+            present(avPlayer, animated: true)
+        }
+    }
+
     
     private func loadAR() {
         session.delegate = self
@@ -71,11 +87,6 @@ extension ARSearchTrailerViewController: ARSCNViewDelegate {
         let overlayNode = SCNNode(geometry: plane)
         overlayNode.eulerAngles.x = -.pi / 2
         
-//        let overlayNode = SCNNode(geometry: SCNPlane(width: referenceImage.physicalSize.width,
-//                                                      height: referenceImage.physicalSize.height))
-//        overlayNode.geometry?.firstMaterial?.diffuse.contents = UIColor(white: 1, alpha: 0.5) // 예시: 반투명 흰색
-//        overlayNode.eulerAngles.x = -.pi / 2 // 평면을 수평으로 회전
-
         return overlayNode
     }
 }
