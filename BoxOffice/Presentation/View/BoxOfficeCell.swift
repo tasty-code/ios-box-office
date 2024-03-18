@@ -80,17 +80,22 @@ extension BoxOfficeCell {
             $0.spacing = 0
         }
         
-        leftStackView.addArrangedSubview(rankLabel)
-        leftStackView.addArrangedSubview(rankIntensityLabel)
-        rightStackView.addArrangedSubview(movieNameLabel)
-        rightStackView.addArrangedSubview(audienceAccountLabel)
-        horizontalStackView.addArrangedSubview(leftStackView)
-        horizontalStackView.addArrangedSubview(rightStackView)
+        [rankLabel, rankIntensityLabel].forEach {
+            leftStackView.addArrangedSubview($0)
+        }
+     
+        [movieNameLabel, audienceAccountLabel].forEach {
+            rightStackView.addArrangedSubview($0)
+        }
+        
+        [leftStackView, rightStackView].forEach {
+            horizontalStackView.addArrangedSubview($0)
+        }
+        
         addSubview(horizontalStackView)
     }
     
     private func configureHorizontalStackView() {
-        
         NSLayoutConstraint.activate([
             horizontalStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             horizontalStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
