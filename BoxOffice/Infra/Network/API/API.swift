@@ -16,4 +16,12 @@ struct API {
                         "key": Bundle.main.apiKey,
                         "movieCd": movieCode])
     }
+    
+    static func movieImage(query: String) -> APIConfig<MovieImageDTO> {
+        return .init(baseURL: BoxOfficeAPI.imageBaseUrl,
+                     path: BoxOfficeAPI.movieImage.path,
+                     headerParameters: [
+                        "Authorization": Bundle.main.kakaoApiKey], queryParameters: [
+                            "query": "\(query) 영화 포스터"])
+    }
 }

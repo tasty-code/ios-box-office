@@ -4,6 +4,8 @@
 <dict>
 	<key>API_KEY</key>
 	<string>200e4c621bdbe013b21688934a6ab29c</string>
+	<key>Kakao_API_KEY</key>
+	<string>KakaoAK 426d6eab07e03ccf42add55365c8dcad</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
