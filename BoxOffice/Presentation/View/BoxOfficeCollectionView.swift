@@ -3,7 +3,7 @@ import UIKit
 
 final class BoxOfficeCollectionView: UICollectionView {
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
-        super.init(frame: frame, collectionViewLayout: BoxOfficeCollectionView.createLayout())
+        super.init(frame: frame, collectionViewLayout: boxOfficeViewLayout)
         configureCollectionView()
     }
     
@@ -15,8 +15,8 @@ final class BoxOfficeCollectionView: UICollectionView {
         self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.backgroundColor = .systemBackground
     }
-
-    private static func createLayout() -> UICollectionViewLayout {
+    
+    let boxOfficeViewLayout: UICollectionViewLayout = {
         let estimatedHeight = CGFloat(78)
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                heightDimension: .estimated(estimatedHeight))
@@ -29,6 +29,6 @@ final class BoxOfficeCollectionView: UICollectionView {
         section.interGroupSpacing = 0
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
-    }
+    }()
 }
 
