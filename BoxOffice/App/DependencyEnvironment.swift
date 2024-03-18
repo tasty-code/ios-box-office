@@ -6,7 +6,6 @@ enum ViewControllerType {
     //case 이후뷰컨들
 }
 
-
 final class DependencyEnvironment {
     /// 디코더 설정 셋팅 예시
     private let jsonDecoder: JSONDecoder = {
@@ -17,13 +16,9 @@ final class DependencyEnvironment {
 
     private lazy var decodeProvider: DecoderProtocol = JsonDecoder(jsonDecoder: jsonDecoder)
 
-    private lazy var sessionProvider: SessionProvidable = SessionProvider()
-    
-    private lazy var requestBuidler: RequestBuilderProtocol = RequestBuilder()
-    
-    private lazy var networkManager: NetworkManagerProtocol = NetworkManager(sessionProvider: sessionProvider, decoder: decodeProvider)
+    private var sessionProvider: SessionProvidable = SessionProvider()
 
-    private lazy var movieRepository: MovieRepositoryProtocol = MovieRepository(networkManager: networkManager, requestBuilder: requestBuidler)
+    private lazy var movieRepository: MovieRepositoryProtocol = MovieRepository(sessionProvider: sessionProvider, decoder: decodeProvider)
     
     private lazy var boxOfficeUseCase: BoxOfficeUseCaseProtocol = BoxOfficeUseCase(moviesRepository: movieRepository)
 }
