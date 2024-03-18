@@ -19,3 +19,16 @@ enum TrailerImageURL: String, CaseIterable {
         return url
     }
 }
+
+enum TrailerVideoURL: String, CaseIterable {
+    case wall_e = "https://drive.google.com/uc?export=download&id=12OS64ap-N_xftUw2GkUYU-okdTzWuR1y"
+    case dune2 = "https://drive.google.com/uc?export=download&id=1iOPW1HPorAByCP_g2k7k6KkW0UrPudbu"
+    case exhuma = "https://drive.google.com/uc?export=download&id=1USGSNNNJAnq-ZWY_yUksPOwEpsPYxQRZ"
+    
+    var url: URL? {
+        guard let url = URL(string: self.rawValue) else {
+            return nil
+        }
+        return url
+    }
+}
