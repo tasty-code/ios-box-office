@@ -20,6 +20,7 @@ class ARSearchTrailerViewController: UIViewController, ARSessionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        trailerSearchView.delegate = self
         loadAR()
         Task {
             await loadImage()
@@ -51,13 +52,30 @@ class ARSearchTrailerViewController: UIViewController, ARSessionDelegate {
            
         }
         configuration.trackingImages = referenceImage
-        print(referenceImage)
+        session.run(configuration)
     }
 }
 
 extension ARSearchTrailerViewController: ARSCNViewDelegate {
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        print("나 잘되니?")
-        return SCNNode()
+    func renderer(_ renderer: any SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        if let imageAnchor = anchor as? ARImageAnchor {
+            let overlayNode = createOverlayNode(for: imageAnchor.referenceImage)
+            node.addChildNode(overlayNode)
+        }
+    }
+    
+    func createOverlayNode(for referenceImage: ARReferenceImage) -> SCNNode {
+        let plane: SCNPlane = SCNPlane(width: referenceImage.physicalSize.width, height: referenceImage.physicalSize.height)
+        plane.firstMaterial?.diffuse.contents = UIColor(white: 1, alpha: 0.5)
+        
+        let overlayNode = SCNNode(geometry: plane)
+        overlayNode.eulerAngles.x = -.pi / 2
+        
+//        let overlayNode = SCNNode(geometry: SCNPlane(width: referenceImage.physicalSize.width,
+//                                                      height: referenceImage.physicalSize.height))
+//        overlayNode.geometry?.firstMaterial?.diffuse.contents = UIColor(white: 1, alpha: 0.5) // 예시: 반투명 흰색
+//        overlayNode.eulerAngles.x = -.pi / 2 // 평면을 수평으로 회전
+
+        return overlayNode
     }
 }
