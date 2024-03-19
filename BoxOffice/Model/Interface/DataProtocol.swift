@@ -5,8 +5,12 @@
 //  Created by LeeSeongYeon on 2024/03/06.
 //
 
-protocol DataDelegate: AnyObject {
-    func reloadView()
+protocol BoxOfficeProviderDelegate: AnyObject {
+    func reloadBoxOfficeView(_ boxOfficeProvider: BoxOfficeProvider)
+}
+
+protocol MovieDataProviderDelegate: AnyObject {
+    func reloadMovieInformationView(_ movieDataProvider: MovieDataProvider)
 }
 
 protocol BoxOfficeViewControllerDataSource {

@@ -12,12 +12,10 @@ final class MovieDataProvider: MovieInformationViewControllerDataSource {
     
     let movieCode: String
     private(set) var posterData: Data? = nil {
-        didSet {
-            delegate?.reloadView()
-        }
+        didSet { delegate?.reloadMovieInformationView(self) }
     }
     
-    weak var delegate: DataDelegate?
+    weak var delegate: MovieDataProviderDelegate?
     let networkManager: NetworkManager
     
     init(movieCode: String, networkManager: NetworkManager = NetworkManager(urlSession: URLSession.shared)) {

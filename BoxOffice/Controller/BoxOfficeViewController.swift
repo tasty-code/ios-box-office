@@ -83,8 +83,8 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
     }
 }
 
-extension BoxOfficeViewController: DataDelegate {
-    func reloadView() {
+extension BoxOfficeViewController: BoxOfficeProviderDelegate {
+    func reloadBoxOfficeView(_ boxOfficeProvider: BoxOfficeProvider) {
         DispatchQueue.main.async {
             self.boxOfficeView.reloadData()
         }

@@ -8,11 +8,11 @@
 import Foundation
 
 final class BoxOfficeProvider: BoxOfficeViewControllerDataSource {
-    weak var delegate: DataDelegate?
+    weak var delegate: BoxOfficeProviderDelegate?
     let networkManager: NetworkManager
     
     var boxOfficeMovies: [Movie] = [] {
-        didSet { delegate?.reloadView() }
+        didSet { delegate?.reloadBoxOfficeView(self) }
     }
     
     init(boxOfficeMovies: [Movie] = [], networkManager: NetworkManager = NetworkManager(urlSession: URLSession.shared)) {

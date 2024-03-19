@@ -13,11 +13,11 @@ final class MovieInformationViewController: UIViewController {
     let movieCode: String
     
     private lazy var dataSource: any MovieInformationViewControllerDataSource = {
-       let dataSource = MovieDataProvider(movieCode: movieCode)
+        let dataSource = MovieDataProvider(movieCode: movieCode)
         dataSource.delegate = self
         return dataSource
     }()
-
+    
     init(movieCode: String, movieName: String) {
         self.movieCode = movieCode
         super.init(nibName: nil, bundle: nil)
@@ -31,7 +31,7 @@ final class MovieInformationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Task {
-           await loadInformation()
+            await loadInformation()
         }
     }
     
@@ -40,13 +40,10 @@ final class MovieInformationViewController: UIViewController {
     }
 }
 
-extension MovieInformationViewController: DataDelegate {
-    func reloadView() {
-        guard let data = dataSource as? MovieDataProvider,
-        let loadedData = data.movieInformationData,
-        let posterData = data.posterData else {
-            return
-        }
+extension MovieInformationViewController: MovieDataProviderDelegate {
+    func reloadMovieInformationView(_ movieDataProvider: MovieDataProvider) {
+        guard let loadedData = movieDataProvider.movieInformationData,
+              let posterData = movieDataProvider.posterData else { return }
         DispatchQueue.main.async {
             self.movieInformationView.setData(movieInformationData: loadedData, posterData: posterData)
         }
