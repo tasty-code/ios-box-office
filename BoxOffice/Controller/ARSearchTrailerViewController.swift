@@ -44,7 +44,7 @@ final class ARSearchTrailerViewController: UIViewController, ARSessionDelegate {
 
 extension ARSearchTrailerViewController {
     private func addGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         self.trailerSearchView.addGestureRecognizer(tapGesture)
     }
     
