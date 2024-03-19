@@ -50,6 +50,8 @@
 		95B4F30A2BA95CD500AB4952 /* MoviePosterAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B4F3092BA95CD500AB4952 /* MoviePosterAPIService.swift */; };
 		95B4F30C2BA95D5D00AB4952 /* MoviePosterDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B4F30B2BA95D5D00AB4952 /* MoviePosterDTO.swift */; };
 		95B4F30E2BA95FFC00AB4952 /* MoviePosterEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B4F30D2BA95FFC00AB4952 /* MoviePosterEntity.swift */; };
+		95B4F3102BA9611000AB4952 /* DefaultMoviePosterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B4F30F2BA9611000AB4952 /* DefaultMoviePosterRepository.swift */; };
+		95B4F3122BA9615C00AB4952 /* MoviePosterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B4F3112BA9615C00AB4952 /* MoviePosterRepository.swift */; };
 		95C84DE22B8B9AD600B77048 /* BoxOfficeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C84DE12B8B9AD600B77048 /* BoxOfficeCollectionViewCell.swift */; };
 		95C84DE42B8B9DB200B77048 /* BoxOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C84DE32B8B9DB200B77048 /* BoxOfficeViewController.swift */; };
 		95C84DE62B8BA9E200B77048 /* BoxOfficeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C84DE52B8BA9E200B77048 /* BoxOfficeEntity.swift */; };
@@ -113,6 +115,8 @@
 		95B4F3092BA95CD500AB4952 /* MoviePosterAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePosterAPIService.swift; sourceTree = "<group>"; };
 		95B4F30B2BA95D5D00AB4952 /* MoviePosterDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePosterDTO.swift; sourceTree = "<group>"; };
 		95B4F30D2BA95FFC00AB4952 /* MoviePosterEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePosterEntity.swift; sourceTree = "<group>"; };
+		95B4F30F2BA9611000AB4952 /* DefaultMoviePosterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMoviePosterRepository.swift; sourceTree = "<group>"; };
+		95B4F3112BA9615C00AB4952 /* MoviePosterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePosterRepository.swift; sourceTree = "<group>"; };
 		95C84DE12B8B9AD600B77048 /* BoxOfficeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeCollectionViewCell.swift; sourceTree = "<group>"; };
 		95C84DE32B8B9DB200B77048 /* BoxOfficeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeViewController.swift; sourceTree = "<group>"; };
 		95C84DE52B8BA9E200B77048 /* BoxOfficeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeEntity.swift; sourceTree = "<group>"; };
@@ -282,6 +286,7 @@
 			children = (
 				776DF58D2B95680F0049BF66 /* BoxOfficeRepository.swift */,
 				95B4F2FD2BA1C25600AB4952 /* MovieRepository.swift */,
+				95B4F3112BA9615C00AB4952 /* MoviePosterRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 			children = (
 				776DF58F2B956A720049BF66 /* DefaultBoxOfficeRepository.swift */,
 				95B4F2FF2BA1C32A00AB4952 /* DefaultMovieRepository.swift */,
+				95B4F30F2BA9611000AB4952 /* DefaultMoviePosterRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -541,6 +547,7 @@
 				95B4F30C2BA95D5D00AB4952 /* MoviePosterDTO.swift in Sources */,
 				95B4F3042BA1CC0F00AB4952 /* MovieUseCase.swift in Sources */,
 				7773387F2B848D1200143672 /* NetworkProvider.swift in Sources */,
+				95B4F3122BA9615C00AB4952 /* MoviePosterRepository.swift in Sources */,
 				952AD2C12B8484B300598680 /* MovieDTO.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
 				7773388B2B849B0E00143672 /* BaseAPIService.swift in Sources */,
@@ -549,6 +556,7 @@
 				7727D2462B9AAA16001463E1 /* Observable.swift in Sources */,
 				777338902B849BFB00143672 /* MovieAPI.swift in Sources */,
 				777338832B848DE600143672 /* NetworkEnvironment.swift in Sources */,
+				95B4F3102BA9611000AB4952 /* DefaultMoviePosterRepository.swift in Sources */,
 				776DF5842B955A880049BF66 /* BoxOfficeUseCase.swift in Sources */,
 				95C84DE62B8BA9E200B77048 /* BoxOfficeEntity.swift in Sources */,
 			);
