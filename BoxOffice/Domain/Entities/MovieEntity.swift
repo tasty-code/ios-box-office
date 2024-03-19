@@ -5,8 +5,6 @@
 //  Created by EUNJU on 3/13/24.
 //
 
-import Foundation
-
 struct MovieEntity {
     let movieName: String
     let director: String
