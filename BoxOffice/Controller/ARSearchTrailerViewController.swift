@@ -9,7 +9,7 @@ import UIKit
 import ARKit
 import AVKit
 
-class ARSearchTrailerViewController: UIViewController, ARSessionDelegate {
+final class ARSearchTrailerViewController: UIViewController, ARSessionDelegate {
     private lazy var session: ARSession = {
         let session = ARSession()
         session.delegate = self
@@ -53,9 +53,8 @@ extension ARSearchTrailerViewController {
         let hitResults = trailerSearchView.hitTest(location, options: [:])
         if let firstHit = hitResults.first {
             let node = firstHit.node
-            guard let trailerName = node.name,
-                  let trailer = TrailerURL(rawValue: trailerName),
-                  let url = trailer.videoURL else {
+            guard let trailerVideo = node.name,
+                  let url = TrailerURL.toURL(from: trailerVideo) else {
                 return
             }
             
@@ -68,14 +67,14 @@ extension ARSearchTrailerViewController {
     private func loadImage() async {
         for trailer in TrailerURL.allCases {
             do {
-                guard let url = trailer.imageURL else { return }
+                guard let url = TrailerURL.toURL(from: trailer.image) else { return }
                 
                 let (data, _) = try await URLSession.shared.data(from: url)
                 
                 guard let image = UIImage(data: data)?.cgImage else { return }
                 
                 let referenceImage = ARReferenceImage(image, orientation: .up, physicalWidth: 0.2)
-                referenceImage.name = trailer.rawValue
+                referenceImage.name = trailer.video
                 self.referenceImage.insert(referenceImage)
                 
             } catch {
