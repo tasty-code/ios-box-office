@@ -68,31 +68,21 @@ struct MovieInformationDetailData: Decodable {
             return date.formatted(using: .standard)
         }()
         
-        let directors: String = directors.map { director in
-            director.personName
-        }.toString()
-        let audits: String = audits.map { audit in
-            audit.watchGradeName
-        }.toString()
-        let nations: String = nations.map { nation in
-            nation.nationName
-        }.toString()
-        let genres: String = genres.map { genre in
-            genre.genreName
-        }.toString()
-        let actors: String = actors.map { actor in
-            actor.personName
-        }.toString()
+        let directors: String = directors.map(\.personName).joinedWithComma()
+        let audits: String = audits.map(\.watchGradeName).joinedWithComma()
+        let nations: String = nations.map(\.nationName).joinedWithComma()
+        let genres: String = genres.map(\.genreName).joinedWithComma()
+        let actors: String = actors.map(\.personName).joinedWithComma()
         
         return MovieDataProvider.Movie(movieName: movieName,
-                                                  directors: directors,
-                                                  productionYear: productionYear,
-                                                  openDate: openDate,
-                                                  showTime: showTime,
-                                                  audits: audits,
-                                                  nations: nations,
-                                                  genres: genres,
-                                                  actors: actors)
+                                       directors: directors,
+                                       productionYear: productionYear,
+                                       openDate: openDate,
+                                       showTime: showTime,
+                                       audits: audits,
+                                       nations: nations,
+                                       genres: genres,
+                                       actors: actors)
     }
 }
 
