@@ -10,30 +10,42 @@ import ARKit
 import AVKit
 
 class ARSearchTrailerViewController: UIViewController, ARSessionDelegate {
-    private let session: ARSession = ARSession()
-    
+    private lazy var session: ARSession = {
+        let session = ARSession()
+        session.delegate = self
+        session.run(configuration)
+        return session
+    }()
     private let configuration: ARImageTrackingConfiguration = ARImageTrackingConfiguration()
-    
-    private let trailerSearchView: ARSCNView = ARSCNView()
-    
     private var referenceImage: Set<ARReferenceImage> = []
     
+    private lazy var trailerSearchView: ARSCNView = {
+        let trailerSearchView = ARSCNView()
+        trailerSearchView.delegate = self
+        return trailerSearchView
+    }()
+    
+    private lazy var avPlayerViewController: AVPlayerViewController = AVPlayerViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        trailerSearchView.delegate = self
-        loadAR()
+        
         Task {
             await loadImage()
         }
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        self.trailerSearchView.addGestureRecognizer(tapGesture)
+        addGesture()
     }
     
     override func loadView() {
         view = trailerSearchView
         trailerSearchView.session = session
+    }
+}
+
+extension ARSearchTrailerViewController {
+    private func addGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        self.trailerSearchView.addGestureRecognizer(tapGesture)
     }
     
     @objc private func handleTap(_ gestureRecognize: UIGestureRecognizer) {
@@ -42,36 +54,30 @@ class ARSearchTrailerViewController: UIViewController, ARSessionDelegate {
         if let firstHit = hitResults.first {
             let node = firstHit.node
             guard let trailerName = node.name,
-                let trailer = TrailerURL(rawValue: trailerName),
+                  let trailer = TrailerURL(rawValue: trailerName),
                   let url = trailer.videoURL else {
                 return
             }
             
-            let avPlayer: AVPlayerViewController = AVPlayerViewController()
-            avPlayer.player = AVPlayer(url: url)
-            avPlayer.player?.play()
-            present(avPlayer, animated: true)
+            avPlayerViewController.player = AVPlayer(url: url)
+            avPlayerViewController.player?.play()
+            present(avPlayerViewController, animated: true)
         }
-    }
-
-    
-    private func loadAR() {
-        session.delegate = self
-        session.run(configuration)
     }
     
     private func loadImage() async {
         for trailer in TrailerURL.allCases {
             do {
                 guard let url = trailer.imageURL else { return }
+                
                 let (data, _) = try await URLSession.shared.data(from: url)
-                guard let image = UIImage(data: data)?.cgImage else {
-                    return
-                }
+                
+                guard let image = UIImage(data: data)?.cgImage else { return }
+                
                 let referenceImage = ARReferenceImage(image, orientation: .up, physicalWidth: 0.2)
                 referenceImage.name = trailer.rawValue
                 self.referenceImage.insert(referenceImage)
-
+                
             } catch {
                 print(error)
             }
@@ -91,7 +97,7 @@ extension ARSearchTrailerViewController: ARSCNViewDelegate {
         }
     }
     
-    func createOverlayNode(for referenceImage: ARReferenceImage) -> SCNNode {
+    private func createOverlayNode(for referenceImage: ARReferenceImage) -> SCNNode {
         let plane: SCNPlane = SCNPlane(width: referenceImage.physicalSize.width, height: referenceImage.physicalSize.height)
         
         let overlayNode = SCNNode(geometry: plane)
