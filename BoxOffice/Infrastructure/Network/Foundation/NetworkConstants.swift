@@ -9,6 +9,7 @@ import Foundation
 
 enum HeaderType {
     case basic
+    case custom([String: String])
 }
 
 enum HTTPHeaderField: String {

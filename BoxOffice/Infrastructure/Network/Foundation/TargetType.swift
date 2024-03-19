@@ -33,6 +33,10 @@ extension TargetType {
         case .basic:
             request.setValue(ContentType.json.rawValue, 
                              forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
+        case .custom(let headers):
+            headers.forEach { key, value in
+                request.setValue(value, forHTTPHeaderField: key)
+            }
         }
         
         return request
