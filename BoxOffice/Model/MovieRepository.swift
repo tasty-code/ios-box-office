@@ -12,7 +12,11 @@ struct MovieRepository {
     
     func fetchBoxOfficeResultData(date: String) async throws -> (Result<BoxOffice, NetworkError>) {
         guard
-            let urlRequest = NetworkURL.makeDailyBoxOfficeRequest(date: date)
+            let urlRequest = NetworkURL.makeURLRequest(
+                type: .boxOffice,
+                path: .dailyBoxOffice,
+                queries: .boxOffice(.dailyBoxOffice(date: date))
+            )
         else {
             return .failure(.invalidURLRequestError)
         }
@@ -28,7 +32,11 @@ struct MovieRepository {
     
     func fetchMovieInfoResultData(code: String) async throws -> (Result<MovieInfomationDetail, NetworkError>) {
         guard
-            let urlRequest = NetworkURL.makeMovieInfomationDetailRequest(code: code)
+            let urlRequest = NetworkURL.makeURLRequest(
+                type: .boxOffice,
+                path: .movieDetail,
+                queries: .boxOffice(.movieDetail(code: code))
+            )
         else {
             return .failure(.invalidURLRequestError)
         }
@@ -44,7 +52,11 @@ struct MovieRepository {
     
     func fetchMoiveImageURL(movieName: String) async throws -> (Result<MovieImage, NetworkError>) {
         guard
-            let urlRequest = NetworkURL.makeMovieImageRequest(movieName: movieName)
+            let urlRequest = NetworkURL.makeURLRequest(
+                type: .kakao,
+                path: .kakao,
+                queries: .kakao(movieName: movieName)
+            )
         else {
             return .failure(.invalidURLRequestError)
         }
