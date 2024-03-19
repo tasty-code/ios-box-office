@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NetworkAPI {
+struct APIURLBuilder {
     
     func buildDailyBoxOfficeAPI(targetDate: APIURLCompnents.QueryValues) -> URL? {
         return buildUrl(apiType: .dailyBoxOffice, query: targetDate).url
@@ -31,7 +31,7 @@ struct NetworkAPI {
     }
 }
 
-extension NetworkAPI {
+extension APIURLBuilder {
     func buildDailyBoxOfficeAPI(targetDate: APIURLCompnents.QueryValues, keys: APIURLCompnents.QueryKeys..., values: Any...) -> URL? {
         let dict: [APIURLCompnents.QueryKeys: Any] = zip(keys, values).reduce(into: [:]) { partialResult, now in
             partialResult[now.0] = now.1

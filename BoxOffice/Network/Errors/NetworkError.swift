@@ -7,7 +7,7 @@
 
 enum NetworkError: Error {
     
-    case netWorkingError
+    case responseError
     case parseError
     case dataError
 }
