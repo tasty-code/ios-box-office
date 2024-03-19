@@ -11,12 +11,15 @@ final class MovieDetailViewController: UIViewController {
     
     private let viewModel: MovieDetailViewModel
     private let movieCode: Observable<String>
+    private let movieName: Observable<String>
     private var movieDetailTableView = UITableView()
     private var movieDetail: MovieEntity?
+    private var moviePoster: MoviePosterEntity?
     
-    init(viewModel: MovieDetailViewModel, movieCode: Observable<String>) {
+    init(viewModel: MovieDetailViewModel, movieCode: Observable<String>, movieName: Observable<String>) {
         self.viewModel = viewModel
         self.movieCode = movieCode
+        self.movieName = movieName
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -64,13 +67,15 @@ final class MovieDetailViewController: UIViewController {
     private func registerCell() {
         movieDetailTableView.register(MovieInfoTableViewCell.self,
                                       forCellReuseIdentifier: String(describing: MovieInfoTableViewCell.self))
+        movieDetailTableView.register(MovieImageTableViewCell.self, forCellReuseIdentifier: String(describing: MovieImageTableViewCell.self))
     }
     
     private func bindViewModel() {
         let input = MovieDetailViewModel.Input(
             viewDidLoad: Observable(()),
             refreshAction: Observable(()),
-            movieCode: movieCode
+            movieCode: movieCode, 
+            movieName: movieName
         )
         let output = viewModel.transform(input: input)
         
@@ -78,6 +83,12 @@ final class MovieDetailViewController: UIViewController {
             guard let movieEntity = movieEntity else { return }
             self?.movieDetail = movieEntity
             self?.setUpNavigationBar(movieName: movieEntity.movieName)
+            self?.movieDetailTableView.reloadData()
+        }
+        
+        output.moviePoster.subscribe { [weak self] moviePoster in
+            guard let moviePoster = moviePoster else { return }
+            self?.moviePoster = moviePoster
             self?.movieDetailTableView.reloadData()
         }
         
@@ -89,7 +100,6 @@ final class MovieDetailViewController: UIViewController {
     }
 }
 
-// MARK: - UITableViewDelegate
 extension MovieDetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -97,7 +107,6 @@ extension MovieDetailViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - UITableViewDataSource
 extension MovieDetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -114,8 +123,9 @@ extension MovieDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            // TODO: 이미지를 불러온 후 보여주는 Cell 작성
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieImageTableViewCell.self), for: indexPath) as! MovieImageTableViewCell
+            cell.setUpData(with: moviePoster)
+            return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieInfoTableViewCell.self), for: indexPath) as! MovieInfoTableViewCell
             let info = movieDetail?.getInfoArray()[indexPath.row]
