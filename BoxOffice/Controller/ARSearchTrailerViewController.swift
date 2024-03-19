@@ -39,9 +39,16 @@ class ARSearchTrailerViewController: UIViewController, ARSessionDelegate {
     @objc private func handleTap(_ gestureRecognize: UIGestureRecognizer) {
         let location = gestureRecognize.location(in: trailerSearchView)
         let hitResults = trailerSearchView.hitTest(location, options: [:])
-        if hitResults.first != nil {
+        if let firstHit = hitResults.first {
+            let node = firstHit.node
+            guard let trailerName = node.name,
+                let trailer = TrailerURL(rawValue: trailerName),
+                  let url = trailer.videoURL else {
+                return
+            }
+            
             let avPlayer: AVPlayerViewController = AVPlayerViewController()
-            avPlayer.player = AVPlayer(url: TrailerVideoURL.exhuma.url!)
+            avPlayer.player = AVPlayer(url: url)
             avPlayer.player?.play()
             present(avPlayer, animated: true)
         }
@@ -54,20 +61,24 @@ class ARSearchTrailerViewController: UIViewController, ARSessionDelegate {
     }
     
     private func loadImage() async {
-        for imageURL in TrailerImageURL.allCases {
+        for trailer in TrailerURL.allCases {
             do {
-                guard let url = imageURL.url else { return }
+                guard let url = trailer.imageURL else { return }
                 let (data, _) = try await URLSession.shared.data(from: url)
                 guard let image = UIImage(data: data)?.cgImage else {
                     return
                 }
-                referenceImage.insert(ARReferenceImage(image, orientation: .up, physicalWidth: 0.2))
+                let referenceImage = ARReferenceImage(image, orientation: .up, physicalWidth: 0.2)
+                referenceImage.name = trailer.rawValue
+                self.referenceImage.insert(referenceImage)
+
             } catch {
                 print(error)
             }
-           
         }
+        
         configuration.trackingImages = referenceImage
+        configuration.maximumNumberOfTrackedImages = 3
         session.run(configuration)
     }
 }
@@ -82,10 +93,11 @@ extension ARSearchTrailerViewController: ARSCNViewDelegate {
     
     func createOverlayNode(for referenceImage: ARReferenceImage) -> SCNNode {
         let plane: SCNPlane = SCNPlane(width: referenceImage.physicalSize.width, height: referenceImage.physicalSize.height)
-        plane.firstMaterial?.diffuse.contents = UIColor(white: 1, alpha: 0.5)
         
         let overlayNode = SCNNode(geometry: plane)
+        overlayNode.name = referenceImage.name
         overlayNode.eulerAngles.x = -.pi / 2
+        overlayNode.opacity = 0.25
         
         return overlayNode
     }
