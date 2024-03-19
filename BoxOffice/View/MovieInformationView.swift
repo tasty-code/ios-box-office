@@ -18,7 +18,7 @@ final class MovieInformationView: UIView {
         return imageView
     }()
     
-    private let detailInformationStackView: UIStackView = UIStackView(axis: .vertical, distribution: .fillProportionally)
+    private let detailInformationStackView: UIStackView = UIStackView(axis: .vertical, distribution: .fill)
     
     private let directorStackView: InformationStackView = InformationStackView(titleText: "감독")
     private let productionYearStackView: InformationStackView = InformationStackView(titleText: "제작년도")
@@ -63,6 +63,9 @@ extension MovieInformationView {
 
 extension MovieInformationView {
     private func setDetailInformationStackViewSubview() {
+        detailInformationStackView.spacing = 7
+        
+        detailInformationStackView.addArrangedSubview(imageView)
         detailInformationStackView.addArrangedSubview(directorStackView)
         detailInformationStackView.addArrangedSubview(productionYearStackView)
         detailInformationStackView.addArrangedSubview(openDateStackView)
@@ -76,7 +79,7 @@ extension MovieInformationView {
     private func setConstraints() {
         self.backgroundColor = .systemBackground
         self.addSubview(scrollView)
-        scrollView.addSubview(imageView)
+        
         scrollView.addSubview(detailInformationStackView)
         
         imageView.addSubview(loadingIndicatorView)
@@ -88,11 +91,10 @@ extension MovieInformationView {
         loadingIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            imageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            imageView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor, multiplier: 0.9),
+            imageView.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor, multiplier: 0.5),
             
-            detailInformationStackView.topAnchor.constraint(equalTo: imageView.bottomAnchor),
-            detailInformationStackView.widthAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1),
+            detailInformationStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 0.9),
+            detailInformationStackView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
             
             loadingIndicatorView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
             loadingIndicatorView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
@@ -101,10 +103,8 @@ extension MovieInformationView {
             scrollView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            scrollView.contentLayoutGuide.topAnchor.constraint(equalTo: imageView.topAnchor),
+            scrollView.contentLayoutGuide.topAnchor.constraint(equalTo: detailInformationStackView.topAnchor),
             scrollView.contentLayoutGuide.bottomAnchor.constraint(equalTo: detailInformationStackView.bottomAnchor),
-            scrollView.contentLayoutGuide.leadingAnchor.constraint(equalTo: detailInformationStackView.leadingAnchor),
-            scrollView.contentLayoutGuide.trailingAnchor.constraint(equalTo: detailInformationStackView.trailingAnchor),
         ])
     }
 }
