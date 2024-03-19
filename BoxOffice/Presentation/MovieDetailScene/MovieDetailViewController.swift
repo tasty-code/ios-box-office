@@ -121,16 +121,20 @@ extension MovieDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let imageCell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieImageTableViewCell.self), for: indexPath) as? MovieImageTableViewCell,
+        let infoCell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieInfoTableViewCell.self), for: indexPath) as? MovieInfoTableViewCell
+        else {
+            return UITableViewCell()
+        }
+        
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieImageTableViewCell.self), for: indexPath) as! MovieImageTableViewCell
-            cell.setUpData(with: moviePoster)
-            return cell
+            imageCell.setUpData(with: moviePoster)
+            return imageCell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MovieInfoTableViewCell.self), for: indexPath) as! MovieInfoTableViewCell
             let info = movieDetail?.getInfoArray()[indexPath.row]
-            cell.setUpData(with: info)
-            return cell
+            infoCell.setUpData(with: info)
+            return infoCell
         default:
             return UITableViewCell()
         }
