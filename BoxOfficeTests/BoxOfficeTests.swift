@@ -53,7 +53,7 @@ final class BoxOfficeTests: XCTestCase {
             let urlString = NetworkURL.makeURLRequest(
                 type: .boxOffice,
                 path: .dailyBoxOffice,
-                queries: .boxOffice(.dailyBoxOffice(date: Date.yesterdayToString))
+                queries: .boxOffice(.dailyBoxOffice(date: Date.movieDateToString))
             )
         else {
             return
