@@ -15,7 +15,7 @@ final class BoxOfficeProvider: BoxOfficeViewControllerDataSource {
         didSet { delegate?.reloadBoxOfficeView(self) }
     }
     
-    init(boxOfficeMovies: [Movie] = [], networkManager: NetworkManager = NetworkManager(urlSession: URLSession.shared)) {
+    init(boxOfficeMovies: [Movie] = [], networkManager: NetworkManager = .shared) {
         self.boxOfficeMovies = boxOfficeMovies
         self.networkManager = networkManager
     }

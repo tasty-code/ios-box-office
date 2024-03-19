@@ -8,9 +8,10 @@
 import Foundation
 
 struct NetworkManager {
-    private var urlSession: URLSessionProtocol
+    static var shared: NetworkManager = NetworkManager(urlSession: URLSession.shared)
+    var urlSession: URLSessionProtocol
     
-    init(urlSession: URLSessionProtocol) {
+    private init(urlSession: URLSessionProtocol) {
         self.urlSession = urlSession
     }
     

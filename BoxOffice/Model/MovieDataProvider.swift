@@ -18,7 +18,7 @@ final class MovieDataProvider: MovieInformationViewControllerDataSource {
     weak var delegate: MovieDataProviderDelegate?
     let networkManager: NetworkManager
     
-    init(movieCode: String, networkManager: NetworkManager = NetworkManager(urlSession: URLSession.shared)) {
+    init(movieCode: String, networkManager: NetworkManager = .shared) {
         self.movieCode = movieCode
         self.networkManager = networkManager
     }
