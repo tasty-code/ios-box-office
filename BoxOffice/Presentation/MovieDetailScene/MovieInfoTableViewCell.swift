@@ -29,7 +29,7 @@ final class MovieInfoTableViewCell: UITableViewCell {
         stackView.distribution = .fill
         stackView.alignment = .center
         stackView.axis = .horizontal
-        stackView.spacing = 5
+        stackView.spacing = 10
         return stackView
     }()
     
@@ -53,12 +53,14 @@ final class MovieInfoTableViewCell: UITableViewCell {
         [titleLabel, infoLabel, movieInfoStackView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        titleLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        infoLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         
         NSLayoutConstraint.activate([
-            movieInfoStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            movieInfoStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            movieInfoStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            movieInfoStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            movieInfoStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            movieInfoStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            movieInfoStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            movieInfoStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
         ])
     }
     
