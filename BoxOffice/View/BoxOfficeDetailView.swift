@@ -44,6 +44,7 @@ final class BoxOfficeDetailView: UIScrollView {
     
     private let movieImageView: UIImageView = {
         let view = UIImageView()
+        view.contentMode = .scaleAspectFit
         view.image = UIImage(named: "prepare")
         return view
     }()
