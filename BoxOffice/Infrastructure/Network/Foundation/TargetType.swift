@@ -17,10 +17,6 @@ protocol TargetType {
 
 extension TargetType {
     
-    var baseURL: String {
-        return NetworkEnvironment.baseURL
-    }
-    
     private func asURL(_ url: String) throws -> URL {
         guard let url = URL(string: url) 
         else {

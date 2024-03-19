@@ -13,6 +13,10 @@ enum MovieAPI {
 
 extension MovieAPI: TargetType {
     
+    var baseURL: String {
+        return NetworkEnvironment.baseURL
+    }
+    
     var method: HTTPMethod {
         switch self {
         case .requestMovieDetailInfo(_, _):
