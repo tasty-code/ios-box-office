@@ -74,15 +74,17 @@ struct MovieInformationDetailData: Decodable {
         let genres: String = genres.map(\.genreName).joinedWithComma()
         let actors: String = actors.map(\.personName).joinedWithComma()
         
-        return MovieDataProvider.Movie(movieName: movieName,
-                                       directors: directors,
-                                       productionYear: productionYear,
-                                       openDate: openDate,
-                                       showTime: showTime,
-                                       audits: audits,
-                                       nations: nations,
-                                       genres: genres,
-                                       actors: actors)
+        return MovieDataProvider.Movie(
+            movieName: movieName,
+            directors: directors,
+            productionYear: productionYear,
+            openDate: openDate,
+            showTime: showTime,
+            audits: audits,
+            nations: nations,
+            genres: genres,
+            actors: actors
+        )
     }
 }
 
