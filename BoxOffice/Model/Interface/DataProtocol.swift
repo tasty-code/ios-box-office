@@ -10,13 +10,11 @@ protocol DataDelegate: AnyObject {
 }
 
 protocol BoxOfficeViewControllerDataSource {
-    associatedtype BoxOfficeData
-    var loadedData: [BoxOfficeData] { get }
-    func loadBoxOfficeData() async throws
+    var boxOfficeMovies: [BoxOfficeProvider.Movie] { get }
+    func loadBoxOfficeMovies() async throws
 }
 
 protocol MovieInformationViewControllerDataSource {
-    associatedtype MovieInformationData
-    var loadedData: MovieInformationData { get }
+    var movieInformationData: MovieDataProvider.Movie? { get }
     func loadMovieInformationData() async throws
 }

@@ -16,7 +16,7 @@ struct MovieInformationResult: Decodable {
 }
 
 struct MovieInformationDetail: Decodable {
-    let movie: Movie
+    let movie: MovieInformationDetailData
     let source: String
     
     private enum CodingKeys: String, CodingKey {
@@ -25,7 +25,7 @@ struct MovieInformationDetail: Decodable {
     }
 }
 
-struct Movie: Decodable {
+struct MovieInformationDetailData: Decodable {
     let movieCode: String
     let movieName: String
     let movieNameEnglish: String
@@ -58,7 +58,7 @@ struct Movie: Decodable {
         case nations, genres, directors, actors, showTypes, audits, staffs
     }
     
-    func toMovieDetail() -> MovieDataProvider.MovieDetail {
+    func toMovieDetail() -> MovieDataProvider.Movie {
         let openDate: String = {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyyMMdd"
@@ -84,7 +84,7 @@ struct Movie: Decodable {
             actor.personName
         }.toString()
         
-        return MovieDataProvider.MovieDetail(movieName: movieName,
+        return MovieDataProvider.Movie(movieName: movieName,
                                                   directors: directors,
                                                   productionYear: productionYear,
                                                   openDate: openDate,

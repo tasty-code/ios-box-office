@@ -8,9 +8,7 @@
 import Foundation
 
 final class MovieDataProvider: MovieInformationViewControllerDataSource {
-    
-    typealias MovieInformationData = MovieDetail?
-    var loadedData: MovieDetail?
+    var movieInformationData: Movie?
     
     let movieCode: String
     private(set) var posterData: Data? = nil {
@@ -33,13 +31,13 @@ final class MovieDataProvider: MovieInformationViewControllerDataSource {
         }
         let data: MovieInformationResult = try await self.networkManager.request(request)
         let movie = data.movieInformationDetail.movie
-        loadedData = converted(movie)
+        movieInformationData = converted(movie)
         try await loadImage()
     }
     
     private func loadImage() async throws {
-        guard let movieName = loadedData?.movieName,
-            let request = KakaoAPI.image(query: movieName).urlRequest else {
+        guard let movieName = movieInformationData?.movieName,
+              let request = KakaoAPI.image(query: movieName).urlRequest else {
             throw NetworkError.invalidAPIKey
         }
         let imageDocument: MovieImageDocument = try await self.networkManager.request(request)
@@ -51,11 +49,11 @@ final class MovieDataProvider: MovieInformationViewControllerDataSource {
         posterData = data
     }
     
-    private func converted(_ movie: Movie) -> MovieDetail {
+    private func converted(_ movie: MovieInformationDetailData) -> Movie {
         return movie.toMovieDetail()
     }
     
-    struct MovieDetail {
+    struct Movie {
         let movieName: String
         let directors: String
         let productionYear: String

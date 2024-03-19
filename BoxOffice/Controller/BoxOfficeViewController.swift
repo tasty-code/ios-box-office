@@ -8,7 +8,7 @@
 import UIKit
 
 final class BoxOfficeViewController: UIViewController {
- 
+    
     private let boxOfficeView: BoxOfficeView = BoxOfficeView()
     private let loadingIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -17,7 +17,7 @@ final class BoxOfficeViewController: UIViewController {
         dataSource.delegate = self
         return dataSource
     }()
-
+    
     override func loadView() {
         view = boxOfficeView
     }
@@ -47,7 +47,7 @@ extension BoxOfficeViewController {
 extension BoxOfficeViewController: BoxOfficeCollectionViewDelegate {
     func loadDailyBoxOfficeData() async {
         do {
-            try await dataSource.loadBoxOfficeData()
+            try await dataSource.loadBoxOfficeMovies()
         } catch {
             guard let networkError = error as? NetworkError else {
                 print(error.localizedDescription)
@@ -61,13 +61,12 @@ extension BoxOfficeViewController: BoxOfficeCollectionViewDelegate {
 
 extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.loadedData.count
+        return dataSource.boxOfficeMovies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeCollectionViewCell.className, for: indexPath) as? BoxOfficeCollectionViewCell,
-              let movies = dataSource.loadedData as? [BoxOfficeProvider.Movie],
-              let data = movies[safeIndex: indexPath.row] else {
+              let data = dataSource.boxOfficeMovies[safeIndex: indexPath.row] else {
             return UICollectionViewCell()
         }
         
@@ -77,10 +76,8 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movies = dataSource.loadedData as? [BoxOfficeProvider.Movie],
-              let movieCode = movies[safeIndex: indexPath.row]?.movieCode, let movieName = movies[safeIndex: indexPath.row]?.movieName else {
-            return
-        }
+        guard let movieCode = dataSource.boxOfficeMovies[safeIndex: indexPath.row]?.movieCode,
+              let movieName = dataSource.boxOfficeMovies[safeIndex: indexPath.row]?.movieName else { return }
         let movieInformationViewController: UIViewController = MovieInformationViewController(movieCode: movieCode, movieName: movieName)
         self.navigationController?.pushViewController(movieInformationViewController, animated: true)
     }
