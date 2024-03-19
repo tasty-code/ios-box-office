@@ -8,7 +8,7 @@
 import UIKit
 
 final class BoxOfficeViewController: UIViewController {
-    private let movieManager: MovieManager
+    private let movieManager: MovieManager = MovieManager()
     private let boxOfficeListView: BoxOfficeListView = {
         let configure = UICollectionLayoutListConfiguration(appearance: .plain)
         let layout = UICollectionViewCompositionalLayout.list(using: configure)
@@ -17,14 +17,13 @@ final class BoxOfficeViewController: UIViewController {
     }()
     private lazy var dataSource = BoxOfficeListDataSource(self.boxOfficeListView)
     
-    init(movieManager: MovieManager) {
-        self.movieManager = movieManager
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//    init() {
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

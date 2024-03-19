@@ -10,7 +10,6 @@ import UIKit
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    let movieManager: MovieManager = MovieManager()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard 
@@ -19,7 +18,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         window = UIWindow(windowScene: windowScene)
-        let navigationViewController = UINavigationController(rootViewController: BoxOfficeViewController(movieManager: movieManager))
+        let navigationViewController = UINavigationController(rootViewController: BoxOfficeViewController())
         let mainViewController = navigationViewController
         window?.rootViewController = mainViewController
         window?.makeKeyAndVisible()
