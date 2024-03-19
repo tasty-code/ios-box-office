@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BoxOfficeTabBarController: UITabBarController {
+final class BoxOfficeTabBarController: UITabBarController {
     
     lazy var boxOfficeNavigationController: UINavigationController = {
         let boxOfficeNavigationController = UINavigationController(rootViewController: boxOfficeViewController)
