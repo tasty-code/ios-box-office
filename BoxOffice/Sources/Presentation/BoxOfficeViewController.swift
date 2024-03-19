@@ -13,7 +13,7 @@ class BoxOfficeViewController: UIViewController, DailyFormatter{
     private let refreshControl = UIRefreshControl()
     let dailyBoxOffice = DailyBoxOfficeUseCase()
     
-    private lazy var boxOfficeCollectionView: UICollectionView = {
+    private var boxOfficeCollectionView: UICollectionView = {
         let layout = UICollectionViewCompositionalLayout.list(using: .init(appearance: .plain))
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
