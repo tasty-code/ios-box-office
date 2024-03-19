@@ -149,6 +149,7 @@ extension BoxOfficeViewController: UICollectionViewDelegateFlowLayout {
 extension BoxOfficeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedMovieCode = Observable<String>(boxOfficeList[indexPath.item].movieCode)
+        let selectedMovieName = Observable<String>(boxOfficeList[indexPath.item].movieName)
         
         let movieDetailVC = MovieDetailViewController(
             viewModel: MovieDetailViewModel(
@@ -156,9 +157,9 @@ extension BoxOfficeViewController: UICollectionViewDelegate {
                     movieRepository: DefaultMovieRepository(
                         apiService: MovieAPIService(provider: NetworkProvider())
                     )
-                )
+                ), moviePosterUseCase: DefaultMoviePoserUseCase(movieRepository: DefaultMoviePosterRepository(apiService: MoviePosterAPIService(provider: NetworkProvider())))
             ),
-            movieCode: selectedMovieCode
+            movieCode: selectedMovieCode, movieName: selectedMovieName
         )
         navigationController?.pushViewController(movieDetailVC, animated: true)
     }
