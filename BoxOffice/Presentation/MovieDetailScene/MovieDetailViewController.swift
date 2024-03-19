@@ -12,11 +12,13 @@ final class MovieDetailViewController: UIViewController {
     private let viewModel: MovieDetailViewModel
     private let movieCode: Observable<String>
     private let movieName: Observable<String>
-    private var movieDetailTableView = UITableView()
     private var movieDetail: MovieEntity?
     private var moviePoster: MoviePosterEntity?
+    private let movieDetailTableView = UITableView()
     
-    init(viewModel: MovieDetailViewModel, movieCode: Observable<String>, movieName: Observable<String>) {
+    init(viewModel: MovieDetailViewModel,
+         movieCode: Observable<String>,
+         movieName: Observable<String>) {
         self.viewModel = viewModel
         self.movieCode = movieCode
         self.movieName = movieName
