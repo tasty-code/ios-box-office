@@ -9,10 +9,6 @@ protocol BoxOfficeProviderDelegate: AnyObject {
     func reloadBoxOfficeView(_ boxOfficeProvider: BoxOfficeProvider)
 }
 
-protocol MovieDataProviderDelegate: AnyObject {
-    func reloadMovieInformationView(_ movieDataProvider: MovieDataProvider)
-}
-
 protocol BoxOfficeViewControllerDataSource {
     var boxOfficeMovies: [BoxOfficeProvider.Movie] { get }
     func loadBoxOfficeMovies() async throws
