@@ -58,6 +58,8 @@ final class BoxOfficeTests: XCTestCase {
         else {
             return
         }
+        
+        // when
         let result = try await sut.fetchData(with: urlString)
         switch result {
         case .success(let movies):
@@ -80,6 +82,8 @@ final class BoxOfficeTests: XCTestCase {
         else {
             return
         }
+        
+        // when
         let result = try await sut.fetchData(with: urlString)
         switch result {
         case .success(let movies):
