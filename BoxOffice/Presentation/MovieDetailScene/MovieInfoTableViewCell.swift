@@ -36,11 +36,16 @@ final class MovieInfoTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        configureUI()
         setUpLayout()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    private func configureUI() {
+        selectionStyle = .none
     }
     
     private func setUpLayout() {

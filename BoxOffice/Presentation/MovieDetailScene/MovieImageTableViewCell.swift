@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieImageTableViewCell: UITableViewCell {
+final class MovieImageTableViewCell: UITableViewCell {
     
     private let posterImageView: UIImageView = {
         let imageView = UIImageView()
@@ -18,6 +18,20 @@ class MovieImageTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        configureUI()
+        setUpLayout()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configureUI() {
+        selectionStyle = .none
+    }
+    
+    private func setUpLayout() {
         contentView.addSubview(posterImageView)
         NSLayoutConstraint.activate([
             posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
@@ -25,10 +39,6 @@ class MovieImageTableViewCell: UITableViewCell {
             posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
             posterImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0)
         ])
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     func setUpData(with moviePoster: MoviePosterEntity?) {

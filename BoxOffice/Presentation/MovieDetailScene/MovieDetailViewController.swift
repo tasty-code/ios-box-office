@@ -100,6 +100,7 @@ final class MovieDetailViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension MovieDetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -107,6 +108,7 @@ extension MovieDetailViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension MovieDetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
