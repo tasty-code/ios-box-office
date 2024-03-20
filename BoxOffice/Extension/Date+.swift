@@ -14,6 +14,8 @@ extension Date {
     func yesterday(format: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        
         let today = Date()
         let timezone = TimeZone.autoupdatingCurrent
         let secondsFromGMT = timezone.secondsFromGMT(for: today)
