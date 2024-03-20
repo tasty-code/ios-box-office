@@ -14,6 +14,12 @@ class BoxOfficeCollectionViewListCell: UICollectionViewListCell {
     
     // MARK: - Private Property
     
+    var movieData: DailyBoxOfficeList? {
+        didSet {
+            updateDailyBoxOfficeCellLabel()
+        }
+    }
+    
     private let rankLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -74,6 +80,12 @@ class BoxOfficeCollectionViewListCell: UICollectionViewListCell {
 extension BoxOfficeCollectionViewListCell {
     
     // MARK: - Private Function
+    
+    private func updateDailyBoxOfficeCellLabel() {
+        rankLabel.text = movieData?.rank
+        titleLabel.text = movieData?.movieName
+        detailLabel.text = "오늘 \(movieData?.audienceDailyCount ?? "Null") / 총 \(movieData?.audienceTotalAmount ?? "Null")"
+    }
     
     private func setUpLayout() {
         contentView.addSubview(titleStackView)

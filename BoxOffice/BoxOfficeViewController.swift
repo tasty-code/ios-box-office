@@ -35,6 +35,7 @@ class BoxOfficeViewController: UIViewController {
         configureUI()
         configureAutoLayout()
         configureCollectionView()
+        requstBoxOfficeData()
     }
     
     // MARK: - Private Function
@@ -64,13 +65,30 @@ class BoxOfficeViewController: UIViewController {
         movieCollectionView.dataSource = self
         movieCollectionView.register(BoxOfficeCollectionViewListCell.self, forCellWithReuseIdentifier: "BoxOfficeCollectionViewListCell")
     }
+    
+    private func requstBoxOfficeData() {
+        let date = Date.yesterdayFormatted
+        
+        NetworkManager.shared.fetchDailyBoxOffice(for: date) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let data):
+                    self?.boxOfficeData = data
+                    self?.movieCollectionView.reloadData()
+                case .failure(let error):
+                    self?.presentAlert(title: "네트워크 요청이 실패 했습니다.\n다시 시도 해주세요.\n(\(error))")
+                }
+            }
+        }
+    }
 }
 
 extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 10
+        guard let sectionCount = boxOfficeData?.boxOfficeResult.dailyBoxOfficeList.count else { return 0 }
+        return sectionCount
     }
     
     
@@ -78,6 +96,12 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeCollectionViewListCell.identifier, for: indexPath) as? BoxOfficeCollectionViewListCell else {
             return UICollectionViewCell()
         }
+        
+        guard let singleData = boxOfficeData?.boxOfficeResult.dailyBoxOfficeList[indexPath.row] else {
+            return UICollectionViewCell()
+        }
+        
+        cell.movieData = singleData
         
         return cell
     }
