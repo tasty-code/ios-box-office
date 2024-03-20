@@ -58,7 +58,7 @@ final class NetworkManager {
         task.resume()
     }
     
-    func fetchDailyBoxOffice(for date: String, completion: @escaping (Result<[BoxOfficeMovieDTO], NetworkError>) -> Void) {
+    func fetchDailyBoxOffice(for date: String, completion: @escaping (Result<BoxOfficeDTO, NetworkError>) -> Void) {
         var components = URLComponents()
         components.scheme = KobisRequesUrl.scheme.rawValue
         components.host = KobisRequesUrl.host.rawValue
@@ -73,17 +73,10 @@ final class NetworkManager {
             return
         }
         
-        performRequest(with: url) { (result: Result<BoxOfficeData, NetworkError>) in
+        performRequest(with: url) { (result: Result<BoxOfficeDTO, NetworkError>) in
             switch result {
             case .success(let data):
-                let boxOfficeMovies = data.boxOfficeResult.dailyBoxOfficeList.map { boxOffice -> BoxOfficeMovieDTO in
-                    BoxOfficeMovieDTO(rank: boxOffice.rank,
-                                      movieName: boxOffice.movieName,
-                                      openDate: boxOffice.openDate,
-                                      audienceCount: boxOffice.audienceCount,
-                                      movieCode: boxOffice.movieCd)
-                }
-                completion(.success(boxOfficeMovies))
+                completion(.success(data))
             case .failure(let error):
                 completion(.failure(error))
             }

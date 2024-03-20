@@ -13,6 +13,8 @@ class BoxOfficeViewController: UIViewController {
     
     // MARK: - Private Property
     
+    private var boxOfficeData: BoxOfficeDTO?
+    
     // MARK: - View
     
     private lazy var movieCollectionView: UICollectionView = {
