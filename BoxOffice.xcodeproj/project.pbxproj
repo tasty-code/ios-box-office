@@ -21,6 +21,7 @@
 		63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F72970E1A1005DF7D1 /* Assets.xcassets */; };
 		63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */; };
 		F32E6F032B84861D0000A504 /* MovieInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32E6F022B84861D0000A504 /* MovieInfoResponse.swift */; };
+		F3446EB32BAA7873007A4430 /* BoxOfficeCollectionViewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3446EB22BAA7873007A4430 /* BoxOfficeCollectionViewListCell.swift */; };
 		F39648222B7C6178002DCB96 /* BoxOfficeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39648212B7C6178002DCB96 /* BoxOfficeData.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		63DF20FA2970E1A1005DF7D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63DF20FC2970E1A1005DF7D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F32E6F022B84861D0000A504 /* MovieInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoResponse.swift; sourceTree = "<group>"; };
+		F3446EB22BAA7873007A4430 /* BoxOfficeCollectionViewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeCollectionViewListCell.swift; sourceTree = "<group>"; };
 		F39648212B7C6178002DCB96 /* BoxOfficeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +119,7 @@
 				1D313A7D2B8499640088297F /* Network */,
 				F396481E2B7C6138002DCB96 /* Model */,
 				63DF20F22970E1A0005DF7D1 /* BoxOfficeViewController.swift */,
+				F3446EB22BAA7873007A4430 /* BoxOfficeCollectionViewListCell.swift */,
 				63DF20F42970E1A0005DF7D1 /* Main.storyboard */,
 				63DF20F72970E1A1005DF7D1 /* Assets.xcassets */,
 				63DF20F92970E1A1005DF7D1 /* LaunchScreen.storyboard */,
@@ -191,7 +194,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					1DF9F88B2B7C81B000458068 = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -257,6 +260,7 @@
 			files = (
 				63DF20F32970E1A0005DF7D1 /* BoxOfficeViewController.swift in Sources */,
 				1D313A7A2B8498200088297F /* MovieDetailDTO.swift in Sources */,
+				F3446EB32BAA7873007A4430 /* BoxOfficeCollectionViewListCell.swift in Sources */,
 				63DF20EF2970E1A0005DF7D1 /* AppDelegate.swift in Sources */,
 				1D7A8E072B89C76000ACCDC7 /* Date+Extensions.swift in Sources */,
 				63DF20F12970E1A0005DF7D1 /* SceneDelegate.swift in Sources */,
@@ -482,7 +486,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -511,7 +515,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

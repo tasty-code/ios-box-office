@@ -32,6 +32,7 @@ class BoxOfficeViewController: UIViewController {
         configureNavigationBar()
         configureUI()
         configureAutoLayout()
+        configureCollectionView()
     }
     
     // MARK: - Private Function
@@ -54,22 +55,33 @@ class BoxOfficeViewController: UIViewController {
             movieCollectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
         ])
     }
+    
+    private func configureCollectionView() {
+        movieCollectionView.backgroundColor = .white
+        movieCollectionView.delegate = self
+        movieCollectionView.dataSource = self
+        movieCollectionView.register(BoxOfficeCollectionViewListCell.self, forCellWithReuseIdentifier: "BoxOfficeCollectionViewListCell")
+    }
 }
 
 extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 0
+        return 10
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-        return UICollectionViewCell()
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeCollectionViewListCell.identifier, for: indexPath) as? BoxOfficeCollectionViewListCell else {
+            return UICollectionViewCell()
+        }
+        
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize()
+        return CGSize(width: collectionView.bounds.width, height: 80)
     }
 }
