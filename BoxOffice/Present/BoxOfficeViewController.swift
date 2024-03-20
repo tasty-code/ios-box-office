@@ -159,7 +159,6 @@ extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewD
         return sectionCount
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BoxOfficeCollectionViewListCell.identifier, for: indexPath) as? BoxOfficeCollectionViewListCell else {
             return UICollectionViewCell()
