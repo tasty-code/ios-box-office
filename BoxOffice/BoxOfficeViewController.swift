@@ -40,8 +40,22 @@ class BoxOfficeViewController: UIViewController {
     
     // MARK: - Private Function
     
+    private func formatDateString(_ dateString: String) -> String {
+        let yearIndex = dateString.index(dateString.startIndex, offsetBy: 0)
+        let monthIndex = dateString.index(dateString.startIndex, offsetBy: 4)
+        let dayIndex = dateString.index(dateString.startIndex, offsetBy: 6)
+        
+        let year = dateString[yearIndex..<monthIndex]
+        let month = dateString[monthIndex..<dayIndex]
+        let day = dateString[dayIndex...]
+        
+        return "\(year)-\(month)-\(day)"
+    }
+    
     private func configureNavigationBar() {
-        self.navigationItem.title = "네비게이션바"
+        let dateString = Date.yesterdayFormatted
+        let formattedDateString = formatDateString(dateString)
+        self.navigationItem.title = formattedDateString
     }
     
     private func configureUI() {
@@ -81,6 +95,8 @@ class BoxOfficeViewController: UIViewController {
             }
         }
     }
+    
+    
 }
 
 extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
