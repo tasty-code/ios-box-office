@@ -11,7 +11,7 @@ final class MovieImageTableViewCell: UITableViewCell {
     
     private let posterImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -34,10 +34,10 @@ final class MovieImageTableViewCell: UITableViewCell {
     private func setUpLayout() {
         contentView.addSubview(posterImageView)
         NSLayoutConstraint.activate([
-            posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
-            posterImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0)
+            posterImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            posterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            posterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            posterImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     
