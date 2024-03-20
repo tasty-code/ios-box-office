@@ -69,7 +69,7 @@ class BoxOfficeCollectionViewListCell: UICollectionViewListCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         accessories = [.disclosureIndicator()]
-        setUpLayout()
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -87,23 +87,20 @@ extension BoxOfficeCollectionViewListCell {
         detailLabel.text = "오늘 \(movieData?.audienceDailyCount ?? "Null") / 총 \(movieData?.audienceTotalAmount ?? "Null")"
     }
     
-    private func setUpLayout() {
+    private func configureUI() {
         contentView.addSubview(titleStackView)
         contentView.addSubview(rankStackView)
         
-        setUpRankStackVeiwConstraint()
-        setUpMovieInfomationStackViewConstraint()
+        configureConstraint()
     }
-    
-    private func setUpRankStackVeiwConstraint() {
+
+    private func configureConstraint() {
         NSLayoutConstraint.activate([
             rankStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             rankStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             rankStackView.widthAnchor.constraint(equalToConstant: 40)
         ])
-    }
-
-    private func setUpMovieInfomationStackViewConstraint() {
+        
         NSLayoutConstraint.activate([
             titleStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             titleStackView.leadingAnchor.constraint(equalTo: rankStackView.trailingAnchor, constant: 30),
