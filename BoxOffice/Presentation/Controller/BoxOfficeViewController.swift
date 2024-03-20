@@ -26,11 +26,10 @@ final class BoxOfficeViewController: UIViewController {
 
 // MARK: - 생명주기
 extension BoxOfficeViewController {
-    
     override func loadView() {
         self.boxOfficeCollectionView = BoxOfficeCollectionView(frame: .zero)
         self.view = boxOfficeCollectionView
-
+        
     }
 
     override func viewDidLoad() {
@@ -38,6 +37,7 @@ extension BoxOfficeViewController {
         setupUI()
         configureDataSource()
         fetchBoxOfficeData()
+        fetchBoxOfficeDetailData()
     }
 }
 
@@ -53,19 +53,17 @@ private extension BoxOfficeViewController {
         navigationItem.title = Date().formattedDate(withFormat: "YYYY-MM-dd")
     }
     
-    // 셀 등록 설정 메서드
     func configureCellRegistration() {
         cellRegistration = UICollectionView.CellRegistration<BoxOfficeCell, BoxOfficeDisplayModel> { (cell, indexPath, movie) in
             cell.accessories = [.disclosureIndicator()]
             cell.rankLabel.text = movie.rank
             cell.movieNameLabel.text = movie.movieName
             guard let rankIntensity = Int(movie.rankIntensity) else { return }
-            cell.matchRankIntensity(of: movie.isNew, with: rankIntensity)
-            cell.matchAudienceAccount(of: movie)
+            cell.showRankIntensity(of: movie.isNew, with: rankIntensity)
+            cell.showAudienceAccount(of: movie)
         }
     }
     
-    // Refresh
     func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshBoxOfficeData), for: .valueChanged)
@@ -82,20 +80,27 @@ private extension BoxOfficeViewController {
     func fetchBoxOfficeData() {
         fetchTask = Task {
             let result = await boxOfficeUseCase.fetchBoxOfficeData()
-            handleFetchResult(result)
+            handleBoxOfficeResult(result)
         }
         self.boxOfficeCollectionView.refreshControl?.endRefreshing()
     }
     
-    func handleFetchResult(_ result: Result<[BoxOfficeMovie], DomainError>) {
-        switch result {
-        case .success(let boxOfficeMovies):
-            let displayMovies = mapEntityToDisplayModel(boxOfficeMovies)
-            self.movies = displayMovies
-            applySnapshot(movies: displayMovies, animatingDifferences: true)
-        case .failure(let error):
-            presentAlert(error: error)
+    func handleBoxOfficeResult(_ result: [BoxOfficeMovie]?) {
+        guard let boxOfficeMovies = result else { return }
+        let displayMovies = mapEntityToDisplayModel(boxOfficeMovies)
+        self.movies = displayMovies
+        applySnapshot(movies: displayMovies, animatingDifferences: true)
+    }
+    
+    func fetchBoxOfficeDetailData() {
+        fetchTask = Task {
+            let result = await boxOfficeUseCase.fetchDetailMovieData(movie: "20236488")
+            handleBoxOfficeDetailResult(result)
         }
+    }
+    
+    func handleBoxOfficeDetailResult(_ result: MovieDetailInfo) {
+            print(result)
     }
     
     @MainActor

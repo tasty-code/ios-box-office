@@ -122,7 +122,7 @@ extension BoxOfficeCell {
         ])
     }
     
-    func matchRankIntensity(of isNew: Bool, with rankNumber: Int) {
+    func showRankIntensity(of isNew: Bool, with rankNumber: Int) {
         if isNew {
             rankIntensityLabel.textColor = .red
             rankIntensityLabel.text = "신작"
@@ -147,7 +147,7 @@ extension BoxOfficeCell {
         rankIntensityLabel.attributedText = attributedString
     }
     
-    func matchAudienceAccount(of cell: BoxOfficeDisplayModel) {
+    func showAudienceAccount(of cell: BoxOfficeDisplayModel) {
         audienceAccountLabel.text = "오늘 \(self.numberFormatter(for: cell.audienceCount)) / 총 \(self.numberFormatter(for: cell.audienceAccount))"
     }
     

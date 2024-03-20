@@ -39,9 +39,10 @@
 		C76965F92B86EE7200EF8F87 /* SessionProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76965F82B86EE7200EF8F87 /* SessionProvidable.swift */; };
 		C77ADAB82B7C766A0069AE0F /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ADAB72B7C766A0069AE0F /* NetworkError.swift */; };
 		C77ADABA2B7C76B40069AE0F /* JsonDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77ADAB92B7C76B40069AE0F /* JsonDecoder.swift */; };
+		C78946B82BA9330B004778A3 /* URLInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78946B72BA9330B004778A3 /* URLInformation.swift */; };
+		C78946BC2BA9B36D004778A3 /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78946BB2BA9B36D004778A3 /* Mapper.swift */; };
 		C78D99402B9F300E00D8000A /* RequestProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78D993F2B9F300E00D8000A /* RequestProvidable.swift */; };
 		C78D99422B9F301F00D8000A /* RequestProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78D99412B9F301F00D8000A /* RequestProvider.swift */; };
-		C790FE502BA838770086D7DB /* URLInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C790FE4F2BA838770086D7DB /* URLInformation.swift */; };
 		C790FE522BA838A70086D7DB /* RequestInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C790FE512BA838A70086D7DB /* RequestInformation.swift */; };
 		C790FE542BA838EB0086D7DB /* SchemeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C790FE532BA838EB0086D7DB /* SchemeType.swift */; };
 		C790FE572BA8394D0086D7DB /* DEBUG-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = C790FE552BA8394D0086D7DB /* DEBUG-Keys.plist */; };
@@ -99,9 +100,10 @@
 		C76965F82B86EE7200EF8F87 /* SessionProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionProvidable.swift; sourceTree = "<group>"; };
 		C77ADAB72B7C766A0069AE0F /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		C77ADAB92B7C76B40069AE0F /* JsonDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDecoder.swift; sourceTree = "<group>"; };
+		C78946B72BA9330B004778A3 /* URLInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLInformation.swift; sourceTree = "<group>"; };
+		C78946BB2BA9B36D004778A3 /* Mapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
 		C78D993F2B9F300E00D8000A /* RequestProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProvidable.swift; sourceTree = "<group>"; };
 		C78D99412B9F301F00D8000A /* RequestProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProvider.swift; sourceTree = "<group>"; };
-		C790FE4F2BA838770086D7DB /* URLInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = URLInformation.swift; path = "../../../../../../../../.Trash/ios-box-office/BoxOffice/Data/NetworkService/URLBuilder/URLInformation.swift"; sourceTree = "<group>"; };
 		C790FE512BA838A70086D7DB /* RequestInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInformation.swift; sourceTree = "<group>"; };
 		C790FE532BA838EB0086D7DB /* SchemeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemeType.swift; sourceTree = "<group>"; };
 		C790FE552BA8394D0086D7DB /* DEBUG-Keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DEBUG-Keys.plist"; sourceTree = "<group>"; };
@@ -136,7 +138,7 @@
 			children = (
 				082798252B87771700ACC723 /* EndPointMakable.swift */,
 				082798272B87778200ACC723 /* EndPoint.swift */,
-				C790FE4F2BA838770086D7DB /* URLInformation.swift */,
+				C78946B72BA9330B004778A3 /* URLInformation.swift */,
 			);
 			path = URLBuilder;
 			sourceTree = "<group>";
@@ -190,7 +192,6 @@
 		08AB8E782B7F24AB00564AC5 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				082798372B88311400ACC723 /* MappableProtocol.swift */,
 				C7C8D3322B7C5EA9009DE42F /* BoxOfficeDTO.swift */,
 				C7A1E7722B883CE300F9AB6B /* DetailMovieInfoDTO.swift */,
 			);
@@ -295,6 +296,7 @@
 			children = (
 				C76965EC2B86E86100EF8F87 /* Entity */,
 				C76965EB2B86E85200EF8F87 /* UseCase */,
+				C7A3FF4D2BAA81B200FEE6A6 /* Mapper */,
 				C7A1E76B2B8831FA00F9AB6B /* Error */,
 			);
 			path = Domain;
@@ -398,6 +400,15 @@
 				C7A1E7692B8831AA00F9AB6B /* DomainError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		C7A3FF4D2BAA81B200FEE6A6 /* Mapper */ = {
+			isa = PBXGroup;
+			children = (
+				C78946BB2BA9B36D004778A3 /* Mapper.swift */,
+				082798372B88311400ACC723 /* MappableProtocol.swift */,
+			);
+			path = Mapper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -517,6 +528,7 @@
 				0827983E2B88339900ACC723 /* DependencyEnvironment.swift in Sources */,
 				C78D99422B9F301F00D8000A /* RequestProvider.swift in Sources */,
 				0827984A2B884F9500ACC723 /* DateExtension.swift in Sources */,
+				C78946BC2BA9B36D004778A3 /* Mapper.swift in Sources */,
 				C7A1E76A2B8831AA00F9AB6B /* DomainError.swift in Sources */,
 				C76771842B9AA88400B3B9BD /* BoxOfficeCollectionView.swift in Sources */,
 				C76965F12B86ECB800EF8F87 /* BoxOfficeMovie.swift in Sources */,
@@ -529,7 +541,6 @@
 				C76965EA2B86E83D00EF8F87 /* SessionProvider.swift in Sources */,
 				0827984C2B88519900ACC723 /* MovieDetailInfo.swift in Sources */,
 				C76965E62B86E83100EF8F87 /* NetworkResponse.swift in Sources */,
-				C790FE502BA838770086D7DB /* URLInformation.swift in Sources */,
 				0864FC652B9F318000CE0725 /* ViewControllerFactoryProtocol.swift in Sources */,
 				08A6CE5D2B99C6CB00F2F2CA /* BoxOfficeDisplayModel.swift in Sources */,
 				08A6CE732B9AAA4E00F2F2CA /* ViewControllerExtension.swift in Sources */,
@@ -542,6 +553,7 @@
 				0864FC632B9F2EE500CE0725 /* APIHostType.swift in Sources */,
 				08A6CE702B9AA9F000F2F2CA /* SynchronizedLockPropertyWrapper.swift in Sources */,
 				C76965F32B86ECBD00EF8F87 /* BoxOfficeUseCase.swift in Sources */,
+				C78946B82BA9330B004778A3 /* URLInformation.swift in Sources */,
 				082798262B87771800ACC723 /* EndPointMakable.swift in Sources */,
 				C76965EF2B86E89B00EF8F87 /* MovieRepository.swift in Sources */,
 				0827983C2B88328B00ACC723 /* BoxOfficeUseCaseProtocol.swift in Sources */,

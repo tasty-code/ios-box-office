@@ -2,6 +2,7 @@
 import Foundation
 
 protocol BoxOfficeUseCaseProtocol {
-    func fetchBoxOfficeData() async -> Result<[BoxOfficeMovie], DomainError>
-    func fetchDetailMovieData(movie: String) async -> Result<MovieDetailInfo, DomainError>
+    func fetchBoxOfficeData() async -> [BoxOfficeMovie]
+    func fetchDetailMovieData(movie: String) async -> MovieDetailInfo
 }
+

@@ -10,36 +10,49 @@ final class MovieRepository: MovieRepositoryProtocol {
         self.decoder = decoder
     }
     
-    func requestBoxOfficeData<T: Decodable>() async -> Result<T, NetworkError> {
+    func requestBoxOfficeData<T: Decodable>() async -> T? {
         guard let request = RequestProvider(requestInformation: .dailyMovie).request else {
-            return .failure(.requestError)
+            return nil
         }
-        return await makeRequestAndDecode(request: request)
+        return await requestAPI(request: request)
     }
     
-    func requestDetailMovieData<T: Decodable>(movieCode: String) async -> Result<T, NetworkError> {
+    func requestDetailMovieData<T: Decodable>(movieCode: String) async -> T? {
         guard let request = RequestProvider(requestInformation: .detailMovie(code: movieCode)).request else {
-            return .failure(.requestError)
+            return nil
         }
-        return await makeRequestAndDecode(request: request)
+        return await requestAPI(request: request)
     }
-
-    private func makeRequestAndDecode<T: Decodable>(request: URLRequest) async -> Result<T, NetworkError> {
+    
+    private func requestAPI<T: Decodable>(request: URLRequest) async -> T? {
         let result: Result<NetworkResponse, NetworkError> = await sessionProvider.requestAPI(using: request)
         
         switch result {
         case .success(let networkResponse):
-            guard let data = networkResponse.data else { return .failure(.connectivity) }
-            print(data)
-            return decoder.decode(data)
+            guard let data = networkResponse.data else { return nil }
+            return decode(data)
             
         case .failure(let networkError):
             logNetworkError(networkError)
-            return .failure(.connectivity)
+            return nil
         }
     }
     
-    private func logNetworkError(_ error: NetworkError) {
-        print("Network Error: \(error.localizedDescription)")
+    private func decode<T: Decodable>(_ data: Data) -> T? {
+        let decodedResult: Result<T, NetworkError> = decoder.decode(data)
+        
+        switch decodedResult {
+        case .success(let decodedData):
+            return decodedData
+        case .failure(_):
+            return nil
+        }
     }
 }
+
+private func logNetworkError(_ error: NetworkError) {
+    print("Network Error: \(error.localizedDescription)")
+}
+
+
+
