@@ -11,8 +11,6 @@ extension String {
     func formatNumberString() -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.locale = Locale.current
-        
         guard let number = Double(self),
               let result = formatter.string(from: NSNumber(value: number))
         else {

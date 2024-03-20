@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 struct APIURLCompnents {
     
     static let schema = "https"
@@ -30,27 +28,6 @@ struct APIURLCompnents {
         case APIKey = "23a93cbbbc8fdc2ae474716728465cca"
         static var targetDate = Date().yesterday
         case movieCode = "20124079"
-    }
-}
-
-extension Date {
-    var yesterday: String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd"
-        let today = Date()
-        let timezone = TimeZone.autoupdatingCurrent
-        let secondsFromGMT = timezone.secondsFromGMT(for: today)
-        let localizedDate = today.addingTimeInterval(TimeInterval(secondsFromGMT))
-        let yesterday = Calendar(identifier: .gregorian).date(byAdding: .day, value: -2, to: localizedDate)
-        guard let dateString = dateFormatter.string(for: yesterday) else {
-            return "알 수 없는 날짜"
-        }
-        
-        print(secondsFromGMT)
-        print(localizedDate)
-        print(yesterday as Any)
-        print(dateString)
-        return dateString
     }
 }
 
