@@ -81,12 +81,6 @@ extension BoxOfficeCollectionViewListCell {
     
     // MARK: - Private Function
     
-    private func updateDailyBoxOfficeCellLabel() {
-        rankLabel.text = movieData?.rank
-        titleLabel.text = movieData?.movieName
-        detailLabel.text = "오늘 \(movieData?.audienceDailyCount ?? "Null") / 총 \(movieData?.audienceTotalAmount ?? "Null")"
-    }
-    
     private func configureUI() {
         contentView.addSubview(titleStackView)
         contentView.addSubview(rankStackView)
@@ -106,5 +100,40 @@ extension BoxOfficeCollectionViewListCell {
             titleStackView.leadingAnchor.constraint(equalTo: rankStackView.trailingAnchor, constant: 30),
             titleStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
         ])
+    }
+    
+    private func updateDailyBoxOfficeCellLabel() {
+        rankLabel.text = movieData?.rank
+        titleLabel.text = movieData?.movieName
+        detailLabel.text = "오늘 \(movieData?.audienceDailyCount.formatNumberString() ?? "Null") / 총 \(movieData?.audienceTotalAmount.formatNumberString() ?? "Null")"
+        formatMovieLabel()
+    }
+    
+    private func formatMovieLabel() {
+        
+        guard let newOrOld = movieData?.rankOldAndNew else {
+            rankChangeLabel.text = "Null"
+            return
+        }
+        
+        guard newOrOld != .new else {
+            rankChangeLabel.text = "신작"
+            rankChangeLabel.textColor = .red
+            return
+        }
+        
+        if let rankChangeValue = movieData?.rankIncrement, let rankChangeValue = Int(rankChangeValue) {
+            
+            guard rankChangeValue != 0 else {
+                rankChangeLabel.text = "-"
+                rankChangeLabel.textColor = .black
+                return
+            }
+            
+            rankChangeLabel.text = rankChangeValue < 0 ? "▼" : "▲"
+            let charactersColor:UIColor = rankChangeValue < 0 ? .blue : .red
+            rankChangeLabel.text! += String(rankChangeValue).formatNumberString()
+            rankChangeLabel.setTextColor(charactersColor, range: NSRange(location: 0, length: 1))
+        }
     }
 }
