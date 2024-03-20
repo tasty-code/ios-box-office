@@ -14,8 +14,15 @@ class BoxOfficeViewController: UIViewController {
     // MARK: - Private Property
     
     private var boxOfficeData: BoxOfficeDTO?
+    private var isAppStartLoading: Bool = true
     
     // MARK: - View
+    
+    private lazy var loadingView: LoadingView = {
+        let view = LoadingView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     private lazy var movieCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -31,15 +38,21 @@ class BoxOfficeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.loadingView.isLoading = true
         configureNavigationBar()
         configureUI()
-        configureAutoLayout()
         configureCollectionView()
         requstBoxOfficeData()
         configureRefreshControl()
     }
     
     // MARK: - Private Function
+    
+    private func callLoadingView(completion: @escaping () -> ()) {
+        DispatchQueue.main.async {
+            completion()
+        }
+    }
     
     private func formatDateString(_ dateString: String) -> String {
         let yearIndex = dateString.index(dateString.startIndex, offsetBy: 0)
@@ -60,7 +73,10 @@ class BoxOfficeViewController: UIViewController {
     }
     
     private func configureUI() {
+        self.loadingView.isLoading = true
         view.addSubview(movieCollectionView)
+        view.addSubview(loadingView)
+        configureAutoLayout()
     }
     
     private func configureAutoLayout() {
@@ -71,6 +87,13 @@ class BoxOfficeViewController: UIViewController {
             movieCollectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             movieCollectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             movieCollectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
+            loadingView.leftAnchor.constraint(equalTo: self.movieCollectionView.leftAnchor),
+            loadingView.rightAnchor.constraint(equalTo: self.movieCollectionView.rightAnchor),
+            loadingView.bottomAnchor.constraint(equalTo: self.movieCollectionView.bottomAnchor),
+            loadingView.topAnchor.constraint(equalTo: self.movieCollectionView.topAnchor),
         ])
     }
     
@@ -106,6 +129,13 @@ class BoxOfficeViewController: UIViewController {
                     self?.movieCollectionView.reloadData()
                 case .failure(let error):
                     self?.presentAlert(title: "네트워크 요청이 실패 했습니다.\n다시 시도 해주세요.\n(\(error))")
+                }
+                
+                if self?.isAppStartLoading == true {
+                    self?.callLoadingView { [weak self] in
+                        self?.loadingView.isLoading = false
+                        self?.isAppStartLoading = false
+                    }
                 }
             }
         }
