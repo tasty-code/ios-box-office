@@ -36,6 +36,7 @@ class BoxOfficeViewController: UIViewController {
         configureAutoLayout()
         configureCollectionView()
         requstBoxOfficeData()
+        configureRefreshControl()
     }
     
     // MARK: - Private Function
@@ -73,6 +74,20 @@ class BoxOfficeViewController: UIViewController {
         ])
     }
     
+    private func configureRefreshControl() {
+        
+        movieCollectionView.refreshControl = UIRefreshControl()
+        let refreshControl = movieCollectionView.refreshControl
+        refreshControl?.addTarget(self, action:
+                                    #selector(handleRefreshControl),
+                                  for: .valueChanged)
+        refreshControl?.tintColor = UIColor.systemYellow
+        refreshControl?.attributedTitle = NSAttributedString(
+            string: "새로고침",
+            attributes: [.foregroundColor: UIColor.systemPink]
+        )
+    }
+    
     private func configureCollectionView() {
         movieCollectionView.backgroundColor = .white
         movieCollectionView.delegate = self
@@ -95,11 +110,18 @@ class BoxOfficeViewController: UIViewController {
             }
         }
     }
-    
-    
 }
 
 extension BoxOfficeViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    @objc func handleRefreshControl() {
+        
+        requstBoxOfficeData()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            self.movieCollectionView.refreshControl?.endRefreshing()
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
