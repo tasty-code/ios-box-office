@@ -24,6 +24,7 @@
 		F3446EB32BAA7873007A4430 /* BoxOfficeCollectionViewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3446EB22BAA7873007A4430 /* BoxOfficeCollectionViewListCell.swift */; };
 		F3446EB52BAA84C2007A4430 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3446EB42BAA84C2007A4430 /* UIViewController+.swift */; };
 		F3446EB72BAAC729007A4430 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3446EB62BAAC729007A4430 /* UILabel+.swift */; };
+		F3446EB92BAACAE6007A4430 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3446EB82BAACAE6007A4430 /* String+.swift */; };
 		F39648222B7C6178002DCB96 /* BoxOfficeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39648212B7C6178002DCB96 /* BoxOfficeDTO.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		F3446EB22BAA7873007A4430 /* BoxOfficeCollectionViewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeCollectionViewListCell.swift; sourceTree = "<group>"; };
 		F3446EB42BAA84C2007A4430 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		F3446EB62BAAC729007A4430 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		F3446EB82BAACAE6007A4430 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		F39648212B7C6178002DCB96 /* BoxOfficeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +127,7 @@
 				F396481E2B7C6138002DCB96 /* Model */,
 				63DF20F22970E1A0005DF7D1 /* BoxOfficeViewController.swift */,
 				F3446EB22BAA7873007A4430 /* BoxOfficeCollectionViewListCell.swift */,
+				F3446EB82BAACAE6007A4430 /* String+.swift */,
 				F3446EB62BAAC729007A4430 /* UILabel+.swift */,
 				63DF20F42970E1A0005DF7D1 /* Main.storyboard */,
 				63DF20F72970E1A1005DF7D1 /* Assets.xcassets */,
@@ -276,6 +279,7 @@
 				F32E6F032B84861D0000A504 /* MovieInfoResponse.swift in Sources */,
 				1D313A812B849ABF0088297F /* NetworkError.swift in Sources */,
 				1D313A7C2B8498740088297F /* BoxOfficeMovieDTO.swift in Sources */,
+				F3446EB92BAACAE6007A4430 /* String+.swift in Sources */,
 				F39648222B7C6178002DCB96 /* BoxOfficeDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
