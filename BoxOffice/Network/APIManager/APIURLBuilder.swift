@@ -7,17 +7,17 @@
 
 import Foundation
 
-struct NetworkAPI {
+struct APIURLBuilder {
     
-    func buildDailyBoxOfficeAPI(targetDate: APIURLCompnents.QueryValues) -> URL? {
+    func buildDailyBoxOfficeAPI(targetDate: String) -> URL? {
         return buildUrl(apiType: .dailyBoxOffice, query: targetDate).url
     }
-    
-    func buildMovieDetailAPI(movieCode: APIURLCompnents.QueryValues) -> URL? {
+
+    func buildMovieDetailAPI(movieCode: String) -> URL? {
         return buildUrl(apiType: .movieDetail, query: movieCode).url
     }
     
-    private func buildUrl(apiType: APIType, query: APIURLCompnents.QueryValues) -> URLComponents {
+    private func buildUrl(apiType: APIType, query: String) -> URLComponents {
         var components = URLComponents()
         components.scheme = APIURLCompnents.schema
         components.host = APIURLCompnents.host
@@ -25,21 +25,21 @@ struct NetworkAPI {
         
         components.queryItems = [
             URLQueryItem(name: "key", value: APIURLCompnents.QueryValues.APIKey.rawValue),
-            URLQueryItem(name: apiType.rawValue , value: query.rawValue)
+            URLQueryItem(name: apiType.rawValue , value: query)
         ]
         return components
     }
 }
 
-extension NetworkAPI {
-    func buildDailyBoxOfficeAPI(targetDate: APIURLCompnents.QueryValues, keys: APIURLCompnents.QueryKeys..., values: Any...) -> URL? {
+extension APIURLBuilder {
+    func buildDailyBoxOfficeAPI(targetDate: String, keys: APIURLCompnents.QueryKeys..., values: Any...) -> URL? {
         let dict: [APIURLCompnents.QueryKeys: Any] = zip(keys, values).reduce(into: [:]) { partialResult, now in
             partialResult[now.0] = now.1
         }
         return buildUrl(apiType: .dailyBoxOffice, requiredQuery: targetDate, queries: dict).url
     }
     
-    private func buildUrl(apiType: APIType, requiredQuery: APIURLCompnents.QueryValues, queries: [APIURLCompnents.QueryKeys: Any]) -> URLComponents {
+    private func buildUrl(apiType: APIType, requiredQuery: String, queries: [APIURLCompnents.QueryKeys: Any]) -> URLComponents {
         var components = URLComponents()
         components.scheme = APIURLCompnents.schema
         components.host = APIURLCompnents.host
@@ -47,7 +47,7 @@ extension NetworkAPI {
 
         components.queryItems = [
             URLQueryItem(name: "key", value: APIURLCompnents.QueryValues.APIKey.rawValue),
-            URLQueryItem(name: apiType.rawValue , value: requiredQuery.rawValue)
+            URLQueryItem(name: apiType.rawValue , value: requiredQuery)
         ]
         queries.forEach { (key: APIURLCompnents.QueryKeys, value: Any) in
             components.queryItems?.append(URLQueryItem(name: key.rawValue,

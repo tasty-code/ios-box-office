@@ -29,14 +29,14 @@ extension MovieDetailDTO.MovieInfoDTO {
         let openDate: String
         let productionStatusName: String
         let typeName: String
-        let nations: [Nation]
-        let genres: [Genre]
-        let directors: [Director]
-        let actors: [Actor]
-        let showTypes: [ShowType]
-        let companys: [Company]
-        let audits: [Audit]
-        let staffs: [Staff]
+        let nations: [NationDTO]
+        let genres: [GenreDTO]
+        let directors: [DirectorDTO]
+        let actors: [ActorDTO]
+        let showTypes: [ShowTypeDTO]
+        let companys: [CompanyDTO]
+        let audits: [AuditDTO]
+        let staffs: [StaffDTO]
     }
 }
 

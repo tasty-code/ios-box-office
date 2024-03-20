@@ -7,20 +7,19 @@
 
 import Foundation
 
-struct DailyBoxOfficeResultDTO: Decodable {
+struct DailyBoxOfficeDTO: Decodable {
     let boxOfficeResult: BoxOfficeDTO
 }
 
-extension DailyBoxOfficeResultDTO {
+extension DailyBoxOfficeDTO {
     struct BoxOfficeDTO: Decodable {
         let boxOfficeType: String
         let dateRange: String
         let dailyBoxOfficeList: [MovieInfo]?
     }
-    
 }
 
-extension DailyBoxOfficeResultDTO.BoxOfficeDTO {
+extension DailyBoxOfficeDTO.BoxOfficeDTO {
     enum CodingKeys: String, CodingKey {
         case dateRange = "showRange"
         case boxOfficeType = "boxofficeType"
@@ -28,7 +27,7 @@ extension DailyBoxOfficeResultDTO.BoxOfficeDTO {
     }
 }
 
-extension DailyBoxOfficeResultDTO.BoxOfficeDTO {
+extension DailyBoxOfficeDTO.BoxOfficeDTO {
     struct MovieInfo: Decodable {
         let rankNumber: String
         let rank: String
@@ -51,7 +50,7 @@ extension DailyBoxOfficeResultDTO.BoxOfficeDTO {
     }
 }
 
-extension DailyBoxOfficeResultDTO.BoxOfficeDTO.MovieInfo {
+extension DailyBoxOfficeDTO.BoxOfficeDTO.MovieInfo {
     enum CodingKeys: String, CodingKey {
         case rankNumber = "rnum"
         case rank
