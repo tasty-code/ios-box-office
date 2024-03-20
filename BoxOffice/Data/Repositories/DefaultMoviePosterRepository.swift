@@ -17,7 +17,7 @@ final class DefaultMoviePosterRepository: MoviePosterRepository {
     
     func fetchMoviePoster(query: String, completion: @escaping (NetworkResult<MoviePosterEntity>) -> Void) {
         guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "KAKAO_KEY") as? String else { return }
-        print(apiKey)
+
         apiService.requestMoviePosterAPI(userKey: apiKey, query: query) { result in
             switch result {
             case .success(let data):
