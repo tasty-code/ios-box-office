@@ -4,14 +4,14 @@
 //
 //  Created by kjs on 13/01/23.
 //
-import SwiftUI
+import OSLog
 import UIKit
 
 final class MovieListViewController: UIViewController {
     
     private let networkManager = NetworkManager.shared
-    private var boxOfficeDataArray:[DailyBoxOfficeDTO.BoxOfficeDTO.MovieInfo] = []
-    let apiBuilder = APIURLBuilder()
+    private var dailyBoxOfficeList:[DailyBoxOfficeDTO.BoxOfficeDTO.MovieInfo] = []
+    private let apiBuilder = APIURLBuilder()
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -31,49 +31,43 @@ final class MovieListViewController: UIViewController {
     
     private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(reload), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(loadData), for: .valueChanged)
         
         return refreshControl
-        
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = Date().yesterday
+        title = Date().yesterday(format: Date.yyyyMMddHyphen)
         
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.refreshControl = refreshControl
         setupCollectionView()
         view.addSubview(activityIndicator)
-        
-        Task {
-            let data = try await networkManager.performRequest(with: apiBuilder.buildDailyBoxOfficeAPI(targetDate: APIURLCompnents.QueryValues.targetDate ?? ""))
-                
-            guard let DTO = JSONParser().decode(data, DTO: DailyBoxOfficeDTO.self),
-                  let boxOfficeList = DTO.boxOfficeResult.dailyBoxOfficeList
-            else {
-                return
-            }
-            
-            boxOfficeDataArray = boxOfficeList
-            collectionView.reloadData()
-            activityIndicator.isHidden = true
-        }
+        loadData()
     }
     
     @objc
-    func reload() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            self.collectionView.reloadData()
-            self.refreshControl.endRefreshing()
+    private func loadData() {
+        Task {
+            let data = try await networkManager.performRequest(with: apiBuilder.buildDailyBoxOfficeAPI(targetDate: APIURLCompnents.QueryValues.targetDate))
+            
+            guard let parsedData = JSONParser().decode(data, DTO: DailyBoxOfficeDTO.self),
+                  let dailyBoxOfficeData = parsedData.boxOfficeResult.dailyBoxOfficeList
+            else {
+                return
+            }
+            dailyBoxOfficeList = dailyBoxOfficeData
+            collectionView.reloadData()
+            activityIndicator.removeFromSuperview()
+            refreshControl.endRefreshing()
         }
     }
-    
+
     private func setupCollectionView() {
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.register(MovieListCollectionViewCell.self, forCellWithReuseIdentifier: "MovieListCollectionViewCell")
-        
+        collectionView.refreshControl = refreshControl
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -90,13 +84,13 @@ extension MovieListViewController: UICollectionViewDataSource, UICollectionViewD
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieListCollectionViewCell", for: indexPath) as? MovieListCollectionViewCell else {
             fatalError("fatalError")
         }
-        cell.configureCell(with: boxOfficeDataArray[indexPath.row])
+        cell.configureCell(with: dailyBoxOfficeList[indexPath.row])
         cell.addSubview(MovieListCollectionViewCell())
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        boxOfficeDataArray.count
+                    dailyBoxOfficeList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -109,26 +103,3 @@ extension MovieListViewController: UICollectionViewDataSource, UICollectionViewD
         0
     }
 }
-
-
-
-//import SwiftUI
-//struct ViewControllerRepresentable: UIViewControllerRepresentable {
-//    
-//    // update
-//    func updateUIViewController(_ uiViewController: UIViewController, context: Context){
-//        
-//    }
-//    // makeui
-//    @available(iOS 13.0, *)
-//    func makeUIViewController(context: Context) -> UIViewController {
-//        MovieListViewController()
-//    }
-//}
-//
-//struct ViewController_Previews: PreviewProvider {
-//    static var previews: some View{
-//        ViewControllerRepresentable().previewDisplayName("아이폰 15프로")
-//    }
-//}
-

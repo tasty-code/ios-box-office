@@ -30,7 +30,7 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     private let movieTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 21, weight: .semibold)
         return label
     }()
     
@@ -72,11 +72,10 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         configureBorder()
         setupUI()
-        
     }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -88,6 +87,7 @@ extension MovieListCollectionViewCell {
         layer.borderWidth = 0.2
         layer.borderColor = UIColor.lightGray.cgColor
     }
+    
     private func setupUI() {
         contentView.addSubview(rankStackView)
         contentView.addSubview(movieTitleStackView)
@@ -113,7 +113,7 @@ extension MovieListCollectionViewCell {
     
     private func setupMovieTitleStackViewConstraint() {
         NSLayoutConstraint.activate([
-            movieTitleStackView.leadingAnchor.constraint(equalTo: rankStackView.trailingAnchor, constant: 30),
+            movieTitleStackView.leadingAnchor.constraint(equalTo: rankStackView.trailingAnchor, constant: 25),
             movieTitleStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16)
         ])
     }
@@ -130,7 +130,7 @@ extension MovieListCollectionViewCell {
         rankLabel.text = movieInfo.rank
         rankChangeLabel.text = movieInfo.rankChanges
         movieTitleLabel.text = movieInfo.movieName
-        audienceLabel.text = "오늘 :\(movieInfo.audienceCount.formatNumberString())명 / 총 :\( movieInfo.audienceAccumulated.formatNumberString())명"
+        audienceLabel.text = "오늘 : \(movieInfo.audienceCount.formatNumberString())명 / 총 : \( movieInfo.audienceAccumulated.formatNumberString())명"
         
         if movieInfo.rankOldAndNew == "NEW" {
             rankChangeLabel.text = "신작"
@@ -150,5 +150,4 @@ extension MovieListCollectionViewCell {
             }
         }
     }
-    
 }

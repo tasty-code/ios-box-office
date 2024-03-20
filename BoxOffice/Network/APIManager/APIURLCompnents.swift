@@ -26,7 +26,7 @@ struct APIURLCompnents {
     enum QueryValues: String {
         
         case APIKey = "23a93cbbbc8fdc2ae474716728465cca"
-        static var targetDate = Date().yesterday
+        static var targetDate = Date().yesterday(format: "yyyyMMdd")
         case movieCode = "20124079"
     }
 }

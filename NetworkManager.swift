@@ -15,33 +15,36 @@ class NetworkManager {
     
     func performRequest(with url: URL?) async throws -> Data {
         guard let url else {
-            throw NetworkError.dataError
+            throw NetworkError.invalidUrl
         }
+        
         let session = URLSession(configuration: .default)
         let request = makeRequest(with: url, method: .get, headers: nil)
         
         let (data, response) = try await session.data(for: request)
 
         guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
-            throw NetworkError.responseError
+            throw NetworkError.invalidResponse
         }
+        
         guard (200 ..< 299) ~= statusCode else {
-            throw responseVerify(with: response as! HTTPURLResponse)
+            throw verifyStatusCode(with: response as! HTTPURLResponse)
         }
+        
         return data
     }
     
     func makeRequest(with url: URL, method: HTTPMethod, headers: [String: String]?) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
-        
         headers?.forEach { key, value in
             request.addValue(value, forHTTPHeaderField: key)
         }
+        
         return request
     }
     
-    private func responseVerify(with HTTPResponse: HTTPURLResponse) -> Error {
+    private func verifyStatusCode(with HTTPResponse: HTTPURLResponse) -> Error {
         switch HTTPResponse.statusCode {
         case (300...399):
             return HTTPError.redirectionMessages(HTTPResponse.statusCode, HTTPResponse.debugDescription)
