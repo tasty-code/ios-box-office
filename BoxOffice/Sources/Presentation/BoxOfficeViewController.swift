@@ -22,6 +22,9 @@ class BoxOfficeViewController: UIViewController, DailyFormatter{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(String(describing: MovieCollectionViewCell.self))
+        
         navigationItem.title = dailyFormatter(format: "yyyy-MM-dd")
         configureView()
         addView()
@@ -41,7 +44,7 @@ class BoxOfficeViewController: UIViewController, DailyFormatter{
     }
     
     private func configureView() {
-        boxOfficeCollectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        boxOfficeCollectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: MovieCollectionViewCell.self))
         boxOfficeCollectionView.dataSource = self
     }
     
@@ -78,7 +81,7 @@ extension BoxOfficeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? CollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MovieCollectionViewCell.self), for: indexPath) as? MovieCollectionViewCell else {
             return UICollectionViewCell()
         }
         cell.configure(with: dailyBoxOfficeList[indexPath.row])
