@@ -8,7 +8,7 @@
 import UIKit
 
 class MovieCollectionViewCell: UICollectionViewListCell {
-    let movieNameLabel: UILabel = {
+    private let movieNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 20)
@@ -16,7 +16,7 @@ class MovieCollectionViewCell: UICollectionViewListCell {
         return label
     }()
     
-    let movieRankLabel: UILabel = {
+    private let movieRankLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 30)
@@ -24,7 +24,7 @@ class MovieCollectionViewCell: UICollectionViewListCell {
         return label
     }()
     
-    let movieChangeRankLabel: UILabel = {
+    private let movieChangeRankLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 15)
@@ -32,7 +32,7 @@ class MovieCollectionViewCell: UICollectionViewListCell {
         return label
     }()
     
-    let movieNumberOfPeopleLabel: UILabel = {
+    private let movieNumberOfPeopleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 15)
@@ -40,7 +40,7 @@ class MovieCollectionViewCell: UICollectionViewListCell {
         return label
     }()
     
-    lazy var rankAndChangeStackView: UIStackView = {
+    private lazy var rankAndChangeStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [movieRankLabel, movieChangeRankLabel])
         stackView.axis = .vertical
         stackView.spacing = 1
@@ -49,7 +49,7 @@ class MovieCollectionViewCell: UICollectionViewListCell {
         return stackView
     }()
     
-    lazy var nameAndNumberOfPeopleStackView: UIStackView = {
+    private lazy var nameAndNumberOfPeopleStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [movieNameLabel, movieNumberOfPeopleLabel])
         stackView.axis = .vertical
         stackView.spacing = 0
