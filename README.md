@@ -2,27 +2,27 @@
 
 ### Overview
 
-`URLSession` 을 활용한 통신, `UICollectionView` 를 학습하고, 여기에 ARKit 을 양념처럼 살짝 맛보는 프로젝트입니다.
-
-<br/>
-
-### Key Topics
-- URLSession 의 활용
-- JSON 데이터의 파싱 및 모델 매핑
-- UICollectionView 의 활용
-- UINavigationController, UITabBarController 의 활용
-- ARKit 기초 학습
-  - 이미지 트래킹 및 터치 시 동영상 실행
-
-<br/>
-
-### 프로젝트 상세
-- 
+`URLSession` 을 활용한 통신과 `UICollectionView` 의 활용, 여기에 `ARKit` 을 양념처럼 살짝 맛보는 학습 프로젝트입니다.
+`UICollectionView`, `UITabBarController`, `UIActivityIndicatorView` 와 같이 새로운 `API` 와 `async/await` 키워드에 대해 학습하고 이를 구현해 보았습니다.
 
 <br/>
 
 ### 프로젝트를 통해 경험한 것
-- 
+- `URLSession` 의 활용
+- `async/await` 학습
+- `JSON` 데이터의 파싱 및 모델 매핑
+- `UICollectionView` 의 활용
+- `UIActivityIndicatorView` 활용
+- `UIRefreshControl` 활용
+- `UINavigationController`, `UITabBarController` 의 활용
+- `ARKit` 기초 학습
+  - 이미지 트래킹 및 터치 시 동영상 실행
+
+<br/>
+
+### 향후 구현해보려고 하는 것
+- 캐싱을 활용한 이미지 저장
+- `UIDatePicker` 를 활용해 날짜 선택 기능 부여
 
 <br/>
 
