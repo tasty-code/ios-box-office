@@ -68,14 +68,16 @@ struct BoxOfficeMovie: Decodable {
         let rankStatus: BoxOfficeProvider.Movie.RankStatus = rankStatus == "NEW" ? .new : .old
         let audienceCount: Int = Int(audienceCount) ?? 0
         let audienceAccumulated: Int = Int(audienceAccumulated) ?? 0
-        let movie = BoxOfficeProvider.Movie(movieCode: movieCode,
-                                         index: index,
-                                         rank: rank,
-                                         rankChangedAmount: rankChangedAmount,
-                                         rankStatus: rankStatus,
-                                         movieName: movieName,
-                                         audienceCount: audienceCount,
-                                         audienceAccumulated: audienceAccumulated)
+        let movie = BoxOfficeProvider.Movie(
+            movieCode: movieCode,
+            index: index,
+            rank: rank,
+            rankChangedAmount: rankChangedAmount,
+            rankStatus: rankStatus,
+            movieName: movieName,
+            audienceCount: audienceCount,
+            audienceAccumulated: audienceAccumulated
+        )
         return movie
     }
 }

@@ -7,39 +7,29 @@
 
 import Foundation
 
-final class MovieDataProvider: MovieInformationViewControllerDataSource {
-    
-    typealias MovieInformationData = MovieDetail?
-    var loadedData: MovieDetail?
+final class MovieDataProvider {
     
     let movieCode: String
-    private(set) var posterData: Data? = nil {
-        didSet {
-            delegate?.reloadView()
-        }
-    }
-    
-    weak var delegate: DataDelegate?
     let networkManager: NetworkManager
     
-    init(movieCode: String, networkManager: NetworkManager = NetworkManager(urlSession: URLSession.shared)) {
+    init(movieCode: String, networkManager: NetworkManager = .shared) {
         self.movieCode = movieCode
         self.networkManager = networkManager
     }
     
-    func loadMovieInformationData() async throws {
+    func loadMovieInformationData() async throws -> (MovieDataProvider.Movie, Data) {
         guard let request = BoxOfficeAPI.movieDetailInformation(movieCode: movieCode).urlRequest else {
             throw NetworkError.invalidURL
         }
         let data: MovieInformationResult = try await self.networkManager.request(request)
-        let movie = data.movieInformationDetail.movie
-        loadedData = converted(movie)
-        try await loadImage()
+        let movie = data.movieInformationDetail.movieInformationDetailData
+        let movieInformation = movie.toMovieDetail()
+        let posterData = try await loadImage(with: movieInformation.movieName)
+        return (movieInformation, posterData)
     }
     
-    private func loadImage() async throws {
-        guard let movieName = loadedData?.movieName,
-            let request = KakaoAPI.image(query: movieName).urlRequest else {
+    private func loadImage(with movieName: String) async throws -> Data {
+        guard let request = KakaoAPI.image(query: movieName).urlRequest else {
             throw NetworkError.invalidAPIKey
         }
         let imageDocument: MovieImageDocument = try await self.networkManager.request(request)
@@ -48,14 +38,10 @@ final class MovieDataProvider: MovieInformationViewControllerDataSource {
             throw NetworkError.invalidURL
         }
         let (data, _) = try await URLSession.shared.data(from: url)
-        posterData = data
+        return data
     }
-    
-    private func converted(_ movie: Movie) -> MovieDetail {
-        return movie.toMovieDetail()
-    }
-    
-    struct MovieDetail {
+
+    struct Movie {
         let movieName: String
         let directors: String
         let productionYear: String

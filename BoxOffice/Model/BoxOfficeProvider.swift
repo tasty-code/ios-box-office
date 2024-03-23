@@ -8,28 +8,25 @@
 import Foundation
 
 final class BoxOfficeProvider: BoxOfficeViewControllerDataSource {
-    
-    typealias BoxOfficeData = Movie
-    
-    weak var delegate: DataDelegate?
+    weak var delegate: BoxOfficeProviderDelegate?
     let networkManager: NetworkManager
     
-    var loadedData: [Movie] = [] {
-        didSet { delegate?.reloadView() }
+    var boxOfficeMovies: [Movie] = [] {
+        didSet { delegate?.reloadBoxOfficeView(self) }
     }
     
-    init(loadedData: [Movie] = [], networkManager: NetworkManager = NetworkManager(urlSession: URLSession.shared)) {
-        self.loadedData = loadedData
+    init(boxOfficeMovies: [Movie] = [], networkManager: NetworkManager = .shared) {
+        self.boxOfficeMovies = boxOfficeMovies
         self.networkManager = networkManager
     }
     
-    func loadBoxOfficeData() async throws {
+    func loadBoxOfficeMovies() async throws {
         guard let request = BoxOfficeAPI.dailyBoxOffice(targetDate: Date.yesterday.formatted(using: .apiFormat)).urlRequest else {
             throw NetworkError.invalidURL
         }
         let data: BoxOfficeResult = try await self.networkManager.request(request)
         let movies = data.boxOfficeDetail.dailyBoxOfficeList
-        loadedData = converted(movies)
+        boxOfficeMovies = converted(movies)
     }
     
     private func converted(_ boxOfficeMovies: [BoxOfficeMovie]) -> [Movie] {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class URLRequestBuilder {
+final class URLRequestBuilder {
     var url: String = ""
     var httpMethod: HTTPMethod
     var body: Data?

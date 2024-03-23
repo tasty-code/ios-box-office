@@ -26,7 +26,7 @@ enum KakaoAPI {
         case .image(let query):
             return URLRequestBuilder(headers: ["Authorization": apiKey])
                 .baseURL(baseURL)
-                .parameters([["query": query + " 영화 포스터"], ["size": "1"]])
+                .parameters([["query": "\(query) 영화 포스터"], ["size": "1"]])
                 .createURLRequest()
         }
     }

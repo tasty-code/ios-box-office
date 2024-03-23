@@ -14,7 +14,8 @@ final class NetworkManagerTests: XCTestCase {
     
     override func setUpWithError() throws {
         let mockSession = MockURLSession()
-        sut = NetworkManager(urlSession: mockSession)
+        sut = NetworkManager.shared
+        sut?.urlSession = mockSession
     }
     
 //    func test_makeRequest메서드는_http메서드를전달하지않으면_get메서드를반환한다() throws {

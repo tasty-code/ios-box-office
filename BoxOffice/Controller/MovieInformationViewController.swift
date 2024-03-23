@@ -12,12 +12,8 @@ final class MovieInformationViewController: UIViewController {
     let movieInformationView: MovieInformationView = MovieInformationView()
     let movieCode: String
     
-    private lazy var dataSource: any MovieInformationViewControllerDataSource = {
-       let dataSource = MovieDataProvider(movieCode: movieCode)
-        dataSource.delegate = self
-        return dataSource
-    }()
-
+    private lazy var dataSource: MovieDataProvider = MovieDataProvider(movieCode: movieCode)
+       
     init(movieCode: String, movieName: String) {
         self.movieCode = movieCode
         super.init(nibName: nil, bundle: nil)
@@ -31,33 +27,22 @@ final class MovieInformationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Task {
-           await loadInformation()
+            await loadInformation()
         }
     }
     
     override func loadView() {
         view = movieInformationView
-        view.backgroundColor = .white
-    }
-}
-
-extension MovieInformationViewController: DataDelegate {
-    func reloadView() {
-        guard let data = dataSource as? MovieDataProvider,
-        let loadedData = data.loadedData,
-        let posterData = data.posterData else {
-            return
-        }
-        DispatchQueue.main.async {
-            self.movieInformationView.setData(loadedData: loadedData, posterData: posterData)
-        }
     }
 }
 
 extension MovieInformationViewController {
     func loadInformation() async {
         do {
-            try await self.dataSource.loadMovieInformationData()
+            let (movieInformation, posterData) = try await self.dataSource.loadMovieInformationData()
+            DispatchQueue.main.async {
+                self.movieInformationView.setData(movieInformationData: movieInformation, posterData: posterData)
+            }
         } catch {
             print(error)
         }

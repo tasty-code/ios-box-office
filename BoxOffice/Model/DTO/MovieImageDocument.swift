@@ -15,6 +15,18 @@ struct MovieImageDocument: Decodable {
         case meta
         case documentResults = "documents"
     }
+    
+    struct Meta: Decodable {
+        let totalCount, pageableCount: Int
+        let isEnd: Bool
+        
+        enum CodingKeys: String, CodingKey {
+            case totalCount = "total_count"
+            case pageableCount = "pageable_count"
+            case isEnd = "is_end"
+        }
+    }
+    
 }
 
 struct DocumentResults: Decodable {
@@ -25,7 +37,7 @@ struct DocumentResults: Decodable {
     let displaySitename: String
     let docURL: String
     let datetime: String
-
+    
     enum CodingKeys: String, CodingKey {
         case collection
         case thumbnailURL = "thumbnail_url"
@@ -37,13 +49,3 @@ struct DocumentResults: Decodable {
     }
 }
 
-struct Meta: Decodable {
-    let totalCount, pageableCount: Int
-    let isEnd: Bool
-
-    enum CodingKeys: String, CodingKey {
-        case totalCount = "total_count"
-        case pageableCount = "pageable_count"
-        case isEnd = "is_end"
-    }
-}

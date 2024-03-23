@@ -5,18 +5,16 @@
 //  Created by LeeSeongYeon on 2024/03/06.
 //
 
-protocol DataDelegate: AnyObject {
-    func reloadView()
+protocol BoxOfficeProviderDelegate: AnyObject {
+    func reloadBoxOfficeView(_ boxOfficeProvider: BoxOfficeProvider)
 }
 
 protocol BoxOfficeViewControllerDataSource {
-    associatedtype BoxOfficeData
-    var loadedData: [BoxOfficeData] { get }
-    func loadBoxOfficeData() async throws
+    var boxOfficeMovies: [BoxOfficeProvider.Movie] { get }
+    func loadBoxOfficeMovies() async throws
 }
 
 protocol MovieInformationViewControllerDataSource {
-    associatedtype MovieInformationData
-    var loadedData: MovieInformationData { get }
+    var movieInformationData: MovieDataProvider.Movie? { get }
     func loadMovieInformationData() async throws
 }
