@@ -13,6 +13,10 @@ enum BoxOfficeAPI {
 
 extension BoxOfficeAPI: TargetType {
     
+    var baseURL: String {
+        return NetworkEnvironment.baseURL
+    }
+    
     var method: HTTPMethod {
         switch self {
         case .requestDailyBoxOfficeInfo(_, _):

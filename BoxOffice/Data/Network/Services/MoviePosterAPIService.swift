@@ -1,22 +1,21 @@
 //
-//  MovieAPIService.swift
+//  MoviePosterAPIService.swift
 //  BoxOffice
 //
-//  Created by EUNJU on 2/20/24.
+//  Created by nayeon  on 3/19/24.
 //
 
 import Foundation
 
-final class MovieAPIService: BaseAPIService {
+final class MoviePosterAPIService: BaseAPIService {
     
     override init(provider: Requestable) {
         super.init(provider: NetworkProvider())
     }
     
-    func requestMovieDetailAPI(userKey: String, movieCode: String,
-                               completion: @escaping ((NetworkResult<Any>) -> Void)) {
-        guard let request = try? MovieAPI
-            .requestMovieDetailInfo(userKey: userKey, movieCode: movieCode)
+    func requestMoviePosterAPI(userKey: String, query: String, completion: @escaping ((NetworkResult<Any>) -> Void)) {
+        guard let request = try? MoviePosterAPI
+            .requestMoviePosterImage(userkey: userKey, query: query)
             .creatURLRequest()
         else {
             completion(.networkFail)
@@ -28,7 +27,7 @@ final class MovieAPIService: BaseAPIService {
             case .success(let result):
                 let networkResult = self.judgeStatus(by: result.response.statusCode,
                                                      result.data,
-                                                     MovieDTO.self)
+                                                     MoviePosterDTO.self)
                 completion(networkResult)
             case .failure(_):
                 completion(.networkFail)

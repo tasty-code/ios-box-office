@@ -17,10 +17,6 @@ protocol TargetType {
 
 extension TargetType {
     
-    var baseURL: String {
-        return NetworkEnvironment.baseURL
-    }
-    
     private func asURL(_ url: String) throws -> URL {
         guard let url = URL(string: url) 
         else {
@@ -37,6 +33,10 @@ extension TargetType {
         case .basic:
             request.setValue(ContentType.json.rawValue, 
                              forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
+        case .custom(let headers):
+            headers.forEach { key, value in
+                request.setValue(value, forHTTPHeaderField: key)
+            }
         }
         
         return request

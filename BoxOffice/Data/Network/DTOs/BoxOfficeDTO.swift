@@ -72,7 +72,8 @@ extension DailyBoxOfficeList {
                                movieName: movieName,
                                salesAmount: salesAmount,
                                audienceCount: audienceCount,
-                               rankChangeValue: rankChangeValue,
+                               rankChangeValue: rankChangeValue, 
+                               movieCode: movieCode,
                                isNewMovie: rankOldAndNew == "New" ? true : false)
     }
 }

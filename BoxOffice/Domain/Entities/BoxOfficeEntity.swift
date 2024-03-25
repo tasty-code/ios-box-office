@@ -11,5 +11,6 @@ struct BoxOfficeEntity {
     let salesAmount: String
     let audienceCount: String
     let rankChangeValue: String
+    let movieCode: String
     let isNewMovie: Bool
 }

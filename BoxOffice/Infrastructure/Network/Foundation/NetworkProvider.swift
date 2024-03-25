@@ -21,8 +21,9 @@ final class NetworkProvider: Requestable {
                (200..<500).contains(httpResponse.statusCode),
                let data = data {
                 completion(.success(NetworkResponse(data: data, response: httpResponse)))
+            } else {
+                completion(.failure(NetworkError.networkFailed))
             }
-            completion(.failure(NetworkError.networkFailed))
         }
         task.resume()
     }

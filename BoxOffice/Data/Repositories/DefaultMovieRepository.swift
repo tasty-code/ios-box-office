@@ -1,30 +1,30 @@
 //
-//  DefaultBoxOfficeRepository.swift
+//  DefaultMovieRepository.swift
 //  BoxOffice
 //
-//  Created by EUNJU on 3/4/24.
+//  Created by nayeon  on 3/13/24.
 //
 
 import Foundation
 
-final class DefaultBoxOfficeRepository: BoxOfficeRepository {
+final class DefaultMovieRepository: MovieRepository {
     
-    private let apiService: BoxOfficeAPIService
+    private let apiService: MovieAPIService
     
-    init(apiService: BoxOfficeAPIService) {
+    init(apiService: MovieAPIService) {
         self.apiService = apiService
     }
     
-    func fetchBoxOfficeData(yesterday: String, completion: @escaping (NetworkResult<[BoxOfficeEntity]>) -> Void) {
+    func fetchMovieDetail(movieCode: String, completion: @escaping (NetworkResult<MovieEntity>) -> Void) {
         guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String else { return }
         
-        apiService.requestDailyBoxOfficeAPI(userKey: apiKey, date: yesterday) { networkResult in
-            switch networkResult {
+        apiService.requestMovieDetailAPI(userKey: apiKey, movieCode: movieCode) { result in
+            switch result {
             case .success(let data):
-                if let dto = data as? BoxOfficeDTO {
+                if let dto = data as? MovieDTO {
                     DispatchQueue.main.async {
-                        completion(.success(dto.boxOfficeResult.dailyBoxOfficeList
-                            .map { $0.toDomain() }))
+                        let movieEntity = dto.movieInformationResult.detailMovieInformation.toEntity()
+                        completion(.success(movieEntity))
                     }
                 }
             case .pathError:
