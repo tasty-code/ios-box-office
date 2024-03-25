@@ -122,18 +122,17 @@ extension BoxOfficeCollectionViewListCell {
             return
         }
         
-        if let rankChangeValue = movieData?.rankIncrement, let rankChangeValue = Int(rankChangeValue) {
+        guard let rankChangeValue = movieData?.rankIncrement, let rankChangeValue = Int(rankChangeValue) else { return }
             
-            guard rankChangeValue != 0 else {
-                rankChangeLabel.text = "-"
-                rankChangeLabel.textColor = .black
-                return
-            }
-            
-            rankChangeLabel.text = rankChangeValue < 0 ? "▼" : "▲"
-            let charactersColor: UIColor = rankChangeValue < 0 ? .blue : .red
-            rankChangeLabel.text! += String(rankChangeValue).formatDecimalNumberString()
-            rankChangeLabel.setTextColor(charactersColor, range: NSRange(location: 0, length: 1))
+        guard rankChangeValue != 0 else {
+            rankChangeLabel.text = "-"
+            rankChangeLabel.textColor = .black
+            return
         }
+        
+        rankChangeLabel.text = rankChangeValue < 0 ? "▼" : "▲"
+        let charactersColor: UIColor = rankChangeValue < 0 ? .blue : .red
+        rankChangeLabel.text! += String(rankChangeValue).formatDecimalNumberString()
+        rankChangeLabel.setTextColor(charactersColor, range: NSRange(location: 0, length: 1))
     }
 }
