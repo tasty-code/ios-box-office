@@ -7,22 +7,20 @@
 
 import UIKit
 
-struct LoadingIndicatorView {
-    static func showLoading() {
+enum LoadingIndicatorView {
+    static func showLoading(in view: UIView) {
             DispatchQueue.main.async {
-                guard
-                    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                    let window = windowScene.windows.last
-                else {
-                    return
-                }
                 let loadingIndicatorView: UIActivityIndicatorView
                 guard
-                    let existedView = window.subviews.first(where: { $0 is UIActivityIndicatorView } ) as? UIActivityIndicatorView
+                    let existedView = view.subviews.first(where: { $0 is UIActivityIndicatorView } ) as? UIActivityIndicatorView
                 else {
                     loadingIndicatorView = UIActivityIndicatorView()
-                    loadingIndicatorView.frame = window.frame
-                    window.addSubview(loadingIndicatorView)
+                    loadingIndicatorView.frame = view.frame
+                    loadingIndicatorView.center = CGPoint(
+                        x: view.frame.width / 2,
+                        y: view.frame.height / 2 + view.bounds.origin.y
+                    )
+                    view.addSubview(loadingIndicatorView)
                     loadingIndicatorView.startAnimating()
                     return
                 }
@@ -31,15 +29,9 @@ struct LoadingIndicatorView {
             }
         }
 
-        static func hideLoading() {
+    static func hideLoading(in view: UIView) {
             DispatchQueue.main.async {
-                guard
-                    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                    let window = windowScene.windows.last
-                else {
-                    return
-                }
-                window.subviews.filter({ $0 is UIActivityIndicatorView }).forEach { $0.removeFromSuperview() }
+                view.subviews.filter({ $0 is UIActivityIndicatorView }).forEach { $0.removeFromSuperview() }
             }
         }
 }
