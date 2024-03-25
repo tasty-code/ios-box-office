@@ -17,14 +17,6 @@ final class BoxOfficeViewController: UIViewController {
     }()
     private lazy var dataSource = BoxOfficeListDataSource(self.boxOfficeListView)
     
-//    init() {
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBoxOfficeListView()
@@ -38,7 +30,7 @@ private extension BoxOfficeViewController {
     }
     
     func setupBoxOfficeListView() {
-        LoadingIndicatorView.showLoading()
+        LoadingIndicatorView.showLoading(in: self.boxOfficeListView)
         boxOfficeListView.boxOfficeListDelegate = self
         boxOfficeListView.delegate = self
         boxOfficeListView.dataSource = dataSource
@@ -49,8 +41,8 @@ private extension BoxOfficeViewController {
         Task {
             do {
                 let result = try await movieManager.fetchBoxOfficeResultData(date: Date.movieDateToString)
-                self.reloadCollectionListData(result: result)
-                LoadingIndicatorView.hideLoading()
+                    self.reloadCollectionListData(result: result)
+                    LoadingIndicatorView.hideLoading(in: self.view)
             } catch {
                 print(error.localizedDescription)
             }

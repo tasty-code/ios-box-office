@@ -11,7 +11,7 @@ final class BoxOfficeDetailViewController: UIViewController {
     private let movieName: String
     private let movieCode: String
     private let movieManager: MovieManager
-    private let scrollView = BoxOfficeDetailView()
+    private let boxOfficeDetailView = BoxOfficeDetailView()
     
     init(
         movieName: String,
@@ -37,8 +37,8 @@ final class BoxOfficeDetailViewController: UIViewController {
 
 private extension BoxOfficeDetailViewController {
     func setupView() {
-        LoadingIndicatorView.showLoading()
-        view = scrollView
+        LoadingIndicatorView.showLoading(in: self.boxOfficeDetailView)
+        view = boxOfficeDetailView
         view.backgroundColor = .white
         self.title = movieName
     }
@@ -52,21 +52,21 @@ private extension BoxOfficeDetailViewController {
             } catch {
                 print(error.localizedDescription)
             }
-            LoadingIndicatorView.hideLoading()
+            LoadingIndicatorView.hideLoading(in: self.boxOfficeDetailView)
         }
     }
     
     func fetchMovieInfo() async throws {
         let data = try await movieManager.fetchMovieInfoResultData(code: movieCode)
-        self.scrollView.setupDetailView(data: data)
+        self.boxOfficeDetailView.setupDetailView(data: data)
     }
     
     func fetchMoiveImageURL() async throws {
         try await movieManager.fetchMoiveImageURL(movieName: movieName)
     }
-
+    
     func setupMovieImage() async throws {
         guard let data = try await movieManager.fetchImageData() else { return }
-        self.scrollView.setupImage(image: UIImage(data: data))
+        self.boxOfficeDetailView.setupImage(image: UIImage(data: data))
     }
 }
