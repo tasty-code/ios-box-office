@@ -9,8 +9,6 @@ import UIKit
 
 final class BoxOfficeViewController: UIViewController {
     
-    // MARK: - Public Property
-    
     // MARK: - Private Property
     
     private var boxOfficeData: BoxOfficeDTO?
