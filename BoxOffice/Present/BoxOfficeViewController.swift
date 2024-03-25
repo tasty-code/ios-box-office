@@ -46,12 +46,6 @@ final class BoxOfficeViewController: UIViewController {
     
     // MARK: - Private Function
     
-    private func callLoadingView(completion: @escaping () -> ()) {
-        DispatchQueue.main.async {
-            completion()
-        }
-    }
-    
     private func formatDateString(_ dateString: String) -> String {
         let yearIndex = dateString.index(dateString.startIndex, offsetBy: 0)
         let monthIndex = dateString.index(dateString.startIndex, offsetBy: 4)
@@ -99,8 +93,8 @@ final class BoxOfficeViewController: UIViewController {
         
         movieCollectionView.refreshControl = UIRefreshControl()
         let refreshControl = movieCollectionView.refreshControl
-        refreshControl?.addTarget(self, action:
-                                    #selector(handleRefreshControl),
+        refreshControl?.addTarget(self,
+                                  action: #selector(handleRefreshControl),
                                   for: .valueChanged)
         refreshControl?.tintColor = UIColor.systemYellow
         refreshControl?.attributedTitle = NSAttributedString(
@@ -130,7 +124,7 @@ final class BoxOfficeViewController: UIViewController {
                 }
                 
                 if self?.isAppStartLoading == true {
-                    self?.callLoadingView { [weak self] in
+                    DispatchQueue.main.async {
                         self?.loadingView.isLoading = false
                         self?.isAppStartLoading = false
                     }
