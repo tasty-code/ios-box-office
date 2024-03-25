@@ -9,7 +9,6 @@ import UIKit
 
 extension UILabel {
     
-    /* 텍스트 구간 색상 변경 */
     func setTextColor(_ color: UIColor, range: NSRange) {
         guard let attributedString = self.mutableAttributedString() else { return }
         
@@ -17,7 +16,6 @@ extension UILabel {
         self.attributedText = attributedString
     }
     
-    /* AttributedString이 설정되어있지 않으면 생성하여 반환한다. */
     private func mutableAttributedString() -> NSMutableAttributedString? {
         guard let labelText = self.text, let labelFont = self.font else { return nil }
         
