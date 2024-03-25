@@ -105,7 +105,7 @@ extension BoxOfficeCollectionViewListCell {
     private func updateDailyBoxOfficeCellLabel() {
         rankLabel.text = movieData?.rank
         titleLabel.text = movieData?.movieName
-        detailLabel.text = "오늘 \(movieData?.audienceDailyCount.formatNumberString() ?? "Null") / 총 \(movieData?.audienceTotalAmount.formatNumberString() ?? "Null")"
+        detailLabel.text = "오늘 \(movieData?.audienceDailyCount.formatDecimalNumberString() ?? "Null") / 총 \(movieData?.audienceTotalAmount.formatDecimalNumberString() ?? "Null")"
         formatMovieLabel()
     }
     
@@ -131,8 +131,8 @@ extension BoxOfficeCollectionViewListCell {
             }
             
             rankChangeLabel.text = rankChangeValue < 0 ? "▼" : "▲"
-            let charactersColor:UIColor = rankChangeValue < 0 ? .blue : .red
-            rankChangeLabel.text! += String(rankChangeValue).formatNumberString()
+            let charactersColor: UIColor = rankChangeValue < 0 ? .blue : .red
+            rankChangeLabel.text! += String(rankChangeValue).formatDecimalNumberString()
             rankChangeLabel.setTextColor(charactersColor, range: NSRange(location: 0, length: 1))
         }
     }

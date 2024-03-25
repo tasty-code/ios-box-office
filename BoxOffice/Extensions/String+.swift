@@ -9,14 +9,14 @@ import Foundation
 
 extension String {
     
-    /// 숫자가 세 자리 이상 넘어가면 ,를 활용하는 메서드
-    func formatNumberString() -> String {
+    func formatDecimalNumberString() -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.locale = Locale.current
-        if let number = Double(self) {
-            return formatter.string(from: NSNumber(value: number)) ?? self
+        guard let number = Double(self),
+              let changedString = formatter.string(from: NSNumber(value: number)) else {
+            return self
         }
-        return self
+        return changedString
     }
 }
