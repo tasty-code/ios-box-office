@@ -8,15 +8,7 @@
 import Foundation
 
 extension URLSession: URLSessionProtocol {
-    func dataTask(
-        with url: URL,
-        completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void
-    ) -> URLSessionDataTaskProtocol {
-        return dataTask(
-            with: url,
-            completionHandler: completionHandler
-        ) as URLSessionDataTask
+    func requestData(with request: URLRequest) async throws -> (Data, URLResponse) {
+        return try await data(for: request)
     }
 }
-
-extension URLSessionDataTask: URLSessionDataTaskProtocol {}

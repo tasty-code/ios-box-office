@@ -8,8 +8,7 @@
 import Foundation
 
 protocol URLSessionProtocol {
-    func dataTask(
-        with url: URL,
-        completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void
-    ) -> URLSessionDataTaskProtocol
+    func requestData(
+        with request: URLRequest
+    ) async throws -> (Data, URLResponse)
 }

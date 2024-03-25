@@ -8,92 +8,61 @@
 import Foundation
 
 struct APIService {
+    typealias APIResult = (Result<Data, NetworkError>)
     private let session: URLSessionProtocol
     
     init(session: URLSessionProtocol = URLSession.shared) {
         self.session = session
     }
     
-    func fetchData<T: Decodable>(urlString: String, completion: @escaping (Result<T, NetworkError>) -> Void) {
+    func fetchData(with urlRequest: URLRequest) async throws -> APIResult {
         guard
-            let url = URL(string: urlString)
+            let cachedResponse = URLCache.shared.cachedResponse(for: urlRequest)
         else {
-            completion(.failure(.invalidURLError))
-            return
+            let (data, response) = try await self.session.requestData(with: urlRequest)
+            let cachedURLResponse = CachedURLResponse(response: response, data: data)
+            URLCache.shared.storeCachedResponse(cachedURLResponse, for: urlRequest)
+            return handleDataTaskCompletion(data: data, response: response)
         }
-        
-        self.session.dataTask(with: url) { data, response, error in
-            DispatchQueue.global().async {
-                self.handleDataTaskCompletion(
-                    data: data,
-                    response: response,
-                    error: error,
-                    completion: completion
-                )
-            }
-        }.resume()
+        return handleDataTaskCompletion(data: cachedResponse.data, response: cachedResponse.response)
     }
-    
-    private func handleDataTaskCompletion<T: Decodable>(
+}
+
+private extension APIService {
+    func handleDataTaskCompletion(
         data: Data?,
-        response: URLResponse?,
-        error: Error?,
-        completion: @escaping (Result<T, NetworkError>) -> Void
-    ) {
-        guard
-            error == nil
-        else {
-            completion(.failure(.requestFailError))
-            return
-        }
-        
+        response: URLResponse?
+    ) -> APIResult {
         guard
             let httpResponse = response as? HTTPURLResponse
         else {
-            completion(.failure(.invalidResponseError))
-            return
+            return .failure(.invalidResponseError)
         }
         
-        self.handleHTTPResponse(
+        return self.handleHTTPResponse(
             data: data,
-            httpResponse: httpResponse,
-            completion: completion
+            httpResponse: httpResponse
         )
     }
     
-    private func handleHTTPResponse<T: Decodable>(
+    func handleHTTPResponse(
         data: Data?,
-        httpResponse: HTTPURLResponse,
-        completion: @escaping (Result<T, NetworkError>) -> Void
-    ) {
-        switch httpResponse.statusCode {
-        case 300..<400:
-            completion(.failure(.redirectionError))
-        case 400..<500:
-            completion(.failure(.clientError))
-        case 500..<600:
-            completion(.failure(.serverError))
-        default:
-            self.handleDecodedData(data: data, completion: completion)
-        }
-    }
-    
-    private func handleDecodedData<T: Decodable>(
-        data: Data?,
-        completion: @escaping (Result<T, NetworkError>) -> Void
-    ) {
+        httpResponse: HTTPURLResponse
+    ) -> APIResult {
         guard
             let data = data
         else {
-            completion(.failure(.noDataError))
-            return
+            return .failure(.noDataError)
         }
-        
-        do {
-            let decodedData = try JSONDecoder().decode(T.self, from: data)
-            completion(.success(decodedData))
-        } catch {
-            completion(.failure(.decodingError))
+        switch httpResponse.statusCode {
+        case 300..<400:
+            return .failure(.redirectionError)
+        case 400..<500:
+            return .failure(.clientError)
+        case 500..<600:
+            return .failure(.serverError)
+        default:
+            return .success(data)
         }
     }
 }

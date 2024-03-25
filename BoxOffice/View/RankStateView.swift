@@ -83,7 +83,7 @@ private extension RankStateView {
 
 extension RankStateView {
     func configureRankState(rankState: String, rankChanged: String) {
-        guard 
+        guard
             rankState != "NEW"
         else {
             self.rankStateLabel.textColor = .systemRed

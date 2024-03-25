@@ -17,20 +17,9 @@ final class BoxOfficeViewController: UIViewController {
     }()
     private lazy var dataSource = BoxOfficeListDataSource(self.boxOfficeListView)
     
-//    init() {
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        boxOfficeListView.boxOfficeListDelegate = self
-        boxOfficeListView.delegate = self
-        boxOfficeListView.dataSource = dataSource
-        view = boxOfficeListView
+        setupBoxOfficeListView()
         setupBoxOfficeData()
     }
 }
@@ -40,13 +29,22 @@ private extension BoxOfficeViewController {
         self.title = Date.titleDateFormatter.string(from: date)
     }
     
+    func setupBoxOfficeListView() {
+        LoadingIndicatorView.showLoading(in: self.boxOfficeListView)
+        boxOfficeListView.boxOfficeListDelegate = self
+        boxOfficeListView.delegate = self
+        boxOfficeListView.dataSource = dataSource
+        view = boxOfficeListView
+    }
+    
     func setupBoxOfficeData() {
-        movieManager.fetchBoxOfficeResultData(date: Date.movieDateToString) { result in
-            switch result {
-            case .success(let success):
-                self.reloadCollectionListData(result: success)
-            case .failure(let failure):
-                print("fetchBoxOfficeResultData 실패: \(failure)")
+        Task {
+            do {
+                let result = try await movieManager.fetchBoxOfficeResultData(date: Date.movieDateToString)
+                    self.reloadCollectionListData(result: result)
+                    LoadingIndicatorView.hideLoading(in: self.view)
+            } catch {
+                print(error.localizedDescription)
             }
         }
     }
@@ -60,19 +58,19 @@ private extension BoxOfficeViewController {
     }
     
     func updateBoxOfficeList() {
-        movieManager.fetchBoxOfficeResultData(date: Date.movieDateToString) { [weak self] result in
-            switch result {
-            case .success(let result):
-                DispatchQueue.main.async {
-                    self?.applyBoxOfficeList(result: result)
-                    guard
-                        let date = result.showRange.toDateFromRange()
-                    else {
-                        return
-                    }
-                    self?.configureNavigation(date: date)
+        Task {
+            do {
+                let result = try await self.movieManager.fetchBoxOfficeResultData(
+                    date: Date.movieDateToString
+                )
+                self.applyBoxOfficeList(result: result)
+                guard
+                    let date = result.showRange.toDateFromRange()
+                else {
+                    return
                 }
-            case .failure(let error):
+                self.configureNavigation(date: date)
+            } catch {
                 print(error.localizedDescription)
             }
         }
@@ -80,7 +78,6 @@ private extension BoxOfficeViewController {
     
     func reloadCollectionListData(result: BoxOfficeResult) {
         DispatchQueue.main.async {
-            self.boxOfficeListView.indicatorView.stopAnimating()
             self.configureNavigation(date: Date.yesterday)
             self.applyBoxOfficeList(result: result)
             self.boxOfficeListView.isScrollEnabled = true
@@ -90,7 +87,17 @@ private extension BoxOfficeViewController {
 
 extension BoxOfficeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.navigationController?.popViewController(animated: true)
+        guard 
+            let data = movieManager.setupBoxOfficeDetailData(for: indexPath.row)
+        else {
+            return
+        }
+        let detailViewController = BoxOfficeDetailViewController(
+            movieName: data.movieName,
+            movieCode: data.movieCode,
+            movieManager: movieManager
+        )
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 

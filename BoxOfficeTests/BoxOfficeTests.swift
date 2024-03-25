@@ -22,110 +22,76 @@ final class BoxOfficeTests: XCTestCase {
         self.sut = nil
     }
     
-    func test_date가_20230101이고_데이터_파싱이_올바르게_됐을_때_fetchData는_nil이_아니다() {
+    func test_date가_20230101이고_데이터_파싱이_올바르게_됐을_때_fetchData는_nil이_아니다() async throws {
         // given
         let date = "20170319"
-        let urlString = MovieURL.makeDailyBoxOfficeURL(date: date)
+        guard
+            let urlString = NetworkURL.makeURLRequest(
+                type: .boxOffice,
+                path: .dailyBoxOffice,
+                queries: .boxOffice(.dailyBoxOffice(date: date))
+            )
+        else {
+            return
+        }
         
         // when
-        let expectation = XCTestExpectation(description: "데이터 패치 중...")
-        
-        sut.fetchData(urlString: urlString) { (result: Result<BoxOffice, NetworkError>) in
-            switch result {
-            case .success(let movies):
-                // then
-                XCTAssertNotNil(movies)
-            case .failure(let error):
-                // then
-                XCTFail("데이터 파싱 에러 발생: \(error))")
-            }
-            expectation.fulfill()
+        let result = try await sut.fetchData(with: urlString)
+        switch result {
+        case .success(let movies):
+            // then
+            XCTAssertNotNil(movies)
+        case .failure(let error):
+            // then
+            XCTFail("데이터 파싱 에러 발생: \(error))")
         }
-        wait(for: [expectation], timeout: 5.0)
     }
     
-    func test_date가_잘못된_타입으로_데이터_파싱_됐을_때_fetchMovie에서_decodingError발생() {
+    func test_어제날짜_영화_데이터_파싱이_올바르게_됐을_때_fetchData에_boxOfficeResult는_nil이_아니다() async throws {
         // given
-        let wrongDate = "iWantToGoHome"
-        let urlString = MovieURL.makeDailyBoxOfficeURL(date: wrongDate)
+        guard
+            let urlString = NetworkURL.makeURLRequest(
+                type: .boxOffice,
+                path: .dailyBoxOffice,
+                queries: .boxOffice(.dailyBoxOffice(date: Date.movieDateToString))
+            )
+        else {
+            return
+        }
         
         // when
-        let expectation = XCTestExpectation(description: "데이터 패치 중...")
-        
-        sut.fetchData(urlString: urlString) { (result: Result<BoxOffice, NetworkError>) in
-            switch result {
-            case .success(let movies):
-                // then
-                XCTFail("데이터 파싱 성공: \(movies))")
-            case .failure(let error):
-                // then
-                XCTAssertEqual(error, NetworkError.decodingError)
-            }
-            expectation.fulfill()
+        let result = try await sut.fetchData(with: urlString)
+        switch result {
+        case .success(let movies):
+            // then
+            XCTAssertNotNil(movies)
+        case .failure(let error):
+            // then
+            XCTFail("데이터 파싱 에러 발생: \(error))")
         }
-        wait(for: [expectation], timeout: 5.0)
     }
     
-    func test_url이_잘못된_주소로_데이터_파싱_됐을_때_fetchMovie에서_invalidURLError_감지발생() {
+    func test_특정_영화_코드로_데이터_파싱이_올바르게_됐을_때_fetchData에_movieInfoResult는_nil이_아니다() async throws {
         // given
-        let url = "qqqq://안녕하세요.닷컴 "
+        guard
+            let urlString = NetworkURL.makeURLRequest(
+                type: .boxOffice,
+                path: .movieDetail,
+                queries: .boxOffice(.movieDetail(code: "20230102"))
+            )
+        else {
+            return
+        }
         
         // when
-        let expectation = XCTestExpectation(description: "데이터 패치 중...")
-        
-        sut.fetchData(urlString: url) { (result: Result<BoxOffice, NetworkError>) in
-            switch result {
-            case .success(let movies):
-                // then
-                XCTFail("데이터 파싱 성공: \(movies))")
-            case .failure(let error):
-                // then
-                XCTAssertEqual(error, NetworkError.invalidURLError)
-            }
-            expectation.fulfill()
+        let result = try await sut.fetchData(with: urlString)
+        switch result {
+        case .success(let movies):
+            // then
+            XCTAssertNotNil(movies)
+        case .failure(let error):
+            // then
+            XCTFail("데이터 파싱 에러 발생: \(error))")
         }
-        wait(for: [expectation], timeout: 5.0)
-    }
-    
-    func test_어제날짜_영화_데이터_파싱이_올바르게_됐을_때_fetchData에_boxOfficeResult는_nil이_아니다() {
-        // given
-        let urlString = MovieURL.makeDailyBoxOfficeURL(date: Date.movieDateToString)
-        
-        // when
-        let expectation = XCTestExpectation(description: "데이터 패치 중...")
-        
-        sut.fetchData(urlString: urlString) { (result: Result<BoxOffice, NetworkError>) in
-            switch result {
-            case .success(let movies):
-                // then
-                XCTAssertNotNil(movies)
-            case .failure(let error):
-                // then
-                XCTFail("데이터 파싱 에러 발생: \(error))")
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 5.0)
-    }
-    
-    func test_특정_영화_코드로_데이터_파싱이_올바르게_됐을_때_fetchData에_movieInfoResult는_nil이_아니다() {
-        // given
-        let urlString = MovieURL.makeMovieInfomationDetailURL(code: "20124079")
-        
-        // when
-        let expectation = XCTestExpectation(description: "데이터 패치 중...")
-        
-        sut.fetchData(urlString: urlString) { (result: Result<MovieInfomationDetail, NetworkError>) in
-            switch result {
-            case .success(let movies):
-                // then
-                XCTAssertNotNil(movies)
-            case .failure(let error):
-                // then
-                XCTFail("데이터 파싱 에러 발생: \(error))")
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 5.0)
     }
 }

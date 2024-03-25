@@ -8,7 +8,7 @@
 import Foundation
 
 final class MockURLSession: URLSessionProtocol {
-    typealias Response = (data: Data?, urlResponse: URLResponse?, error: Error?)
+    typealias Response = (Data, URLResponse)
     
     private let response: Response
     
@@ -16,16 +16,14 @@ final class MockURLSession: URLSessionProtocol {
         self.response = response
     }
     
-    func dataTask(
-        with url: URL,
-        completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void
-    ) -> URLSessionDataTaskProtocol {
-        return MockURLSessionDataTask(completionHandler: {
-            completionHandler(
-                self.response.data,
-                self.response.urlResponse,
-                self.response.error
-            )}
-        )
+    func data(
+        for request: URLRequest,
+        delegate: (any URLSessionTaskDelegate)? = nil
+    ) async throws -> (Data, URLResponse) {
+        return response
+    }
+    
+    func requestData(with request: URLRequest) async throws -> (Data, URLResponse) {
+        return try await data(for: request)
     }
 }
