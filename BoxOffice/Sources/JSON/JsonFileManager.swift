@@ -17,6 +17,7 @@ final class JsonFileManager {
         
         let decoder = JsonDecoder.shared
         let data = jsonString.data(using: .utf8)
+
         guard let data = data,
               let result = try? decoder.decode(T.self, data)
         else {

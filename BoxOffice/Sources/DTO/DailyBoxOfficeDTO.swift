@@ -35,8 +35,3 @@ struct DailyBoxOfficeDTO: Decodable {
         case old = "OLD"
     }
 }
-
-
-
-
-
