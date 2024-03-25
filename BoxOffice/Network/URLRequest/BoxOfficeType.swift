@@ -25,4 +25,13 @@ enum BoxOfficeType {
             ]
         }
     }
+    
+    var path: String {
+        switch self {
+        case .dailyBoxOffice:
+            "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
+        case .movieDetail:
+            "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
+        }
+    }
 }

@@ -12,20 +12,18 @@ enum HttpMethod {
     case patch
     case delete
     
-    var
-    switch method {
-    case .get:
-        self.httpMethod = "GET"
-    case .post(let body):
-        self.httpMethod = "POST"
-        self.httpBody = try? JSONEncoder().encode(body)
-    case .put(let body):
-        self.httpMethod = "PUT"
-        self.httpBody = try? JSONEncoder().encode(body)
-    case .patch(let body):
-        self.httpMethod = "PATCH"
-        self.httpBody = try? JSONEncoder().encode(body)
-    case .delete(let body):
-        self.httpMethod = "DELETE"
-        self.httpBody = try? JSONEncoder().encode(body)
+    var type: String {
+        switch self {
+        case .get:
+            return "GET"
+        case .post:
+            return "POST"
+        case .put:
+            return "PUT"
+        case .patch:
+            return "PATCH"
+        case .delete:
+            return "DELETE"
+        }
+    }
 }
