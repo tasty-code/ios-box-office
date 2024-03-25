@@ -31,7 +31,7 @@ final class LoadingView: UIView {
     
     var isLoading = false {
         didSet {
-            self.isHidden = !self.isLoading
+            self.isHidden = self.isLoading == false
             self.isLoading ? self.activityIndicatorView.startAnimating() : self.activityIndicatorView.stopAnimating()
         }
     }
