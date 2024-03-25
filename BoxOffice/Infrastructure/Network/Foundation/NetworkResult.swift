@@ -9,6 +9,7 @@ enum NetworkResult<T> {
     case success(T)
     case requestError
     case pathError
+    case parsingError
     case serverError
     case networkFail
 }

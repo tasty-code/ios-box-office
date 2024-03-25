@@ -21,7 +21,7 @@ class BaseAPIService {
         let decoder = JSONDecoder()
         guard let decodedData = try? decoder.decode(T.self, from: data) 
         else {
-            return .pathError
+            return .parsingError
         }
         
         switch statusCode {

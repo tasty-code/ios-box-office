@@ -35,10 +35,12 @@ final class DefaultMoviePosterRepository: MoviePosterRepository {
                         }
                     }
                 } else {
-                    completion(.pathError)
+                    completion(.parsingError)
                 }
             case .pathError:
                 completion(.pathError)
+            case .parsingError:
+                completion(.parsingError)
             case .requestError:
                 completion(.requestError)
             case .serverError:

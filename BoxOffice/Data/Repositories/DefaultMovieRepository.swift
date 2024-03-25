@@ -29,6 +29,8 @@ final class DefaultMovieRepository: MovieRepository {
                 }
             case .pathError:
                 completion(.pathError)
+            case .parsingError:
+                completion(.parsingError)
             case .requestError:
                 completion(.requestError)
             case .serverError:

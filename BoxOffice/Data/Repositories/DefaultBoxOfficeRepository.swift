@@ -29,6 +29,8 @@ final class DefaultBoxOfficeRepository: BoxOfficeRepository {
                 }
             case .pathError:
                 completion(.pathError)
+            case .parsingError:
+                completion(.parsingError)
             case .requestError:
                 completion(.requestError)
             case .serverError:
