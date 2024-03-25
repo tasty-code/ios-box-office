@@ -12,11 +12,7 @@ struct MovieRepository {
     
     func fetchBoxOfficeResultData(date: String) async throws -> (Result<BoxOffice, NetworkError>) {
         guard
-            let urlRequest = NetworkURL.makeURLRequest(
-                type: .boxOffice,
-                path: .dailyBoxOffice,
-                queries: .boxOffice(.dailyBoxOffice(date: date))
-            )
+            let urlRequest = NetworkURL.makeURLRequest(type: .boxOffice(.dailyBoxOffice(date: date)))
         else {
             return .failure(.invalidURLRequestError)
         }
@@ -32,11 +28,7 @@ struct MovieRepository {
     
     func fetchMovieInfoResultData(code: String) async throws -> (Result<MovieInfomationDetail, NetworkError>) {
         guard
-            let urlRequest = NetworkURL.makeURLRequest(
-                type: .boxOffice,
-                path: .movieDetail,
-                queries: .boxOffice(.movieDetail(code: code))
-            )
+            let urlRequest = NetworkURL.makeURLRequest(type: .boxOffice(.movieDetail(code: code)))
         else {
             return .failure(.invalidURLRequestError)
         }
@@ -52,11 +44,7 @@ struct MovieRepository {
     
     func fetchMoiveImageURL(movieName: String) async throws -> (Result<MovieImage, NetworkError>) {
         guard
-            let urlRequest = NetworkURL.makeURLRequest(
-                type: .kakao,
-                path: .kakao,
-                queries: .kakao(movieName: movieName)
-            )
+            let urlRequest = NetworkURL.makeURLRequest(type: .kakao(movieName: movieName))
         else {
             return .failure(.invalidURLRequestError)
         }
@@ -72,11 +60,16 @@ struct MovieRepository {
     
     func fetchMovieImage(urlString: String) async throws -> (Result<Data, NetworkError>) {
         guard
-            let url = makeHttps(urlString: urlString)
+            let url = URL(string: urlString)
         else {
             return .failure(.invalidURLError)
         }
-        let urlRequest = URLRequest(url: url)
+        
+        guard
+            let urlRequest = NetworkURL.makeURLRequest(type: .image(url: url))
+        else {
+            return .failure(.invalidURLRequestError)
+        }
         
         let result = try await apiService.fetchData(with: urlRequest)
         return result
@@ -97,17 +90,5 @@ private extension MovieRepository {
         } catch {
             return .failure(.decodingError)
         }
-    }
-    
-    func makeHttps(urlString: String) -> URL? {
-        let originUrl = urlString
-        var editingUrl = originUrl.components(separatedBy: "://")
-        editingUrl[0] = "https"
-        guard
-            let resultUrl = URL(string: "\(editingUrl[0])://\(editingUrl[1])")
-        else {
-            return nil
-        }
-        return resultUrl
     }
 }
