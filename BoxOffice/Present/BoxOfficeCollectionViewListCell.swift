@@ -130,9 +130,10 @@ extension BoxOfficeCollectionViewListCell {
             return
         }
         
-        rankChangeLabel.text = rankChangeValue < 0 ? "▼" : "▲"
+        var rankChangString = rankChangeValue < 0 ? "▼" : "▲"
         let charactersColor: UIColor = rankChangeValue < 0 ? .blue : .red
-        rankChangeLabel.text! += String(rankChangeValue).formatDecimalNumberString()
+        rankChangString += String(rankChangeValue).formatDecimalNumberString()
+        rankChangeLabel.text = rankChangString
         rankChangeLabel.setTextColor(charactersColor, range: NSRange(location: 0, length: 1))
     }
 }
