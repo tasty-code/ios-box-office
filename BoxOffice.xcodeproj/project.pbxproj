@@ -133,6 +133,7 @@
 			children = (
 				CCDEC3C52B84A24200F7566D /* NetworkManager.swift */,
 				CCAB1BFF2B89CF2A0022EEC5 /* DailyFormatter.swift */,
+
 				CC9B90C62BA2DFC7004FA698 /* BoxOfficeEntity.swift */,
 			);
 			path = Model;
@@ -399,6 +400,13 @@
 				63DF20FB2970E1A1005DF7D1 /* LaunchScreen.storyboard in Resources */,
 				63DF20F82970E1A1005DF7D1 /* Assets.xcassets in Resources */,
 				CCDEC3492B82E69400F7566D /* box_office_sample.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC968A7B2B7CD02A00869511 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (d_NERO
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
