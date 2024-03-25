@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BoxOfficeViewController: UIViewController {
+final class BoxOfficeViewController: UIViewController {
     
     // MARK: - Public Property
     

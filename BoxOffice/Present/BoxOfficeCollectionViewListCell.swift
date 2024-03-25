@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BoxOfficeCollectionViewListCell: UICollectionViewListCell {
+final class BoxOfficeCollectionViewListCell: UICollectionViewListCell {
     // MARK: - Public Property
     
     static let identifier = "BoxOfficeCollectionViewListCell"
