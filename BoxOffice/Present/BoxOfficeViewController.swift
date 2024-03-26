@@ -124,10 +124,8 @@ final class BoxOfficeViewController: UIViewController {
                 }
                 
                 if self?.isAppStartLoading == true {
-                    DispatchQueue.main.async {
-                        self?.loadingView.isLoading = false
-                        self?.isAppStartLoading = false
-                    }
+                    self?.loadingView.isLoading = false
+                    self?.isAppStartLoading = false
                 }
             }
         }
